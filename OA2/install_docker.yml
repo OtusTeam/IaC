@@ -1,0 +1,47 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+
+  - name: install dependencies
+    apt:
+      pkg:
+      - apt-transport-https
+#      - ca-certificates
+      - curl
+      - gnupg-agent
+      - software-properties-common
+      state: present
+      update_cache: yes
+
+  - name: add GPG key
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+  - name: add docker repository to apt
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu jammy stable
+      state: present
+
+  - name: install docker
+    apt:
+      pkg:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      state: latest
+      update_cache: yes
+
+  - name: check docker is active
+    service:
+      name: docker
+      state: started
+      enabled: yes
+
+  - name: adding ansible user to docker group
+    user:
+      name: ansible
+      groups: docker
+      append: yes
