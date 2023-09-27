@@ -1,0 +1,32 @@
+{
+  "variables": {
+    "token": "{{env `YC_TOKEN`}}",
+    "folder_id": "{{env `YC_FOLDER`}}"
+  },
+
+  "builders": [
+    {
+      "type": "yandex",
+      "token": "{{user `token`}}",
+      "folder_id": "{{user `folder_id`}}",
+      "source_image_family": "ubuntu-2204-lts",
+      "image_name": "my-ws-hello-image",
+      "image_family": "my-ws-hello-family",
+      "ssh_username": "ubuntu",
+      "use_ipv4_nat": true
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sleep 30",
+        "sudo apt update",
+        "sleep 30",
+        "sudo apt install -y apache2",
+        "sleep 30",
+        "echo '<html><body><h1>Hello, World!</h1></body></html>' | sudo tee /var/www/html/index.html"
+      ]
+    }
+  ]
+}

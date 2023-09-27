@@ -1,0 +1,51 @@
+{
+  "variables": {
+    "token": "{{env `YC_TOKEN`}}",
+    "folder_id": "{{env `YC_FOLDER`}}",
+    "zone": "{{env `YC_ZONE`}}",
+    "subnet_id": "{{env `YC_SUBNET_ID`}}",
+    "pub_key_file": "{{env `PUB_KEY_FILE`}}"
+  },
+
+  "builders": [
+    {
+      "type": "yandex",
+      "token": "{{user `token`}}",
+      "folder_id": "{{user `folder_id`}}",
+      "source_image_family": "ubuntu-2204-lts",
+      "image_name": "my-ws-hello-image",
+      "image_family": "my-ws-hello-family",
+      "ssh_username": "ubuntu",
+      "use_ipv4_nat": true
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sleep 5",
+        "# sudo apt-get update",
+        "sleep 5",
+        "sudo apt-get install -y apache2",
+        "sleep 5",
+        "echo '<html><body><h1>Hello, World!</h1></body></html>' | sudo tee /var/www/html/index.html"
+      ]
+    }
+  ],
+
+  "post-processors": [
+    {
+      "type": "yandex-export",
+      "token": "{{user `token`}}",
+      "folder_id": "{{user `folder_id`}}",
+      "service_account_id": "ajegjkhkfqheqbg5b6s4",
+      "subnet_id": "{{user `subnet_id`}}",
+      "paths": [
+        "s3://otusiacles02/my-exported-image.qcow2",
+        "s3://otusiacles02/template-supported-get-{{build `ImageID` }}-right-here.qcow2"
+      ],
+      "keep_input_artifact": true
+    }
+  ]
+}

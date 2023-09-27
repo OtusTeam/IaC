@@ -1,0 +1,22 @@
+{
+  "builders": [
+    {
+      "//": "fill type and communicator:",
+      "type": "<?>",
+      "communicator": "<?>"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "/home/aleksey/.ssh/id_rsa.pub",
+      "destination": "/tmp/id_rsa.pub"
+    },
+    {
+      "type": "shell",
+      "inline": [
+      "sudo echo /tmp/is_rsa.pub >> /home/user/.ssh/authorized_keys"
+      ]
+    }
+  ]
+}

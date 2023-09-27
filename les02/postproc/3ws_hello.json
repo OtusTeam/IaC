@@ -1,0 +1,65 @@
+{
+  "variables": {
+    "token": "{{env `YC_TOKEN`}}",
+    "folder_id": "{{env `YC_FOLDER`}}",
+    "zone": "{{env `YC_ZONE`}}",
+    "subnet_id": "{{env `YC_SUBNET_ID`}}",
+    "pub_key_file": "{{env `PUB_KEY_FILE`}}"
+  },
+
+  "builders": [
+    {
+      "type": "yandex",
+      "token": "{{user `token`}}",
+      "folder_id": "{{user `folder_id`}}",
+      "source_image_family": "ubuntu-2204-lts",
+      "image_name": "my-ws-hello-image",
+      "image_family": "my-ws-hello-family",
+      "ssh_username": "ubuntu",
+      "use_ipv4_nat": true
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sleep 5",
+        "# sudo apt-get update",
+        "sleep 5",
+        "sudo apt-get install -y apache2",
+        "sleep 5",
+        "echo '<html><body><h1>Hello, World!</h1></body></html>' | sudo tee /var/www/html/index.html"
+      ]
+    }
+  ],
+
+  "post-processors": [
+    {
+      "type": "yandex-export",
+      "token": "{{user `token`}}",
+      "folder_id": "{{user `folder_id`}}",
+      "zone": "{{user `zone`}}",
+      "source_image_family": "my-web-server-family",
+      "instance_name": "my-web-server-instance",
+      "subnet_id": "{{user `subnet_id`}}",
+      "use_ipv4_nat": true,
+      "metadata" : [
+        {
+         "name": "test",
+         "groups": "sudo",
+         "shell": "/bin/bash",
+         "sudo": "['ALL=(ALL) NOPASSWD:ALL']",
+         "ssh-authorized-keys": [
+            "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCewj3O2osKw0rnOybUkYE6OwayOiEU5blxv+HfmATGt2tzcrQPROuILp"
+            "aMXIlmlcEgPx1BFowQOS+/Ajhtxphd1p0YpLqvZGrUQd9/1kIoKd5E6FnXrG3O7apX0Bjj12MSDwuPMYWLlQ1OR4m7sIw3"
+            "blzl+Y0RcLqZZpX+xs9u9fguEE34rSC7X9/cfYysTAfZk86W5C6XiXK5twah75Z+Jka02+hPlR3KkNA3ti70rWIbx83RPu"
+            "e3Bx8GNCYeK5h2ah7a3B/0GTxgyzA4WpBizpHygTnfN5lBlIpcYYf2RFzJxG686d6fkJHlWTZgp8Mei2hEukhfkxtZFc1Z"
+            "5OhRDsY1EeNOXbtkyR9P8BNvCHNQvnZEmVH76DNZ2cdNaz8ANHBrAWO4c2lptPwpELHZVJbafzNRs3aT0QMtK57gES8CF7"
+            "hmk8J6Gk3PDwmONTLsMIfqmgahLRFEL4Wbgs2eZqQ3suFSJSEHKaY3gzueKDxApVCmmfWs2ZhfkH9xtNM= aleksey@first"
+         ]
+        }
+      ]
+    }
+  ]
+}

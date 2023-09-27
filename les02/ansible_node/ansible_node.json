@@ -1,0 +1,43 @@
+{
+  "variables": {
+    "token": "{{env `YC_TOKEN`}}",
+    "folder_id": "{{env `YC_FOLDER`}}",
+    "path_to_key": "/home/aleksey/.ssh/id_rsa.pub",
+    "ansible_user": "ansible"
+  },
+
+  "builders": [
+    {
+      "type": "yandex",
+      "token": "{{user `token`}}",
+      "folder_id": "{{user `folder_id`}}",
+      "source_image_family": "ubuntu-2204-lts",
+      "image_name": "my-ansible-node-image",
+      "image_family": "my-ansible-node-family",
+      "ssh_username": "ubuntu",
+      "use_ipv4_nat": true
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "{{user `path_to_key`}}",
+      "destination": "/tmp/key.pub"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sleep 5",
+        "sudo useradd -m -s /bin/bash -G sudo {{user `ansible_user`}}",
+        "sleep 5",
+        "echo '{{user `ansible_user`}} ALL=(ALL:ALL) NOPASSWD:ALL' > /tmp/ansible_user_sudoer.txt",
+        "sudo cp /tmp/ansible_user_sudoer.txt /etc/sudoers.d/{{user `ansible_user`}}",
+        "sudo chmod 0440 /etc/sudoers.d/{{user `ansible_user`}}",
+        "sudo mkdir /home/{{user `ansible_user`}}/.ssh",
+        "sudo cp /tmp/key.pub /home/{{user `ansible_user`}}/.ssh/authorized_keys"
+      ]
+    }
+  ]
+}
+
+
