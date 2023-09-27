@@ -1,0 +1,28 @@
+[Sep 25 05:53]  .
+├── [Sep 25 05:52]  main.tf
+├── [Sep 25 05:52]  modules
+│   ├── [Sep 25 05:52]  animal
+│   │   ├── [Sep 25 05:52]  data.tf
+│   │   ├── [Sep 25 05:52]  main.tf
+│   │   ├── [Sep 25 05:52]  outputs.tf
+│   │   ├── [Sep 25 05:52]  variables.tf
+│   │   └── [Sep 25 05:52]  versions.tf
+│   ├── [Sep 25 05:52]  network
+│   │   ├── [Sep 25 05:52]  main.tf
+│   │   ├── [Sep 25 05:52]  outputs.tf
+│   │   ├── [Sep 25 05:52]  terraform.tfstate
+│   │   ├── [Sep 25 05:52]  variables.tf
+│   │   └── [Sep 25 05:52]  versions.tf
+│   └── [Sep 25 05:52]  subnet
+│       ├── [Sep 25 05:52]  main.tf
+│       ├── [Sep 25 05:52]  outputs.tf
+│       ├── [Sep 25 05:52]  variables.tf
+│       └── [Sep 25 05:52]  versions.tf
+├── [Sep 25 05:52]  outputs.tf
+├── [Sep 25 05:52]  terraform.tfstate
+├── [Sep 25 05:52]  terraform.tfstate.backup
+├── [Sep 25 05:53]  tree.txt
+├── [Sep 25 05:52]  variables.tf
+└── [Sep 25 05:52]  versions.tf
+
+4 directories, 21 files

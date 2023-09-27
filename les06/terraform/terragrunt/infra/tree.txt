@@ -1,0 +1,34 @@
+.
+├── tree.txt
+├── dev
+│   ├── terragrunt.hcl
+│   └── animals
+│       ├── casper
+│       │   └── terragrunt.hcl
+│       ├── cats
+│       │   └── terragrunt.hcl
+│       ├── dogs
+│       │   └── terragrunt.hcl
+│       ├── lark
+│       │   └── terragrunt.hcl
+│       ├── network
+│       │   └── terragrunt.hcl
+│       └── tommy
+│           └── terragrunt.hcl
+└── prod
+    ├── terragrunt.hcl
+    └── animals
+        ├── casper
+        │   └── terragrunt.hcl
+        ├── cats
+        │   └── terragrunt.hcl
+        ├── dogs
+        │   └── terragrunt.hcl
+        ├── lark
+        │   └── terragrunt.hcl
+        ├── network
+        │   └── terragrunt.hcl
+        └── tommy
+            └── terragrunt.hcl
+
+16 directories, 15 files

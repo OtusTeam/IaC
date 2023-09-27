@@ -1,0 +1,19 @@
+.
+├── call_animal.tf
+├── terraform.tfstate
+├── terraform.tfstate.backup
+├── tree.txt
+├── variables.tf
+└── modules
+    └── animal
+        ├── cat1.tf
+        ├── network.tf
+        ├── os_image.tf
+        ├── output.tf
+        ├── provider.tf
+        ├── subnet_cats.tf
+        ├── terraform.tfstate
+        ├── terraform.tfstate.backup
+        └── variables.tf
+
+2 directories, 14 files

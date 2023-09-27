@@ -1,0 +1,27 @@
+.
+├── main.tf
+├── outputs.tf
+├── terraform.tfstate
+├── terraform.tfstate.backup
+├── tree.txt
+├── variables.tf
+├── versions.tf
+└── modules
+    ├── animal
+    │   ├── data.tf
+    │   ├── main.tf
+    │   ├── outputs.tf
+    │   ├── variables.tf
+    │   └── versions.tf
+    ├── network
+    │   ├── main.tf
+    │   ├── outputs.tf
+    │   ├── variables.tf
+    │   └── versions.tf
+    └── subnet
+        ├── main.tf
+        ├── outputs.tf
+        ├── variables.tf
+        └── versions.tf
+
+4 directories, 20 files
