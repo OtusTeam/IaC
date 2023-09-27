@@ -39,6 +39,9 @@ override.tf.json
 .terraformrc
 terraform.rc
 
+# added by JA
+.terraform.lock.*
+
 # End of https://www.toptal.com/developers/gitignore/api/terraform
 
 # ========================================================================================
@@ -69,8 +72,10 @@ Godeps
 
 # from new https://www.toptal.com/developers/gitignore/api/go 
 # added by JA 
-
 go.work
+
+# added by JA
+.test-data
 
 # End of https://www.toptal.com/developers/gitignore/api/go
 
@@ -82,3 +87,4 @@ meta.yml
 # ignore this foldes
 ignore/*
 logs/*
+
