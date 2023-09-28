@@ -85,6 +85,6 @@ go.work
 # Push for example a file template without any keys (e.g. meta_yml.template) instead of a file with real metadata (meta.yml). 
 meta.yml
 # ignore this foldes
-ignore/*
+ignore
 logs/*
 
