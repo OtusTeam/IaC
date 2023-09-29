@@ -33,10 +33,10 @@ func TestEndToEndDeploymentScenario(t *testing.T) {
 
 	    terraformOptions := test_structure.LoadTerraformOptions(t, fixtureFolder)
 
-            // test load balancer ip existing
-	    loadbalancerIPAddress := terraform.Output(t, terraformOptions, "vm1_public_ip")
+            // test vmLinux ip existing
+	    vmLinuxPublicIPAddress := terraform.Output(t, terraformOptions, "vm1_public_ip")
 
-	    if loadbalancerIPAddress == "" {
+	    if vmLinuxPublicIPAddress == "" {
 			t.Fatal("Cannot retrieve the public IP address value for the vm1.")
 		}
 
