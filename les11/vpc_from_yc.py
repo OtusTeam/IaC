@@ -25,25 +25,14 @@ import os
 import argparse
 from yandexcloud import SDK
 
-# sdk = SDK()
+def get_hosts_by_vpc(sdk, folder_id, vpc_id):
 
-
-def get_hosts_by_vpc(sdk, vpc_id):
-
-#    sdk = SDK()
-
-    folder_id = os.getenv('YC_FOLDER_ID')
     filter = f'networkInterfaces.subnetId="{vpc_id}"'
 
-    print(f"{folder_id=}, {filter=}")
+    print(f"{filter=}")
 
     compute = sdk.client('compute')
     hosts = []
-
-#    folder_id = os.getenv('YC_FOLDER_ID')
-#    filter = f'networkInterfaces.subnetId="{vpc_id}"'
-#
-#    print(f"{folder_id=}, {filter=}")
 
     # Получаем список всех инстансов в указанной VPC
 #    instances = compute.instances().list(folder_id=os.getenv('YC_FOLDER_ID'), filter=f'networkInterfaces.subnetId="{vpc_id}"').result().instances
@@ -65,10 +54,14 @@ def main():
     tokstart = token[0:4]
     tokend   = token[-4:]
     print (f"{tokstart=}, {tokend=}")
-    sdk = SDK(token=token)
+    sdk = SDK(iam_token=token)
 
 
-    hosts = get_hosts_by_vpc(sdk, args.vpc_id)
+    folder_id = os.getenv('YC_FOLDER_ID')
+    print(f"{folder_id=}")
+
+
+    hosts = get_hosts_by_vpc(sdk, folder_id, args.vpc_id)
 
     inventory = {
         'all': {
