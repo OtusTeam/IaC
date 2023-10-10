@@ -25,13 +25,29 @@ import os
 import argparse
 from yandexcloud import SDK
 
-def get_hosts_by_vpc(vpc_id):
-    sdk = SDK()
+# sdk = SDK()
+
+
+def get_hosts_by_vpc(sdk, vpc_id):
+
+#    sdk = SDK()
+
+    folder_id = os.getenv('YC_FOLDER_ID')
+    filter = f'networkInterfaces.subnetId="{vpc_id}"'
+
+    print(f"{folder_id=}, {filter=}")
+
     compute = sdk.client('compute')
     hosts = []
 
+#    folder_id = os.getenv('YC_FOLDER_ID')
+#    filter = f'networkInterfaces.subnetId="{vpc_id}"'
+#
+#    print(f"{folder_id=}, {filter=}")
+
     # Получаем список всех инстансов в указанной VPC
-    instances = compute.instances().list(folder_id=os.getenv('YC_FOLDER_ID'), filter=f'networkInterfaces.subnetId="{vpc_id}"').result().instances
+#    instances = compute.instances().list(folder_id=os.getenv('YC_FOLDER_ID'), filter=f'networkInterfaces.subnetId="{vpc_id}"').result().instances
+    instances = compute.instances().list(folder_id=folder_id, filter=filter).result().instances
     for instance in instances:
         # Получаем внутренние IP-адреса инстансов
         internal_ips = [iface.primary_v4_address.address for iface in instance.network_interfaces]
@@ -45,7 +61,14 @@ def main():
     parser.add_argument('--vpc-id', required=True, help='ID VPC в облаке Yandex.Cloud')
     args = parser.parse_args()
 
-    hosts = get_hosts_by_vpc(args.vpc_id)
+    token = os.getenv('YC_TOKEN')
+    tokstart = token[0:4]
+    tokend   = token[-4:]
+    print (f"{tokstart=}, {tokend=}")
+    sdk = SDK(token=token)
+
+
+    hosts = get_hosts_by_vpc(sdk, args.vpc_id)
 
     inventory = {
         'all': {
