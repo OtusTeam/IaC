@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # see: https://cloud.yandex.ru/docs/functions/lang/python/sdk
 
 import os

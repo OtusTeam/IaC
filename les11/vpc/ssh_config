@@ -1,0 +1,4 @@
+   Host git
+       HostName git.domain.org
+       User tkarasek
+       IdentityFile /home/tomk/keys/thekey
