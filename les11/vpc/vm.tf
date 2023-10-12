@@ -4,7 +4,7 @@ resource "yandex_compute_instance" "vm4ans" {
 
 
   provisioner "local-exec" {
-    command = "echo 'The servers name is ${self.name}'"
+    command = "./add_host_2_ssh_config.sh ${self.name} ${self.network_interface.0.nat_ip_address} ${var.username} ${var.sec_key_path}"
   }
 
 
@@ -25,6 +25,6 @@ resource "yandex_compute_instance" "vm4ans" {
   }
 
   metadata = {
-    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "${var.username}:${file(var.pub_key_path)}"
   }
 }
