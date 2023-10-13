@@ -1,22 +1,68 @@
 #!/usr/bin/env python3
-
-# source from https://github.com/awh0ll/ansible-inventory-population/blob/master/main.py
-# changed by Aleksei E. Zhuravlev for accepting YC-provider stucture of tfstate-file
+########################################################################################################################
+#
+# (C) 2023 Copyright Aleksei E. Zhuravlev
+#
+# This code is licensed under the Apache License, Version 2.0. You may
+# obtain a copy of this license in the LICENSE-2.0.txt file in the root directory
+# of this source tree or at https://www.apache.org/licenses/LICENSE-2.0
+#
+# Any modifications or derivative works of this code must retain this
+# copyright notice, and modified files need to carry a notice indicating
+# that they have been altered from the originals.
+#
+########################################################################################################################
+#
+# The purpose of this program:
+# Generate dynamic inventory from YC-provider structure of tfstate-file.
+# For study purposes only.
+#
+########################################################################################################################
 
 import json
 import argparse
 
 class Host:
-    def __init__(self, hostName, nat_ip=None, ssh_user=None, keyPath = None):
-        self.name = hostName
+    def __init__(self, name, nat_ip=None, ssh_user=None, key=None):
+        self.name = name
         self.nat_ip = nat_ip
         self.ssh_user = ssh_user
-        self.key = keyPath
+        self.key = key
 
-#Take in a list of hosts, output it to a file name "hosts" in the execution directory.
-def print_hosts(hostList):
 
-    for i in hostList:
+def print_json(hosts):
+    inventory = {
+        'all': {
+            'hosts': [],
+        },
+        '_meta': {
+            'hostvars': {},
+        },
+    }
+
+    for i in hosts:
+        inventory['all']['hosts'].append(i.name)
+        # inventory['_meta']['hostvars'][i.name] = {'ansible_host': i.nat_ip, 'ansible_user': i.ssh_user}
+        inventory['_meta']['hostvars'][i.name] = {}
+        if i.nat_ip is not None:
+            inventory['_meta']['hostvars'][i.name]["ansible_host"] = i.nat_ip
+        if i.ssh_user is not None:
+            inventory['_meta']['hostvars'][i.name]["ansible_user"] = i.ssh_user
+        if i.key is not None:
+            inventory['_meta']['hostvars'][i.name]["ansible_ssh_private_key_file"] = i.key
+
+    if len(hosts) == 0:
+        inventory = {}
+
+    print(json.dumps(inventory))
+
+
+# write hosts to file
+def write2file(file, hosts):
+
+    hostFile = open(file, "w")
+
+    for i in hosts:
         temp = [i.name]
         if i.nat_ip is not None:
             temp.append("ansible_host=" + i.nat_ip)
@@ -24,35 +70,41 @@ def print_hosts(hostList):
             temp.append("ansible_user=" + i.ssh_user)
         if i.key is not None:
             temp.append("ansible_ssh_private_key_file=" + i.key)
+        hostFile.write(" ".join(temp) + "\n")
 
-        print(" ".join(temp))
+    hostFile.close()
+
+
+def parse_tfstate(args, hosts):
+
+    stateFile = open('terraform.tfstate')
+    data = json.load(stateFile)
+    stateFile.close()
+
+    for i in data['resources']:
+        if i['type'] == "yandex_compute_instance":
+            for j in i['instances']:
+                ja = j['attributes']
+                if (args.host and args.host == ja['name']) or args.list or args.file:
+                     hosts.append(Host(ja['name'], ja['network_interface'][0]['nat_ip_address'], ja['metadata']['ssh-keys'].split(':')[0]))
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--list', action='store_true', help='Вывести весь список хостов')
     parser.add_argument('--host', help='Указать конкретный хост')
+    parser.add_argument('--file', help='Указать файл')
     args = parser.parse_args()
-
-
-    stateFile = open('terraform.tfstate')
-    data = json.load(stateFile)
-    stateFile.close()
 
     #ansible hosts
     hosts = []
+    parse_tfstate(args, hosts)
 
-    #Iterate through the resources in tfstate
-    for i in data['resources']:
-        #We only care about AWS instances
-        if i['type'] == "yandex_compute_instance":
-            for j in i['instances']:
-                ja = j['attributes']
-                if (args.host and args.host == ja['name']) or args.list:
-                     hosts.append(Host(ja['name'], ja['network_interface'][0]['nat_ip_address'], ja['metadata']['ssh-keys'].split(':')[0]))
-
-    print_hosts(hosts)
-
+    if args.file:
+        write2file(args.file, hosts)
+    else:
+        print_json(hosts)
 
 if __name__ == '__main__':
     main()
+
