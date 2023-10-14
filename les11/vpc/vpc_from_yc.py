@@ -22,15 +22,31 @@
 
 import os
 import argparse
+import json
 from yandexcloud import SDK
+from yandex.cloud.compute.v1.instance_service_pb2_grpc import InstanceServiceStub
+from yandex.cloud.compute.v1.instance_service_pb2 import ListInstancesRequest
+from google.protobuf.json_format import MessageToDict
 
 def get_hosts_by_vpc(sdk, folder_id, vpc_id):
 
+    self_hosts = []
+    self_instance_service = sdk.client(InstanceServiceStub)
+
+    hosts = self_instance_service.List(ListInstancesRequest(folder_id=folder_id))
+    dict_ = MessageToDict(hosts)
+
+    if dict_:
+       self_hosts += dict_["instances"]
+
+    return self_hosts
+
+# old:
+
     filter = f'networkInterfaces.subnetId="{vpc_id}"'
-
     print(f"{filter=}")
-
     compute = sdk.client('compute')
+
     hosts = []
 
     # Получаем список всех инстансов в указанной VPC
