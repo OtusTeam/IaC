@@ -28,7 +28,7 @@ from yandex.cloud.compute.v1.instance_service_pb2_grpc import InstanceServiceStu
 from yandex.cloud.compute.v1.instance_service_pb2 import ListInstancesRequest
 from google.protobuf.json_format import MessageToDict
 
-def get_hosts_by_vpc(sdk, folder_id, vpc_id):
+def get_hosts(sdk, folder_id):
 
     self_hosts = []
     self_instance_service = sdk.client(InstanceServiceStub)
@@ -41,51 +41,50 @@ def get_hosts_by_vpc(sdk, folder_id, vpc_id):
 
     return self_hosts
 
-# old:
-
-    filter = f'networkInterfaces.subnetId="{vpc_id}"'
-    print(f"{filter=}")
-    compute = sdk.client('compute')
-
-    hosts = []
-
-    # Получаем список всех инстансов в указанной VPC
-#    instances = compute.instances().list(folder_id=os.getenv('YC_FOLDER_ID'), filter=f'networkInterfaces.subnetId="{vpc_id}"').result().instances
-    instances = compute.instances().list(folder_id=folder_id, filter=filter).result().instances
-    for instance in instances:
-        # Получаем внутренние IP-адреса инстансов
-        internal_ips = [iface.primary_v4_address.address for iface in instance.network_interfaces]
-        if internal_ips:
-            hosts.append(instance.name)
-
-    return hosts
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--vpc-id', required=True, help='ID VPC в облаке Yandex.Cloud')
+    parser.add_argument('--list', action='store_true', help='Вывести весь список хостов')
+    parser.add_argument('--host', help='Указать конкретный хост')
     args = parser.parse_args()
 
     token = os.getenv('YC_TOKEN')
-    tokstart = token[0:4]
-    tokend   = token[-4:]
-    print (f"{tokstart=}, {tokend=}")
+    if token is None:
+       print(f'Error: YC_TOKEN is not set as env variable')
+       exit(1)
+
     sdk = SDK(iam_token=token)
 
-
     folder_id = os.getenv('YC_FOLDER_ID')
-    print(f"{folder_id=}")
+    if folder_id is None:
+       print(f'Error: YC_FOLDER_ID is not set as env variable')
+       exit(1)
 
-
-    hosts = get_hosts_by_vpc(sdk, folder_id, args.vpc_id)
+    hosts = get_hosts(sdk, folder_id)
 
     inventory = {
         'all': {
-            'hosts': hosts
+            'hosts': []
         },
         '_meta': {
             'hostvars': {}
         }
     }
+
+    for h in hosts:
+        name = h['name']
+        if h['status'] == 'RUNNING' and (args.host and args.host == name or args.list):
+            inventory['all']['hosts'].append(name)
+            inventory['_meta']['hostvars'][name] = {}
+            if (networkInterfaces := h.setdefault('networkInterfaces')) is not None:
+                if len(networkInterfaces) >= 1:
+                    if (primaryV4Address := networkInterfaces[0].setdefault('primaryV4Address')) is not None:
+                        if (oneToOneNat := primaryV4Address.setdefault('oneToOneNat')) is not None:
+                            if (address := oneToOneNat.setdefault('address')) is not None:
+                                inventory['_meta']['hostvars'][name]["ansible_host"] = address
+
+    if len(inventory['all']['hosts']) == 0:
+        inventory = {}
 
     print(json.dumps(inventory))
 
