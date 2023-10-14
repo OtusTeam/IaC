@@ -15,9 +15,8 @@
 ########################################################################################################################
 #
 # The purpose of this program:
-# 	1. Training (at least mine and whoever wants) of
-# 	the internal structure and principles of the ansible dynamic inventory script
-#	2. Usage in study and work
+# Generate dynamic inventory from YC by its API.
+# It is assumed that for study purposes only.
 #
 ########################################################################################################################
 

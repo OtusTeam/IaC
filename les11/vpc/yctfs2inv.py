@@ -15,12 +15,13 @@
 #
 # The purpose of this program:
 # Generate dynamic inventory from YC-provider structure of tfstate-file.
-# For study purposes only.
+# It is assumed that for study purposes only.
 #
 ########################################################################################################################
 
 import json
 import argparse
+
 
 class Host:
     def __init__(self, name, nat_ip=None, ssh_user=None, key=None):
@@ -40,16 +41,15 @@ def print_json(hosts):
         },
     }
 
-    for i in hosts:
-        inventory['all']['hosts'].append(i.name)
-        # inventory['_meta']['hostvars'][i.name] = {'ansible_host': i.nat_ip, 'ansible_user': i.ssh_user}
-        inventory['_meta']['hostvars'][i.name] = {}
-        if i.nat_ip is not None:
-            inventory['_meta']['hostvars'][i.name]["ansible_host"] = i.nat_ip
-        if i.ssh_user is not None:
-            inventory['_meta']['hostvars'][i.name]["ansible_user"] = i.ssh_user
-        if i.key is not None:
-            inventory['_meta']['hostvars'][i.name]["ansible_ssh_private_key_file"] = i.key
+    for h in hosts:
+        inventory['all']['hosts'].append(h.name)
+        inventory['_meta']['hostvars'][h.name] = {}
+        if h.nat_ip is not None:
+            inventory['_meta']['hostvars'][h.name]["ansible_host"] = h.nat_ip
+        if h.ssh_user is not None:
+            inventory['_meta']['hostvars'][h.name]["ansible_user"] = h.ssh_user
+        if h.key is not None:
+            inventory['_meta']['hostvars'][h.name]["ansible_ssh_private_key_file"] = h.key
 
     if len(hosts) == 0:
         inventory = {}
@@ -60,33 +60,40 @@ def print_json(hosts):
 # write hosts to file
 def write2file(file, hosts):
 
-    hostFile = open(file, "w")
+    host_file = open(file, "w")
 
-    for i in hosts:
-        temp = [i.name]
-        if i.nat_ip is not None:
-            temp.append("ansible_host=" + i.nat_ip)
-        if i.ssh_user is not None:
-            temp.append("ansible_user=" + i.ssh_user)
-        if i.key is not None:
-            temp.append("ansible_ssh_private_key_file=" + i.key)
-        hostFile.write(" ".join(temp) + "\n")
+    for h in hosts:
+        host = [h.name]
+        if h.nat_ip is not None:
+            host.append("ansible_host=" + h.nat_ip)
+        if h.ssh_user is not None:
+            host.append("ansible_user=" + h.ssh_user)
+        if h.key is not None:
+            host.append("ansible_ssh_private_key_file=" + h.key)
+        host_file.write(" ".join(host) + "\n")
 
-    hostFile.close()
+    host_file.close()
 
 
 def parse_tfstate(args, hosts):
 
-    stateFile = open('terraform.tfstate')
-    data = json.load(stateFile)
-    stateFile.close()
+    state_file = open('terraform.tfstate')
+    tfstate = json.load(state_file)
+    state_file.close()
 
-    for i in data['resources']:
-        if i['type'] == "yandex_compute_instance":
-            for j in i['instances']:
-                ja = j['attributes']
-                if (args.host and args.host == ja['name']) or args.list or args.file:
-                     hosts.append(Host(ja['name'], ja['network_interface'][0]['nat_ip_address'], ja['metadata']['ssh-keys'].split(':')[0]))
+    for resource in tfstate['resources']:
+        if resource['type'] == "yandex_compute_instance":
+            for instance in resource['instances']:
+                attribute = instance['attributes']
+                if (args.host and args.host == attribute['name']) or args.list or args.file:
+                    host = Host(attribute['name'])
+                    if (network_interface := attribute.setdefault('network_interface')) is not None:
+                        host.nat_ip = network_interface[0].setdefault('nat_ip_address')
+                    if (metadata := attribute.setdefault('metadata')) is not None:
+                        if (ssh_keys := metadata.setdefault('ssh-keys')) is not None:
+                            if ssh_keys.find(':') > 0:
+                                host.ssh_user = ssh_keys.split(':')[0]
+                    hosts.append(host)
 
 
 def main():
@@ -104,6 +111,7 @@ def main():
         write2file(args.file, hosts)
     else:
         print_json(hosts)
+
 
 if __name__ == '__main__':
     main()
