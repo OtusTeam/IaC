@@ -6,5 +6,8 @@ all:
       yandex_cloud_instance_type: {{ host.instance_type }}
 {% endfor %}
   vars:
-    yandex_cloud_zone: {{ yandex_cloud_zone }}
-    yandex_cloud_network: {{ yandex_cloud_network }}
+    net_name: {{ yandex_cloud_net_name }}
+    sub_name: {{ yandex_cloud_sub_name }}
+    sub_cidr: {{ yandex_cloud_sub_cidr }}
+    sub_zone: {{ yandex_cloud_sub_zone }}
+ 
