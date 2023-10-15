@@ -1,0 +1,10 @@
+yandex_cloud_hosts:
+  - name: host1
+    image: ubuntu-1804-lts
+    instance_type: n1-standard-2
+  - name: host2
+    image: centos-7
+    instance_type: n1-standard-1
+
+yandex_cloud_zone: ru-central1-a
+yandex_cloud_network: default

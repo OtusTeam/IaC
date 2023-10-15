@@ -1,0 +1,10 @@
+all:
+  hosts:
+{% for host in yandex_cloud_hosts %}
+    {{ host.name }}:
+      yandex_cloud_image: {{ host.image }}
+      yandex_cloud_instance_type: {{ host.instance_type }}
+{% endfor %}
+  vars:
+    yandex_cloud_zone: {{ yandex_cloud_zone }}
+    yandex_cloud_network: {{ yandex_cloud_network }}
