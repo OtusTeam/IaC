@@ -8,16 +8,31 @@ def generate_dynamic_inventory():
         'all': {
             'hosts': [],
         },
+        'hello': {
+            'hosts': []
+        },
+        'world': {
+            'hosts': []
+        },
         '_meta': {
             'hostvars': {},
         },
     }
 
-    hosts = ['hello', 'world']
+    hostnames = ['hello', 'world']
+    hosts = []
+    for i in range(random.randint(2, 10)):
+        hosts.append(random.choice(hostnames) + str(random.randint(1, 255)))
+
     for host in hosts:
-        ip_address = f'{random.randint(1, 255)}.{random.randint(1, 255)}.{random.randint(1, 255)}.{random.randint(1, 255)}'
         inventory['all']['hosts'].append(host)
-        inventory['_meta']['hostvars'][host] = {'ansible_host': ip_address}
+        if host[0:5] == 'hello':
+            inventory['hello']['hosts'].append(host)
+            inventory['_meta']['hostvars'][host] = {'ansible_host': '127.0.0.1', 'ansible_connection': 'local'}
+        else:
+            inventory['world']['hosts'].append(host)
+            ip_address = f'{random.randint(1, 255)}.{random.randint(1, 255)}.{random.randint(1, 255)}.{random.randint(1, 255)}'
+            inventory['_meta']['hostvars'][host] = {'ansible_host': ip_address}
 
     return inventory
 
@@ -48,3 +63,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
