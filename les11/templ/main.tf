@@ -1,9 +1,5 @@
-data "yandex_compute_image" "image_id" {
-  for_each = local.inventory_data.all.hosts
-  name = each.key
-  
-  family = local.inventory_data.all.hosts[each.key].yandex_cloud_image
-#  family = "ubuntu-2204-lts"
+data "yandex_compute_image" "my_image" {
+  family = "ubuntu-2204-lts"
 }
 
 
@@ -22,7 +18,8 @@ resource "yandex_compute_instance" "my_vm" {
 
   boot_disk {
     initialize_params {
-      image_id = data.yandex_compute_image.image_id[each.key].image_id
+      image_id = "${data.yandex_compute_image.my_image.id}"
+#      image_id = data.yandex_compute_image.image_id[each.key].image_id
 #"fd8pecdhv50nec1qf9im"
     }
   }
