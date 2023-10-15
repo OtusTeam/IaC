@@ -1,0 +1,2 @@
+export YC_FOLDER_ID="$YC_SAND_FOLDER_ID"
+
