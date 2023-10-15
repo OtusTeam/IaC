@@ -1,12 +1,17 @@
 yandex_cloud_hosts:
   - name: host1
-    image: ubuntu-2204-lts
-    instance_type: n1-standard-2
+    subnet: sub1
+    platform: standard-v2
   - name: host2
-    image: centos-7
-    instance_type: n1-standard-1
+    subnet: sub2
+    platform: standard-v1
 
-yandex_cloud_sub_cidr: 10.20.0.0/16
-yandex_cloud_sub_name: my-sub
-yandex_cloud_sub_zone: ru-central1-a
+yandex_cloud_subnets:
+  - name: sub1
+    cidr: 10.10.0.0/16
+    zone: ru-central1-b
+  - name: sub2
+    cidr: 10.20.0.0/16
+    zone: ru-central1-a
+
 yandex_cloud_net_name: my-net
