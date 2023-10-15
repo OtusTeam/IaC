@@ -1,0 +1,36 @@
+- name: Установка и настройка приложения на виртуальных машинах в Yandex.Cloud
+  hosts: all
+  gather_facts: True
+  become: True
+  vars:
+    app_name: simple_http_server
+    app_path: "/tmp/hello_shs.py"
+
+  tasks:
+
+    - name: Установка зависимостей
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - pip
+
+    - name: Установка приложения
+      pip:
+        name: "{{ app_name }}"
+        state: present
+
+    - name: Настройка приложения
+      template:
+        src: hello_shs.j2
+        dest: "{{ app_path }}"
+        mode: +x
+      vars:
+        port: "80"
+        hostname: "{{inventory_hostname}}"
+
+    - name: Запуск приложения
+#      command: "python3 hello_shs.py"
+      shell: 'start-stop-daemon --start -b --quiet --pidfile /var/run/hello_shs --exec {{ app_path }}'
+      args:
+        executable: "/bin/bash"
