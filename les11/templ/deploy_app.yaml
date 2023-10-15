@@ -10,10 +10,9 @@
 
     - name: Установка зависимостей
       apt:
-        name: "{{ item }}"
+        name: pip
         state: present
-      with_items:
-        - pip
+        update_cache: yes
 
     - name: Установка приложения
       pip:
