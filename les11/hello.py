@@ -27,8 +27,9 @@ def get_inventory(args):
         if args.host in inventory['_meta']['hostvars']:
             host_vars = inventory['_meta']['hostvars'][args.host]
             inventory = {
+                'all': {'hosts': [args.host]},
                 '_meta': {
-                    'hostvars': host_vars,
+                    'hostvars': { args.host: host_vars},
                 },
             }
         else:
