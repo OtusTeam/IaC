@@ -89,5 +89,6 @@ ignore
 logs/*
 
 # JA: for ansible
-role_imported
+roles_imported
 collections
+.venv
