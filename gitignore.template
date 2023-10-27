@@ -88,3 +88,6 @@ meta.yml
 ignore
 logs/*
 
+# JA: for ansible
+role_imported
+collections
