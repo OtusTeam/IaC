@@ -3,6 +3,7 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
+# about yacloud_iam_token added by JA:
 DOCUMENTATION = '''
     name: yacloud_compute
     plugin_type: inventory
@@ -22,6 +23,8 @@ DOCUMENTATION = '''
             choices: ['yacloud_compute']
         yacloud_token:
             description: Oauth token for yacloud connection
+        yacloud_iam_token:
+            description: iam token for yacloud connection
         yacloud_token_file:
             description: File with oauth token for yacloud connection
         yacloud_clouds:
@@ -46,6 +49,8 @@ from ansible.errors import AnsibleError
 from ansible.plugins.inventory import BaseInventoryPlugin, Constructable, Cacheable
 from ansible.utils.display import Display
 from ansible.module_utils._text import to_native
+# added by JA:
+import os
 
 try:
     import yandexcloud
@@ -115,11 +120,18 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
             token = open(file).read().strip()
         else:
             token = self.get_option('yacloud_token')
-        if not token:
-            raise AnsibleError("token it empty. provide either `yacloud_token_file` or `yacloud_token`")
-#       changed token to iam_token by JA:
-#        sdk = yandexcloud.SDK(token=token)
-        sdk = yandexcloud.SDK(iam_token=token)
+#       added iam_token by JA:
+            iam_token = self.get_option('yacloud_iam_token')
+#       iam _token can be also specified e.g. as "$YC_IAM_TOKEN" this means take the iam_token from environment variable "YC_IAM_TOKEN"
+            if iam_token[0] == '$':
+               iam_token = os.getenv(iam_token[1:])
+
+        if token:
+           sdk = yandexcloud.SDK(token=token)
+        elif iam_token:
+           sdk = yandexcloud.SDK(iam_token=iam_token)
+        else:
+            raise AnsibleError("token it empty. provide either `yacloud_token_file` or `yacloud_token` or `yacloud_iam_token`")
 
         self.instance_service = sdk.client(InstanceServiceStub)
         self.folder_service = sdk.client(FolderServiceStub)

@@ -88,7 +88,8 @@ meta.yml
 ignore
 logs/*
 
-# JA: for ansible
+# JA: for ansible and python:
 roles_imported
 collections
 .venv
+*.pyc
