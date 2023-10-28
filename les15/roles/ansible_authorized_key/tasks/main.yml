@@ -1,0 +1,15 @@
+- name: add ansible user
+  ansible.builtin.user:
+    name: ansible
+    comment: A special ansible user
+    shell: /bin/bash
+    groups: adm,dialout,cdrom,floppy,sudo,audio,dip,video,plugdev,lxd,netdev
+  become: true
+
+- name: give ansible user password-less SSH
+  authorized_key:
+    user: "ansible"
+    key: "{{ authorized_key }}"
+    state: present
+  when: ansible_connection != 'local'
+  become: true
