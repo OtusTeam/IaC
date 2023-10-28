@@ -1,0 +1,7 @@
+plugin: yacloud_compute
+# https://cloud.yandex.ru/docs/iam/concepts/authorization/oauth-t
+yacloud_token: "t1.9euelZqNnImRl4yRl5yTzY-cj5zOle3rnpWaj5eNi56PkJCRip2PlIqQmJfl8_cnHQxW-e8GPglj_N3z92dLCVb57wY-CWP8zef1656Vmsudko7KmMaUj5DPicyQnZWU7_zF656Vmsudko7KmMaUj5DPicyQnZWU.ILWlQHSJDGDeun5kVr4vk8muj9BRoQ8XZUhC5niA6O6OxV2xY6w_HiXlYv5VMK-a19YY--Lgr7M8KMXdAMMQAA"
+yacloud_clouds:
+- cloud-aleksey-jhuravlev
+yacloud_folders:
+- sand
