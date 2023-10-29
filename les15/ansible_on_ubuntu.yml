@@ -1,0 +1,8 @@
+- hosts: all
+  roles:
+    - role: ansible_authorized_key
+    - role: devroles.system.sudoers
+  vars:
+    sudoers_no_password:
+      - ansible
+
