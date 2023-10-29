@@ -1,0 +1,21 @@
+- hosts: all
+#  gather_facts: False
+  roles:
+    - role: ansible_authorized_key
+    - role: devroles.system.sudoers
+  vars:
+    ansible_remote_user:        "{{ lookup('ansible.builtin.env', 'ANSIBLE_REMOTE_USER') }}"
+    ansible_remote_user_groups: "{{ lookup('ansible.builtin.env', 'ANSIBLE_REMOTE_USER_GROUPS', default='adm,dialout,cdrom,floppy,sudo,audio,dip,video,plugdev,lxd,netdev') }}"
+    ansible_remote_user_shell:  "{{ lookup('ansible.builtin.env', 'ANSIBLE_REMOTE_USER_SHELL',  default='/bin/bash') }}"
+    sudoers_no_password:
+      - "{{ ansible_remote_user }}"
+
+  tasks:
+    - name: print vars values
+      ansible.builtin.debug:
+        msg:
+        - "ansible_remote_user_______: {{ ansible_remote_user }}."
+        - "ansible_remote_user_groups: {{ ansible_remote_user_groups }}."
+        - "ansible_remote_user_shell_: {{ ansible_remote_user_shell }}."
+        - "sudoers_no_password_______: {{ sudoers_no_password }}."
+        verbosity: 2

@@ -1,15 +1,16 @@
-- name: add ansible user
+- name: grant access ansible to ansible remote user
   ansible.builtin.user:
-    name: ansible
-    comment: A special ansible user
+    name:   "{{ ansible_remote_user }}"
+    comment: The special ansible remote user
+#    shell:  "{{ ansible_remote_user_shell }}"
     shell: /bin/bash
-    groups: adm,dialout,cdrom,floppy,sudo,audio,dip,video,plugdev,lxd,netdev
+    groups: "{{ ansible_remote_user_groups }}"
   become: true
 
-- name: give ansible user password-less SSH
+- name: give ansible remote user password-less SSH
   authorized_key:
-    user: "ansible"
-    key: "{{ authorized_key }}"
+    user:   "{{ ansible_remote_user }}"
+    key:    "{{ authorized_key }}"
     state: present
   when: ansible_connection != 'local'
   become: true
