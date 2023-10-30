@@ -1,0 +1,19 @@
+---
+- name: Создание и запуск в docker контейнера ansible с выводом --version
+  hosts: docker
+
+  tasks:
+
+    - name: Создание и выполнение Docker контейнера
+      community.docker.docker_container:
+        name: docker_container
+        image: willhallonline/ansible:2.15.2-bullseye-slim
+        command: sh -c "ansible --version"
+        state: started
+        detach: no
+        cleanup: yes
+      register: output
+
+    - name: Show results
+      ansible.builtin.debug:
+        msg: "{{ output.container.Output }}"
