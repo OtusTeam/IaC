@@ -1,7 +1,0 @@
-- hosts: all
-  roles:
-    - role: devroles.system.sudoers
-  vars:
-    sudoers_no_password:
-      - ansible
-

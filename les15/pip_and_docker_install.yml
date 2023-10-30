@@ -1,0 +1,31 @@
+- hosts: docker
+  gather_facts: true
+  become: true
+
+  vars:
+    ansible_remote_user: "{{ lookup('ansible.builtin.env', 'ANSIBLE_REMOTE_USER') }}"
+    pip_install_packages:
+      - name: docker
+    docker_users:
+      - "{{ ansible_remote_user }}"
+  roles:
+    - geerlingguy.pip
+    - geerlingguy.docker
+
+  tasks:
+    - name: print vars values
+      ansible.builtin.debug:
+        msg:
+        - "ansible_user________: {{ ansible_user }}."
+        - "ansible_ssh_user____: ['{{ ansible_ssh_user }}']."
+        - "ansinle_remote_user_: {{ ansible_remote_user }}."
+        - "docker_users:_______: {{ docker_users }}."
+        verbosity: 2
+
+    - name: second print vars values
+      ansible.builtin.debug:
+        msg: "item: {{ item }}."
+        verbosity: 2
+      with_items:
+      - "{{ docker_users }}."
+
