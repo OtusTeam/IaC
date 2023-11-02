@@ -1,7 +1,7 @@
 - hosts: all
 #  gather_facts: False
   roles:
-    - role: ansible_authorized_key
+    - role: my.my_collection.ansible_authorized_key
     - role: devroles.system.sudoers
   vars:
     ansible_remote_user:        "{{ lookup('ansible.builtin.env', 'ANSIBLE_REMOTE_USER') }}"

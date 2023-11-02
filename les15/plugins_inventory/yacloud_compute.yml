@@ -1,4 +1,4 @@
-plugin: my.my_collection.yacloud_compute
+plugin: yacloud_compute
 yacloud_iam_token: "$YC_TOKEN"
 yacloud_clouds:
 - cloud-aleksey-jhuravlev
