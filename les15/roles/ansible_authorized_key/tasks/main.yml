@@ -5,6 +5,7 @@
 #    shell:  "{{ ansible_remote_user_shell }}"
     shell: /bin/bash
     groups: "{{ ansible_remote_user_groups }}"
+    append: true
   become: true
 
 - name: give ansible remote user password-less SSH
