@@ -93,3 +93,6 @@ roles_imported
 collections
 .venv
 *.pyc
+
+# JA: for vagrant
+.vagrant
