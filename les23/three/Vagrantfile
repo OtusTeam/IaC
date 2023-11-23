@@ -1,0 +1,50 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "/media/za/1/images/jammy-server-cloudimg-amd64-vagrant.box"
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "512"
+    vb.cpus = 1
+  end
+
+  config.vm.define "lb" do |server|
+    server.vm.host_name = 'loadbalancer'
+    server.vm.network :private_network, ip: "192.168.56.6"
+    server.vm.network "forwarded_port", guest: 80, host: 8086
+    server.vm.provision "shell", inline: "hostname"
+
+    server.vm.provision "file",
+      source: "sites-default",
+      destination: "/home/vagrant/sites-default"
+
+    server.vm.provision "shell",
+      inline: "sudo mv -f /home/vagrant/sites-default /etc/nginx/sites-available/default"
+
+    server.vm.provision "shell",
+      inline: "sudo systemctl reload nginx"
+  end
+
+  config.vm.define "backend1" do |server|
+    server.vm.host_name = 'backend1'
+    server.vm.network :private_network, ip: "192.168.56.7"
+
+    server.vm.provision "shell", inline: <<-SHELL\
+      hostname | sudo tee /var/www/html/index.html
+    SHELL
+  end
+
+  config.vm.define "backend2" do |server|
+    server.vm.host_name = 'backend2'
+    server.vm.network :private_network, ip: "192.168.56.8"
+
+    server.vm.provision "shell", inline: <<-SHELL\
+      hostname | sudo tee /var/www/html/index.html
+    SHELL
+  end
+
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get update
+    apt-get install -y nginx
+  SHELL
+end
