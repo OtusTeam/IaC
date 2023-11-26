@@ -1,0 +1,30 @@
+{
+  "builders": [
+    {
+      "communicator": "ssh",
+      "source_path": "/media/za/1/images/jammy-server-cloudimg-amd64-vagrant.box",
+      "provider": "virtualbox",
+      "add_force": true,
+      "type": "vagrant"
+    }
+  ],
+  "provisioners": [
+    {
+      "inline": [
+        "sudo apt-get update -qq",
+        "sudo apt-get upgrade -y -qq",
+        "sleep 10",
+        "echo '=============================after update and upgrade================================='",
+        "sudo apt-get install -y -qq python3-pip",
+        "sleep 10",
+        "echo '=============================after python3-pip install================================'",
+        "sudo apt-get install -y -qq ansible",
+        "sleep 10",
+        "echo '=============================after ansible install===================================='",
+        "sleep 1"
+      ],
+      "type": "shell"
+    }
+  ]
+}
+

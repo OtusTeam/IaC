@@ -7,5 +7,16 @@
       "add_force": true,
       "type": "vagrant"
     }
+  ],
+  "provisioners": [
+    {
+      "inline": [
+        "sudo apt-get install -y -qq pip3",
+        "sleep 10",
+        "python3 -m pip install ansible"
+      ],
+      "type": "shell"
+    }
   ]
 }
+
