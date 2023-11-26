@@ -43,8 +43,12 @@ Vagrant.configure("2") do |config|
     SHELL
   end
 
-  config.vm.provision "shell", inline: <<-SHELL
-    apt-get update
-    apt-get install -y nginx
-  SHELL
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.playbook = "/vagrant/ansible_local.yml"
+  end
+
+  # config.vm.provision "shell", inline: <<-SHELL
+  #   apt-get update
+  #   apt-get install -y nginx
+  # SHELL
 end
