@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "/media/za/1/images/jammy-server-cloudimg-amd64-vagrant.box"
+  config.vm.box = "/media/za/1/images/jammy-server-cloudimg-amd64-vagrant-ansible.box"
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "512"
     vb.cpus = 1

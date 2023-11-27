@@ -18,10 +18,15 @@
         "sudo apt-get install -y -qq python3-pip",
         "sleep 10",
         "echo '=============================after python3-pip install================================'",
+        "sudo add-apt-repository ppa:ansible/ansible -y",
+        "sleep 10",
+        "sudo apt-get update -y -qq",
+        "sleep 10",
         "sudo apt-get install -y -qq ansible",
         "sleep 10",
+        "ansible --version",
         "echo '=============================after ansible install===================================='",
-        "sleep 1"
+        "sleep 10"
       ],
       "type": "shell"
     }
