@@ -25,30 +25,19 @@ Vagrant.configure("2") do |config|
       inline: "sudo systemctl reload nginx"
   end
 
-  config.vm.define "backend1" do |server|
-    server.vm.host_name = 'backend1'
-    server.vm.network :private_network, ip: "192.168.56.7"
+  (1..2).each do |i|
+    config.vm.define "backend#{i}" do |node|
+      node.vm.host_name = "backend#{i}"
+      node.vm.network :private_network, ip: "192.168.56.#{6+i}"
 
-    server.vm.provision "shell", inline: <<-SHELL\
-      hostname | sudo tee /var/www/html/index.html
-    SHELL
-  end
-
-  config.vm.define "backend2" do |server|
-    server.vm.host_name = 'backend2'
-    server.vm.network :private_network, ip: "192.168.56.8"
-
-    server.vm.provision "shell", inline: <<-SHELL\
-      hostname | sudo tee /var/www/html/index.html
-    SHELL
+      node.vm.provision "shell", inline: <<-SHELL\
+        hostname | sudo tee /var/www/html/index.html
+      SHELL
+    end
   end
 
   config.vm.provision "ansible_local" do |ansible|
     ansible.playbook = "/vagrant/ansible_local.yml"
   end
 
-  # config.vm.provision "shell", inline: <<-SHELL
-  #   apt-get update
-  #   apt-get install -y nginx
-  # SHELL
 end
