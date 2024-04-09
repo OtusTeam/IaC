@@ -1,0 +1,26 @@
+aleksey@first:~/siem/siem/ol$ yc config profile activate default
+Profile 'default' activated
+aleksey@first:~/siem/siem/ol$ yc config profile list
+audit-sa-profile
+default ACTIVE
+aleksey@first:~/siem/siem/ol$ ./yc_resource-manager_cloud_add-access-binding.sh
+done (3s)
+effective_deltas:
+  - action: ADD
+    access_binding:
+      role_id: audit-trails.viewer
+      subject:
+        id: aje5vjc1nssela771tiq
+        type: serviceAccount
+
+aleksey@first:~/siem/siem/ol$ nano yc_resource-manager_cloud_add-access-binding.sh
+aleksey@first:~/siem/siem/ol$ cp yc_resource-manager_cloud_add-access-binding.sh yc_resource-manager_folder_add-access-binding.sh
+aleksey@first:~/siem/siem/ol$ nano yc_resource-manager_folder_add-access-binding.sh
+aleksey@first:~/siem/siem/ol$ ./yc_resource-manager_folder_add-access-binding.shdone (2s)
+effective_deltas:
+  - action: ADD
+    access_binding:
+      role_id: storage.uploader
+      subject:
+        id: aje5vjc1nssela771tiq
+        type: serviceAccount
