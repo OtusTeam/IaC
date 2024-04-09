@@ -1,0 +1,15 @@
+aleksey@first:~/siem/siem/ol$ ./yc_resource-manager_cloud_and_folder_list-access-bindings.sh
++------------------+----------------+----------------------+
+|     ROLE ID      |  SUBJECT TYPE  |      SUBJECT ID      |
++------------------+----------------+----------------------+
+| ai.auditor       | serviceAccount | aje5vjc1nssela771tiq |
+| storage.uploader | serviceAccount | aje5vjc1nssela771tiq |
++------------------+----------------+----------------------+
+
++-------------------------------+----------------+----------------------+
+|            ROLE ID            |  SUBJECT TYPE  |      SUBJECT ID      |
++-------------------------------+----------------+----------------------+
+| resource-manager.clouds.owner | userAccount    | ajephrtapoonubpkuogh |
+| audit-trails.viewer           | serviceAccount | aje5vjc1nssela771tiq |
++-------------------------------+----------------+----------------------+
+
