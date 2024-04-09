@@ -1,0 +1,12 @@
+aleksey@first:~/siem/siem/ol$ ./yc_bucket_get.sh 
+name: otus-audit-log
+folder_id: b1gmesrdjgklgkvcp704
+anonymous_access_flags:
+  read: false
+  list: false
+  config_read: false
+default_storage_class: STANDARD
+versioning: VERSIONING_DISABLED
+max_size: "10737418240"
+created_at: "2024-04-07T18:13:35.648623Z"
+
