@@ -1,0 +1,6 @@
+aleksey@first:~/siem/siem/ol$ ./yc_kms_symmetric-k_list-access-binding.sh 
++-----------------------------+----------------+----------------------+
+|           ROLE ID           |  SUBJECT TYPE  |      SUBJECT ID      |
++-----------------------------+----------------+----------------------+
+| kms.keys.encrypterDecrypter | serviceAccount | aje5vjc1nssela771tiq |
++-----------------------------+----------------+----------------------+
