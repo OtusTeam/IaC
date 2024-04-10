@@ -1,0 +1,12 @@
+aleksey@first:~/siem/siem/ol$ ./yc_vpc_subnet_update.sh
+id: e2l3co6r10mp14ro4ff6
+folder_id: b1gmesrdjgklgkvcp704
+created_at: "2024-02-16T06:40:54Z"
+name: default-ru-central1-b
+description: Auto-created default subnet for zone ru-central1-b in default
+network_id: enpjr0b65u0olvuotmdf
+zone_id: ru-central1-b
+v4_cidr_blocks:
+  - 10.129.0.0/24
+route_table_id: enphj3e78v5n2t2g986e
+dhcp_options: {}

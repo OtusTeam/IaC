@@ -1,0 +1,7 @@
+# yc_vpc_gateway_create_otus-nat-gw.sh
+aleksey@first:~/siem/siem/ol$ yc vpc gateway create otus-nat-gw
+id: enpkq17kierqhjtovjkn
+folder_id: b1gmesrdjgklgkvcp704
+created_at: "2024-04-10T08:44:47Z"
+name: otus-nat-gw
+shared_egress_gateway: {}

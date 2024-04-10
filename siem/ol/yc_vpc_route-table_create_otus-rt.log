@@ -1,0 +1,10 @@
+aleksey@first:~/siem/siem/ol$ ./yc_vpc_route-table_create_otus-rt.sh
+id: enphj3e78v5n2t2g986e
+folder_id: b1gmesrdjgklgkvcp704
+created_at: "2024-04-10T09:51:13Z"
+name: otus-rt
+network_id: enpjr0b65u0olvuotmdf
+static_routes:
+  - destination_prefix: 0.0.0.0/0
+    gateway_id: enpkq17kierqhjtovjkn
+
