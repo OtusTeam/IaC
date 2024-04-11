@@ -1,0 +1,33 @@
+---
+- hosts: wazuh
+  become: true
+
+  tasks:
+
+    - name: install dependencies
+      apt:
+        pkg:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - gnupg-agent
+        - software-properties-common
+        state: present
+        update_cache: yes
+
+    - name: Скачать установочный скрипт
+      get_url:
+        url: "https://packages.wazuh.com/4.7/wazuh-install.sh"
+        dest: "/tmp/wazuh-install.sh"
+
+    - name: Запустить установку Wazuh
+      command: "bash /tmp/wazuh-install.sh -a"
+      register: install_output
+
+    - name: Найти строку с паролем и сохранить в файл
+      lineinfile:
+        line: "{{ item }}"
+        dest: "wazuh_password.txt"
+        create: yes
+      loop: "{{ install_output.stdout_lines }}"
+      when: "'Password:' in item"
