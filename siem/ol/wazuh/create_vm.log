@@ -1,0 +1,40 @@
+aleksey@first:~/siem/siem/ol/wazuh$ ./create_vm.sh 
+done (1m17s)
+id: fhmqqqqkepta1hvg3esp
+folder_id: b1gmesrdjgklgkvcp704
+created_at: "2024-04-11T11:38:11Z"
+name: wazuh
+zone_id: ru-central1-a
+platform_id: standard-v2
+resources:
+  memory: "17179869184"
+  cores: "2"
+  core_fraction: "100"
+status: RUNNING
+metadata_options:
+  gce_http_endpoint: ENABLED
+  aws_v1_http_endpoint: ENABLED
+  gce_http_token: ENABLED
+  aws_v1_http_token: DISABLED
+boot_disk:
+  mode: READ_WRITE
+  device_name: fhmhcoj19vmtcraua0up
+  auto_delete: true
+  disk_id: fhmhcoj19vmtcraua0up
+network_interfaces:
+  - index: "0"
+    mac_address: d0:0d:1a:d6:b5:47
+    subnet_id: e9bop98iu12teftg4uj8
+    primary_v4_address:
+      address: 10.128.0.14
+      one_to_one_nat:
+        address: 178.154.207.133
+        ip_version: IPV4
+serial_port_settings:
+  ssh_authorization: INSTANCE_METADATA
+gpu_settings: {}
+fqdn: wazuh.ru-central1.internal
+scheduling_policy: {}
+network_settings:
+  type: STANDARD
+placement_policy: {}

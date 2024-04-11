@@ -1,0 +1,9 @@
+aleksey@first:~/siem/siem/ol/wazuh$ ./ansible_ping.sh
+178.154.207.133 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+
