@@ -1,0 +1,88 @@
+aleksey@first:~/siem/siem/ol/wazuh$ ./ansible_check_wazuh_services.sh
+wazuh | CHANGED | rc=0 >>
+● wazuh-indexer.service - Wazuh-indexer
+     Loaded: loaded (/lib/systemd/system/wazuh-indexer.service; enabled; vendor preset: enabled)
+     Active: active (running) since Thu 2024-04-11 15:25:50 UTC; 2h 11min ago
+       Docs: https://documentation.wazuh.com
+   Main PID: 6756 (java)
+      Tasks: 71 (limit: 19052)
+     Memory: 8.4G
+        CPU: 2min 33.117s
+     CGroup: /system.slice/wazuh-indexer.service
+             └─6756 /usr/share/wazuh-indexer/jdk/bin/java -Xshare:auto -Dopensearch.networkaddress.cache.ttl=60 -Dopensearch.networkaddress.cache.negative.ttl=10 -XX:+AlwaysPreTouch -Xss1m -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Djna.nosys=true -XX:-OmitStackTraceInFastThrow -XX:+ShowCodeDetailsInExceptionMessages -Dio.netty.noUnsafe=true -Dio.netty.noKeySetOptimization=true -Dio.netty.recycler.maxCapacityPerThread=0 -Dio.netty.allocator.numDirectArenas=0 -Dlog4j.shutdownHookEnabled=false -Dlog4j2.disable.jmx=true -Djava.locale.providers=SPI,COMPAT -Xms7995m -Xmx7995m -XX:+UseG1GC -XX:G1ReservePercent=25 -XX:InitiatingHeapOccupancyPercent=30 -Djava.io.tmpdir=/tmp/opensearch-13612424337974060093 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/var/lib/wazuh-indexer -XX:ErrorFile=/var/log/wazuh-indexer/hs_err_pid%p.log "-Xlog:gc*,gc+age=trace,safepoint:file=/var/log/wazuh-indexer/gc.log:utctime,pid,tags:filecount=32,filesize=64m" -Dclk.tck=100 -Djdk.attach.allowAttachSelf=true -Djava.security.policy=file:///etc/wazuh-indexer/opensearch-performance-analyzer/opensearch_security.policy --add-opens=jdk.attach/sun.tools.attach=ALL-UNNAMED -Dclk.tck=100 -Djdk.attach.allowAttachSelf=true -Djava.security.policy=file:///usr/share/wazuh-indexer/plugins/opendistro-performance-analyzer/pa_config/es_security.policy -XX:MaxDirectMemorySize=4192206848 -Dopensearch.path.home=/usr/share/wazuh-indexer -Dopensearch.path.conf=/etc/wazuh-indexer -Dopensearch.distribution.type=rpm -Dopensearch.bundled_jdk=true -cp "/usr/share/wazuh-indexer/lib/*" org.opensearch.bootstrap.OpenSearch -p /run/wazuh-indexer/wazuh-indexer.pid --quiet
+wazuh | CHANGED | rc=0 >>
+● wazuh-dashboard.service - wazuh-dashboard
+     Loaded: loaded (/etc/systemd/system/wazuh-dashboard.service; enabled; vendor preset: enabled)
+     Active: active (running) since Thu 2024-04-11 15:30:05 UTC; 2h 6min ago
+   Main PID: 53082 (node)
+      Tasks: 11 (limit: 19052)
+     Memory: 156.2M
+        CPU: 26.067s
+     CGroup: /system.slice/wazuh-dashboard.service
+             └─53082 /usr/share/wazuh-dashboard/node/bin/node --no-warnings --max-http-header-size=65536 --unhandled-rejections=warn /usr/share/wazuh-dashboard/src/cli/dist -c /etc/wazuh-dashboard/opensearch_dashboards.yml
+wazuh | CHANGED | rc=0 >>
+● wazuh-manager.service - Wazuh manager
+     Loaded: loaded (/lib/systemd/system/wazuh-manager.service; enabled; vendor preset: enabled)
+     Active: active (running) since Thu 2024-04-11 15:27:22 UTC; 2h 9min ago
+      Tasks: 121 (limit: 19052)
+     Memory: 710.7M
+        CPU: 1min 48.153s
+     CGroup: /system.slice/wazuh-manager.service
+             ├─50270 /var/ossec/framework/python/bin/python3 /var/ossec/api/scripts/wazuh-apid.py
+             ├─50309 /var/ossec/bin/wazuh-authd
+             ├─50325 /var/ossec/bin/wazuh-db
+             ├─50349 /var/ossec/bin/wazuh-execd
+             ├─50361 /var/ossec/bin/wazuh-analysisd
+             ├─50403 /var/ossec/bin/wazuh-syscheckd
+             ├─50423 /var/ossec/bin/wazuh-remoted
+             ├─50455 /var/ossec/bin/wazuh-logcollector
+             ├─50473 /var/ossec/bin/wazuh-monitord
+             ├─50495 /var/ossec/bin/wazuh-modulesd
+             ├─50751 /var/ossec/framework/python/bin/python3 /var/ossec/api/scripts/wazuh-apid.py
+             ├─50754 /var/ossec/framework/python/bin/python3 /var/ossec/api/scripts/wazuh-apid.py
+             └─50757 /var/ossec/framework/python/bin/python3 /var/ossec/api/scripts/wazuh-apid.py
+wazuh | CHANGED | rc=0 >>
+● filebeat.service - Filebeat sends log files to Logstash or directly to Elasticsearch.
+     Loaded: loaded (/lib/systemd/system/filebeat.service; enabled; vendor preset: enabled)
+     Active: active (running) since Thu 2024-04-11 15:30:03 UTC; 2h 6min ago
+       Docs: https://www.elastic.co/products/beats/filebeat
+   Main PID: 53005 (filebeat)
+      Tasks: 8 (limit: 19052)
+     Memory: 9.8M
+        CPU: 1.016s
+     CGroup: /system.slice/filebeat.service
+             └─53005 /usr/share/filebeat/bin/filebeat --environment systemd -c /etc/filebeat/filebeat.yml --path.home /usr/share/filebeat --path.config /etc/filebeat --path.data /var/lib/filebeat --path.logs /var/log/filebeat
+wazuh | CHANGED | rc=0 >>
+Netid State  Recv-Q Send-Q      Local Address:Port        Peer Address:Port Process
+udp   UNCONN 0      0           127.0.0.53%lo:53               0.0.0.0:*           
+udp   UNCONN 0      0        10.128.0.14%eth0:68               0.0.0.0:*           
+tcp   LISTEN 0      128               0.0.0.0:55000            0.0.0.0:*           
+tcp   LISTEN 0      4096        127.0.0.53%lo:53               0.0.0.0:*           
+tcp   LISTEN 0      128               0.0.0.0:1514             0.0.0.0:*           
+tcp   LISTEN 0      128               0.0.0.0:1515             0.0.0.0:*           
+tcp   LISTEN 0      511               0.0.0.0:443              0.0.0.0:*           
+tcp   LISTEN 0      128               0.0.0.0:22               0.0.0.0:*           
+tcp   ESTAB  0      0               127.0.0.1:54936          127.0.0.1:9200        
+tcp   ESTAB  0      0               127.0.0.1:60682          127.0.0.1:9200        
+tcp   ESTAB  0      0               127.0.0.1:37236          127.0.0.1:9200        
+tcp   ESTAB  0      0               127.0.0.1:60644          127.0.0.1:9200        
+tcp   ESTAB  0      0               127.0.0.1:60658          127.0.0.1:9200        
+tcp   ESTAB  0      0               127.0.0.1:54916          127.0.0.1:9200        
+tcp   ESTAB  0      0               127.0.0.1:33596          127.0.0.1:9200        
+tcp   ESTAB  0      0               127.0.0.1:54928          127.0.0.1:9200        
+tcp   ESTAB  0      0               127.0.0.1:37228          127.0.0.1:9200        
+tcp   ESTAB  0      0             10.128.0.14:22         51.250.13.236:36010       
+tcp   ESTAB  0      0               127.0.0.1:60662          127.0.0.1:9200        
+tcp   LISTEN 0      4096   [::ffff:127.0.0.1]:9300                   *:*           
+tcp   LISTEN 0      4096   [::ffff:127.0.0.1]:9200                   *:*           
+tcp   LISTEN 0      128                  [::]:22                  [::]:*           
+tcp   ESTAB  0      0      [::ffff:127.0.0.1]:9200  [::ffff:127.0.0.1]:37236       
+tcp   ESTAB  0      0      [::ffff:127.0.0.1]:9200  [::ffff:127.0.0.1]:60644       
+tcp   ESTAB  0      0      [::ffff:127.0.0.1]:9200  [::ffff:127.0.0.1]:33596       
+tcp   ESTAB  0      0      [::ffff:127.0.0.1]:9200  [::ffff:127.0.0.1]:54936       
+tcp   ESTAB  0      0      [::ffff:127.0.0.1]:9200  [::ffff:127.0.0.1]:60658       
+tcp   ESTAB  0      0      [::ffff:127.0.0.1]:9200  [::ffff:127.0.0.1]:60682       
+tcp   ESTAB  0      0      [::ffff:127.0.0.1]:9200  [::ffff:127.0.0.1]:54916       
+tcp   ESTAB  0      0      [::ffff:127.0.0.1]:9200  [::ffff:127.0.0.1]:54928       
+tcp   ESTAB  0      0      [::ffff:127.0.0.1]:9200  [::ffff:127.0.0.1]:60662       
+tcp   ESTAB  0      0      [::ffff:127.0.0.1]:9200  [::ffff:127.0.0.1]:37228       
