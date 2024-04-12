@@ -3,8 +3,8 @@
 import boto3
 session = boto3.session.Session()
 s3 = session.client(
-    service_name='s3',
-    endpoint_url='https://storage.yandexcloud.net'
+    service_name='s3'
+    #, endpoint_url='https://storage.yandexcloud.net'
 )
 
 my_bucket_name = 'otus-audit-log' 
