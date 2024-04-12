@@ -25,11 +25,12 @@ my_bucket_name = 'otus-audit-log'
 # Получить список объектов в бакете
 for key in s3.list_objects(Bucket=my_bucket_name)['Contents']:
     print(key['Key'])
+    last_key = key['Key']
 
 # Удалить несколько объектов
 #forDeletion = [{'Key':'object_name'}, {'Key':'script/py_script.py'}]
 #response = s3.delete_objects(Bucket=my_bucket_name, Delete={'Objects': forDeletion})
 
-# Получить объект
-#get_object_response = s3.get_object(Bucket=my_bucket_name,Key='py_script.py')
-#print(get_object_response['Body'].read())
+# Получить крайний объект
+get_object_response = s3.get_object(Bucket=my_bucket_name, Key=last_key)
+print(get_object_response['Body'].read())
