@@ -1,0 +1,1 @@
+tar -cvf sensitive.tar --wildcards s3/audit_sa_access-key.sensitive.log wazuh/ansible_playbook.sensitive.log audit_sa_key.sensitive.json save_audit_sa_profile.sensitive.txt save_default_profile.sensitive.txt /home/aleksey/.aws/config /home/aleksey/.aws/credentials /home/aleksey/.aws/old
