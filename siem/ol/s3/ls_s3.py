@@ -54,8 +54,8 @@ def list_objects(s3_client, bucket_name, prefix='', delimiter='/', path=''):
         list_objects(s3_client, bucket_name, prefix, delimiter, path)
 
 # Пример использования
-aws_access_key_id = 'YCAJEZZS6AsKRipDc8PIHf7wQ'
-aws_secret_access_key = 'YCMCiyRgj78qgUUdCefc75n_4hfZ9JZjEwp2AH5-'
+aws_access_key_id = ''
+aws_secret_access_key = ''
 bucket_name = 'your-bucket-name'
 prefix = 'your-prefix'
 path = 'your/path/in/directory/tree'

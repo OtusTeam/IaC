@@ -3,6 +3,34 @@ done (2s)
 effective_deltas:
   - action: ADD
     access_binding:
+      role_id: compute.viewer
+      subject:
+        id: ajeo3f9qr5tlur3h6f1n
+        type: serviceAccount
+
+done (2s)
+effective_deltas:
+  - action: ADD
+    access_binding:
+      role_id: logging.viewer
+      subject:
+        id: ajeo3f9qr5tlur3h6f1n
+        type: serviceAccount
+
+done (2s)
+effective_deltas:
+  - action: ADD
+    access_binding:
+      role_id: logging.reader
+      subject:
+        id: ajeo3f9qr5tlur3h6f1n
+        type: serviceAccount
+
+
+done (2s)
+effective_deltas:
+  - action: ADD
+    access_binding:
       role_id: logging.writer
       subject:
         id: ajeo3f9qr5tlur3h6f1n
