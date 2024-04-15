@@ -1,0 +1,9 @@
+aleksey@first:~/siem/siem/ol/mw$ ./yc_resource-manager_folder_add-access-binding.sh 
+done (2s)
+effective_deltas:
+  - action: ADD
+    access_binding:
+      role_id: logging.writer
+      subject:
+        id: ajeo3f9qr5tlur3h6f1n
+        type: serviceAccount

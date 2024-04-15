@@ -1,0 +1,13 @@
+aleksey@first:~/siem/siem/ol/mw$ ./yc_organization-manager_organization_list-access-bindings.sh 
++------------------------------------------+----------------+----------------------+
+|                 ROLE ID                  |  SUBJECT TYPE  |      SUBJECT ID      |
++------------------------------------------+----------------+----------------------+
+| compute.viewer                           | serviceAccount | ajeo3f9qr5tlur3h6f1n |
+| logging.viewer                           | serviceAccount | ajeo3f9qr5tlur3h6f1n |
+| logging.reader                           | serviceAccount | ajeo3f9qr5tlur3h6f1n |
+| audit-trails.viewer                      | serviceAccount | aje5vjc1nssela771tiq |
+| audit-trails.viewer                      | serviceAccount | ajeo3f9qr5tlur3h6f1n |
+| organization-manager.organizations.owner | userAccount    | ajephrtapoonubpkuogh |
++------------------------------------------+----------------+----------------------+
+
+
