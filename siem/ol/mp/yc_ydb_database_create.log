@@ -1,0 +1,23 @@
+aleksey@first:~/siem/siem/ol/mp$ ./yc_ydb_database_create.sh
+done (15s)
+id: etn15ekv9k10qttc410o
+folder_id: b1gmesrdjgklgkvcp704
+created_at: "2024-04-15T18:23:17Z"
+name: maxpatrol-db
+status: PROVISIONING
+endpoint: grpcs://ydb.serverless.yandexcloud.net:2135/?database=/ru-central1/b1glq0cg9jigrj5lcp63/etn15ekv9k10qttc410o
+serverless_database:
+  storage_size_limit: "53687091200"
+location_id: ru-central1
+backup_config:
+  backup_settings:
+    - name: daily
+      backup_schedule:
+        daily_backup_schedule:
+          execute_time:
+            hours: 17
+      backup_time_to_live: 604800s
+      type: SYSTEM
+document_api_endpoint: https://docapi.serverless.yandexcloud.net/ru-central1/b1glq0cg9jigrj5lcp63/etn15ekv9k10qttc410o
+monitoring_config: {}
+

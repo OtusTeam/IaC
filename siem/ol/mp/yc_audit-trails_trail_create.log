@@ -1,0 +1,28 @@
+aleksey@first:~/siem/siem/ol/mp$ ./yc_audit-trails_trail_create.sh
+done (1s)
+id: cnpor71j3dfidljdbber
+folder_id: b1gmesrdjgklgkvcp704
+created_at: "2024-04-15T18:55:43.755Z"
+updated_at: "2024-04-15T18:55:43.755Z"
+name: maxpatrol-trail
+description: maxpatrol-trail
+destination:
+  data_stream:
+    database_id: etn15ekv9k10qttc410o
+    stream_name: maxpatrol-stream
+service_account_id: ajevofu72sng1un31f6i
+status: ACTIVE
+filter:
+  path_filter:
+    root:
+      some_filter:
+        resource:
+          id: bpfrtqbajbhpm5j05tkl
+          type: organization-manager.organization
+        filters:
+          - any_filter:
+              resource:
+                id: b1glq0cg9jigrj5lcp63
+                type: resource-manager.cloud
+  event_filter: {}
+cloud_id: b1glq0cg9jigrj5lcp63

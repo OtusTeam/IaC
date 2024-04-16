@@ -1,0 +1,9 @@
+aleksey@first:~/siem/siem/ol/mp$ ./yc_resource-manager_folder_add-access-binding.sh 
+done (2s)
+effective_deltas:
+  - action: ADD
+    access_binding:
+      role_id: yds.editor
+      subject:
+        id: ajevofu72sng1un31f6i
+        type: serviceAccount
