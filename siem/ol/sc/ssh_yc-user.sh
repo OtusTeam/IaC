@@ -1,1 +1,1 @@
-ssh yc-user@84.201.134.248
+ssh $SC_ANSIBLE_USER@$SC_IP

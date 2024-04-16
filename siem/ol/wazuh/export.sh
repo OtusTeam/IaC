@@ -1,0 +1,4 @@
+export WZ_ANSIBLE_USER="yc-user"
+export WZ_IP="158.160.57.166"
+echo wazuh ansible_host=$WZ_IP ansible_user=$WZ_ANSIBLE_USER > inv 
+

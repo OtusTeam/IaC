@@ -1,0 +1,91 @@
+[yc-user@sc ~]$ echo -e "1\n3\n1\nA\nyc\n/mount/sc/\n*.json\nR\nY\nF\n2\nA\n0\n158.160.57.166\n514\nUDP\nF\n3\nN\nY\n0" | sudo -S /home/agent/yc_agent/agent agentsetup
+
+Savrus Inforter agent 0.64 setup, build Apr 15 2022
+SAVRUS LLC, www.savrus.ru
+
+Linux version 'CentOS Linux 7'
+
+1 - create new config 
+2 - import from ArcSight agent.properties
+0 - exit
+
+Please select an option: [0..2] :1 - filereader
+2 - multifolderreader
+3 - jsonfolderfollower
+4 - syslog
+0 - exit
+
+Please select an option: [0..4] :Create new config
+
+1 - Add, modify, or remove sources
+2 - Add, modify, or remove destinations
+3 - Install as a service
+0 - Exit
+
+Please select an option: [0..3] :
+Modify table sources
+
+NN, configfile, folder, wildcard, mode, processfoldersrecursively
+--------------------------------------------------------------------------
+
+Please select an option: [A]dd [D]elete [M]odify [F]inish => 
+config file: folder: wildcard: mode (D - DeleteFile, R - RenameFile): process folders recursively (Y - Yes, N - No): 
+
+Modify table sources
+
+NN, configfile, folder, wildcard, mode, processfoldersrecursively
+--------------------------------------------------------------------------
+1. 'yc', '/mount/sc/', '*.json', 'RenameFile', 'true'
+
+Please select an option: [A]dd [D]elete [M]odify [F]inish => 
+Savrus Inforter agent 0.64 setup, build Apr 15 2022
+SAVRUS LLC, www.savrus.ru
+
+Linux version 'CentOS Linux 7'
+
+
+1 - Add, modify, or remove sources
+2 - Add, modify, or remove destinations
+3 - Install as a service
+0 - Exit
+
+Please select an option: [0..3] :
+Modify table destinations
+
+
+Please select an option: [A]dd [D]elete [F]inish => 
+Add destination
+
+Destination type (0 - cefsyslog): Host: Port: Protocol: 
+Modify table destinations
+
+1. cefsyslog - , host: 158.160.57.166, port: 514, protocol: UDP
+
+Please select an option: [A]dd [D]elete [F]inish => 
+Savrus Inforter agent 0.64 setup, build Apr 15 2022
+SAVRUS LLC, www.savrus.ru
+
+Linux version 'CentOS Linux 7'
+
+
+1 - Add, modify, or remove sources
+2 - Add, modify, or remove destinations
+3 - Install as a service
+0 - Exit
+
+Please select an option: [0..3] :
+Service name: inforter_agent_jsonfolderfollower, description: inforter_agent_jsonfolderfollower
+
+Change service name/description? (Y/N): Starting the service at startup? (Y/N): 
+Savrus Inforter agent 0.64 setup, build Apr 15 2022
+SAVRUS LLC, www.savrus.ru
+
+Linux version 'CentOS Linux 7'
+
+
+1 - Add, modify, or remove sources
+2 - Add, modify, or remove destinations
+3 - Uninstall service
+0 - Exit
+
+Please select an option: [0..3] :

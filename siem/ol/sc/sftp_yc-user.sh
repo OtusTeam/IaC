@@ -1,1 +1,1 @@
-sftp yc-user@84.201.134.248
+sftp $SC_ANSIBLE_USER@$SC_IP

@@ -1,1 +1,1 @@
-ssh yc-user@178.154.207.133
+ssh $WZ_ANSIBLE_USER@$WZ_IP

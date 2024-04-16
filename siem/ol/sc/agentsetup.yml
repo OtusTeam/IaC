@@ -1,0 +1,83 @@
+---
+- hosts: sc
+#  become: true
+
+  tasks:
+
+#    - name: Установить epel-release
+#      yum:
+#        name: epel-release
+#        state: present
+#        update_cache: yes
+#      become: true
+
+#    - name: Установить s3fs-fuse
+#      yum:
+#        name: s3fs-fuse
+#        state: present
+#      become: true
+
+#    - name: Копировать файл passwd-s3fs.sensitive.plaintext
+#      copy:
+#        src: passwd-s3fs.sensitive.plaintext
+#        dest: ~/.passwd-s3fs
+#        mode: '0600'
+
+#    - name: Создать директорию /mount/sc
+#      file:
+#        path: /mount/sc
+#        state: directory
+#        mode: '0777'
+##        creates: /nount/sc
+#      become: true
+
+#    - name: Монтировать S3FS
+#      command: s3fs otus-audit-log /mount/sc -o passwd_file=$HOME/.passwd-s3fs -o url=https://storage.yandexcloud.net -o use_path_request_style
+
+    - name: Запустить программу настройки агента
+# Чтобы создать новую конфигурацию, введите значение 1 (create new config).                                                      
+# Выберите компонент для настройки – 3 (jsonfolderfollower).                                                                     
+# Установите источники аудитных логов: Введите значение 1 (Add, modify, or remove sources).                                      
+# Установите источники аудитных логов:                                                                                           
+# в поле config file укажите yc;                                                                                                 
+# в поле folder укажите путь к смонтированному бакету с аудитными логами, например /home/agent/logs/;                            
+# в поле wildcard укажите маску логов *.json;                                                                                    
+# в поле mode укажите, что делать с логами после обработки на ВМ: D (DeleteFile) – удалять или R (RenameFile) – переименовывать; 
+# в поле process folders recursively введите Y(Yes).                                                                             
+# Проверьте указанные параметры и введите F (Finish).                                                                            
+# Введите значение 2 (Add, modify, or remove destinations).                                                                      
+# Выберите опцию A (Add) и задайте параметры получателя:                                                                         
+# в поле Destination type введите 0 (cefsyslog);                                                                                 
+# в поле Host введите IP-адрес сервера, на котором установлен syslog-коннектор SIEM-системы в вашей корпоративной сети;          
+# в поле Port укажите 514;                                                                                                       
+# в поле Protocol укажите UDP.                                                                                                   
+# Проверьте указанные параметры и введите F (Finish).                                                                            
+# ведите значение 3 (Install as a service).                                                                                      
+# Чтобы изменить имя и описание сервиса, на запрос Change service name/description введите Y (Yes) и задайте новые параметры:    
+# В строке Starting the service at startup введите Y (Yes).                                                                      
+# Чтобы выйти из меню конфигурирования, введите значение 0 (Exit).                                                               
+      shell: |
+        echo '1'
+        echo '3'
+        echo '1'
+        echo 'A'
+        echo 'yc'
+        echo '/mount/sc/'
+        echo '*.json'
+        echo 'R'
+        echo 'Y'
+        echo 'F'
+        echo '2'
+        echo 'A'
+        echo '0'
+        echo '$DEST_IP'
+        echo '514'
+        echo 'UDP'
+        echo 'F'
+        echo '3'
+        echo 'N'
+        echo 'Y'
+        echo '0'
+      args:
+        executable: /home/agent/yc_agent/agent agentsetup
+      become: true
