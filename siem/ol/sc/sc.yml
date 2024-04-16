@@ -34,50 +34,29 @@
 #    - name: Монтировать S3FS
 #      command: s3fs otus-audit-log /mount/sc -o passwd_file=$HOME/.passwd-s3fs -o url=https://storage.yandexcloud.net -o use_path_request_style
 
-    - name: Запустить программу настройки агента 
-      command: |
-        echo '1'  # Чтобы создать новую конфигурацию, введите значение 1 (create new config).
-# Выберите компонент для настройки – 3 (jsonfolderfollower).
-        echo '3'
-# Установите источники аудитных логов:
-# Введите значение 1 (Add, modify, or remove sources).
-        echo '1'
-# Установите источники аудитных логов:
-        echo 'A'
-# в поле config file укажите yc;
-        echo 'yc'
-# в поле folder укажите путь к смонтированному бакету с аудитными логами, например /home/agent/logs/;
-        echo '/mount/sc/'
-# в поле wildcard укажите маску логов *.json;
-        echo '*.json'
-# в поле mode укажите, что делать с логами после обработки на ВМ: D (DeleteFile) – удалять или R (RenameFile) – переименовывать;
-        echo 'R'
-# в поле process folders recursively введите Y(Yes).
-        echo 'Y'
-# Проверьте указанные параметры и введите F (Finish).
-        echo 'F'
-# Введите значение 2 (Add, modify, or remove destinations).
-        echo '2'
-# Выберите опцию A (Add) и задайте параметры получателя:
-        echo 'A'
-# в поле Destination type введите 0 (cefsyslog);
-        echo '0'
-# в поле Host введите IP-адрес сервера, на котором установлен syslog-коннектор SIEM-системы в вашей корпоративной сети;
-        echo '$DEST_IP'
-# в поле Port укажите 514;
-        echo '514'
-# в поле Protocol укажите UDP.
-        echo 'UDP'
-# Проверьте указанные параметры и введите F (Finish).
-        echo 'F'
-# ведите значение 3 (Install as a service).
-        echo '3'
-# Чтобы изменить имя и описание сервиса, на запрос Change service name/description введите Y (Yes) и задайте новые параметры:
-        echo 'N'
-# В строке Starting the service at startup введите Y (Yes).
-        echo 'Y'
-# Чтобы выйти из меню конфигурирования, введите значение 0 (Exit).
-        echo '0'
+    - name: Запустить программу настройки агента
+      shell: |
+        echo '1'                # Чтобы создать новую конфигурацию, введите значение 1 (create new config).
+        echo '3'                # Выберите компонент для настройки – 3 (jsonfolderfollower).
+        echo '1'                # Установите источники аудитных логов: Введите значение 1 (Add, modify, or remove sources).
+        echo 'A'                # Установите источники аудитных логов:
+        echo 'yc'               # в поле config file укажите yc;
+        echo '/mount/sc/'       # в поле folder укажите путь к смонтированному бакету с аудитными логами, например /home/agent/logs/;
+        echo '*.json'           # в поле wildcard укажите маску логов *.json;
+        echo 'R'                # в поле mode укажите, что делать с логами после обработки на ВМ: D (DeleteFile) – удалять или R (RenameFile) – переименовывать;
+        echo 'Y'                # в поле process folders recursively введите Y(Yes).
+        echo 'F'                # Проверьте указанные параметры и введите F (Finish).
+        echo '2'                # Введите значение 2 (Add, modify, or remove destinations).
+        echo 'A'                # Выберите опцию A (Add) и задайте параметры получателя:
+        echo '0'                # в поле Destination type введите 0 (cefsyslog);
+        echo '$DEST_IP'         # в поле Host введите IP-адрес сервера, на котором установлен syslog-коннектор SIEM-системы в вашей корпоративной сети;
+        echo '514'              # в поле Port укажите 514;
+        echo 'UDP'              # в поле Protocol укажите UDP.
+        echo 'F'                # Проверьте указанные параметры и введите F (Finish).
+        echo '3'                # ведите значение 3 (Install as a service).
+        echo 'N'                # Чтобы изменить имя и описание сервиса, на запрос Change service name/description введите Y (Yes) и задайте новые параметры:
+        echo 'Y'                # В строке Starting the service at startup введите Y (Yes).
+        echo '0'                # Чтобы выйти из меню конфигурирования, введите значение 0 (Exit).
       args:
         executable: /home/agent/yc_agent/agent agentsetup
         stdin: "yes"
