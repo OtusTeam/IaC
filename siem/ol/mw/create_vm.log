@@ -1,0 +1,41 @@
+aleksey@first:~/siem/siem/ol/mw$ ./create_vm.sh 
+done (28s)
+id: fhmjdviote58plpjmamg
+folder_id: b1gmesrdjgklgkvcp704
+created_at: "2024-04-17T17:17:26Z"
+name: mw
+zone_id: ru-central1-a
+platform_id: standard-v2
+resources:
+  memory: "34359738368"
+  cores: "8"
+  core_fraction: "100"
+status: RUNNING
+metadata_options:
+  gce_http_endpoint: ENABLED
+  aws_v1_http_endpoint: ENABLED
+  gce_http_token: ENABLED
+  aws_v1_http_token: DISABLED
+boot_disk:
+  mode: READ_WRITE
+  device_name: fhmh58vpu3q3a6sqnuu1
+  auto_delete: true
+  disk_id: fhmh58vpu3q3a6sqnuu1
+network_interfaces:
+  - index: "0"
+    mac_address: d0:0d:13:6f:e5:8e
+    subnet_id: e9bop98iu12teftg4uj8
+    primary_v4_address:
+      address: 10.128.0.33
+      one_to_one_nat:
+        address: 130.193.36.28
+        ip_version: IPV4
+serial_port_settings:
+  ssh_authorization: INSTANCE_METADATA
+gpu_settings: {}
+fqdn: mw.ru-central1.internal
+scheduling_policy: {}
+service_account_id: ajeo3f9qr5tlur3h6f1n
+network_settings:
+  type: STANDARD
+placement_policy: {}

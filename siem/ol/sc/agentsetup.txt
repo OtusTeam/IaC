@@ -1,1 +1,1 @@
-echo -e "1\n3\n1\nA\nyc\n/mount/sc/\n*.json\nR\nY\nF\n2\nA\n0\n158.160.57.166\n514\nUDP\nF\n3\nN\nY\n0" | sudo -S /home/agent/yc_agent/agent agentsetup
+echo -e "1\n3\n1\nA\nyc\n/mount/sc/\n*.json\nR\nY\nF\n2\nA\n0\n10.128.0.14\n514\nUDP\nF\n3\nN\nY\n0" | sudo -S /home/agent/yc_agent/agent agentsetup
