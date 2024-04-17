@@ -22,6 +22,9 @@
         src: passwd-s3fs.sensitive.plaintext
         dest: ~/.passwd-s3fs
         mode: '0600'
+#        mode: '0644'
+      become: true
+      become_user: agent
 
     - name: Создать директорию /mount/sc
       file:
@@ -33,4 +36,5 @@
 
     - name: Монтировать S3FS
       command: s3fs otus-audit-log /mount/sc -o passwd_file=$HOME/.passwd-s3fs -o url=https://storage.yandexcloud.net -o use_path_request_style
-
+      become: true
+      become_user: agent
