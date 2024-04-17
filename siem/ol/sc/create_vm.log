@@ -1,8 +1,8 @@
 aleksey@first:~/siem/siem/ol/sc$ ./create_vm.sh 
 done (31s)
-id: fhmohq2gm8sut2ai9n2k
+id: fhmgqpg8euv63ep10j8e
 folder_id: b1gmesrdjgklgkvcp704
-created_at: "2024-04-16T05:41:33Z"
+created_at: "2024-04-17T18:24:47Z"
 name: sc
 zone_id: ru-central1-a
 platform_id: standard-v2
@@ -18,17 +18,17 @@ metadata_options:
   aws_v1_http_token: DISABLED
 boot_disk:
   mode: READ_WRITE
-  device_name: fhmffhr28vflu4ogrphb
+  device_name: fhmc06dresfqek9cpia4
   auto_delete: true
-  disk_id: fhmffhr28vflu4ogrphb
+  disk_id: fhmc06dresfqek9cpia4
 network_interfaces:
   - index: "0"
-    mac_address: d0:0d:18:8e:85:0b
+    mac_address: d0:0d:10:d6:60:87
     subnet_id: e9bop98iu12teftg4uj8
     primary_v4_address:
-      address: 10.128.0.16
+      address: 10.128.0.12
       one_to_one_nat:
-        address: 84.201.134.248
+        address: 178.154.225.220
         ip_version: IPV4
 serial_port_settings:
   ssh_authorization: INSTANCE_METADATA
@@ -38,3 +38,4 @@ scheduling_policy: {}
 network_settings:
   type: STANDARD
 placement_policy: {}
+
