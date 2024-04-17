@@ -1,0 +1,1 @@
+ssh $MW_ANSIBLE_USER@$MW_IP

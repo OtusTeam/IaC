@@ -1,1 +1,1 @@
-wazuh ansible_host=130.193.39.101 ansible_user=aleksey
+mw ansible_host=158.160.96.16 ansible_user=aleksey

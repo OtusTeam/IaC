@@ -1,8 +1,8 @@
-ansible -i inv -a 'systemctl status wazuh-indexer' wazuh
-ansible -i inv -a 'systemctl status wazuh-dashboard' wazuh
-ansible -i inv -a 'systemctl status wazuh-manager' wazuh
-ansible -i inv -a 'systemctl status filebeat' wazuh
-ansible -i inv -a 'ss -tulpan' wazuh
+ansible -i inv -a 'systemctl status wazuh-indexer' mw
+ansible -i inv -a 'systemctl status wazuh-dashboard' mw
+ansible -i inv -a 'systemctl status wazuh-manager' mw
+ansible -i inv -a 'systemctl status filebeat' mw
+ansible -i inv -a 'ss -tulpan' mw
 
 
 

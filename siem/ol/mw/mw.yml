@@ -1,0 +1,23 @@
+---
+- name: Настройка Market Wazuh
+  hosts: mw
+  become: true
+  tasks:
+    - name: Добавление переменной в /etc/profile.d/wazuh.sh
+      lineinfile:
+        path: /etc/profile.d/wazuh.sh
+        line: "export YANDEX_LOG_GROUP_ID=\"{{ lookup('env', 'MW_LOG_GROUP_ID') }}\""
+
+    - name: Распаковка архива с паролями и сертификатами
+      unarchive:
+        src: /var/ossec/wazuh-install-files.tar
+        dest: ./
+        remote_src: yes
+
+    - name: Получение значений параметров доступа к веб-интерфейсу Wazuh
+      shell: "cat ./wazuh-install-files/wazuh-new-passwords.txt | grep 'Admin user for the web user interface and Wazuh indexer' -A 2 | tail -n 2"
+      register: wazuh_credentials
+
+    - name: Вывод значений параметров доступа к веб-интерфейсу Wazuh
+      debug:
+        msg: "indexer_username: {{ wazuh_credentials.stdout_lines[0] | trim }}, indexer_password: {{ wazuh_credentials.stdout_lines[1] | trim }}"
