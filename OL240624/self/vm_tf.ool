@@ -1,10 +1,16 @@
+locals {
+  username = "ubuntu"
+  sec_key_path = "~/.ssh/id_rsa.pub"
+  pub_key_path = "~/.ssh/id_rsa"
+}
+
 resource "yandex_compute_instance" "wp1" {
   name = "test-provisioners-wp1"
   zone = "ru-central1-a"
 
 
   provisioner "local-exec" {
-    command = "echo 'The name of our server is ${self.name} and its public IP is ${self.network_interface.0.nat_ip_address}'"
+    command = "echo 'The servers name is ${self.name}'"
   }
 
 
@@ -14,14 +20,15 @@ resource "yandex_compute_instance" "wp1" {
     connection {
       host        = self.network_interface.0.nat_ip_address
       type        = "ssh"
-      user        = var.username
-      private_key = file(var.sec_key_path)
+      user        = local.username
+      private_key = file(local.sec_key_path)
     }
   }
 
   provisioner "local-exec" {
-    command = "export ANSIBLE_HOST_KEY_CHECKING=False && ansible -u ${var.username} -i '${self.network_interface.0.nat_ip_address},' --private-key ${var.sec_key_path} -m ping all" 
+    command = "export ANSIBLE_HOST_KEY_CHECKING=False && ansible -u ${local.username} -i '${self.network_interface.0.nat_ip_address},' --private-key ${local.sec_key_path} -m ping all" 
   }
+
 
   resources {
     cores  = 2
@@ -41,6 +48,6 @@ resource "yandex_compute_instance" "wp1" {
   }
 
   metadata = {
-    ssh-keys = "ubuntu:${file(var.pub_key_path)}"
+    ssh-keys = "ubuntu:${file(local.pub_key_path)}"
   }
 }

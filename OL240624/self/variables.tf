@@ -18,3 +18,20 @@ variable "yc_default_zone" {
   description = "Yandex Cloud default zone"
   default = "ru-central1-a"
 }
+
+variable "username" {
+   type = string
+   default = "ubuntu"
+}
+
+variable "pub_key_path" {
+   type = string
+   sensitive = true
+   default = "~/.ssh/id_rsa.pub"
+}
+
+variable "sec_key_path" {
+   type = string
+#   sensitive = true
+   default = "~/.ssh/id_rsa"
+}
