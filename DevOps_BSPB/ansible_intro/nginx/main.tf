@@ -1,3 +1,7 @@
+variable "username" {
+  default = "ubuntu"
+}
+
 resource "yandex_compute_instance" "nginx" {
   name = "nginx"
 
@@ -18,7 +22,7 @@ resource "yandex_compute_instance" "nginx" {
   }
 
   metadata = {
-    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "${var.username}:${file("~/.ssh/id_rsa.pub")}"
   }
 
 }
