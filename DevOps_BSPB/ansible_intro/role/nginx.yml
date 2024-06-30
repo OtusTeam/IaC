@@ -1,0 +1,19 @@
+- hosts: webservers
+  become: yes
+
+  roles:
+    - geerlingguy.nginx
+
+  tasks:
+    - name: Create 'hello world' index.html
+      copy:
+        content: |
+          <html>
+            <head>
+              <title>Hello World</title>
+            </head>
+            <body>
+              <h1>Hello, World!</h1>
+            </body>
+          </html>
+        dest: /var/www/html/index.html
