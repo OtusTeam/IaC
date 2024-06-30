@@ -1,0 +1,28 @@
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Create 'hello world' index.html
+      copy:
+        content: |
+          <html>
+            <head>
+              <title>Hello World</title>
+            </head>
+            <body>
+              <h1>Hello, World!</h1>
+            </body>
+          </html>
+        dest: /var/www/html/index.html
+
+    - name: Start and enable Nginx
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
