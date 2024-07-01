@@ -5,7 +5,7 @@
   tasks:
 
     - name: Создание и выполнение Docker контейнера
-      docker_container:
+      community.docker.docker_container:
         name: hello_container
         image: busybox:latest
         command: sh -c "echo 'Hello'"
