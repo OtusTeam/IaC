@@ -1,0 +1,21 @@
+---
+- name: Создание и запуск контейнера Docker
+  hosts: all
+
+  tasks:
+
+    - name: Создание и выполнение Docker контейнера
+      docker_container:
+        name: hello_container
+        image: busybox:latest
+        command: sh -c "echo 'Hello'"
+        state: started
+        detach: no
+        cleanup: yes
+      become: yes
+      register: output
+
+
+    - name: Show results
+      ansible.builtin.debug:
+        var: output

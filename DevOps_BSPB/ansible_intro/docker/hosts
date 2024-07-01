@@ -1,0 +1,2 @@
+[webservers]
+dcr ansible_host=178.154.220.54 ansible_user=ubuntu

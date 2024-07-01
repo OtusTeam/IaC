@@ -1,0 +1,15 @@
+---
+- name: Установка пакетов для docker_container
+  hosts: all
+  become: yes
+
+  tasks:
+
+    - name: Установка pip3 если нет
+      apt:
+        name: python3-pip
+        update_cache: yes
+
+    - name: Установка Docker с помощью pip
+      pip:
+        name: docker

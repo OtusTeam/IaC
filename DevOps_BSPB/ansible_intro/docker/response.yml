@@ -1,0 +1,11 @@
+- hosts: webservers
+  tasks:
+    - name: Get HTTP response from each webserver
+      uri:
+        url: http://{{ hostvars[inventory_hostname]['ansible_host'] }}
+        return_content: yes
+      register: webserver_response
+
+    - name: Print webserver responses
+      debug:
+        var: webserver_response.content
