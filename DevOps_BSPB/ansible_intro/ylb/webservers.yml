@@ -1,0 +1,27 @@
+---
+- name: Install and configure NGINX on webservers
+  hosts: webservers
+  become: yes
+  roles:
+    - geerlingguy.nginx
+
+  tasks:
+
+    - name: Create 'Welcome' index.html
+      copy:
+        content: |
+          <html>
+            <head>
+              <title>Welcome</title>
+            </head>
+            <body>
+              <h1>Welcome to {{ inventory_hostname }}!</h1>
+            </body>
+          </html>
+        dest: /var/www/html/index.html
+
+    - name: Restart and enable NGINX service
+      service:
+        name: nginx
+        state: restarted
+        enabled: yes
