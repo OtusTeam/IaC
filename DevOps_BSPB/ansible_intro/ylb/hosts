@@ -1,4 +1,4 @@
 [webservers]
-ws1 ansible_host=158.160.120.29 ansible_user=ubuntu
-ws2 ansible_host=84.201.158.148 ansible_user=ubuntu
-ws3 ansible_host=51.250.76.173 ansible_user=ubuntu
+ws1 ansible_host=158.160.63.63 ansible_user=ubuntu
+ws2 ansible_host=158.160.120.144 ansible_user=ubuntu
+ws3 ansible_host=51.250.87.133 ansible_user=ubuntu
