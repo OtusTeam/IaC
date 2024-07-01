@@ -1,1 +1,1 @@
-ansible-playbook -i inventory.ini nginx.yml
+ansible-playbook nginx.yml

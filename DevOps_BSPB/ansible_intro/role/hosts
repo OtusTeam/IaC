@@ -1,0 +1,2 @@
+[webservers]
+nginx ansible_host=51.250.84.2 ansible_user=ubuntu

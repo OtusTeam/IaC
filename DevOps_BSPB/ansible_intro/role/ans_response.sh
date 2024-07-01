@@ -1,1 +1,1 @@
-ansible-playbook -i inventory.ini response.yml
+ansible-playbook response.yml
