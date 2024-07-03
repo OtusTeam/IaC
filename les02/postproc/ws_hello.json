@@ -39,7 +39,7 @@
       "type": "yandex-export",
       "token": "{{user `token`}}",
       "folder_id": "{{user `folder_id`}}",
-      "service_account_id": "ajegjkhkfqheqbg5b6s4",
+      "service_account_id": "ajenudjqt9nn9lct6ij1",
       "subnet_id": "{{user `subnet_id`}}",
       "paths": [
         "s3://otusiacles02/my-exported-image.qcow2",
