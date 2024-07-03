@@ -8,6 +8,12 @@
   ],
   "provisioners": [
     {
+      "type": "shell-local",
+      "inline": [
+        "# ssh-keygen -t rsa "
+      ]
+    },
+    {
       "type": "file",
       "source": "/home/aleksey/.ssh/id_rsa.pub",
       "destination": "/tmp/id_rsa.pub"
@@ -15,7 +21,7 @@
     {
       "type": "shell",
       "inline": [
-      "sudo echo /tmp/is_rsa.pub >> /home/user/.ssh/authorized_keys"
+      "cat /tmp/is_rsa.pub | sudo tee /home/user/.ssh/authorized_keys"
       ]
     }
   ]

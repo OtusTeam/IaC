@@ -9,7 +9,7 @@ fi
 
 export VM_NAME="test"
 export YC_IMAGE_ID="$1"
-export YC_SUBNET_ID="e9bo8se3rvrnd67mog80"
+export YC_SUBNET_ID="e9bop98iu12teftg4uj8"
 
 yc compute instance create \
   --name $VM_NAME \
