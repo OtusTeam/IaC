@@ -13,9 +13,22 @@ variable "yc_token" {
   description = "Yandex Cloud OAuth token"
 }
 
-variable "yc_default_zone" {
-  type = string
-  description = "Yandex Cloud default zone"
-  default = "ru-central1-a"
+variable "lamp" {
+  description = "for lamp webserver"
+  default = {
+     zone = "ru-central1-a"
+     cidr = ["192.168.15.0/24"]
+  }
 }
+
+variable "lemp" {
+  description = "for lamp webserver"
+  default = {
+     zone = "ru-central1-b"
+     cidr = ["192.168.16.0/24"]
+  }
+}
+
+
+
 
