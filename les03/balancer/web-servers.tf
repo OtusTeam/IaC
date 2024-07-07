@@ -1,6 +1,7 @@
-resource "yandex_compute_instance" "vm-test1" {
-  name                      = "vm-test1"
-  allow_stopping_for_update = true
+resource "yandex_compute_instance" "les03_lamp" {
+  name = "les03-lamp"
+  zone = yandex_vpc_subnet.les03_subnet_a.zone
+
 
   resources {
     cores  = 2
@@ -19,15 +20,15 @@ resource "yandex_compute_instance" "vm-test1" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.subnet_terraform.id
+    subnet_id = yandex_vpc_subnet.les03_subnet_a.id
     nat       = true
   }
 
 }
 
-resource "yandex_compute_instance" "vm-test2" {
-  name                      = "vm-test2"
-  allow_stopping_for_update = true
+resource "yandex_compute_instance" "les03_lemp" {
+  name = "les03-lemp"
+  zone = yandex_vpc_subnet.les03_subnet_b.zone
 
   resources {
     cores  = 2
@@ -46,7 +47,7 @@ resource "yandex_compute_instance" "vm-test2" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.subnet_terraform.id
+    subnet_id = yandex_vpc_subnet.les03_subnet_b.id
     nat       = true
   }
 
