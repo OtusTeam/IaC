@@ -1,5 +1,5 @@
-resource "yandex_compute_instance" "use_const" {
-  name = "use-const"
+resource "yandex_compute_instance" "les03_const" {
+  name = "les03-const"
 
   resources {
     cores  = 2

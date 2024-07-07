@@ -1,0 +1,243 @@
+aleksey@first:~/OtusTeam/IaC/les03/const$ tf apply --auto-approve
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.les03_const will be created
+  + resource "yandex_compute_instance" "les03_const" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = <<-EOT
+                ubuntu:ssh-rsa AAA...
+            EOT
+        }
+      + name                      = "les03-const"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + service_account_id        = (known after apply)
+      + status                    = (known after apply)
+      + zone                      = (known after apply)
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd8p8rslnsmtkkqojh50"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + network_interface {
+          + index              = (known after apply)
+          + ip_address         = (known after apply)
+          + ipv4               = true
+          + ipv6               = (known after apply)
+          + ipv6_address       = (known after apply)
+          + mac_address        = (known after apply)
+          + nat                = true
+          + nat_ip_address     = (known after apply)
+          + nat_ip_version     = (known after apply)
+          + security_group_ids = (known after apply)
+          + subnet_id          = "e9bop98iu12teftg4uj8"
+        }
+
+      + resources {
+          + core_fraction = 20
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy {
+          + preemptible = true
+        }
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+yandex_compute_instance.les03_const: Creating...
+yandex_compute_instance.les03_const: Still creating... [10s elapsed]
+yandex_compute_instance.les03_const: Still creating... [20s elapsed]
+yandex_compute_instance.les03_const: Creation complete after 25s [id=fhmhno8kdvfs0s1251m8]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+aleksey@first:~/OtusTeam/IaC/les03/const$ cp off/output.tf ./
+aleksey@first:~/OtusTeam/IaC/les03/const$ cat output.tf 
+output "public_ip" {
+  description = "Public IP address of VM"
+  value = yandex_compute_instance.les03_const.network_interface.0.nat_ip_address
+}
+aleksey@first:~/OtusTeam/IaC/les03/const$ tf validate
+Success! The configuration is valid.
+
+aleksey@first:~/OtusTeam/IaC/les03/const$ tf apply --auto-approve
+yandex_compute_instance.les03_const: Refreshing state... [id=fhmhno8kdvfs0s1251m8]
+
+Changes to Outputs:
+  + public_ip = "51.250.84.46"
+
+You can apply this plan to save these new output values to the Terraform state, without changing any real infrastructure.
+
+Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+public_ip = "51.250.84.46"
+aleksey@first:~/OtusTeam/IaC/les03/const$ ping 51.250.84.46
+PING 51.250.84.46 (51.250.84.46) 56(84) bytes of data.
+64 bytes from 51.250.84.46: icmp_seq=1 ttl=60 time=1.03 ms
+64 bytes from 51.250.84.46: icmp_seq=2 ttl=60 time=0.591 ms
+^C
+--- 51.250.84.46 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1001ms
+rtt min/avg/max/mdev = 0.591/0.810/1.029/0.219 ms
+aleksey@first:~/OtusTeam/IaC/les03/const$ ssh ubuntu@51.250.84.46
+The authenticity of host '51.250.84.46 (51.250.84.46)' can't be established.
+ED25519 key fingerprint is SHA256:8lOZr3TnUj+iNN4NucaSMSCi37RXLshAO5H2KZ6gZfw.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yea
+Please type 'yes', 'no' or the fingerprint: yes
+Warning: Permanently added '51.250.84.46' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 5.15.0-112-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Sun Jul  7 04:47:22 PM UTC 2024
+
+  System load:  0.64              Processes:             134
+  Usage of /:   51.4% of 7.79GB   Users logged in:       0
+  Memory usage: 10%               IPv4 address for eth0: 10.128.0.17
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@fhmhno8kdvfs0s1251m8:~$ exit
+logout
+Connection to 51.250.84.46 closed.
+aleksey@first:~/OtusTeam/IaC/les03/const$ tf destroy --auto-approve
+yandex_compute_instance.les03_const: Refreshing state... [id=fhmhno8kdvfs0s1251m8]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.les03_const will be destroyed
+  - resource "yandex_compute_instance" "les03_const" {
+      - created_at                = "2024-07-07T16:44:59Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "fhmhno8kdvfs0s1251m8.auto.internal" -> null
+      - id                        = "fhmhno8kdvfs0s1251m8" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = <<-EOT
+                ubuntu:ssh-rsa AAAA...
+            EOT
+        } -> null
+      - name                      = "les03-const" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-a" -> null
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "fhmkrds6un20l4go37qh" -> null
+          - disk_id     = "fhmkrds6un20l4go37qh" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size = 4096 -> null
+              - image_id   = "fd8p8rslnsmtkkqojh50" -> null
+              - size       = 8 -> null
+              - type       = "network-hdd" -> null
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.128.0.17" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:11:be:11:46" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "51.250.84.46" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e9bop98iu12teftg4uj8" -> null
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+        }
+
+      - resources {
+          - core_fraction = 20 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = true -> null
+        }
+    }
+
+Plan: 0 to add, 0 to change, 1 to destroy.
+
+Changes to Outputs:
+  - public_ip = "51.250.84.46" -> null
+yandex_compute_instance.les03_const: Destroying... [id=fhmhno8kdvfs0s1251m8]
+yandex_compute_instance.les03_const: Still destroying... [id=fhmhno8kdvfs0s1251m8, 10s elapsed]
+yandex_compute_instance.les03_const: Still destroying... [id=fhmhno8kdvfs0s1251m8, 20s elapsed]
+yandex_compute_instance.les03_const: Still destroying... [id=fhmhno8kdvfs0s1251m8, 30s elapsed]
+yandex_compute_instance.les03_const: Still destroying... [id=fhmhno8kdvfs0s1251m8, 40s elapsed]
+yandex_compute_instance.les03_const: Destruction complete after 49s
+
+Destroy complete! Resources: 1 destroyed.
