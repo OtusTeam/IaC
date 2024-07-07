@@ -19,8 +19,3 @@ variable "yc_default_zone" {
   default = "ru-central1-a"
 }
 
-/*
-variable "db_password" {
-  description = "MySQL user pasword"
-}
-*/

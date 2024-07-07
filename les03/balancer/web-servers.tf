@@ -5,6 +5,11 @@ resource "yandex_compute_instance" "vm-test1" {
   resources {
     cores  = 2
     memory = 2
+    core_fraction = 20
+  }
+
+  scheduling_policy {
+    preemptible = true
   }
 
   boot_disk {
@@ -27,6 +32,11 @@ resource "yandex_compute_instance" "vm-test2" {
   resources {
     cores  = 2
     memory = 2
+    core_fraction = 20
+  }
+
+  scheduling_policy {
+    preemptible = true
   }
 
   boot_disk {
