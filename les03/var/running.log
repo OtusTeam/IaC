@@ -1,0 +1,249 @@
+aleksey@first:~/OtusTeam/IaC/les03/var$ tf validate
+Success! The configuration is valid.
+
+aleksey@first:~/OtusTeam/IaC/les03/var$ tf apply
+data.yandex_compute_image.ubuntu_image: Reading...
+data.yandex_compute_image.ubuntu_image: Read complete after 0s [id=fd8l04iucc4vsh00rkb1]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.les03_var will be created
+  + resource "yandex_compute_instance" "les03_var" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = (sensitive value)
+        }
+      + name                      = "les03-var"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + service_account_id        = (known after apply)
+      + status                    = (known after apply)
+      + zone                      = (known after apply)
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd8l04iucc4vsh00rkb1"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + network_interface {
+          + index              = (known after apply)
+          + ip_address         = (known after apply)
+          + ipv4               = true
+          + ipv6               = (known after apply)
+          + ipv6_address       = (known after apply)
+          + mac_address        = (known after apply)
+          + nat                = true
+          + nat_ip_address     = (known after apply)
+          + nat_ip_version     = (known after apply)
+          + security_group_ids = (known after apply)
+          + subnet_id          = "e9bop98iu12teftg4uj8"
+        }
+
+      + resources {
+          + core_fraction = 20
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy {
+          + preemptible = true
+        }
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + public_ip = (known after apply)
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+yandex_compute_instance.les03_var: Creating...
+yandex_compute_instance.les03_var: Still creating... [10s elapsed]
+yandex_compute_instance.les03_var: Still creating... [20s elapsed]
+yandex_compute_instance.les03_var: Still creating... [30s elapsed]
+yandex_compute_instance.les03_var: Creation complete after 31s [id=fhmi1ejc70cvvcc54asj]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+public_ip = "158.160.55.75"
+aleksey@first:~/OtusTeam/IaC/les03/var$ ping 158.160.55.75
+PING 158.160.55.75 (158.160.55.75) 56(84) bytes of data.
+64 bytes from 158.160.55.75: icmp_seq=18 ttl=60 time=0.830 ms
+64 bytes from 158.160.55.75: icmp_seq=19 ttl=60 time=13.6 ms
+^C
+--- 158.160.55.75 ping statistics ---
+19 packets transmitted, 2 received, 89.4737% packet loss, time 18433ms
+rtt min/avg/max/mdev = 0.830/7.199/13.568/6.369 ms
+aleksey@first:~/OtusTeam/IaC/les03/var$ ssh ubuntu@158.160.55.75
+The authenticity of host '158.160.55.75 (158.160.55.75)' can't be established.
+ED25519 key fingerprint is SHA256:Y4tLL77aoZB3O/jiLfKNAT7dT/Nh4kW22LhHHK878HM.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '158.160.55.75' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 5.15.0-113-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+  System information as of Thu Jul 13 05:05:28 PM UTC 2023
+
+  System load:             0.62255859375
+  Usage of /:              60.1% of 4.84GB
+  Memory usage:            3%
+  Swap usage:              0%
+  Processes:               150
+  Users logged in:         0
+  IPv4 address for enp0s2: 10.0.2.15
+  IPv6 address for enp0s2: fec0::5054:ff:fe12:3456
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@fhmi1ejc70cvvcc54asj:~$ exit
+logout
+Connection to 158.160.55.75 closed.
+aleksey@first:~/OtusTeam/IaC/les03/var$ tf destroy
+data.yandex_compute_image.ubuntu_image: Reading...
+data.yandex_compute_image.ubuntu_image: Read complete after 0s [id=fd8l04iucc4vsh00rkb1]
+yandex_compute_instance.les03_var: Refreshing state... [id=fhmi1ejc70cvvcc54asj]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.les03_var will be destroyed
+  - resource "yandex_compute_instance" "les03_var" {
+      - created_at                = "2024-07-08T04:28:21Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "fhmi1ejc70cvvcc54asj.auto.internal" -> null
+      - id                        = "fhmi1ejc70cvvcc54asj" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = (sensitive value)
+        } -> null
+      - name                      = "les03-var" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-a" -> null
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "fhm4vn8b59c08t2q4s43" -> null
+          - disk_id     = "fhm4vn8b59c08t2q4s43" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size = 4096 -> null
+              - image_id   = "fd8l04iucc4vsh00rkb1" -> null
+              - size       = 8 -> null
+              - type       = "network-hdd" -> null
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.128.0.28" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:12:0b:a6:c3" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "158.160.55.75" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e9bop98iu12teftg4uj8" -> null
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+        }
+
+      - resources {
+          - core_fraction = 20 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = true -> null
+        }
+    }
+
+Plan: 0 to add, 0 to change, 1 to destroy.
+
+Changes to Outputs:
+  - public_ip = "158.160.55.75" -> null
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+yandex_compute_instance.les03_var: Destroying... [id=fhmi1ejc70cvvcc54asj]
+yandex_compute_instance.les03_var: Still destroying... [id=fhmi1ejc70cvvcc54asj, 10s elapsed]
+yandex_compute_instance.les03_var: Still destroying... [id=fhmi1ejc70cvvcc54asj, 20s elapsed]
+yandex_compute_instance.les03_var: Still destroying... [id=fhmi1ejc70cvvcc54asj, 30s elapsed]
+yandex_compute_instance.les03_var: Still destroying... [id=fhmi1ejc70cvvcc54asj, 40s elapsed]
+yandex_compute_instance.les03_var: Destruction complete after 47s
+
+Destroy complete! Resources: 1 destroyed.
