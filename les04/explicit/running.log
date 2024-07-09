@@ -1,4 +1,3 @@
-aleksey@first:~/OtusTeam/IaC/les04/explicit$ rm hosts
 aleksey@first:~/OtusTeam/IaC/les04/explicit$ tf apply
 
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following
@@ -68,6 +67,10 @@ Terraform will perform the following actions:
           + cores         = 2
           + memory        = 2
         }
+
+      + scheduling_policy {
+          + preemptible = true
+        }
     }
 
   # yandex_vpc_network.les01-network will be created
@@ -104,19 +107,20 @@ Do you want to perform these actions?
 
   Enter a value: yes
 
-yandex_vpc_network.les01-network: Creating...
 yandex_compute_instance.les04_explicit: Creating...
-yandex_vpc_network.les01-network: Creation complete after 2s [id=enpm155hqkgnk5aq0tr5]
+yandex_vpc_network.les01-network: Creating...
+yandex_vpc_network.les01-network: Creation complete after 2s [id=enps4ir4bans909kgk6r]
 yandex_vpc_subnet.les01-subnet-a: Creating...
-yandex_vpc_subnet.les01-subnet-a: Creation complete after 1s [id=e9b4i1o1ddbkktrtblht]
+yandex_vpc_subnet.les01-subnet-a: Creation complete after 0s [id=e9bi1iaqppolq74plhdk]
 yandex_compute_instance.les04_explicit: Still creating... [10s elapsed]
 yandex_compute_instance.les04_explicit: Still creating... [20s elapsed]
 yandex_compute_instance.les04_explicit: Still creating... [30s elapsed]
+yandex_compute_instance.les04_explicit: Still creating... [40s elapsed]
 yandex_compute_instance.les04_explicit: Provisioning with 'local-exec'...
-yandex_compute_instance.les04_explicit (local-exec): Executing: ["/bin/sh" "-c" "echo 'les04-explicit ansible_host=51.250.0.74' > hosts"]
+yandex_compute_instance.les04_explicit (local-exec): Executing: ["/bin/sh" "-c" "echo 'les04-explicit ansible_host=51.250.3.63' > hosts"]
 yandex_compute_instance.les04_explicit: Provisioning with 'remote-exec'...
 yandex_compute_instance.les04_explicit (remote-exec): Connecting to remote host via SSH...
-yandex_compute_instance.les04_explicit (remote-exec):   Host: 51.250.0.74
+yandex_compute_instance.les04_explicit (remote-exec):   Host: 51.250.3.63
 yandex_compute_instance.les04_explicit (remote-exec):   User: ubuntu
 yandex_compute_instance.les04_explicit (remote-exec):   Password: false
 yandex_compute_instance.les04_explicit (remote-exec):   Private key: true
@@ -124,10 +128,9 @@ yandex_compute_instance.les04_explicit (remote-exec):   Certificate: false
 yandex_compute_instance.les04_explicit (remote-exec):   SSH Agent: false
 yandex_compute_instance.les04_explicit (remote-exec):   Checking Host Key: false
 yandex_compute_instance.les04_explicit (remote-exec):   Target Platform: unix
-yandex_compute_instance.les04_explicit: Still creating... [40s elapsed]
 yandex_compute_instance.les04_explicit: Still creating... [50s elapsed]
 yandex_compute_instance.les04_explicit (remote-exec): Connecting to remote host via SSH...
-yandex_compute_instance.les04_explicit (remote-exec):   Host: 51.250.0.74
+yandex_compute_instance.les04_explicit (remote-exec):   Host: 51.250.3.63
 yandex_compute_instance.les04_explicit (remote-exec):   User: ubuntu
 yandex_compute_instance.les04_explicit (remote-exec):   Password: false
 yandex_compute_instance.les04_explicit (remote-exec):   Private key: true
@@ -136,7 +139,7 @@ yandex_compute_instance.les04_explicit (remote-exec):   SSH Agent: false
 yandex_compute_instance.les04_explicit (remote-exec):   Checking Host Key: false
 yandex_compute_instance.les04_explicit (remote-exec):   Target Platform: unix
 yandex_compute_instance.les04_explicit (remote-exec): Connected!
-yandex_compute_instance.les04_explicit: Creation complete after 53s [id=fhmifgna7e1k2eptjb75]
+yandex_compute_instance.les04_explicit: Creation complete after 1m0s [id=fhm6u13qaj1mrpebmb1m]
 null_resource.ansible: Creating...
 null_resource.ansible: Provisioning with 'local-exec'...
 null_resource.ansible (local-exec): Executing: ["/bin/sh" "-c" "export ANSIBLE_HOST_KEY_CHECKING=False &&\nansible -u ubuntu -i hosts --private-key ~/.ssh/id_rsa -m ping all\n"]
@@ -147,14 +150,17 @@ null_resource.ansible (local-exec):     },
 null_resource.ansible (local-exec):     "changed": false,
 null_resource.ansible (local-exec):     "ping": "pong"
 null_resource.ansible (local-exec): }
-null_resource.ansible: Creation complete after 2s [id=8059973393899841848]
+null_resource.ansible: Creation complete after 2s [id=6386182803941433070]
 
 Apply complete! Resources: 4 added, 0 changed, 0 destroyed.
+aleksey@first:~/OtusTeam/IaC/les04/explicit$ cat hosts 
+les04-explicit ansible_host=51.250.3.63
+aleksey@first:~/OtusTeam/IaC/les04/explicit$ rm hosts 
 aleksey@first:~/OtusTeam/IaC/les04/explicit$ tf destroy
-yandex_vpc_network.les01-network: Refreshing state... [id=enpm155hqkgnk5aq0tr5]
-yandex_compute_instance.les04_explicit: Refreshing state... [id=fhmifgna7e1k2eptjb75]
-yandex_vpc_subnet.les01-subnet-a: Refreshing state... [id=e9b4i1o1ddbkktrtblht]
-null_resource.ansible: Refreshing state... [id=8059973393899841848]
+yandex_vpc_network.les01-network: Refreshing state... [id=enps4ir4bans909kgk6r]
+yandex_compute_instance.les04_explicit: Refreshing state... [id=fhm6u13qaj1mrpebmb1m]
+yandex_vpc_subnet.les01-subnet-a: Refreshing state... [id=e9bi1iaqppolq74plhdk]
+null_resource.ansible: Refreshing state... [id=6386182803941433070]
 
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following
 symbols:
@@ -164,15 +170,15 @@ Terraform will perform the following actions:
 
   # null_resource.ansible will be destroyed
   - resource "null_resource" "ansible" {
-      - id = "8059973393899841848" -> null
+      - id = "6386182803941433070" -> null
     }
 
   # yandex_compute_instance.les04_explicit will be destroyed
   - resource "yandex_compute_instance" "les04_explicit" {
-      - created_at                = "2024-07-09T17:04:40Z" -> null
+      - created_at                = "2024-07-09T18:15:56Z" -> null
       - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
-      - fqdn                      = "fhmifgna7e1k2eptjb75.auto.internal" -> null
-      - id                        = "fhmifgna7e1k2eptjb75" -> null
+      - fqdn                      = "fhm6u13qaj1mrpebmb1m.auto.internal" -> null
+      - id                        = "fhm6u13qaj1mrpebmb1m" -> null
       - labels                    = {} -> null
       - metadata                  = {
           - "ssh-keys" = (sensitive value)
@@ -185,8 +191,8 @@ Terraform will perform the following actions:
 
       - boot_disk {
           - auto_delete = true -> null
-          - device_name = "fhmsf2c6rrhn5kd8maa3" -> null
-          - disk_id     = "fhmsf2c6rrhn5kd8maa3" -> null
+          - device_name = "fhmgds3e8h5kfh1n1r04" -> null
+          - disk_id     = "fhmgds3e8h5kfh1n1r04" -> null
           - mode        = "READ_WRITE" -> null
 
           - initialize_params {
@@ -206,12 +212,12 @@ Terraform will perform the following actions:
 
       - network_interface {
           - index              = 0 -> null
-          - ip_address         = "10.128.0.34" -> null
+          - ip_address         = "10.128.0.26" -> null
           - ipv4               = true -> null
           - ipv6               = false -> null
-          - mac_address        = "d0:0d:12:7c:2e:a3" -> null
+          - mac_address        = "d0:0d:6f:04:7a:54" -> null
           - nat                = true -> null
-          - nat_ip_address     = "51.250.0.74" -> null
+          - nat_ip_address     = "51.250.3.63" -> null
           - nat_ip_version     = "IPV4" -> null
           - security_group_ids = [] -> null
           - subnet_id          = "e9bop98iu12teftg4uj8" -> null
@@ -230,31 +236,31 @@ Terraform will perform the following actions:
         }
 
       - scheduling_policy {
-          - preemptible = false -> null
+          - preemptible = true -> null
         }
     }
 
   # yandex_vpc_network.les01-network will be destroyed
   - resource "yandex_vpc_network" "les01-network" {
-      - created_at                = "2024-07-09T17:04:40Z" -> null
-      - default_security_group_id = "enpg96gl480i6e9egm6n" -> null
+      - created_at                = "2024-07-09T18:15:56Z" -> null
+      - default_security_group_id = "enpish1lcb3f4gb83bhu" -> null
       - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
-      - id                        = "enpm155hqkgnk5aq0tr5" -> null
+      - id                        = "enps4ir4bans909kgk6r" -> null
       - labels                    = {} -> null
       - name                      = "wp-network" -> null
       - subnet_ids                = [
-          - "e9b4i1o1ddbkktrtblht",
+          - "e9bi1iaqppolq74plhdk",
         ] -> null
     }
 
   # yandex_vpc_subnet.les01-subnet-a will be destroyed
   - resource "yandex_vpc_subnet" "les01-subnet-a" {
-      - created_at     = "2024-07-09T17:04:42Z" -> null
+      - created_at     = "2024-07-09T18:15:57Z" -> null
       - folder_id      = "b1gmesrdjgklgkvcp704" -> null
-      - id             = "e9b4i1o1ddbkktrtblht" -> null
+      - id             = "e9bi1iaqppolq74plhdk" -> null
       - labels         = {} -> null
       - name           = "wp-subnet-a" -> null
-      - network_id     = "enpm155hqkgnk5aq0tr5" -> null
+      - network_id     = "enps4ir4bans909kgk6r" -> null
       - v4_cidr_blocks = [
           - "10.2.0.0/16",
         ] -> null
@@ -270,20 +276,20 @@ Do you really want to destroy all resources?
 
   Enter a value: yes
 
-null_resource.ansible: Destroying... [id=8059973393899841848]
+null_resource.ansible: Destroying... [id=6386182803941433070]
 null_resource.ansible: Destruction complete after 0s
-yandex_vpc_subnet.les01-subnet-a: Destroying... [id=e9b4i1o1ddbkktrtblht]
-yandex_compute_instance.les04_explicit: Destroying... [id=fhmifgna7e1k2eptjb75]
+yandex_vpc_subnet.les01-subnet-a: Destroying... [id=e9bi1iaqppolq74plhdk]
+yandex_compute_instance.les04_explicit: Destroying... [id=fhm6u13qaj1mrpebmb1m]
+yandex_compute_instance.les04_explicit: Provisioning with 'local-exec'...
+yandex_compute_instance.les04_explicit (local-exec): Executing: ["/bin/sh" "-c" "rm hosts"]
+yandex_compute_instance.les04_explicit (local-exec): rm: cannot remove 'hosts': No such file or directory
 yandex_vpc_subnet.les01-subnet-a: Destruction complete after 1s
-yandex_vpc_network.les01-network: Destroying... [id=enpm155hqkgnk5aq0tr5]
-yandex_vpc_network.les01-network: Destruction complete after 0s
-yandex_compute_instance.les04_explicit: Still destroying... [id=fhmifgna7e1k2eptjb75, 10s elapsed]
-yandex_compute_instance.les04_explicit: Still destroying... [id=fhmifgna7e1k2eptjb75, 20s elapsed]
-yandex_compute_instance.les04_explicit: Still destroying... [id=fhmifgna7e1k2eptjb75, 30s elapsed]
-yandex_compute_instance.les04_explicit: Still destroying... [id=fhmifgna7e1k2eptjb75, 40s elapsed]
-yandex_compute_instance.les04_explicit: Destruction complete after 46s
+yandex_vpc_network.les01-network: Destroying... [id=enps4ir4bans909kgk6r]
+yandex_vpc_network.les01-network: Destruction complete after 1s
+yandex_compute_instance.les04_explicit: Still destroying... [id=fhm6u13qaj1mrpebmb1m, 10s elapsed]
+yandex_compute_instance.les04_explicit: Still destroying... [id=fhm6u13qaj1mrpebmb1m, 20s elapsed]
+yandex_compute_instance.les04_explicit: Still destroying... [id=fhm6u13qaj1mrpebmb1m, 30s elapsed]
+yandex_compute_instance.les04_explicit: Still destroying... [id=fhm6u13qaj1mrpebmb1m, 40s elapsed]
+yandex_compute_instance.les04_explicit: Destruction complete after 47s
 
 Destroy complete! Resources: 4 destroyed.
-aleksey@first:~/OtusTeam/IaC/les04/explicit$ cat hosts
-les04-explicit ansible_host=51.250.0.74
-aleksey@first:~/OtusTeam/IaC/les04/explicit$ rm hosts

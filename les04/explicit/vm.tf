@@ -29,10 +29,20 @@ resource "yandex_compute_instance" "les04_explicit" {
     }
   }
 
+  provisioner "local-exec" {
+    when       = destroy
+    command    = "rm hosts"
+    on_failure = continue
+  }
+
   resources {
     cores  = 2
     memory = 2
     core_fraction = 100
+  }
+
+  scheduling_policy {
+    preemptible = true
   }
 
   boot_disk {
