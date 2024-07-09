@@ -1,8 +1,8 @@
-resource "null_resource" "deploy" {
+resource "null_resource" "ansible" {
   provisioner "local-exec" {
     command = <<-EOT
       export ANSIBLE_HOST_KEY_CHECKING=False &&
-      ansible -u ${var.username} -i '${yandex_compute_instance.les04_explicit.network_interface.0.nat_ip_address},' --private-key ${var.sec_key_path} -m ping all
+      ansible -u ${var.username} -i hosts --private-key ${var.sec_key_path} -m ping all
     EOT
   }
 
@@ -14,6 +14,9 @@ resource "yandex_compute_instance" "les04_explicit" {
   name = "les04-explicit"
   zone = var.yc_default_zone
 
+  provisioner "local-exec" {
+    command = "echo '${self.name} ansible_host=${self.network_interface.0.nat_ip_address}' > hosts"
+  }
 
   provisioner "remote-exec" {
     inline = ["sleep 1"]
