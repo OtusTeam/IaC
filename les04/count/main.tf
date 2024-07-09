@@ -27,6 +27,27 @@ resource "yandex_compute_instance" "les04_webservers" {
     ssh-keys = "${var.username}:${file(var.pub_key_path)}"
   }
 
+  connection {
+    host        = self.network_interface.0.nat_ip_address
+    type        = "ssh"
+    user        = var.username
+    private_key = file(var.sec_key_path)
+  }
+
+  provisioner "remote-exec" {
+    inline = ["sleep 1",
+              "sudo apt update -y",
+              "sleep 10",
+              "sudo apt install -y nginx"]
+  }
+
+  provisioner "remote-exec" {
+    inline = ["sleep 1",
+              "sudo systemctl reload nginx"]
+    on_failure = continue
+  }
+
+
 }
 
 output "ansible_inventory" {
