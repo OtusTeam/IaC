@@ -1,3 +1,4 @@
+
 resource "yandex_compute_instance" "les04_webservers" {
   count = var.num_webservers
   name = "les04-ws${count.index + 1}"
@@ -41,10 +42,16 @@ resource "yandex_compute_instance" "les04_webservers" {
               "sudo apt install -y nginx"]
   }
 
+  provisioner "file" {
+    content     = templatefile("index.html.tpl", { server_name = self.name })
+    destination = "/tmp/index.html"
+  }
+
   provisioner "remote-exec" {
-    inline = ["sleep 1",
+    inline = ["sudo mv /tmp/index.html /var/www/html/",
+              "sleep 1",
               "sudo systemctl reload nginx"]
-    on_failure = continue
+#    on_failure = continue
   }
 
 
