@@ -1,0 +1,11 @@
+.
+├── call_hello.tf
+├── terraform.tfstate
+├── terraform.tfstate.backup
+├── tree.txt
+└── hello_dir
+    ├── hello.tf
+    ├── terraform.tfstate
+    └── terraform.tfstate.backup
+
+1 directory, 7 files
