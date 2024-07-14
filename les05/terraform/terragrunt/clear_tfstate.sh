@@ -1,2 +1,2 @@
-rm -rf $(find . -type d -name "terraform.tfstate")
-rm -rf $(find . -type d -name "terraform.tfstate.backup")
+rm -rf $(find . -type f -name "terraform.tfstate")
+rm -rf $(find . -type f -name "terraform.tfstate.backup")

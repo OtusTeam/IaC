@@ -10,6 +10,7 @@ provider "yandex" {
   folder_id = "${local.yc_folder_id}"
 }
 
+/*
 terraform {
   required_providers {
     yandex = {
@@ -18,5 +19,7 @@ terraform {
   }
   required_version = ">= 0.13"
 }
+*/
+
 EOF
 }
