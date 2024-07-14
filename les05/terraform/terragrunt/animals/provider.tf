@@ -2,15 +2,3 @@
 provider "yandex" {
   folder_id = "b1ggm2k4duhi62vkadtq"
 }
-
-/*
-terraform {
-  required_providers {
-    yandex = {
-      source = "yandex-cloud/yandex"
-    }
-  }
-  required_version = ">= 0.13"
-}
-*/
-
