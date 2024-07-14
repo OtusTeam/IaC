@@ -1,7 +1,7 @@
 
 variable "nickname" {
   type = string
-  default = "Hey"
+  default = "hey"
 }
 
 variable "subnet_id" {
