@@ -1,16 +1,12 @@
 
 resource "yandex_compute_instance" "animal" {
-  name     = "${var.prefix}-${var.nickname}"
+  name     = var.nickname
   hostname = var.nickname
  
   resources {
     core_fraction = 5
     cores  = 2
     memory = 2
-  }
-
-  scheduling_policy {
-    preemptible = true
   }
 
   boot_disk {
