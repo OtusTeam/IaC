@@ -1,0 +1,28 @@
+#!/bin/bash
+
+read -p "Do you want to continue (1 or 0)? " answer
+if [ "$answer" != "1" ]; then
+  echo "Error: incorrect answer"
+  exit 1
+fi
+
+read -p "Choose a setup option: " answer
+if [ "$answer" != "8" ]; then
+  echo "Error: incorrect answer"
+  exit 1
+fi
+
+read -p "Are you sure? " answer
+if [ "$answer" != "yes" ]; then
+  echo "Error: incorrect answer"
+  exit 1
+fi
+
+read -p "Type 'exit' to finish: " answer
+if [ "$answer" != "exit" ]; then
+  echo "Error: incorrect answer"
+  exit 1
+fi
+
+echo "All answers correct!"
+exit 0
