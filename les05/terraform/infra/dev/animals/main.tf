@@ -17,7 +17,7 @@ module "subnet" {
 module "cats" {
   source = "./modules/animal"
   subnet_id = module.subnet["cats"].subnet_id
-  for_each = toset(["casper"])
+  for_each = toset(["tomcat"])
   nickname = each.key
 }
 
