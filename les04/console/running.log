@@ -1,0 +1,21 @@
+aleksey@first:~/OtusTeam/IaC/les04/console$ terraform console
+> flatten([["a", "b"], [], ["c"]])
+[
+  "a",
+  "b",
+  "c",
+]
+> flatten([[["a", "b"], []], ["c"]])
+[
+  "a",
+  "b",
+  "c",
+]
+> toset([1, 5, 2, 3, 1])
+toset([
+  1,
+  2,
+  3,
+  5,
+])
+> exit

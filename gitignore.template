@@ -99,3 +99,6 @@ collections
 *.sensitive*
 *sensitive.*
 *.sensitive.*
+
+# JA: for terragrunt
+.terragrunt-cache

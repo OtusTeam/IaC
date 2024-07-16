@@ -1,0 +1,116 @@
+aleksey@first:~/OtusTeam/IaC/general/org_sa$ tf validate
+Success! The configuration is valid.
+
+aleksey@first:~/OtusTeam/IaC/general/org_sa$ tf apply
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated
+with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # null_resource.list_organization_sa will be created
+  + resource "null_resource" "list_organization_sa" {
+      + id = (known after apply)
+    }
+
+  # yandex_iam_service_account.sa4org will be created
+  + resource "yandex_iam_service_account" "sa4org" {
+      + created_at  = (known after apply)
+      + description = "admin service accunt"
+      + folder_id   = "b1ggm2k4duhi62vkadtq"
+      + id          = (known after apply)
+      + name        = "sa4org"
+    }
+
+  # yandex_organizationmanager_organization_iam_binding.editor will be created
+  + resource "yandex_organizationmanager_organization_iam_binding" "editor" {
+      + id              = (known after apply)
+      + members         = (known after apply)
+      + organization_id = "bpfrtqbajbhpm5j05tkl"
+      + role            = "organization-manager.admin"
+    }
+
+Plan: 3 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+yandex_iam_service_account.sa4org: Creating...
+yandex_iam_service_account.sa4org: Creation complete after 2s [id=ajete02p5korb8ut1men]
+yandex_organizationmanager_organization_iam_binding.editor: Creating...
+yandex_organizationmanager_organization_iam_binding.editor: Creation complete after 2s [id=bpfrtqbajbhpm5j05tkl/organization-manager.admin]
+null_resource.list_organization_sa: Creating...
+null_resource.list_organization_sa: Provisioning with 'local-exec'...
+null_resource.list_organization_sa (local-exec): Executing: ["/bin/sh" "-c" "yc organization-manager organization list-access-bindings bpfrtqbajbhpm5j05tkl"]
+null_resource.list_organization_sa (local-exec): +------------------------------------------+----------------+----------------------+
+null_resource.list_organization_sa (local-exec): |                 ROLE ID                  |  SUBJECT TYPE  |      SUBJECT ID      |
+null_resource.list_organization_sa (local-exec): +------------------------------------------+----------------+----------------------+
+null_resource.list_organization_sa (local-exec): | organization-manager.admin               | serviceAccount | ajete02p5korb8ut1men |
+null_resource.list_organization_sa (local-exec): | organization-manager.organizations.owner | userAccount    | ajephrtapoonubpkuogh |
+null_resource.list_organization_sa (local-exec): +------------------------------------------+----------------+----------------------+
+
+null_resource.list_organization_sa: Creation complete after 1s [id=2041145984390232427]
+
+Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+aleksey@first:~/OtusTeam/IaC/general/org_sa$ tf destroy
+yandex_iam_service_account.sa4org: Refreshing state... [id=ajete02p5korb8ut1men]
+yandex_organizationmanager_organization_iam_binding.editor: Refreshing state... [id=bpfrtqbajbhpm5j05tkl/organization-manager.admin]
+null_resource.list_organization_sa: Refreshing state... [id=2041145984390232427]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated
+with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # null_resource.list_organization_sa will be destroyed
+  - resource "null_resource" "list_organization_sa" {
+      - id = "2041145984390232427" -> null
+    }
+
+  # yandex_iam_service_account.sa4org will be destroyed
+  - resource "yandex_iam_service_account" "sa4org" {
+      - created_at  = "2024-07-16T07:38:09Z" -> null
+      - description = "admin service accunt" -> null
+      - folder_id   = "b1ggm2k4duhi62vkadtq" -> null
+      - id          = "ajete02p5korb8ut1men" -> null
+      - name        = "sa4org" -> null
+    }
+
+  # yandex_organizationmanager_organization_iam_binding.editor will be destroyed
+  - resource "yandex_organizationmanager_organization_iam_binding" "editor" {
+      - id              = "bpfrtqbajbhpm5j05tkl/organization-manager.admin" -> null
+      - members         = [
+          - "serviceAccount:ajete02p5korb8ut1men",
+        ] -> null
+      - organization_id = "bpfrtqbajbhpm5j05tkl" -> null
+      - role            = "organization-manager.admin" -> null
+    }
+
+Plan: 0 to add, 0 to change, 3 to destroy.
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+null_resource.list_organization_sa: Destroying... [id=2041145984390232427]
+null_resource.list_organization_sa: Destruction complete after 0s
+yandex_organizationmanager_organization_iam_binding.editor: Destroying... [id=bpfrtqbajbhpm5j05tkl/organization-manager.admin]
+yandex_organizationmanager_organization_iam_binding.editor: Destruction complete after 3s
+yandex_iam_service_account.sa4org: Destroying... [id=ajete02p5korb8ut1men]
+yandex_iam_service_account.sa4org: Destruction complete after 3s
+
+Destroy complete! Resources: 3 destroyed.
+aleksey@first:~/OtusTeam/IaC/general/org_sa$ yc organization-manager organization list-access-bindings bpfrtqbajbhpm5j05tkl
++------------------------------------------+--------------+----------------------+
+|                 ROLE ID                  | SUBJECT TYPE |      SUBJECT ID      |
++------------------------------------------+--------------+----------------------+
+| organization-manager.organizations.owner | userAccount  | ajephrtapoonubpkuogh |
++------------------------------------------+--------------+----------------------+
+
