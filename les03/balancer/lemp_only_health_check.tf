@@ -1,29 +1,33 @@
-resource "terraform_data" "lamp_stop" {
-  input = var.lamp_stop
+locals {
+  lamp_status = yandex_compute_instance.les03_lamp.status
 }
 
-resource "null_resource" "stop_lamp" {
+resource "terraform_data" "lamp_action" {
+  input = var.lamp_stop && local.lamp_status != "stopped" ? "stop" : (!var.lamp_stop) && local.lamp_status != "running" ? "start" : "get"
+}
+
+resource "null_resource" "do_with_lamp" {
 
   lifecycle {
-    replace_triggered_by = [terraform_data.lamp_stop]
+    replace_triggered_by = [terraform_data.lamp_action]
   }
 
   provisioner "local-exec" {
-    command = var.lamp_stop ? "yc compute instance stop ${yandex_compute_instance.les03_lamp.id}" : "echo 'not need to stop lamp!'"
+    command = "yc compute instance ${terraform_data.lamp_action.input} ${yandex_compute_instance.les03_lamp.id}"
   } 
 
   depends_on = [yandex_compute_instance.les03_lamp]
 
 }
 
+/*
 check "lamp_stopped" {
   assert {
     condition = var.lamp_stop && yandex_compute_instance.les03_lamp.status != "running"
     error_message = "lamp need to stop but it's running!"
   }
-
-#  depends_on = [null_resource.stop_lamp]
 }
+*/
 
 /*
 data "http" "lamp" {
@@ -36,7 +40,7 @@ data "http" "lamp" {
     }
   }
 
-  depends_on = [null_resource.stop_lamp]
+  depends_on = [null_resource.do_with_lamp]
 
 }
 */
