@@ -21,6 +21,12 @@ variable "lamp" {
   }
 }
 
+variable "lamp_stop" {
+  type = bool  
+  default = false
+}
+
+
 variable "lemp" {
   description = "for lamp webserver"
   default = {
