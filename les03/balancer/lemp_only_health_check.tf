@@ -22,32 +22,7 @@ resource "null_resource" "do_with_lamp" {
   } 
 
   depends_on = [yandex_compute_instance.les03_lamp]
-
 }
-
-/*
-check "lamp_stopped" {
-  assert {
-    condition = var.lamp_stop && yandex_compute_instance.les03_lamp.status != "running"
-    error_message = "lamp need to stop but it's running!"
-  }
-}
-*/
-
-/*
-data "http" "lamp" {
-  url = "http://${yandex_compute_instance.les03_lamp.network_interface.0.nat_ip_address}"
-
-  lifecycle {
-    postcondition {
-        condition = var.lamp_stop !! ((self.status_code == 200) != var.lamp_stop)
-        error_message = "${self.url} returned an unhealthy status code"
-    }
-  }
-
-  depends_on = [null_resource.do_with_lamp]
-}
-*/
 
 resource "null_resource" "curl_lamp" {
   provisioner "local-exec" {
@@ -83,4 +58,17 @@ data "http" "ylb" {
         error_message = "${self.url} returned an unhealthy status code"
     }
   }
+}
+
+resource "null_resource" "get_target_group_info" {
+  provisioner "local-exec" {
+    command = "yc lb target-group get ${yandex_lb_target_group.les03-web-servers.id}"
+    on_failure = continue
+  }
+
+  lifecycle {
+    replace_triggered_by = [terraform_data.lamp_action]
+  }
+
+  depends_on = [null_resource.do_with_lamp]
 }
