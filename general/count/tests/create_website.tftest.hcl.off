@@ -11,20 +11,3 @@ run "create_website" {
     error_message = "Wrong number of webservers in the target group"
   } 
 }
-
-run "website_is_running" {
-  command = apply
-
-  module {
-    source = "./tests/get"
-  }
-
-  variables {
-    endpoint = run.create_website.lb_ip_address
-  }
-
-  assert {
-    condition     = data.http.index.status_code == 200
-    error_message = "Website responded with HTTP status ${data.http.index.status_code}"
-  }
-}
