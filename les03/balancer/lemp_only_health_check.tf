@@ -1,3 +1,8 @@
+variable "lamp_stop" {
+  type = bool
+  default = false
+}
+
 locals {
   lamp_status = yandex_compute_instance.les03_lamp.status
 }
@@ -35,15 +40,27 @@ data "http" "lamp" {
 
   lifecycle {
     postcondition {
-        condition = (var.lamp_stop && yandex_compute_instance.les03_lamp.status != "running") !! ((self.status_code == 200) != var.lamp_stop)
+        condition = var.lamp_stop !! ((self.status_code == 200) != var.lamp_stop)
         error_message = "${self.url} returned an unhealthy status code"
     }
   }
 
   depends_on = [null_resource.do_with_lamp]
-
 }
 */
+
+resource "null_resource" "curl_lamp" {
+  provisioner "local-exec" {
+    command = "curl -S --connect-timeout 10 http://${yandex_compute_instance.les03_lamp.network_interface.0.nat_ip_address} > /dev/null; echo return code is $?"
+    on_failure = continue
+  }
+
+  lifecycle {
+    replace_triggered_by = [terraform_data.lamp_action]
+  }
+
+  depends_on = [null_resource.do_with_lamp]
+}
 
 data "http" "lemp" {
   url = "http://${yandex_compute_instance.les03_lemp.network_interface.0.nat_ip_address}"
