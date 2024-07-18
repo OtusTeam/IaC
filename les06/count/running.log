@@ -1,0 +1,21 @@
+aleksey@first:~/OtusTeam/IaC/les06/count$ tf test
+tests/all.tftest.hcl... in progress
+  run "check_instances_number"... pass
+  run "create_instances"... pass
+  run "create_website"... pass
+  run "instances_are_running"... pass
+  run "website_is_running"... pass
+  run "stop_nginx_on_instance_0"... pass
+  run "website_is_running_without_one_instance"... pass
+  run "stop_nginx_on_instance_2"... pass
+  run "website_is_running_without_two_instances"... pass
+tests/all.tftest.hcl... tearing down
+tests/all.tftest.hcl... pass
+tests/on_failure.tftest.hcl... in progress
+  run "condition_expected_wrong_instances_number"... pass
+  run "check_expected_wrong_instances_number"... pass
+tests/on_failure.tftest.hcl... tearing down
+tests/on_failure.tftest.hcl... pass
+
+Success! 11 passed, 0 failed.
+
