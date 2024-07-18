@@ -7,8 +7,26 @@ run "check_instances_number" {
 
   assert {
     condition   = var.num_webservers == var.const_num_webservers
-    error_message = "The number of webservers must be ${tostring(var.const_num_webservers)} "
+    error_message = "The number of webservers must be ${tostring(var.const_num_webservers)}"
   } 
+}
+
+
+run "check_expected_wrong_instances_number" {
+  command = plan
+
+  module {
+    source = "./tests/check_expected_failure"
+  }
+
+  variables {
+    const_num_webservers = 4
+  }
+
+  expect_failures = [
+    check.wrong_const_num_webservers
+#    var.const_num_webservers
+  ]
 }
 
 
@@ -52,7 +70,7 @@ run "create_website" {
 }
 
 
-run "instances_is_running" {
+run "instances_are_running" {
   command = apply
   
   variables {
@@ -98,5 +116,58 @@ run "stop_nginx_on_instance_0" {
 
   module {
     source = "./tests/stop_nginx"
+  }
+
+#  expect_failures = [data.http.instance]
+}
+
+
+run "website_is_running_without_one_instance" {
+  command = apply
+
+  module {
+    source = "./tests/http_get"
+  }
+
+  variables {
+    endpoint = run.create_website.lb_ip_address
+  }
+
+  assert {
+    condition     = data.http.index.status_code == 200
+    error_message = "Website responded with HTTP status ${data.http.index.status_code}"
+  }
+}
+
+run "stop_nginx_on_instance_2" {
+  command = apply
+
+  variables {
+     ip = run.create_instances.instances_nat_ips[2]
+  }
+
+
+  module {
+    source = "./tests/stop_nginx"
+  }
+
+#  expect_failures = [data.http.instance]
+}
+
+
+run "website_is_running_without_two_instances" {
+  command = apply
+
+  module {
+    source = "./tests/http_get"
+  }
+
+  variables {
+    endpoint = run.create_website.lb_ip_address
+  }
+
+  assert {
+    condition     = data.http.index.status_code == 200
+    error_message = "Website responded with HTTP status ${data.http.index.status_code}"
   }
 }

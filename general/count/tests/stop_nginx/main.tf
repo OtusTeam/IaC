@@ -31,3 +31,18 @@ resource "null_resource" "stop_nginx" {
     ]
   }
 }
+
+/*
+check "health_check" {
+  data "http" "instance" {
+    url = "http://${var.ip}"
+
+    depends_on = [null_resource.stop_nginx]
+  }
+
+  assert {
+    condition = data.http.instance.status_code == 200
+    error_message = "${data.http.instance.url} returned an unhealthy status code ${tostring(data.http.instance.status_code)}"
+  }
+}
+*/
