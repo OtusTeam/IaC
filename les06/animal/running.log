@@ -1,0 +1,8 @@
+aleksey@first:~/OtusTeam/IaC/les06/animal$ tf test
+tests/ssh_connect.tftest.hcl... in progress
+  run "check_ip"... pass
+  run "check_ssh_connect"... pass
+tests/ssh_connect.tftest.hcl... tearing down
+tests/ssh_connect.tftest.hcl... pass
+
+Success! 2 passed, 0 failed.

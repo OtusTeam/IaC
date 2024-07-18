@@ -1,0 +1,7 @@
+aleksey@first:~/OtusTeam/IaC/les06/hello$ tf test
+tests/hello.tftest.hcl... in progress
+  run "check_hello_output"... pass
+tests/hello.tftest.hcl... tearing down
+tests/hello.tftest.hcl... pass
+
+Success! 1 passed, 0 failed.

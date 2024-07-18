@@ -1,0 +1,297 @@
+aleksey@first:~/OtusTeam/IaC/les06/animal/test$ ./go_test_key_pass.sh 
+=== RUN   TestEndToEndDeploymentScenario
+TestEndToEndDeploymentScenario 2024-07-18T17:32:22Z test_structure.go:27: The 'SKIP_setup' environment variable is not set, so executing stage 'setup'.
+TestEndToEndDeploymentScenario 2024-07-18T17:32:22Z save_test_data.go:197: Storing test data in ../.test-data/TerraformOptions.json so it can be reused later
+TestEndToEndDeploymentScenario 2024-07-18T17:32:22Z save_test_data.go:201: [WARNING] The named test data at path ../.test-data/TerraformOptions.json is non-empty. Save operation will overwrite existing value with "&{ ../ map[yc_folder:b1gphr6mcggqjvd9kl4h] [] [] false  map[] map[] map[] 0 0s false false false false <nil> false 0 <nil> 0   false}".
+.
+TestEndToEndDeploymentScenario 2024-07-18T17:32:22Z save_test_data.go:213: Marshalled JSON: {"TerraformBinary":"","TerraformDir":"../","Vars":{"yc_folder":"b1gphr6mcggqjvd9kl4h"},"VarFiles":null,"Targets":null,"Lock":false,"LockTimeout":"","EnvVars":null,"BackendConfig":null,"RetryableTerraformErrors":null,"MaxRetries":0,"TimeBetweenRetries":0,"Upgrade":false,"Reconfigure":false,"MigrateState":false,"NoColor":false,"SshAgent":null,"NoStderr":false,"OutputMaxLineSize":0,"Logger":null,"Parallelism":0,"PlanFilePath":"","PluginDir":"","SetVarsAfterVarFiles":false}
+TestEndToEndDeploymentScenario 2024-07-18T17:32:22Z retry.go:91: terraform [init -upgrade=false]
+TestEndToEndDeploymentScenario 2024-07-18T17:32:22Z logger.go:66: Running command terraform with args [init -upgrade=false]
+TestEndToEndDeploymentScenario 2024-07-18T17:32:22Z logger.go:66: Initializing the backend...
+TestEndToEndDeploymentScenario 2024-07-18T17:32:22Z logger.go:66: Initializing provider plugins...
+TestEndToEndDeploymentScenario 2024-07-18T17:32:22Z logger.go:66: - Reusing previous version of yandex-cloud/yandex from the dependency lock file
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: - Using previously-installed yandex-cloud/yandex v0.124.0
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: Terraform has been successfully initialized!
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: You may now begin working with Terraform. Try running "terraform plan" to see
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: any changes that are required for your infrastructure. All Terraform commands
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: should now work.
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: If you ever set or change modules or backend configuration for Terraform,
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: rerun this command to reinitialize your working directory. If you forget, other
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: commands will detect it and remind you to do so if necessary.
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z retry.go:91: terraform [apply -input=false -auto-approve -var yc_folder=b1gphr6mcggqjvd9kl4h -lock=false]
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: Running command terraform with args [apply -input=false -auto-approve -var yc_folder=b1gphr6mcggqjvd9kl4h -lock=false]
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: data.yandex_compute_image.ubuntu_image: Reading...
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: data.yandex_compute_image.ubuntu_image: Read complete after 0s [id=fd8fdpnu69uindc6eumc]
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: Terraform used the selected providers to generate the following execution
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: plan. Resource actions are indicated with the following symbols:
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:   + create
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: Terraform will perform the following actions:
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:   # yandex_compute_instance.test-vm1 will be created
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:   + resource "yandex_compute_instance" "test-vm1" {
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + created_at                = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + folder_id                 = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + fqdn                      = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + gpu_cluster_id            = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + hostname                  = "cat1"
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + id                        = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + maintenance_grace_period  = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + maintenance_policy        = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + metadata                  = {
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + "ssh-keys" = (sensitive value)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:         }
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + name                      = "cat1"
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + network_acceleration_type = "standard"
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + platform_id               = "standard-v1"
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + service_account_id        = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + status                    = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + zone                      = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + boot_disk {
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + auto_delete = true
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + device_name = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + disk_id     = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + mode        = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + initialize_params {
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:               + block_size  = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:               + description = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:               + image_id    = "fd8fdpnu69uindc6eumc"
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:               + name        = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:               + size        = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:               + snapshot_id = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:               + type        = "network-hdd"
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:             }
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:         }
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + metadata_options (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + network_interface {
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + index              = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + ip_address         = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + ipv4               = true
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + ipv6               = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + ipv6_address       = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + mac_address        = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + nat                = true
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + nat_ip_address     = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + nat_ip_version     = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + security_group_ids = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + subnet_id          = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:         }
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + placement_policy (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + resources {
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + core_fraction = 5
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + cores         = 2
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + memory        = 2
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:         }
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + scheduling_policy (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:     }
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:   # yandex_vpc_network.test-net will be created
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:   + resource "yandex_vpc_network" "test-net" {
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + created_at                = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + default_security_group_id = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + description               = "cats and dogs are animals"
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + folder_id                 = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + id                        = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + labels                    = {
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + "empty-label" = null
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + "tf-label"    = "tf-label-value"
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:         }
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + name                      = "animals"
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + subnet_ids                = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:     }
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:   # yandex_vpc_subnet.test-subnet-1 will be created
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:   + resource "yandex_vpc_subnet" "test-subnet-1" {
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + created_at     = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + description    = "cats are animals"
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + folder_id      = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + id             = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + labels         = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + name           = "cats"
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + network_id     = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + v4_cidr_blocks = [
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:           + "192.168.1.0/24",
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:         ]
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + v6_cidr_blocks = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:       + zone           = "ru-central1-a"
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:     }
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: Plan: 3 to add, 0 to change, 0 to destroy.
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: Changes to Outputs:
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66:   + vm1_public_ip = (known after apply)
+TestEndToEndDeploymentScenario 2024-07-18T17:32:23Z logger.go:66: yandex_vpc_network.test-net: Creating...
+TestEndToEndDeploymentScenario 2024-07-18T17:32:25Z logger.go:66: yandex_vpc_network.test-net: Creation complete after 2s [id=enpdg3sc71ko2ki5ljjl]
+TestEndToEndDeploymentScenario 2024-07-18T17:32:25Z logger.go:66: yandex_vpc_subnet.test-subnet-1: Creating...
+TestEndToEndDeploymentScenario 2024-07-18T17:32:26Z logger.go:66: yandex_vpc_subnet.test-subnet-1: Creation complete after 0s [id=e9bib9ilq53qt2iljanc]
+TestEndToEndDeploymentScenario 2024-07-18T17:32:26Z logger.go:66: yandex_compute_instance.test-vm1: Creating...
+TestEndToEndDeploymentScenario 2024-07-18T17:32:36Z logger.go:66: yandex_compute_instance.test-vm1: Still creating... [10s elapsed]
+TestEndToEndDeploymentScenario 2024-07-18T17:32:46Z logger.go:66: yandex_compute_instance.test-vm1: Still creating... [20s elapsed]
+TestEndToEndDeploymentScenario 2024-07-18T17:32:56Z logger.go:66: yandex_compute_instance.test-vm1: Still creating... [30s elapsed]
+TestEndToEndDeploymentScenario 2024-07-18T17:33:02Z logger.go:66: yandex_compute_instance.test-vm1: Creation complete after 37s [id=fhm4vj9a0190r6d0b1ic]
+TestEndToEndDeploymentScenario 2024-07-18T17:33:02Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:33:02Z logger.go:66: Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+TestEndToEndDeploymentScenario 2024-07-18T17:33:02Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:33:02Z logger.go:66: Outputs:
+TestEndToEndDeploymentScenario 2024-07-18T17:33:02Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:33:02Z logger.go:66: vm1_public_ip = "51.250.4.41"
+TestEndToEndDeploymentScenario 2024-07-18T17:33:02Z test_structure.go:27: The 'SKIP_validate' environment variable is not set, so executing stage 'validate'.
+Run some tests...
+TestEndToEndDeploymentScenario 2024-07-18T17:33:02Z save_test_data.go:229: Loading test data from ../.test-data/TerraformOptions.json
+TestEndToEndDeploymentScenario 2024-07-18T17:33:02Z retry.go:91: terraform [output -no-color -json vm1_public_ip]
+TestEndToEndDeploymentScenario 2024-07-18T17:33:02Z logger.go:66: Running command terraform with args [output -no-color -json vm1_public_ip]
+TestEndToEndDeploymentScenario 2024-07-18T17:33:02Z logger.go:66: "51.250.4.41"
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z test_structure.go:27: The 'SKIP_teardown' environment variable is not set, so executing stage 'teardown'.
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z save_test_data.go:229: Loading test data from ../.test-data/TerraformOptions.json
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z retry.go:91: terraform [destroy -auto-approve -input=false -var yc_folder=b1gphr6mcggqjvd9kl4h -lock=false]
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: Running command terraform with args [destroy -auto-approve -input=false -var yc_folder=b1gphr6mcggqjvd9kl4h -lock=false]
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: data.yandex_compute_image.ubuntu_image: Reading...
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: yandex_vpc_network.test-net: Refreshing state... [id=enpdg3sc71ko2ki5ljjl]
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: data.yandex_compute_image.ubuntu_image: Read complete after 0s [id=fd8fdpnu69uindc6eumc]
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: yandex_vpc_subnet.test-subnet-1: Refreshing state... [id=e9bib9ilq53qt2iljanc]
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: yandex_compute_instance.test-vm1: Refreshing state... [id=fhm4vj9a0190r6d0b1ic]
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: Terraform used the selected providers to generate the following execution
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: plan. Resource actions are indicated with the following symbols:
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:   - destroy
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: Terraform will perform the following actions:
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:   # yandex_compute_instance.test-vm1 will be destroyed
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:   - resource "yandex_compute_instance" "test-vm1" {
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - created_at                = "2024-07-18T17:32:26Z" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - folder_id                 = "b1gphr6mcggqjvd9kl4h" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - fqdn                      = "cat1.ru-central1.internal" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - hostname                  = "cat1" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - id                        = "fhm4vj9a0190r6d0b1ic" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - labels                    = {} -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - metadata                  = {
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - "ssh-keys" = (sensitive value)
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:         } -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - name                      = "cat1" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - network_acceleration_type = "standard" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - platform_id               = "standard-v1" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - status                    = "running" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - zone                      = "ru-central1-a" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:         # (4 unchanged attributes hidden)
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - boot_disk {
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - auto_delete = true -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - device_name = "fhmaetrj0nobspodvkn1" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - disk_id     = "fhmaetrj0nobspodvkn1" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - mode        = "READ_WRITE" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - initialize_params {
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:               - block_size  = 4096 -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:               - image_id    = "fd8fdpnu69uindc6eumc" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:                 name        = null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:               - size        = 8 -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:               - type        = "network-hdd" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:                 # (2 unchanged attributes hidden)
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:             }
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:         }
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - metadata_options {
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - aws_v1_http_endpoint = 1 -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - aws_v1_http_token    = 2 -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - gce_http_endpoint    = 1 -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - gce_http_token       = 1 -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:         }
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - network_interface {
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - index              = 0 -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - ip_address         = "192.168.1.29" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - ipv4               = true -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - ipv6               = false -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - mac_address        = "d0:0d:4f:cd:2a:00" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - nat                = true -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - nat_ip_address     = "51.250.4.41" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - nat_ip_version     = "IPV4" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - security_group_ids = [] -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - subnet_id          = "e9bib9ilq53qt2iljanc" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:             # (1 unchanged attribute hidden)
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:         }
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - placement_policy {
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - host_affinity_rules       = [] -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - placement_group_partition = 0 -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:             # (1 unchanged attribute hidden)
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:         }
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - resources {
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - core_fraction = 5 -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - cores         = 2 -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - gpus          = 0 -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - memory        = 2 -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:         }
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - scheduling_policy {
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - preemptible = false -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:         }
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:     }
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:   # yandex_vpc_network.test-net will be destroyed
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:   - resource "yandex_vpc_network" "test-net" {
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - created_at                = "2024-07-18T17:32:23Z" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - default_security_group_id = "enphtshsgi3vicsi8eha" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - description               = "cats and dogs are animals" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - folder_id                 = "b1gphr6mcggqjvd9kl4h" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - id                        = "enpdg3sc71ko2ki5ljjl" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - labels                    = {
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - "empty-label" = null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - "tf-label"    = "tf-label-value"
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:         } -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - name                      = "animals" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - subnet_ids                = [
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - "e9bib9ilq53qt2iljanc",
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:         ] -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:     }
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:   # yandex_vpc_subnet.test-subnet-1 will be destroyed
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:   - resource "yandex_vpc_subnet" "test-subnet-1" {
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - created_at     = "2024-07-18T17:32:26Z" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - description    = "cats are animals" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - folder_id      = "b1gphr6mcggqjvd9kl4h" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - id             = "e9bib9ilq53qt2iljanc" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - labels         = {} -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - name           = "cats" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - network_id     = "enpdg3sc71ko2ki5ljjl" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - v4_cidr_blocks = [
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:           - "192.168.1.0/24",
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:         ] -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - v6_cidr_blocks = [] -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:       - zone           = "ru-central1-a" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:         # (1 unchanged attribute hidden)
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:     }
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: Plan: 0 to add, 0 to change, 3 to destroy.
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: Changes to Outputs:
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66:   - vm1_public_ip = "51.250.4.41" -> null
+TestEndToEndDeploymentScenario 2024-07-18T17:34:08Z logger.go:66: yandex_compute_instance.test-vm1: Destroying... [id=fhm4vj9a0190r6d0b1ic]
+TestEndToEndDeploymentScenario 2024-07-18T17:34:18Z logger.go:66: yandex_compute_instance.test-vm1: Still destroying... [id=fhm4vj9a0190r6d0b1ic, 10s elapsed]
+TestEndToEndDeploymentScenario 2024-07-18T17:34:28Z logger.go:66: yandex_compute_instance.test-vm1: Still destroying... [id=fhm4vj9a0190r6d0b1ic, 20s elapsed]
+TestEndToEndDeploymentScenario 2024-07-18T17:34:38Z logger.go:66: yandex_compute_instance.test-vm1: Still destroying... [id=fhm4vj9a0190r6d0b1ic, 30s elapsed]
+TestEndToEndDeploymentScenario 2024-07-18T17:34:48Z logger.go:66: yandex_compute_instance.test-vm1: Still destroying... [id=fhm4vj9a0190r6d0b1ic, 40s elapsed]
+TestEndToEndDeploymentScenario 2024-07-18T17:34:55Z logger.go:66: yandex_compute_instance.test-vm1: Destruction complete after 47s
+TestEndToEndDeploymentScenario 2024-07-18T17:34:56Z logger.go:66: yandex_vpc_subnet.test-subnet-1: Destroying... [id=e9bib9ilq53qt2iljanc]
+TestEndToEndDeploymentScenario 2024-07-18T17:34:58Z logger.go:66: yandex_vpc_subnet.test-subnet-1: Destruction complete after 2s
+TestEndToEndDeploymentScenario 2024-07-18T17:34:58Z logger.go:66: yandex_vpc_network.test-net: Destroying... [id=enpdg3sc71ko2ki5ljjl]
+TestEndToEndDeploymentScenario 2024-07-18T17:34:59Z logger.go:66: yandex_vpc_network.test-net: Destruction complete after 1s
+TestEndToEndDeploymentScenario 2024-07-18T17:34:59Z logger.go:66: 
+TestEndToEndDeploymentScenario 2024-07-18T17:34:59Z logger.go:66: Destroy complete! Resources: 3 destroyed.
+TestEndToEndDeploymentScenario 2024-07-18T17:34:59Z logger.go:66: 
+--- PASS: TestEndToEndDeploymentScenario (156.55s)
+PASS
+ok  	test	156.567s
