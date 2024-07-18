@@ -8,9 +8,33 @@ run "check_instances_number" {
 }
 
 
-run "create_website" {
+run "create_instances" {
   command = apply
 
+  assert {
+    condition   = length(yandex_compute_instance.les04_webservers) == var.num_webservers
+    error_message = "Wrong number of webservers"
+  }
+
+  assert {
+    condition   = length(yandex_compute_instance.les04_webservers[0].network_interface.0.nat_ip_address) > 0
+    error_message = "Empty webserver[0] nat ip address"
+  }
+
+  assert {
+    condition   = length(yandex_compute_instance.les04_webservers[1].network_interface.0.nat_ip_address) > 0
+    error_message = "Empty webserver[1] nat ip address"
+  }
+
+  assert {
+    condition   = length(yandex_compute_instance.les04_webservers[2].network_interface.0.nat_ip_address) > 0
+    error_message = "Empty webserver[2] nat ip address"
+  }
+}
+
+
+run "create_website" {
+  command = apply
 
   assert {
     condition   = length(yandex_lb_target_group.les04_web_servers.target) == var.num_webservers
@@ -22,6 +46,7 @@ run "create_website" {
     error_message = "Empty load balancer external ip address"
   }
 }
+
 
 run "website_is_running" {
   command = apply
