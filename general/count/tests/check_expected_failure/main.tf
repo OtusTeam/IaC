@@ -1,5 +1,5 @@
 variable "const_num_webservers" {
-  type = number    
+  type = number
 }
 
 check "wrong_const_num_webservers" {
