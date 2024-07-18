@@ -1,7 +1,7 @@
 
-resource "yandex_compute_instance" "les04_webservers" {
+resource "yandex_compute_instance" "les06_webservers" {
   count = var.num_webservers
-  name = "les04-ws${count.index + 1}"
+  name = "les06-ws${count.index + 1}"
 
   resources {
     cores  = 2
@@ -57,11 +57,6 @@ resource "yandex_compute_instance" "les04_webservers" {
 
 }
 
-output "ansible_inventory" {
-  value = <<-EOT
-[webservers]
-%{ for ws in yandex_compute_instance.les04_webservers ~}
-${ws.name} ansible_host=${ws.network_interface.0.nat_ip_address} ansible_user=${var.username}
-%{ endfor ~}
-EOT
+output "instances_nat_ips" {
+   value = yandex_compute_instance.les06_webservers.*.network_interface.0.nat_ip_address
 }

@@ -2,7 +2,7 @@ run "check_instances_number" {
   command = plan
 
   assert {
-    condition   = length(yandex_lb_target_group.les04_web_servers.target) == var.num_webservers
+    condition   = length(yandex_lb_target_group.les06_web_servers.target) == var.num_webservers
     error_message = "Wrong number of webservers in the target group"
   } 
 }

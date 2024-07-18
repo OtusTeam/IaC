@@ -1,8 +1,8 @@
-resource "yandex_lb_network_load_balancer" "les04_ylb" {
-  name = "les04-ylb"
+resource "yandex_lb_network_load_balancer" "les06_ylb" {
+  name = "les06-ylb"
 
   listener {
-    name = "les04-listener-web-servers"
+    name = "les06-listener-web-servers"
     port = 80
     external_address_spec {
       ip_version = "ipv4"
@@ -10,7 +10,7 @@ resource "yandex_lb_network_load_balancer" "les04_ylb" {
   }
 
   attached_target_group {
-    target_group_id = yandex_lb_target_group.les04_web_servers.id
+    target_group_id = yandex_lb_target_group.les06_web_servers.id
 
     healthcheck {
       name = "http"
@@ -22,18 +22,18 @@ resource "yandex_lb_network_load_balancer" "les04_ylb" {
   }
 }
 
-resource "yandex_lb_target_group" "les04_web_servers" {
-  name = "les04-web-servers-target-group"
+resource "yandex_lb_target_group" "les06_web_servers" {
+  name = "les06-web-servers-target-group"
 
   dynamic "target" {
-    for_each = yandex_compute_instance.les04_webservers
+    for_each = yandex_compute_instance.les06_webservers
     content {
           subnet_id = var.yc_subnet_id
-          address   = yandex_compute_instance.les04_webservers[target.key].network_interface.0.ip_address
+          address   = yandex_compute_instance.les06_webservers[target.key].network_interface.0.ip_address
     }
   }      
 }
 
 output "lb_ip_address" {
-  value = yandex_lb_network_load_balancer.les04_ylb.listener.*.external_address_spec[0].*.address[0]
+  value = yandex_lb_network_load_balancer.les06_ylb.listener.*.external_address_spec[0].*.address[0]
 }
