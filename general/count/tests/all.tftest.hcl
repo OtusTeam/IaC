@@ -86,3 +86,17 @@ run "website_is_running" {
     error_message = "Website responded with HTTP status ${data.http.index.status_code}"
   }
 }
+
+
+run "stop_nginx_on_instance_0" {
+  command = apply
+
+  variables {
+     ip = run.create_instances.instances_nat_ips[0]
+  }
+
+
+  module {
+    source = "./tests/stop_nginx"
+  }
+}
