@@ -1,1 +1,0 @@
-unset SKIP_teardown

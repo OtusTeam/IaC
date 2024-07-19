@@ -1,8 +1,0 @@
-package test
-
-import (
-    "testing"
-)
-
-func TestEndToEndDeploymentScenario(t *testing.T) {
-}
