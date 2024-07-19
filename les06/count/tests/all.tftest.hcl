@@ -65,7 +65,7 @@ run "instances_are_running" {
   }
 
   module {
-    source = "./tests/instances_is_running"
+    source = "./tests/instances_are_running"
   }
 }
 
