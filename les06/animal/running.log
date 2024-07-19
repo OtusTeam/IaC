@@ -1,3 +1,102 @@
+aleksey@first:~/OtusTeam/IaC/les06/animal$ ping -c 1 otusdw.ru; echo $?
+ping: otusdw.ru: Name or service not known
+2
+aleksey@first:~/OtusTeam/IaC/les06/animal$ nano tests/ssh_connect/main.tf
+aleksey@first:~/OtusTeam/IaC/les06/animal$ cat tests/ssh_connect/main.tf
+variable "ip" {
+  type = string
+}
+
+variable "username" {
+   type = string
+   default = "ubuntu"
+}
+
+variable "sec_key_path" {
+   type = string
+   sensitive = true
+   default = "~/.ssh/id_rsa"
+}
+
+
+resource "null_resource" "ssh_connect" {
+
+  connection {
+    host        = var.ip
+    type        = "ssh"
+    user        = var.username
+    private_key = file(var.sec_key_path)
+
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "ping -c 1 otusdw.ru"
+    ]
+  }
+}
+
+aleksey@first:~/OtusTeam/IaC/les06/animal$ tf test
+tests/ssh_connect.tftest.hcl... in progress
+  run "check_ip"... pass
+  run "check_ssh_connect"... fail
+╷
+│ Error: remote-exec provisioner error
+│ 
+│   with null_resource.ssh_connect,
+│   on tests/ssh_connect/main.tf line 27, in resource "null_resource" "ssh_connect":
+│   27:   provisioner "remote-exec" {
+│ 
+│ error executing "/tmp/terraform_528803429.sh": Process exited with status 2
+╵
+tests/ssh_connect.tftest.hcl... tearing down
+tests/ssh_connect.tftest.hcl... fail
+
+Failure! 1 passed, 1 failed.
+aleksey@first:~/OtusTeam/IaC/les06/animal$ ping -c 1 otus.ru; echo $?
+PING otus.ru (188.114.98.233) 56(84) bytes of data.
+64 bytes from 188.114.98.233 (188.114.98.233): icmp_seq=1 ttl=53 time=51.0 ms
+
+--- otus.ru ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 50.974/50.974/50.974/0.000 ms
+0
+ 
+aleksey@first:~/OtusTeam/IaC/les06/animal$ nano tests/ssh_connect/main.tf 
+aleksey@first:~/OtusTeam/IaC/les06/animal$ cat tests/ssh_connect/main.tf
+variable "ip" {
+  type = string
+}
+
+variable "username" {
+   type = string
+   default = "ubuntu"
+}
+
+variable "sec_key_path" {
+   type = string
+   sensitive = true
+   default = "~/.ssh/id_rsa"
+}
+
+
+resource "null_resource" "ssh_connect" {
+
+  connection {
+    host        = var.ip
+    type        = "ssh"
+    user        = var.username
+    private_key = file(var.sec_key_path)
+
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "ping -c 1 otus.ru"
+    ]
+  }
+}
+
 aleksey@first:~/OtusTeam/IaC/les06/animal$ tf test
 tests/ssh_connect.tftest.hcl... in progress
   run "check_ip"... pass

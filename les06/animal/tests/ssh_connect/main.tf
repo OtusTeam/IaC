@@ -26,7 +26,7 @@ resource "null_resource" "ssh_connect" {
 
   provisioner "remote-exec" {
     inline = [
-      "sleep 10"
+      "ping -c 1 otus.ru"
     ]
   }
 }
