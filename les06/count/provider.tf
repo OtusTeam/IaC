@@ -1,7 +1,7 @@
 provider "yandex" {
-  cloud_id  = "b1glq0cg9jigrj5lcp63"
-  folder_id = "b1gmesrdjgklgkvcp704"
-  zone      = "ru-central1-a"
+  cloud_id  = var.yc_cloud
+  folder_id = var.yc_folder
+  zone      = var.yc_default_zone
 }
 
 terraform {

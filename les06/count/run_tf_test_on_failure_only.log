@@ -1,0 +1,16 @@
+aleksey@first:~/OtusTeam/IaC/les06/count$ tf test -filter=tests/on_failure.tftest.hcl
+tests/on_failure.tftest.hcl... in progress
+  run "condition_expected_wrong_instances_number"... pass
+  run "check_expected_wrong_instances_number"... pass
+tests/on_failure.tftest.hcl... tearing down
+tests/on_failure.tftest.hcl... pass
+
+Success! 2 passed, 0 failed.
+aleksey@first:~/OtusTeam/IaC/les06/count$ ./run_tf_test_on_failure_only.sh 
+tests/on_failure.tftest.hcl... in progress
+  run "condition_expected_wrong_instances_number"... pass
+  run "check_expected_wrong_instances_number"... pass
+tests/on_failure.tftest.hcl... tearing down
+tests/on_failure.tftest.hcl... pass
+
+Success! 2 passed, 0 failed.
