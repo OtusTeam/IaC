@@ -1,0 +1,84 @@
+aleksey@first:~/OtusTeam/IaC/les10/hello$ ansible-inventory -i hello.py --list
+{
+    "_meta": {
+        "hostvars": {
+            "hello": {
+                "ansible_connection": "local",
+                "ansible_host": "127.0.0.1"
+            },
+            "world": {
+                "ansible_connection": "local",
+                "ansible_host": "127.0.0.1"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped"
+        ]
+    },
+    "ungrouped": {
+        "hosts": [
+            "hello",
+            "world"
+        ]
+    }
+}
+aleksey@first:~/OtusTeam/IaC/les10/hello$ ansible-inventory -i random_ip_hello.py --list
+{
+    "_meta": {
+        "hostvars": {
+            "hello132": {
+                "ansible_connection": "local",
+                "ansible_host": "127.0.0.1"
+            },
+            "hello213": {
+                "ansible_connection": "local",
+                "ansible_host": "127.0.0.1"
+            },
+            "hello235": {
+                "ansible_connection": "local",
+                "ansible_host": "127.0.0.1"
+            },
+            "hello90": {
+                "ansible_connection": "local",
+                "ansible_host": "127.0.0.1"
+            },
+            "world207": {
+                "ansible_host": "128.179.4.161"
+            },
+            "world231": {
+                "ansible_host": "19.252.115.39"
+            },
+            "world233": {
+                "ansible_host": "108.239.152.163"
+            },
+            "world249": {
+                "ansible_host": "48.153.159.38"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped",
+            "hello",
+            "world"
+        ]
+    },
+    "hello": {
+        "hosts": [
+            "hello132",
+            "hello90",
+            "hello213",
+            "hello235"
+        ]
+    },
+    "world": {
+        "hosts": [
+            "world231",
+            "world207",
+            "world249",
+            "world233"
+        ]
+    }
+}
