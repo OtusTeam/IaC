@@ -82,3 +82,30 @@ aleksey@first:~/OtusTeam/IaC/les10/hello$ ansible-inventory -i random_ip_hello.p
         ]
     }
 }
+aleksey@first:~/OtusTeam/IaC/les10/hello$ ansible-inventory -i hello.py --host hello
+{
+    "ansible_connection": "local",
+    "ansible_host": "127.0.0.1"
+}
+aleksey@first:~/OtusTeam/IaC/les10/hello$ ansible-inventory -i hello.py --host world
+{
+    "ansible_connection": "local",
+    "ansible_host": "127.0.0.1"
+}
+aleksey@first:~/OtusTeam/IaC/les10/hello$ ansible-inventory -i hello.py --host world -y
+ansible_connection: local
+ansible_host: 127.0.0.1
+aleksey@first:~/OtusTeam/IaC/les10/hello$ ansible-inventory -i hello.py --host hello -y
+ansible_connection: local
+ansible_host: 127.0.0.1
+aleksey@first:~/OtusTeam/IaC/les10/hello$ ansible-inventory -i hello.py --list -y
+all:
+  children:
+    ungrouped:
+      hosts:
+        hello:
+          ansible_connection: local
+          ansible_host: 127.0.0.1
+        world:
+          ansible_connection: local
+          ansible_host: 127.0.0.1
