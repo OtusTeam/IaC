@@ -36,4 +36,7 @@ variable "sec_key_path" {
   default = "~/.ssh/id_rsa"
 }
 
+variable "image" {
+  default = "fd8pecdhv50nec1qf9im"
+}
 

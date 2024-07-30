@@ -1,0 +1,413 @@
+aleksey@first:~/OtusTeam/IaC/les10/ssh_config$ ./ans_inv_local_demo.sh 
++ cat ssh_config
+   Host git
+       HostName git.domain.org
+       User tkarasek
+       IdentityFile /home/tomk/keys/thekey
++ echo 'Press any key to continue'
+Press any key to continue
++ read -sn 1
++ ansible-inventory -i ssh_config.py.ssh_config --list
+{
+    "_meta": {
+        "hostvars": {
+            "git": {
+                "ansible_ssh_host": "git.domain.org",
+                "ansible_ssh_private_key_file": "/home/tomk/keys/thekey",
+                "ansible_ssh_user": "tkarasek"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped",
+            "ssh_config"
+        ]
+    },
+    "ssh_config": {
+        "hosts": [
+            "git"
+        ]
+    }
+}
+aleksey@first:~/OtusTeam/IaC/les10/ssh_config$ ansible-inventory -i ssh_config.py.ssh_config --list -y
+all:
+  children:
+    ssh_config:
+      hosts:
+        git:
+          ansible_ssh_host: git.domain.org
+          ansible_ssh_private_key_file: /home/tomk/keys/thekey
+          ansible_ssh_user: tkarasek
+aleksey@first:~/OtusTeam/IaC/les10/ssh_config$ ./add_3_hosts_2_ssh_config.sh 
+File /home/aleksey/.ssh/config exists and is not empty:
+Host les10-ssh-config-vm
+    HostName 89.169.143.224
+    User ubuntu
+    IdentityFile /home/aleksey/.ssh/id_rsa
+Host eight
+    HostName 8.8.8.8
+    User somename
+    IdentityFile /home/aleksey/.ssh/id_rsa
+Host two
+    HostName 2.2.2.2
+    User somename
+    IdentityFile /home/aleksey/.ssh/id_rsa
+Host one
+    HostName 1.1.1.1
+    User somename
+    IdentityFile /home/aleksey/.ssh/id_rsa
+Do you want to truncate it to zero length? (y/n) y
+File truncated to zero length.
++ ./add_host_2_ssh_config.sh one 1.1.1.1 somename /home/aleksey/.ssh/id_rsa
+Добавлено описание хоста one в файл ~/.ssh/config
++ ./add_host_2_ssh_config.sh two 2.2.2.2 somename /home/aleksey/.ssh/id_rsa
+Добавлено описание хоста two в файл ~/.ssh/config
++ ./add_host_2_ssh_config.sh eight 8.8.8.8 somename /home/aleksey/.ssh/id_rsa
+Добавлено описание хоста eight в файл ~/.ssh/config
++ cat /home/aleksey/.ssh/config
+Host eight
+    HostName 8.8.8.8
+    User somename
+    IdentityFile /home/aleksey/.ssh/id_rsa
+Host two
+    HostName 2.2.2.2
+    User somename
+    IdentityFile /home/aleksey/.ssh/id_rsa
+Host one
+    HostName 1.1.1.1
+    User somename
+    IdentityFile /home/aleksey/.ssh/id_rsa
+aleksey@first:~/OtusTeam/IaC/les10/ssh_config$ ./ans_inv_ssh_config.sh 
+++ ansible-inventory -i ssh_config.py --list
+{
+    "_meta": {
+        "hostvars": {
+            "eight": {
+                "ansible_ssh_host": "8.8.8.8",
+                "ansible_ssh_private_key_file": "/home/aleksey/.ssh/id_rsa",
+                "ansible_ssh_user": "somename"
+            },
+            "one": {
+                "ansible_ssh_host": "1.1.1.1",
+                "ansible_ssh_private_key_file": "/home/aleksey/.ssh/id_rsa",
+                "ansible_ssh_user": "somename"
+            },
+            "two": {
+                "ansible_ssh_host": "2.2.2.2",
+                "ansible_ssh_private_key_file": "/home/aleksey/.ssh/id_rsa",
+                "ansible_ssh_user": "somename"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped",
+            "ssh_config"
+        ]
+    },
+    "ssh_config": {
+        "hosts": [
+            "eight",
+            "one",
+            "two"
+        ]
+    }
+}
+aleksey@first:~/OtusTeam/IaC/les10/ssh_config$ ansible-inventory -i ssh_config.py --list -y
+all:
+  children:
+    ssh_config:
+      hosts:
+        eight:
+          ansible_ssh_host: 8.8.8.8
+          ansible_ssh_private_key_file: /home/aleksey/.ssh/id_rsa
+          ansible_ssh_user: somename
+        one:
+          ansible_ssh_host: 1.1.1.1
+          ansible_ssh_private_key_file: /home/aleksey/.ssh/id_rsa
+          ansible_ssh_user: somename
+        two:
+          ansible_ssh_host: 2.2.2.2
+          ansible_ssh_private_key_file: /home/aleksey/.ssh/id_rsa
+          ansible_ssh_user: somename
+aleksey@first:~/OtusTeam/IaC/les10/ssh_config$ tf apply
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.vm will be created
+  + resource "yandex_compute_instance" "vm" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = (sensitive value)
+        }
+      + name                      = "les10-ssh-config-vm"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + service_account_id        = (known after apply)
+      + status                    = (known after apply)
+      + zone                      = "ru-central1-a"
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd8pecdhv50nec1qf9im"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index              = (known after apply)
+          + ip_address         = (known after apply)
+          + ipv4               = true
+          + ipv6               = (known after apply)
+          + ipv6_address       = (known after apply)
+          + mac_address        = (known after apply)
+          + nat                = true
+          + nat_ip_address     = (known after apply)
+          + nat_ip_version     = (known after apply)
+          + security_group_ids = (known after apply)
+          + subnet_id          = (known after apply)
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 100
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy (known after apply)
+    }
+
+  # yandex_vpc_network.network will be created
+  + resource "yandex_vpc_network" "network" {
+      + created_at                = (known after apply)
+      + default_security_group_id = (known after apply)
+      + folder_id                 = (known after apply)
+      + id                        = (known after apply)
+      + labels                    = (known after apply)
+      + name                      = "les10-ssh-config-network"
+      + subnet_ids                = (known after apply)
+    }
+
+  # yandex_vpc_subnet.subnet will be created
+  + resource "yandex_vpc_subnet" "subnet" {
+      + created_at     = (known after apply)
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + labels         = (known after apply)
+      + name           = "les10-ssh-config-subnet"
+      + network_id     = (known after apply)
+      + v4_cidr_blocks = [
+          + "10.3.0.0/16",
+        ]
+      + v6_cidr_blocks = (known after apply)
+      + zone           = "ru-central1-a"
+    }
+
+Plan: 3 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+yandex_vpc_network.network: Creating...
+yandex_vpc_network.network: Creation complete after 2s [id=enp5t98c0pv593vqag4a]
+yandex_vpc_subnet.subnet: Creating...
+yandex_vpc_subnet.subnet: Creation complete after 0s [id=e9bpa2e9eouagelh4unk]
+yandex_compute_instance.vm: Creating...
+yandex_compute_instance.vm: Still creating... [10s elapsed]
+yandex_compute_instance.vm: Still creating... [20s elapsed]
+yandex_compute_instance.vm: Still creating... [30s elapsed]
+yandex_compute_instance.vm: Still creating... [41s elapsed]
+yandex_compute_instance.vm: Still creating... [51s elapsed]
+yandex_compute_instance.vm: Provisioning with 'local-exec'...
+yandex_compute_instance.vm (local-exec): Executing: ["/bin/sh" "-c" "./add_host_2_ssh_config.sh les10-ssh-config-vm 51.250.81.111 ubuntu ~/.ssh/id_rsa"]
+yandex_compute_instance.vm (local-exec): Добавлено описание хоста les10-ssh-config-vm в файл ~/.ssh/config
+yandex_compute_instance.vm: Creation complete after 54s [id=fhmdl15fvmaqsubfvh7s]
+
+Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+aleksey@first:~/OtusTeam/IaC/les10/ssh_config$ ./ans_ping_vm.sh 
+++ cat /home/aleksey/.ssh/config
+Host les10-ssh-config-vm
+    HostName 51.250.81.111
+    User ubuntu
+    IdentityFile /home/aleksey/.ssh/id_rsa
+Host eight
+    HostName 8.8.8.8
+    User somename
+    IdentityFile /home/aleksey/.ssh/id_rsa
+Host two
+    HostName 2.2.2.2
+    User somename
+    IdentityFile /home/aleksey/.ssh/id_rsa
+Host one
+    HostName 1.1.1.1
+    User somename
+    IdentityFile /home/aleksey/.ssh/id_rsa
+++ ansible -m ping les10-ssh-config-vm
+les10-ssh-config-vm | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+aleksey@first:~/OtusTeam/IaC/les10/ssh_config$ tf destroy
+yandex_vpc_network.network: Refreshing state... [id=enp5t98c0pv593vqag4a]
+yandex_vpc_subnet.subnet: Refreshing state... [id=e9bpa2e9eouagelh4unk]
+yandex_compute_instance.vm: Refreshing state... [id=fhmdl15fvmaqsubfvh7s]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.vm will be destroyed
+  - resource "yandex_compute_instance" "vm" {
+      - created_at                = "2024-07-30T10:26:18Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "fhmdl15fvmaqsubfvh7s.auto.internal" -> null
+      - id                        = "fhmdl15fvmaqsubfvh7s" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = (sensitive value)
+        } -> null
+      - name                      = "les10-ssh-config-vm" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-a" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "fhmh0df68uf42gsslph4" -> null
+          - disk_id     = "fhmh0df68uf42gsslph4" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd8pecdhv50nec1qf9im" -> null
+                name        = null
+              - size        = 8 -> null
+              - type        = "network-hdd" -> null
+                # (2 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.3.0.7" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:da:84:af:fd" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "51.250.81.111" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e9bpa2e9eouagelh4unk" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 100 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = false -> null
+        }
+    }
+
+  # yandex_vpc_network.network will be destroyed
+  - resource "yandex_vpc_network" "network" {
+      - created_at                = "2024-07-30T10:26:16Z" -> null
+      - default_security_group_id = "enp68lt4grkms5hci7p3" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - id                        = "enp5t98c0pv593vqag4a" -> null
+      - labels                    = {} -> null
+      - name                      = "les10-ssh-config-network" -> null
+      - subnet_ids                = [
+          - "e9bpa2e9eouagelh4unk",
+        ] -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # yandex_vpc_subnet.subnet will be destroyed
+  - resource "yandex_vpc_subnet" "subnet" {
+      - created_at     = "2024-07-30T10:26:18Z" -> null
+      - folder_id      = "b1gmesrdjgklgkvcp704" -> null
+      - id             = "e9bpa2e9eouagelh4unk" -> null
+      - labels         = {} -> null
+      - name           = "les10-ssh-config-subnet" -> null
+      - network_id     = "enp5t98c0pv593vqag4a" -> null
+      - v4_cidr_blocks = [
+          - "10.3.0.0/16",
+        ] -> null
+      - v6_cidr_blocks = [] -> null
+      - zone           = "ru-central1-a" -> null
+        # (2 unchanged attributes hidden)
+    }
+
+Plan: 0 to add, 0 to change, 3 to destroy.
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+yandex_compute_instance.vm: Destroying... [id=fhmdl15fvmaqsubfvh7s]
+yandex_compute_instance.vm: Still destroying... [id=fhmdl15fvmaqsubfvh7s, 10s elapsed]
+^@yandex_compute_instance.vm: Still destroying... [id=fhmdl15fvmaqsubfvh7s, 20s elapsed]
+yandex_compute_instance.vm: Still destroying... [id=fhmdl15fvmaqsubfvh7s, 30s elapsed]
+yandex_compute_instance.vm: Still destroying... [id=fhmdl15fvmaqsubfvh7s, 40s elapsed]
+yandex_compute_instance.vm: Still destroying... [id=fhmdl15fvmaqsubfvh7s, 50s elapsed]
+yandex_compute_instance.vm: Destruction complete after 53s
+yandex_vpc_subnet.subnet: Destroying... [id=e9bpa2e9eouagelh4unk]
+yandex_vpc_subnet.subnet: Destruction complete after 2s
+yandex_vpc_network.network: Destroying... [id=enp5t98c0pv593vqag4a]
+yandex_vpc_network.network: Destruction complete after 1s
+
+Destroy complete! Resources: 3 destroyed.

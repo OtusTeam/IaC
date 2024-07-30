@@ -1,5 +1,5 @@
-resource "yandex_compute_instance" "vm4ans" {
-  name = "vm4ans"
+resource "yandex_compute_instance" "vm" {
+  name = "les10-ssh-config-vm"
   zone = var.yc_default_zone
 
 
@@ -15,12 +15,12 @@ resource "yandex_compute_instance" "vm4ans" {
 
   boot_disk {
     initialize_params {
-      image_id = "fd8pecdhv50nec1qf9im"
+      image_id = var.image
     }
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.sub4ans.id
+    subnet_id = yandex_vpc_subnet.subnet.id
     nat       = true
   }
 
