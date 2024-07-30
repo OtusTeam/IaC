@@ -1,0 +1,5 @@
+if "$ANSIBLE_INVENTORY" == "" then
+   
+terraform output -raw ansible_inventory_of_vm > $ANSIBLE_INVENTORY
+terraform output -raw ansible_inventory_of_vms >> $ANSIBLE_INVENTORY
+
