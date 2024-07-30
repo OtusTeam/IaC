@@ -15,7 +15,10 @@ resource "yandex_compute_instance" "vm4ans" {
   }
 
   provisioner "local-exec" {
-    command = "export ANSIBLE_HOST_KEY_CHECKING=False && ansible -u ${var.username} -i '${self.network_interface.0.nat_ip_address},' --private-key ${var.sec_key_path} -m ping all" 
+    command = <<-EOT
+      export ANSIBLE_HOST_KEY_CHECKING=False
+      ansible -u ${var.username} -i '${self.network_interface.0.nat_ip_address},' --private-key ${var.sec_key_path} -m ping all
+    EOT
   }
 
   resources {
@@ -25,7 +28,7 @@ resource "yandex_compute_instance" "vm4ans" {
 
   boot_disk {
     initialize_params {
-      image_id = "fd8pecdhv50nec1qf9im"
+      image_id = var.image
     }
   }
 
@@ -37,4 +40,11 @@ resource "yandex_compute_instance" "vm4ans" {
   metadata = {
     ssh-keys = "${var.username}:${file(var.pub_key_path)}"
   }
+}
+
+output "ansible_inventory" {
+  value = <<-EOT
+[vms]
+${yandex_compute_instance.vm4ans.name} ansible_host=${yandex_compute_instance.vm4ans.network_interface.0.nat_ip_address} ansible_user=${var.username} ansible_ssh_host_key_checking=False
+EOT
 }
