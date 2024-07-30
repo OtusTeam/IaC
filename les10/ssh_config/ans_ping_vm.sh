@@ -1,3 +1,3 @@
 set -x #echo on
 cat ~/.ssh/config
-ansible -m ping les10-ssh-config-vm
+ansible -i ./ssh_config.py -m ping les10-ssh-config-vm
