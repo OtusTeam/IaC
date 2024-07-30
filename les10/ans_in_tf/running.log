@@ -1,4 +1,3 @@
-aleksey@first:~/OtusTeam/IaC/les10/ans_in_tf$ rm inv
 aleksey@first:~/OtusTeam/IaC/les10/ans_in_tf$ tf apply
 
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
@@ -19,7 +18,135 @@ Terraform will perform the following actions:
       + metadata                  = {
           + "ssh-keys" = (sensitive value)
         }
-      + name                      = "vm4ans"
+      + name                      = "les10-vm4ans"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + service_account_id        = (known after apply)
+      + status                    = (known after apply)
+      + zone                      = "ru-central1-a"
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd8pecdhv50nec1qf9im"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index              = (known after apply)
+          + ip_address         = (known after apply)
+          + ipv4               = true
+          + ipv6               = (known after apply)
+          + ipv6_address       = (known after apply)
+          + mac_address        = (known after apply)
+          + nat                = true
+          + nat_ip_address     = (known after apply)
+          + nat_ip_version     = (known after apply)
+          + security_group_ids = (known after apply)
+          + subnet_id          = (known after apply)
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 100
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy (known after apply)
+    }
+
+  # yandex_compute_instance.vms4ans[0] will be created
+  + resource "yandex_compute_instance" "vms4ans" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = (sensitive value)
+        }
+      + name                      = "les10-vms4ans1"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + service_account_id        = (known after apply)
+      + status                    = (known after apply)
+      + zone                      = "ru-central1-a"
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd8pecdhv50nec1qf9im"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index              = (known after apply)
+          + ip_address         = (known after apply)
+          + ipv4               = true
+          + ipv6               = (known after apply)
+          + ipv6_address       = (known after apply)
+          + mac_address        = (known after apply)
+          + nat                = true
+          + nat_ip_address     = (known after apply)
+          + nat_ip_version     = (known after apply)
+          + security_group_ids = (known after apply)
+          + subnet_id          = (known after apply)
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 100
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy (known after apply)
+    }
+
+  # yandex_compute_instance.vms4ans[1] will be created
+  + resource "yandex_compute_instance" "vms4ans" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = (sensitive value)
+        }
+      + name                      = "les10-vms4ans2"
       + network_acceleration_type = "standard"
       + platform_id               = "standard-v1"
       + service_account_id        = (known after apply)
@@ -77,7 +204,7 @@ Terraform will perform the following actions:
       + folder_id                 = (known after apply)
       + id                        = (known after apply)
       + labels                    = (known after apply)
-      + name                      = "net4ans"
+      + name                      = "les10-net4ans"
       + subnet_ids                = (known after apply)
     }
 
@@ -87,7 +214,7 @@ Terraform will perform the following actions:
       + folder_id      = (known after apply)
       + id             = (known after apply)
       + labels         = (known after apply)
-      + name           = "sub4ans"
+      + name           = "les10-sub4ans"
       + network_id     = (known after apply)
       + v4_cidr_blocks = [
           + "10.2.0.0/16",
@@ -96,10 +223,11 @@ Terraform will perform the following actions:
       + zone           = "ru-central1-a"
     }
 
-Plan: 3 to add, 0 to change, 0 to destroy.
+Plan: 5 to add, 0 to change, 0 to destroy.
 
 Changes to Outputs:
-  + ansible_inventory = (known after apply)
+  + ansible_inventory_of_vm  = (known after apply)
+  + ansible_inventory_of_vms = (known after apply)
 
 Do you want to perform these actions?
   Terraform will perform the actions described above.
@@ -108,16 +236,24 @@ Do you want to perform these actions?
   Enter a value: yes
 
 yandex_vpc_network.net4ans: Creating...
-yandex_vpc_network.net4ans: Creation complete after 1s [id=enpldvsit81gudhimkmm]
+yandex_vpc_network.net4ans: Creation complete after 2s [id=enpd2mq5v0jomstgcp33]
 yandex_vpc_subnet.sub4ans: Creating...
-yandex_vpc_subnet.sub4ans: Creation complete after 0s [id=e9b04lkhslb00c82v2r9]
+yandex_vpc_subnet.sub4ans: Creation complete after 0s [id=e9bao6ukdvrruvv9pb2c]
+yandex_compute_instance.vms4ans[0]: Creating...
 yandex_compute_instance.vm4ans: Creating...
+yandex_compute_instance.vms4ans[1]: Creating...
 yandex_compute_instance.vm4ans: Still creating... [10s elapsed]
+yandex_compute_instance.vms4ans[1]: Still creating... [10s elapsed]
+yandex_compute_instance.vms4ans[0]: Still creating... [10s elapsed]
 yandex_compute_instance.vm4ans: Still creating... [20s elapsed]
+yandex_compute_instance.vms4ans[1]: Still creating... [20s elapsed]
+yandex_compute_instance.vms4ans[0]: Still creating... [20s elapsed]
 yandex_compute_instance.vm4ans: Still creating... [30s elapsed]
+yandex_compute_instance.vms4ans[1]: Still creating... [30s elapsed]
+yandex_compute_instance.vms4ans[0]: Still creating... [30s elapsed]
 yandex_compute_instance.vm4ans: Provisioning with 'remote-exec'...
 yandex_compute_instance.vm4ans (remote-exec): Connecting to remote host via SSH...
-yandex_compute_instance.vm4ans (remote-exec):   Host: 62.84.125.140
+yandex_compute_instance.vm4ans (remote-exec):   Host: 89.169.135.17
 yandex_compute_instance.vm4ans (remote-exec):   User: ubuntu
 yandex_compute_instance.vm4ans (remote-exec):   Password: false
 yandex_compute_instance.vm4ans (remote-exec):   Private key: true
@@ -125,10 +261,34 @@ yandex_compute_instance.vm4ans (remote-exec):   Certificate: false
 yandex_compute_instance.vm4ans (remote-exec):   SSH Agent: false
 yandex_compute_instance.vm4ans (remote-exec):   Checking Host Key: false
 yandex_compute_instance.vm4ans (remote-exec):   Target Platform: unix
+yandex_compute_instance.vms4ans[0]: Provisioning with 'remote-exec'...
+yandex_compute_instance.vms4ans[0] (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.vms4ans[0] (remote-exec):   Host: 62.84.116.182
+yandex_compute_instance.vms4ans[0] (remote-exec):   User: ubuntu
+yandex_compute_instance.vms4ans[0] (remote-exec):   Password: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   Private key: true
+yandex_compute_instance.vms4ans[0] (remote-exec):   Certificate: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   SSH Agent: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   Checking Host Key: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   Target Platform: unix
 yandex_compute_instance.vm4ans: Still creating... [40s elapsed]
+yandex_compute_instance.vms4ans[1]: Still creating... [40s elapsed]
+yandex_compute_instance.vms4ans[0]: Still creating... [40s elapsed]
+yandex_compute_instance.vms4ans[1]: Provisioning with 'remote-exec'...
+yandex_compute_instance.vms4ans[1] (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.vms4ans[1] (remote-exec):   Host: 51.250.4.138
+yandex_compute_instance.vms4ans[1] (remote-exec):   User: ubuntu
+yandex_compute_instance.vms4ans[1] (remote-exec):   Password: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   Private key: true
+yandex_compute_instance.vms4ans[1] (remote-exec):   Certificate: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   SSH Agent: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   Checking Host Key: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   Target Platform: unix
 yandex_compute_instance.vm4ans: Still creating... [50s elapsed]
+yandex_compute_instance.vms4ans[1]: Still creating... [50s elapsed]
+yandex_compute_instance.vms4ans[0]: Still creating... [50s elapsed]
 yandex_compute_instance.vm4ans (remote-exec): Connecting to remote host via SSH...
-yandex_compute_instance.vm4ans (remote-exec):   Host: 62.84.125.140
+yandex_compute_instance.vm4ans (remote-exec):   Host: 89.169.135.17
 yandex_compute_instance.vm4ans (remote-exec):   User: ubuntu
 yandex_compute_instance.vm4ans (remote-exec):   Password: false
 yandex_compute_instance.vm4ans (remote-exec):   Private key: true
@@ -136,10 +296,29 @@ yandex_compute_instance.vm4ans (remote-exec):   Certificate: false
 yandex_compute_instance.vm4ans (remote-exec):   SSH Agent: false
 yandex_compute_instance.vm4ans (remote-exec):   Checking Host Key: false
 yandex_compute_instance.vm4ans (remote-exec):   Target Platform: unix
+yandex_compute_instance.vms4ans[0] (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.vms4ans[0] (remote-exec):   Host: 62.84.116.182
+yandex_compute_instance.vms4ans[0] (remote-exec):   User: ubuntu
+yandex_compute_instance.vms4ans[0] (remote-exec):   Password: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   Private key: true
+yandex_compute_instance.vms4ans[0] (remote-exec):   Certificate: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   SSH Agent: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   Checking Host Key: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   Target Platform: unix
 yandex_compute_instance.vm4ans: Still creating... [1m0s elapsed]
-yandex_compute_instance.vm4ans: Still creating... [1m10s elapsed]
+yandex_compute_instance.vms4ans[1]: Still creating... [1m0s elapsed]
+yandex_compute_instance.vms4ans[0]: Still creating... [1m0s elapsed]
+yandex_compute_instance.vms4ans[1] (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.vms4ans[1] (remote-exec):   Host: 51.250.4.138
+yandex_compute_instance.vms4ans[1] (remote-exec):   User: ubuntu
+yandex_compute_instance.vms4ans[1] (remote-exec):   Password: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   Private key: true
+yandex_compute_instance.vms4ans[1] (remote-exec):   Certificate: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   SSH Agent: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   Checking Host Key: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   Target Platform: unix
 yandex_compute_instance.vm4ans (remote-exec): Connecting to remote host via SSH...
-yandex_compute_instance.vm4ans (remote-exec):   Host: 62.84.125.140
+yandex_compute_instance.vm4ans (remote-exec):   Host: 89.169.135.17
 yandex_compute_instance.vm4ans (remote-exec):   User: ubuntu
 yandex_compute_instance.vm4ans (remote-exec):   Password: false
 yandex_compute_instance.vm4ans (remote-exec):   Private key: true
@@ -147,8 +326,56 @@ yandex_compute_instance.vm4ans (remote-exec):   Certificate: false
 yandex_compute_instance.vm4ans (remote-exec):   SSH Agent: false
 yandex_compute_instance.vm4ans (remote-exec):   Checking Host Key: false
 yandex_compute_instance.vm4ans (remote-exec):   Target Platform: unix
+yandex_compute_instance.vms4ans[1] (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.vms4ans[1] (remote-exec):   Host: 51.250.4.138
+yandex_compute_instance.vms4ans[1] (remote-exec):   User: ubuntu
+yandex_compute_instance.vms4ans[1] (remote-exec):   Password: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   Private key: true
+yandex_compute_instance.vms4ans[1] (remote-exec):   Certificate: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   SSH Agent: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   Checking Host Key: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   Target Platform: unix
+yandex_compute_instance.vm4ans: Still creating... [1m10s elapsed]
+yandex_compute_instance.vms4ans[1]: Still creating... [1m10s elapsed]
+yandex_compute_instance.vms4ans[0]: Still creating... [1m10s elapsed]
 yandex_compute_instance.vm4ans (remote-exec): Connecting to remote host via SSH...
-yandex_compute_instance.vm4ans (remote-exec):   Host: 62.84.125.140
+yandex_compute_instance.vm4ans (remote-exec):   Host: 89.169.135.17
+yandex_compute_instance.vm4ans (remote-exec):   User: ubuntu
+yandex_compute_instance.vm4ans (remote-exec):   Password: false
+yandex_compute_instance.vm4ans (remote-exec):   Private key: true
+yandex_compute_instance.vm4ans (remote-exec):   Certificate: false
+yandex_compute_instance.vm4ans (remote-exec):   SSH Agent: false
+yandex_compute_instance.vm4ans (remote-exec):   Checking Host Key: false
+yandex_compute_instance.vm4ans (remote-exec):   Target Platform: unix
+yandex_compute_instance.vms4ans[0] (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.vms4ans[0] (remote-exec):   Host: 62.84.116.182
+yandex_compute_instance.vms4ans[0] (remote-exec):   User: ubuntu
+yandex_compute_instance.vms4ans[0] (remote-exec):   Password: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   Private key: true
+yandex_compute_instance.vms4ans[0] (remote-exec):   Certificate: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   SSH Agent: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   Checking Host Key: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   Target Platform: unix
+yandex_compute_instance.vms4ans[1] (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.vms4ans[1] (remote-exec):   Host: 51.250.4.138
+yandex_compute_instance.vms4ans[1] (remote-exec):   User: ubuntu
+yandex_compute_instance.vms4ans[1] (remote-exec):   Password: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   Private key: true
+yandex_compute_instance.vms4ans[1] (remote-exec):   Certificate: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   SSH Agent: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   Checking Host Key: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   Target Platform: unix
+yandex_compute_instance.vms4ans[0] (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.vms4ans[0] (remote-exec):   Host: 62.84.116.182
+yandex_compute_instance.vms4ans[0] (remote-exec):   User: ubuntu
+yandex_compute_instance.vms4ans[0] (remote-exec):   Password: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   Private key: true
+yandex_compute_instance.vms4ans[0] (remote-exec):   Certificate: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   SSH Agent: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   Checking Host Key: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   Target Platform: unix
+yandex_compute_instance.vm4ans (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.vm4ans (remote-exec):   Host: 89.169.135.17
 yandex_compute_instance.vm4ans (remote-exec):   User: ubuntu
 yandex_compute_instance.vm4ans (remote-exec):   Password: false
 yandex_compute_instance.vm4ans (remote-exec):   Private key: true
@@ -157,18 +384,31 @@ yandex_compute_instance.vm4ans (remote-exec):   SSH Agent: false
 yandex_compute_instance.vm4ans (remote-exec):   Checking Host Key: false
 yandex_compute_instance.vm4ans (remote-exec):   Target Platform: unix
 yandex_compute_instance.vm4ans: Still creating... [1m20s elapsed]
-yandex_compute_instance.vm4ans (remote-exec): Connecting to remote host via SSH...
-yandex_compute_instance.vm4ans (remote-exec):   Host: 62.84.125.140
-yandex_compute_instance.vm4ans (remote-exec):   User: ubuntu
-yandex_compute_instance.vm4ans (remote-exec):   Password: false
-yandex_compute_instance.vm4ans (remote-exec):   Private key: true
-yandex_compute_instance.vm4ans (remote-exec):   Certificate: false
-yandex_compute_instance.vm4ans (remote-exec):   SSH Agent: false
-yandex_compute_instance.vm4ans (remote-exec):   Checking Host Key: false
-yandex_compute_instance.vm4ans (remote-exec):   Target Platform: unix
+yandex_compute_instance.vms4ans[1]: Still creating... [1m20s elapsed]
+yandex_compute_instance.vms4ans[0]: Still creating... [1m20s elapsed]
+yandex_compute_instance.vms4ans[1] (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.vms4ans[1] (remote-exec):   Host: 51.250.4.138
+yandex_compute_instance.vms4ans[1] (remote-exec):   User: ubuntu
+yandex_compute_instance.vms4ans[1] (remote-exec):   Password: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   Private key: true
+yandex_compute_instance.vms4ans[1] (remote-exec):   Certificate: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   SSH Agent: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   Checking Host Key: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   Target Platform: unix
+yandex_compute_instance.vms4ans[0] (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.vms4ans[0] (remote-exec):   Host: 62.84.116.182
+yandex_compute_instance.vms4ans[0] (remote-exec):   User: ubuntu
+yandex_compute_instance.vms4ans[0] (remote-exec):   Password: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   Private key: true
+yandex_compute_instance.vms4ans[0] (remote-exec):   Certificate: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   SSH Agent: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   Checking Host Key: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   Target Platform: unix
 yandex_compute_instance.vm4ans: Still creating... [1m30s elapsed]
+yandex_compute_instance.vms4ans[1]: Still creating... [1m30s elapsed]
+yandex_compute_instance.vms4ans[0]: Still creating... [1m30s elapsed]
 yandex_compute_instance.vm4ans (remote-exec): Connecting to remote host via SSH...
-yandex_compute_instance.vm4ans (remote-exec):   Host: 62.84.125.140
+yandex_compute_instance.vm4ans (remote-exec):   Host: 89.169.135.17
 yandex_compute_instance.vm4ans (remote-exec):   User: ubuntu
 yandex_compute_instance.vm4ans (remote-exec):   Password: false
 yandex_compute_instance.vm4ans (remote-exec):   Private key: true
@@ -177,36 +417,101 @@ yandex_compute_instance.vm4ans (remote-exec):   SSH Agent: false
 yandex_compute_instance.vm4ans (remote-exec):   Checking Host Key: false
 yandex_compute_instance.vm4ans (remote-exec):   Target Platform: unix
 yandex_compute_instance.vm4ans (remote-exec): Connected!
-yandex_compute_instance.vm4ans: Still creating... [1m40s elapsed]
 yandex_compute_instance.vm4ans: Provisioning with 'local-exec'...
-yandex_compute_instance.vm4ans (local-exec): Executing: ["/bin/sh" "-c" "export ANSIBLE_HOST_KEY_CHECKING=False\nansible -u ubuntu -i '62.84.125.140,' --private-key ~/.ssh/id_rsa -m ping all\n"]
-yandex_compute_instance.vm4ans (local-exec): 62.84.125.140 | SUCCESS => {
-yandex_compute_instance.vm4ans (local-exec):     "ansible_facts": {
-yandex_compute_instance.vm4ans (local-exec):         "discovered_interpreter_python": "/usr/bin/python3"
-yandex_compute_instance.vm4ans (local-exec):     },
-yandex_compute_instance.vm4ans (local-exec):     "changed": false,
-yandex_compute_instance.vm4ans (local-exec):     "ping": "pong"
-yandex_compute_instance.vm4ans (local-exec): }
-yandex_compute_instance.vm4ans: Creation complete after 1m43s [id=fhmr618dric82934ukq2]
+yandex_compute_instance.vm4ans (local-exec): Executing: ["/bin/sh" "-c" "ansible-playbook -i '89.169.135.17,' --private-key ~/.ssh/id_rsa -e 'location=terraform' hello_from.yml\n"]
+yandex_compute_instance.vms4ans[1] (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.vms4ans[1] (remote-exec):   Host: 51.250.4.138
+yandex_compute_instance.vms4ans[1] (remote-exec):   User: ubuntu
+yandex_compute_instance.vms4ans[1] (remote-exec):   Password: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   Private key: true
+yandex_compute_instance.vms4ans[1] (remote-exec):   Certificate: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   SSH Agent: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   Checking Host Key: false
+yandex_compute_instance.vms4ans[1] (remote-exec):   Target Platform: unix
+yandex_compute_instance.vms4ans[1] (remote-exec): Connected!
 
-Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+yandex_compute_instance.vm4ans (local-exec): PLAY [Print hello message] *****************************************************
+
+yandex_compute_instance.vm4ans (local-exec): TASK [Print message] ***********************************************************
+yandex_compute_instance.vm4ans (local-exec): ok: [89.169.135.17] => {
+yandex_compute_instance.vm4ans (local-exec):     "msg": "Hello from terraform"
+yandex_compute_instance.vm4ans (local-exec): }
+
+yandex_compute_instance.vm4ans (local-exec): PLAY RECAP *********************************************************************
+yandex_compute_instance.vm4ans (local-exec): 89.169.135.17              : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+yandex_compute_instance.vm4ans: Creation complete after 1m40s [id=fhmj23e8f7vih4l6g0fp]
+yandex_compute_instance.vms4ans[1]: Still creating... [1m40s elapsed]
+yandex_compute_instance.vms4ans[0]: Still creating... [1m40s elapsed]
+yandex_compute_instance.vms4ans[1]: Provisioning with 'local-exec'...
+yandex_compute_instance.vms4ans[1] (local-exec): Executing: ["/bin/sh" "-c" "export ANSIBLE_HOST_KEY_CHECKING=False\nansible -u ubuntu -i '51.250.4.138,' --private-key ~/.ssh/id_rsa -m ping all\n"]
+yandex_compute_instance.vms4ans[0] (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.vms4ans[0] (remote-exec):   Host: 62.84.116.182
+yandex_compute_instance.vms4ans[0] (remote-exec):   User: ubuntu
+yandex_compute_instance.vms4ans[0] (remote-exec):   Password: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   Private key: true
+yandex_compute_instance.vms4ans[0] (remote-exec):   Certificate: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   SSH Agent: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   Checking Host Key: false
+yandex_compute_instance.vms4ans[0] (remote-exec):   Target Platform: unix
+yandex_compute_instance.vms4ans[0] (remote-exec): Connected!
+yandex_compute_instance.vms4ans[1] (local-exec): 51.250.4.138 | SUCCESS => {
+yandex_compute_instance.vms4ans[1] (local-exec):     "ansible_facts": {
+yandex_compute_instance.vms4ans[1] (local-exec):         "discovered_interpreter_python": "/usr/bin/python3"
+yandex_compute_instance.vms4ans[1] (local-exec):     },
+yandex_compute_instance.vms4ans[1] (local-exec):     "changed": false,
+yandex_compute_instance.vms4ans[1] (local-exec):     "ping": "pong"
+yandex_compute_instance.vms4ans[1] (local-exec): }
+yandex_compute_instance.vms4ans[1]: Creation complete after 1m43s [id=fhmnsrt3i9eumd9n3ca2]
+yandex_compute_instance.vms4ans[0]: Provisioning with 'local-exec'...
+yandex_compute_instance.vms4ans[0] (local-exec): Executing: ["/bin/sh" "-c" "export ANSIBLE_HOST_KEY_CHECKING=False\nansible -u ubuntu -i '62.84.116.182,' --private-key ~/.ssh/id_rsa -m ping all\n"]
+yandex_compute_instance.vms4ans[0] (local-exec): 62.84.116.182 | SUCCESS => {
+yandex_compute_instance.vms4ans[0] (local-exec):     "ansible_facts": {
+yandex_compute_instance.vms4ans[0] (local-exec):         "discovered_interpreter_python": "/usr/bin/python3"
+yandex_compute_instance.vms4ans[0] (local-exec):     },
+yandex_compute_instance.vms4ans[0] (local-exec):     "changed": false,
+yandex_compute_instance.vms4ans[0] (local-exec):     "ping": "pong"
+yandex_compute_instance.vms4ans[0] (local-exec): }
+yandex_compute_instance.vms4ans[0]: Creation complete after 1m46s [id=fhmhusm8h7t1uftj5s4c]
+
+Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
 
 Outputs:
 
-ansible_inventory = <<EOT
-[vms]
-vm4ans ansible_host=62.84.125.140 ansible_user=ubuntu ansible_ssh_host_key_checking=False
+ansible_inventory_of_vm = <<EOT
+[vm]
+les10-vm4ans ansible_host=89.169.135.17
 
 EOT
-aleksey@first:~/OtusTeam/IaC/les10/ans_in_tf$ tf output -raw ansible_inventory
+ansible_inventory_of_vms = <<EOT
 [vms]
-vm4ans ansible_host=62.84.125.140 ansible_user=ubuntu ansible_ssh_host_key_checking=False
+les10-vms4ans1 ansible_host=62.84.116.182 ansible_user=ubuntu ansible_ssh_host_key_checking=False
+les10-vms4ans2 ansible_host=51.250.4.138 ansible_user=ubuntu ansible_ssh_host_key_checking=False
+
+EOT
 aleksey@first:~/OtusTeam/IaC/les10/ans_in_tf$ ./tf_output_2_inv.sh 
 aleksey@first:~/OtusTeam/IaC/les10/ans_in_tf$ cat inv
+[vm]
+les10-vm4ans ansible_host=89.169.135.17
 [vms]
-vm4ans ansible_host=62.84.125.140 ansible_user=ubuntu ansible_ssh_host_key_checking=False
-aleksey@first:~/OtusTeam/IaC/les10/ans_in_tf$ ansible -i inv -m ping all
-vm4ans | SUCCESS => {
+les10-vms4ans1 ansible_host=62.84.116.182 ansible_user=ubuntu ansible_ssh_host_key_checking=False
+les10-vms4ans2 ansible_host=51.250.4.138 ansible_user=ubuntu ansible_ssh_host_key_checking=False
+aleksey@first:~/OtusTeam/IaC/les10/ans_in_tf$ ./ans_inv_ping.sh 
+les10-vms4ans2 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+les10-vms4ans1 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+les10-vm4ans | SUCCESS => {
     "ansible_facts": {
         "discovered_interpreter_python": "/usr/bin/python3"
     },
@@ -214,10 +519,32 @@ vm4ans | SUCCESS => {
     "ping": "pong"
 }
 
+aleksey@first:~/OtusTeam/IaC/les10/ans_in_tf$ ansible-playbook -e "location=outside" hello_from.yml 
+
+PLAY [Print hello message] *******************************************************************************************************************************************************************************************************************
+
+TASK [Print message] *************************************************************************************************************************************************************************************************************************
+ok: [les10-vm4ans] => {
+    "msg": "Hello from outside"
+}
+ok: [les10-vms4ans1] => {
+    "msg": "Hello from outside"
+}
+ok: [les10-vms4ans2] => {
+    "msg": "Hello from outside"
+}
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+les10-vm4ans               : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+les10-vms4ans1             : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+les10-vms4ans2             : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
 aleksey@first:~/OtusTeam/IaC/les10/ans_in_tf$ tf destroy
-yandex_vpc_network.net4ans: Refreshing state... [id=enpldvsit81gudhimkmm]
-yandex_vpc_subnet.sub4ans: Refreshing state... [id=e9b04lkhslb00c82v2r9]
-yandex_compute_instance.vm4ans: Refreshing state... [id=fhmr618dric82934ukq2]
+yandex_vpc_network.net4ans: Refreshing state... [id=enpd2mq5v0jomstgcp33]
+yandex_vpc_subnet.sub4ans: Refreshing state... [id=e9bao6ukdvrruvv9pb2c]
+yandex_compute_instance.vms4ans[1]: Refreshing state... [id=fhmnsrt3i9eumd9n3ca2]
+yandex_compute_instance.vms4ans[0]: Refreshing state... [id=fhmhusm8h7t1uftj5s4c]
+yandex_compute_instance.vm4ans: Refreshing state... [id=fhmj23e8f7vih4l6g0fp]
 
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
   - destroy
@@ -226,15 +553,15 @@ Terraform will perform the following actions:
 
   # yandex_compute_instance.vm4ans will be destroyed
   - resource "yandex_compute_instance" "vm4ans" {
-      - created_at                = "2024-07-30T05:41:10Z" -> null
+      - created_at                = "2024-07-30T07:26:12Z" -> null
       - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
-      - fqdn                      = "fhmr618dric82934ukq2.auto.internal" -> null
-      - id                        = "fhmr618dric82934ukq2" -> null
+      - fqdn                      = "fhmj23e8f7vih4l6g0fp.auto.internal" -> null
+      - id                        = "fhmj23e8f7vih4l6g0fp" -> null
       - labels                    = {} -> null
       - metadata                  = {
           - "ssh-keys" = (sensitive value)
         } -> null
-      - name                      = "vm4ans" -> null
+      - name                      = "les10-vm4ans" -> null
       - network_acceleration_type = "standard" -> null
       - platform_id               = "standard-v1" -> null
       - status                    = "running" -> null
@@ -243,8 +570,8 @@ Terraform will perform the following actions:
 
       - boot_disk {
           - auto_delete = true -> null
-          - device_name = "fhm7obnrjn8skaqhsv1r" -> null
-          - disk_id     = "fhm7obnrjn8skaqhsv1r" -> null
+          - device_name = "fhmuvvbs5au0lhnups90" -> null
+          - disk_id     = "fhmuvvbs5au0lhnups90" -> null
           - mode        = "READ_WRITE" -> null
 
           - initialize_params {
@@ -266,15 +593,159 @@ Terraform will perform the following actions:
 
       - network_interface {
           - index              = 0 -> null
-          - ip_address         = "10.2.0.34" -> null
+          - ip_address         = "10.2.0.3" -> null
           - ipv4               = true -> null
           - ipv6               = false -> null
-          - mac_address        = "d0:0d:1b:30:50:dd" -> null
+          - mac_address        = "d0:0d:13:10:dc:87" -> null
           - nat                = true -> null
-          - nat_ip_address     = "62.84.125.140" -> null
+          - nat_ip_address     = "89.169.135.17" -> null
           - nat_ip_version     = "IPV4" -> null
           - security_group_ids = [] -> null
-          - subnet_id          = "e9b04lkhslb00c82v2r9" -> null
+          - subnet_id          = "e9bao6ukdvrruvv9pb2c" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 100 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = false -> null
+        }
+    }
+
+  # yandex_compute_instance.vms4ans[0] will be destroyed
+  - resource "yandex_compute_instance" "vms4ans" {
+      - created_at                = "2024-07-30T07:26:12Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "fhmhusm8h7t1uftj5s4c.auto.internal" -> null
+      - id                        = "fhmhusm8h7t1uftj5s4c" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = (sensitive value)
+        } -> null
+      - name                      = "les10-vms4ans1" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-a" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "fhmartd8edlp3ov79rep" -> null
+          - disk_id     = "fhmartd8edlp3ov79rep" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd8pecdhv50nec1qf9im" -> null
+                name        = null
+              - size        = 8 -> null
+              - type        = "network-hdd" -> null
+                # (2 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.2.0.18" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:11:f7:2c:88" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "62.84.116.182" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e9bao6ukdvrruvv9pb2c" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 100 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = false -> null
+        }
+    }
+
+  # yandex_compute_instance.vms4ans[1] will be destroyed
+  - resource "yandex_compute_instance" "vms4ans" {
+      - created_at                = "2024-07-30T07:26:12Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "fhmnsrt3i9eumd9n3ca2.auto.internal" -> null
+      - id                        = "fhmnsrt3i9eumd9n3ca2" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = (sensitive value)
+        } -> null
+      - name                      = "les10-vms4ans2" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-a" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "fhm3ra2b1ns0fpmp0e7u" -> null
+          - disk_id     = "fhm3ra2b1ns0fpmp0e7u" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd8pecdhv50nec1qf9im" -> null
+                name        = null
+              - size        = 8 -> null
+              - type        = "network-hdd" -> null
+                # (2 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.2.0.10" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:17:e6:fa:39" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "51.250.4.138" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e9bao6ukdvrruvv9pb2c" -> null
             # (1 unchanged attribute hidden)
         }
 
@@ -298,26 +769,26 @@ Terraform will perform the following actions:
 
   # yandex_vpc_network.net4ans will be destroyed
   - resource "yandex_vpc_network" "net4ans" {
-      - created_at                = "2024-07-30T05:41:08Z" -> null
-      - default_security_group_id = "enpbmm0tfc6h8toh8vjc" -> null
+      - created_at                = "2024-07-30T07:26:10Z" -> null
+      - default_security_group_id = "enpl53c1pmde3f4udbhd" -> null
       - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
-      - id                        = "enpldvsit81gudhimkmm" -> null
+      - id                        = "enpd2mq5v0jomstgcp33" -> null
       - labels                    = {} -> null
-      - name                      = "net4ans" -> null
+      - name                      = "les10-net4ans" -> null
       - subnet_ids                = [
-          - "e9b04lkhslb00c82v2r9",
+          - "e9bao6ukdvrruvv9pb2c",
         ] -> null
         # (1 unchanged attribute hidden)
     }
 
   # yandex_vpc_subnet.sub4ans will be destroyed
   - resource "yandex_vpc_subnet" "sub4ans" {
-      - created_at     = "2024-07-30T05:41:10Z" -> null
+      - created_at     = "2024-07-30T07:26:12Z" -> null
       - folder_id      = "b1gmesrdjgklgkvcp704" -> null
-      - id             = "e9b04lkhslb00c82v2r9" -> null
+      - id             = "e9bao6ukdvrruvv9pb2c" -> null
       - labels         = {} -> null
-      - name           = "sub4ans" -> null
-      - network_id     = "enpldvsit81gudhimkmm" -> null
+      - name           = "les10-sub4ans" -> null
+      - network_id     = "enpd2mq5v0jomstgcp33" -> null
       - v4_cidr_blocks = [
           - "10.2.0.0/16",
         ] -> null
@@ -326,12 +797,17 @@ Terraform will perform the following actions:
         # (2 unchanged attributes hidden)
     }
 
-Plan: 0 to add, 0 to change, 3 to destroy.
+Plan: 0 to add, 0 to change, 5 to destroy.
 
 Changes to Outputs:
-  - ansible_inventory = <<-EOT
+  - ansible_inventory_of_vm  = <<-EOT
+        [vm]
+        les10-vm4ans ansible_host=89.169.135.17
+    EOT -> null
+  - ansible_inventory_of_vms = <<-EOT
         [vms]
-        vm4ans ansible_host=62.84.125.140 ansible_user=ubuntu ansible_ssh_host_key_checking=False
+        les10-vms4ans1 ansible_host=62.84.116.182 ansible_user=ubuntu ansible_ssh_host_key_checking=False
+        les10-vms4ans2 ansible_host=51.250.4.138 ansible_user=ubuntu ansible_ssh_host_key_checking=False
     EOT -> null
 
 Do you really want to destroy all resources?
@@ -340,17 +816,33 @@ Do you really want to destroy all resources?
 
   Enter a value: yes
 
-yandex_compute_instance.vm4ans: Destroying... [id=fhmr618dric82934ukq2]
-yandex_compute_instance.vm4ans: Still destroying... [id=fhmr618dric82934ukq2, 10s elapsed]
-yandex_compute_instance.vm4ans: Still destroying... [id=fhmr618dric82934ukq2, 20s elapsed]
-yandex_compute_instance.vm4ans: Still destroying... [id=fhmr618dric82934ukq2, 30s elapsed]
-yandex_compute_instance.vm4ans: Still destroying... [id=fhmr618dric82934ukq2, 40s elapsed]
-yandex_compute_instance.vm4ans: Still destroying... [id=fhmr618dric82934ukq2, 50s elapsed]
-yandex_compute_instance.vm4ans: Destruction complete after 51s
-yandex_vpc_subnet.sub4ans: Destroying... [id=e9b04lkhslb00c82v2r9]
-yandex_vpc_subnet.sub4ans: Destruction complete after 4s
-yandex_vpc_network.net4ans: Destroying... [id=enpldvsit81gudhimkmm]
-yandex_vpc_network.net4ans: Destruction complete after 1s
+yandex_compute_instance.vms4ans[0]: Destroying... [id=fhmhusm8h7t1uftj5s4c]
+yandex_compute_instance.vm4ans: Destroying... [id=fhmj23e8f7vih4l6g0fp]
+yandex_compute_instance.vms4ans[1]: Destroying... [id=fhmnsrt3i9eumd9n3ca2]
+yandex_compute_instance.vms4ans[0]: Still destroying... [id=fhmhusm8h7t1uftj5s4c, 10s elapsed]
+yandex_compute_instance.vms4ans[1]: Still destroying... [id=fhmnsrt3i9eumd9n3ca2, 10s elapsed]
+yandex_compute_instance.vm4ans: Still destroying... [id=fhmj23e8f7vih4l6g0fp, 10s elapsed]
+yandex_compute_instance.vms4ans[0]: Still destroying... [id=fhmhusm8h7t1uftj5s4c, 20s elapsed]
+yandex_compute_instance.vms4ans[1]: Still destroying... [id=fhmnsrt3i9eumd9n3ca2, 20s elapsed]
+yandex_compute_instance.vm4ans: Still destroying... [id=fhmj23e8f7vih4l6g0fp, 20s elapsed]
+yandex_compute_instance.vms4ans[0]: Still destroying... [id=fhmhusm8h7t1uftj5s4c, 30s elapsed]
+yandex_compute_instance.vm4ans: Still destroying... [id=fhmj23e8f7vih4l6g0fp, 30s elapsed]
+yandex_compute_instance.vms4ans[1]: Still destroying... [id=fhmnsrt3i9eumd9n3ca2, 30s elapsed]
+yandex_compute_instance.vms4ans[0]: Still destroying... [id=fhmhusm8h7t1uftj5s4c, 40s elapsed]
+yandex_compute_instance.vms4ans[1]: Still destroying... [id=fhmnsrt3i9eumd9n3ca2, 40s elapsed]
+yandex_compute_instance.vm4ans: Still destroying... [id=fhmj23e8f7vih4l6g0fp, 40s elapsed]
+yandex_compute_instance.vms4ans[0]: Still destroying... [id=fhmhusm8h7t1uftj5s4c, 50s elapsed]
+yandex_compute_instance.vm4ans: Still destroying... [id=fhmj23e8f7vih4l6g0fp, 50s elapsed]
+yandex_compute_instance.vms4ans[1]: Still destroying... [id=fhmnsrt3i9eumd9n3ca2, 50s elapsed]
+yandex_compute_instance.vms4ans[0]: Destruction complete after 55s
+yandex_compute_instance.vm4ans: Destruction complete after 55s
+yandex_compute_instance.vms4ans[1]: Still destroying... [id=fhmnsrt3i9eumd9n3ca2, 1m0s elapsed]
+yandex_compute_instance.vms4ans[1]: Destruction complete after 1m7s
+yandex_vpc_subnet.sub4ans: Destroying... [id=e9bao6ukdvrruvv9pb2c]
+yandex_vpc_subnet.sub4ans: Destruction complete after 3s
+yandex_vpc_network.net4ans: Destroying... [id=enpd2mq5v0jomstgcp33]
+yandex_vpc_network.net4ans: Destruction complete after 0s
 
-Destroy complete! Resources: 3 destroyed.
+Destroy complete! Resources: 5 destroyed.
 aleksey@first:~/OtusTeam/IaC/les10/ans_in_tf$ rm inv
+

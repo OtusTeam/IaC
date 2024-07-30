@@ -1,5 +1,10 @@
-resource "yandex_compute_instance" "vm4ans" {
-  name = "les10-vm4ans"
+variable "vms_count" {
+  default = 2
+}
+
+resource "yandex_compute_instance" "vms4ans" {
+  count = var.vms_count
+  name = "les10-vms4ans${tostring(count.index+1)}"
   zone = var.yc_default_zone
 
 
@@ -16,7 +21,8 @@ resource "yandex_compute_instance" "vm4ans" {
 
   provisioner "local-exec" {
     command = <<-EOT
-      ansible-playbook -i '${self.network_interface.0.nat_ip_address},' --private-key ${var.sec_key_path} -e 'location=terraform' hello_from.yml
+      export ANSIBLE_HOST_KEY_CHECKING=False
+      ansible -u ${var.username} -i '${self.network_interface.0.nat_ip_address},' --private-key ${var.sec_key_path} -m ping all
     EOT
   }
 
@@ -41,9 +47,11 @@ resource "yandex_compute_instance" "vm4ans" {
   }
 }
 
-output "ansible_inventory_of_vm" {
+output "ansible_inventory_of_vms" {
   value = <<-EOT
-[vm]
-${yandex_compute_instance.vm4ans.name} ansible_host=${yandex_compute_instance.vm4ans.network_interface.0.nat_ip_address}
+[vms]
+%{ for vm in yandex_compute_instance.vms4ans ~}
+${vm.name} ansible_host=${vm.network_interface.0.nat_ip_address} ansible_user=${var.username} ansible_ssh_host_key_checking=False
+%{ endfor ~}
 EOT
 }
