@@ -1,20 +1,25 @@
-resource "yandex_compute_instance" "vm4ans" {
-  name = "vm4ans"
+resource "yandex_compute_instance" "vm" {
+  name = "les10-tfs-vm"
   zone = var.yc_default_zone
 
   resources {
     cores  = 2
     memory = 2
+    core_fraction = 5
+  }
+
+  scheduling_policy {
+    preemptible = true
   }
 
   boot_disk {
     initialize_params {
-      image_id = "fd8pecdhv50nec1qf9im"
+      image_id = var.image
     }
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.sub4ans.id
+    subnet_id = var.yc_subnet_id
     nat       = true
   }
 
