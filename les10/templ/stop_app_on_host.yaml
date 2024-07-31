@@ -1,0 +1,14 @@
+- name: Остановка приложения на целевой виртуальной машине в Yandex.Cloud
+  hosts: "{{ target_host }}"
+  gather_facts: False
+  become: True
+  vars:
+    app_name: simple_http_server
+    app_path: "/tmp/hello_shs.py"
+
+  tasks:
+
+    - name: Останов приложения
+      shell: 'sudo pkill -f "python3 {{ app_path }}"'
+      args:
+        executable: "/bin/bash"

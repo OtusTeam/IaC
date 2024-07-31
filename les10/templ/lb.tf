@@ -1,8 +1,8 @@
 resource "yandex_lb_network_load_balancer" "my_lb" {
-  name = "my-test"
+  name = "les10-test"
 
   listener {
-    name = "listener-web-servers"
+    name = "les10-listener"
     port = 80
     external_address_spec {
       ip_version = "ipv4"
@@ -23,7 +23,7 @@ resource "yandex_lb_network_load_balancer" "my_lb" {
 }
 
 resource "yandex_lb_target_group" "web-servers" {
-  name = "web-servers-target-group"
+  name = "les10-web-servers-target-group"
 
   dynamic "target" {
     for_each = local.inventory_data.all.hosts 

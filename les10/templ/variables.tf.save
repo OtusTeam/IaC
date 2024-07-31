@@ -36,7 +36,4 @@ variable "sec_key_path" {
    default = "~/.ssh/id_rsa"
 }
 
-variable "image" {
-   type = string
-   default = "fd84kp940dsrccckilj6"
-}
+variable "@image 

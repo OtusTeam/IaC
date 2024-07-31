@@ -1,6 +1,6 @@
-data "yandex_compute_image" "my_image" {
-  family = "ubuntu-2204-lts"
-}
+#data "yandex_compute_image" "my_image" {
+#  family = "ubuntu-2204-lts"
+#}
 
 resource "yandex_compute_instance" "my_vm" {
   for_each = local.inventory_data.all.hosts
@@ -13,11 +13,17 @@ resource "yandex_compute_instance" "my_vm" {
   resources {
     cores  = 2
     memory = 2
+    core_fraction = 5
+  }
+
+  scheduling_policy {
+    preemptible = true
   }
 
   boot_disk {
     initialize_params {
-      image_id = "${data.yandex_compute_image.my_image.id}"
+      image_id = var.image 
+#"${data.yandex_compute_image.my_image.id}"
     }
   }
 
