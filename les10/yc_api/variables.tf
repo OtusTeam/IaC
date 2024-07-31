@@ -8,6 +8,10 @@ variable "yc_folder" {
   description = "Yandex Cloud folder"
 }
 
+variable "yc_subnet_id" {
+  type = string
+}
+
 variable "yc_token" {
   type = string
   description = "Yandex Cloud OAuth token"
@@ -36,4 +40,7 @@ variable "sec_key_path" {
    default = "~/.ssh/id_rsa"
 }
 
-
+variable "image" {
+   type = string
+   default = "fd84kp940dsrccckilj6"
+}
