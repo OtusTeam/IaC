@@ -1,0 +1,779 @@
+aleksey@first:~/OtusTeam/IaC/les10/templ$ ./clear.sh
+++ rm ./inventory.yaml
+aleksey@first:~/OtusTeam/IaC/les10/templ$ ./ans_generate.sh 
+++ ansible-playbook -i localhost, -c local generate.yaml
+
+PLAY [Generate inventory file] ***************************************************************************************************************************************************************************************************************
+
+TASK [Generate inventory] ********************************************************************************************************************************************************************************************************************
+changed: [localhost]
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+localhost                  : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+aleksey@first:~/OtusTeam/IaC/les10/templ$ cat inventory.yaml 
+all:
+  hosts:
+    les10-host1:
+      yandex_cloud_subnet: les10-sub1
+      yandex_cloud_platform: standard-v2
+    les10-host2:
+      yandex_cloud_subnet: les10-sub2
+      yandex_cloud_platform: standard-v1
+
+  subnets:
+    les10-sub1:
+      yandex_cloud_cidr: 10.10.0.0/16
+      yandex_cloud_zone: ru-central1-b
+    les10-sub2:
+      yandex_cloud_cidr: 10.20.0.0/16
+      yandex_cloud_zone: ru-central1-a
+
+  vars:
+    net_name: les10-net 
+aleksey@first:~/OtusTeam/IaC/les10/templ$ tf apply
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.my_vm["les10-host1"] will be created
+  + resource "yandex_compute_instance" "my_vm" {
+      + created_at                = (known after apply)
+      + folder_id                 = "b1gmesrdjgklgkvcp704"
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = (sensitive value)
+        }
+      + name                      = "les10-host1"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v2"
+      + service_account_id        = (known after apply)
+      + status                    = (known after apply)
+      + zone                      = "ru-central1-b"
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd84kp940dsrccckilj6"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index              = (known after apply)
+          + ip_address         = (known after apply)
+          + ipv4               = true
+          + ipv6               = (known after apply)
+          + ipv6_address       = (known after apply)
+          + mac_address        = (known after apply)
+          + nat                = true
+          + nat_ip_address     = (known after apply)
+          + nat_ip_version     = (known after apply)
+          + security_group_ids = (known after apply)
+          + subnet_id          = (known after apply)
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 5
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy {
+          + preemptible = true
+        }
+    }
+
+  # yandex_compute_instance.my_vm["les10-host2"] will be created
+  + resource "yandex_compute_instance" "my_vm" {
+      + created_at                = (known after apply)
+      + folder_id                 = "b1gmesrdjgklgkvcp704"
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = (sensitive value)
+        }
+      + name                      = "les10-host2"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + service_account_id        = (known after apply)
+      + status                    = (known after apply)
+      + zone                      = "ru-central1-a"
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd84kp940dsrccckilj6"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index              = (known after apply)
+          + ip_address         = (known after apply)
+          + ipv4               = true
+          + ipv6               = (known after apply)
+          + ipv6_address       = (known after apply)
+          + mac_address        = (known after apply)
+          + nat                = true
+          + nat_ip_address     = (known after apply)
+          + nat_ip_version     = (known after apply)
+          + security_group_ids = (known after apply)
+          + subnet_id          = (known after apply)
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 5
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy {
+          + preemptible = true
+        }
+    }
+
+  # yandex_lb_network_load_balancer.my_lb will be created
+  + resource "yandex_lb_network_load_balancer" "my_lb" {
+      + created_at          = (known after apply)
+      + deletion_protection = (known after apply)
+      + folder_id           = (known after apply)
+      + id                  = (known after apply)
+      + name                = "les10-test"
+      + region_id           = (known after apply)
+      + type                = "external"
+
+      + attached_target_group {
+          + target_group_id = (known after apply)
+
+          + healthcheck {
+              + healthy_threshold   = 2
+              + interval            = 2
+              + name                = "http"
+              + timeout             = 1
+              + unhealthy_threshold = 2
+
+              + http_options {
+                  + path = "/"
+                  + port = 80
+                }
+            }
+        }
+
+      + listener {
+          + name        = "les10-listener"
+          + port        = 80
+          + protocol    = (known after apply)
+          + target_port = (known after apply)
+
+          + external_address_spec {
+              + address    = (known after apply)
+              + ip_version = "ipv4"
+            }
+        }
+    }
+
+  # yandex_lb_target_group.web-servers will be created
+  + resource "yandex_lb_target_group" "web-servers" {
+      + created_at = (known after apply)
+      + folder_id  = (known after apply)
+      + id         = (known after apply)
+      + name       = "les10-web-servers-target-group"
+      + region_id  = (known after apply)
+
+      + target {
+          + address   = (known after apply)
+          + subnet_id = (known after apply)
+        }
+      + target {
+          + address   = (known after apply)
+          + subnet_id = (known after apply)
+        }
+    }
+
+  # yandex_vpc_network.my_net will be created
+  + resource "yandex_vpc_network" "my_net" {
+      + created_at                = (known after apply)
+      + default_security_group_id = (known after apply)
+      + folder_id                 = (known after apply)
+      + id                        = (known after apply)
+      + labels                    = (known after apply)
+      + name                      = "les10-net"
+      + subnet_ids                = (known after apply)
+    }
+
+  # yandex_vpc_subnet.my_sub["les10-sub1"] will be created
+  + resource "yandex_vpc_subnet" "my_sub" {
+      + created_at     = (known after apply)
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + labels         = (known after apply)
+      + name           = "les10-sub1"
+      + network_id     = (known after apply)
+      + v4_cidr_blocks = [
+          + "10.10.0.0/16",
+        ]
+      + v6_cidr_blocks = (known after apply)
+      + zone           = "ru-central1-b"
+    }
+
+  # yandex_vpc_subnet.my_sub["les10-sub2"] will be created
+  + resource "yandex_vpc_subnet" "my_sub" {
+      + created_at     = (known after apply)
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + labels         = (known after apply)
+      + name           = "les10-sub2"
+      + network_id     = (known after apply)
+      + v4_cidr_blocks = [
+          + "10.20.0.0/16",
+        ]
+      + v6_cidr_blocks = (known after apply)
+      + zone           = "ru-central1-a"
+    }
+
+Plan: 7 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + lb_ip_address = (known after apply)
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+yandex_vpc_network.my_net: Creating...
+yandex_vpc_network.my_net: Creation complete after 1s [id=enpjdoo816vvrt60qb3q]
+yandex_vpc_subnet.my_sub["les10-sub2"]: Creating...
+yandex_vpc_subnet.my_sub["les10-sub1"]: Creating...
+yandex_vpc_subnet.my_sub["les10-sub1"]: Creation complete after 0s [id=e2l1h14j1eb6hrj09kd2]
+yandex_vpc_subnet.my_sub["les10-sub2"]: Creation complete after 1s [id=e9bob6u64id3skad71me]
+yandex_compute_instance.my_vm["les10-host1"]: Creating...
+yandex_compute_instance.my_vm["les10-host2"]: Creating...
+yandex_compute_instance.my_vm["les10-host1"]: Still creating... [10s elapsed]
+yandex_compute_instance.my_vm["les10-host2"]: Still creating... [10s elapsed]
+yandex_compute_instance.my_vm["les10-host1"]: Still creating... [20s elapsed]
+yandex_compute_instance.my_vm["les10-host2"]: Still creating... [20s elapsed]
+yandex_compute_instance.my_vm["les10-host1"]: Still creating... [30s elapsed]
+yandex_compute_instance.my_vm["les10-host2"]: Still creating... [30s elapsed]
+yandex_compute_instance.my_vm["les10-host2"]: Creation complete after 40s [id=fhm0gpgqdnh977rbg47b]
+yandex_compute_instance.my_vm["les10-host1"]: Still creating... [40s elapsed]
+yandex_compute_instance.my_vm["les10-host1"]: Creation complete after 47s [id=epdk7n0h9mrchf9epocq]
+yandex_lb_target_group.web-servers: Creating...
+yandex_lb_target_group.web-servers: Creation complete after 2s [id=enpftkqvf185hqsij10m]
+yandex_lb_network_load_balancer.my_lb: Creating...
+yandex_lb_network_load_balancer.my_lb: Creation complete after 2s [id=enpp8ghepbroj9s7itdr]
+
+Apply complete! Resources: 7 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+lb_ip_address = "51.250.44.98"
+
+aleksey@first:~/OtusTeam/IaC/les10/templ$ . export_tfs.sh
+++ export ANSIBLE_INVENTORY=../tfs/tfs2inv.py
+++ ANSIBLE_INVENTORY=../tfs/tfs2inv.py
+++ set +x
+aleksey@first:~/OtusTeam/IaC/les10/templ$ ./set_grep_ANSIBLE.sh
+ANSIBLE_INVENTORY=../tfs/tfs2inv.py
+ANSIBLE_REMOTE_USER=ubuntu
+BASH_SOURCE=([0]="./set_grep_ANSIBLE.sh")
+aleksey@first:~/OtusTeam/IaC/les10/templ$ ./ans_inv_list.sh
+++ ansible-inventory --list
+{
+    "_meta": {
+        "hostvars": {
+            "les10-host1": {
+                "ansible_host": "89.169.169.219",
+                "ansible_user": "ubuntu"
+            },
+            "les10-host2": {
+                "ansible_host": "62.84.126.23",
+                "ansible_user": "ubuntu"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped"
+        ]
+    },
+    "ungrouped": {
+        "hosts": [
+            "les10-host1",
+            "les10-host2"
+        ]
+    }
+}
+aleksey@first:~/OtusTeam/IaC/les10/templ$ ./ans_ping.sh
+++ ansible -m ping all
+les10-host2 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+les10-host1 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+aleksey@first:~/OtusTeam/IaC/les10/templ$ . export_tfs.sh
+++ export ANSIBLE_INVENTORY=../tfs/tfs2inv.py
+++ ANSIBLE_INVENTORY=../tfs/tfs2inv.py
+++ set +x
+aleksey@first:~/OtusTeam/IaC/les10/templ$ ./set_grep_ANSIBLE.sh
+ANSIBLE_INVENTORY=../tfs/tfs2inv.py
+ANSIBLE_REMOTE_USER=ubuntu
+BASH_SOURCE=([0]="./set_grep_ANSIBLE.sh")
+aleksey@first:~/OtusTeam/IaC/les10/templ$ ./ans_inv_list.sh
+++ ansible-inventory --list
+{
+    "_meta": {
+        "hostvars": {
+            "les10-host1": {
+                "ansible_host": "89.169.169.219",
+                "ansible_user": "ubuntu"
+            },
+            "les10-host2": {
+                "ansible_host": "62.84.126.23",
+                "ansible_user": "ubuntu"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped"
+        ]
+    },
+    "ungrouped": {
+        "hosts": [
+            "les10-host1",
+            "les10-host2"
+        ]
+    }
+}
+aleksey@first:~/OtusTeam/IaC/les10/templ$ ./ans_ping.sh
+++ ansible -m ping all
+les10-host2 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+les10-host1 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+aleksey@first:~/OtusTeam/IaC/les10/templ$ ./ans_deploy.sh 
+++ ansible-playbook deploy_app.yaml
+
+PLAY [Установка и настройка приложения на виртуальных машинах в Yandex.Cloud] ****************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************************************************
+fatal: [les10-host1]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 89.169.169.219 port 22: Connection refused", "unreachable": true}
+fatal: [les10-host2]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 62.84.126.23 port 22: Connection timed out", "unreachable": true}
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+les10-host1                : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+les10-host2                : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+
+aleksey@first:~/OtusTeam/IaC/les10/templ$ ./ans_deploy.sh 
+++ ansible-playbook deploy_app.yaml
+
+PLAY [Установка и настройка приложения на виртуальных машинах в Yandex.Cloud] ****************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************************************************
+ok: [les10-host2]
+ok: [les10-host1]
+
+TASK [Установка зависимостей] ****************************************************************************************************************************************************************************************************************
+changed: [les10-host1]
+changed: [les10-host2]
+
+TASK [Установка приложения] ******************************************************************************************************************************************************************************************************************
+changed: [les10-host1]
+changed: [les10-host2]
+
+TASK [Настройка приложения] ******************************************************************************************************************************************************************************************************************
+changed: [les10-host2]
+changed: [les10-host1]
+
+TASK [Запуск приложения] *********************************************************************************************************************************************************************************************************************
+changed: [les10-host2]
+changed: [les10-host1]
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+les10-host1                : ok=5    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+les10-host2                : ok=5    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+aleksey@first:~/OtusTeam/IaC/les10/templ$ ./curl_lb.sh 
++++ terraform output -raw lb_ip_address
+++ curl http://51.250.44.98
+{"hello": "world", "from": "les10-host2"}aleksey@first:~/OtusTeam/IaC/les10/templ$ ./curl_lb.sh 
++++ terraform output -raw lb_ip_address
+++ curl http://51.250.44.98
+{"hello": "world", "from": "les10-host2"}aleksey@first:~/OtusTeam/IaC/les10/templ$ ./ans_stop_app_on_host2.sh 
+++ ansible-playbook -e 'target_host='\''*host2'\''' stop_app_on_host.yaml
+
+PLAY [Остановка приложения на целевой виртуальной машине в Yandex.Cloud] *********************************************************************************************************************************************************************
+
+TASK [Останов приложения] ********************************************************************************************************************************************************************************************************************
+changed: [les10-host2]
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+les10-host2                : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+aleksey@first:~/OtusTeam/IaC/les10/templ$ ./curl_lb.sh 
++++ terraform output -raw lb_ip_address
+++ curl http://51.250.44.98
+{"hello": "world", "from": "les10-host1"}aleksey@first:~/OtusTeam/IaC/les10/templ$ tf destroy
+yandex_vpc_network.my_net: Refreshing state... [id=enpjdoo816vvrt60qb3q]
+yandex_vpc_subnet.my_sub["les10-sub1"]: Refreshing state... [id=e2l1h14j1eb6hrj09kd2]
+yandex_vpc_subnet.my_sub["les10-sub2"]: Refreshing state... [id=e9bob6u64id3skad71me]
+yandex_compute_instance.my_vm["les10-host2"]: Refreshing state... [id=fhm0gpgqdnh977rbg47b]
+yandex_compute_instance.my_vm["les10-host1"]: Refreshing state... [id=epdk7n0h9mrchf9epocq]
+yandex_lb_target_group.web-servers: Refreshing state... [id=enpftkqvf185hqsij10m]
+yandex_lb_network_load_balancer.my_lb: Refreshing state... [id=enpp8ghepbroj9s7itdr]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.my_vm["les10-host1"] will be destroyed
+  - resource "yandex_compute_instance" "my_vm" {
+      - created_at                = "2024-07-31T07:24:30Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "epdk7n0h9mrchf9epocq.auto.internal" -> null
+      - id                        = "epdk7n0h9mrchf9epocq" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = (sensitive value)
+        } -> null
+      - name                      = "les10-host1" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v2" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-b" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "epdg2g588autcp0n8i7a" -> null
+          - disk_id     = "epdg2g588autcp0n8i7a" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd84kp940dsrccckilj6" -> null
+                name        = null
+              - size        = 8 -> null
+              - type        = "network-hdd" -> null
+                # (2 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.10.0.10" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:14:3d:c1:14" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "89.169.169.219" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e2l1h14j1eb6hrj09kd2" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 5 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = true -> null
+        }
+    }
+
+  # yandex_compute_instance.my_vm["les10-host2"] will be destroyed
+  - resource "yandex_compute_instance" "my_vm" {
+      - created_at                = "2024-07-31T07:24:30Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "fhm0gpgqdnh977rbg47b.auto.internal" -> null
+      - id                        = "fhm0gpgqdnh977rbg47b" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = (sensitive value)
+        } -> null
+      - name                      = "les10-host2" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-a" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "fhmoprbsvajqcrqefrac" -> null
+          - disk_id     = "fhmoprbsvajqcrqefrac" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd84kp940dsrccckilj6" -> null
+                name        = null
+              - size        = 8 -> null
+              - type        = "network-hdd" -> null
+                # (2 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.20.0.3" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:86:61:a6:de" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "62.84.126.23" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e9bob6u64id3skad71me" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 5 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = true -> null
+        }
+    }
+
+  # yandex_lb_network_load_balancer.my_lb will be destroyed
+  - resource "yandex_lb_network_load_balancer" "my_lb" {
+      - created_at          = "2024-07-31T07:25:19Z" -> null
+      - deletion_protection = false -> null
+      - folder_id           = "b1gmesrdjgklgkvcp704" -> null
+      - id                  = "enpp8ghepbroj9s7itdr" -> null
+      - labels              = {} -> null
+      - name                = "les10-test" -> null
+      - region_id           = "ru-central1" -> null
+      - type                = "external" -> null
+        # (1 unchanged attribute hidden)
+
+      - attached_target_group {
+          - target_group_id = "enpftkqvf185hqsij10m" -> null
+
+          - healthcheck {
+              - healthy_threshold   = 2 -> null
+              - interval            = 2 -> null
+              - name                = "http" -> null
+              - timeout             = 1 -> null
+              - unhealthy_threshold = 2 -> null
+
+              - http_options {
+                  - path = "/" -> null
+                  - port = 80 -> null
+                }
+            }
+        }
+
+      - listener {
+          - name        = "les10-listener" -> null
+          - port        = 80 -> null
+          - protocol    = "tcp" -> null
+          - target_port = 80 -> null
+
+          - external_address_spec {
+              - address    = "51.250.44.98" -> null
+              - ip_version = "ipv4" -> null
+            }
+        }
+    }
+
+  # yandex_lb_target_group.web-servers will be destroyed
+  - resource "yandex_lb_target_group" "web-servers" {
+      - created_at  = "2024-07-31T07:25:17Z" -> null
+      - folder_id   = "b1gmesrdjgklgkvcp704" -> null
+      - id          = "enpftkqvf185hqsij10m" -> null
+      - labels      = {} -> null
+      - name        = "les10-web-servers-target-group" -> null
+      - region_id   = "ru-central1" -> null
+        # (1 unchanged attribute hidden)
+
+      - target {
+          - address   = "10.10.0.10" -> null
+          - subnet_id = "e2l1h14j1eb6hrj09kd2" -> null
+        }
+      - target {
+          - address   = "10.20.0.3" -> null
+          - subnet_id = "e9bob6u64id3skad71me" -> null
+        }
+    }
+
+  # yandex_vpc_network.my_net will be destroyed
+  - resource "yandex_vpc_network" "my_net" {
+      - created_at                = "2024-07-31T07:24:27Z" -> null
+      - default_security_group_id = "enpoe8rqbtpeku7060g5" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - id                        = "enpjdoo816vvrt60qb3q" -> null
+      - labels                    = {} -> null
+      - name                      = "les10-net" -> null
+      - subnet_ids                = [
+          - "e2l1h14j1eb6hrj09kd2",
+          - "e9bob6u64id3skad71me",
+        ] -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # yandex_vpc_subnet.my_sub["les10-sub1"] will be destroyed
+  - resource "yandex_vpc_subnet" "my_sub" {
+      - created_at     = "2024-07-31T07:24:29Z" -> null
+      - folder_id      = "b1gmesrdjgklgkvcp704" -> null
+      - id             = "e2l1h14j1eb6hrj09kd2" -> null
+      - labels         = {} -> null
+      - name           = "les10-sub1" -> null
+      - network_id     = "enpjdoo816vvrt60qb3q" -> null
+      - v4_cidr_blocks = [
+          - "10.10.0.0/16",
+        ] -> null
+      - v6_cidr_blocks = [] -> null
+      - zone           = "ru-central1-b" -> null
+        # (2 unchanged attributes hidden)
+    }
+
+  # yandex_vpc_subnet.my_sub["les10-sub2"] will be destroyed
+  - resource "yandex_vpc_subnet" "my_sub" {
+      - created_at     = "2024-07-31T07:24:29Z" -> null
+      - folder_id      = "b1gmesrdjgklgkvcp704" -> null
+      - id             = "e9bob6u64id3skad71me" -> null
+      - labels         = {} -> null
+      - name           = "les10-sub2" -> null
+      - network_id     = "enpjdoo816vvrt60qb3q" -> null
+      - v4_cidr_blocks = [
+          - "10.20.0.0/16",
+        ] -> null
+      - v6_cidr_blocks = [] -> null
+      - zone           = "ru-central1-a" -> null
+        # (2 unchanged attributes hidden)
+    }
+
+Plan: 0 to add, 0 to change, 7 to destroy.
+
+Changes to Outputs:
+  - lb_ip_address = "51.250.44.98" -> null
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+yandex_lb_network_load_balancer.my_lb: Destroying... [id=enpp8ghepbroj9s7itdr]
+yandex_lb_network_load_balancer.my_lb: Destruction complete after 3s
+yandex_lb_target_group.web-servers: Destroying... [id=enpftkqvf185hqsij10m]
+yandex_lb_target_group.web-servers: Destruction complete after 1s
+yandex_compute_instance.my_vm["les10-host2"]: Destroying... [id=fhm0gpgqdnh977rbg47b]
+yandex_compute_instance.my_vm["les10-host1"]: Destroying... [id=epdk7n0h9mrchf9epocq]
+yandex_compute_instance.my_vm["les10-host2"]: Still destroying... [id=fhm0gpgqdnh977rbg47b, 10s elapsed]
+yandex_compute_instance.my_vm["les10-host1"]: Still destroying... [id=epdk7n0h9mrchf9epocq, 10s elapsed]
+yandex_compute_instance.my_vm["les10-host2"]: Still destroying... [id=fhm0gpgqdnh977rbg47b, 20s elapsed]
+yandex_compute_instance.my_vm["les10-host1"]: Still destroying... [id=epdk7n0h9mrchf9epocq, 20s elapsed]
+yandex_compute_instance.my_vm["les10-host1"]: Still destroying... [id=epdk7n0h9mrchf9epocq, 30s elapsed]
+yandex_compute_instance.my_vm["les10-host2"]: Still destroying... [id=fhm0gpgqdnh977rbg47b, 30s elapsed]
+yandex_compute_instance.my_vm["les10-host1"]: Still destroying... [id=epdk7n0h9mrchf9epocq, 40s elapsed]
+yandex_compute_instance.my_vm["les10-host2"]: Still destroying... [id=fhm0gpgqdnh977rbg47b, 40s elapsed]
+yandex_compute_instance.my_vm["les10-host1"]: Destruction complete after 50s
+yandex_compute_instance.my_vm["les10-host2"]: Still destroying... [id=fhm0gpgqdnh977rbg47b, 50s elapsed]
+yandex_compute_instance.my_vm["les10-host2"]: Destruction complete after 52s
+yandex_vpc_subnet.my_sub["les10-sub1"]: Destroying... [id=e2l1h14j1eb6hrj09kd2]
+yandex_vpc_subnet.my_sub["les10-sub2"]: Destroying... [id=e9bob6u64id3skad71me]
+yandex_vpc_subnet.my_sub["les10-sub2"]: Destruction complete after 2s
+yandex_vpc_subnet.my_sub["les10-sub1"]: Destruction complete after 5s
+yandex_vpc_network.my_net: Destroying... [id=enpjdoo816vvrt60qb3q]
+yandex_vpc_network.my_net: Destruction complete after 1s
+
+Destroy complete! Resources: 7 destroyed.
+aleksey@first:~/OtusTeam/IaC/les10/templ$ ./clear.sh 
+++ rm ./inventory.yaml
