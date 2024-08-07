@@ -1,0 +1,167 @@
+aleksey@first:~/OtusTeam/IaC/Intense2024/les02/yacloud$ ansible-playbook -i 89.169.146.138, install_yc.yml 
+
+PLAY [Install yc] ****************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************************************************
+ok: [89.169.146.138]
+
+TASK [download yc install.sh] ****************************************************************************************************************************************************************************************************************
+ok: [89.169.146.138]
+
+TASK [run install] ***************************************************************************************************************************************************************************************************************************
+changed: [89.169.146.138]
+
+TASK [print output] **************************************************************************************************************************************************************************************************************************
+ok: [89.169.146.138] => {
+    "output": {
+        "changed": true,
+        "cmd": "bash ./install.sh",
+        "delta": "0:00:02.831123",
+        "end": "2024-08-07 18:31:34.187714",
+        "failed": false,
+        "rc": 0,
+        "start": "2024-08-07 18:31:31.356591",
+        "stdout": "Downloading yc 0.130.0\r\n  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\r\n                                 Dload  Upload   Total   Spent    Left  Speed\r\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r 11 80.3M   11 9216k    0     0  44.7M      0  0:00:01 --:--:--  0:00:01 44.5M\r100 80.3M  100 80.3M    0     0   117M      0 --:--:-- --:--:-- --:--:--  117M\r\nYandex Cloud CLI 0.130.0 linux/amd64\r\nModify profile to update your $PATH and enable shell command completion? [Y/n] Enter a path to an rc file to update, or leave blank to use\r\n[/home/yc-user/.bashrc]: To complete installation, start a new shell (exec -l $SHELL) or type 'source \"/home/yc-user/.bashrc\"' in the current one",
+        "stdout_lines": [
+            "Downloading yc 0.130.0",
+            "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current",
+            "                                 Dload  Upload   Total   Spent    Left  Speed",
+            "",
+            "  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0",
+            " 11 80.3M   11 9216k    0     0  44.7M      0  0:00:01 --:--:--  0:00:01 44.5M",
+            "100 80.3M  100 80.3M    0     0   117M      0 --:--:-- --:--:-- --:--:--  117M",
+            "Yandex Cloud CLI 0.130.0 linux/amd64",
+            "Modify profile to update your $PATH and enable shell command completion? [Y/n] Enter a path to an rc file to update, or leave blank to use",
+            "[/home/yc-user/.bashrc]: To complete installation, start a new shell (exec -l $SHELL) or type 'source \"/home/yc-user/.bashrc\"' in the current one"
+        ]
+    }
+}
+
+TASK [restart .bashrc] ***********************************************************************************************************************************************************************************************************************
+changed: [89.169.146.138]
+
+TASK [upload create_vm.sh] *******************************************************************************************************************************************************************************************************************
+ok: [89.169.146.138]
+
+TASK [Проверка существования файла ключа] ****************************************************************************************************************************************************************************************************
+ok: [89.169.146.138]
+
+TASK [Генерация SSH RSA-ключей] **************************************************************************************************************************************************************************************************************
+changed: [89.169.146.138]
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+89.169.146.138             : ok=8    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+aleksey@first:~/OtusTeam/IaC/Intense2024/les02/yacloud$ ssh yc-user@89.169.146.138 
+Welcome to Ubuntu 22.04.3 LTS (GNU/Linux 5.15.0-86-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Aug  7 06:31:28 PM UTC 2024
+
+  System load:  0.080078125        Processes:             130
+  Usage of /:   20.9% of 19.59GB   Users logged in:       0
+  Memory usage: 11%                IPv4 address for eth0: 10.128.0.15
+  Swap usage:   0%
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+Last login: Wed Aug  7 18:31:35 2024 from 51.250.13.236
+yc-user@yc-test:~$ ./create_vm.sh new 
+vm_name=new will be used to create VM
+done (35s)
+id: fhmd3vp7ra5jev54spnn
+folder_id: b1gmesrdjgklgkvcp704
+created_at: "2024-08-07T18:31:45Z"
+name: new
+zone_id: ru-central1-a
+platform_id: standard-v2
+resources:
+  memory: "2147483648"
+  cores: "2"
+  core_fraction: "20"
+status: RUNNING
+metadata_options:
+  gce_http_endpoint: ENABLED
+  aws_v1_http_endpoint: ENABLED
+  gce_http_token: ENABLED
+  aws_v1_http_token: DISABLED
+boot_disk:
+  mode: READ_WRITE
+  device_name: fhmd1jmvmpfnvq0o995p
+  auto_delete: true
+  disk_id: fhmd1jmvmpfnvq0o995p
+network_interfaces:
+  - index: "0"
+    mac_address: d0:0d:d1:ff:27:da
+    subnet_id: e9bop98iu12teftg4uj8
+    primary_v4_address:
+      address: 10.128.0.13
+      one_to_one_nat:
+        address: 51.250.5.209
+        ip_version: IPV4
+serial_port_settings:
+  ssh_authorization: INSTANCE_METADATA
+gpu_settings: {}
+fqdn: new.ru-central1.internal
+scheduling_policy: {}
+network_settings:
+  type: STANDARD
+placement_policy: {}
+
+yc-user@yc-test:~$ ssh yc-user@51.250.5.209
+The authenticity of host '51.250.5.209 (51.250.5.209)' can't be established.
+ED25519 key fingerprint is SHA256:1pOCPuk29MHX7N4dQd+EXwL99r5/A3mk1uOD0sB78hQ.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '51.250.5.209' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 22.04.3 LTS (GNU/Linux 5.15.0-86-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Aug  7 06:36:32 PM UTC 2024
+
+  System load:  0.29345703125      Processes:             137
+  Usage of /:   21.2% of 19.59GB   Users logged in:       0
+  Memory usage: 9%                 IPv4 address for eth0: 10.128.0.13
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+yc-user@new:~$ exit

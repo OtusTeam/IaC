@@ -1,0 +1,46 @@
+---
+- name: Install yc
+  hosts: all
+  become: no
+  tasks:
+
+  - name: download yc install.sh
+    get_url:
+      url: https://storage.yandexcloud.net/yandexcloud-yc/install.sh
+      dest: "$HOME/"
+      mode: +x
+
+#  - name: make executable
+#    file:
+#      path: install.sh
+#      mode: +x
+
+  - name: run install
+    expect:
+      command: bash ./install.sh
+      responses:
+        "[Y/n]": "\n"
+        "/.bashrc]": "\n"
+    register: output
+
+  - name: print output
+    debug:
+      var: output
+
+  - name: restart .bashrc
+    shell: "bash -c 'source ~/.bashrc'"
+
+  - name: upload create_vm.sh
+    copy:
+      src: create_vm.sh
+      dest: "$HOME/"
+      mode: +x
+
+  - name: Проверка существования файла ключа
+    stat:
+      path: "~/.ssh/id_rsa"
+    register: ssh_key_file
+
+  - name: Генерация SSH RSA-ключей
+    shell: "ssh-keygen -t rsa -b 2048 -N '' -f ~/.ssh/id_rsa"
+    when: not ssh_key_file.stat.exists

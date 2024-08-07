@@ -1,0 +1,18 @@
+---
+- name: Print hello message
+  hosts: all
+  gather_facts: no
+
+  vars_files:
+  - vars.ya
+    prompt: Enter login
+    private: no
+  - name: pass
+    prompt: Enter pass
+    private: yes
+
+
+  tasks:
+  - name: Print message
+    debug:
+      msg: "Entered login is {{ login }} pass is {{ pass }}"

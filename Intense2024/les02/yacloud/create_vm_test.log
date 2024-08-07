@@ -1,4 +1,4 @@
-aleksey@first:~/OtusTeam/IaC/Intense2024/les02$ ./create_vm.sh test
+aleksey@first:~/OtusTeam/IaC/Intense2024/les02/yacloud$ ./create_vm.sh test
 vm_name=test will be used to create VM
 done (47s)
 id: fhmd91qur6tdq0334inq
