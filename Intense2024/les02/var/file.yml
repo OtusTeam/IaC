@@ -1,0 +1,12 @@
+---
+- name: Print hello message
+  hosts: all
+  gather_facts: no
+
+  vars_files:
+    - var.yml
+
+  tasks:
+  - name: Print message
+    debug:
+      msg: "var1 is {{ var1 }} var2 is {{ var2 }}"
