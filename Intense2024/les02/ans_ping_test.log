@@ -1,0 +1,8 @@
+aleksey@first:~/OtusTeam/IaC/Intense2024/les02$ ansible -i 62.84.116.179, -m ping -u yc-user all
+62.84.116.179 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}

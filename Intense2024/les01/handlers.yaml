@@ -1,0 +1,23 @@
+---
+- name: Example playbook with handlers
+  hosts: webservers
+  become: true
+
+  handlers:
+  - name: restart apache
+    service:
+      name: apache2
+      state: restarted
+
+  tasks:
+  - name: Install Apache
+    apt:
+      name: apache2
+      state: present
+    notify: restart apache
+
+  - name: Copy Apache config
+    copy:
+      content: "<VirtualHost *:80>\nServerName example.com\n</VirtualHost>"
+      dest: /etc/apache2/sites-available/example.com.conf
+    notify: restart apache

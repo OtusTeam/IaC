@@ -1,0 +1,42 @@
+aleksey@first:~/OtusTeam/IaC/Intense2024/les02$ ./create_vm.sh test
+vm_name=test will be used to create VM
+done (47s)
+id: fhmd91qur6tdq0334inq
+folder_id: b1gmesrdjgklgkvcp704
+created_at: "2024-08-07T09:07:20Z"
+name: test
+zone_id: ru-central1-a
+platform_id: standard-v2
+resources:
+  memory: "2147483648"
+  cores: "2"
+  core_fraction: "20"
+status: RUNNING
+metadata_options:
+  gce_http_endpoint: ENABLED
+  aws_v1_http_endpoint: ENABLED
+  gce_http_token: ENABLED
+  aws_v1_http_token: DISABLED
+boot_disk:
+  mode: READ_WRITE
+  device_name: fhml21p72l4jjhh6316g
+  auto_delete: true
+  disk_id: fhml21p72l4jjhh6316g
+network_interfaces:
+  - index: "0"
+    mac_address: d0:0d:d4:87:5e:d9
+    subnet_id: e9bop98iu12teftg4uj8
+    primary_v4_address:
+      address: 10.128.0.34
+      one_to_one_nat:
+        address: 62.84.116.179
+        ip_version: IPV4
+serial_port_settings:
+  ssh_authorization: INSTANCE_METADATA
+gpu_settings: {}
+fqdn: test.ru-central1.internal
+scheduling_policy: {}
+network_settings:
+  type: STANDARD
+placement_policy: {}
+
