@@ -1,0 +1,102 @@
+yc-user@yc-test:~$ ansible-playbook -i 89.169.133.218, -u yc-user install.yml 
+
+PLAY [Install yc] ****************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************************************************
+ok: [89.169.133.218]
+
+TASK [download yc install.sh] ****************************************************************************************************************************************************************************************************************
+changed: [89.169.133.218]
+
+TASK [run install] ***************************************************************************************************************************************************************************************************************************
+changed: [89.169.133.218]
+
+TASK [print output] **************************************************************************************************************************************************************************************************************************
+ok: [89.169.133.218] => {
+    "output": {
+        "changed": true,
+        "cmd": "bash ./install.sh",
+        "delta": "0:00:03.398548",
+        "end": "2024-08-07 19:36:56.592076",
+        "failed": false,
+        "rc": 0,
+        "start": "2024-08-07 19:36:53.193528",
+        "stdout": "Downloading yc 0.130.0\r\n  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\r\n                                 Dload  Upload   Total   Spent    Left  Speed\r\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100 80.3M  100 80.3M    0     0   115M      0 --:--:-- --:--:-- --:--:--  115M\r\nYandex Cloud CLI 0.130.0 linux/amd64\r\nModify profile to update your $PATH and enable shell command completion? [Y/n] Enter a path to an rc file to update, or leave blank to use\r\n[/home/yc-user/.bashrc]: \r\nyc PATH has been added to your '/home/yc-user/.bashrc' profile\r\nyc bash completion has been added to your '/home/yc-user/.bashrc' profile.\r\nNow we have zsh completion. Type \"echo 'source /home/yc-user/yandex-cloud/completion.zsh.inc' >>  ~/.zshrc\" to install itTo complete installation, start a new shell (exec -l $SHELL) or type 'source \"/home/yc-user/.bashrc\"' in the current one",
+        "stdout_lines": [
+            "Downloading yc 0.130.0",
+            "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current",
+            "                                 Dload  Upload   Total   Spent    Left  Speed",
+            "",
+            "  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0",
+            "  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0",
+            "100 80.3M  100 80.3M    0     0   115M      0 --:--:-- --:--:-- --:--:--  115M",
+            "Yandex Cloud CLI 0.130.0 linux/amd64",
+            "Modify profile to update your $PATH and enable shell command completion? [Y/n] Enter a path to an rc file to update, or leave blank to use",
+            "[/home/yc-user/.bashrc]: ",
+            "yc PATH has been added to your '/home/yc-user/.bashrc' profile",
+            "yc bash completion has been added to your '/home/yc-user/.bashrc' profile.",
+            "Now we have zsh completion. Type \"echo 'source /home/yc-user/yandex-cloud/completion.zsh.inc' >>  ~/.zshrc\" to install itTo complete installation, start a new shell (exec -l $SHELL) or type 'source \"/home/yc-user/.bashrc\"' in the current one"
+        ]
+    }
+}
+
+TASK [restart .bashrc] ***********************************************************************************************************************************************************************************************************************
+changed: [89.169.133.218]
+
+TASK [Проверка существования файла ключа] ****************************************************************************************************************************************************************************************************
+ok: [89.169.133.218]
+
+TASK [Генерация SSH RSA-ключей] **************************************************************************************************************************************************************************************************************
+changed: [89.169.133.218]
+
+TASK [upload create_vm.sh] *******************************************************************************************************************************************************************************************************************
+changed: [89.169.133.218]
+
+TASK [Install Ansible] ***********************************************************************************************************************************************************************************************************************
+changed: [89.169.133.218]
+
+TASK [Verify Ansible installation] ***********************************************************************************************************************************************************************************************************
+ok: [89.169.133.218]
+
+TASK [debug] *********************************************************************************************************************************************************************************************************************************
+ok: [89.169.133.218] => {
+    "ansible_version.string": "2.10.8"
+}
+
+TASK [upload install.yml] ********************************************************************************************************************************************************************************************************************
+changed: [89.169.133.218]
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+89.169.133.218             : ok=12   changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+yc-user@yc-test:~$ ssh yc-user@89.169.133.218
+Welcome to Ubuntu 22.04.3 LTS (GNU/Linux 5.15.0-86-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Aug  7 07:38:50 PM UTC 2024
+
+  System load:  0.4599609375       Processes:             142
+  Usage of /:   23.9% of 19.59GB   Users logged in:       0
+  Memory usage: 17%                IPv4 address for eth0: 10.128.0.21
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+1 additional security update can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+
+Last login: Wed Aug  7 19:38:10 2024 from 89.169.146.138
+yc-user@new:~$ ls
+create_vm.sh  install.sh  install.yml  yandex-cloud
+yc-user@new:~$ yc init
+Welcome! This command will take you through the configuration process.
+Please go to https://oauth.yandex.ru/authorize?response_type=token&client_id=1a6990aa636648e9b2ef855fa7bec2fb in order to obtain OAuth token.
+ Please enter OAuth token: ^C
+yc-user@new:~$ exit

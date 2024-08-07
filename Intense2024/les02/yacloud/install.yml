@@ -10,11 +10,6 @@
       dest: "$HOME/"
       mode: +x
 
-#  - name: make executable
-#    file:
-#      path: install.sh
-#      mode: +x
-
   - name: run install
     expect:
       command: bash ./install.sh
@@ -30,12 +25,6 @@
   - name: restart .bashrc
     shell: "bash -c 'source ~/.bashrc'"
 
-  - name: upload create_vm.sh
-    copy:
-      src: create_vm.sh
-      dest: "$HOME/"
-      mode: +x
-
   - name: Проверка существования файла ключа
     stat:
       path: "~/.ssh/id_rsa"
@@ -44,3 +33,28 @@
   - name: Генерация SSH RSA-ключей
     shell: "ssh-keygen -t rsa -b 2048 -N '' -f ~/.ssh/id_rsa"
     when: not ssh_key_file.stat.exists
+
+  - name: upload create_vm.sh
+    copy:
+      src: create_vm.sh
+      dest: "$HOME/"
+      mode: +x
+
+  - name: Install Ansible
+    become: yes
+    package:
+      name: ansible
+      state: present
+
+  - name: Verify Ansible installation
+    command: ansible --version
+    register: ansible_version
+    changed_when: false
+
+  - debug:
+     var: ansible_version.string
+
+  - name: upload install.yml
+    copy:
+      src: install.yml
+      dest: "$HOME/"

@@ -1,4 +1,4 @@
-aleksey@first:~/OtusTeam/IaC/Intense2024/les02/yacloud$ ansible-playbook -i 89.169.146.138, install_yc.yml 
+aleksey@first:~/OtusTeam/IaC/Intense2024/les02/yacloud$ ansible-playbook -i 89.169.146.138, install.yml 
 
 PLAY [Install yc] ****************************************************************************************************************************************************************************************************************************
 

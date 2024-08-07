@@ -1,0 +1,94 @@
+yc-user@yc-test:~$ ./create_vm.sh new
+vm_name=new will be used to create VM
+done (37s)
+id: fhm17d46gv66r4bi76b1
+folder_id: b1gmesrdjgklgkvcp704
+created_at: "2024-08-07T19:33:39Z"
+name: new
+zone_id: ru-central1-a
+platform_id: standard-v2
+resources:
+  memory: "2147483648"
+  cores: "2"
+  core_fraction: "20"
+status: RUNNING
+metadata_options:
+  gce_http_endpoint: ENABLED
+  aws_v1_http_endpoint: ENABLED
+  gce_http_token: ENABLED
+  aws_v1_http_token: DISABLED
+boot_disk:
+  mode: READ_WRITE
+  device_name: fhm5vboi6bkkh58vfbsl
+  auto_delete: true
+  disk_id: fhm5vboi6bkkh58vfbsl
+network_interfaces:
+  - index: "0"
+    mac_address: d0:0d:13:b4:86:87
+    subnet_id: e9bop98iu12teftg4uj8
+    primary_v4_address:
+      address: 10.128.0.21
+      one_to_one_nat:
+        address: 89.169.133.218
+        ip_version: IPV4
+serial_port_settings:
+  ssh_authorization: INSTANCE_METADATA
+gpu_settings: {}
+fqdn: new.ru-central1.internal
+scheduling_policy:
+  preemptible: true
+network_settings:
+  type: STANDARD
+placement_policy: {}
+
+yc-user@yc-test:~$ ping 89.169.133.218
+PING 89.169.133.218 (89.169.133.218) 56(84) bytes of data.
+64 bytes from 89.169.133.218: icmp_seq=1 ttl=60 time=1.16 ms
+64 bytes from 89.169.133.218: icmp_seq=2 ttl=60 time=0.435 ms
+64 bytes from 89.169.133.218: icmp_seq=3 ttl=60 time=0.449 ms
+^C
+--- 89.169.133.218 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2029ms
+rtt min/avg/max/mdev = 0.435/0.681/1.160/0.338 ms
+yc-user@yc-test:~$ ssh yc-user@89.169.133.218
+The authenticity of host '89.169.133.218 (89.169.133.218)' can't be established.
+ED25519 key fingerprint is SHA256:7LQwtFyGhDxEZQLRIm4s7BP8KaY8aARgNryJaUIdGVk.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '89.169.133.218' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 22.04.3 LTS (GNU/Linux 5.15.0-86-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Aug  7 07:35:07 PM UTC 2024
+
+  System load:  1.34375            Processes:             143
+  Usage of /:   21.2% of 19.59GB   Users logged in:       0
+  Memory usage: 9%                 IPv4 address for eth0: 10.128.0.21
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+yc-user@new:~$ exit
+logout
+Connection to 89.169.133.218 closed.
