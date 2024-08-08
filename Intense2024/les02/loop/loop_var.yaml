@@ -1,0 +1,33 @@
+---
+- name: Demo Playbook with Loop
+  hosts: localhost
+  vars:
+    fruits:
+      - apple
+      - banana
+      - cherry
+      - date
+
+  tasks:
+    - name: Create fruit directories
+      file:
+        path: "/tmp/fruits/{{ item }}"
+        state: directory
+        mode: '0755'
+      loop: "{{ fruits }}"
+
+    - name: Create fruit files
+      file:
+        path: "/tmp/fruits/{{ item }}/{{ item }}.txt"
+        state: touch
+        mode: '0644'
+      loop: "{{ fruits }}"
+
+    - name: Display created files
+      command: "ls -R /tmp/fruits"
+      register: ls_output
+      changed_when: false
+
+    - name: Show directory structure
+      debug:
+        var: ls_output.stdout_lines

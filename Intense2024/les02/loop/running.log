@@ -1,0 +1,86 @@
+aleksey@first:~/OtusTeam/IaC/Intense2024/les02/loop$ cp ans_loop_var.sh ans_loop.sh 
+aleksey@first:~/OtusTeam/IaC/Intense2024/les02/loop$ nano ans_loop.sh 
+aleksey@first:~/OtusTeam/IaC/Intense2024/les02/loop$ ./ans_loop.sh
+++ ansible-playbook loop.yaml
+[WARNING]: Unable to parse /home/aleksey/OtusTeam/IaC/Intense2024/les02/loop/hosts.ini as an inventory source
+[WARNING]: No inventory was parsed, only implicit localhost is available
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+PLAY [Short Demo Playbook with Loop] *********************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [Create numbered files] *****************************************************************************************************************************************************************************************************************
+changed: [localhost] => (item=1)
+changed: [localhost] => (item=2)
+changed: [localhost] => (item=3)
+
+TASK [Check if files exist] ******************************************************************************************************************************************************************************************************************
+ok: [localhost] => (item=1)
+ok: [localhost] => (item=2)
+ok: [localhost] => (item=3)
+
+TASK [List created files] ********************************************************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [Show found files] **********************************************************************************************************************************************************************************************************************
+ok: [localhost] => {
+    "msg": "Found files: ['/tmp/file3.txt', '/tmp/file2.txt', '/tmp/file1.txt']"
+}
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+localhost                  : ok=5    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+aleksey@first:~/OtusTeam/IaC/Intense2024/les02/loop$ ./ans_loop_var.sh
+++ ansible-playbook loop_var.yaml
+[WARNING]: Unable to parse /home/aleksey/OtusTeam/IaC/Intense2024/les02/loop/hosts.ini as an inventory source
+[WARNING]: No inventory was parsed, only implicit localhost is available
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+PLAY [Demo Playbook with Loop] ***************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [Create fruit directories] **************************************************************************************************************************************************************************************************************
+ok: [localhost] => (item=apple)
+ok: [localhost] => (item=banana)
+ok: [localhost] => (item=cherry)
+ok: [localhost] => (item=date)
+
+TASK [Create fruit files] ********************************************************************************************************************************************************************************************************************
+changed: [localhost] => (item=apple)
+changed: [localhost] => (item=banana)
+changed: [localhost] => (item=cherry)
+changed: [localhost] => (item=date)
+
+TASK [Display created files] *****************************************************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [Show directory structure] **************************************************************************************************************************************************************************************************************
+ok: [localhost] => {
+    "ls_output.stdout_lines": [
+        "/tmp/fruits:",
+        "apple",
+        "banana",
+        "cherry",
+        "date",
+        "",
+        "/tmp/fruits/apple:",
+        "apple.txt",
+        "",
+        "/tmp/fruits/banana:",
+        "banana.txt",
+        "",
+        "/tmp/fruits/cherry:",
+        "cherry.txt",
+        "",
+        "/tmp/fruits/date:",
+        "date.txt"
+    ]
+}
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+localhost                  : ok=5    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

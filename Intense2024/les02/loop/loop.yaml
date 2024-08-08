@@ -1,0 +1,31 @@
+---
+- name: Short Demo Playbook with Loop
+  hosts: localhost
+  tasks:
+    - name: Create numbered files
+      file:
+        path: "/tmp/file{{ item }}.txt"
+        state: touch
+        mode: '0644'
+      loop:
+        - 1
+        - 2
+        - 3
+
+    - name: Check if files exist
+      stat:
+        path: "/tmp/file{{ item }}.txt"
+      loop:
+        - 1
+        - 2
+        - 3
+
+    - name: List created files
+      find:
+        paths: /tmp
+        patterns: "file*.txt"
+      register: found_files
+
+    - name: Show found files
+      debug:
+        msg: "Found files: {{ found_files.files | map(attribute='path') | list }}"
