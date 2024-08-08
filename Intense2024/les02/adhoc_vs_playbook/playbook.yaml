@@ -1,0 +1,87 @@
+---
+- name: Playbook
+  hosts: all
+
+  tasks:
+  - name: Ping
+    ping:
+
+  - name: File
+    file:
+      path: /tmp/test
+      state: touch
+
+  - name: Command ls
+    command: ls -la /tmp/test
+    register: ls_output
+
+  - name: Print ls output
+    debug:
+      msg: "{{ ls_output.stdout }}"
+
+  - name: Template
+    template:
+      src: test.j2
+      dest: /tmp/test1
+      mode: '0644'
+    vars:
+      yourname: John
+
+  - name: Command cat
+    command: cat /tmp/test1
+    register: cat_output
+
+  - name: Print cat output
+    debug:
+      msg: "{{ cat_output.stdout }}"
+
+  - name: Copy
+    copy:
+      content: 'Hello World!'
+      dest: /tmp/test2
+      mode: '0644'
+
+  - name: Lineinfile
+    lineinfile:
+      path: /tmp/test2
+      line: 'Hello World!'
+
+  - name: Command cat
+    command: cat /tmp/test2
+    register: cat_output2
+
+  - name: Print cat output
+    debug:
+      msg: "{{ cat_output2.stdout }}"
+
+  - name: Debug
+    debug:
+      msg: 'Hello World!'
+
+  - name: Git
+    git:
+      repo: https://github.com/regolith-labs/ore-cli.git
+      dest: /tmp/repo
+
+  - name: Command
+    command: ls -la /tmp/
+    register: ls_output2
+
+  - name: Print ls output
+    debug:
+      msg: "{{ ls_output2.stdout }}"
+
+  - name: Apt
+    apt:
+      name: apache2
+      state: present
+
+  - name: Service
+    service:
+      name: apache2
+      state: started
+    register: service_status
+
+  - name: Print service status
+    debug:
+      msg: "changed: {{ service_status.changed }}, failed: {{ service_status.failed }}, name: {{ service_status.name }}, state: {{ service_status.state }}"
