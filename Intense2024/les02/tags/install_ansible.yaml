@@ -1,0 +1,33 @@
+---
+- name: Install Ansible on Linux
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Install EPEL repository (for RHEL-based systems)
+    yum:
+      name: epel-release
+      state: present
+    when: ansible_distribution == "RedHat" or ansible_distribution == "CentOS"
+
+  - name: Install Ansible
+    package:
+      name: ansible
+      state: present
+    when: ansible_distribution == "RedHat" or ansible_distribution == "CentOS" or ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
+
+  - name: Install Ansible (alternative package name for some distributions)
+    package:
+      name: ansible-core
+      state: present
+    when: ansible_distribution == "Fedora" or ansible_distribution == "openSUSE"
+
+  - name: Verify Ansible installation
+    command: ansible --version
+    register: ansible_version
+    changed_when: false
+    tags: version
+
+  - debug:
+     var: ansible_version.string
+    tags: version
