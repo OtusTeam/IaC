@@ -1,0 +1,69 @@
+---
+- name: Example playbook with handlers
+  hosts: all
+  become: true
+
+  handlers:
+  - name: restart apache
+    service:
+      name: apache2
+      state: restarted
+
+  pre_tasks:
+  - name: Update apt cache
+    apt:
+      update_cache: yes
+
+  tasks:
+  - name: Install Apache
+    apt:
+      name: apache2
+      state: present
+    notify: restart apache
+
+  - name: Copy Apache configuration file
+    copy:
+      content: |
+        <VirtualHost *:80>
+          ServerName example.com
+          DocumentRoot /var/www/html
+        </VirtualHost>
+      dest: /etc/apache2/sites-available/example.com.conf
+      mode: '0644'
+      notify: restart apache
+
+  - name: Create index.html from template
+    template:
+      src: index.html.j2
+      dest: /var/www/html/index.html
+      mode: '0644'
+    vars:
+      hostname: "{{ inventory_hostname }}"
+    notify: restart apache
+
+  - name: Enable Apache site
+    command: a2ensite example.com
+    notify: restart apache
+
+  post_tasks:
+  - name: Verify Apache is running
+    service:
+      name: apache2
+      state: started
+
+  - name: Verify Apache site is enabled
+    command: apache2ctl -S
+    register: apache_status
+    failed_when: "'example.com' not in apache_status.stdout"
+
+  - name: HTTP request
+    uri:
+      url: "http://{{ inventory_hostname }}"
+      method: GET
+      return_content: yes
+    register: response
+
+  - name: Print respose
+    debug:
+      msg: "{{ response.content }}"
+

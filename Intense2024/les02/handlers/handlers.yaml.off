@@ -1,6 +1,6 @@
 ---
-- name: Example playbook with forced handlers
-  hosts: webservers
+- name: Example playbook with handlers
+  hosts: all
   become: true
 
   handlers:
@@ -14,10 +14,10 @@
     apt:
       name: apache2
       state: present
+    notify: restart apache
 
   - name: Copy Apache config
     copy:
       content: "<VirtualHost *:80>\nServerName example.com\n</VirtualHost>"
       dest: /etc/apache2/sites-available/example.com.conf
-
-  - meta: flush_handlers
+    notify: restart apache

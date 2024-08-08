@@ -1,0 +1,55 @@
+---
+- name: Example playbook with pre_tasks, tasks, and post_tasks
+  hosts: all
+  become: true
+
+  pre_tasks:
+  - name: Update apt cache
+    apt:
+      update_cache: yes
+
+  tasks:
+  - name: Install Apache
+    apt:
+      name: apache2
+      state: present
+
+  - name: Copy Apache configuration file
+    copy:
+      content: |
+        <VirtualHost *:80>
+          ServerName example.com
+          DocumentRoot /var/www/html
+        </VirtualHost>
+      dest: /etc/apache2/sites-available/example.com.conf
+      mode: '0644'
+
+  - name: Copy Apache configuration file
+    copy:
+      content: |
+        <VirtualHost *:80>
+          ServerName example.com
+          DocumentRoot /var/www/html
+        </VirtualHost>
+      dest: /etc/apache2/sites-available/example.com.conf
+      mode: '0644'
+
+
+  - name: Enable Apache site
+    command: a2ensite example.com
+
+  - name: Restart Apache
+    service:
+      name: apache2
+      state: restarted
+
+  post_tasks:
+  - name: Verify Apache is running
+    service:
+      name: apache2
+      state: started
+
+  - name: Verify Apache site is enabled
+    command: apache2ctl -S
+    register: apache_status
+    failed_when: "'example.com' not in apache_status.stdout"
