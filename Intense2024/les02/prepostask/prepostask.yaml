@@ -1,6 +1,6 @@
 ---
 - name: Example playbook with pre_tasks, tasks, and post_tasks
-  hosts: webservers
+  hosts: all
   become: true
 
   pre_tasks:
@@ -24,6 +24,14 @@
       dest: /etc/apache2/sites-available/example.com.conf
       mode: '0644'
 
+  - name: Create index.html from template
+    template:
+      src: index.html.j2
+      dest: /var/www/html/index.html
+      mode: '0644'
+    vars:
+      hostname: "{{ inventory_hostname }}"
+
   - name: Enable Apache site
     command: a2ensite example.com
 
@@ -42,3 +50,15 @@
     command: apache2ctl -S
     register: apache_status
     failed_when: "'example.com' not in apache_status.stdout"
+
+  - name: HTTP request
+    uri:
+      url: "http://{{ inventory_hostname }}"
+      method: GET
+      return_content: yes
+    register: response
+
+  - name: Print respose
+    debug:
+      msg: "{{ response.content }}"
+
