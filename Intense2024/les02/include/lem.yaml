@@ -1,0 +1,15 @@
+---
+- name: Установка и настройка сервера
+  hosts: my_server
+  become: yes
+  vars:
+    mysql_version: 5.7
+
+
+  tasks:
+
+  - include_tasks: tasks/nginx.yml
+
+  - include_tasks: tasks/mysql.yml
+    when: mysql_version == 5.7
+

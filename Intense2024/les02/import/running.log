@@ -1,0 +1,8 @@
+aleksey@first:~/OtusTeam/IaC/Intense2024/les02/import$ ./ans_lem_syntax_check.sh
+++ ansible-playbook lem.yaml --syntax-check
+[WARNING]: Unable to parse /home/aleksey/OtusTeam/IaC/Intense2024/les02/import/hosts.ini as an inventory source
+[WARNING]: No inventory was parsed, only implicit localhost is available
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+[WARNING]: Could not match supplied host pattern, ignoring: my_server
+
+playbook: lem.yaml
