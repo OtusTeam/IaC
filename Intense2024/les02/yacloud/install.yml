@@ -22,8 +22,8 @@
     debug:
       var: output
 
-  - name: restart .bashrc
-    shell: "bash -c 'source ~/.bashrc'"
+#  - name: restart .bashrc
+#    shell: "bash -c 'source ~/.bashrc'"
 
   - name: Проверка существования файла ключа
     stat:
