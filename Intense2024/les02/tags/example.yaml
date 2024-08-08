@@ -1,0 +1,53 @@
+---
+- name: Установка и настройка сервера
+  hosts: my_server
+  become: yes
+
+  tasks:
+  - name: Установка пакетов
+    apt:
+      name: "{{ item }}"
+      state: present
+    loop:
+      - nginx
+      - mysql-server
+    tags:
+      - packages
+
+  - name: Настройка nginx
+    template:
+      src: templates/nginx.conf.j2
+      dest: /etc/nginx/nginx.conf
+    notify: restart nginx
+    tags:
+      - nginx
+
+  - name: Настройка mysql
+    template:
+      src: templates/my.cnf.j2
+      dest: /etc/mysql/my.cnf
+    notify: restart mysql
+    tags:
+      - mysql
+
+  - name: Запуск сервисов
+    service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+    loop:
+      - nginx
+      - mysql
+    tags:
+      - services
+
+
+# В этом примере задачи разделены на четыре группы: packages, nginx, mysql и services. 
+# Каждая группа имеет свой тег.
+# Чтобы выполнить только задачи с тегом nginx, можно использовать следующую команду:
+# ansible-playbook -t nginx playbook.yml
+# Это приведет к выполнению только задачи "Настройка nginx".
+# Чтобы выполнить задачи с тегами nginx и mysql, можно использовать следующую команду:
+# ansible-playbook -t nginx,mysql playbook.yml
+# Это приведет к выполнению задач "Настройка nginx" и "Настройка mysql".
+# Если не указать теги, то будут выполнены все задачи в плейбуке.

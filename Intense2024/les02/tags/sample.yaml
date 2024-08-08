@@ -1,0 +1,22 @@
+---
+- name: Установка и настройка сервера
+  hosts: my_server
+  become: yes
+
+  tasks:
+  - apt: name={{ item }} state=present
+    loop:
+      - nginx
+      - mysql-server
+    tags: packages
+
+  - template: src=templates/nginx.conf.j2 dest=/etc/nginx/nginx.conf
+    tags: nginx
+
+  - template: src=templates/my.cnf.j2 dest=/etc/mysql/my.cnf
+    tags: mysql
+
+# В этом примере задачи имеют теги packages, nginx и mysql. 
+# Чтобы выполнить только задачи с определенным тегом, можно использовать команду 
+# ansible-playbook -t <тег> playbook.yml.
+
