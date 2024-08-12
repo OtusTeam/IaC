@@ -1,7 +1,0 @@
-set -x
-echo "secret_username: {$ansible-vault encrypt_string very_secure_password}" > secrets.yml 
-echo "secret_username: {$ansible-vault encrypt_string very_secure_password}" > secrets.yml 
-
-echo "secret_password: {$ansible-vault encrypt string admin
-
-
