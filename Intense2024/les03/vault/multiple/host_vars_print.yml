@@ -1,0 +1,9 @@
+---
+- name: Print ansible_user and ansible_password length
+  hosts: myhost
+  gather_facts: no
+
+  tasks:
+  - name: Print ansible_user and ansible_password length
+    debug:
+      msg: "ansible_user: {{ ansible_user }} | ansible_password length: {{ ansible_password | length }}"
