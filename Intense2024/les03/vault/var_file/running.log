@@ -1,0 +1,62 @@
+aleksey@first:~/OtusTeam/IaC/Intense2024/les03/vault/var_file$ ./run.sh 
+++ cp origin.yml secrets.yml
+++ cat secrets.yml
+---
+secret_username: admin
+secret_password: very_secure_password
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ chmod 664 secrets.yml
+++ ansible-vault encrypt secrets.yml
+New Vault password: 
+Confirm New Vault password: 
+Encryption successful
+++ cat secrets.yml
+$ANSIBLE_VAULT;1.1;AES256
+32316466313839666662653733666164656232396162396238616661636531373634373833313431
+3264393766653262383233376363666135326533643761620a363839313536626233393230336163
+31346230363837643631316635376565363837646433353030343165373966616266636333616230
+3133366362656265330a366230343236306162653963336664623530393334363266633563666161
+35396361663131313934326538633530363264373562653061623534363061343633383964373132
+39656633363163613532363535323234663331383336316333613733366337323063316237303533
+30313739306637356632373036626534366632393930613366623035396234653834663839653530
+38666563633261626665
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ ansible-playbook vault_demo.yml --ask-vault-pass
+Vault password: 
+[WARNING]: No inventory was parsed, only implicit localhost is available
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+PLAY [Ansible Vault Demo] ********************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [Display secret username (for demo purposes only)] **************************************************************************************************************************************************************************************
+ok: [localhost] => {
+    "msg": "The secret username is: admin"
+}
+
+TASK [Create a file with secret content] *****************************************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [Simulate using password (DO NOT display passwords in production)] **********************************************************************************************************************************************************************
+ok: [localhost] => {
+    "msg": "Connection established using password (Length: 20)"
+}
+
+TASK [Show contents of the created file] *****************************************************************************************************************************************************************************************************
+changed: [localhost]
+
+TASK [Display file contents] *****************************************************************************************************************************************************************************************************************
+ok: [localhost] => {
+    "file_contents.stdout": "This file was created by admin"
+}
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+localhost                  : ok=6    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+++ rm secrets.yml

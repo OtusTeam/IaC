@@ -1,0 +1,28 @@
+---
+- name: Ansible Vault Demo
+  hosts: localhost
+  vars_files:
+    - secrets.yml
+
+  tasks:
+    - name: Display secret username (for demo purposes only)
+      debug:
+        msg: "The secret username is: {{ secret_username }}"
+
+    - name: Create a file with secret content
+      copy:
+        content: "This file was created by {{ secret_username }}"
+        dest: "/tmp/secret_file.txt"
+        mode: '0600'
+
+    - name: Simulate using password (DO NOT display passwords in production)
+      debug:
+        msg: "Connection established using password (Length: {{ secret_password | length }})"
+
+    - name: Show contents of the created file
+      command: cat /tmp/secret_file.txt
+      register: file_contents
+
+    - name: Display file contents
+      debug:
+        var: file_contents.stdout
