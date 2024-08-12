@@ -4,5 +4,7 @@ echo "ansible_user: $(ansible-vault encrypt_string --vault-password-file ignore/
 echo "ansible_password: $(ansible-vault encrypt_string --vault-password-file ignore/password_file very_secure_password)"	>> host_vars/myhost.yml
 cat host_vars/myhost.yml
 read -n 1 -s -r -p "press any key to continue..."; echo ""
+ansible-inventory -i myhost.yml --list -y
+read -n 1 -s -r -p "press any key to continue..."; echo ""
 ansible-playbook -i myhost.yml host_vars_print.yml --vault-password-file ignore/password_file
 
