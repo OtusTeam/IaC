@@ -1,0 +1,10 @@
+---
+- name: Deploy my role
+  hosts: all
+  become: yes
+
+  roles:
+    - my_role
+
+  vars:
+    callname: "World"

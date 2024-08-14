@@ -1,0 +1,37 @@
+aleksey@first:~/OtusTeam/IaC/Intense2024/les03/vault/file_ops$ ./run.sh 
+++ rm test.txt
+++ echo use INSERT to insert text, ESC to escape text, SHIFT+: to command, wq to write and quit or qa to quit w/o changes
+use INSERT to insert text, ESC to escape text, SHIFT+: to command, wq to write and quit or qa to quit w/o changes
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ ansible-vault create test.txt
+New Vault password: 
+Confirm New Vault password: 
+++ cat test.txt
+$ANSIBLE_VAULT;1.1;AES256
+63653361393030623839626161373830323936623030373234376633653466643737393065656261
+3664303666663634643534663939653664356162323965660a383439656633323236396166653131
+62353633313134356233393239663063373866376134386431623634356163623631346465313566
+3839373437313162650a313834656363663237393166373963383031636638633131666662616331
+6639
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ ansible-vault edit test.txt
+Vault password: 
+++ ansible-vault view test.txt
+Vault password: 
+test2
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ ansible-vault rekey test.txt
+Vault password: 
+New Vault password: 
+Confirm New Vault password: 
+Rekey successful
+++ ansible-vault view test.txt
+Vault password: 
+test2
+++ rm test.txt

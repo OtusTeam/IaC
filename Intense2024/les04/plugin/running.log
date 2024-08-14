@@ -1,0 +1,84 @@
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/plugin$ . export_plg.sh 
++ . export_plg.sh
+++ set -x
+++ export ANSIBLE_INVENTORY=../plugin/inventory
+++ ANSIBLE_INVENTORY=../plugin/inventory
+++ export ANSIBLE_PLUGINS_INVENTORY=../plugin/plugins/inventory
+++ ANSIBLE_PLUGINS_INVENTORY=../plugin/plugins/inventory
+++ export ANSIBLE_REMOTE_USER=yc-user
+++ ANSIBLE_REMOTE_USER=yc-user
+++ set +x
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/plugin$ ./create_vm.sh one
+vm_name=one will be used to create VM
+done (42s)
+id: fhmratdfvjshgj1vvahv
+folder_id: b1gmesrdjgklgkvcp704
+created_at: "2024-08-12T17:01:47Z"
+name: one
+zone_id: ru-central1-a
+platform_id: standard-v2
+resources:
+  memory: "2147483648"
+  cores: "2"
+  core_fraction: "20"
+status: RUNNING
+metadata_options:
+  gce_http_endpoint: ENABLED
+  aws_v1_http_endpoint: ENABLED
+  gce_http_token: ENABLED
+  aws_v1_http_token: DISABLED
+boot_disk:
+  mode: READ_WRITE
+  device_name: fhmllhoqqnvnru3jupfl
+  auto_delete: true
+  disk_id: fhmllhoqqnvnru3jupfl
+network_interfaces:
+  - index: "0"
+    mac_address: d0:0d:1b:57:5a:ff
+    subnet_id: e9bop98iu12teftg4uj8
+    primary_v4_address:
+      address: 10.128.0.31
+      one_to_one_nat:
+        address: 51.250.84.64
+        ip_version: IPV4
+serial_port_settings:
+  ssh_authorization: INSTANCE_METADATA
+gpu_settings: {}
+fqdn: one.ru-central1.internal
+scheduling_policy:
+  preemptible: true
+network_settings:
+  type: STANDARD
+placement_policy: {}
+
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/plugin$ ./ans_inv_list.sh 
+++ ansible-inventory --list
+{
+    "_meta": {
+        "hostvars": {
+            "one": {
+                "ansible_host": "51.250.84.64"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped",
+            "yacloud"
+        ]
+    },
+    "yacloud": {
+        "hosts": [
+            "one"
+        ]
+    }
+}
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/plugin$ ./ans_ping.sh 
+++ ansible -m ping all
+one | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}

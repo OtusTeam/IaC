@@ -1,0 +1,22 @@
+aleksey@first:~/OtusTeam/IaC/Intense2024/les03/vault/password_file$ ./run.sh 
+++ rm test.txt
+rm: cannot remove 'test.txt': No such file or directory
+++ echo 'my test password'
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ env EDITOR=nano ansible-vault create --vault-password-file ignore/password_file test.txt
+++ cat test.txt
+$ANSIBLE_VAULT;1.1;AES256
+32313162636662343864656230656366356565333138396435303436613563633037343633323036
+3538646266336366323130393333336265646439373431340a383332643264663439323730393138
+30616139613831653433626535636432633638363538323131313134323839393033616437623836
+6364656437316562350a663861333136653938666266653539323363663232343837373964326262
+3762
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ env EDITOR=nano ansible-vault edit --vault-password-file ignore/password_file test.txt
+++ ansible-vault view --vault-password-file ignore/password_file test.txt
+my secret content
+++ rm test.txt
