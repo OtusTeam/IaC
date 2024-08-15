@@ -69,7 +69,7 @@
 
     - name: Verify httpd response
       uri:
-        url: "http://{{ ansible_host }}:8080"
+        url: "http://{{ ansible_host }}:80"
         return_content: yes
       register: result
       tags: check

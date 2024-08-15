@@ -39,7 +39,7 @@
         exposed_ports:
           - '80'
         ports:
-          - '8080:80'
+          - '80:80'
         volumes: "{{ webroot }}:/usr/local/apache2/htdocs/" 
 
   handlers:
@@ -55,7 +55,7 @@
 
     - name: Verify httpd response
       uri:
-        url: "http://{{ ansible_host }}:8080"
+        url: "http://{{ ansible_host }}:80"
         return_content: yes
       register: result
       tags: check
