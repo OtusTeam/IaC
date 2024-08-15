@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My App</title>
+  </head>
+  <body>
+    <h1>My App</h1>
+    <table>
+      <tr>
+        <th>Column 1</th>
+        <th>Column 2</th>
+      </tr>
+      {% for row in rows %}
+      <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

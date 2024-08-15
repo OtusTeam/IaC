@@ -1,0 +1,27 @@
+from flask import Flask, render_template
+import mysql.connector
+from mysql.connector import errorcode
+
+app = Flask(__name__)
+
+cnx = mysql.connector.connect(
+    user='username',
+    password='password',
+    host='10.128.0.13',
+    database='mysql'
+)
+
+cursor = cnx.cursor()
+
+@app.route("/")
+def index():
+    query = "SELECT * FROM db"
+    try:
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        return render_template("index.html", rows=rows)
+    except mysql.connector.Error as err:
+        return "Something went wrong: {}".format(err)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=80)

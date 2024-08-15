@@ -1,0 +1,6 @@
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/yandex_cloud_cli$ ./galaxy_intstall_requirements.sh 
+Starting galaxy role install process
+- downloading role 'yandex_cloud_cli', owned by webarchitect609
+- downloading role from https://github.com/webarchitect609/ansible-role-yandex_cloud_cli/archive/0.0.3.tar.gz
+- extracting webarchitect609.yandex_cloud_cli to /home/aleksey/OtusTeam/IaC/Intense2024/les04/yandex_cloud_cli/roles_imported/webarchitect609.yandex_cloud_cli
+- webarchitect609.yandex_cloud_cli (0.0.3) was installed successfully
