@@ -15,8 +15,8 @@ resource "yandex_compute_instance" "my_vm" {
 
   resources {
     cores  = 2
-    memory = 2
-    core_fraction = 5
+    memory = 4
+    core_fraction = 20
   }
 
   scheduling_policy {
@@ -26,6 +26,7 @@ resource "yandex_compute_instance" "my_vm" {
   boot_disk {
     initialize_params {
       image_id = var.image 
+      size = 50
 #"${data.yandex_compute_image.my_image.id}"
     }
   }

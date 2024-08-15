@@ -5,7 +5,7 @@ yandex_cloud_hosts:
     group: webservers
   - name: les04-host2
     subnet: les04-sub2
-    platform: standard-v1
+    platform: standard-v2
     group: webservers
 
 yandex_cloud_subnets:

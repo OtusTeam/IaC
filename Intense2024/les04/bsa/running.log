@@ -1,0 +1,309 @@
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/bsa$ ./ans_inv_list.sh 
+++ ansible-inventory --list
+{
+    "_meta": {
+        "hostvars": {
+            "les04-host1": {
+                "ansible_host": "51.250.26.55"
+            },
+            "les04-host2": {
+                "ansible_host": "89.169.150.164"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped",
+            "webservers"
+        ]
+    },
+    "webservers": {
+        "hosts": [
+            "les04-host1",
+            "les04-host2"
+        ]
+    }
+}
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/bsa$ ./ans_ping.sh 
+++ ansible -m ping all
+les04-host2 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+les04-host1 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/bsa$ ansible-playbook install_docker.yml 
+
+PLAY [webservers] **********************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************
+ok: [les04-host1]
+ok: [les04-host2]
+
+TASK [Update apt cache] ****************************************************************************************************************
+changed: [les04-host1]
+changed: [les04-host2]
+
+TASK [install dependencies] ************************************************************************************************************
+changed: [les04-host1]
+changed: [les04-host2]
+
+TASK [add GPG key] *********************************************************************************************************************
+changed: [les04-host2]
+changed: [les04-host1]
+
+TASK [add docker repository to apt] ****************************************************************************************************
+changed: [les04-host2]
+changed: [les04-host1]
+
+TASK [install docker] ******************************************************************************************************************
+changed: [les04-host2]
+changed: [les04-host1]
+
+TASK [check docker is active] **********************************************************************************************************
+ok: [les04-host2]
+ok: [les04-host1]
+
+TASK [adding ansible user to docker group] *********************************************************************************************
+changed: [les04-host2]
+changed: [les04-host1]
+
+TASK [Check how docker user runs docker command] ***************************************************************************************
+changed: [les04-host2]
+changed: [les04-host1]
+
+TASK [Print output] ********************************************************************************************************************
+ok: [les04-host1] => {
+    "msg": [
+        "Docker version 27.1.2, build d01f264"
+    ]
+}
+ok: [les04-host2] => {
+    "msg": [
+        "Docker version 27.1.2, build d01f264"
+    ]
+}
+
+PLAY RECAP *****************************************************************************************************************************
+les04-host1                : ok=10   changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+les04-host2                : ok=10   changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/bsa$ ansible-playbook for_docker_container_install.yml 
+
+PLAY [Установка пакетов для docker_container] ******************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************
+ok: [les04-host2]
+ok: [les04-host1]
+
+TASK [Установка pip3 если нет] *********************************************************************************************************
+fatal: [les04-host1]: FAILED! => {"cache_update_time": 1723744910, "cache_updated": true, "changed": false, "msg": "'/usr/bin/apt-get -y -o \"Dpkg::Options::=--force-confdef\" -o \"Dpkg::Options::=--force-confold\"       install 'python3-pip=22.0.2+dfsg-1ubuntu0.4'' failed: E: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4427 (unattended-upgr)\nE: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?\n", "rc": 100, "stderr": "E: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4427 (unattended-upgr)\nE: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?\n", "stderr_lines": ["E: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4427 (unattended-upgr)", "E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?"], "stdout": "", "stdout_lines": []}
+changed: [les04-host2]
+
+TASK [Установка Docker с помощью pip] **************************************************************************************************
+changed: [les04-host2]
+
+TASK [Get info on docker host] *********************************************************************************************************
+ok: [les04-host2]
+
+TASK [Show host information] ***********************************************************************************************************
+ok: [les04-host2] => {
+    "result.host_info.ServerVersion": "27.1.2"
+}
+
+PLAY RECAP *****************************************************************************************************************************
+les04-host1                : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+les04-host2                : ok=5    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/bsa$ ansible-playbook for_docker_container_install.yml 
+
+PLAY [Установка пакетов для docker_container] ******************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************
+ok: [les04-host2]
+ok: [les04-host1]
+
+TASK [Установка pip3 если нет] *********************************************************************************************************
+fatal: [les04-host1]: FAILED! => {"cache_update_time": 1723745047, "cache_updated": true, "changed": false, "msg": "'/usr/bin/apt-get -y -o \"Dpkg::Options::=--force-confdef\" -o \"Dpkg::Options::=--force-confold\"       install 'python3-pip=22.0.2+dfsg-1ubuntu0.4'' failed: E: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4427 (unattended-upgr)\nE: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?\n", "rc": 100, "stderr": "E: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4427 (unattended-upgr)\nE: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?\n", "stderr_lines": ["E: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4427 (unattended-upgr)", "E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?"], "stdout": "", "stdout_lines": []}
+ok: [les04-host2]
+
+TASK [Установка Docker с помощью pip] **************************************************************************************************
+ok: [les04-host2]
+
+TASK [Get info on docker host] *********************************************************************************************************
+ok: [les04-host2]
+
+TASK [Show host information] ***********************************************************************************************************
+ok: [les04-host2] => {
+    "result.host_info.ServerVersion": "27.1.2"
+}
+
+PLAY RECAP *****************************************************************************************************************************
+les04-host1                : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+les04-host2                : ok=5    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/bsa$ ansible-playbook for_docker_container_install.yml 
+
+PLAY [Установка пакетов для docker_container] ******************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************
+ok: [les04-host2]
+ok: [les04-host1]
+
+TASK [Установка pip3 если нет] *********************************************************************************************************
+ok: [les04-host2]
+ok: [les04-host1]
+
+TASK [Установка Docker с помощью pip] **************************************************************************************************
+ok: [les04-host2]
+changed: [les04-host1]
+
+TASK [Get info on docker host] *********************************************************************************************************
+ok: [les04-host2]
+ok: [les04-host1]
+
+TASK [Show host information] ***********************************************************************************************************
+ok: [les04-host1] => {
+    "result.host_info.ServerVersion": "27.1.2"
+}
+ok: [les04-host2] => {
+    "result.host_info.ServerVersion": "27.1.2"
+}
+
+PLAY RECAP *****************************************************************************************************************************
+les04-host1                : ok=5    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+les04-host2                : ok=5    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/bsa$ ansible-playbook run_httpd_container.yml 
+
+PLAY [run httpd container] *************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************
+ok: [les04-host2]
+ok: [les04-host1]
+
+TASK [pull image] **********************************************************************************************************************
+changed: [les04-host2]
+changed: [les04-host1]
+
+TASK [webroot present] *****************************************************************************************************************
+changed: [les04-host2]
+changed: [les04-host1]
+
+TASK [custom index.html] ***************************************************************************************************************
+changed: [les04-host2]
+changed: [les04-host1]
+
+TASK [Flush handlers] ******************************************************************************************************************
+
+TASK [Flush handlers] ******************************************************************************************************************
+
+RUNNING HANDLER [stop and remove previous container] ***********************************************************************************
+[DEPRECATION WARNING]: The container_default_behavior option will change its default value from "compatibility" to "no_defaults" in 
+community.docker 2.0.0. To remove this warning, please specify an explicit value for it now. This feature will be removed from 
+community.docker in version 2.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+changed: [les04-host2]
+changed: [les04-host1]
+
+TASK [run httpd container] *************************************************************************************************************
+changed: [les04-host2]
+changed: [les04-host1]
+
+TASK [Verify httpd response] ***********************************************************************************************************
+fatal: [les04-host2]: FAILED! => {"changed": false, "content": "", "elapsed": 30, "msg": "Status code was -1 and not [200]: Request failed: <urlopen error timed out>", "redirected": false, "status": -1, "url": "http://89.169.150.164"}
+fatal: [les04-host1]: FAILED! => {"changed": false, "content": "", "elapsed": 30, "msg": "Status code was -1 and not [200]: Request failed: <urlopen error timed out>", "redirected": false, "status": -1, "url": "http://51.250.26.55"}
+
+PLAY RECAP *****************************************************************************************************************************
+les04-host1                : ok=6    changed=5    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+les04-host2                : ok=6    changed=5    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/bsa$ curl http://89.169.150.164
+Custom Web Page from les04-host2
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/bsa$ curl http://51.250.26.55
+Custom Web Page from les04-host1
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/bsa$ ansible-playbook webapp.yml 
+
+PLAY [deploy app on containers and run] ************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************
+ok: [les04-host2]
+ok: [les04-host1]
+
+TASK [pull image] **********************************************************************************************************************
+changed: [les04-host2]
+changed: [les04-host1]
+
+TASK [webroot present] *****************************************************************************************************************
+ok: [les04-host2]
+ok: [les04-host1]
+
+TASK [approot present] *****************************************************************************************************************
+changed: [les04-host2]
+changed: [les04-host1]
+
+TASK [deploy myapp.py] *****************************************************************************************************************
+changed: [les04-host2]
+changed: [les04-host1]
+
+TASK [Flush handlers] ******************************************************************************************************************
+
+TASK [Flush handlers] ******************************************************************************************************************
+
+RUNNING HANDLER [stop and remove previous myapp container] *****************************************************************************
+[DEPRECATION WARNING]: The container_default_behavior option will change its default value from "compatibility" to "no_defaults" in 
+community.docker 2.0.0. To remove this warning, please specify an explicit value for it now. This feature will be removed from 
+community.docker in version 2.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+changed: [les04-host2]
+changed: [les04-host1]
+
+TASK [run myapp container] *************************************************************************************************************
+changed: [les04-host2]
+changed: [les04-host1]
+
+TASK [Print myapp result] **************************************************************************************************************
+skipping: [les04-host1]
+skipping: [les04-host2]
+
+TASK [custom index.html] ***************************************************************************************************************
+changed: [les04-host2]
+changed: [les04-host1]
+
+TASK [Verify httpd response] ***********************************************************************************************************
+fatal: [les04-host2]: FAILED! => {"changed": false, "content": "", "elapsed": 30, "msg": "Status code was -1 and not [200]: Request failed: <urlopen error timed out>", "redirected": false, "status": -1, "url": "http://89.169.150.164:80"}
+fatal: [les04-host1]: FAILED! => {"changed": false, "content": "", "elapsed": 30, "msg": "Status code was -1 and not [200]: Request failed: <urlopen error timed out>", "redirected": false, "status": -1, "url": "http://51.250.26.55:80"}
+
+PLAY RECAP *****************************************************************************************************************************
+les04-host1                : ok=8    changed=6    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+les04-host2                : ok=8    changed=6    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/bsa$ curl http://51.250.26.55
+Start Web Page from les04-host1
+<a href="forecast.html">Forecast here!</a>
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/bsa$ curl http://89.169.150.164
+Start Web Page from les04-host2
+<a href="forecast.html">Forecast here!</a>
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/bsa$ cd templ/
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/bsa/templ$ ./curl_lb.sh 
++++ terraform output -raw lb_ip_address
+++ curl http://51.250.33.210
+Start Web Page from les04-host2
+<a href="forecast.html">Forecast here!</a>
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/bsa/templ$ ./curl_lb.sh 
++++ terraform output -raw lb_ip_address
+++ curl http://51.250.33.210
+Start Web Page from les04-host2
+<a href="forecast.html">Forecast here!</a>
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/bsa/templ$ ./curl_lb.sh 
++++ terraform output -raw lb_ip_address
+++ curl http://51.250.33.210
+Start Web Page from les04-host1
+<a href="forecast.html">Forecast here!</a>
+
