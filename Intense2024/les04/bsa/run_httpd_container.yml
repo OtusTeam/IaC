@@ -12,6 +12,7 @@
         name: httpd
         source: pull
         tag: latest
+      notify: stop and remove previous container
 
     - name: webroot present
       ansible.builtin.file:
@@ -23,13 +24,10 @@
         dest: "{{ webroot}}index.html"
         content: |
           Custom Web Page from {{inventory_hostname}}
+      notify: stop and remove previous container
 
-    - name: stop and remove previous container
-      community.docker.docker_container:
-        name: webserver
-        image: httpd
-        state: stopped
-        auto_remove: yes
+    - name: Flush handlers
+      meta: flush_handlers
 
     - name: run httpd container
       community.docker.docker_container:
@@ -43,6 +41,15 @@
         ports:
           - '8080:80'
         volumes: "{{ webroot }}:/usr/local/apache2/htdocs/" 
+
+  handlers:
+
+    - name: stop and remove previous container
+      community.docker.docker_container:
+        name: webserver
+        image: httpd
+        state: stopped
+        auto_remove: yes
 
   post_tasks:
 
