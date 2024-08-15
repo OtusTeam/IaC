@@ -1,0 +1,11 @@
+---
+- name: Get IP addresses of hosts in group
+  hosts: all
+  gather_facts: no
+
+  tasks:
+  - set_fact:
+      ip_addresses: "{{ groups['webservers'] | map('extract', hostvars, 'ansible_host') | list }}"
+
+  - debug:
+      msg: "{{ ip_addresses }}"
