@@ -1,0 +1,8 @@
+- name: grant access ansible to ansible remote user
+  ansible.builtin.user:
+    name:   "{{ ansible_remote_user }}"
+    comment: The special ansible remote user
+    shell:  "{{ ansible_remote_user_shell }}"
+    groups: "{{ ansible_remote_user_groups }}"
+    append: true
+  become: true

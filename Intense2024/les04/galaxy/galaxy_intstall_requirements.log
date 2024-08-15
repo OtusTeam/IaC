@@ -1,0 +1,43 @@
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/galaxy$ ./galaxy_intstall_requirements.sh 
+Starting galaxy role install process
+- downloading role 'pip', owned by geerlingguy
+- downloading role from https://github.com/geerlingguy/ansible-role-pip/archive/2.2.0.tar.gz
+- extracting geerlingguy.pip to /home/aleksey/OtusTeam/IaC/Intense2024/les04/galaxy/roles_imported/geerlingguy.pip
+- geerlingguy.pip (2.2.0) was installed successfully
+- downloading role 'docker', owned by geerlingguy
+- downloading role from https://github.com/geerlingguy/ansible-role-docker/archive/7.0.1.tar.gz
+- extracting geerlingguy.docker to /home/aleksey/OtusTeam/IaC/Intense2024/les04/galaxy/roles_imported/geerlingguy.docker
+- geerlingguy.docker (7.0.1) was installed successfully
+Starting galaxy collection install process
+[WARNING]: Collection openvswitch.openvswitch does not support Ansible version 2.15.5
+[WARNING]: Collection junipernetworks.junos does not support Ansible version 2.15.5
+[WARNING]: Collection ansible.posix does not support Ansible version 2.15.5
+[WARNING]: Collection cisco.iosxr does not support Ansible version 2.15.5
+[WARNING]: Collection cisco.asa does not support Ansible version 2.15.5
+[WARNING]: Collection splunk.es does not support Ansible version 2.15.5
+[WARNING]: Collection vyos.vyos does not support Ansible version 2.15.5
+[WARNING]: Collection ibm.qradar does not support Ansible version 2.15.5
+[WARNING]: Collection ansible.netcommon does not support Ansible version 2.15.5
+[WARNING]: Collection cisco.nxos does not support Ansible version 2.15.5
+[WARNING]: Collection frr.frr does not support Ansible version 2.15.5
+Process install dependency map
+Starting collection install process
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/devroles-system-3.0.0.tar.gz to /home/aleksey/.ansible/tmp/ansible-local-6759648vtaifgz/tmpo655rw_0/devroles-system-3.0.0-pmye18ey
+Installing 'devroles.system:3.0.0' to '/home/aleksey/OtusTeam/IaC/Intense2024/les04/galaxy/collections/ansible_collections/devroles/system'
+devroles.system:3.0.0 was installed successfully
+'containers.podman:1.4.1' is already installed, skipping.
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/community-docker-3.4.10.tar.gz to /home/aleksey/.ansible/tmp/ansible-local-6759648vtaifgz/tmpo655rw_0/community-docker-3.4.10-bpvlbkle
+Installing 'community.docker:3.4.10' to '/home/aleksey/OtusTeam/IaC/Intense2024/les04/galaxy/collections/ansible_collections/community/docker'
+community.docker:3.4.10 was installed successfully
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/community-general-4.8.0.tar.gz to /home/aleksey/.ansible/tmp/ansible-local-6759648vtaifgz/tmpo655rw_0/community-general-4.8.0-ew257x0b
+Installing 'community.general:4.8.0' to '/home/aleksey/OtusTeam/IaC/Intense2024/les04/galaxy/collections/ansible_collections/community/general'
+community.general:4.8.0 was installed successfully
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/ansible-posix-1.5.4.tar.gz to /home/aleksey/.ansible/tmp/ansible-local-6759648vtaifgz/tmpo655rw_0/ansible-posix-1.5.4-nqdjic2d
+Installing 'ansible.posix:1.5.4' to '/home/aleksey/OtusTeam/IaC/Intense2024/les04/galaxy/collections/ansible_collections/ansible/posix'
+ansible.posix:1.5.4 was installed successfully
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/community-mysql-3.9.0.tar.gz to /home/aleksey/.ansible/tmp/ansible-local-6759648vtaifgz/tmpo655rw_0/community-mysql-3.9.0-2u7356yh
+Installing 'community.mysql:3.9.0' to '/home/aleksey/OtusTeam/IaC/Intense2024/les04/galaxy/collections/ansible_collections/community/mysql'
+community.mysql:3.9.0 was installed successfully
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/community-crypto-2.21.1.tar.gz to /home/aleksey/.ansible/tmp/ansible-local-6759648vtaifgz/tmpo655rw_0/community-crypto-2.21.1-wrx7hbsk
+Installing 'community.crypto:2.21.1' to '/home/aleksey/OtusTeam/IaC/Intense2024/les04/galaxy/collections/ansible_collections/community/crypto'
+community.crypto:2.21.1 was installed successfully
