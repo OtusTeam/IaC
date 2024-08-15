@@ -1,0 +1,4 @@
+[webapps]
+
+third  ansible_host=10.128.0.11 ansible_ssh_user=ansible
+

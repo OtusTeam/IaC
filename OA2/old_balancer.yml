@@ -1,0 +1,35 @@
+---
+- name: Deploy HTTP Load Balancer with Docker
+  hosts: balancers
+#  become: true
+
+  tasks:
+
+    - name: Pull NGINX Docker image
+      docker_image:
+        name: nginx
+        state: present
+ 
+   - name: Start the load balancer container
+      docker_container:
+        name: http_load_balancer
+        image: nginx
+        state: started
+        ports:
+          - "80:80"
+        networks:
+          - name: load_balancer_net
+        command: |
+          bash -c "echo 'upstream backend { server http_server_1:80; server http_server_2:80; } \
+          server { listen 80; location / { proxy_pass http://backend; } }' > /etc/nginx/conf.d/default.conf && \
+          nginx -g 'daemon off;'"
+
+    - name: Verify load balancer connectivity
+      uri:
+        url: http://localhost
+        status_code: 200
+      register: result
+
+    - name: Print load balancer response
+      debug:
+        var: result.status_code

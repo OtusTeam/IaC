@@ -1,0 +1,43 @@
+---
+- name: Deploy HTTP Load Balancer with Docker
+  hosts: balancer
+#  become: true
+
+  tasks:
+
+    - name: Pull NGINX Docker image
+      docker_image:
+        name: nginx
+        state: present
+
+#    - name: Копирование Dockerfile на удаленный хост
+#      copy:
+#        src: Balancer_Dockerfile
+#        dest: /tmp/Dockerfile
+#        mode: 0644
+
+#    - name: Сборка Docker-образа
+#      become: true
+#      command: docker build -t http_balancer /tmp/
+
+    - name: Запуск контейнера с балансировщиком HTTP-трафика
+      become: true
+      docker_container:
+        name: http_balancer_container
+        image: nginx
+        state: started
+        ports:
+          - "80:80"
+        env:
+          BACKEND_SERVERS: "10.128.0.11:8080,10.128.0.17:8080"
+
+    - name: Verify load balancer connectivity
+      uri:
+        url: http://localhost
+        status_code: 200
+      register: result
+
+    - name: Print load balancer response
+      debug:
+        var: result.status_code
+
