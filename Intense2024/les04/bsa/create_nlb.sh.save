@@ -1,0 +1,36 @@
+#!/bin/bash
+
+if [ $# -eq 1 ]; then
+   echo "nlb_name=$1 will be used to create Network Load Balancer "
+else
+   echo "Error: required parameter not specified!"
+   echo "Call $0 nlb_name"
+   exit 1
+fi
+
+export NLB_NAME="$1"
+export YC_SUBNET_ID="e9bop98iu12teftg4uj8"
+
+yc load-balancer network-load-balancer create $NLB_NAME \
+   --listener name=test-listener, \
+             `port=80, \
+             `target-port=80, \
+             `protocol=tcp, \
+             `external-ip-version=ipv4 \
+   --target-group target-group-id=enpu2l7q9kth********, \
+                 `healthcheck-name=http,`
+                 `healthcheck-interval=2s,`
+                 `healthcheck-timeout=1s,`
+                 `healthcheck-unhealthythreshold=2,`
+                 `healthcheck-healthythreshold=2,`
+                 `healthcheck-http-port=80,`
+                 `healthcheck-http-path=/
+  --hostname $VM_NAME \
+  --zone=$YC_ZONE \
+  --create-boot-disk size=20GB,image-id=$YC_IMAGE_ID \
+  --cores=2 \
+  --memory=2G \
+  --core-fraction=20 \
+  --preemptible \
+  --network-interface subnet-id=$YC_SUBNET_ID,ipv4-address=auto,nat-ip-version=ipv4 \
+  --ssh-key ~/.ssh/id_rsa.pub

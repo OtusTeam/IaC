@@ -40,7 +40,7 @@
           - '80'
         ports:
           - '80:80'
-        volumes: "{{ webroot }}:/usr/local/apache2/htdocs/" 
+        volumes: "{{ webroot }}:/usr/local/apache2/htdocs/"
 
   handlers:
 
@@ -55,7 +55,7 @@
 
     - name: Verify httpd response
       uri:
-        url: "http://{{ ansible_host }}:80"
+        url: "http://{{ ansible_host }}"
         return_content: yes
       register: result
       tags: check
