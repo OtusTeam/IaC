@@ -11,12 +11,14 @@ fi
 export VM_NAME="$1"
 export YC_IMAGE_ID="fd8pecdhv50nec1qf9im"
 export YC_SUBNET_ID="e9bop98iu12teftg4uj8"
+export YC_GROUP="webservers"
 
 
 yc compute instance create \
   --name $VM_NAME \
   --hostname $VM_NAME \
   --zone=$YC_ZONE \
+  --labels group=$YC_GROUP \
   --create-boot-disk size=20GB,image-id=$YC_IMAGE_ID \
   --cores=2 \
   --memory=2G \
