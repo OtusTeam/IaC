@@ -21,7 +21,8 @@ variable "yc_default_zone" {
 
 variable "username" {
    type = string
-   default = "yc-user"
+   default = "ubuntu" 
+#"yc-user"
 }
 
 variable "pub_key_path" {
