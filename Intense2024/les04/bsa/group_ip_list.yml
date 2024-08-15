@@ -1,6 +1,6 @@
 ---
 - name: Get IP addresses of hosts in group
-  hosts: all
+  hosts: localhost
   gather_facts: no
 
   tasks:
