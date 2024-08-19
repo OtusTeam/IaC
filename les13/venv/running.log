@@ -1,0 +1,157 @@
+aleksey@first:~/OtusTeam/IaC/les13/venv$ ls -la
+total 36
+drwxrwxr-x 2 aleksey aleksey 4096 Aug 19 13:39 .
+drwxrwxr-x 6 aleksey aleksey 4096 Aug 19 13:39 ..
+-rwxrwxr-x 1 aleksey aleksey   52 Aug 19 13:39 ans_local_ping.sh
+-rwxrwxr-x 1 aleksey aleksey   67 Aug 19 13:39 ans_local_version.sh
+-rwxrwxr-x 1 aleksey aleksey   12 Aug 19 13:39 clear.sh
+-rwxrwxr-x 1 aleksey aleksey  559 Aug 19 13:39 install_ansible_in_venv.sh
+-rw-rw-r-- 1 aleksey aleksey   15 Aug 19 13:39 requirements.txt
+-rw-rw-r-- 1 aleksey aleksey 5223 Aug 19 13:39 running.log
+aleksey@first:~/OtusTeam/IaC/les13/venv$ rm running.log 
+aleksey@first:~/OtusTeam/IaC/les13/venv$ ./install_ansible_in_venv.sh 
+++ echo ansible==9.0.0
+++ python3 -m venv .venv
+++ . .venv/bin/activate
++++ deactivate nondestructive
++++ '[' -n '' ']'
++++ '[' -n '' ']'
++++ '[' -n /usr/bin/bash -o -n '' ']'
++++ hash -r
++++ '[' -n '' ']'
++++ unset VIRTUAL_ENV
++++ unset VIRTUAL_ENV_PROMPT
++++ '[' '!' nondestructive = nondestructive ']'
++++ VIRTUAL_ENV=/home/aleksey/OtusTeam/IaC/les13/venv/.venv
++++ export VIRTUAL_ENV
++++ _OLD_VIRTUAL_PATH=/home/aleksey/.local/bin:/home/aleksey/yandex-cloud/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/go/bin:/home/aleksey/.pulumi/bin
++++ PATH=/home/aleksey/OtusTeam/IaC/les13/venv/.venv/bin:/home/aleksey/.local/bin:/home/aleksey/yandex-cloud/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/go/bin:/home/aleksey/.pulumi/bin
++++ export PATH
++++ '[' -n '' ']'
++++ '[' -z '' ']'
++++ _OLD_VIRTUAL_PS1=
++++ PS1='(.venv) '
++++ export PS1
++++ VIRTUAL_ENV_PROMPT='(.venv) '
++++ export VIRTUAL_ENV_PROMPT
++++ '[' -n /usr/bin/bash -o -n '' ']'
++++ hash -r
+++ python3 -m pip install -r requirements.txt
+Collecting ansible==9.0.0
+  Using cached ansible-9.0.0-py3-none-any.whl (48.0 MB)
+Collecting ansible-core~=2.16.0
+  Downloading ansible_core-2.16.10-py3-none-any.whl (2.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.3/2.3 MB 8.2 MB/s eta 0:00:00
+Collecting packaging
+  Using cached packaging-24.1-py3-none-any.whl (53 kB)
+Collecting jinja2>=3.0.0
+  Using cached jinja2-3.1.4-py3-none-any.whl (133 kB)
+Collecting cryptography
+  Using cached cryptography-43.0.0-cp39-abi3-manylinux_2_28_x86_64.whl (4.0 MB)
+Collecting PyYAML>=5.1
+  Using cached PyYAML-6.0.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (751 kB)
+Collecting resolvelib<1.1.0,>=0.5.3
+  Using cached resolvelib-1.0.1-py2.py3-none-any.whl (17 kB)
+Collecting MarkupSafe>=2.0
+  Using cached MarkupSafe-2.1.5-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (25 kB)
+Collecting cffi>=1.12
+  Using cached cffi-1.17.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (445 kB)
+Collecting pycparser
+  Using cached pycparser-2.22-py3-none-any.whl (117 kB)
+WARNING: The candidate selected for download or install is a yanked version: 'ansible' candidate (version 9.0.0 at https://files.pythonhosted.org/packages/cb/3a/f4c07cb9aac56d1e4b1b329c3ef7359feec00cedf22a2ef019df7edf74b7/ansible-9.0.0-py3-none-any.whl#sha256=e5fd9eeca38d0241ccd414302df2aa0937aaac060aeb150aa9bcc8016a194ad3 (from https://pypi.org/simple/ansible/))
+Reason for being yanked: <none given>
+Installing collected packages: resolvelib, PyYAML, pycparser, packaging, MarkupSafe, jinja2, cffi, cryptography, ansible-core, ansible
+Successfully installed MarkupSafe-2.1.5 PyYAML-6.0.2 ansible-9.0.0 ansible-core-2.16.10 cffi-1.17.0 cryptography-43.0.0 jinja2-3.1.4 packaging-24.1 pycparser-2.22 resolvelib-1.0.1
+++ ansible --version
+ansible [core 2.16.10]
+  config file = None
+  configured module search path = ['/home/aleksey/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/aleksey/OtusTeam/IaC/les13/venv/.venv/lib/python3.10/site-packages/ansible
+  ansible collection location = /home/aleksey/.ansible/collections:/usr/share/ansible/collections
+  executable location = /home/aleksey/OtusTeam/IaC/les13/venv/.venv/bin/ansible
+  python version = 3.10.12 (main, Jul 29 2024, 16:56:48) [GCC 11.4.0] (/home/aleksey/OtusTeam/IaC/les13/venv/.venv/bin/python3)
+  jinja version = 3.1.4
+  libyaml = True
+++ ansible -c local -i localhost, -a 'ansible --version' all
+localhost | CHANGED | rc=0 >>
+ansible [core 2.16.10]
+  config file = None
+  configured module search path = ['/home/aleksey/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/aleksey/OtusTeam/IaC/les13/venv/.venv/lib/python3.10/site-packages/ansible
+  ansible collection location = /home/aleksey/.ansible/collections:/usr/share/ansible/collections
+  executable location = /home/aleksey/OtusTeam/IaC/les13/venv/.venv/bin/ansible
+  python version = 3.10.12 (main, Jul 29 2024, 16:56:48) [GCC 11.4.0] (/home/aleksey/OtusTeam/IaC/les13/venv/.venv/bin/python3)
+  jinja version = 3.1.4
+  libyaml = True
+++ ansible -c local -i localhost, -m ping all
+localhost | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+++ deactivate
+++ '[' -n /home/aleksey/.local/bin:/home/aleksey/yandex-cloud/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/go/bin:/home/aleksey/.pulumi/bin ']'
+++ PATH=/home/aleksey/.local/bin:/home/aleksey/yandex-cloud/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/go/bin:/home/aleksey/.pulumi/bin
+++ export PATH
+++ unset _OLD_VIRTUAL_PATH
+++ '[' -n '' ']'
+++ '[' -n /usr/bin/bash -o -n '' ']'
+++ hash -r
+++ '[' -n '' ']'
+++ unset VIRTUAL_ENV
+++ unset VIRTUAL_ENV_PROMPT
+++ '[' '!' '' = nondestructive ']'
+++ unset -f deactivate
+aleksey@first:~/OtusTeam/IaC/les13/venv$ ansible --version
+ansible [core 2.15.5]
+  config file = None
+  configured module search path = ['/home/aleksey/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/aleksey/.local/lib/python3.10/site-packages/ansible
+  ansible collection location = /home/aleksey/.ansible/collections:/usr/share/ansible/collections
+  executable location = /home/aleksey/.local/bin/ansible
+  python version = 3.10.12 (main, Jul 29 2024, 16:56:48) [GCC 11.4.0] (/usr/bin/python3)
+  jinja version = 3.0.3
+  libyaml = True
+aleksey@first:~/OtusTeam/IaC/les13/venv$ . .venv/bin/activate
+(.venv) aleksey@first:~/OtusTeam/IaC/les13/venv$ ansible --version
+ansible [core 2.16.10]
+  config file = None
+  configured module search path = ['/home/aleksey/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/aleksey/OtusTeam/IaC/les13/venv/.venv/lib/python3.10/site-packages/ansible
+  ansible collection location = /home/aleksey/.ansible/collections:/usr/share/ansible/collections
+  executable location = /home/aleksey/OtusTeam/IaC/les13/venv/.venv/bin/ansible
+  python version = 3.10.12 (main, Jul 29 2024, 16:56:48) [GCC 11.4.0] (/home/aleksey/OtusTeam/IaC/les13/venv/.venv/bin/python3)
+  jinja version = 3.1.4
+  libyaml = True
+(.venv) aleksey@first:~/OtusTeam/IaC/les13/venv$ ./ans_local_ping.sh 
+++ ansible -c local -i localhost, -m ping all
+localhost | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+(.venv) aleksey@first:~/OtusTeam/IaC/les13/venv$ deactivate 
+aleksey@first:~/OtusTeam/IaC/les13/venv$ ansible --version
+ansible [core 2.15.5]
+  config file = None
+  configured module search path = ['/home/aleksey/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/aleksey/.local/lib/python3.10/site-packages/ansible
+  ansible collection location = /home/aleksey/.ansible/collections:/usr/share/ansible/collections
+  executable location = /home/aleksey/.local/bin/ansible
+  python version = 3.10.12 (main, Jul 29 2024, 16:56:48) [GCC 11.4.0] (/usr/bin/python3)
+  jinja version = 3.0.3
+  libyaml = True
+aleksey@first:~/OtusTeam/IaC/les13/venv$ ./clear.sh 
+aleksey@first:~/OtusTeam/IaC/les13/venv$ ls -la
+total 28
+drwxrwxr-x 2 aleksey aleksey 4096 Aug 19 13:43 .
+drwxrwxr-x 6 aleksey aleksey 4096 Aug 19 13:39 ..
+-rwxrwxr-x 1 aleksey aleksey   52 Aug 19 13:39 ans_local_ping.sh
+-rwxrwxr-x 1 aleksey aleksey   67 Aug 19 13:39 ans_local_version.sh
+-rwxrwxr-x 1 aleksey aleksey   12 Aug 19 13:39 clear.sh
+-rwxrwxr-x 1 aleksey aleksey  559 Aug 19 13:39 install_ansible_in_venv.sh
+-rw-rw-r-- 1 aleksey aleksey   15 Aug 19 13:40 requirements.txt

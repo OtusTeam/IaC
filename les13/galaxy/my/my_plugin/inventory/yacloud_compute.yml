@@ -1,0 +1,8 @@
+plugin: yacloud_compute
+yacloud_iam_token: "$YC_TOKEN"
+yacloud_clouds:
+- cloud-aleksey-jhuravlev
+yacloud_folders:
+- sand
+yacloud_group_label: "label"
+

@@ -1,0 +1,534 @@
+aleksey@first:~/OtusTeam/IaC/les13/galaxy$ ./role_list.sh 
+++ ansible-galaxy role list
+# /home/aleksey/OtusTeam/IaC/les13/galaxy/roles_imported
+- geerlingguy.pip, 2.2.0
+# /home/aleksey/OtusTeam/IaC/les13/galaxy/roles
+- ansible_authorized_key, (unknown version)
+- my_role, (unknown version)
+aleksey@first:~/OtusTeam/IaC/les13/galaxy$ ./docker_role_install.sh 
+Starting galaxy role install process
+- downloading role 'docker', owned by geerlingguy
+- downloading role from https://github.com/geerlingguy/ansible-role-docker/archive/7.3.0.tar.gz
+- extracting geerlingguy.docker to /home/aleksey/OtusTeam/IaC/les13/galaxy/roles_imported/geerlingguy.docker
+- geerlingguy.docker (7.3.0) was installed successfully
+aleksey@first:~/OtusTeam/IaC/les13/galaxy$ ./role_list.sh 
+++ ansible-galaxy role list
+# /home/aleksey/OtusTeam/IaC/les13/galaxy/roles_imported
+- geerlingguy.docker, 7.3.0
+- geerlingguy.pip, 2.2.0
+# /home/aleksey/OtusTeam/IaC/les13/galaxy/roles
+- ansible_authorized_key, (unknown version)
+- my_role, (unknown version)
+aleksey@first:~/OtusTeam/IaC/les13/galaxy$ ansible-inventory --list
+{
+    "_meta": {
+        "hostvars": {
+            "test": {
+                "ansible_host": "89.169.147.135"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped",
+            "yacloud"
+        ]
+    },
+    "yacloud": {
+        "hosts": [
+            "test"
+        ]
+    }
+}
+aleksey@first:~/OtusTeam/IaC/les13/galaxy$ ansible-playbook pip_and_docker_install.yml 
+
+PLAY [all] ***********************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************************************************
+ok: [test]
+
+TASK [geerlingguy.pip : Ensure Pip is installed.] ********************************************************************************************************************************************************************************************
+changed: [test]
+
+TASK [geerlingguy.pip : Ensure pip_install_packages are installed.] **************************************************************************************************************************************************************************
+changed: [test] => (item={'name': 'docker'})
+
+TASK [geerlingguy.docker : Load OS-specific vars.] *******************************************************************************************************************************************************************************************
+ok: [test]
+
+TASK [geerlingguy.docker : include_tasks] ****************************************************************************************************************************************************************************************************
+skipping: [test]
+
+TASK [geerlingguy.docker : include_tasks] ****************************************************************************************************************************************************************************************************
+included: /home/aleksey/OtusTeam/IaC/les13/galaxy/roles_imported/geerlingguy.docker/tasks/setup-Debian.yml for test
+
+TASK [geerlingguy.docker : Ensure old versions of Docker are not installed.] *****************************************************************************************************************************************************************
+ok: [test]
+
+TASK [geerlingguy.docker : Ensure dependencies are installed.] *******************************************************************************************************************************************************************************
+changed: [test]
+
+TASK [geerlingguy.docker : Ensure directory exists for /etc/apt/keyrings] ********************************************************************************************************************************************************************
+ok: [test]
+
+TASK [geerlingguy.docker : Add Docker apt key.] **********************************************************************************************************************************************************************************************
+changed: [test]
+
+TASK [geerlingguy.docker : Ensure curl is present (on older systems without SNI).] ***********************************************************************************************************************************************************
+skipping: [test]
+
+TASK [geerlingguy.docker : Add Docker apt key (alternative for older systems without SNI).] **************************************************************************************************************************************************
+skipping: [test]
+
+TASK [geerlingguy.docker : Add Docker repository.] *******************************************************************************************************************************************************************************************
+changed: [test]
+
+TASK [geerlingguy.docker : Install Docker packages.] *****************************************************************************************************************************************************************************************
+skipping: [test]
+
+TASK [geerlingguy.docker : Install Docker packages (with downgrade option).] *****************************************************************************************************************************************************************
+changed: [test]
+
+TASK [geerlingguy.docker : Install docker-compose plugin.] ***********************************************************************************************************************************************************************************
+skipping: [test]
+
+TASK [geerlingguy.docker : Install docker-compose-plugin (with downgrade option).] ***********************************************************************************************************************************************************
+ok: [test]
+
+TASK [geerlingguy.docker : Ensure /etc/docker/ directory exists.] ****************************************************************************************************************************************************************************
+skipping: [test]
+
+TASK [geerlingguy.docker : Configure Docker daemon options.] *********************************************************************************************************************************************************************************
+skipping: [test]
+
+TASK [geerlingguy.docker : Ensure Docker is started and enabled at boot.] ********************************************************************************************************************************************************************
+ok: [test]
+
+TASK [geerlingguy.docker : Ensure handlers are notified now to avoid firewall conflicts.] ****************************************************************************************************************************************************
+
+RUNNING HANDLER [geerlingguy.docker : restart docker] ****************************************************************************************************************************************************************************************
+changed: [test]
+
+TASK [geerlingguy.docker : include_tasks] ****************************************************************************************************************************************************************************************************
+skipping: [test]
+
+TASK [geerlingguy.docker : Get docker group info using getent.] ******************************************************************************************************************************************************************************
+ok: [test]
+
+TASK [geerlingguy.docker : Check if there are any users to add to the docker group.] *********************************************************************************************************************************************************
+ok: [test] => (item=yc-user)
+
+TASK [geerlingguy.docker : include_tasks] ****************************************************************************************************************************************************************************************************
+included: /home/aleksey/OtusTeam/IaC/les13/galaxy/roles_imported/geerlingguy.docker/tasks/docker-users.yml for test
+
+TASK [geerlingguy.docker : Ensure docker users are added to the docker group.] ***************************************************************************************************************************************************************
+changed: [test] => (item=yc-user)
+
+TASK [geerlingguy.docker : Reset ssh connection to apply user changes.] **********************************************************************************************************************************************************************
+
+TASK [print vars values] *********************************************************************************************************************************************************************************************************************
+skipping: [test]
+
+TASK [second print vars values] **************************************************************************************************************************************************************************************************************
+skipping: [test] => (item=['yc-user'].) 
+skipping: [test]
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+test                       : ok=18   changed=8    unreachable=0    failed=0    skipped=10   rescued=0    ignored=0   
+
+aleksey@first:~/OtusTeam/IaC/les13/galaxy$ ansible-playbook docker_ansible_run.yml 
+
+PLAY [Создание и запуск в docker контейнера ansible с выводом --version] *********************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************************************************
+ok: [test]
+
+TASK [Создание и выполнение Docker контейнера] ***********************************************************************************************************************************************************************************************
+[DEPRECATION WARNING]: The container_default_behavior option will change its default value from "compatibility" to "no_defaults" in community.docker 2.0.0. To remove this warning, please specify an explicit value for it now. This feature
+ will be removed from community.docker in version 2.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+changed: [test]
+
+TASK [Show results] **************************************************************************************************************************************************************************************************************************
+ok: [test] => {
+    "msg": "ansible [core 2.15.2]\n  config file = None\n  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']\n  ansible python module location = /usr/local/lib/python3.9/dist-packages/ansible\n  ansible collection location = /root/.ansible/collections:/usr/share/ansible/collections\n  executable location = /usr/local/bin/ansible\n  python version = 3.9.2 (default, Feb 28 2021, 17:03:44) [GCC 10.2.1 20210110] (/usr/bin/python3)\n  jinja version = 3.1.2\n  libyaml = True\n"
+}
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+test                       : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+aleksey@first:~/OtusTeam/IaC/les13/galaxy$ ./docker_role_remove.sh 
+- successfully removed geerlingguy.docker
+aleksey@first:~/OtusTeam/IaC/les13/galaxy$ ./role_list.sh 
+++ ansible-galaxy role list
+# /home/aleksey/OtusTeam/IaC/les13/galaxy/roles_imported
+- geerlingguy.pip, 2.2.0
+# /home/aleksey/OtusTeam/IaC/les13/galaxy/roles
+- ansible_authorized_key, (unknown version)
+- my_role, (unknown version)
+aleksey@first:~/OtusTeam/IaC/les13/galaxy$ ansible-playbook call_my_role.yml 
+
+PLAY [Deploy my role] ************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [my.my_collection.my_role : Create /var/www/html directory] *****************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [my.my_collection.my_role : Create index.html file] *************************************************************************************************************************************************************************************
+changed: [localhost]
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+localhost                  : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+aleksey@first:~/OtusTeam/IaC/les13/galaxy$ cat /var/www/html/index.html 
+<html>
+  <body>
+    <h1>Hello, World!</h1>
+  </body>
+</html>
+aleksey@first:~/OtusTeam/IaC/les13/galaxy$ ansible-playbook call_my_role.yml -e callname=test
+
+PLAY [Deploy my role] ************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [my.my_collection.my_role : Create /var/www/html directory] *****************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [my.my_collection.my_role : Create index.html file] *************************************************************************************************************************************************************************************
+changed: [localhost]
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+localhost                  : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+aleksey@first:~/OtusTeam/IaC/les13/galaxy$ cat /var/www/html/index.html 
+<html>
+  <body>
+    <h1>Hello, test!</h1>
+  </body>
+</html>
+aleksey@first:~/OtusTeam/IaC/les13/galaxy$ 
+aleksey@first:~/OtusTeam/IaC/les13/galaxy$ ./clear_index_html.sh 
+++ sudo rm /var/www/html/index.html
+aleksey@first:~/OtusTeam/IaC/les13/galaxy$ ./collection_list.sh 
+++ ansible-galaxy collection list
+
+# /home/aleksey/OtusTeam/IaC/les13/galaxy/collections/ansible_collections
+Collection                Version
+------------------------- -------
+my.my_collection          1.0.0  
+
+# /usr/lib/python3/dist-packages/ansible_collections
+Collection                Version
+------------------------- -------
+amazon.aws                1.4.0  
+ansible.netcommon         1.5.0  
+ansible.posix             1.1.1  
+ansible.windows           1.4.0  
+arista.eos                1.3.0  
+awx.awx                   14.1.0 
+azure.azcollection        1.4.0  
+check_point.mgmt          1.0.6  
+chocolatey.chocolatey     1.0.2  
+cisco.aci                 1.1.1  
+cisco.asa                 1.0.4  
+cisco.intersight          1.0.10 
+cisco.ios                 1.3.0  
+cisco.iosxr               1.2.1  
+cisco.meraki              2.2.0  
+cisco.mso                 1.1.0  
+cisco.nso                 1.0.3  
+cisco.nxos                1.4.0  
+cisco.ucs                 1.6.0  
+cloudscale_ch.cloud       1.3.1  
+community.aws             1.3.0  
+community.azure           1.0.0  
+community.crypto          1.4.0  
+community.digitalocean    1.0.0  
+community.docker          1.2.2  
+community.fortios         1.0.0  
+community.general         1.3.6  
+community.google          1.0.0  
+community.grafana         1.1.0  
+community.hashi_vault     1.1.0  
+community.hrobot          1.1.0  
+community.kubernetes      1.1.1  
+community.kubevirt        1.0.0  
+community.libvirt         1.0.0  
+community.mongodb         1.2.0  
+community.mysql           1.2.0  
+community.network         1.3.2  
+community.okd             1.0.0  
+community.postgresql      1.1.1  
+community.proxysql        1.0.0  
+community.rabbitmq        1.0.1  
+community.routeros        1.1.0  
+community.skydive         1.0.0  
+community.vmware          1.7.0  
+community.windows         1.3.0  
+community.zabbix          1.2.0  
+containers.podman         1.4.1  
+cyberark.conjur           1.1.0  
+cyberark.pas              1.0.5  
+dellemc.os10              1.0.2  
+dellemc.os6               1.0.6  
+dellemc.os9               1.0.3  
+f5networks.f5_modules     1.7.1  
+fortinet.fortimanager     1.0.5  
+fortinet.fortios          1.1.8  
+frr.frr                   1.0.3  
+gluster.gluster           1.0.1  
+google.cloud              1.0.2  
+hetzner.hcloud            1.2.1  
+ibm.qradar                1.0.3  
+infinidat.infinibox       1.2.4  
+junipernetworks.junos     1.3.0  
+mellanox.onyx             1.0.0  
+netapp.aws                20.9.0 
+netapp.elementsw          20.11.0
+netapp.ontap              20.12.0
+netapp_eseries.santricity 1.1.0  
+netbox.netbox             1.2.1  
+ngine_io.cloudstack       1.2.0  
+ngine_io.exoscale         1.0.0  
+ngine_io.vultr            1.1.0  
+openstack.cloud           1.2.1  
+openvswitch.openvswitch   1.1.0  
+ovirt.ovirt               1.3.0  
+purestorage.flasharray    1.6.2  
+purestorage.flashblade    1.4.0  
+servicenow.servicenow     1.0.4  
+splunk.es                 1.0.2  
+theforeman.foreman        1.5.1  
+vyos.vyos                 1.1.1  
+wti.remote                1.0.1  
+aleksey@first:~/OtusTeam/IaC/les13/galaxy$ ./galaxy_intstall_requirements.sh 
+Starting galaxy role install process
+- geerlingguy.pip (2.2.0) is already installed, skipping.
+- geerlingguy.docker (7.0.1) is already installed, skipping.
+Starting galaxy collection install process
+[WARNING]: Collection ansible.netcommon does not support Ansible version 2.15.5
+[WARNING]: Collection ibm.qradar does not support Ansible version 2.15.5
+[WARNING]: Collection cisco.iosxr does not support Ansible version 2.15.5
+[WARNING]: Collection vyos.vyos does not support Ansible version 2.15.5
+[WARNING]: Collection cisco.nxos does not support Ansible version 2.15.5
+[WARNING]: Collection junipernetworks.junos does not support Ansible version 2.15.5
+[WARNING]: Collection ansible.posix does not support Ansible version 2.15.5
+[WARNING]: Collection cisco.asa does not support Ansible version 2.15.5
+[WARNING]: Collection frr.frr does not support Ansible version 2.15.5
+[WARNING]: Collection splunk.es does not support Ansible version 2.15.5
+[WARNING]: Collection openvswitch.openvswitch does not support Ansible version 2.15.5
+Process install dependency map
+Starting collection install process
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/devroles-system-3.0.0.tar.gz to /home/aleksey/.ansible/tmp/ansible-local-727672j77i5feg/tmpfg4lsymu/devroles-system-3.0.0-3xn0s98j
+Installing 'devroles.system:3.0.0' to '/home/aleksey/OtusTeam/IaC/les13/galaxy/collections/ansible_collections/devroles/system'
+devroles.system:3.0.0 was installed successfully
+'containers.podman:1.4.1' is already installed, skipping.
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/community-docker-3.4.10.tar.gz to /home/aleksey/.ansible/tmp/ansible-local-727672j77i5feg/tmpfg4lsymu/community-docker-3.4.10-dmy8lvgl
+Installing 'community.docker:3.4.10' to '/home/aleksey/OtusTeam/IaC/les13/galaxy/collections/ansible_collections/community/docker'
+community.docker:3.4.10 was installed successfully
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/community-general-4.8.0.tar.gz to /home/aleksey/.ansible/tmp/ansible-local-727672j77i5feg/tmpfg4lsymu/community-general-4.8.0-22pc4sdg
+Installing 'community.general:4.8.0' to '/home/aleksey/OtusTeam/IaC/les13/galaxy/collections/ansible_collections/community/general'
+community.general:4.8.0 was installed successfully
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/ansible-posix-1.5.4.tar.gz to /home/aleksey/.ansible/tmp/ansible-local-727672j77i5feg/tmpfg4lsymu/ansible-posix-1.5.4-lgvruk6u
+Installing 'ansible.posix:1.5.4' to '/home/aleksey/OtusTeam/IaC/les13/galaxy/collections/ansible_collections/ansible/posix'
+ansible.posix:1.5.4 was installed successfully
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/community-mysql-3.9.0.tar.gz to /home/aleksey/.ansible/tmp/ansible-local-727672j77i5feg/tmpfg4lsymu/community-mysql-3.9.0-85gyngn3
+Installing 'community.mysql:3.9.0' to '/home/aleksey/OtusTeam/IaC/les13/galaxy/collections/ansible_collections/community/mysql'
+community.mysql:3.9.0 was installed successfully
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/community-crypto-2.21.1.tar.gz to /home/aleksey/.ansible/tmp/ansible-local-727672j77i5feg/tmpfg4lsymu/community-crypto-2.21.1-v47m7te4
+Installing 'community.crypto:2.21.1' to '/home/aleksey/OtusTeam/IaC/les13/galaxy/collections/ansible_collections/community/crypto'
+community.crypto:2.21.1 was installed successfully
+aleksey@first:~/OtusTeam/IaC/les13/galaxy$ ./collection_list.sh 
+++ ansible-galaxy collection list
+
+# /home/aleksey/OtusTeam/IaC/les13/galaxy/collections/ansible_collections
+Collection                Version
+------------------------- -------
+ansible.posix             1.5.4  
+community.crypto          2.21.1 
+community.docker          3.4.10 
+community.general         4.8.0  
+community.mysql           3.9.0  
+devroles.system           3.0.0  
+my.my_collection          1.0.0  
+
+# /usr/lib/python3/dist-packages/ansible_collections
+Collection                Version
+------------------------- -------
+amazon.aws                1.4.0  
+ansible.netcommon         1.5.0  
+ansible.posix             1.1.1  
+ansible.windows           1.4.0  
+arista.eos                1.3.0  
+awx.awx                   14.1.0 
+azure.azcollection        1.4.0  
+check_point.mgmt          1.0.6  
+chocolatey.chocolatey     1.0.2  
+cisco.aci                 1.1.1  
+cisco.asa                 1.0.4  
+cisco.intersight          1.0.10 
+cisco.ios                 1.3.0  
+cisco.iosxr               1.2.1  
+cisco.meraki              2.2.0  
+cisco.mso                 1.1.0  
+cisco.nso                 1.0.3  
+cisco.nxos                1.4.0  
+cisco.ucs                 1.6.0  
+cloudscale_ch.cloud       1.3.1  
+community.aws             1.3.0  
+community.azure           1.0.0  
+community.crypto          1.4.0  
+community.digitalocean    1.0.0  
+community.docker          1.2.2  
+community.fortios         1.0.0  
+community.general         1.3.6  
+community.google          1.0.0  
+community.grafana         1.1.0  
+community.hashi_vault     1.1.0  
+community.hrobot          1.1.0  
+community.kubernetes      1.1.1  
+community.kubevirt        1.0.0  
+community.libvirt         1.0.0  
+community.mongodb         1.2.0  
+community.mysql           1.2.0  
+community.network         1.3.2  
+community.okd             1.0.0  
+community.postgresql      1.1.1  
+community.proxysql        1.0.0  
+community.rabbitmq        1.0.1  
+community.routeros        1.1.0  
+community.skydive         1.0.0  
+community.vmware          1.7.0  
+community.windows         1.3.0  
+community.zabbix          1.2.0  
+containers.podman         1.4.1  
+cyberark.conjur           1.1.0  
+cyberark.pas              1.0.5  
+dellemc.os10              1.0.2  
+dellemc.os6               1.0.6  
+dellemc.os9               1.0.3  
+f5networks.f5_modules     1.7.1  
+fortinet.fortimanager     1.0.5  
+fortinet.fortios          1.1.8  
+frr.frr                   1.0.3  
+gluster.gluster           1.0.1  
+google.cloud              1.0.2  
+hetzner.hcloud            1.2.1  
+ibm.qradar                1.0.3  
+infinidat.infinibox       1.2.4  
+junipernetworks.junos     1.3.0  
+mellanox.onyx             1.0.0  
+netapp.aws                20.9.0 
+netapp.elementsw          20.11.0
+netapp.ontap              20.12.0
+netapp_eseries.santricity 1.1.0  
+netbox.netbox             1.2.1  
+ngine_io.cloudstack       1.2.0  
+ngine_io.exoscale         1.0.0  
+ngine_io.vultr            1.1.0  
+openstack.cloud           1.2.1  
+openvswitch.openvswitch   1.1.0  
+ovirt.ovirt               1.3.0  
+purestorage.flasharray    1.6.2  
+purestorage.flashblade    1.4.0  
+servicenow.servicenow     1.0.4  
+splunk.es                 1.0.2  
+theforeman.foreman        1.5.1  
+vyos.vyos                 1.1.1  
+wti.remote                1.0.1  
+aleksey@first:~/OtusTeam/IaC/les13/galaxy$ 
+aleksey@first:~/OtusTeam/IaC/les13/galaxy$ ./collection_list.sh 
+++ ansible-galaxy collection list
+
+# /home/aleksey/OtusTeam/IaC/les13/galaxy/collections/ansible_collections
+Collection                Version
+------------------------- -------
+my.my_collection          1.0.0  
+
+# /usr/lib/python3/dist-packages/ansible_collections
+Collection                Version
+------------------------- -------
+amazon.aws                1.4.0  
+ansible.netcommon         1.5.0  
+ansible.posix             1.1.1  
+ansible.windows           1.4.0  
+arista.eos                1.3.0  
+awx.awx                   14.1.0 
+azure.azcollection        1.4.0  
+check_point.mgmt          1.0.6  
+chocolatey.chocolatey     1.0.2  
+cisco.aci                 1.1.1  
+cisco.asa                 1.0.4  
+cisco.intersight          1.0.10 
+cisco.ios                 1.3.0  
+cisco.iosxr               1.2.1  
+cisco.meraki              2.2.0  
+cisco.mso                 1.1.0  
+cisco.nso                 1.0.3  
+cisco.nxos                1.4.0  
+cisco.ucs                 1.6.0  
+cloudscale_ch.cloud       1.3.1  
+community.aws             1.3.0  
+community.azure           1.0.0  
+community.crypto          1.4.0  
+community.digitalocean    1.0.0  
+community.docker          1.2.2  
+community.fortios         1.0.0  
+community.general         1.3.6  
+community.google          1.0.0  
+community.grafana         1.1.0  
+community.hashi_vault     1.1.0  
+community.hrobot          1.1.0  
+community.kubernetes      1.1.1  
+community.kubevirt        1.0.0  
+community.libvirt         1.0.0  
+community.mongodb         1.2.0  
+community.mysql           1.2.0  
+community.network         1.3.2  
+community.okd             1.0.0  
+community.postgresql      1.1.1  
+community.proxysql        1.0.0  
+community.rabbitmq        1.0.1  
+community.routeros        1.1.0  
+community.skydive         1.0.0  
+community.vmware          1.7.0  
+community.windows         1.3.0  
+community.zabbix          1.2.0  
+containers.podman         1.4.1  
+cyberark.conjur           1.1.0  
+cyberark.pas              1.0.5  
+dellemc.os10              1.0.2  
+dellemc.os6               1.0.6  
+dellemc.os9               1.0.3  
+f5networks.f5_modules     1.7.1  
+fortinet.fortimanager     1.0.5  
+fortinet.fortios          1.1.8  
+frr.frr                   1.0.3  
+gluster.gluster           1.0.1  
+google.cloud              1.0.2  
+hetzner.hcloud            1.2.1  
+ibm.qradar                1.0.3  
+infinidat.infinibox       1.2.4  
+junipernetworks.junos     1.3.0  
+mellanox.onyx             1.0.0  
+netapp.aws                20.9.0 
+netapp.elementsw          20.11.0
+netapp.ontap              20.12.0
+netapp_eseries.santricity 1.1.0  
+netbox.netbox             1.2.1  
+ngine_io.cloudstack       1.2.0  
+ngine_io.exoscale         1.0.0  
+ngine_io.vultr            1.1.0  
+openstack.cloud           1.2.1  
+openvswitch.openvswitch   1.1.0  
+ovirt.ovirt               1.3.0  
+purestorage.flasharray    1.6.2  
+purestorage.flashblade    1.4.0  
+servicenow.servicenow     1.0.4  
+splunk.es                 1.0.2  
+theforeman.foreman        1.5.1  
+vyos.vyos                 1.1.1  
+wti.remote                1.0.1  

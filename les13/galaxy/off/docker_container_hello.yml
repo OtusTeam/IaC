@@ -1,0 +1,19 @@
+---
+- name: Создание и запуск в docker контейнера busybox с выводом "Hello"
+  hosts: docker
+
+  tasks:
+
+    - name: Создание и выполнение Docker контейнера
+      community.docker.docker_container:
+        name: hello_container
+        image: busybox:latest
+        command: sh -c "echo 'Hello'"
+        state: started
+        detach: no
+        cleanup: yes
+      register: output
+
+    - name: Show results
+      ansible.builtin.debug:
+        msg: "{{ output.container.Output }}"

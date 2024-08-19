@@ -1,0 +1,60 @@
+---
+- hosts: localhost
+  vars:
+#    - remote_regular_user: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
+    - remote_regular_user: "{{ ansible_user_id }}"
+
+  tasks:
+    - name: print remote username from config
+      ansible.builtin.debug:
+        msg:
+        - "user:      {{ ansible_user }}"
+        - "user_id:   {{ ansible_user_id }}"
+        - "user_gid:  {{ ansible_user_gid }}"
+#        - "user_sid:  {{ ansible_user_sid }}"
+        - "ssh_user:  {{ ansible_ssh_user }}"
+        - "env USER:  {{ lookup('env', 'USER') }}"
+        - "lookup  env ANSIBLE_REMOTE_USER {{ lookup('env', 'ANSIBLE_REMOTE_USER') }}"
+        - "ansible_env.ANSIBLE_REMOTE_USER {{ ansible_env.ANSIBLE_REMOTE_USER }}"
+        - "remote_regular_user: {{ remote_regular_user }}"
+
+    - name: Before 2.13, how to set default value if the variable is not defined.
+             This cannot distinguish between USR undefined and USR=''.
+      ansible.builtin.debug:
+        msg: "{{ lookup('ansible.builtin.env', 'USR')|default('nobody', True) }} is the user."
+
+    - name: Example how to set default value if the variable is not defined, ignores USR=''
+      ansible.builtin.debug:
+        msg: "{{ lookup('ansible.builtin.env', 'USR', default='nobody') }} is the user."
+
+    - name: Before 2.13, how to set default value if the variable is not defined.
+             This cannot distinguish between ANSIBLE_REMOTE_USER undefined and ANSIBLE_USR=''.
+      ansible.builtin.debug:
+        msg: "{{ lookup('ansible.builtin.env', 'ANSIBLE_REMOTE_USER')|default('nobody', True) }} is the ANSIBLE_REMOTE_USER."
+
+    - name: Example how to set default value if the variable is not defined, ignores ANSIBLE_REMOTE_USER=''
+      ansible.builtin.debug:
+        msg: "{{ lookup('ansible.builtin.env', 'ANSIBLE_REMOTE_USER', default='nobody') }} is the ANSIBLE_REMOTE_USER."
+
+# You can pass the Undefined object as default to force an undefined error:
+
+#    - name: Set default value to Undefined, if the variable is not defined
+#            You can pass the Undefined object as default to force an undefined error
+#      ansible.builtin.debug:
+#        msg: "{{ lookup('ansible.builtin.env', 'USR', default=Undefined) }} is the user."
+
+#    - name: Set default value to undef(), if the variable is not defined
+#      ansible.builtin.debug:
+#        msg: "{{ lookup('ansible.builtin.env', 'USR', default=undef()) }} is the user."
+
+
+
+    - name: test when defined
+      ansible.builtin.debug:
+        msg:  "{{ foo }}"
+      when: foo is defined
+
+    - name: test when undefined
+      ansible.builtin.debug:
+        msg: "The variable bar is not defined"
+      when: bar is undefined

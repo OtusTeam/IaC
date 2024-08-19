@@ -1,0 +1,98 @@
+aleksey@first:~/OtusTeam/IaC/les13/role$ cd roles
+aleksey@first:~/OtusTeam/IaC/les13/role/roles$ tree
+.
+└── my_role
+    ├── defaults
+    │   └── main.yml
+    ├── tasks
+    │   └── main.yml
+    └── templates
+        └── index.html.j2
+
+4 directories, 3 files
+aleksey@first:~/OtusTeam/IaC/les13/role/roles$ cd my_role/
+aleksey@first:~/OtusTeam/IaC/les13/role/roles/my_role$ cat defaults/main.yml 
+---
+callname: "Anonymous"
+aleksey@first:~/OtusTeam/IaC/les13/role/roles/my_role$ cat tasks/main.yml 
+---
+- name: Create /var/www/html directory
+  file:
+    path: /var/www/html
+    state: directory
+
+- name: Create index.html file
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    mode: '0644'
+  vars:
+    templname: "{{ callname }}"
+aleksey@first:~/OtusTeam/IaC/les13/role/roles/my_role$ cat templates/index.html.j2 
+<html>
+  <body>
+    <h1>Hello, {{ templname }}!</h1>
+  </body>
+</html>
+aleksey@first:~/OtusTeam/IaC/les13/role/roles/my_role$ cd ..
+aleksey@first:~/OtusTeam/IaC/les13/role/roles$ cd ..
+aleksey@first:~/OtusTeam/IaC/les13/role$ ansible-playbook call_my_role.yml 
+[WARNING]: No inventory was parsed, only implicit localhost is available
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+PLAY [Deploy my role] ************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [my_role : Create /var/www/html directory] **********************************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [my_role : Create index.html file] ******************************************************************************************************************************************************************************************************
+changed: [localhost]
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+localhost                  : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+aleksey@first:~/OtusTeam/IaC/les13/role$ ansible --version
+ansible [core 2.15.5]
+  config file = None
+  configured module search path = ['/home/aleksey/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/aleksey/.local/lib/python3.10/site-packages/ansible
+  ansible collection location = /home/aleksey/.ansible/collections:/usr/share/ansible/collections
+  executable location = /home/aleksey/.local/bin/ansible
+  python version = 3.10.12 (main, Jul 29 2024, 16:56:48) [GCC 11.4.0] (/usr/bin/python3)
+  jinja version = 3.0.3
+  libyaml = True
+aleksey@first:~/OtusTeam/IaC/les13/role$ cat /var/www/html/index.html 
+<html>
+  <body>
+    <h1>Hello, World!</h1>
+  </body>
+</html>
+aleksey@first:~/OtusTeam/IaC/les13/role$ ansible-playbook call_my_role.yml -e callname=External_world
+[WARNING]: No inventory was parsed, only implicit localhost is available
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+PLAY [Deploy my role] ************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [my_role : Create /var/www/html directory] **********************************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [my_role : Create index.html file] ******************************************************************************************************************************************************************************************************
+changed: [localhost]
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+localhost                  : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+aleksey@first:~/OtusTeam/IaC/les13/role$ cat /var/www/html/index.html 
+<html>
+  <body>
+    <h1>Hello, External_world!</h1>
+  </body>
+</html>
+aleksey@first:~/OtusTeam/IaC/les13/role$ ./clear.sh 
+++ sudo rm /var/www/html/index.html
