@@ -1,0 +1,65 @@
+---
+- hosts: docker
+  become: true
+
+  pre_tasks:
+
+  - name: Update apt cache
+    apt:
+      update_cache: yes
+
+  tasks:
+
+  - name: install dependencies
+    apt:
+      pkg:
+      - apt-transport-https
+      - curl
+      - gnupg-agent
+      - software-properties-common
+      state: present
+
+  - name: add GPG key
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+  - name: add docker repository to apt
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu jammy stable
+      state: present
+
+  - name: install docker
+    apt:
+      pkg:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      state: latest
+      update_cache: yes
+
+  - name: check docker is active
+    service:
+      name: docker
+      state: started
+      enabled: yes
+    tags: check
+
+  - name: adding ansible user to docker group
+    user:
+      name: "{{ ansible_user }}"
+      groups: docker
+      append: yes
+
+  post_tasks:
+
+  - name: Check how docker user runs docker command
+    command: docker --version
+    become: no
+    register: output
+    tags: check
+
+  - name: Print output
+    debug:
+      msg: "{{ output.stdout_lines }}"
+    tags: check

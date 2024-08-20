@@ -1,0 +1,26 @@
+- name: Установка пакетов для docker_container
+  hosts: docker
+  tasks:
+
+    - name: Установка pip3 если нет
+      apt:
+        name: python3-pip
+        update_cache: yes
+      become: yes
+
+    - name: Установка Docker с помощью pip
+      pip:
+        name: docker
+
+  post_tasks:
+
+  - name: Get info on docker host
+    community.docker.docker_host_info:
+    register: result
+    tags: check
+
+  - name: Show host information
+    ansible.builtin.debug:
+      var: result.host_info.ServerVersion
+    tags: check
+

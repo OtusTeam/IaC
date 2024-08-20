@@ -1,0 +1,11 @@
+---
+- hosts: docker
+  tasks:
+
+  - name: Run container
+    command: docker run --rm -u 4000 python:3.12-alpine python --version
+    register: output
+
+  - name: Show results
+    ansible.builtin.debug:
+      var: output.stdout

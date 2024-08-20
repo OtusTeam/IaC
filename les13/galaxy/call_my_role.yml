@@ -7,4 +7,4 @@
     - my.my_collection.my_role
 
   vars:
-    callname: "World"
+    callname: "Collection"
