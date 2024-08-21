@@ -1,0 +1,25 @@
+yc-user@test:~/examples/options/env$ ./run.sh 
+++ cat Dockerfile
+FROM alpine:3.20
+
+CMD ["sh", "-c", "echo MY_ENV_VAR=$MY_ENV_VAR"]
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ docker build -t printenv .
+[+] Building 0.3s (5/5) FINISHED                                 docker:default
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 103B                                       0.0s
+ => [internal] load metadata for docker.io/library/alpine:3.20             0.0s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => CACHED [1/1] FROM docker.io/library/alpine:3.20                        0.0s
+ => exporting to image                                                     0.0s
+ => => exporting layers                                                    0.0s
+ => => writing image sha256:36a6c8a181e579b5fa719b5a61c3139da80775634d408  0.0s
+ => => naming to docker.io/library/printenv                                0.0s
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ docker run --rm --env MY_ENV_VAR=my_value printenv
+MY_ENV_VAR=my_value
