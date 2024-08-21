@@ -3,7 +3,7 @@
   tasks:
 
   - name: Run container
-    command: docker run --rm -u 4000 python:3.12-alpine python --version
+    command: docker run --rm -u 4000:4000 python:3.12-alpine python --version
     register: output
 
   - name: Show results

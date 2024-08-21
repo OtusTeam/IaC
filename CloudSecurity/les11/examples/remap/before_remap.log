@@ -1,0 +1,27 @@
+yc-user@test:~/examples/remap$ ./run.sh 
+++ docker container rm alpine_itd -f
+alpine_itd
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ docker run -itd --name alpine_itd alpine:3.20
+23eb837d233a960354cb858ecb257060c1cc7f2e8a8261bf91bf54075c79671d
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ docker ps
+CONTAINER ID   IMAGE         COMMAND     CREATED         STATUS        PORTS     NAMES
+23eb837d233a   alpine:3.20   "/bin/sh"   2 seconds ago   Up 1 second             alpine_itd
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ docker exec -it alpine_itd ps -a
+PID   USER     TIME  COMMAND
+    1 root      0:00 /bin/sh
+    7 root      0:00 ps -a
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ docker container top alpine_itd
+UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+root                99681               99661               0                   17:37               pts/0               00:00:00            /bin/sh

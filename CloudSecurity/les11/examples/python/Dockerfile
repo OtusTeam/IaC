@@ -2,7 +2,14 @@
 FROM alpine:3.20
 
 # Update the package index and install Python 3 and pip
-RUN apk update && apk add python3 py-pip
+RUN apk add --update-cache
+RUN apk add python3
+RUN apk add python3-dev
+RUN apk add py-pip
+RUN apk add build-base
+#RUN pip install virtualenv 
+# Clear cache
+RUN rm -rf /var/cache/apk/*
 
 # Copy the requirements.txt file to the /app directory
 #COPY requirements.txt /app/

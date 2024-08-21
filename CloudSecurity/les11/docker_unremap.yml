@@ -1,0 +1,17 @@
+---
+- name: Delete /etc/docker/daemon.json file and restart Docker service if file existed and was deleted
+  hosts: docker
+  become: yes
+  tasks:
+    - name: Delete /etc/docker/daemon.json file if it exists
+      file:
+        path: /etc/docker/daemon.json
+        state: absent
+#      register: delete_result
+      notify: Restart Docker service
+
+  handlers:
+    - name: Restart Docker service
+      service:
+        name: docker
+        state: restarted

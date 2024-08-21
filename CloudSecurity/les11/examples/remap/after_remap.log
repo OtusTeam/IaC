@@ -1,0 +1,28 @@
+yc-user@test:~/examples/remap$ ../useful/docker_container_prune.sh 
+++ docker container prune -f
+Deleted Containers:
+c99db21e7fb623b3db29264ac7d211a817738922a973640acb8ff94b7368440b
+
+Total reclaimed space: 0B
+yc-user@test:~/examples/remap$ ./run.sh 
+++ docker run -itd --name alpine_itd alpine:3.20
+b75f8fd238593a1ff4fc52097622443882d9bbfc003f88e56a527f64c5f07e1b
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ docker ps
+CONTAINER ID   IMAGE         COMMAND     CREATED         STATUS        PORTS     NAMES
+b75f8fd23859   alpine:3.20   "/bin/sh"   3 seconds ago   Up 1 second             alpine_itd
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ docker exec -it alpine_itd ps -a
+PID   USER     TIME  COMMAND
+    1 root      0:00 /bin/sh
+    7 root      0:00 ps -a
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ docker container top alpine_itd
+UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+165536              98711               98690               0                   17:30               pts/0               00:00:00            /bin/sh

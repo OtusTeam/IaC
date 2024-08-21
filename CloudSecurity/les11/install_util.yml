@@ -13,6 +13,7 @@
   - name: install dependencies
     apt:
       pkg:
+      - jq
       - tree
       - mc
       state: present
