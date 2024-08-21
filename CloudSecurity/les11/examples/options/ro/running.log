@@ -1,0 +1,7 @@
+yc-user@test:~/examples/options/ro$ ./run.sh 
+Limit the mounted filesystem to be read-only.
+Provide an in-memory storage for temporary files at /tmp.
+Bind your local partition /usr/local/myapp using the read-only option too.
+You can also create a read-only bind mount:
+++ docker run --rm --read-only --tmpfs /tmp:rw,noexec,nosuid -v /usr/local/myapp:/app/:ro myimage
+uid=100(appuser) gid=101(appgroup) groups=101(appgroup)

@@ -1,10 +1,11 @@
-yc-user@test:~/examples/options/net$ ./run.sh 
+yc-user@test:~/examples/options/net$ ./run.sh
 ++ docker network create web
 Error response from daemon: network with name web already exists
 ++ read -n 1 -s -r -p 'press any key to continue...'
 press any key to continue...++ echo ''
 
-++ echo
-
+++ echo Disable the default bridge and use a dedicated network to expose the host interface:
+Disable the default bridge and use a dedicated network to expose the host interface:
 ++ docker run --rm --network=web myimage
 uid=100(appuser) gid=101(appgroup) groups=101(appgroup)
+

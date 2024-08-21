@@ -1,0 +1,9 @@
+yc-user@test:~/examples/options/all$ ./run.sh 
+Example of using all options:
+++ docker network create web
+Error response from daemon: network with name web already exists
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ docker run --rm --security-opt no-new-privileges --cap-drop=ALL --cap-add=NET_BIND_SERVICE -p 8080:80 --cpus=0.5 --ulimit nofile=50 --ulimit nproc=50 --memory 128m --read-only --tmpfs /tmp:rw,noexec,nosuid -v /usr/local/myapp:/app/:ro --network=web myimage
+uid=100(appuser) gid=101(appgroup) groups=101(appgroup)
