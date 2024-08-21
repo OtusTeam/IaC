@@ -1,0 +1,23 @@
+yc-user@test:~$ docker build -t myimage .
+[+] Building 0.1s (6/6) FINISHED                                 docker:default
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 183B                                       0.0s
+ => [internal] load metadata for docker.io/library/python:3.12-alpine      0.0s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => [1/2] FROM docker.io/library/python:3.12-alpine                        0.0s
+ => CACHED [2/2] RUN addgroup -S appgroup && adduser -S appuser -G appgro  0.0s
+ => exporting to image                                                     0.0s
+ => => exporting layers                                                    0.0s
+ => => writing image sha256:b26f3f27120eadede7ccb57d748e461f6b7b24c43e06c  0.0s
+ => => naming to docker.io/library/myimage                                 0.0s
+yc-user@test:~$ docker run --rm  myimage 
+Hello, world!
+uid=100(appuser) gid=101(appgroup) groups=101(appgroup)
+yc-user@test:~$ cat Dockerfile 
+FROM python:3.12-alpine
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup 
+
+USER appuser
+
+CMD ["sh", "-c", "echo 'Hello, world!'; id"]

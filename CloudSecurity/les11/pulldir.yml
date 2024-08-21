@@ -1,0 +1,22 @@
+---
+- name: Copy directory to remote host
+  hosts: all
+#  become: yes
+  tasks:
+    - name: Ensure directory exists on localhost
+      file:
+        path: examples
+        state: directory
+#        mode: 0755
+      delegate_to: localhost
+#      become: no
+
+    - name: Sync directory from remote to localhost
+      synchronize:
+        src: examples
+        dest: ./
+        mode: pull
+        delete: yes
+#      delegate_to: localhost
+#      become: no
+      tags: sync

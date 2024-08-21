@@ -1,0 +1,56 @@
+yc-user@test:~/examples/python$ ./run.sh
+++ cat Dockerfile
+# Use the stable Alpine image as the base image
+FROM alpine:3.20
+
+# Update the package index and install Python 3 and pip
+RUN apk update && apk add python3 py-pip
+
+# Copy the requirements.txt file to the /app directory
+#COPY requirements.txt /app/
+
+# Set the default working directory to /app
+#WORKDIR /app
+
+# Install the dependencies
+#RUN pip3 install -r requirements.txt
+
+# Copy the application code to the /app directory
+# COPY . /app/
+
+# Set the default command to run when the container is started
+CMD ["python3", "--version"]
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ docker build -t mypython .
+[+] Building 0.2s (6/6) FINISHED                                 docker:default
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 571B                                       0.0s
+ => [internal] load metadata for docker.io/library/alpine:3.20             0.0s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => [1/2] FROM docker.io/library/alpine:3.20                               0.0s
+ => CACHED [2/2] RUN apk update && apk add python3 py-pip                  0.0s
+ => exporting to image                                                     0.0s
+ => => exporting layers                                                    0.0s
+ => => writing image sha256:ecf3b8ca1c7d5fe22c699b3e506300162dfe7f2dfbb77  0.0s
+ => => naming to docker.io/library/mypython                                0.0s
+++ docker run mypython
+Python 3.12.3
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ docker run python:3.12 python --version
+Python 3.12.5
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ docker images
+REPOSITORY   TAG           IMAGE ID       CREATED             SIZE
+mypython     latest        ecf3b8ca1c7d   12 minutes ago      72.5MB
+myimage      latest        a386b69238e8   About an hour ago   7.8MB
+python       3.12          0218518c77be   13 days ago         1.02GB
+python       3.12-alpine   ab735b9c6e07   13 days ago         53.6MB
+alpine       3.20          324bc02ae123   4 weeks ago         7.8MB
+busybox      latest        65ad0d468eb1   15 months ago       4.26MB

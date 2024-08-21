@@ -1,0 +1,18 @@
+aleksey@first:~/OtusTeam/IaC/CloudSecurity/les11$ ansible-playbook docker_run.yml 
+
+PLAY [docker] ******************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [test]
+
+TASK [Run container] ***********************************************************
+changed: [test]
+
+TASK [Show results] ************************************************************
+ok: [test] => {
+    "output.stdout": "Python 3.12.5"
+}
+
+PLAY RECAP *********************************************************************
+test                       : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

@@ -1,0 +1,19 @@
+aleksey@first:~/OtusTeam/IaC/CloudSecurity/les11$ ansible-playbook pulldir.yml 
+[WARNING]: Collection ansible.posix does not support Ansible version 2.15.5
+
+PLAY [Copy directory to remote host] *********************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************************************************
+ok: [test]
+
+TASK [Ensure directory exists on localhost] **************************************************************************************************************************************************************************************************
+ok: [test -> localhost]
+
+TASK [Sync directory from remote to localhost] ***********************************************************************************************************************************************************************************************
+[DEPRECATION WARNING]: The connection's stdin object is deprecated. Call display.prompt_until(msg) instead. This feature will be removed in version 2.19. Deprecation warnings can be disabled by setting deprecation_warnings=False in 
+ansible.cfg.
+changed: [test]
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+test                       : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

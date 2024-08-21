@@ -1,0 +1,18 @@
+---
+- hosts: docker
+  become: true
+
+  pre_tasks:
+
+  - name: Update apt cache
+    apt:
+      update_cache: yes
+
+  tasks:
+
+  - name: install dependencies
+    apt:
+      pkg:
+      - tree
+      - mc
+      state: present

@@ -1,0 +1,40 @@
+yc-user@test:~/examples/user$ ./run.sh 
+++ docker run --rm alpine:3.20 id
+Unable to find image 'alpine:3.20' locally
+3.20: Pulling from library/alpine
+c6a83fedfae6: Already exists 
+Digest: sha256:0a4eaa0eecf5f8c050e5bba433f58c052be7587ee8af3e8b3910ef9ab5fbe9f5
+Status: Downloaded newer image for alpine:3.20
+uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel),11(floppy),20(dialout),26(tape),27(video)
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ cat Dockerfile
+FROM alpine:3.20
+
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup 
+
+USER appuser
+
+CMD ["id"]
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ docker build -t myimage .
+[+] Building 0.3s (6/6) FINISHED                                 docker:default
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 141B                                       0.0s
+ => [internal] load metadata for docker.io/library/alpine:3.20             0.0s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => [1/2] FROM docker.io/library/alpine:3.20                               0.0s
+ => CACHED [2/2] RUN addgroup -S appgroup && adduser -S appuser -G appgro  0.0s
+ => exporting to image                                                     0.0s
+ => => exporting layers                                                    0.0s
+ => => writing image sha256:a386b69238e861978a4a418f109d1043712b3219e29e4  0.0s
+ => => naming to docker.io/library/myimage                                 0.0s
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ docker run --rm myimage
+uid=100(appuser) gid=101(appgroup) groups=101(appgroup)
