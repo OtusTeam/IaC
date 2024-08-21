@@ -14,7 +14,8 @@ RUN apk update && apk add python3 py-pip
 #RUN pip3 install -r requirements.txt
 
 # Copy the application code to the /app directory
-# COPY . /app/
+# COPY hello.py /app/
 
 # Set the default command to run when the container is started
 CMD ["python3", "--version"]
+#CMD ["python3", "hello.py"]
