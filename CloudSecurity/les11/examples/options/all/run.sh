@@ -11,6 +11,7 @@ docker run --rm \
  --ulimit nofile=50 \
  --ulimit nproc=50 \
  --memory 128m \
+ --mount type=tmpfs,destination=/temp,tmpfs-size=100M \
  --read-only \
  --tmpfs /tmp:rw,noexec,nosuid \
  -v /usr/local/myapp:/app/:ro \

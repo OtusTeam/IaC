@@ -1,4 +1,4 @@
-yc-user@test:~/examples/options/constrains$ ./run.sh
+yc-user@test:~/examples/options/constrains$ ./run.sh 
 Avoid DoS attacks by explicitly constraining the use of resources.
-++ docker run --rm --cpus=0.5 --ulimit nofile=50 --ulimit nproc=50 --memory 128m myimage
+++ docker run --rm --cpus=0.5 --ulimit nofile=50 --ulimit nproc=50 --memory 128m --mount type=tmpfs,destination=/temp,tmpfs-size=100M myimage
 uid=100(appuser) gid=101(appgroup) groups=101(appgroup)
