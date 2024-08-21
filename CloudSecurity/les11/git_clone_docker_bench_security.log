@@ -1,0 +1,17 @@
+aleksey@first:~/OtusTeam/IaC/CloudSecurity/les11$ ansible-playbook git_clone_docker_bench_security.yml 
+
+PLAY [Install and clone Docker Bench Security] *********************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [test]
+
+TASK [Install git] *************************************************************
+ok: [test]
+
+TASK [Clone Docker Bench Security repository] **********************************
+changed: [test]
+
+PLAY RECAP *********************************************************************
+test                       : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+
