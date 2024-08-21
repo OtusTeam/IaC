@@ -1,7 +1,11 @@
 echo Do not use:
+echo docker run --network=host
+echo But instead create a dedicated network isolate the hosts network
+echo
+echo Do not use:
 echo docker run --rm --device=/dev/snd:/dev/snd alpine:3.20
 echo Unselected access to host devices.
-echo 
+echo
 echo Do not use:
 echo docker run -v /var/run/docker.sock:/var/ run/docker.sock myimage
 echo Exposing the Docker socket is equivalent to
