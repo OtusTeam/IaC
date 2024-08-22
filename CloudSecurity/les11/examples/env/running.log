@@ -1,4 +1,4 @@
-yc-user@test:~/examples/options/env$ ./run.sh 
+yc-user@test:~/examples/env$ ./run.sh 
 ++ cat Dockerfile
 FROM alpine:3.20
 

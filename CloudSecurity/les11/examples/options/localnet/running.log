@@ -1,0 +1,74 @@
+yc-user@test:~/examples/options/localnet$ ./run.sh 
++++ curl -s ifconfig.me
+++ EXTERNAL_IP=89.169.145.144
+++ EXTARNAL_PORT=8080
+++ /home/yc-user/examples/useful/docker_container_kill.sh nginx
+Контейнер nginx не найден
+++ docker run -d -p 8080:80 nginx
+37b6b0c75df5c6120d420057d7cea8a24187ed445b89b659691df1ad59c7eced
+++ sleep 5
+++ curl http://89.169.145.144:8080
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ EXTARNAL_PORT=8080
+++ /home/yc-user/examples/useful/docker_container_kill.sh nginx
+37b6b0c75df5
+37b6b0c75df5
+Контейнер nginx удален
+++ docker run -d -p 127.0.0.1:8080:80 nginx
+b54275417901a8e8f334dff4c29603bc9ab246b3c15e7a37cd22af29cac065f3
+++ sleep 5
+++ curl http://89.169.145.144:8080
+curl: (7) Failed to connect to 89.169.145.144 port 8080 after 0 ms: Connection refused
+++ curl http://127.0.0.1:8080
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+++ /home/yc-user/examples/useful/docker_container_kill.sh nginx
+b54275417901
+b54275417901
+Контейнер nginx удален
