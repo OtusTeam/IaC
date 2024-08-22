@@ -1,0 +1,37 @@
+yc-user@test:~/examples/mirror$ ./run.sh 
+++ cat /etc/docker/daemon.json
+{
+  "registry-mirrors": [
+    "https://mirror.gcr.io/"
+  ]
+}
+++ docker info
+++ tail -f
+ ID: 3cf5e081-f6f1-495c-a006-38ae8224f462
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Experimental: false
+ Insecure Registries:
+  127.0.0.0/8
+ Registry Mirrors:
+  https://mirror.gcr.io/
+ Live Restore Enabled: false
+
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ docker pull cr.yandex/mirror/alpine
+Using default tag: latest
+latest: Pulling from mirror/alpine
+59bf1c3509f3: Pull complete 
+Digest: sha256:e7d88de73db3d3fd9b2d63aa7f447a10fd0220b7cbf39803c803f2af9ba256b3
+Status: Downloaded newer image for cr.yandex/mirror/alpine:latest
+cr.yandex/mirror/alpine:latest
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ docker image rm cr.yandex/mirror/alpine
+Untagged: cr.yandex/mirror/alpine:latest
+Untagged: cr.yandex/mirror/alpine@sha256:e7d88de73db3d3fd9b2d63aa7f447a10fd0220b7cbf39803c803f2af9ba256b3
+Deleted: sha256:c059bfaa849c4d8e4aecaeb3a10c2d9b3d85f5165c66ad3a4d937758128c4d18
+Deleted: sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759
