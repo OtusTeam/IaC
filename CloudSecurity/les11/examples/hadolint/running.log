@@ -1,0 +1,10 @@
+yc-user@test:~/examples/hadolint$ ./run.sh
+++ docker run --rm -i hadolint/hadolint
+Unable to find image 'hadolint/hadolint:latest' locally
+latest: Pulling from hadolint/hadolint
+db4123164570: Pull complete 
+Digest: sha256:fff226bdf9ebcc08db47fb90ee144dd770120b35c2b1cbbb46e932a650cfe232
+Status: Downloaded newer image for hadolint/hadolint:latest
+-:5 DL3018 warning: Pin versions in apk add. Instead of `apk add <package>` use `apk add <package>=<version>`
+-:5 DL3019 info: Use the `--no-cache` switch to avoid the need to use `--update` and remove `/var/cache/apk/*` when done installing packages
+
