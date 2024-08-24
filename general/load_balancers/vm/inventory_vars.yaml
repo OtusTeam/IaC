@@ -1,0 +1,19 @@
+yandex_cloud_hosts:
+  - name: web-host1
+    subnet: web-sub1
+    platform: standard-v2
+    group: webservers
+  - name: web-host2
+    subnet: web-sub2
+    platform: standard-v2
+    group: webservers
+
+yandex_cloud_subnets:
+  - name: web-sub1
+    cidr: 10.10.0.0/16
+    zone: ru-central1-b
+  - name: web-sub2
+    cidr: 10.20.0.0/16
+    zone: ru-central1-a
+
+yandex_cloud_net_name: web-net

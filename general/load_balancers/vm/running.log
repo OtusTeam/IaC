@@ -1,0 +1,295 @@
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/bsa/templ$ ./ans_generate.sh 
+++ ansible-playbook -i localhost, -c local generate.yaml
+
+PLAY [Generate inventory file] *********************************************************************************************************
+
+TASK [Generate inventory] **************************************************************************************************************
+changed: [localhost]
+
+PLAY RECAP *****************************************************************************************************************************
+localhost                  : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+aleksey@first:~/OtusTeam/IaC/Intense2024/les04/bsa/templ$ tf apply
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following
+symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.my_vm["les04-host1"] will be created
+  + resource "yandex_compute_instance" "my_vm" {
+      + created_at                = (known after apply)
+      + folder_id                 = "b1gmesrdjgklgkvcp704"
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + labels                    = {
+          + "group" = "webservers"
+        }
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = (sensitive value)
+        }
+      + name                      = "les04-host1"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v2"
+      + service_account_id        = (known after apply)
+      + status                    = (known after apply)
+      + zone                      = "ru-central1-b"
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd8pecdhv50nec1qf9im"
+              + name        = (known after apply)
+              + size        = 50
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index              = (known after apply)
+          + ip_address         = (known after apply)
+          + ipv4               = true
+          + ipv6               = (known after apply)
+          + ipv6_address       = (known after apply)
+          + mac_address        = (known after apply)
+          + nat                = true
+          + nat_ip_address     = (known after apply)
+          + nat_ip_version     = (known after apply)
+          + security_group_ids = (known after apply)
+          + subnet_id          = (known after apply)
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 20
+          + cores         = 2
+          + memory        = 4
+        }
+
+      + scheduling_policy {
+          + preemptible = true
+        }
+    }
+
+  # yandex_compute_instance.my_vm["les04-host2"] will be created
+  + resource "yandex_compute_instance" "my_vm" {
+      + created_at                = (known after apply)
+      + folder_id                 = "b1gmesrdjgklgkvcp704"
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + labels                    = {
+          + "group" = "webservers"
+        }
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = (sensitive value)
+        }
+      + name                      = "les04-host2"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v2"
+      + service_account_id        = (known after apply)
+      + status                    = (known after apply)
+      + zone                      = "ru-central1-a"
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd8pecdhv50nec1qf9im"
+              + name        = (known after apply)
+              + size        = 50
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index              = (known after apply)
+          + ip_address         = (known after apply)
+          + ipv4               = true
+          + ipv6               = (known after apply)
+          + ipv6_address       = (known after apply)
+          + mac_address        = (known after apply)
+          + nat                = true
+          + nat_ip_address     = (known after apply)
+          + nat_ip_version     = (known after apply)
+          + security_group_ids = (known after apply)
+          + subnet_id          = (known after apply)
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 20
+          + cores         = 2
+          + memory        = 4
+        }
+
+      + scheduling_policy {
+          + preemptible = true
+        }
+    }
+
+  # yandex_lb_network_load_balancer.my_lb will be created
+  + resource "yandex_lb_network_load_balancer" "my_lb" {
+      + created_at          = (known after apply)
+      + deletion_protection = (known after apply)
+      + folder_id           = (known after apply)
+      + id                  = (known after apply)
+      + name                = "les04-test"
+      + region_id           = (known after apply)
+      + type                = "external"
+
+      + attached_target_group {
+          + target_group_id = (known after apply)
+
+          + healthcheck {
+              + healthy_threshold   = 2
+              + interval            = 2
+              + name                = "http"
+              + timeout             = 1
+              + unhealthy_threshold = 2
+
+              + http_options {
+                  + path = "/"
+                  + port = 80
+                }
+            }
+        }
+
+      + listener {
+          + name        = "les04-listener"
+          + port        = 80
+          + protocol    = (known after apply)
+          + target_port = (known after apply)
+
+          + external_address_spec {
+              + address    = (known after apply)
+              + ip_version = "ipv4"
+            }
+        }
+    }
+
+  # yandex_lb_target_group.web-servers will be created
+  + resource "yandex_lb_target_group" "web-servers" {
+      + created_at = (known after apply)
+      + folder_id  = (known after apply)
+      + id         = (known after apply)
+      + name       = "les04-web-servers-target-group"
+      + region_id  = (known after apply)
+
+      + target {
+          + address   = (known after apply)
+          + subnet_id = (known after apply)
+        }
+      + target {
+          + address   = (known after apply)
+          + subnet_id = (known after apply)
+        }
+    }
+
+  # yandex_vpc_network.my_net will be created
+  + resource "yandex_vpc_network" "my_net" {
+      + created_at                = (known after apply)
+      + default_security_group_id = (known after apply)
+      + folder_id                 = (known after apply)
+      + id                        = (known after apply)
+      + labels                    = (known after apply)
+      + name                      = "les04-net"
+      + subnet_ids                = (known after apply)
+    }
+
+  # yandex_vpc_subnet.my_sub["les04-sub1"] will be created
+  + resource "yandex_vpc_subnet" "my_sub" {
+      + created_at     = (known after apply)
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + labels         = (known after apply)
+      + name           = "les04-sub1"
+      + network_id     = (known after apply)
+      + v4_cidr_blocks = [
+          + "10.10.0.0/16",
+        ]
+      + v6_cidr_blocks = (known after apply)
+      + zone           = "ru-central1-b"
+    }
+
+  # yandex_vpc_subnet.my_sub["les04-sub2"] will be created
+  + resource "yandex_vpc_subnet" "my_sub" {
+      + created_at     = (known after apply)
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + labels         = (known after apply)
+      + name           = "les04-sub2"
+      + network_id     = (known after apply)
+      + v4_cidr_blocks = [
+          + "10.20.0.0/16",
+        ]
+      + v6_cidr_blocks = (known after apply)
+      + zone           = "ru-central1-a"
+    }
+
+Plan: 7 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + lb_ip_address = (known after apply)
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+yandex_vpc_network.my_net: Creating...
+yandex_vpc_network.my_net: Creation complete after 2s [id=enpo02t6ogcai1ln3v8e]
+yandex_vpc_subnet.my_sub["les04-sub2"]: Creating...
+yandex_vpc_subnet.my_sub["les04-sub1"]: Creating...
+yandex_vpc_subnet.my_sub["les04-sub1"]: Creation complete after 0s [id=e2lin3fpj9n629o1b81h]
+yandex_vpc_subnet.my_sub["les04-sub2"]: Creation complete after 1s [id=e9b2mkm9etkpnhmidqju]
+yandex_compute_instance.my_vm["les04-host2"]: Creating...
+yandex_compute_instance.my_vm["les04-host1"]: Creating...
+yandex_compute_instance.my_vm["les04-host2"]: Still creating... [10s elapsed]
+yandex_compute_instance.my_vm["les04-host1"]: Still creating... [10s elapsed]
+yandex_compute_instance.my_vm["les04-host2"]: Still creating... [20s elapsed]
+yandex_compute_instance.my_vm["les04-host1"]: Still creating... [20s elapsed]
+yandex_compute_instance.my_vm["les04-host1"]: Still creating... [30s elapsed]
+yandex_compute_instance.my_vm["les04-host2"]: Still creating... [30s elapsed]
+yandex_compute_instance.my_vm["les04-host1"]: Still creating... [40s elapsed]
+yandex_compute_instance.my_vm["les04-host2"]: Still creating... [40s elapsed]
+yandex_compute_instance.my_vm["les04-host1"]: Creation complete after 40s [id=epdflvvh3o45bbchplgh]
+yandex_compute_instance.my_vm["les04-host2"]: Creation complete after 47s [id=fhmc9g6hl7024tlmr0br]
+yandex_lb_target_group.web-servers: Creating...
+yandex_lb_target_group.web-servers: Creation complete after 1s [id=enp5aonam34da324sqma]
+yandex_lb_network_load_balancer.my_lb: Creating...
+yandex_lb_network_load_balancer.my_lb: Creation complete after 3s [id=enp39bdujhugkcuea2pi]
+
+Apply complete! Resources: 7 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+lb_ip_address = "51.250.33.210"

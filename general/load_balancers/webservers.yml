@@ -1,0 +1,44 @@
+---
+- name: Install Nginx and create index.html
+  hosts: webservers
+  become: yes
+
+#  - name: Update apt
+#    apt:
+#      update: yes
+
+  tasks:
+  - name: Update apt cache
+    command: apt update
+
+  tasks:
+  - name: Update apt cache
+    apt:
+      update_cache: yes
+
+
+  tasks:
+  - name: Install Nginx
+    apt:
+      name: nginx
+      state: present
+    notify: restart nginx
+
+  - name: Create index.html
+    template:
+      src: templates/index.html.j2
+      dest: /var/www/html/index.html
+      mode: '0644'
+    notify: restart nginx
+
+  - name: Start and enable Nginx
+    service:
+      name: nginx
+      state: started
+      enabled: yes
+
+  handlers:
+  - name: restart nginx
+    service:
+      name: nginx
+      state: restarted

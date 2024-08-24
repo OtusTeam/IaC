@@ -1,0 +1,20 @@
+global
+    maxconn 256
+
+defaults
+    mode http
+    timeout connect 5000ms
+    timeout client  50000ms
+    timeout server  50000ms
+
+frontend http
+    bind *:80
+
+    default_backend webservers
+
+backend webservers
+    mode http
+    balance roundrobin
+    {% for server in groups['webservers'] %}
+    server {{ server }} {{ hostvars[server]['ansible_host'] }}:80 check
+    {% endfor %}

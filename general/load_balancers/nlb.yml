@@ -1,0 +1,37 @@
+---
+- name: Install and configure Nginx
+  hosts: nlb-group
+  become: yes
+
+  tasks:
+  - name: Install Nginx
+    apt:
+      name: nginx
+      state: present
+    notify: restart nginx
+
+  - name: Configure Nginx
+    template:
+      src: templates/nginx.conf.j2
+      dest: /etc/nginx/nginx.conf
+      mode: '0644'
+    notify: restart nginx
+
+  - name: Create upstream configuration
+    template:
+      src: templates/upstream.conf.j2
+      dest: /etc/nginx/conf.d/upstream.conf
+      mode: '0644'
+    notify: restart nginx
+
+  - name: Start and enable Nginx
+    service:
+      name: nginx
+      state: started
+      enabled: yes
+
+  handlers:
+  - name: restart nginx
+    service:
+      name: nginx
+      state: restarted

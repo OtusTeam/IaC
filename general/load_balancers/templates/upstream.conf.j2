@@ -1,0 +1,5 @@
+upstream webservers {
+    {% for server in groups['webservers'] %}
+    server {{ hostvars[server]['ansible_host'] }}:80;
+    {% endfor %}
+}
