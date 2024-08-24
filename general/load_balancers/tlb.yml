@@ -1,0 +1,67 @@
+---
+- name: Install and configure Traefik
+  hosts: tlbs
+  become: yes
+
+  tasks:
+
+#  - name: Install Traefik
+#    apt:
+#      name: traefik
+#      state: present
+#      install_recommends: no
+#    when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
+
+  - name: Install Traefik
+    snap:
+      name: traefik
+      state: present
+
+  - name: Create Traefik configuration directory
+    file:
+      path: /etc/traefik
+      state: directory
+
+  - name: Create Traefik configuration file
+    template:
+      src: templates/config.yml.j2
+      dest: /etc/traefik/config.yml
+      mode: '0644'
+
+  - name: Create Traefik dynamic configuration file
+    template:
+      src: templates/traefik.yml.j2
+      dest: /etc/traefik/traefik.yml
+      mode: '0644'
+    notify: restart traefik
+
+  - name: Start and enable Traefik
+    debug:
+      msg: "It is dummy"
+#    service:
+#      name: traefik
+#      state: started
+#      enabled: yes
+
+  handlers:
+  - name: restart traefik
+    debug:
+      msg: "It is dummy"
+
+#    service:
+#      name: traefik
+#      state: restarted
+
+  post_tasks:
+
+  - name: Verify httpd response
+    uri:
+      url: "http://{{ ansible_host }}:80"
+      return_content: yes
+    register: result
+    tags: check
+
+  - name: Print httpd response
+    debug:
+      var: result.content
+    tags: check

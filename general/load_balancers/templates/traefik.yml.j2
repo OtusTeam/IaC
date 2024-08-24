@@ -1,0 +1,22 @@
+log:
+  level: DEBUG
+
+api:
+  dashboard: true
+
+entryPoints:
+  web:
+    address: :80
+
+routes:
+  webservers:
+    rule: "Host(`{{ ansible_host }}`)"
+    service: webservers
+
+services:
+  webservers:
+    loadBalancer:
+      servers:
+      {% for server in groups['webservers'] %}
+      - url: "http://{{ hostvars[server]['ansible_host'] }}:80"
+      {% endfor %}
