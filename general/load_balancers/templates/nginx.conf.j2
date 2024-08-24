@@ -1,5 +1,9 @@
+events {
+    worker_connections 1024;
+}
+
 http {
-    ...
+
     upstream webservers {
         {% for server in groups['webservers'] %}
         server {{ hostvars[server]['ansible_host'] }}:80;

@@ -1,9 +1,9 @@
 yandex_cloud_hosts:
-  - name: web-host1
+  - name: host1
     subnet: web-sub1
     platform: standard-v2
     group: webservers
-  - name: web-host2
+  - name: host2
     subnet: web-sub2
     platform: standard-v2
     group: webservers
