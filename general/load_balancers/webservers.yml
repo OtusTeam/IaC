@@ -3,21 +3,11 @@
   hosts: webservers
   become: yes
 
-#  - name: Update apt
-#    apt:
-#      update: yes
-
-  tasks:
-  - name: Update apt cache
-    command: apt update
-
   tasks:
   - name: Update apt cache
     apt:
       update_cache: yes
 
-
-  tasks:
   - name: Install Nginx
     apt:
       name: nginx
