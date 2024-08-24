@@ -1,10 +1,10 @@
 all:
   hosts:
-    web-host1:
+    host1:
       yandex_cloud_subnet: web-sub1
       yandex_cloud_platform: standard-v2
       yandex_cloud_group: webservers
-    web-host2:
+    host2:
       yandex_cloud_subnet: web-sub2
       yandex_cloud_platform: standard-v2
       yandex_cloud_group: webservers

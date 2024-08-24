@@ -1,6 +1,6 @@
 ---
 - name: Install and configure HAProxy
-  hosts: hap-group
+  hosts: haps
   become: yes
 
   tasks:
@@ -32,3 +32,17 @@
     service:
       name: haproxy
       state: restarted
+
+  post_tasks:
+
+  - name: Verify httpd response
+    uri:
+      url: "http://{{ ansible_host }}:80"
+      return_content: yes
+    register: result
+    tags: check
+
+  - name: Print httpd response
+    debug:
+      var: result.content
+    tags: check

@@ -1,6 +1,6 @@
 ---
 - name: Install and configure Nginx
-  hosts: nlb-group
+  hosts: nlbs
   become: yes
 
   tasks:
@@ -34,8 +34,25 @@
       state: started
       enabled: yes
 
+#  - name: Flush handlers
+#    meta: flush_handlers
+
   handlers:
   - name: restart nginx
     service:
       name: nginx
       state: restarted
+
+  post_tasks:
+
+  - name: Verify httpd response
+    uri:
+      url: "http://{{ ansible_host }}:80"
+      return_content: yes
+    register: result
+    tags: check
+
+  - name: Print httpd response
+    debug:
+      var: result.content
+    tags: check

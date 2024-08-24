@@ -1,11 +1,11 @@
 resource "yandex_compute_instance" "nlb_host" {
-  name = "nlb-host"
+  name = "nlb"
 
   zone        = local.inventory_data.all.subnets[values(local.inventory_data.all.hosts)[0].yandex_cloud_subnet].yandex_cloud_zone
   folder_id   = var.yc_folder
   platform_id = values(local.inventory_data.all.hosts)[0].yandex_cloud_platform
   labels = {
-    group = "nlb-group"
+    group = "nlbs"
   } 
 
   resources {

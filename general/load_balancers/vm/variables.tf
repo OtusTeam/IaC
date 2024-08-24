@@ -21,8 +21,7 @@ variable "yc_default_zone" {
 
 variable "username" {
    type = string
-   default = "ubuntu" 
-#"yc-user"
+   default = "yc-user"
 }
 
 variable "pub_key_path" {
@@ -45,5 +44,6 @@ variable "image" {
 
 variable "yc_subnet_id" {
    type = string
-   default = "e9bop98iu12teftg4uj8"
+   default = "fd8btqg2mh540ftne9p4" # ubuntu 22.04 
+# "e9bop98iu12teftg4uj8"
 }
