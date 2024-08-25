@@ -1,0 +1,17 @@
+---
+- name: Down Prometheus and Grafana
+  hosts: dockers
+  become: no
+  vars:
+    pg_dir: "prometheus_grafana"
+
+  tasks:
+
+  - name: Stop Docker Compose
+    command: docker compose down
+    args:
+      chdir: "{{ pg_dir }}"
+    when: ansible_run_tags|intersect(['down'])
+    tags:
+      - down
+

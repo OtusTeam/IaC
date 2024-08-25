@@ -1,0 +1,66 @@
+---
+- name: Install and Configure Docker Compose, Prometheus, and Grafana
+  hosts: [remote_host]
+  become: yes
+
+  tasks:
+  - name: Install Docker Compose
+    apt:
+      name: docker-compose
+      state: present
+
+  - name: Add current user to Docker group
+    user:
+      name: "{{ ansible_user }}"
+      groups: docker
+      append: yes
+
+  - name: Reload systemd daemon
+    systemd:
+      daemon_reload: yes
+
+  - name: Restart Docker service
+    service:
+      name: docker
+      state: restarted
+
+  - name: Create Docker Compose configuration file
+    template:
+      src: templates/docker-compose.yml.j2
+      dest: "{{ ansible_user_dir }}/docker-compose.yml"
+      mode: '0644'
+    become: no
+
+  - name: Start Docker Compose
+    command: docker-compose up -d
+    args:
+      chdir: "{{ ansible_user_dir }}"
+    become: no
+
+  handlers:
+  - name: restart docker-compose
+    command: docker-compose restart
+    args:
+      chdir: "{{ ansible_user_dir }}"
+    become: no
+
+  templates:
+  - name: docker-compose.yml.j2
+    content: |
+      version: '3'
+      services:
+        prometheus:
+          image: prom/prometheus
+          ports:
+            - "9090:9090"
+          volumes:
+            - ./prometheus.yml:/etc/prometheus/prometheus.yml
+          restart: always
+
+        grafana:
+          image: grafana/grafana
+          ports:
+            - "3000:3000"
+          depends_on:
+            - prometheus
+          restart: always

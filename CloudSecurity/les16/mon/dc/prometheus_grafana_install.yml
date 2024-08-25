@@ -1,0 +1,90 @@
+---
+- name: Install and Configure Docker Compose, Prometheus, and Grafana
+  hosts: dockers
+  become: no
+  vars:
+    pg_dir: "prometheus_grafana"
+
+  tasks:
+
+  - name: pg_dir present
+    file:
+      path: "{{ pg_dir }}"
+      state: directory
+
+  - name: Create Docker Compose configuration file
+    copy:
+      content: |
+        version: '3.2'
+        services:
+          cadvisor:
+            image: gcr.io/cadvisor/cadvisor:latest
+            container_name: cadvisor
+            ports:
+            - "127.0.0.1:8080:8080"
+            volumes:
+            - /:/rootfs:ro
+            - /var/run:/var/run:rw
+            - /sys:/sys:ro
+            - /var/lib/docker/:/var/lib/docker:ro
+          prometheus:
+            image: prom/prometheus
+            ports:
+              - "9090:9090"
+            volumes:
+              - ./prometheus.yml:/etc/prometheus/prometheus.yml
+            restart: always
+            depends_on:
+              - cadvisor
+          grafana:
+            image: grafana/grafana
+            ports:
+              - "3000:3000"
+            depends_on:
+              - prometheus
+            restart: always
+      dest: "{{ pg_dir }}/docker-compose.yml"
+      mode: '0644'
+    notify: restart docker compose
+
+  - name: Create Prometheus configuration file
+    copy:
+      content: |
+        global:
+          scrape_interval:     15s
+          external_labels:
+            monitor: 'codelab-monitor'
+
+        scrape_configs:
+          - job_name: 'prometheus'
+            scrape_interval: 5s
+            static_configs:
+              - targets: ['localhost:9090']
+          - job_name: cadvisor
+            scrape_interval: 5s
+            static_configs:
+              - targets:
+                 - cadvisor:8080
+      dest: "{{ pg_dir }}/prometheus.yml"
+      mode: '0644'
+    notify: restart docker compose
+
+  - name: Start Docker Compose
+    command: docker compose up -d
+    args:
+      chdir: "{{ pg_dir }}"
+    when: not ansible_run_tags|intersect(['off'])
+
+  - name: Stop Docker Compose
+    command: docker compose down
+    args:
+      chdir: "{{ pg_dir }}"
+    when: ansible_run_tags|intersect(['off'])
+    tags:
+      - off
+
+  handlers:
+  - name: restart docker compose
+    command: docker compose restart
+    args:
+      chdir: "{{ pg_dir }}"
