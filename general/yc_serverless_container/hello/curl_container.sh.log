@@ -1,9 +1,10 @@
-aleksey@first:~/OtusTeam/IaC/general/yc_serverless_container/hello$ yc serverless container list 
+aleksey@first:~/OtusTeam/IaC/general/yc_serverless_container/hello$ ./curl_container.sh 
+++ yc serverless container list
 +----------------------+-------+----------------------+--------+
 |          ID          | NAME  |      FOLDER ID       | STATUS |
 +----------------------+-------+----------------------+--------+
 | bbaaqjp87dgqnl903fab | hello | b1gmesrdjgklgkvcp704 | ACTIVE |
 +----------------------+-------+----------------------+--------+
 
-aleksey@first:~/OtusTeam/IaC/general/yc_serverless_container/hello$ curl -H "Authorization: Bearer $YC_TOKEN" https://bbaaqjp87dgqnl903fab.containers.yandexcloud.net/hello
+++ set +x
 Hello!
