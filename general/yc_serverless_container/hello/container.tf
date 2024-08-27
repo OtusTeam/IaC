@@ -1,8 +1,8 @@
 resource "yandex_serverless_container" "hello" {
   name               = "hello"
   memory             = 128
-  service_account_id = "ajeom3f6n05n6keto8jp"
+  service_account_id = var.yc_puller_sa
   image {
-      url = "cr.yandex/crpgqba9ldgbfg8ad8j0/hello:latest"
+      url = var.yc_registry_image_url
   }
 }
