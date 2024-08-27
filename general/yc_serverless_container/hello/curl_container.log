@@ -1,0 +1,14 @@
+aleksey@first:~/OtusTeam/IaC/general/yc_serverless_container/hello$ yc serverless container list 
++----------------------+------+----------------------+--------+
+|          ID          | NAME |      FOLDER ID       | STATUS |
++----------------------+------+----------------------+--------+
+| bba28kbcddoo9ts7l1gb | test | b1gmesrdjgklgkvcp704 | ACTIVE |
++----------------------+------+----------------------+--------+
+
+There is a new yc version '0.132.0' available. Current version: '0.131.1'.
+See release notes at https://yandex.cloud/ru/docs/cli/release-notes
+You can install it by running the following command in your shell:
+	$ yc components update
+
+aleksey@first:~/OtusTeam/IaC/general/yc_serverless_container/hello$ curl -H "Authorization: Bearer $YC_TOKEN" https://bba28kbcddoo9ts7l1gb.containers.yandexcloud.net/hello
+Hello!
