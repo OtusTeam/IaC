@@ -1,0 +1,30 @@
+aleksey@first:~/OtusTeam/IaC/general/yc_serverless_container/create_registry$ tf apply
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # yandex_container_registry.my-reg will be created
+  + resource "yandex_container_registry" "my-reg" {
+      + created_at = (known after apply)
+      + folder_id  = "b1gmesrdjgklgkvcp704"
+      + id         = (known after apply)
+      + labels     = {
+          + "my-label" = "my-label-value"
+        }
+      + name       = "my-registry"
+      + status     = (known after apply)
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+yandex_container_registry.my-reg: Creating...
+yandex_container_registry.my-reg: Creation complete after 5s [id=crpgqba9ldgbfg8ad8j0]
+

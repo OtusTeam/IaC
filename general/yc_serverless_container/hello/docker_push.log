@@ -1,0 +1,18 @@
+aleksey@first:~/OtusTeam/IaC/general/yc_serverless_container/hello$ ./docker_login.sh 
+WARNING! Your password will be stored unencrypted in /home/aleksey/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+aleksey@first:~/OtusTeam/IaC/general/yc_serverless_container/hello$ ./docker_push.sh 
+++ docker push cr.yandex/crpgqba9ldgbfg8ad8j0/hello:latest
+The push refers to repository [cr.yandex/crpgqba9ldgbfg8ad8j0/hello]
+2edc806b3c73: Pushed 
+672af33cdcda: Pushed 
+6bc64e2faf04: Pushed 
+63d299102447: Pushed 
+2b728766068e: Pushed 
+3548b2e74780: Pushed 
+1505ca8b8119: Pushed 
+9853575bc4f9: Pushed 
+latest: digest: sha256:70d1109d18b7ad74058f12212ac7cf37c0939148106ca58b48191e754b952aa9 size: 1995
