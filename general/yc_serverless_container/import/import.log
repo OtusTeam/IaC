@@ -1,0 +1,174 @@
+aleksey@first:~/OtusTeam/IaC/general/yc_serverless_container/import$ ls -la terraform.tfstate
+-rw-rw-r-- 1 aleksey aleksey 181 Aug 27 19:29 terraform.tfstate
+aleksey@first:~/OtusTeam/IaC/general/yc_serverless_container/nginx$ cat terraform.tfstate
+{
+  "version": 4,
+  "terraform_version": "1.9.2",
+  "serial": 22,
+  "lineage": "c3a80c04-e69b-da72-1e92-ac273a38c1d4",
+  "outputs": {},
+  "resources": [],
+  "check_results": null
+}
+aleksey@first:~/OtusTeam/IaC/general/yc_serverless_container/import$ cat docker.tf 
+resource "yandex_compute_instance" "docker" {
+  # (resource arguments)
+}
+aleksey@first:~/OtusTeam/IaC/general/yc_serverless_container/import$ tf validate
+╷
+│ Error: Insufficient boot_disk blocks
+│ 
+│   on docker.tf line 1, in resource "yandex_compute_instance" "docker":
+│    1: resource "yandex_compute_instance" "docker" {
+│ 
+│ At least 1 "boot_disk" blocks are required.
+╵
+╷
+│ Error: Insufficient resources blocks
+│ 
+│   on docker.tf line 1, in resource "yandex_compute_instance" "docker":
+│    1: resource "yandex_compute_instance" "docker" {
+│ 
+│ At least 1 "resources" blocks are required.
+╵
+╷
+│ Error: Insufficient network_interface blocks
+│ 
+│   on docker.tf line 1, in resource "yandex_compute_instance" "docker":
+│    1: resource "yandex_compute_instance" "docker" {
+│ 
+│ At least 1 "network_interface" blocks are required.
+╵
+aleksey@first:~/OtusTeam/IaC/general/yc_serverless_container/import$ terraform import yandex_compute_instance.docker fhm4j3nhavfuphr1o2ec
+yandex_compute_instance.docker: Importing from ID "fhm4j3nhavfuphr1o2ec"...
+yandex_compute_instance.docker: Import prepared!
+  Prepared yandex_compute_instance for import
+yandex_compute_instance.docker: Refreshing state... [id=fhm4j3nhavfuphr1o2ec]
+
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+
+aleksey@first:~/OtusTeam/IaC/general/yc_serverless_container/import$ nano docker.tf
+aleksey@first:~/OtusTeam/IaC/general/yc_serverless_container/import$ ls -la terraform.tfstate
+-rw-rw-r-- 1 aleksey aleksey 5041 Aug 28 08:27 terraform.tfstate
+aleksey@first:~/OtusTeam/IaC/general/yc_serverless_container/import$ cat terraform.tfstate
+{
+  "version": 4,
+  "terraform_version": "1.9.2",
+  "serial": 23,
+  "lineage": "c3a80c04-e69b-da72-1e92-ac273a38c1d4",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "yandex_compute_instance",
+      "name": "docker",
+      "provider": "provider[\"registry.terraform.io/yandex-cloud/yandex\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "allow_recreate": null,
+            "allow_stopping_for_update": null,
+            "boot_disk": [
+              {
+                "auto_delete": true,
+                "device_name": "fhmsmlqb8o270ogoj1lr",
+                "disk_id": "fhmsmlqb8o270ogoj1lr",
+                "initialize_params": [
+                  {
+                    "block_size": 4096,
+                    "description": "",
+                    "image_id": "fd8t9ge4ig1mg766f31c",
+                    "name": "",
+                    "size": 100,
+                    "snapshot_id": "",
+                    "type": "network-hdd"
+                  }
+                ],
+                "mode": "READ_WRITE"
+              }
+            ],
+            "created_at": "2024-08-25T09:42:55Z",
+            "description": "",
+            "filesystem": [],
+            "folder_id": "b1gmesrdjgklgkvcp704",
+            "fqdn": "docker.ru-central1.internal",
+            "gpu_cluster_id": "",
+            "hostname": "docker",
+            "id": "fhm4j3nhavfuphr1o2ec",
+            "labels": {
+              "group": "dockers"
+            },
+            "local_disk": [],
+            "maintenance_grace_period": "",
+            "maintenance_policy": null,
+            "metadata": {
+              "ssh-keys": "yc-user:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCewj3O2osKw0rnOybUkYE6OwayOiEU5blxv+HfmATGt2tzcrQPROuILpaMXIlmlcEgPx1BFowQOS+/Ajhtxphd1p0YpLqvZGrUQd9/1kIoKd5E6FnXrG3O7apX0Bjj12MSDwuPMYWLlQ1OR4m7sIw3blzl+Y0RcLqZZpX+xs9u9fguEE34rSC7X9/cfYysTAfZk86W5C6XiXK5twah75Z+Jka02+hPlR3KkNA3ti70rWIbx83RPue3Bx8GNCYeK5h2ah7a3B/0GTxgyzA4WpBizpHygTnfN5lBlIpcYYf2RFzJxG686d6fkJHlWTZgp8Mei2hEukhfkxtZFc1Z5OhRDsY1EeNOXbtkyR9P8BNvCHNQvnZEmVH76DNZ2cdNaz8ANHBrAWO4c2lptPwpELHZVJbafzNRs3aT0QMtK57gES8CF7hmk8J6Gk3PDwmONTLsMIfqmgahLRFEL4Wbgs2eZqQ3suFSJSEHKaY3gzueKDxApVCmmfWs2ZhfkH9xtNM= aleksey@first\n",
+              "user-data": "#cloud-config\ndatasource:\n Ec2:\n  strict_id: false\nssh_pwauth: no\nusers:\n- name: yc-user\n  sudo: ALL=(ALL) NOPASSWD:ALL\n  shell: /bin/bash\n  ssh_authorized_keys:\n  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCewj3O2osKw0rnOybUkYE6OwayOiEU5blxv+HfmATGt2tzcrQPROuILpaMXIlmlcEgPx1BFowQOS+/Ajhtxphd1p0YpLqvZGrUQd9/1kIoKd5E6FnXrG3O7apX0Bjj12MSDwuPMYWLlQ1OR4m7sIw3blzl+Y0RcLqZZpX+xs9u9fguEE34rSC7X9/cfYysTAfZk86W5C6XiXK5twah75Z+Jka02+hPlR3KkNA3ti70rWIbx83RPue3Bx8GNCYeK5h2ah7a3B/0GTxgyzA4WpBizpHygTnfN5lBlIpcYYf2RFzJxG686d6fkJHlWTZgp8Mei2hEukhfkxtZFc1Z5OhRDsY1EeNOXbtkyR9P8BNvCHNQvnZEmVH76DNZ2cdNaz8ANHBrAWO4c2lptPwpELHZVJbafzNRs3aT0QMtK57gES8CF7hmk8J6Gk3PDwmONTLsMIfqmgahLRFEL4Wbgs2eZqQ3suFSJSEHKaY3gzueKDxApVCmmfWs2ZhfkH9xtNM= aleksey@first\n\n"
+            },
+            "metadata_options": [
+              {
+                "aws_v1_http_endpoint": 1,
+                "aws_v1_http_token": 2,
+                "gce_http_endpoint": 1,
+                "gce_http_token": 1
+              }
+            ],
+            "name": "docker",
+            "network_acceleration_type": "standard",
+            "network_interface": [
+              {
+                "dns_record": [],
+                "index": 0,
+                "ip_address": "10.128.0.14",
+                "ipv4": true,
+                "ipv6": false,
+                "ipv6_address": "",
+                "ipv6_dns_record": [],
+                "mac_address": "d0:0d:49:8e:f1:57",
+                "nat": true,
+                "nat_dns_record": [],
+                "nat_ip_address": "",
+                "nat_ip_version": "IPV4",
+                "security_group_ids": [],
+                "subnet_id": "e9bop98iu12teftg4uj8"
+              }
+            ],
+            "placement_policy": [
+              {
+                "host_affinity_rules": [],
+                "placement_group_id": "",
+                "placement_group_partition": 0
+              }
+            ],
+            "platform_id": "standard-v2",
+            "resources": [
+              {
+                "core_fraction": 20,
+                "cores": 2,
+                "gpus": 0,
+                "memory": 8
+              }
+            ],
+            "scheduling_policy": [
+              {
+                "preemptible": true
+              }
+            ],
+            "secondary_disk": [],
+            "service_account_id": "",
+            "status": "stopped",
+            "timeouts": null,
+            "zone": "ru-central1-a"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjMwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9"
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}

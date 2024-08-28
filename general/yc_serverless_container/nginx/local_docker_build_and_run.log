@@ -1,0 +1,30 @@
+aleksey@first:~/OtusTeam/IaC/general/yc_serverless_container/nginx$ docker build -t my-nginx-image .
+[+] Building 1.4s (8/8) FINISHED                                                                                                                                                                                               docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                                                     0.1s
+ => => transferring dockerfile: 193B                                                                                                                                                                                                     0.0s
+ => [internal] load .dockerignore                                                                                                                                                                                                        0.1s
+ => => transferring context: 2B                                                                                                                                                                                                          0.0s
+ => [internal] load metadata for docker.io/library/nginx:latest                                                                                                                                                                          0.9s
+ => [1/3] FROM docker.io/library/nginx:latest@sha256:447a8665cc1dab95b1ca778e162215839ccbb9189104c79d7ec3a81e14577add                                                                                                                    0.0s
+ => CACHED [2/3] RUN mkdir -p /etc/nginx/conf.d/                                                                                                                                                                                         0.0s
+ => [internal] load build context                                                                                                                                                                                                        0.0s
+ => => transferring context: 62B                                                                                                                                                                                                         0.0s
+ => [3/3] COPY files/index.html /usr/share/nginx/html/index.html                                                                                                                                                                         0.1s
+ => exporting to image                                                                                                                                                                                                                   0.1s
+ => => exporting layers                                                                                                                                                                                                                  0.1s
+ => => writing image sha256:37e25bc30d220b7250e31ed77b250bb2e7a19741d945425e8090bb857dee01dc                                                                                                                                             0.0s
+ => => naming to docker.io/library/my-nginx-image                                                                                                                                                                                        0.0s
+aleksey@first:~/OtusTeam/IaC/general/yc_serverless_container/nginx$ docker run -d --rm -p 8080:80 my-nginx-image
+7baf0670fe006d708faa9c3721764ab23d6fdcf00b5158bc4b377e6882c078f1
+aleksey@first:~/OtusTeam/IaC/general/yc_serverless_container/nginx$ curl http://localhost:8080
+<html>
+  <body>
+    <h1>Hello World!</h1>
+  </body>
+</html>
+aleksey@first:~/OtusTeam/IaC/general/yc_serverless_container/nginx$ docker ps
+CONTAINER ID   IMAGE            COMMAND                  CREATED              STATUS              PORTS                                   NAMES
+7baf0670fe00   my-nginx-image   "/docker-entrypoint.…"   About a minute ago   Up About a minute   0.0.0.0:8080->80/tcp, :::8080->80/tcp   focused_bouman
+aleksey@first:~/OtusTeam/IaC/general/yc_serverless_container/nginx$ docker stop 7baf0670fe00
+7baf0670fe00
+
