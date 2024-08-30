@@ -1,0 +1,65 @@
+---
+- name: Установка и настройка Nginx Exporter
+  hosts: webservers  # Замените на вашу группу хостов или IP-адреса
+  become: yes  # Используйте sudo для выполнения задач
+
+  tasks:
+    - name: Установка необходимых пакетов
+      apt:
+        name:
+          - wget
+          - unzip
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Установка Nginx Exporter
+      shell: |
+        wget https://github.com/nginxinc/nginx-prometheus-exporter/releases/latest/download/nginx-prometheus-exporter-linux-amd64.zip
+        unzip nginx-prometheus-exporter-linux-amd64.zip
+        mv nginx-prometheus-exporter /usr/local/bin/
+        chmod +x /usr/local/bin/nginx-prometheus-exporter
+      args:
+        chdir: /tmp
+
+    - name: Создание системного юнита для Nginx Exporter
+      copy:
+        dest: /etc/systemd/system/nginx-prometheus-exporter.service
+        content: |
+          [Unit]
+          Description=Nginx Prometheus Exporter
+          After=network.target
+
+          [Service]
+          ExecStart=/usr/local/bin/nginx-prometheus-exporter -nginx.scrape-uri=http://localhost/nginx_status
+          Restart=always
+
+          [Install]
+          WantedBy=multi-user.target
+
+    - name: Включение и запуск Nginx Exporter
+      systemd:
+        name: nginx-prometheus-exporter
+        enabled: yes
+        state: started
+
+    - name: Настройка Nginx для stub_status
+      lineinfile:
+        path: /etc/nginx/nginx.conf
+        line: 'location /nginx_status { stub_status on; allow 127.0.0.1; deny all; }'
+        state: present
+        validate: 'nginx -t'
+
+    - name: Перезагрузка Nginx
+      service:
+        name: nginx
+        state: restarted
+
+    - name: Убедитесь, что Nginx Exporter работает
+      uri:
+        url: http://localhost:9113/metrics
+        return_content: yes
+      register: exporter_metrics
+
+    - name: Проверка доступности метрик
+      debug:
+        var: exporter_metrics.content

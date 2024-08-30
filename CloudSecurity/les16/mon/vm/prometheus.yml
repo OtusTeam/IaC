@@ -3,8 +3,10 @@
   hosts: prometheus
   become: yes
   vars:
-    prometheus_version: "2.30.3"  # Укажите нужную версию Prometheus
-    prometheus_config_path: "/etc/prometheus/prometheus.yml"
+    prometheus_version: "2.54.1"  # Указана версия Prometheus
+    prometheus_user: "prometheus"  # Имя пользователя для запуска Prometheus
+    prometheus_config_path: "/home/{{ prometheus_user }}/prometheus.yml"
+    prometheus_data_dir: "/home/{{ prometheus_user }}/data"
     prometheus_targets: []
 
   tasks:
@@ -12,14 +14,26 @@
       set_fact:
         prometheus_targets: "{{ groups['webservers'] | map('extract', hostvars, 'ansible_host') | list }}"
 
+    - name: Создание пользователя для Prometheus
+      user:
+        name: "{{ prometheus_user }}"
+        shell: /bin/bash
+        create_home: yes
+
     - name: Установка необходимых пакетов
       apt:
         name:
           - wget
           - tar
-          - prometheus
         state: present
         update_cache: yes
+
+    - name: Создание директории для данных Prometheus
+      file:
+        path: "{{ prometheus_data_dir }}"
+        state: directory
+        owner: "{{ prometheus_user }}"
+        group: "{{ prometheus_user }}"
 
     - name: Скачивание Prometheus
       get_url:
@@ -29,8 +43,9 @@
     - name: Распаковка Prometheus
       unarchive:
         src: "/tmp/prometheus.tar.gz"
-        dest: "/usr/local/bin/"
+        dest: "/home/{{ prometheus_user }}/"
         remote_src: yes
+        extra_opts: [ "--strip-components=1" ]  # Удаляет верхний уровень директории
 
     - name: Создание конфигурационного файла Prometheus
       copy:
@@ -46,7 +61,7 @@
                   {% for target in prometheus_targets %}
                     - {{ target }}:8888
                   {% endfor %}
-    
+
     - name: Создание systemd unit файла для Prometheus
       copy:
         dest: /etc/systemd/system/prometheus.service
@@ -56,8 +71,8 @@
           After=network.target
 
           [Service]
-          User=root
-          ExecStart=/usr/local/bin/prometheus --config.file={{ prometheus_config_path }} --web.listen-address=":9090"
+          User={{ prometheus_user }}
+          ExecStart=/home/{{ prometheus_user }}/prometheus --config.file={{ prometheus_config_path }} --storage.tsdb.path={{ prometheus_data_dir }} --web.listen-address=":9090"
 
           [Install]
           WantedBy=multi-user.target
@@ -72,3 +87,4 @@
       file:
         path: /tmp/prometheus.tar.gz
         state: absent
+
