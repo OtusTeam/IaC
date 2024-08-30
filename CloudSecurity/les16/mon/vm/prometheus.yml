@@ -1,0 +1,74 @@
+---
+- name: Установка и настройка Prometheus
+  hosts: prometheus
+  become: yes
+  vars:
+    prometheus_version: "2.30.3"  # Укажите нужную версию Prometheus
+    prometheus_config_path: "/etc/prometheus/prometheus.yml"
+    prometheus_targets: []
+
+  tasks:
+    - name: Получение IP-адресов webservers
+      set_fact:
+        prometheus_targets: "{{ groups['webservers'] | map('extract', hostvars, 'ansible_host') | list }}"
+
+    - name: Установка необходимых пакетов
+      apt:
+        name:
+          - wget
+          - tar
+          - prometheus
+        state: present
+        update_cache: yes
+
+    - name: Скачивание Prometheus
+      get_url:
+        url: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz"
+        dest: "/tmp/prometheus.tar.gz"
+
+    - name: Распаковка Prometheus
+      unarchive:
+        src: "/tmp/prometheus.tar.gz"
+        dest: "/usr/local/bin/"
+        remote_src: yes
+
+    - name: Создание конфигурационного файла Prometheus
+      copy:
+        dest: "{{ prometheus_config_path }}"
+        content: |
+          global:
+            scrape_interval: 15s
+
+          scrape_configs:
+            - job_name: 'webservers'
+              static_configs:
+                - targets: 
+                  {% for target in prometheus_targets %}
+                    - {{ target }}:8888
+                  {% endfor %}
+    
+    - name: Создание systemd unit файла для Prometheus
+      copy:
+        dest: /etc/systemd/system/prometheus.service
+        content: |
+          [Unit]
+          Description=Prometheus
+          After=network.target
+
+          [Service]
+          User=root
+          ExecStart=/usr/local/bin/prometheus --config.file={{ prometheus_config_path }} --web.listen-address=":9090"
+
+          [Install]
+          WantedBy=multi-user.target
+
+    - name: Запуск и включение Prometheus
+      systemd:
+        name: prometheus
+        state: started
+        enabled: yes
+
+    - name: Удаление временного файла
+      file:
+        path: /tmp/prometheus.tar.gz
+        state: absent

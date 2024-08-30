@@ -1,0 +1,89 @@
+---
+- name: Установка и настройка Nginx на webservers
+  hosts: webservers
+  become: yes
+  vars:
+    nginx_index_path: "/var/www/html/index.html"
+    server_ip: "{{ ansible_host }}"
+    prometheus_ips: "{{ groups['prometheus'] | map('extract', hostvars, 'ansible_host') | list }}"
+
+  tasks:
+    - name: Установка Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Создание простой веб-страницы
+      copy:
+        dest: "{{ nginx_index_path }}"
+        content: |
+          <html>
+          <head>
+              <title>Hello from {{ server_ip }}</title>
+          </head>
+          <body>
+              <h1>Hello from {{ server_ip }}</h1>
+          </body>
+          </html>
+
+    - name: Настройка Nginx для выдачи метрик
+      copy:
+        dest: /etc/nginx/sites-available/default
+        content: |
+          server {
+              listen 80;
+              server_name localhost;
+
+              location / {
+                  root /var/www/html;
+                  index index.html;
+              }
+
+              location /metrics {
+                  stub_status on;
+                  allow 127.0.0.1;
+                  allow 51.250.13.236;
+                  allow {{ server_ip }};
+                  {% for ip in prometheus_ips %}
+                  allow {{ ip }};
+                  {% endfor %}
+                  deny all;  # Запретить доступ всем остальным
+              }
+          }
+
+    - name: Перезапуск Nginx
+      systemd:
+        name: nginx
+        state: restarted
+
+    - name: Убедиться, что Nginx запущен и включен
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Проверка страницы на порту 80
+      uri:
+        url: "http://{{ server_ip }}"
+        return_content: yes
+      register: http_80_response
+      tags: check
+
+    - name: Проверка метрик на порту 8888
+      uri:
+        url: "http://127.0.0.1:8888/metrics"
+#        url: "http://{{ server_ip }}:8888/metrics"
+        return_content: yes
+      register: http_8888_response
+      tags: check
+
+    - name: Печать содержимого страницы на порту 80
+      debug:
+        msg: "Содержимое страницы на порту 80:\n{{ http_80_response.content }}"
+      tags: check
+
+    - name: Печать содержимого метрик на порту 8888
+      debug:
+        msg: "Содержимое метрик на порту 8888:\n{{ http_8888_response.content }}"
+      tags: check

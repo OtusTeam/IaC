@@ -1,0 +1,46 @@
+aleksey@first:~/OtusTeam/IaC/CloudSecurity/les16/mon/vm$ 
+
+./create_promehteus.sh
+done (38s)
+id: fhmo0dl0lbs8ih54lgc0
+folder_id: b1gmesrdjgklgkvcp704
+created_at: "2024-08-30T06:12:22Z"
+name: prom
+labels:
+  group: prometheus
+zone_id: ru-central1-a
+platform_id: standard-v2
+resources:
+  memory: "8589934592"
+  cores: "2"
+  core_fraction: "20"
+status: RUNNING
+metadata_options:
+  gce_http_endpoint: ENABLED
+  aws_v1_http_endpoint: ENABLED
+  gce_http_token: ENABLED
+  aws_v1_http_token: DISABLED
+boot_disk:
+  mode: READ_WRITE
+  device_name: fhmno020gsdb8ft72924
+  auto_delete: true
+  disk_id: fhmno020gsdb8ft72924
+network_interfaces:
+  - index: "0"
+    mac_address: d0:0d:18:03:6a:0a
+    subnet_id: e9bop98iu12teftg4uj8
+    primary_v4_address:
+      address: 10.128.0.29
+      one_to_one_nat:
+        address: 89.169.147.114
+        ip_version: IPV4
+serial_port_settings:
+  ssh_authorization: OS_LOGIN
+gpu_settings: {}
+fqdn: prom.ru-central1.internal
+scheduling_policy:
+  preemptible: true
+network_settings:
+  type: STANDARD
+placement_policy: {}
+
