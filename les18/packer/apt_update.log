@@ -1,0 +1,39 @@
+~/try/vagrant/IaC/les18/packer$ packer build apt_update.json
+Warning: Bundled plugins used
+
+This template relies on the use of plugins bundled into the Packer binary.
+The practice of bundling external plugins into Packer will be removed in an
+upcoming version.
+
+To remove this warning and ensure builds keep working you can install these
+external plugins with the 'packer plugins install' command
+
+* packer plugins install github.com/hashicorp/vagrant
+
+Alternatively, if you upgrade your templates to HCL2, you can use 'packer init'
+with a 'required_plugins' block to automatically install external plugins.
+
+You can try HCL2 by running 'packer hcl2_upgrade
+/home/za/try/vagrant/IaC/les18/packer/apt_update.json'
+
+
+vagrant: output will be in this color.
+
+==> vagrant: Creating a Vagrantfile in the build directory...
+==> vagrant: Adding box using vagrant box add ...
+    vagrant: (this can take some time if we need to download the box)
+==> vagrant: Calling Vagrant Up (this can take some time)...
+==> vagrant: Using SSH communicator to connect: 127.0.0.1
+==> vagrant: Waiting for SSH to become available...
+==> vagrant: Connected to SSH!
+==> vagrant: Provisioning with shell script: /tmp/packer-shell1022153844
+    vagrant: =============================after update==================================
+==> vagrant: Packaging box...
+==> vagrant: destroying Vagrant box...
+Build 'vagrant' finished after 9 minutes 50 seconds.
+
+==> Wait completed after 9 minutes 50 seconds
+
+==> Builds finished. The artifacts of successful builds are:
+--> vagrant: Vagrant box 'package.box' for 'virtualbox' provider
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

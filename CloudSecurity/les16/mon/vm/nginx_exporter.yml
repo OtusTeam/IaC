@@ -1,21 +1,21 @@
 ---
 - name: Установка и настройка Nginx Exporter
-  hosts: webservers  # Замените на вашу группу хостов или IP-адреса
-  become: yes  # Используйте sudo для выполнения задач
+  hosts: webservers  # Указываем группу хостов
+  become: yes  # Используем sudo для выполнения задач
 
   tasks:
     - name: Установка необходимых пакетов
       apt:
         name:
           - wget
-          - unzip
+          - tar
         state: present
       when: ansible_os_family == "Debian"
 
     - name: Установка Nginx Exporter
       shell: |
-        wget https://github.com/nginxinc/nginx-prometheus-exporter/releases/latest/download/nginx-prometheus-exporter-linux-amd64.zip
-        unzip nginx-prometheus-exporter-linux-amd64.zip
+        wget https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v1.3.0/nginx-prometheus-exporter_1.3.0_linux_amd64.tar.gz
+        tar -xzf nginx-prometheus-exporter_1.3.0_linux_amd64.tar.gz
         mv nginx-prometheus-exporter /usr/local/bin/
         chmod +x /usr/local/bin/nginx-prometheus-exporter
       args:
@@ -49,10 +49,16 @@
         state: present
         validate: 'nginx -t'
 
+    - name: Проверка конфигурации Nginx
+      command: nginx -t
+      register: nginx_test
+      ignore_errors: yes
+
     - name: Перезагрузка Nginx
       service:
         name: nginx
         state: restarted
+      when: nginx_test.rc == 0  # Перезагружаем только если проверка прошла успешно
 
     - name: Убедитесь, что Nginx Exporter работает
       uri:
@@ -63,3 +69,4 @@
     - name: Проверка доступности метрик
       debug:
         var: exporter_metrics.content
+
