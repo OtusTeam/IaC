@@ -1,0 +1,14 @@
+- hosts: all
+  become: yes
+  tasks:
+
+    - name: Update the repository cache and update package "apache2" to latest version
+      ansible.builtin.apt:
+        name: apache2
+        state: latest
+        update_cache: yes
+
+    - name: custom index.html
+      ansible.builtin.copy:
+        dest: "/var/www/html/index.html"
+        content: "<html><body><h1>Hello, World!</h1></body></html>"
