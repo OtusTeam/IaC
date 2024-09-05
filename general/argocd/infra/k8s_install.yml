@@ -1,0 +1,68 @@
+---
+- name: Установка Kubernetes на Ubuntu с использованием Snap
+  hosts: k8smaster, k8snodes
+  become: yes
+  tasks:
+    - name: Обновление пакетов
+      apt:
+        update_cache: yes
+        upgrade: yes
+
+    - name: Установка snapd
+      apt:
+        name: snapd
+        state: present
+
+    - name: Установка kubelet, kubeadm и kubectl через snap
+      snap:
+        name: "{{ item }}"
+        state: present
+        classic: yes
+      loop:
+        - kubelet
+        - kubeadm
+        - kubectl
+
+    - name: Установка необходимых утилит
+      apt:
+        name:
+          - conntrack
+          - socat
+        state: present
+
+    - name: Включение и запуск службы kubelet
+      systemd:
+        name: snap.kubelet.daemon
+        enabled: yes
+        state: started
+
+    - name: Отключение swap
+      command: swapoff -a
+      when: ansible_hostname == "k8smaster"
+
+    - name: Удаление записи swap из fstab
+      lineinfile:
+        path: /etc/fstab
+        regexp: '^.*swap.*'
+        state: absent
+      when: ansible_hostname == "k8smaster"
+
+- name: Инициализация кластера Kubernetes
+  hosts: k8smaster
+  become: yes
+  tasks:
+    - name: Инициализация кластера
+      command: kubeadm init --pod-network-cidr=192.168.0.0/16
+      register: kubeadm_init
+
+    - name: Настройка kubectl для текущего пользователя
+      command: "{{ item }}"
+      with_items:
+        - mkdir -p $HOME/.kube
+        - sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+        - sudo chown $(id -u):$(id -g) $HOME/.kube/config
+      when: kubeadm_init is succeeded
+
+    - name: Установка сетевого плагина (Flannel)
+      command: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/
+
