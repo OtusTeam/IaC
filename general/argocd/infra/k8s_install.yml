@@ -2,11 +2,56 @@
 - name: Установка Kubernetes на Ubuntu с использованием Snap
   hosts: k8smaster, k8snodes
   become: yes
+
   tasks:
     - name: Обновление пакетов
       apt:
         update_cache: yes
         upgrade: yes
+
+    - name: Установка необходимых пакетов
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+        state: present
+        update_cache: yes
+
+    - name: Установка необходимых утилит
+      apt:
+        name:
+          - conntrack
+          - socat
+        state: present
+
+    - name: Download crictl
+      get_url:
+        url: https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.31.1/crictl-v1.31.1-linux-amd64.tar.gz
+        dest: /tmp/crictl.tar.gz
+        mode: '0644'
+
+    - name: Extract crictl
+      unarchive:
+        src: /tmp/crictl.tar.gz
+        dest: /usr/local/bin
+        remote_src: yes
+
+    - name: Set permissions for crictl
+      file:
+        path: /usr/local/bin/crictl
+        mode: '0755'
+
+    - name: Verify crictl installation
+      command: crictl --version
+      register: crictl_version
+      when: ansible_verbosity > 2
+
+    - name: Print crictl version
+      debug:
+        msg: "crictl version: {{ crictl_version.stdout }}"
+      when: ansible_verbosity > 2
 
     - name: Установка snapd
       apt:
@@ -23,19 +68,6 @@
         - kubeadm
         - kubectl
 
-    - name: Установка необходимых утилит
-      apt:
-        name:
-          - conntrack
-          - socat
-        state: present
-
-    - name: Включение и запуск службы kubelet
-      systemd:
-        name: snap.kubelet.daemon
-        enabled: yes
-        state: started
-
     - name: Отключение swap
       command: swapoff -a
       when: ansible_hostname == "k8smaster"
@@ -47,12 +79,85 @@
         state: absent
       when: ansible_hostname == "k8smaster"
 
+#    - name: Включение и запуск службы kubelet
+#      systemd:
+#        name: snap.kubelet.daemon
+#        enabled: yes
+#        state: started
+
+    - name: Stop the snap.kubelet.daemon service
+      systemd:
+        name: snap.kubelet.daemon
+        state: stopped
+
+    - name: Create kubelet.service file
+      copy:
+        dest: /etc/systemd/system/kubelet.service
+        content: |
+          [Unit]
+          Description=Kubelet
+          After=network.target
+
+          [Service]
+          ExecStart=/usr/bin/snap run kubelet.daemon
+          Restart=always
+
+          [Install]
+          WantedBy=multi-user.target
+#      notify: Reload systemd
+
+    - name: Enable kubelet service
+      systemd:
+        name: kubelet
+        enabled: yes
+
+    - name: Start kubelet service
+      systemd:
+        name: kubelet
+        state: started
+
+    - name: Check kubelet service status
+      command: systemctl status kubelet
+      register: kubelet_status
+      ignore_errors: yes
+      when: ansible_verbosity > 2
+
+    - name: Display kubelet service status
+      debug:
+        var: kubelet_status.stdout_lines
+      when: ansible_verbosity > 2
+
+    - name: Reload systemd
+      systemd:
+        daemon_reload: yes
+
+    - name: Check healthz endpoint
+      uri:
+        url: http://127.0.0.1:10248/healthz
+        return_content: yes
+      register: healthz_response
+
+    - name: Check if healthz endpoint returns ok
+      assert:
+        that: healthz_response.content == "ok"
+        msg: "Healthz endpoint did not return ok"
+
 - name: Инициализация кластера Kubernetes
   hosts: k8smaster
   become: yes
+  vars:
+    clear: true
+
   tasks:
+
+    - name: Remove all files from /etc/kubernetes/manifests/
+      file:
+        path: /etc/kubernetes/manifests/
+        state: absent
+      when: clear | default(false) | bool
+
     - name: Инициализация кластера
-      command: kubeadm init --pod-network-cidr=192.168.0.0/16
+      command: kubeadm init --pod-network-cidr=192.168.0.0/16 --ignore-preflight-errors=Port-10250
       register: kubeadm_init
 
     - name: Настройка kubectl для текущего пользователя
@@ -66,3 +171,8 @@
     - name: Установка сетевого плагина (Flannel)
       command: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/
 
+    - name: Включение и перезапуск службы kubelet
+      systemd:
+        name: snap.kubelet.daemon
+        enabled: yes
+        state: restarted

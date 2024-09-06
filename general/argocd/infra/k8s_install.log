@@ -1,0 +1,145 @@
+aleksey@first:~/OtusTeam/IaC/general/argocd/infra$ ansible-playbook k8s_install.yml 
+
+PLAY [Установка Kubernetes на Ubuntu с использованием Snap] **********************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************************************************
+ok: [ac-k8s-master]
+ok: [ac-k8s-node-1]
+ok: [ac-k8s-node-2]
+
+TASK [Обновление пакетов] ********************************************************************************************************************************************************************************************************************
+ok: [ac-k8s-node-1]
+ok: [ac-k8s-master]
+ok: [ac-k8s-node-2]
+
+TASK [Установка необходимых пакетов] *********************************************************************************************************************************************************************************************************
+ok: [ac-k8s-master]
+ok: [ac-k8s-node-1]
+ok: [ac-k8s-node-2]
+
+TASK [Установка необходимых утилит] **********************************************************************************************************************************************************************************************************
+ok: [ac-k8s-master]
+ok: [ac-k8s-node-1]
+ok: [ac-k8s-node-2]
+
+TASK [Download crictl] ***********************************************************************************************************************************************************************************************************************
+ok: [ac-k8s-node-2]
+ok: [ac-k8s-master]
+ok: [ac-k8s-node-1]
+
+TASK [Extract crictl] ************************************************************************************************************************************************************************************************************************
+ok: [ac-k8s-master]
+ok: [ac-k8s-node-2]
+ok: [ac-k8s-node-1]
+
+TASK [Set permissions for crictl] ************************************************************************************************************************************************************************************************************
+ok: [ac-k8s-node-2]
+ok: [ac-k8s-master]
+ok: [ac-k8s-node-1]
+
+TASK [Verify crictl installation] ************************************************************************************************************************************************************************************************************
+skipping: [ac-k8s-master]
+skipping: [ac-k8s-node-1]
+skipping: [ac-k8s-node-2]
+
+TASK [Print crictl version] ******************************************************************************************************************************************************************************************************************
+skipping: [ac-k8s-master]
+skipping: [ac-k8s-node-1]
+skipping: [ac-k8s-node-2]
+
+TASK [Установка snapd] ***********************************************************************************************************************************************************************************************************************
+ok: [ac-k8s-master]
+ok: [ac-k8s-node-1]
+ok: [ac-k8s-node-2]
+
+TASK [Установка kubelet, kubeadm и kubectl через snap] ***************************************************************************************************************************************************************************************
+ok: [ac-k8s-master] => (item=kubelet)
+ok: [ac-k8s-node-2] => (item=kubelet)
+ok: [ac-k8s-node-1] => (item=kubelet)
+ok: [ac-k8s-master] => (item=kubeadm)
+ok: [ac-k8s-node-1] => (item=kubeadm)
+ok: [ac-k8s-node-2] => (item=kubeadm)
+ok: [ac-k8s-node-1] => (item=kubectl)
+ok: [ac-k8s-master] => (item=kubectl)
+ok: [ac-k8s-node-2] => (item=kubectl)
+
+TASK [Отключение swap] ***********************************************************************************************************************************************************************************************************************
+skipping: [ac-k8s-master]
+skipping: [ac-k8s-node-1]
+skipping: [ac-k8s-node-2]
+
+TASK [Удаление записи swap из fstab] *********************************************************************************************************************************************************************************************************
+skipping: [ac-k8s-master]
+skipping: [ac-k8s-node-1]
+skipping: [ac-k8s-node-2]
+
+TASK [Stop the snap.kubelet.daemon service] **************************************************************************************************************************************************************************************************
+ok: [ac-k8s-master]
+ok: [ac-k8s-node-2]
+ok: [ac-k8s-node-1]
+
+TASK [Create kubelet.service file] ***********************************************************************************************************************************************************************************************************
+ok: [ac-k8s-master]
+ok: [ac-k8s-node-1]
+ok: [ac-k8s-node-2]
+
+TASK [Enable kubelet service] ****************************************************************************************************************************************************************************************************************
+ok: [ac-k8s-master]
+ok: [ac-k8s-node-1]
+ok: [ac-k8s-node-2]
+
+TASK [Start kubelet service] *****************************************************************************************************************************************************************************************************************
+ok: [ac-k8s-master]
+ok: [ac-k8s-node-1]
+ok: [ac-k8s-node-2]
+
+TASK [Check kubelet service status] **********************************************************************************************************************************************************************************************************
+skipping: [ac-k8s-master]
+skipping: [ac-k8s-node-1]
+skipping: [ac-k8s-node-2]
+
+TASK [Display kubelet service status] ********************************************************************************************************************************************************************************************************
+skipping: [ac-k8s-master]
+skipping: [ac-k8s-node-1]
+skipping: [ac-k8s-node-2]
+
+TASK [Reload systemd] ************************************************************************************************************************************************************************************************************************
+ok: [ac-k8s-master]
+ok: [ac-k8s-node-1]
+ok: [ac-k8s-node-2]
+
+TASK [Check healthz endpoint] ****************************************************************************************************************************************************************************************************************
+ok: [ac-k8s-master]
+ok: [ac-k8s-node-2]
+ok: [ac-k8s-node-1]
+
+TASK [Check if healthz endpoint returns ok] **************************************************************************************************************************************************************************************************
+ok: [ac-k8s-master] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+ok: [ac-k8s-node-1] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+ok: [ac-k8s-node-2] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+
+PLAY [Инициализация кластера Kubernetes] *****************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************************************************
+ok: [ac-k8s-master]
+
+TASK [Remove all files from /etc/kubernetes/manifests/] **************************************************************************************************************************************************************************************
+changed: [ac-k8s-master]
+
+TASK [Инициализация кластера] ****************************************************************************************************************************************************************************************************************
+fatal: [ac-k8s-master]: FAILED! => {"changed": true, "cmd": ["kubeadm", "init", "--pod-network-cidr=192.168.0.0/16", "--ignore-preflight-errors=Port-10250"], "delta": "0:04:04.809964", "end": "2024-09-06 08:45:05.377929", "msg": "non-zero return code", "rc": 1, "start": "2024-09-06 08:41:00.567965", "stderr": "I0906 08:41:01.027167   16370 version.go:256] remote version is much newer: v1.31.0; falling back to: stable-1.30\n\t[WARNING Port-10250]: Port 10250 is in use\nW0906 08:41:01.772066   16370 checks.go:844] detected that the sandbox image \"registry.k8s.io/pause:3.8\" of the container runtime is inconsistent with that used by kubeadm.It is recommended to use \"registry.k8s.io/pause:3.9\" as the CRI sandbox image.\nerror execution phase wait-control-plane: could not initialize a Kubernetes cluster\nTo see the stack trace of this error execute with --v=5 or higher", "stderr_lines": ["I0906 08:41:01.027167   16370 version.go:256] remote version is much newer: v1.31.0; falling back to: stable-1.30", "\t[WARNING Port-10250]: Port 10250 is in use", "W0906 08:41:01.772066   16370 checks.go:844] detected that the sandbox image \"registry.k8s.io/pause:3.8\" of the container runtime is inconsistent with that used by kubeadm.It is recommended to use \"registry.k8s.io/pause:3.9\" as the CRI sandbox image.", "error execution phase wait-control-plane: could not initialize a Kubernetes cluster", "To see the stack trace of this error execute with --v=5 or higher"], "stdout": "[init] Using Kubernetes version: v1.30.4\n[preflight] Running pre-flight checks\n[preflight] Pulling images required for setting up a Kubernetes cluster\n[preflight] This might take a minute or two, depending on the speed of your internet connection\n[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'\n[certs] Using certificateDir folder \"/etc/kubernetes/pki\"\n[certs] Using existing ca certificate authority\n[certs] Using existing apiserver certificate and key on disk\n[certs] Using existing apiserver-kubelet-client certificate and key on disk\n[certs] Using existing front-proxy-ca certificate authority\n[certs] Using existing front-proxy-client certificate and key on disk\n[certs] Using existing etcd/ca certificate authority\n[certs] Using existing etcd/server certificate and key on disk\n[certs] Using existing etcd/peer certificate and key on disk\n[certs] Using existing etcd/healthcheck-client certificate and key on disk\n[certs] Using existing apiserver-etcd-client certificate and key on disk\n[certs] Using the existing \"sa\" key\n[kubeconfig] Using kubeconfig folder \"/etc/kubernetes\"\n[kubeconfig] Using existing kubeconfig file: \"/etc/kubernetes/admin.conf\"\n[kubeconfig] Using existing kubeconfig file: \"/etc/kubernetes/super-admin.conf\"\n[kubeconfig] Using existing kubeconfig file: \"/etc/kubernetes/kubelet.conf\"\n[kubeconfig] Using existing kubeconfig file: \"/etc/kubernetes/controller-manager.conf\"\n[kubeconfig] Using existing kubeconfig file: \"/etc/kubernetes/scheduler.conf\"\n[etcd] Creating static Pod manifest for local etcd in \"/etc/kubernetes/manifests\"\n[control-plane] Using manifest folder \"/etc/kubernetes/manifests\"\n[control-plane] Creating static Pod manifest for \"kube-apiserver\"\n[control-plane] Creating static Pod manifest for \"kube-controller-manager\"\n[control-plane] Creating static Pod manifest for \"kube-scheduler\"\n[kubelet-start] Writing kubelet environment file with flags to file \"/var/lib/kubelet/kubeadm-flags.env\"\n[kubelet-start] Writing kubelet configuration to file \"/var/lib/kubelet/config.yaml\"\n[kubelet-start] Starting the kubelet\n[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory \"/etc/kubernetes/manifests\"\n[kubelet-check] Waiting for a healthy kubelet at http://127.0.0.1:10248/healthz. This can take up to 4m0s\n[kubelet-check] The kubelet is healthy after 501.531299ms\n[api-check] Waiting for a healthy API server. This can take up to 4m0s\n[api-check] The API server is not healthy after 4m0.000262696s\n\nUnfortunately, an error has occurred:\n\tcontext deadline exceeded\n\nThis error is likely caused by:\n\t- The kubelet is not running\n\t- The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)\n\nIf you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:\n\t- 'systemctl status kubelet'\n\t- 'journalctl -xeu kubelet'\n\nAdditionally, a control plane component may have crashed or exited when started by the container runtime.\nTo troubleshoot, list all containers using your preferred container runtimes CLI.\nHere is one example how you may list all running Kubernetes containers by using crictl:\n\t- 'crictl --runtime-endpoint unix:///var/run/containerd/containerd.sock ps -a | grep kube | grep -v pause'\n\tOnce you have found the failing container, you can inspect its logs with:\n\t- 'crictl --runtime-endpoint unix:///var/run/containerd/containerd.sock logs CONTAINERID'", "stdout_lines": ["[init] Using Kubernetes version: v1.30.4", "[preflight] Running pre-flight checks", "[preflight] Pulling images required for setting up a Kubernetes cluster", "[preflight] This might take a minute or two, depending on the speed of your internet connection", "[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'", "[certs] Using certificateDir folder \"/etc/kubernetes/pki\"", "[certs] Using existing ca certificate authority", "[certs] Using existing apiserver certificate and key on disk", "[certs] Using existing apiserver-kubelet-client certificate and key on disk", "[certs] Using existing front-proxy-ca certificate authority", "[certs] Using existing front-proxy-client certificate and key on disk", "[certs] Using existing etcd/ca certificate authority", "[certs] Using existing etcd/server certificate and key on disk", "[certs] Using existing etcd/peer certificate and key on disk", "[certs] Using existing etcd/healthcheck-client certificate and key on disk", "[certs] Using existing apiserver-etcd-client certificate and key on disk", "[certs] Using the existing \"sa\" key", "[kubeconfig] Using kubeconfig folder \"/etc/kubernetes\"", "[kubeconfig] Using existing kubeconfig file: \"/etc/kubernetes/admin.conf\"", "[kubeconfig] Using existing kubeconfig file: \"/etc/kubernetes/super-admin.conf\"", "[kubeconfig] Using existing kubeconfig file: \"/etc/kubernetes/kubelet.conf\"", "[kubeconfig] Using existing kubeconfig file: \"/etc/kubernetes/controller-manager.conf\"", "[kubeconfig] Using existing kubeconfig file: \"/etc/kubernetes/scheduler.conf\"", "[etcd] Creating static Pod manifest for local etcd in \"/etc/kubernetes/manifests\"", "[control-plane] Using manifest folder \"/etc/kubernetes/manifests\"", "[control-plane] Creating static Pod manifest for \"kube-apiserver\"", "[control-plane] Creating static Pod manifest for \"kube-controller-manager\"", "[control-plane] Creating static Pod manifest for \"kube-scheduler\"", "[kubelet-start] Writing kubelet environment file with flags to file \"/var/lib/kubelet/kubeadm-flags.env\"", "[kubelet-start] Writing kubelet configuration to file \"/var/lib/kubelet/config.yaml\"", "[kubelet-start] Starting the kubelet", "[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory \"/etc/kubernetes/manifests\"", "[kubelet-check] Waiting for a healthy kubelet at http://127.0.0.1:10248/healthz. This can take up to 4m0s", "[kubelet-check] The kubelet is healthy after 501.531299ms", "[api-check] Waiting for a healthy API server. This can take up to 4m0s", "[api-check] The API server is not healthy after 4m0.000262696s", "", "Unfortunately, an error has occurred:", "\tcontext deadline exceeded", "", "This error is likely caused by:", "\t- The kubelet is not running", "\t- The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)", "", "If you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:", "\t- 'systemctl status kubelet'", "\t- 'journalctl -xeu kubelet'", "", "Additionally, a control plane component may have crashed or exited when started by the container runtime.", "To troubleshoot, list all containers using your preferred container runtimes CLI.", "Here is one example how you may list all running Kubernetes containers by using crictl:", "\t- 'crictl --runtime-endpoint unix:///var/run/containerd/containerd.sock ps -a | grep kube | grep -v pause'", "\tOnce you have found the failing container, you can inspect its logs with:", "\t- 'crictl --runtime-endpoint unix:///var/run/containerd/containerd.sock logs CONTAINERID'"]}
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+ac-k8s-master              : ok=18   changed=1    unreachable=0    failed=1    skipped=6    rescued=0    ignored=0   
+ac-k8s-node-1              : ok=16   changed=0    unreachable=0    failed=0    skipped=6    rescued=0    ignored=0   
+ac-k8s-node-2              : ok=16   changed=0    unreachable=0    failed=0    skipped=6    rescued=0    ignored=0   
+

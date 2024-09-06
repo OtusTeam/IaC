@@ -1,0 +1,52 @@
+fatal: [ac-k8s-master]: FAILED! => {"changed": true, "cmd": ["kubeadm", "init", "--pod-network-cidr=192.168.0.0/16", "--ignore-preflight-errors=Port-10250"], "delta": "0:04:39.897496", "end": "2024-09-06 06:38:01.556340", 
+"msg": "non-zero return code", "rc": 1, "start": "2024-09-06 06:33:21.658844", "stderr": "I0906 06:33:23.394281    6962 version.go:256] remote version is much newer: v1.31.0; falling back to: stable-1.30\n\t[WARNING Service-Kubelet]: kubelet service is not enabled, please run 'systemctl enable kubelet.service'\n\t
+[WARNING Port-10250]: Port 10250 is in use\nW0906 06:33:24.138764    6962 checks.go:844] 
+detected that the sandbox image \"registry.k8s.io/pause:3.8\" of the container runtime is inconsistent with that used by kubeadm.It is recommended to use \"registry.k8s.io/pause:3.9\" as the CRI sandbox image.\n
+W0906 06:34:01.162747    6962 kubelet.go:63] [kubelet-start] WARNING: unable to stop the kubelet service momentarily: [exit status 5]\nW0906 06:34:01.515450    6962 kubelet.go:43] [kubelet-start] WARNING: 
+unable to start the kubelet service: [exit status 5]\nerror execution phase wait-control-plane: could not initialize a Kubernetes cluster\nTo see the stack trace of this error execute with --v=5 or higher", "stderr_lines":
+ ["I0906 06:33:23.394281    6962 version.go:256] remote version is much newer: v1.31.0; falling back to: stable-1.30", "\t[WARNING Service-Kubelet]: kubelet service is not enabled, please run 'systemctl enable kubelet.service'", 
+"\t[WARNING Port-10250]: Port 10250 is in use", "W0906 06:33:24.138764    6962 checks.go:844] detected that the sandbox image \"registry.k8s.io/pause:3.8\" of the container runtime is inconsistent with that used by kubeadm.
+It is recommended to use \"registry.k8s.io/pause:3.9\" as the CRI sandbox image.", "W0906 06:34:01.162747    6962 kubelet.go:63] [kubelet-start] WARNING: unable to stop the kubelet service momentarily: [exit status 5]", 
+"W0906 06:34:01.515450    6962 kubelet.go:43] [kubelet-start] WARNING: unable to start the kubelet service: [exit status 5]", "error execution phase wait-control-plane: could not initialize a Kubernetes cluster", 
+"To see the stack trace of this error execute with --v=5 or higher"], "stdout": "[init] Using Kubernetes version: v1.30.4\n[preflight] Running pre-flight checks\n[preflight] Pulling images required for setting up a Kubernetes cluster\n
+[preflight] This might take a minute or two, depending on the speed of your internet connection\n[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'\n
+[certs] Using certificateDir folder \"/etc/kubernetes/pki\"\n[certs] Generating \"ca\" certificate and key\n[certs] Generating \"apiserver\" certificate and key\n
+[certs] apiserver serving cert is signed for DNS names [fhmqpsu2nfnpk2raq47m kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 192.168.1.8]\n
+[certs] Generating \"apiserver-kubelet-client\" certificate and key\n[certs] Generating \"front-proxy-ca\" certificate and key\n[certs] Generating \"front-proxy-client\" certificate and key\
+n[certs] Generating \"etcd/ca\" certificate and key\n[certs] Generating \"etcd/server\" certificate and key\n[certs] etcd/server serving cert is signed for DNS names [fhmqpsu2nfnpk2raq47m localhost] and IPs [192.168.1.8 127.0.0.1 ::1]\n
+[certs] Generating \"etcd/peer\" certificate and key\n[certs] etcd/peer serving cert is signed for DNS names [fhmqpsu2nfnpk2raq47m localhost] and IPs [192.168.1.8 127.0.0.1 ::1]\n[certs] Generating \"etcd/healthcheck-client\" 
+certificate and key\n[certs] Generating \"apiserver-etcd-client\" certificate and key\n[certs] Generating \"sa\" key and public key\n[kubeconfig] Using kubeconfig folder \"/etc/kubernetes\"\n
+[kubeconfig] Writing \"admin.conf\" kubeconfig file\n[kubeconfig] Writing \"super-admin.conf\" kubeconfig file\n[kubeconfig] Writing \"kubelet.conf\" kubeconfig file\n[kubeconfig] Writing \"controller-manager.conf\" 
+kubeconfig file\n[kubeconfig] Writing \"scheduler.conf\" kubeconfig file\n[etcd] Creating static Pod manifest for local etcd in \"/etc/kubernetes/manifests\"\n[control-plane] Using manifest folder \"/etc/kubernetes/manifests\"\n
+[control-plane] Creating static Pod manifest for \"kube-apiserver\"\n[control-plane] Creating static Pod manifest for \"kube-controller-manager\"\n[control-plane] Creating static Pod manifest for \"kube-scheduler\"\n
+[kubelet-start] Writing kubelet environment file with flags to file \"/var/lib/kubelet/kubeadm-flags.env\"\n[kubelet-start] Writing kubelet configuration to file \"/var/lib/kubelet/config.yaml\"\n[kubelet-start] Starting the kubelet\n
+[kubelet-start] Please ensure kubelet is reloaded and running manually.\n[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory \"/etc/kubernetes/manifests\"\n
+[kubelet-check] Waiting for a healthy kubelet at http://127.0.0.1:10248/healthz. This can take up to 4m0s\n[kubelet-check] The kubelet is healthy after 1.132802ms\n[api-check] Waiting for a healthy API server. 
+This can take up to 4m0s\n[api-check] The API server is not healthy after 4m0.000256019s\n\nUnfortunately, an error has occurred:\n\tcontext deadline exceeded\n\nThis error is likely caused by:\n\t- The kubelet is not running\n\t
+- The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)\n\nIf you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:\n\t
+- 'systemctl status kubelet'\n\t- 'journalctl -xeu kubelet'\n\nAdditionally, a control plane component may have crashed or exited when started by the container runtime.\n
+To troubleshoot, list all containers using your preferred container runtimes CLI.\nHere is one example how you may list all running Kubernetes containers by using crictl:\n\t
+- 'crictl --runtime-endpoint unix:///var/run/containerd/containerd.sock ps -a | grep kube | grep -v pause'\n\t
+Once you have found the failing container, you can inspect its logs with:\n\t- 'crictl --runtime-endpoint unix:///var/run/containerd/containerd.sock logs CONTAINERID'", 
+"stdout_lines": ["[init] Using Kubernetes version: v1.30.4", "[preflight] Running pre-flight checks", "[preflight] Pulling images required for setting up a Kubernetes cluster", 
+"[preflight] This might take a minute or two, depending on the speed of your internet connection", "[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'", 
+"[certs] Using certificateDir folder \"/etc/kubernetes/pki\"", "[certs] Generating \"ca\" certificate and key", "[certs] Generating \"apiserver\" certificate and key", 
+"[certs] apiserver serving cert is signed for DNS names [fhmqpsu2nfnpk2raq47m kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 192.168.1.8]", 
+"[certs] Generating \"apiserver-kubelet-client\" certificate and key", 
+"[certs] Generating \"front-proxy-ca\" certificate and key", "[certs] Generating \"front-proxy-client\" certificate and key", "[certs] Generating \"etcd/ca\" certificate and key", 
+"[certs] Generating \"etcd/server\" certificate and key", "[certs] etcd/server serving cert is signed for DNS names [fhmqpsu2nfnpk2raq47m localhost] and IPs [192.168.1.8 127.0.0.1 ::1]", 
+"[certs] Generating \"etcd/peer\" certificate and key", "[certs] etcd/peer serving cert is signed for DNS names [fhmqpsu2nfnpk2raq47m localhost] and IPs [192.168.1.8 127.0.0.1 ::1]", 
+"[certs] Generating \"etcd/healthcheck-client\" certificate and key", "[certs] Generating \"apiserver-etcd-client\" certificate and key", "[certs] Generating \"sa\" key and public key", 
+"[kubeconfig] Using kubeconfig folder \"/etc/kubernetes\"", "[kubeconfig] Writing \"admin.conf\" kubeconfig file", "[kubeconfig] Writing \"super-admin.conf\" kubeconfig file", "[kubeconfig] Writing \"kubelet.conf\" kubeconfig file", 
+"[kubeconfig] Writing \"controller-manager.conf\" kubeconfig file", "[kubeconfig] Writing \"scheduler.conf\" kubeconfig file", "[etcd] Creating static Pod manifest for local etcd in \"/etc/kubernetes/manifests\"", 
+"[control-plane] Using manifest folder \"/etc/kubernetes/manifests\"", "[control-plane] Creating static Pod manifest for \"kube-apiserver\"", "[control-plane] Creating static Pod manifest for \"kube-controller-manager\"", 
+"[control-plane] Creating static Pod manifest for \"kube-scheduler\"", "[kubelet-start] Writing kubelet environment file with flags to file \"/var/lib/kubelet/kubeadm-flags.env\"", 
+"[kubelet-start] Writing kubelet configuration to file \"/var/lib/kubelet/config.yaml\"", "[kubelet-start] Starting the kubelet", 
+"[kubelet-start] Please ensure kubelet is reloaded and running manually.", "[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory \"/etc/kubernetes/manifests\"", 
+"[kubelet-check] Waiting for a healthy kubelet at http://127.0.0.1:10248/healthz. This can take up to 4m0s", "[kubelet-check] The kubelet is healthy after 1.132802ms", 
+"[api-check] Waiting for a healthy API server. This can take up to 4m0s", "[api-check] The API server is not healthy after 4m0.000256019s", "", "Unfortunately, an error has occurred:", 
+"\tcontext deadline exceeded", "", "This error is likely caused by:", "\t- The kubelet is not running", "\t- The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)", 
+"", "If you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:", "\t- 'systemctl status kubelet'", 
+"\t- 'journalctl -xeu kubelet'", "", "Additionally, a control plane component may have crashed or exited when started by the container runtime.", "To troubleshoot, list all containers using your preferred container runtimes CLI.", 
+"Here is one example how you may list all running Kubernetes containers by using crictl:", "\t- 'crictl --runtime-endpoint unix:///var/run/containerd/containerd.sock ps -a | grep kube | grep -v pause'", 
+"\tOnce you have found the failing container, you can inspect its logs with:", "\t- 'crictl --runtime-endpoint unix:///var/run/containerd/containerd.sock logs CONTAINERID'"]}

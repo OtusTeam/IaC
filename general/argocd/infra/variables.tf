@@ -39,6 +39,7 @@ variable "sec_key_path" {
 
 variable "image" {
    type = string
-   default = "fd8pecdhv50nec1qf9im" 
+   default = "fd8lh1aqti7987pcqt11" # Ubuntu 22.04 LTS (Vanilla), no OS Login 
+# "fd8pecdhv50nec1qf9im" 
 # "fd84kp940dsrccckilj6"
 }
