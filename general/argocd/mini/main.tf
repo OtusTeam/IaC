@@ -34,11 +34,10 @@ resource "yandex_compute_instance" "ac_mini" {
                 #cloud-config
                 package_update: true
                 packages:
-                  - docker-ce
-                  - docker-ce-cli
-                  - containerd.io
-                  - docker-buildx-plugin
-                  - docker-compose-plugin
+                  - ca-certificates 
+                  - curl 
+                  - gnupg 
+                  - lsb-release
                 EOF
   }
 }

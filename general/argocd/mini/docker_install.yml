@@ -1,0 +1,40 @@
+---
+- name: Install Docker
+  hosts: mini
+  become: yes
+  tasks:
+  - name: Update package list
+    apt:
+      update_cache: yes
+
+  - name: Install required packages
+    apt:
+      name: ca-certificates,curl,gnupg,lsb-release
+      state: present
+
+  - name: Create directory for Docker GPG key
+    file:
+      path: /etc/apt/keyrings
+      state: directory
+      mode: '0755'
+
+  - name: Download Docker GPG key
+    get_url:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      dest: /etc/apt/keyrings/docker.gpg
+      mode: '0644'
+
+  - name: Dearmor Docker GPG key
+    shell: gpg --dearmor /etc/apt/keyrings/docker.gpg
+
+  - name: Add Docker repository to Apt sources
+    shell: echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+
+  - name: Update package list again
+    apt:
+      update_cache: yes
+
+  - name: Install Docker
+    apt:
+      name: docker-ce,docker-ce-cli,containerd.io,docker-compose-plugin
+      state: present
