@@ -1,0 +1,84 @@
+---
+- name: Install Minikube
+  hosts: all
+
+  vars:
+    CNI_PLUGIN_VERSION: "v1.5.1"
+    CNI_PLUGIN_TAR: "cni-plugins-linux-amd64-{{ CNI_PLUGIN_VERSION }}.tgz"
+    CNI_PLUGIN_INSTALL_DIR: "/opt/cni/bin"
+
+  tasks:
+  - name: Download Minikube
+    get_url:
+      url: https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
+      dest: /tmp/minikube_latest_amd64.deb
+
+  - name: Install Minikube
+    become: yes
+    command: dpkg -i /tmp/minikube_latest_amd64.deb
+
+  - name: Install conntrack
+    become: yes
+    apt:
+      name: conntrack
+      state: present
+
+  - name: Download crictl
+    get_url:
+      url: https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.31.1/crictl-v1.31.1-linux-amd64.tar.gz
+      dest: /tmp/crictl.tar.gz
+
+  - name: Extract crictl
+    become: yes
+    unarchive:
+      src: /tmp/crictl.tar.gz
+      dest: /usr/local/bin
+      remote_src: yes
+
+  - name: Download cri-dockerd
+    get_url:
+      url: https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.14/cri-dockerd-0.3.14.amd64.tgz
+      dest: /tmp/cri-dockerd.tgz
+
+  - name: Extract cri-dockerd
+    become: yes
+    unarchive:
+      src: /tmp/cri-dockerd.tgz
+      dest: /tmp
+      remote_src: yes
+
+  - name: Copy cri-dockerd and make it executable
+    become: yes
+    copy:
+      src: /tmp/cri-dockerd/cri-dockerd
+      dest: /usr/local/bin/cri-dockerd
+      mode: '0755'
+      remote_src: yes
+
+  - name: Download CNI plugin
+    get_url:
+      url: "https://github.com/containernetworking/plugins/releases/download/{{ CNI_PLUGIN_VERSION }}/{{ CNI_PLUGIN_TAR }}"
+      dest: "/tmp/{{ CNI_PLUGIN_TAR }}"
+
+  - name: Create CNI plugin install directory
+    become: yes
+    file:
+      path: "{{ CNI_PLUGIN_INSTALL_DIR }}"
+      state: directory
+      mode: '0755'
+
+  - name: Extract CNI plugin
+    become: yes
+    unarchive:
+      src: "/tmp/{{ CNI_PLUGIN_TAR }}"
+      dest: "{{ CNI_PLUGIN_INSTALL_DIR }}"
+      remote_src: yes
+
+  - name: Remove CNI plugin tar file
+    file:
+      path: "/tmp/{{ CNI_PLUGIN_TAR }}"
+      state: absent
+
+  - name: Start Minikube
+    command: minikube start --driver=none
+
