@@ -1,14 +1,14 @@
-resource "yandex_compute_instance" "ac_mini" {
-  name = "ac-mini"
+resource "yandex_compute_instance" "ac_mini_nodrive" {
+  name = "ac-mini-nodrive"
   zone = "ru-central1-a"
 
   labels = {
-    group = "mini"
+    group = "mininodrive"
   } 
 
   resources {
     cores  = 2
-    memory = 4
+    memory = 8
     core_fraction = 20
   }
 

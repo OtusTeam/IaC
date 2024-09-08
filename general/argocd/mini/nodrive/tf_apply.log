@@ -1,12 +1,13 @@
-aleksey@first:~/OtusTeam/IaC/general/argocd/mini$ tf apply
+aleksey@first:~/OtusTeam/IaC/general/argocd/mini/nodrive$ tf apply
+yandex_compute_instance.ac_mini: Refreshing state... [id=fhms5hgndik1617st1ig]
 
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
   + create
 
 Terraform will perform the following actions:
 
-  # yandex_compute_instance.ac_mini will be created
-  + resource "yandex_compute_instance" "ac_mini" {
+  # yandex_compute_instance.ac_mini_nodrive will be created
+  + resource "yandex_compute_instance" "ac_mini_nodrive" {
       + created_at                = (known after apply)
       + folder_id                 = (known after apply)
       + fqdn                      = (known after apply)
@@ -14,7 +15,7 @@ Terraform will perform the following actions:
       + hostname                  = (known after apply)
       + id                        = (known after apply)
       + labels                    = {
-          + "group" = "mini"
+          + "group" = "mininodrive"
         }
       + maintenance_grace_period  = (known after apply)
       + maintenance_policy        = (known after apply)
@@ -30,7 +31,7 @@ Terraform will perform the following actions:
                   - lsb-release
             EOT
         }
-      + name                      = "ac-mini"
+      + name                      = "ac-mini-nodrive"
       + network_acceleration_type = "standard"
       + platform_id               = "standard-v1"
       + service_account_id        = (known after apply)
@@ -75,7 +76,7 @@ Terraform will perform the following actions:
       + resources {
           + core_fraction = 20
           + cores         = 2
-          + memory        = 4
+          + memory        = 8
         }
 
       + scheduling_policy {
@@ -91,10 +92,59 @@ Do you want to perform these actions?
 
   Enter a value: yes
 
-yandex_compute_instance.ac_mini: Creating...
-yandex_compute_instance.ac_mini: Still creating... [10s elapsed]
-yandex_compute_instance.ac_mini: Still creating... [20s elapsed]
-yandex_compute_instance.ac_mini: Still creating... [30s elapsed]
-yandex_compute_instance.ac_mini: Still creating... [40s elapsed]
-yandex_compute_instance.ac_mini: Creation complete after 41s [id=fhms5hgndik1617st1ig]
+yandex_compute_instance.ac_mini_nodrive: Creating...
+yandex_compute_instance.ac_mini_nodrive: Still creating... [10s elapsed]
+yandex_compute_instance.ac_mini_nodrive: Still creating... [20s elapsed]
+yandex_compute_instance.ac_mini_nodrive: Still creating... [30s elapsed]
+yandex_compute_instance.ac_mini_nodrive: Still creating... [40s elapsed]
+yandex_compute_instance.ac_mini_nodrive: Creation complete after 43s [id=fhmvesptdiribj3mgtm5]
 
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+aleksey@first:~/OtusTeam/IaC/general/argocd/mini/nodrive$ ./ans_inv_list.sh 
+++ ansible-inventory --list
+{
+    "_meta": {
+        "hostvars": {
+            "ac-mini-docker": {
+                "ansible_host": "89.169.152.28"
+            },
+            "ac-mini-nodrive": {
+                "ansible_host": "89.169.128.139"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped",
+            "minidocker",
+            "mininodrive"
+        ]
+    },
+    "minidocker": {
+        "hosts": [
+            "ac-mini-docker"
+        ]
+    },
+    "mininodrive": {
+        "hosts": [
+            "ac-mini-nodrive"
+        ]
+    }
+}
+
+aleksey@first:~/OtusTeam/IaC/general/argocd/mini/nodrive$ ./ans_ping.sh 
+++ ansible -m ping all
+ac-mini-docker | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+ac-mini-nodrive | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}

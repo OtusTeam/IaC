@@ -18,3 +18,43 @@
   - name: Start Minikube
     command: minikube start
 
+# new tasks need to test:
+
+  - name: get kubectl and interact with the cluster
+    command minikube kubectl -- get po -A
+    register: minikube_kubectl_output
+
+  - name: Print minikube kubectl output
+    debug:
+      var: minikube_kubectl_output
+
+  - name: Add kubectl alias to .bashrc
+    lineinfile:
+      path: "~/.bashrc"
+      line: "alias kubectl=\"minikube kubectl --\""
+      state: present
+
+  - name: Enable metrics-server
+    command: minikube addons enable metrics-server
+
+  - name: Run minikube addons list command
+    command: minikube addons list
+    register: addons_output
+
+  - name: Print minikube addons list output
+    debug:
+      var: addons_output.stdout_lines
+
+
+#  - name: Start minikube dashboard in the background
+#    shell: "minikube dashboard --port=3333 --url=true"
+#    async: 1
+#    poll: 0
+#    register: dashboard_output
+
+#  - name: Show minikube dashboard URL
+#    debug:
+#      var: dashboard_output.stdout_lines
+
+
+

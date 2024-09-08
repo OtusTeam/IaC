@@ -1,0 +1,883 @@
+aleksey@first:~/OtusTeam/IaC/general/argocd/mini$ ssh ubuntu@89.169.152.28
+Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 5.15.0-119-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Sun Sep  8 09:34:37 AM UTC 2024
+
+  System load:  0.18              Processes:             136
+  Usage of /:   9.2% of 49.12GB   Users logged in:       0
+  Memory usage: 4%                IPv4 address for eth0: 10.128.0.6
+  Swap usage:   0%
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Expanded Security Maintenance for Applications is not enabled.
+
+6 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Sun Sep  8 09:33:13 2024 from 51.250.13.236
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ top
+
+top - 09:39:54 up 15 min,  1 user,  load average: 1.25, 1.12, 0.56
+Tasks: 175 total,   1 running, 174 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  3.1 us,  2.2 sy,  0.0 ni, 94.5 id,  0.2 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem :   7937.9 total,   2671.3 free,    689.4 used,   4577.2 buff/cache
+MiB Swap:      0.0 total,      0.0 free,      0.0 used.   6926.8 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND  
+   7820 root      20   0 1473848 241684  74208 S   4.3   3.0   0:11.11 kube-ap+ 
+   7888 root      20   0 2066396  91192  62484 S   2.7   1.1   0:02.54 kubelet  
+   7697 root      20   0   10.7g  45184  21768 S   1.7   0.6   0:03.38 etcd     
+   7752 root      20   0 1333744 108344  67332 S   1.7   1.3   0:04.22 kube-co+ 
+   6857 root      20   0 2429668  99620  57304 S   1.0   1.2   0:01.85 dockerd  
+   7078 root      20   0 1275584  46740  32292 S   1.0   0.6   0:01.25 cri-doc+ 
+   4833 ubuntu    20   0   17188   7980   5580 S   0.3   0.1   0:00.01 sshd     
+   6632 root      20   0 1946928  49132  32528 S   0.3   0.6   0:00.42 contain+ 
+   8442 65532     20   0  768324  49920  39444 S   0.3   0.6   0:00.20 coredns  
+      1 root      20   0  101976  12912   8240 S   0.0   0.2   0:05.98 systemd  
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd 
+      3 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 rcu_gp   
+      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 rcu_par+ 
+      5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 slub_fl+ 
+      6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 netns    
+      8 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+ 
+      9 root      20   0       0      0      0 I   0.0   0.0   0:01.76 kworker+ 
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubeadm version
+Command 'kubeadm' not found, but can be installed with:
+sudo snap install kubeadm
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl version
+Command 'kubectl' not found, but can be installed with:
+sudo snap install kubectl
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube kubectl -- get po -A
+    > kubectl.sha256:  64 B / 64 B [-------------------------] 100.00% ? p/s 0s
+    > kubectl:  49.07 MiB / 49.07 MiB [------------] 100.00% 19.41 MiB p/s 2.7s
+NAMESPACE     NAME                               READY   STATUS    RESTARTS      AGE
+kube-system   coredns-7db6d8ff4d-6gqlc           1/1     Running   0             63m
+kube-system   etcd-minikube                      1/1     Running   0             64m
+kube-system   kube-apiserver-minikube            1/1     Running   0             64m
+kube-system   kube-controller-manager-minikube   1/1     Running   0             64m
+kube-system   kube-proxy-g68w7                   1/1     Running   0             63m
+kube-system   kube-scheduler-minikube            1/1     Running   0             64m
+kube-system   storage-provisioner                1/1     Running   1 (63m ago)   64m
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube kubectl -- get po -A
+NAMESPACE     NAME                               READY   STATUS    RESTARTS      AGE
+kube-system   coredns-7db6d8ff4d-6gqlc           1/1     Running   0             66m
+kube-system   etcd-minikube                      1/1     Running   0             67m
+kube-system   kube-apiserver-minikube            1/1     Running   0             67m
+kube-system   kube-controller-manager-minikube   1/1     Running   0             67m
+kube-system   kube-proxy-g68w7                   1/1     Running   0             66m
+kube-system   kube-scheduler-minikube            1/1     Running   0             67m
+kube-system   storage-provisioner                1/1     Running   1 (66m ago)   67m
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube dashboard
+🔌  Enabling dashboard ...
+    ▪ Using image docker.io/kubernetesui/metrics-scraper:v1.0.8
+    ▪ Using image docker.io/kubernetesui/dashboard:v2.7.0
+💡  Some dashboard features require the metrics-server addon. To enable all features please run:
+
+	minikube addons enable metrics-server
+
+🤔  Verifying dashboard health ...
+🚀  Launching proxy ...
+🤔  Verifying proxy health ...
+🎉  Opening http://127.0.0.1:39601/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ in your default browser...
+👉  http://127.0.0.1:39601/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
+^C
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube addons enable metrics-server
+💡  metrics-server is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
+You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
+    ▪ Using image registry.k8s.io/metrics-server/metrics-server:v0.7.1
+🌟  The 'metrics-server' addon is enabled
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube dashboard
+🤔  Verifying dashboard health ...
+🚀  Launching proxy ...
+🤔  Verifying proxy health ...
+🎉  Opening http://127.0.0.1:41437/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ in your default browser...
+👉  http://127.0.0.1:41437/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
+^C
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube dashboard --help
+Access the Kubernetes dashboard running within the minikube cluster
+
+Options:
+    --port=0:
+	Exposed port of the proxyfied dashboard. Set to 0 to pick a random port.
+
+    --url=false:
+	Display dashboard URL instead of opening a browser
+
+Usage:
+  minikube dashboard [flags] [options]
+
+Use "minikube options" for a list of global command-line options (applies to all commands).
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube dashboard --port=3333 --url=false
+🤔  Verifying dashboard health ...
+🚀  Launching proxy ...
+🤔  Verifying proxy health ...
+🎉  Opening http://127.0.0.1:3333/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ in your default browser...
+👉  http://127.0.0.1:3333/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
+^X^C
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube dashboard --port=3333 --url=true
+🤔  Verifying dashboard health ...
+🚀  Launching proxy ...
+🤔  Verifying proxy health ...
+http://127.0.0.1:3333/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
+^C
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube dashboard --port=3333 --url=true
+🤔  Verifying dashboard health ...
+🚀  Launching proxy ...
+🤔  Verifying proxy health ...
+http://127.0.0.1:3333/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
+^Z
+[1]+  Stopped                 minikube dashboard --port=3333 --url=true
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ curl http://127.0.0.1:3333/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
+get
+help
+test 
+quit
+exit
+^C
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ bg
+[1]+ minikube dashboard --port=3333 --url=true &
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ fg
+minikube dashboard --port=3333 --url=true
+^C
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ bg
+-bash: bg: current: no such job
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube addons list
+|-----------------------------|----------|--------------|--------------------------------|
+|         ADDON NAME          | PROFILE  |    STATUS    |           MAINTAINER           |
+|-----------------------------|----------|--------------|--------------------------------|
+| ambassador                  | minikube | disabled     | 3rd party (Ambassador)         |
+| auto-pause                  | minikube | disabled     | minikube                       |
+| cloud-spanner               | minikube | disabled     | Google                         |
+| csi-hostpath-driver         | minikube | disabled     | Kubernetes                     |
+| dashboard                   | minikube | enabled ✅   | Kubernetes                     |
+| default-storageclass        | minikube | enabled ✅   | Kubernetes                     |
+| efk                         | minikube | disabled     | 3rd party (Elastic)            |
+| freshpod                    | minikube | disabled     | Google                         |
+| gcp-auth                    | minikube | disabled     | Google                         |
+| gvisor                      | minikube | disabled     | minikube                       |
+| headlamp                    | minikube | disabled     | 3rd party (kinvolk.io)         |
+| helm-tiller                 | minikube | disabled     | 3rd party (Helm)               |
+| inaccel                     | minikube | disabled     | 3rd party (InAccel             |
+|                             |          |              | [info@inaccel.com])            |
+| ingress                     | minikube | disabled     | Kubernetes                     |
+| ingress-dns                 | minikube | disabled     | minikube                       |
+| inspektor-gadget            | minikube | disabled     | 3rd party                      |
+|                             |          |              | (inspektor-gadget.io)          |
+| istio                       | minikube | disabled     | 3rd party (Istio)              |
+| istio-provisioner           | minikube | disabled     | 3rd party (Istio)              |
+| kong                        | minikube | disabled     | 3rd party (Kong HQ)            |
+| kubeflow                    | minikube | disabled     | 3rd party                      |
+| kubevirt                    | minikube | disabled     | 3rd party (KubeVirt)           |
+| logviewer                   | minikube | disabled     | 3rd party (unknown)            |
+| metallb                     | minikube | disabled     | 3rd party (MetalLB)            |
+| metrics-server              | minikube | enabled ✅   | Kubernetes                     |
+| nvidia-device-plugin        | minikube | disabled     | 3rd party (NVIDIA)             |
+| nvidia-driver-installer     | minikube | disabled     | 3rd party (Nvidia)             |
+| nvidia-gpu-device-plugin    | minikube | disabled     | 3rd party (Nvidia)             |
+| olm                         | minikube | disabled     | 3rd party (Operator Framework) |
+| pod-security-policy         | minikube | disabled     | 3rd party (unknown)            |
+| portainer                   | minikube | disabled     | 3rd party (Portainer.io)       |
+| registry                    | minikube | disabled     | minikube                       |
+| registry-aliases            | minikube | disabled     | 3rd party (unknown)            |
+| registry-creds              | minikube | disabled     | 3rd party (UPMC Enterprises)   |
+| storage-provisioner         | minikube | enabled ✅   | minikube                       |
+| storage-provisioner-gluster | minikube | disabled     | 3rd party (Gluster)            |
+| storage-provisioner-rancher | minikube | disabled     | 3rd party (Rancher)            |
+| volumesnapshots             | minikube | disabled     | Kubernetes                     |
+| yakd                        | minikube | disabled     | 3rd party (marcnuri.com)       |
+|-----------------------------|----------|--------------|--------------------------------|
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube pause
+⏸️  Pausing node minikube ... 
+⏯️  Paused 20 containers in: kube-system, kubernetes-dashboard, storage-gluster, istio-operator
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube unpause
+⏸️  Unpausing node minikube ... 
+⏸️  Unpaused 20 containers in: kube-system, kubernetes-dashboard, storage-gluster, istio-operator
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube stop
+✋  Stopping node "minikube"  ...
+🛑  Powering off "minikube" via SSH ...
+🛑  1 node stopped.
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ ss -tulpan
+Netid                   State                    Recv-Q                   Send-Q                                       Local Address:Port                                      Peer Address:Port                    Process                   
+udp                     UNCONN                   0                        0                                            127.0.0.53%lo:53                                             0.0.0.0:*                                                 
+udp                     UNCONN                   0                        0                                          10.128.0.6%eth0:68                                             0.0.0.0:*                                                 
+tcp                     LISTEN                   0                        4096                                         127.0.0.53%lo:53                                             0.0.0.0:*                                                 
+tcp                     LISTEN                   0                        128                                                0.0.0.0:22                                             0.0.0.0:*                                                 
+tcp                     ESTAB                    0                        0                                               10.128.0.6:22                                       51.250.13.236:37076                                             
+tcp                     LISTEN                   0                        128                                                   [::]:22                                                [::]:*                                                 
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube start
+😄  minikube v1.33.1 on Ubuntu 22.04 (amd64)
+✨  Using the docker driver based on existing profile
+👍  Starting "minikube" primary control-plane node in "minikube" cluster
+🚜  Pulling base image v0.0.44 ...
+🔄  Restarting existing docker container for "minikube" ...
+🐳  Preparing Kubernetes v1.30.0 on Docker 26.1.1 ...
+🔎  Verifying Kubernetes components...
+    ▪ Using image docker.io/kubernetesui/metrics-scraper:v1.0.8
+    ▪ Using image docker.io/kubernetesui/dashboard:v2.7.0
+    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+    ▪ Using image registry.k8s.io/metrics-server/metrics-server:v0.7.1
+💡  Some dashboard features require the metrics-server addon. To enable all features please run:
+
+	minikube addons enable metrics-server
+
+🌟  Enabled addons: metrics-server, storage-provisioner, dashboard, default-storageclass
+💡  kubectl not found. If you need it, try: 'minikube kubectl -- get pods -A'
+🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube addons list
+|-----------------------------|----------|--------------|--------------------------------|
+|         ADDON NAME          | PROFILE  |    STATUS    |           MAINTAINER           |
+|-----------------------------|----------|--------------|--------------------------------|
+| ambassador                  | minikube | disabled     | 3rd party (Ambassador)         |
+| auto-pause                  | minikube | disabled     | minikube                       |
+| cloud-spanner               | minikube | disabled     | Google                         |
+| csi-hostpath-driver         | minikube | disabled     | Kubernetes                     |
+| dashboard                   | minikube | enabled ✅   | Kubernetes                     |
+| default-storageclass        | minikube | enabled ✅   | Kubernetes                     |
+| efk                         | minikube | disabled     | 3rd party (Elastic)            |
+| freshpod                    | minikube | disabled     | Google                         |
+| gcp-auth                    | minikube | disabled     | Google                         |
+| gvisor                      | minikube | disabled     | minikube                       |
+| headlamp                    | minikube | disabled     | 3rd party (kinvolk.io)         |
+| helm-tiller                 | minikube | disabled     | 3rd party (Helm)               |
+| inaccel                     | minikube | disabled     | 3rd party (InAccel             |
+|                             |          |              | [info@inaccel.com])            |
+| ingress                     | minikube | disabled     | Kubernetes                     |
+| ingress-dns                 | minikube | disabled     | minikube                       |
+| inspektor-gadget            | minikube | disabled     | 3rd party                      |
+|                             |          |              | (inspektor-gadget.io)          |
+| istio                       | minikube | disabled     | 3rd party (Istio)              |
+| istio-provisioner           | minikube | disabled     | 3rd party (Istio)              |
+| kong                        | minikube | disabled     | 3rd party (Kong HQ)            |
+| kubeflow                    | minikube | disabled     | 3rd party                      |
+| kubevirt                    | minikube | disabled     | 3rd party (KubeVirt)           |
+| logviewer                   | minikube | disabled     | 3rd party (unknown)            |
+| metallb                     | minikube | disabled     | 3rd party (MetalLB)            |
+| metrics-server              | minikube | enabled ✅   | Kubernetes                     |
+| nvidia-device-plugin        | minikube | disabled     | 3rd party (NVIDIA)             |
+| nvidia-driver-installer     | minikube | disabled     | 3rd party (Nvidia)             |
+| nvidia-gpu-device-plugin    | minikube | disabled     | 3rd party (Nvidia)             |
+| olm                         | minikube | disabled     | 3rd party (Operator Framework) |
+| pod-security-policy         | minikube | disabled     | 3rd party (unknown)            |
+| portainer                   | minikube | disabled     | 3rd party (Portainer.io)       |
+| registry                    | minikube | disabled     | minikube                       |
+| registry-aliases            | minikube | disabled     | 3rd party (unknown)            |
+| registry-creds              | minikube | disabled     | 3rd party (UPMC Enterprises)   |
+| storage-provisioner         | minikube | enabled ✅   | minikube                       |
+| storage-provisioner-gluster | minikube | disabled     | 3rd party (Gluster)            |
+| storage-provisioner-rancher | minikube | disabled     | 3rd party (Rancher)            |
+| volumesnapshots             | minikube | disabled     | Kubernetes                     |
+| yakd                        | minikube | disabled     | 3rd party (marcnuri.com)       |
+|-----------------------------|----------|--------------|--------------------------------|
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ ss -tulpan
+Netid                   State                    Recv-Q                   Send-Q                                       Local Address:Port                                       Peer Address:Port                   Process                   
+udp                     UNCONN                   0                        0                                            127.0.0.53%lo:53                                              0.0.0.0:*                                                
+udp                     UNCONN                   0                        0                                          10.128.0.6%eth0:68                                              0.0.0.0:*                                                
+tcp                     LISTEN                   0                        4096                                         127.0.0.53%lo:53                                              0.0.0.0:*                                                
+tcp                     LISTEN                   0                        128                                                0.0.0.0:22                                              0.0.0.0:*                                                
+tcp                     LISTEN                   0                        4096                                             127.0.0.1:32773                                           0.0.0.0:*                                                
+tcp                     LISTEN                   0                        4096                                             127.0.0.1:32775                                           0.0.0.0:*                                                
+tcp                     LISTEN                   0                        4096                                             127.0.0.1:32774                                           0.0.0.0:*                                                
+tcp                     LISTEN                   0                        4096                                             127.0.0.1:32777                                           0.0.0.0:*                                                
+tcp                     LISTEN                   0                        4096                                             127.0.0.1:32776                                           0.0.0.0:*                                                
+tcp                     ESTAB                    0                        0                                               10.128.0.6:22                                        51.250.13.236:37076                                            
+tcp                     LISTEN                   0                        128                                                   [::]:22                                                 [::]:*                                                
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube kubectl -- get po -A
+NAMESPACE              NAME                                        READY   STATUS    RESTARTS        AGE
+kube-system            coredns-7db6d8ff4d-6gqlc                    1/1     Running   1 (4m58s ago)   3h1m
+kube-system            etcd-minikube                               1/1     Running   1 (5m3s ago)    3h1m
+kube-system            kube-apiserver-minikube                     1/1     Running   1 (4m53s ago)   3h1m
+kube-system            kube-controller-manager-minikube            1/1     Running   1 (5m3s ago)    3h1m
+kube-system            kube-proxy-g68w7                            1/1     Running   1 (5m3s ago)    3h1m
+kube-system            kube-scheduler-minikube                     1/1     Running   1 (5m3s ago)    3h1m
+kube-system            metrics-server-c59844bb4-4wmkx              1/1     Running   2 (3m24s ago)   101m
+kube-system            storage-provisioner                         1/1     Running   3 (3m28s ago)   3h1m
+kubernetes-dashboard   dashboard-metrics-scraper-b5fc48f67-frbch   1/1     Running   1 (5m3s ago)    106m
+kubernetes-dashboard   kubernetes-dashboard-779776cb65-gpk48       1/1     Running   2 (3m24s ago)   106m
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl create deployment hello-minikube --image=kicbase/echo-server:1.0
+kubectl expose deployment hello-minikube --type=NodePort --port=8080
+Command 'kubectl' not found, but can be installed with:
+sudo snap install kubectl
+Command 'kubectl' not found, but can be installed with:
+sudo snap install kubectl
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube kubectl --create deployment hello-minikube --image=kicbase/echo-server:1.0
+Error: unknown flag: --create
+See 'minikube kubectl --help' for usage.
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube kubectl create deployment hello-minikube --image=kicbase/echo-server:1.0
+Error: unknown flag: --image
+See 'minikube kubectl --help' for usage.
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ alias kubectl="minikube kubectl --"
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl create deployment hello-minikube --image=kicbase/echo-server:1.0
+deployment.apps/hello-minikube created
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl expose deployment hello-minikube --type=NodePort --port=8080
+service/hello-minikube exposed
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ ss -tulpan
+Netid                   State                    Recv-Q                   Send-Q                                       Local Address:Port                                       Peer Address:Port                   Process                   
+udp                     UNCONN                   0                        0                                            127.0.0.53%lo:53                                              0.0.0.0:*                                                
+udp                     UNCONN                   0                        0                                          10.128.0.6%eth0:68                                              0.0.0.0:*                                                
+tcp                     LISTEN                   0                        4096                                         127.0.0.53%lo:53                                              0.0.0.0:*                                                
+tcp                     LISTEN                   0                        128                                                0.0.0.0:22                                              0.0.0.0:*                                                
+tcp                     LISTEN                   0                        4096                                             127.0.0.1:32773                                           0.0.0.0:*                                                
+tcp                     LISTEN                   0                        4096                                             127.0.0.1:32775                                           0.0.0.0:*                                                
+tcp                     LISTEN                   0                        4096                                             127.0.0.1:32774                                           0.0.0.0:*                                                
+tcp                     LISTEN                   0                        4096                                             127.0.0.1:32777                                           0.0.0.0:*                                                
+tcp                     LISTEN                   0                        4096                                             127.0.0.1:32776                                           0.0.0.0:*                                                
+tcp                     ESTAB                    0                        0                                               10.128.0.6:22                                        51.250.13.236:37076                                            
+tcp                     LISTEN                   0                        128                                                   [::]:22                                                 [::]:*                                                
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl get services hello-minikube
+NAME             TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+hello-minikube   NodePort   10.105.141.49   <none>        8080:30921/TCP   67s
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ ss -tulpan
+Netid                   State                    Recv-Q                   Send-Q                                       Local Address:Port                                       Peer Address:Port                   Process                   
+udp                     UNCONN                   0                        0                                            127.0.0.53%lo:53                                              0.0.0.0:*                                                
+udp                     UNCONN                   0                        0                                          10.128.0.6%eth0:68                                              0.0.0.0:*                                                
+tcp                     LISTEN                   0                        4096                                         127.0.0.53%lo:53                                              0.0.0.0:*                                                
+tcp                     LISTEN                   0                        128                                                0.0.0.0:22                                              0.0.0.0:*                                                
+tcp                     LISTEN                   0                        4096                                             127.0.0.1:32773                                           0.0.0.0:*                                                
+tcp                     LISTEN                   0                        4096                                             127.0.0.1:32775                                           0.0.0.0:*                                                
+tcp                     LISTEN                   0                        4096                                             127.0.0.1:32774                                           0.0.0.0:*                                                
+tcp                     LISTEN                   0                        4096                                             127.0.0.1:32777                                           0.0.0.0:*                                                
+tcp                     LISTEN                   0                        4096                                             127.0.0.1:32776                                           0.0.0.0:*                                                
+tcp                     ESTAB                    0                        0                                               10.128.0.6:22                                        51.250.13.236:37076                                            
+tcp                     LISTEN                   0                        128                                                   [::]:22                                                 [::]:*                                                
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube service hello-minikube
+|-----------|----------------|-------------|---------------------------|
+| NAMESPACE |      NAME      | TARGET PORT |            URL            |
+|-----------|----------------|-------------|---------------------------|
+| default   | hello-minikube |        8080 | http://192.168.49.2:30921 |
+|-----------|----------------|-------------|---------------------------|
+🎉  Opening service default/hello-minikube in default browser...
+👉  http://192.168.49.2:30921
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ ss -tulpan
+Netid                  State                      Recv-Q                   Send-Q                                       Local Address:Port                                       Peer Address:Port                   Process                  
+udp                    UNCONN                     0                        0                                            127.0.0.53%lo:53                                              0.0.0.0:*                                               
+udp                    UNCONN                     0                        0                                          10.128.0.6%eth0:68                                              0.0.0.0:*                                               
+tcp                    LISTEN                     0                        4096                                         127.0.0.53%lo:53                                              0.0.0.0:*                                               
+tcp                    LISTEN                     0                        128                                                0.0.0.0:22                                              0.0.0.0:*                                               
+tcp                    LISTEN                     0                        4096                                             127.0.0.1:32773                                           0.0.0.0:*                                               
+tcp                    LISTEN                     0                        4096                                             127.0.0.1:32775                                           0.0.0.0:*                                               
+tcp                    LISTEN                     0                        4096                                             127.0.0.1:32774                                           0.0.0.0:*                                               
+tcp                    LISTEN                     0                        4096                                             127.0.0.1:32777                                           0.0.0.0:*                                               
+tcp                    LISTEN                     0                        4096                                             127.0.0.1:32776                                           0.0.0.0:*                                               
+tcp                    TIME-WAIT                  0                        0                                                127.0.0.1:47448                                         127.0.0.1:32773                                           
+tcp                    ESTAB                      0                        0                                               10.128.0.6:22                                        51.250.13.236:37076                                           
+tcp                    TIME-WAIT                  0                        0                                             192.168.49.1:40768                                      192.168.49.2:22                                              
+tcp                    LISTEN                     0                        128                                                   [::]:22                                                 [::]:*                                               
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl port-forward service/hello-minikube 7080:8080
+Forwarding from 127.0.0.1:7080 -> 8080
+Forwarding from [::1]:7080 -> 8080
+^Z
+[1]+  Stopped                 minikube kubectl -- port-forward service/hello-minikube 7080:8080
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ ss -tulpan
+Netid                State                 Recv-Q                Send-Q                                 Local Address:Port                                 Peer Address:Port                Process                                           
+udp                  UNCONN                0                     0                                      127.0.0.53%lo:53                                        0.0.0.0:*                                                                     
+udp                  UNCONN                0                     0                                    10.128.0.6%eth0:68                                        0.0.0.0:*                                                                     
+tcp                  LISTEN                0                     4096                                   127.0.0.53%lo:53                                        0.0.0.0:*                                                                     
+tcp                  LISTEN                0                     128                                          0.0.0.0:22                                        0.0.0.0:*                                                                     
+tcp                  LISTEN                0                     4096                                       127.0.0.1:7080                                      0.0.0.0:*                    users:(("kubectl",pid=48682,fd=8))               
+tcp                  LISTEN                0                     4096                                       127.0.0.1:32773                                     0.0.0.0:*                                                                     
+tcp                  LISTEN                0                     4096                                       127.0.0.1:32775                                     0.0.0.0:*                                                                     
+tcp                  LISTEN                0                     4096                                       127.0.0.1:32774                                     0.0.0.0:*                                                                     
+tcp                  LISTEN                0                     4096                                       127.0.0.1:32777                                     0.0.0.0:*                                                                     
+tcp                  LISTEN                0                     4096                                       127.0.0.1:32776                                     0.0.0.0:*                                                                     
+tcp                  ESTAB                 0                     0                                       192.168.49.1:35792                                192.168.49.2:8443                 users:(("kubectl",pid=48682,fd=7))               
+tcp                  ESTAB                 0                     0                                         10.128.0.6:22                                  51.250.13.236:37076                                                                 
+tcp                  LISTEN                0                     4096                                           [::1]:7080                                         [::]:*                    users:(("kubectl",pid=48682,fd=9))               
+tcp                  LISTEN                0                     128                                             [::]:22                                           [::]:*                                                                     
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ curl http://127.0.0.1:7080
+get
+quit
+bye
+exit
+^C
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ bg
+[1]+ minikube kubectl -- port-forward service/hello-minikube 7080:8080 &
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ Handling connection for 7080
+
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ fg
+minikube kubectl -- port-forward service/hello-minikube 7080:8080
+^C
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl port-forward service/hello-minikube 7080:8080
+Forwarding from 127.0.0.1:7080 -> 8080
+Forwarding from [::1]:7080 -> 8080
+^Z
+[1]+  Stopped                 minikube kubectl -- port-forward service/hello-minikube 7080:8080
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ curl http://127.0.0.1:7080
+POST
+^Z
+[2]+  Stopped                 curl http://127.0.0.1:7080
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ fg
+curl http://127.0.0.1:7080
+^C
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ curl POST://127.0.0.1:7080
+curl: (1) Protocol "post" not supported or disabled in libcurl
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ curl POST http://127.0.0.1:7080
+curl: (6) Could not resolve host: POST
+
+^C
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ curl --help
+Usage: curl [options...] <url>
+ -d, --data <data>          HTTP POST data
+ -f, --fail                 Fail silently (no output at all) on HTTP errors
+ -h, --help <category>      Get help for commands
+ -i, --include              Include protocol response headers in the output
+ -o, --output <file>        Write to file instead of stdout
+ -O, --remote-name          Write output to a file named as the remote file
+ -s, --silent               Silent mode
+ -T, --upload-file <file>   Transfer local FILE to destination
+ -u, --user <user:password> Server user and password
+ -A, --user-agent <name>    Send User-Agent <name> to server
+ -v, --verbose              Make the operation more talkative
+ -V, --version              Show version number and quit
+
+This is not the full help, this menu is stripped into categories.
+Use "--help category" to get an overview of all categories.
+For all options use the manual or "--help all".
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ curl -d http://127.0.0.1:7080
+curl: no URL specified!
+curl: try 'curl --help' or 'curl --manual' for more information
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ 
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl create deployment balanced --image=kicbase/echo-server:1.0
+kubectl expose deployment balanced --type=LoadBalancer --port=8080
+deployment.apps/balanced created
+service/balanced exposed
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube tunnel
+^Z
+[2]+  Stopped                 minikube tunnel
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl get services balanced
+NAME       TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+balanced   LoadBalancer   10.102.20.175   <pending>     8080:32502/TCP   103s
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ ss -tulpan
+Netid               State                    Recv-Q               Send-Q                               Local Address:Port                                 Peer Address:Port                Process                                            
+udp                 UNCONN                   0                    0                                    127.0.0.53%lo:53                                        0.0.0.0:*                                                                      
+udp                 UNCONN                   0                    0                                  10.128.0.6%eth0:68                                        0.0.0.0:*                                                                      
+tcp                 LISTEN                   0                    4096                                 127.0.0.53%lo:53                                        0.0.0.0:*                                                                      
+tcp                 LISTEN                   0                    128                                        0.0.0.0:22                                        0.0.0.0:*                                                                      
+tcp                 LISTEN                   2                    4096                                     127.0.0.1:7080                                      0.0.0.0:*                    users:(("kubectl",pid=49739,fd=8))                
+tcp                 LISTEN                   0                    4096                                     127.0.0.1:32773                                     0.0.0.0:*                                                                      
+tcp                 LISTEN                   0                    4096                                     127.0.0.1:32775                                     0.0.0.0:*                                                                      
+tcp                 LISTEN                   0                    4096                                     127.0.0.1:32774                                     0.0.0.0:*                                                                      
+tcp                 LISTEN                   0                    4096                                     127.0.0.1:32777                                     0.0.0.0:*                                                                      
+tcp                 LISTEN                   0                    4096                                     127.0.0.1:32776                                     0.0.0.0:*                                                                      
+tcp                 ESTAB                    0                    0                                     192.168.49.1:43138                                192.168.49.2:8443                 users:(("minikube",pid=65040,fd=9))               
+tcp                 ESTAB                    0                    0                                     192.168.49.1:59682                                192.168.49.2:22                                                                     
+tcp                 CLOSE-WAIT               79                   0                                        127.0.0.1:7080                                    127.0.0.1:44542                                                                  
+tcp                 ESTAB                    0                    0                                     192.168.49.1:45796                                192.168.49.2:8443                 users:(("kubectl",pid=49739,fd=7))                
+tcp                 ESTAB                    0                    0                                        127.0.0.1:33746                                   127.0.0.1:32773                users:(("minikube",pid=65040,fd=8))               
+tcp                 CLOSE-WAIT               79                   0                                        127.0.0.1:7080                                    127.0.0.1:41830                                                                  
+tcp                 ESTAB                    0                    0                                        127.0.0.1:32773                                   127.0.0.1:33746                                                                  
+tcp                 ESTAB                    0                    0                                       10.128.0.6:22                                  51.250.13.236:37076                                                                  
+tcp                 LISTEN                   0                    4096                                         [::1]:7080                                         [::]:*                    users:(("kubectl",pid=49739,fd=9))                
+tcp                 LISTEN                   0                    128                                           [::]:22                                           [::]:*                                                                      
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ bg
+[2]+ minikube tunnel &
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ Status:	
+	machine: minikube
+	pid: 65040
+	route: 10.96.0.0/12 -> 192.168.49.2
+	minikube: Running
+	services: [balanced]
+    errors: 
+		minikube: no errors
+		router: no errors
+		loadbalancer emulator: no errors
+
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ fg
+minikube kubectl -- port-forward service/hello-minikube 7080:8080
+Handling connection for 7080
+Handling connection for 7080
+E0908 14:23:22.042208   49739 portforward.go:385] error copying from remote stream to local connection: readfrom tcp4 127.0.0.1:7080->127.0.0.1:41830: write tcp4 127.0.0.1:7080->127.0.0.1:41830: write: broken pipe
+E0908 14:23:22.043484   49739 portforward.go:385] error copying from remote stream to local connection: readfrom tcp4 127.0.0.1:7080->127.0.0.1:44542: write tcp4 127.0.0.1:7080->127.0.0.1:44542: write: broken pipe
+^C
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ bg
+-bash: bg: job 2 already in background
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ jobs
+[2]+  Running                 minikube tunnel &
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ fg
+minikube tunnel
+^Cubuntu@fhm3u5vsb7q5j2rcpl77:~$ fg
+-bash: fg: current: no such job
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ jobs
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube addons enable ingress
+💡  ingress is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
+You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
+    ▪ Using image registry.k8s.io/ingress-nginx/controller:v1.10.1
+    ▪ Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.4.1
+    ▪ Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.4.1
+🔎  Verifying ingress addon...
+🌟  The 'ingress' addon is enabled
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube addons list
+|-----------------------------|----------|--------------|--------------------------------|
+|         ADDON NAME          | PROFILE  |    STATUS    |           MAINTAINER           |
+|-----------------------------|----------|--------------|--------------------------------|
+| ambassador                  | minikube | disabled     | 3rd party (Ambassador)         |
+| auto-pause                  | minikube | disabled     | minikube                       |
+| cloud-spanner               | minikube | disabled     | Google                         |
+| csi-hostpath-driver         | minikube | disabled     | Kubernetes                     |
+| dashboard                   | minikube | enabled ✅   | Kubernetes                     |
+| default-storageclass        | minikube | enabled ✅   | Kubernetes                     |
+| efk                         | minikube | disabled     | 3rd party (Elastic)            |
+| freshpod                    | minikube | disabled     | Google                         |
+| gcp-auth                    | minikube | disabled     | Google                         |
+| gvisor                      | minikube | disabled     | minikube                       |
+| headlamp                    | minikube | disabled     | 3rd party (kinvolk.io)         |
+| helm-tiller                 | minikube | disabled     | 3rd party (Helm)               |
+| inaccel                     | minikube | disabled     | 3rd party (InAccel             |
+|                             |          |              | [info@inaccel.com])            |
+| ingress                     | minikube | enabled ✅   | Kubernetes                     |
+| ingress-dns                 | minikube | disabled     | minikube                       |
+| inspektor-gadget            | minikube | disabled     | 3rd party                      |
+|                             |          |              | (inspektor-gadget.io)          |
+| istio                       | minikube | disabled     | 3rd party (Istio)              |
+| istio-provisioner           | minikube | disabled     | 3rd party (Istio)              |
+| kong                        | minikube | disabled     | 3rd party (Kong HQ)            |
+| kubeflow                    | minikube | disabled     | 3rd party                      |
+| kubevirt                    | minikube | disabled     | 3rd party (KubeVirt)           |
+| logviewer                   | minikube | disabled     | 3rd party (unknown)            |
+| metallb                     | minikube | disabled     | 3rd party (MetalLB)            |
+| metrics-server              | minikube | enabled ✅   | Kubernetes                     |
+| nvidia-device-plugin        | minikube | disabled     | 3rd party (NVIDIA)             |
+| nvidia-driver-installer     | minikube | disabled     | 3rd party (Nvidia)             |
+| nvidia-gpu-device-plugin    | minikube | disabled     | 3rd party (Nvidia)             |
+| olm                         | minikube | disabled     | 3rd party (Operator Framework) |
+| pod-security-policy         | minikube | disabled     | 3rd party (unknown)            |
+| portainer                   | minikube | disabled     | 3rd party (Portainer.io)       |
+| registry                    | minikube | disabled     | minikube                       |
+| registry-aliases            | minikube | disabled     | 3rd party (unknown)            |
+| registry-creds              | minikube | disabled     | 3rd party (UPMC Enterprises)   |
+| storage-provisioner         | minikube | enabled ✅   | minikube                       |
+| storage-provisioner-gluster | minikube | disabled     | 3rd party (Gluster)            |
+| storage-provisioner-rancher | minikube | disabled     | 3rd party (Rancher)            |
+| volumesnapshots             | minikube | disabled     | Kubernetes                     |
+| yakd                        | minikube | disabled     | 3rd party (marcnuri.com)       |
+|-----------------------------|----------|--------------|--------------------------------|
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl apply -f https://storage.googleapis.com/minikube-site-examples/ingress-example.yaml
+pod/foo-app created
+service/foo-service created
+pod/bar-app created
+service/bar-service created
+ingress.networking.k8s.io/example-ingress created
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl get ingress
+NAME              CLASS   HOSTS   ADDRESS   PORTS   AGE
+example-ingress   nginx   *                 80      34s
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl get ingress
+NAME              CLASS   HOSTS   ADDRESS   PORTS   AGE
+example-ingress   nginx   *                 80      46s
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl get ingress
+NAME              CLASS   HOSTS   ADDRESS        PORTS   AGE
+example-ingress   nginx   *       192.168.49.2   80      49s
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube tunnel
+Status:	
+	machine: minikube
+	pid: 69378
+	route: 10.96.0.0/12 -> 192.168.49.2
+	minikube: Running
+	services: [balanced]
+    errors: 
+		minikube: no errors
+		router: no errors
+		loadbalancer emulator: no errors
+^Z
+[1]+  Stopped                 minikube tunnel
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ curl 127.0.0.1/foo
+curl: (7) Failed to connect to 127.0.0.1 port 80 after 0 ms: Connection refused
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ curl 192.168.49.2/foo
+Request served by foo-app
+
+HTTP/1.1 GET /foo
+
+Host: 192.168.49.2
+Accept: */*
+User-Agent: curl/7.81.0
+X-Forwarded-For: 192.168.49.1
+X-Forwarded-Host: 192.168.49.2
+X-Forwarded-Port: 80
+X-Forwarded-Proto: http
+X-Forwarded-Scheme: http
+X-Real-Ip: 192.168.49.1
+X-Request-Id: 59d463ba06c9ceeb16cad3e01e00915a
+X-Scheme: http
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ curl 192.168.49.2/bar
+Request served by bar-app
+
+HTTP/1.1 GET /bar
+
+Host: 192.168.49.2
+Accept: */*
+User-Agent: curl/7.81.0
+X-Forwarded-For: 192.168.49.1
+X-Forwarded-Host: 192.168.49.2
+X-Forwarded-Port: 80
+X-Forwarded-Proto: http
+X-Forwarded-Scheme: http
+X-Real-Ip: 192.168.49.1
+X-Request-Id: 08865fb39ed6e129879b0b6a7f28f891
+X-Scheme: http
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube ssh
+docker@minikube:~$ ping host.minikube.internal
+PING host.minikube.internal (192.168.49.1) 56(84) bytes of data.
+64 bytes from host.minikube.internal (192.168.49.1): icmp_seq=1 ttl=64 time=0.103 ms
+64 bytes from host.minikube.internal (192.168.49.1): icmp_seq=2 ttl=64 time=0.089 ms
+64 bytes from host.minikube.internal (192.168.49.1): icmp_seq=3 ttl=64 time=0.070 ms
+^C
+--- host.minikube.internal ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2036ms
+rtt min/avg/max/mdev = 0.070/0.087/0.103/0.013 ms
+docker@minikube:~$ nc -vz host.minikube.internal 8000
+nc: connect to host.minikube.internal (192.168.49.1) port 8000 (tcp) failed: Connection refused
+docker@minikube:~$ ss -tulpan
+Netid                 State                     Recv-Q                 Send-Q                                         Local Address:Port                                           Peer Address:Port                  Process                 
+udp                   UNCONN                    0                      0                                                 127.0.0.11:37338                                               0.0.0.0:*                                             
+tcp                   LISTEN                    0                      4096                                               127.0.0.1:10257                                               0.0.0.0:*                                             
+tcp                   LISTEN                    0                      4096                                               127.0.0.1:10259                                               0.0.0.0:*                                             
+tcp                   LISTEN                    0                      4096                                               127.0.0.1:10248                                               0.0.0.0:*                                             
+tcp                   LISTEN                    0                      4096                                               127.0.0.1:2379                                                0.0.0.0:*                                             
+tcp                   LISTEN                    0                      4096                                               127.0.0.1:2381                                                0.0.0.0:*                                             
+tcp                   LISTEN                    0                      4096                                              127.0.0.11:33467                                               0.0.0.0:*                                             
+tcp                   LISTEN                    0                      4096                                            192.168.49.2:10010                                               0.0.0.0:*                                             
+tcp                   LISTEN                    0                      128                                                  0.0.0.0:22                                                  0.0.0.0:*                                             
+tcp                   LISTEN                    0                      4096                                            192.168.49.2:2380                                                0.0.0.0:*                                             
+tcp                   LISTEN                    0                      4096                                            192.168.49.2:2379                                                0.0.0.0:*                                             
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43524                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43428                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43404                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43318                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43486                                         
+tcp                   TIME-WAIT                 0                      0                                                 10.244.0.1:36688                                            10.244.0.7:8181                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43266                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43528                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43468                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43266                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43486                                             127.0.0.1:2379                                          
+tcp                   TIME-WAIT                 0                      0                                                  127.0.0.1:2381                                              127.0.0.1:54782                                         
+tcp                   TIME-WAIT                 0                      0                                                 10.244.0.1:42684                                            10.244.0.7:8181                                          
+tcp                   ESTAB                     0                      0                                                 10.244.0.1:58386                                            10.244.0.8:8000                                          
+tcp                   ESTAB                     0                      0                                               192.168.49.2:58462                                          192.168.49.2:8443                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43548                                             127.0.0.1:2379                                          
+tcp                   TIME-WAIT                 0                      0                                                 10.244.0.1:59328                                           10.244.0.14:10254                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43578                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43472                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43446                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43650                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43304                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43534                                             127.0.0.1:2379                                          
+tcp                   TIME-WAIT                 0                      0                                                 10.244.0.1:35700                                            10.244.0.8:8000                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43568                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43238                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43256                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43360                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43470                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      1304                                               127.0.0.1:43300                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43268                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43458                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43390                                         
+tcp                   ESTAB                     0                      0                                               192.168.49.2:58496                                          192.168.49.2:8443                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43206                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43626                                         
+tcp                   ESTAB                     0                      0                                               192.168.49.2:22                                             192.168.49.1:38218                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43418                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43360                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43328                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43662                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43178                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43140                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43676                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43506                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43400                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43524                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43628                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43248                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43594                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43620                                         
+tcp                   ESTAB                     0                      0                                               192.168.49.2:22                                             192.168.49.1:45180                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43418                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43256                                         
+tcp                   TIME-WAIT                 0                      0                                                 10.244.0.1:44862                                            10.244.0.9:9090                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43578                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43628                                         
+tcp                   TIME-WAIT                 0                      0                                                  127.0.0.1:2381                                              127.0.0.1:33462                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43178                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43644                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43608                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43196                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43506                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                               192.168.49.2:57324                                         10.107.109.57:443                                           
+tcp                   TIME-WAIT                 0                      0                                                  127.0.0.1:2381                                              127.0.0.1:47660                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43644                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43126                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43650                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43342                                         
+tcp                   TIME-WAIT                 0                      0                                                 10.244.0.1:54854                                            10.244.0.9:9090                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43432                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43374                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43220                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43518                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43328                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43318                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                               192.168.49.2:57296                                         10.107.109.57:443                                           
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43648                                             127.0.0.1:2379                                          
+tcp                   TIME-WAIT                 0                      0                                                  127.0.0.1:2381                                              127.0.0.1:53670                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43626                                             127.0.0.1:2379                                          
+tcp                   TIME-WAIT                 0                      0                                                  127.0.0.1:2381                                              127.0.0.1:45332                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43568                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                               192.168.49.2:58492                                          192.168.49.2:8443                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43198                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43286                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43198                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43534                                         
+tcp                   TIME-WAIT                 0                      0                                                  127.0.0.1:57150                                             127.0.0.1:2381                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43502                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43686                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43458                                             127.0.0.1:2379                                          
+tcp                   TIME-WAIT                 0                      0                                                 10.244.0.1:49902                                            10.244.0.8:8000                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43280                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                               192.168.49.2:58468                                          192.168.49.2:8443                                          
+tcp                   TIME-WAIT                 0                      0                                                  127.0.0.1:51284                                             127.0.0.1:10259                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43468                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43126                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43470                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43594                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43238                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43300                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43480                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43404                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43286                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43662                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43518                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43528                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43432                                         
+tcp                   TIME-WAIT                 0                      0                                                 10.244.0.1:47914                                            10.244.0.8:8000                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43472                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43268                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43620                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43150                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43150                                         
+tcp                   ESTAB                     0                      0                                               192.168.49.2:44186                                             10.96.0.1:443                                           
+tcp                   TIME-WAIT                 0                      0                                                 10.244.0.1:39488                                            10.244.0.9:9090                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43556                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43342                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43480                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43648                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43248                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43236                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43430                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43676                                         
+tcp                   ESTAB                     0                      0                                               192.168.49.2:54270                                          192.168.49.2:8443                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43608                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43220                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43304                                         
+tcp                   ESTAB                     0                      0                                               192.168.49.2:58510                                          192.168.49.2:8443                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43196                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43686                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43236                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43430                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43400                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43350                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43374                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43206                                         
+tcp                   TIME-WAIT                 0                      0                                                 10.244.0.1:59330                                           10.244.0.14:10254                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43502                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43548                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43446                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43556                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43350                                             127.0.0.1:2379                                          
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43140                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43280                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:2379                                              127.0.0.1:43428                                         
+tcp                   ESTAB                     0                      0                                                  127.0.0.1:43390                                             127.0.0.1:2379                                          
+tcp                   LISTEN                    0                      4096                                                       *:10256                                                     *:*                                             
+tcp                   LISTEN                    0                      4096                                                       *:10250                                                     *:*                                             
+tcp                   LISTEN                    0                      4096                                                       *:10249                                                     *:*                                             
+tcp                   LISTEN                    0                      4096                                                       *:2376                                                      *:*                                             
+tcp                   LISTEN                    0                      128                                                     [::]:22                                                     [::]:*                                             
+tcp                   LISTEN                    0                      4096                                                       *:8443                                                      *:*                                             
+tcp                   LISTEN                    0                      4096                                                       *:38879                                                     *:*                                             
+tcp                   ESTAB                     0                      0                                      [::ffff:192.168.49.2]:8443                                  [::ffff:192.168.49.2]:58492                                         
+tcp                   ESTAB                     0                      0                                      [::ffff:192.168.49.2]:8443                                  [::ffff:192.168.49.2]:58462                                         
+tcp                   ESTAB                     0                      0                                      [::ffff:192.168.49.2]:8443                                    [::ffff:10.244.0.8]:50984                                         
+tcp                   ESTAB                     0                      0                                      [::ffff:192.168.49.2]:8443                                   [::ffff:10.244.0.14]:52642                                         
+tcp                   ESTAB                     0                      0                                                      [::1]:41808                                                 [::1]:8443                                          
+tcp                   ESTAB                     0                      0                                      [::ffff:192.168.49.2]:8443                                    [::ffff:10.244.0.6]:41754                                         
+tcp                   ESTAB                     0                      0                                      [::ffff:192.168.49.2]:8443                                    [::ffff:10.244.0.9]:33276                                         
+tcp                   ESTAB                     0                      35                                     [::ffff:192.168.49.2]:8443                                  [::ffff:192.168.49.2]:64414                                         
+tcp                   ESTAB                     0                      0                                      [::ffff:192.168.49.2]:8443                                  [::ffff:192.168.49.2]:58496                                         
+tcp                   ESTAB                     0                      0                                      [::ffff:192.168.49.2]:8443                                  [::ffff:192.168.49.2]:54270                                         
+tcp                   ESTAB                     0                      0                                      [::ffff:192.168.49.2]:8443                                  [::ffff:192.168.49.2]:58468                                         
+tcp                   ESTAB                     0                      0                                                      [::1]:8443                                                  [::1]:41808                                         
+tcp                   ESTAB                     0                      0                                      [::ffff:192.168.49.2]:8443                                    [::ffff:10.244.0.7]:43274                                         
+tcp                   TIME-WAIT                 0                      0                                      [::ffff:192.168.49.2]:8443                                  [::ffff:192.168.49.2]:50884                                         
+tcp                   ESTAB                     0                      0                                      [::ffff:192.168.49.2]:10250                                   [::ffff:10.244.0.6]:42264                                         
+tcp                   TIME-WAIT                 0                      0                                      [::ffff:192.168.49.2]:8443                                  [::ffff:192.168.49.2]:44066                                         
+tcp                   ESTAB                     0                      0                                      [::ffff:192.168.49.2]:8443                                  [::ffff:192.168.49.2]:58510                                         
+docker@minikube:~$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    link/ether 02:42:dc:a6:55:6c brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever
+3: bridge: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 62:14:d6:fa:a2:16 brd ff:ff:ff:ff:ff:ff
+    inet 10.244.0.1/16 brd 10.244.255.255 scope global bridge
+       valid_lft forever preferred_lft forever
+    inet6 fe80::6014:d6ff:fefa:a216/64 scope link 
+       valid_lft forever preferred_lft forever
+4: veth402f6e89@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master bridge state UP group default 
+    link/ether e2:a4:2d:31:71:e6 brd ff:ff:ff:ff:ff:ff link-netnsid 1
+    inet6 fe80::e0a4:2dff:fe31:71e6/64 scope link 
+       valid_lft forever preferred_lft forever
+5: vethbb975ba3@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master bridge state UP group default 
+    link/ether 0e:b2:c7:fe:8d:b2 brd ff:ff:ff:ff:ff:ff link-netnsid 2
+    inet6 fe80::cb2:c7ff:fefe:8db2/64 scope link 
+       valid_lft forever preferred_lft forever
+6: veth81a8576a@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master bridge state UP group default 
+    link/ether 2a:32:6d:3a:7f:0d brd ff:ff:ff:ff:ff:ff link-netnsid 3
+    inet6 fe80::2832:6dff:fe3a:7f0d/64 scope link 
+       valid_lft forever preferred_lft forever
+7: vethd8b9ea1b@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master bridge state UP group default 
+    link/ether d6:46:cf:3a:93:83 brd ff:ff:ff:ff:ff:ff link-netnsid 4
+    inet6 fe80::d446:cfff:fe3a:9383/64 scope link 
+       valid_lft forever preferred_lft forever
+8: veth5dc5aefc@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master bridge state UP group default 
+    link/ether ea:b6:0f:5e:17:23 brd ff:ff:ff:ff:ff:ff link-netnsid 5
+    inet6 fe80::e8b6:fff:fe5e:1723/64 scope link 
+       valid_lft forever preferred_lft forever
+9: veth836a1f5c@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master bridge state UP group default 
+    link/ether 1a:f5:56:8a:83:de brd ff:ff:ff:ff:ff:ff link-netnsid 6
+    inet6 fe80::18f5:56ff:fe8a:83de/64 scope link 
+       valid_lft forever preferred_lft forever
+11: eth0@if12: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
+    link/ether 02:42:c0:a8:31:02 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 192.168.49.2/24 brd 192.168.49.255 scope global eth0
+       valid_lft forever preferred_lft forever
+13: veth1c2df4d3@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master bridge state UP group default 
+    link/ether 26:83:09:a5:70:19 brd ff:ff:ff:ff:ff:ff link-netnsid 7
+    inet6 fe80::2483:9ff:fea5:7019/64 scope link 
+       valid_lft forever preferred_lft forever
+14: vethaa9c7781@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master bridge state UP group default 
+    link/ether 4a:0a:76:a9:14:4b brd ff:ff:ff:ff:ff:ff link-netnsid 8
+    inet6 fe80::480a:76ff:fea9:144b/64 scope link 
+       valid_lft forever preferred_lft forever
+15: veth9f5df3c8@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master bridge state UP group default 
+    link/ether 22:4d:4a:94:95:07 brd ff:ff:ff:ff:ff:ff link-netnsid 9
+    inet6 fe80::204d:4aff:fe94:9507/64 scope link 
+       valid_lft forever preferred_lft forever
+docker@minikube:~$ exit
+logout

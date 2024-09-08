@@ -1,6 +1,6 @@
 ---
 - name: Install Minikube
-  hosts: all
+  hosts: mininodrive
 
   vars:
     CNI_PLUGIN_VERSION: "v1.5.1"
@@ -8,6 +8,12 @@
     CNI_PLUGIN_INSTALL_DIR: "/opt/cni/bin"
 
   tasks:
+
+  - name: Update package list
+    become: yes
+    apt:
+      update_cache: yes
+
   - name: Download Minikube
     get_url:
       url: https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb

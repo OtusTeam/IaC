@@ -1,0 +1,52 @@
+aleksey@first:~/OtusTeam/IaC/general/argocd/mini/nodrive$ ansible-playbook mini_nodrive.yml 
+
+PLAY [Install Minikube] **********************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************************************************
+ok: [ac-mini-nodrive]
+
+TASK [Update package list] *******************************************************************************************************************************************************************************************************************
+changed: [ac-mini-nodrive]
+
+TASK [Download Minikube] *********************************************************************************************************************************************************************************************************************
+ok: [ac-mini-nodrive]
+
+TASK [Install Minikube] **********************************************************************************************************************************************************************************************************************
+changed: [ac-mini-nodrive]
+
+TASK [Install conntrack] *********************************************************************************************************************************************************************************************************************
+changed: [ac-mini-nodrive]
+
+TASK [Download crictl] ***********************************************************************************************************************************************************************************************************************
+changed: [ac-mini-nodrive]
+
+TASK [Extract crictl] ************************************************************************************************************************************************************************************************************************
+changed: [ac-mini-nodrive]
+
+TASK [Download cri-dockerd] ******************************************************************************************************************************************************************************************************************
+changed: [ac-mini-nodrive]
+
+TASK [Extract cri-dockerd] *******************************************************************************************************************************************************************************************************************
+changed: [ac-mini-nodrive]
+
+TASK [Copy cri-dockerd and make it executable] ***********************************************************************************************************************************************************************************************
+changed: [ac-mini-nodrive]
+
+TASK [Download CNI plugin] *******************************************************************************************************************************************************************************************************************
+changed: [ac-mini-nodrive]
+
+TASK [Create CNI plugin install directory] ***************************************************************************************************************************************************************************************************
+changed: [ac-mini-nodrive]
+
+TASK [Extract CNI plugin] ********************************************************************************************************************************************************************************************************************
+changed: [ac-mini-nodrive]
+
+TASK [Remove CNI plugin tar file] ************************************************************************************************************************************************************************************************************
+changed: [ac-mini-nodrive]
+
+TASK [Start Minikube] ************************************************************************************************************************************************************************************************************************
+fatal: [ac-mini-nodrive]: FAILED! => {"changed": true, "cmd": ["minikube", "start", "--driver=none"], "delta": "0:00:09.799941", "end": "2024-09-08 10:31:36.424455", "msg": "non-zero return code", "rc": 80, "start": "2024-09-08 10:31:26.624514", "stderr": "! StartHost failed, but will try again: creating host: create: precreate: exec: \"docker\": executable file not found in $PATH\n* Failed to start none bare metal machine. Running \"minikube delete\" may fix it: creating host: create: precreate: exec: \"docker\": executable file not found in $PATH\nX Exiting due to GUEST_PROVISION: error provisioning guest: Failed to start host: creating host: create: precreate: exec: \"docker\": executable file not found in $PATH\n* \n╭─────────────────────────────────────────────────────────────────────────────────────────────╮\n│                                                                                             │\n│    * If the above advice does not help, please let us know:                                 │\n│      https://github.com/kubernetes/minikube/issues/new/choose                               │\n│                                                                                             │\n│    * Please run `minikube logs --file=logs.txt` and attach logs.txt to the GitHub issue.    │\n│                                                                                             │\n╰─────────────────────────────────────────────────────────────────────────────────────────────╯", "stderr_lines": ["! StartHost failed, but will try again: creating host: create: precreate: exec: \"docker\": executable file not found in $PATH", "* Failed to start none bare metal machine. Running \"minikube delete\" may fix it: creating host: create: precreate: exec: \"docker\": executable file not found in $PATH", "X Exiting due to GUEST_PROVISION: error provisioning guest: Failed to start host: creating host: create: precreate: exec: \"docker\": executable file not found in $PATH", "* ", "╭─────────────────────────────────────────────────────────────────────────────────────────────╮", "│                                                                                             │", "│    * If the above advice does not help, please let us know:                                 │", "│      https://github.com/kubernetes/minikube/issues/new/choose                               │", "│                                                                                             │", "│    * Please run `minikube logs --file=logs.txt` and attach logs.txt to the GitHub issue.    │", "│                                                                                             │", "╰─────────────────────────────────────────────────────────────────────────────────────────────╯"], "stdout": "* minikube v1.33.1 on Ubuntu 22.04 (amd64)\n* Using the none driver based on user configuration\n* Starting \"minikube\" primary control-plane node in \"minikube\" cluster\n* Running on localhost (CPUs=2, Memory=7937MB, Disk=50298MB) ...\n* Running on localhost (CPUs=2, Memory=7937MB, Disk=50298MB) ...", "stdout_lines": ["* minikube v1.33.1 on Ubuntu 22.04 (amd64)", "* Using the none driver based on user configuration", "* Starting \"minikube\" primary control-plane node in \"minikube\" cluster", "* Running on localhost (CPUs=2, Memory=7937MB, Disk=50298MB) ...", "* Running on localhost (CPUs=2, Memory=7937MB, Disk=50298MB) ..."]}
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+ac-mini-nodrive            : ok=14   changed=12   unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+
