@@ -1,0 +1,55 @@
+---
+- name: Install Docker
+  hosts: minidocker
+  become: yes
+  tasks:
+  - name: Update package list
+    apt:
+      update_cache: yes
+
+  - name: Install required packages
+    apt:
+      name: ca-certificates,curl,gnupg,lsb-release
+      state: present
+
+  - name: Create directory for Docker GPG key
+    file:
+      path: /etc/apt/keyrings
+      state: directory
+      mode: '0755'
+
+  - name: Check if Docker GPG key exists
+    stat:
+      path: /etc/apt/keyrings/docker.gpg
+    register: docker_gpg_key
+
+  - name: Download and dearmor Docker GPG key
+    shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    when: not docker_gpg_key.stat.exists
+
+  - name: Add Docker repository to Apt sources
+    shell: echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+
+  - name: Update package list again
+    apt:
+      update_cache: yes
+
+  - name: Install Docker
+    apt:
+      name: docker-ce,docker-ce-cli,containerd.io,docker-buildx-plugin,docker-compose-plugin
+
+      state: present
+
+#  - name: Check if user is already in docker group
+#    shell: groups {{ ansible_user }} | grep -q docker
+#    register: user_in_docker_group
+#    ignore_errors: true
+
+  - name: Add user to docker group
+    shell: usermod -aG docker {{ ansible_user }}
+ #   when: user_in_docker_group.rc != 0
+
+  - name: Verify user is in docker group
+    shell: groups {{ ansible_user }} | grep -q docker
+    register: user_in_docker_group_after_add
+    failed_when: user_in_docker_group_after_add.rc != 0
