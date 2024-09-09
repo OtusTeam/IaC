@@ -15,6 +15,7 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "jammy64/update"
+  config.vm.box_url = "/media/za/1/images/packer_jammy64_update/output-vagrant/package.box"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -86,7 +87,7 @@ press any key to continue...++ echo ''
 Bringing machine 'default' up with 'virtualbox' provider...
 ==> default: Importing base box 'jammy64/update'...
 ==> default: Matching MAC address for NAT networking...
-==> default: Setting the name of the VM: updated_apache2_hello_default_1725713020239_9414
+==> default: Setting the name of the VM: updated_apache2_hello_default_1725429256437_1487
 ==> default: Clearing any previously set network interfaces...
 ==> default: Preparing network interfaces based on configuration...
     default: Adapter 1: nat
@@ -123,10 +124,16 @@ Bringing machine 'default' up with 'virtualbox' provider...
     default: /vagrant => /home/za/try/vagrant/IaC/les18/updated_apache2_hello
 ==> default: Running provisioner: shell...
     default: Running: inline script
-    default: Hit:1 http://security.ubuntu.com/ubuntu jammy-security InRelease
-    default: Hit:2 http://archive.ubuntu.com/ubuntu jammy InRelease
-    default: Hit:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+    default: Hit:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+    default: Get:2 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+    default: Get:3 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
     default: Hit:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+    default: Get:5 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [1988 kB]
+    default: Get:6 http://security.ubuntu.com/ubuntu jammy-security/main amd64 c-n-f Metadata [13.3 kB]
+    default: Get:7 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 c-n-f Metadata [19.2 kB]
+    default: Get:8 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1121 kB]
+    default: Get:9 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 c-n-f Metadata [26.1 kB]
+    default: Fetched 3424 kB in 2s (1471 kB/s)
     default: Reading package lists...
     default: Reading package lists...
     default: Building dependency tree...
@@ -159,7 +166,7 @@ Bringing machine 'default' up with 'virtualbox' provider...
     default: Get:12 http://archive.ubuntu.com/ubuntu jammy/main amd64 bzip2 amd64 1.0.8-5build1 [34.8 kB]
     default: Get:13 http://archive.ubuntu.com/ubuntu jammy/main amd64 ssl-cert all 1.1.2 [17.4 kB]
     default: dpkg-preconfigure: unable to re-open stdin: No such file or directory
-    default: Fetched 2141 kB in 2s (1279 kB/s)
+    default: Fetched 2141 kB in 2s (1006 kB/s)
     default: Selecting previously unselected package libapr1:amd64.
 (Reading database ... 63881 files and directories currently installed.)
     default: Preparing to unpack .../00-libapr1_1.7.0-8ubuntu0.22.04.1_amd64.deb ...
@@ -278,3 +285,4 @@ The environment has not yet been created. Run `vagrant up` to
 create the environment. If a machine is not created, only the
 default provider will be shown. So if a provider is not listed,
 then the machine is not created for that environment.
+

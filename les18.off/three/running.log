@@ -1,0 +1,264 @@
+(base) za@za-Lenovo-IdeaPad-S340-15IWL:~/try/vagrant/IaC/les18/three$ ./run.sh 
+++ cat Vagrantfile
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+    config.vm.box = "jammy64/ansible"
+    config.vm.provider "virtualbox" do |vb|
+    vb.memory = "512"
+    vb.cpus = 1
+  end
+
+  config.vm.define "lb" do |server|
+    server.vm.host_name = 'loadbalancer'
+    server.vm.network :private_network, ip: "192.168.56.6"
+    server.vm.network "forwarded_port", guest: 80, host: 8086
+    server.vm.provision "shell", inline: "hostname"
+
+    server.vm.provision "file",
+      source: "sites-default",
+      destination: "/home/vagrant/sites-default"
+
+    server.vm.provision "shell",
+      inline: "sudo mv -f /home/vagrant/sites-default /etc/nginx/sites-available/default"
+
+    server.vm.provision "shell",
+      inline: "sudo systemctl reload nginx"
+  end
+
+  (1..2).each do |i|
+    config.vm.define "backend#{i}" do |node|
+      node.vm.host_name = "backend#{i}"
+      node.vm.network :private_network, ip: "192.168.56.#{6+i}"
+
+      node.vm.provision "shell", inline: <<-SHELL\
+        hostname | sudo tee /var/www/html/index.html
+      SHELL
+    end
+  end
+
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.playbook = "/vagrant/ansible_local.yml"
+  end
+
+end
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ vagrant up
+Bringing machine 'lb' up with 'virtualbox' provider...
+Bringing machine 'backend1' up with 'virtualbox' provider...
+Bringing machine 'backend2' up with 'virtualbox' provider...
+==> lb: Importing base box 'jammy64/ansible'...
+==> lb: Matching MAC address for NAT networking...
+==> lb: Setting the name of the VM: three_lb_1725461742316_16990
+==> lb: Clearing any previously set network interfaces...
+==> lb: Preparing network interfaces based on configuration...
+    lb: Adapter 1: nat
+    lb: Adapter 2: hostonly
+==> lb: Forwarding ports...
+    lb: 80 (guest) => 8086 (host) (adapter 1)
+    lb: 22 (guest) => 2222 (host) (adapter 1)
+==> lb: Running 'pre-boot' VM customizations...
+==> lb: Booting VM...
+==> lb: Waiting for machine to boot. This may take a few minutes...
+    lb: SSH address: 127.0.0.1:2222
+    lb: SSH username: vagrant
+    lb: SSH auth method: private key
+    lb: 
+    lb: Vagrant insecure key detected. Vagrant will automatically replace
+    lb: this with a newly generated keypair for better security.
+    lb: 
+    lb: Inserting generated public key within guest...
+    lb: Removing insecure key from the guest if it's present...
+    lb: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> lb: Machine booted and ready!
+==> lb: Checking for guest additions in VM...
+    lb: The guest additions on this VM do not match the installed version of
+    lb: VirtualBox! In most cases this is fine, but in rare cases it can
+    lb: prevent things such as shared folders from working properly. If you see
+    lb: shared folder errors, please make sure the guest additions within the
+    lb: virtual machine match the version of VirtualBox you have installed on
+    lb: your host and reload your VM.
+    lb: 
+    lb: Guest Additions Version: 6.0.0 r127566
+    lb: VirtualBox Version: 7.0
+==> lb: Setting hostname...
+==> lb: Configuring and enabling network interfaces...
+==> lb: Mounting shared folders...
+    lb: /vagrant => /home/za/try/vagrant/IaC/les18/three
+==> lb: Running provisioner: ansible_local...
+    lb: Running ansible-playbook...
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [lb]
+
+TASK [Update the repository cache and update package "nginx" to latest version] ***
+changed: [lb]
+
+PLAY RECAP *********************************************************************
+lb                         : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+==> lb: Running provisioner: shell...
+    lb: Running: inline script
+    lb: loadbalancer
+==> lb: Running provisioner: file...
+    lb: sites-default => /home/vagrant/sites-default
+==> lb: Running provisioner: shell...
+    lb: Running: inline script
+==> lb: Running provisioner: shell...
+    lb: Running: inline script
+==> backend1: Importing base box 'jammy64/ansible'...
+==> backend1: Matching MAC address for NAT networking...
+==> backend1: Setting the name of the VM: three_backend1_1725461857541_69422
+==> backend1: Fixed port collision for 22 => 2222. Now on port 2200.
+==> backend1: Clearing any previously set network interfaces...
+==> backend1: Preparing network interfaces based on configuration...
+    backend1: Adapter 1: nat
+    backend1: Adapter 2: hostonly
+==> backend1: Forwarding ports...
+    backend1: 22 (guest) => 2200 (host) (adapter 1)
+==> backend1: Running 'pre-boot' VM customizations...
+==> backend1: Booting VM...
+==> backend1: Waiting for machine to boot. This may take a few minutes...
+    backend1: SSH address: 127.0.0.1:2200
+    backend1: SSH username: vagrant
+    backend1: SSH auth method: private key
+    backend1: 
+    backend1: Vagrant insecure key detected. Vagrant will automatically replace
+    backend1: this with a newly generated keypair for better security.
+    backend1: 
+    backend1: Inserting generated public key within guest...
+    backend1: Removing insecure key from the guest if it's present...
+    backend1: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> backend1: Machine booted and ready!
+==> backend1: Checking for guest additions in VM...
+    backend1: The guest additions on this VM do not match the installed version of
+    backend1: VirtualBox! In most cases this is fine, but in rare cases it can
+    backend1: prevent things such as shared folders from working properly. If you see
+    backend1: shared folder errors, please make sure the guest additions within the
+    backend1: virtual machine match the version of VirtualBox you have installed on
+    backend1: your host and reload your VM.
+    backend1: 
+    backend1: Guest Additions Version: 6.0.0 r127566
+    backend1: VirtualBox Version: 7.0
+==> backend1: Setting hostname...
+==> backend1: Configuring and enabling network interfaces...
+==> backend1: Mounting shared folders...
+    backend1: /vagrant => /home/za/try/vagrant/IaC/les18/three
+==> backend1: Running provisioner: ansible_local...
+    backend1: Running ansible-playbook...
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [backend1]
+
+TASK [Update the repository cache and update package "nginx" to latest version] ***
+changed: [backend1]
+
+PLAY RECAP *********************************************************************
+backend1                   : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+==> backend1: Running provisioner: shell...
+    backend1: Running: inline script
+    backend1: backend1
+==> backend2: Importing base box 'jammy64/ansible'...
+==> backend2: Matching MAC address for NAT networking...
+==> backend2: Setting the name of the VM: three_backend2_1725461945497_66741
+==> backend2: Fixed port collision for 22 => 2222. Now on port 2201.
+==> backend2: Clearing any previously set network interfaces...
+==> backend2: Preparing network interfaces based on configuration...
+    backend2: Adapter 1: nat
+    backend2: Adapter 2: hostonly
+==> backend2: Forwarding ports...
+    backend2: 22 (guest) => 2201 (host) (adapter 1)
+==> backend2: Running 'pre-boot' VM customizations...
+==> backend2: Booting VM...
+==> backend2: Waiting for machine to boot. This may take a few minutes...
+    backend2: SSH address: 127.0.0.1:2201
+    backend2: SSH username: vagrant
+    backend2: SSH auth method: private key
+    backend2: 
+    backend2: Vagrant insecure key detected. Vagrant will automatically replace
+    backend2: this with a newly generated keypair for better security.
+    backend2: 
+    backend2: Inserting generated public key within guest...
+    backend2: Removing insecure key from the guest if it's present...
+    backend2: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> backend2: Machine booted and ready!
+==> backend2: Checking for guest additions in VM...
+    backend2: The guest additions on this VM do not match the installed version of
+    backend2: VirtualBox! In most cases this is fine, but in rare cases it can
+    backend2: prevent things such as shared folders from working properly. If you see
+    backend2: shared folder errors, please make sure the guest additions within the
+    backend2: virtual machine match the version of VirtualBox you have installed on
+    backend2: your host and reload your VM.
+    backend2: 
+    backend2: Guest Additions Version: 6.0.0 r127566
+    backend2: VirtualBox Version: 7.0
+==> backend2: Setting hostname...
+==> backend2: Configuring and enabling network interfaces...
+==> backend2: Mounting shared folders...
+    backend2: /vagrant => /home/za/try/vagrant/IaC/les18/three
+==> backend2: Running provisioner: ansible_local...
+    backend2: Running ansible-playbook...
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [backend2]
+
+TASK [Update the repository cache and update package "nginx" to latest version] ***
+changed: [backend2]
+
+PLAY RECAP *********************************************************************
+backend2                   : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+==> backend2: Running provisioner: shell...
+    backend2: Running: inline script
+    backend2: backend2
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ curl http://127.0.0.1:8086
+backend1
+++ curl http://127.0.0.1:8086
+backend1
+++ curl http://127.0.0.1:8086
+backend2
+++ curl http://127.0.0.1:8086
+backend2
+++ curl http://127.0.0.1:8086
+backend1
+++ curl http://127.0.0.1:8086
+backend2
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ vagrant destroy
+    backend2: Are you sure you want to destroy the 'backend2' VM? [y/N] y
+==> backend2: Forcing shutdown of VM...
+==> backend2: Destroying VM and associated drives...
+    backend1: Are you sure you want to destroy the 'backend1' VM? [y/N] y
+==> backend1: Forcing shutdown of VM...
+==> backend1: Destroying VM and associated drives...
+    lb: Are you sure you want to destroy the 'lb' VM? [y/N] y
+==> lb: Forcing shutdown of VM...
+==> lb: Destroying VM and associated drives...
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ vagrant status
+Current machine states:
+
+lb                        not created (virtualbox)
+backend1                  not created (virtualbox)
+backend2                  not created (virtualbox)
+
+This environment represents multiple VMs. The VMs are all listed
+above with their current state. For more information about a specific
+VM, run `vagrant status NAME`.

@@ -1,0 +1,23 @@
+{
+  "builders": [
+    {
+      "communicator": "ssh",
+      "source_path": "ubuntu/jammy64",
+      "provider": "virtualbox",
+      "add_force": true,
+      "type": "vagrant"
+    }
+  ],
+  "provisioners": [
+    {
+      "inline": [
+        "sleep 10",
+        "sudo apt-get update -y -qq",
+        "echo '=============================after update=================================='",
+        "sleep 10"
+      ],
+      "type": "shell"
+    }
+  ]
+}
+

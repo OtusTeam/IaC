@@ -1,0 +1,11 @@
+(base) za@za-Lenovo-IdeaPad-S340-15IWL:~/try/vagrant/IaC/les18/packer_jammy64_ansible_pip$ ./vargant_box_add.sh 
+++ vagrant box add jammy64/ansible output-vagrant/package.box
+==> box: Box file was not detected as metadata. Adding it directly...
+==> box: Adding box 'jammy64/ansible' (v0) for provider: 
+    box: Unpacking necessary files from: file:///home/za/try/vagrant/IaC/les18/packer_jammy64_ansible_pip/output-vagrant/package.box
+==> box: Successfully added box 'jammy64/ansible' (v0) for ''!
+++ vagrant box list
+jammy64/ansible (virtualbox, 0)
+jammy64/update  (virtualbox, 0)
+ubuntu/jammy64  (virtualbox, 1.0.0)
+++ rm -rf output-vagrant

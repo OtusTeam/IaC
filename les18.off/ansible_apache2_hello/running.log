@@ -15,6 +15,7 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "jammy64/ansible"
+  config.vm.box_url = "/media/za/1/images/packer_jammy64_ansible_pip/output-vagrant/package.box"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -90,7 +91,7 @@ press any key to continue...++ echo ''
 Bringing machine 'default' up with 'virtualbox' provider...
 ==> default: Importing base box 'jammy64/ansible'...
 ==> default: Matching MAC address for NAT networking...
-==> default: Setting the name of the VM: ansible_apache2_hello_default_1725715182198_86590
+==> default: Setting the name of the VM: ansible_apache2_hello_default_1725428915085_47277
 ==> default: Clearing any previously set network interfaces...
 ==> default: Preparing network interfaces based on configuration...
     default: Adapter 1: nat
@@ -165,3 +166,4 @@ The environment has not yet been created. Run `vagrant up` to
 create the environment. If a machine is not created, only the
 default provider will be shown. So if a provider is not listed,
 then the machine is not created for that environment.
+

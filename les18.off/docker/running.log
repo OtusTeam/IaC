@@ -1,4 +1,6 @@
-(base) za@za-Lenovo-IdeaPad-S340-15IWL:~/try/vagrant/IaC/les18/ansible_apache2_hello$ ./run.sh 
+(base) za@za-Lenovo-IdeaPad-S340-15IWL:~/try/vagrant/IaC/les18/docker$ ./run.sh 
+++ mkdir -p data
+++ rm data/out.txt
 ++ cat Vagrantfile
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
@@ -14,7 +16,7 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "jammy64/ansible"
+  config.vm.box = "jammy64/update"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -31,7 +33,6 @@ Vagrant.configure("2") do |config|
   # within the machine from a port on the host machine and only allow access
   # via 127.0.0.1 to disable public access
   # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
-  config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1", auto_correct: true
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -46,14 +47,14 @@ Vagrant.configure("2") do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  # config.vm.synced_folder "./data", "/vagrant_data"
+  config.vm.synced_folder "./data", "/vagrant_data"
 
   # Disable the default share of the current code directory. Doing this
   # provides improved isolation between the vagrant box and your host
   # by making sure your Vagrantfile isn't accessable to the vagrant box.
   # If you use this you may want to enable additional shared subfolders as
   # shown above.
-  # config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.synced_folder ".", "/vagrant", disabled: true
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -73,14 +74,11 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  # config.vm.provision "shell", inline: <<-SHELL
-  #   apt-get update
-  #   apt-get install -y apache2
-  #   echo '<html><body><h1>Hello World!</h1></body></html>' | sudo tee /var/www/html/index.html
-  # SHELL
-  
-  config.vm.provision "ansible_local" do |ansible|
-    ansible.playbook = "/vagrant/ansible_local.yml"
+  config.vm.provision "docker" do |d|
+    d.run "busybox:latest",
+      cmd: "sh -c 'echo Hello! > /data/out.txt'",
+      daemonize: false,
+      args: "-v '/vagrant_data:/data'"
   end
 end
 ++ read -n 1 -s -r -p 'press any key to continue...'
@@ -88,15 +86,14 @@ press any key to continue...++ echo ''
 
 ++ vagrant up
 Bringing machine 'default' up with 'virtualbox' provider...
-==> default: Importing base box 'jammy64/ansible'...
+==> default: Importing base box 'jammy64/update'...
 ==> default: Matching MAC address for NAT networking...
-==> default: Setting the name of the VM: ansible_apache2_hello_default_1725715182198_86590
+==> default: Setting the name of the VM: docker_default_1725430148496_98503
 ==> default: Clearing any previously set network interfaces...
 ==> default: Preparing network interfaces based on configuration...
     default: Adapter 1: nat
     default: Adapter 2: hostonly
 ==> default: Forwarding ports...
-    default: 80 (guest) => 8080 (host) (adapter 1)
     default: 22 (guest) => 2222 (host) (adapter 1)
 ==> default: Running 'pre-boot' VM customizations...
 ==> default: Booting VM...
@@ -124,29 +121,26 @@ Bringing machine 'default' up with 'virtualbox' provider...
     default: VirtualBox Version: 7.0
 ==> default: Configuring and enabling network interfaces...
 ==> default: Mounting shared folders...
-    default: /vagrant => /home/za/try/vagrant/IaC/les18/ansible_apache2_hello
-==> default: Running provisioner: ansible_local...
-    default: Running ansible-playbook...
-
-PLAY [all] *********************************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [default]
-
-TASK [Update the repository cache and update package "apache2" to latest version] ***
-changed: [default]
-
-TASK [custom index.html] *******************************************************
-changed: [default]
-
-PLAY RECAP *********************************************************************
-default                    : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-
+    default: /vagrant_data => /home/za/try/vagrant/IaC/les18/docker/data
+==> default: Running provisioner: docker...
+    default: Installing Docker onto machine...
+==> default: Starting Docker containers...
+==> default: -- Container: busybox:latest
 ++ read -n 1 -s -r -p 'press any key to continue...'
 press any key to continue...++ echo ''
 
-++ curl http://127.0.0.1:8080
-<html><body><h1>Hello, World!</h1></body></html>++ read -n 1 -s -r -p 'press any key to continue...'
+++ ls -la data/out.txt
+-rw-r--r-- 1 za za 7 сен  4 14:11 data/out.txt
+++ cat data/out.txt
+Hello!
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
+++ vagrant ssh -c 'ls -la /vagrant_data/out.txt; cat /vagrant_data/out.txt; ls /vagrant'
+-rw-r--r-- 1 vagrant vagrant 7 Sep  4  2024 /vagrant_data/out.txt
+Hello!
+ls: cannot access '/vagrant': No such file or directory
+++ read -n 1 -s -r -p 'press any key to continue...'
 press any key to continue...++ echo ''
 
 ++ vagrant destroy
@@ -165,3 +159,4 @@ The environment has not yet been created. Run `vagrant up` to
 create the environment. If a machine is not created, only the
 default provider will be shown. So if a provider is not listed,
 then the machine is not created for that environment.
+

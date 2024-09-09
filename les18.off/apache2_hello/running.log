@@ -1,92 +1,13 @@
-(base) za@za-Lenovo-IdeaPad-S340-15IWL:~/try/vagrant/IaC/les18/updated_apache2_hello$ ./run.sh 
-++ cat Vagrantfile
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
-# All Vagrant configuration is done below. The "2" in Vagrant.configure
-# configures the configuration version (we support older styles for
-# backwards compatibility). Please don't change it unless you know what
-# you're doing.
-Vagrant.configure("2") do |config|
-  # The most common configuration options are documented and commented below.
-  # For a complete reference, please see the online documentation at
-  # https://docs.vagrantup.com.
-
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "jammy64/update"
-
-  # Disable automatic box update checking. If you disable this, then
-  # boxes will only be checked for updates when the user runs
-  # `vagrant box outdated`. This is not recommended.
-  # config.vm.box_check_update = false
-
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
-  # NOTE: This will enable public access to the opened port
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
-
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine and only allow access
-  # via 127.0.0.1 to disable public access
-  # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
-  config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1", auto_correct: true
-
-  # Create a private network, which allows host-only access to the machine
-  # using a specific IP.
-  config.vm.network "private_network", type: "dhcp"
-
-  # Create a public network, which generally matched to bridged network.
-  # Bridged networks make the machine appear as another physical device on
-  # your network.
-  # config.vm.network "public_network"
-
-  # Share an additional folder to the guest VM. The first argument is
-  # the path on the host to the actual folder. The second argument is
-  # the path on the guest to mount the folder. And the optional third
-  # argument is a set of non-required options.
-  # config.vm.synced_folder "./data", "/vagrant_data"
-
-  # Disable the default share of the current code directory. Doing this
-  # provides improved isolation between the vagrant box and your host
-  # by making sure your Vagrantfile isn't accessable to the vagrant box.
-  # If you use this you may want to enable additional shared subfolders as
-  # shown above.
-  # config.vm.synced_folder ".", "/vagrant", disabled: true
-
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
-  # Example for VirtualBox:
-  #
-  config.vm.provider "virtualbox" do |vb|
-  #   # Display the VirtualBox GUI when booting the machine
-  #   vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
-    vb.memory = "1024"
-  end
-  #
-  # View the documentation for the provider you are using for more
-  # information on available options.
-
-  # Enable provisioning with a shell script. Additional provisioners such as
-  # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
-  # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", inline: <<-SHELL
-    apt-get update
-    apt-get install -y apache2
-    echo '<html><body><h1>Hello World!</h1></body></html>' | sudo tee /var/www/html/index.html
-  SHELL
-end
-++ read -n 1 -s -r -p 'press any key to continue...'
-press any key to continue...++ echo ''
-
-++ vagrant up
+(base) za@za-Lenovo-IdeaPad-S340-15IWL:~/try/vagrant/IaC/les18/shell$ vagrant init
+A `Vagrantfile` has been placed in this directory. You are now
+ready to `vagrant up` your first virtual environment! Please read
+the comments in the Vagrantfile as well as documentation on
+`vagrantup.com` for more information on using Vagrant.
+(base) za@za-Lenovo-IdeaPad-S340-15IWL:~/try/vagrant/IaC/les18/shell$ vagrant up
 Bringing machine 'default' up with 'virtualbox' provider...
-==> default: Importing base box 'jammy64/update'...
+==> default: Importing base box 'ubuntu/jammy64'...
 ==> default: Matching MAC address for NAT networking...
-==> default: Setting the name of the VM: updated_apache2_hello_default_1725713020239_9414
+==> default: Setting the name of the VM: shell_default_1725392849739_22218
 ==> default: Clearing any previously set network interfaces...
 ==> default: Preparing network interfaces based on configuration...
     default: Adapter 1: nat
@@ -120,13 +41,52 @@ Bringing machine 'default' up with 'virtualbox' provider...
     default: VirtualBox Version: 7.0
 ==> default: Configuring and enabling network interfaces...
 ==> default: Mounting shared folders...
-    default: /vagrant => /home/za/try/vagrant/IaC/les18/updated_apache2_hello
+    default: /vagrant => /home/za/try/vagrant/IaC/les18/shell
 ==> default: Running provisioner: shell...
     default: Running: inline script
-    default: Hit:1 http://security.ubuntu.com/ubuntu jammy-security InRelease
+    default: Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
     default: Hit:2 http://archive.ubuntu.com/ubuntu jammy InRelease
-    default: Hit:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
-    default: Hit:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+    default: Get:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+    default: Get:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+    default: Get:5 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [1769 kB]
+    default: Get:6 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [14.1 MB]
+    default: Get:7 http://security.ubuntu.com/ubuntu jammy-security/main Translation-en [291 kB]
+    default: Get:8 http://security.ubuntu.com/ubuntu jammy-security/main amd64 c-n-f Metadata [13.2 kB]
+    default: Get:9 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [2308 kB]
+    default: Get:10 http://security.ubuntu.com/ubuntu jammy-security/restricted Translation-en [398 kB]
+    default: Get:11 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 c-n-f Metadata [572 B]
+    default: Get:12 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [899 kB]
+    default: Get:13 http://security.ubuntu.com/ubuntu jammy-security/universe Translation-en [175 kB]
+    default: Get:14 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 c-n-f Metadata [19.2 kB]
+    default: Get:15 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [37.2 kB]
+    default: Get:16 http://security.ubuntu.com/ubuntu jammy-security/multiverse Translation-en [7588 B]
+    default: Get:17 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 c-n-f Metadata [228 B]
+    default: Get:18 http://archive.ubuntu.com/ubuntu jammy/universe Translation-en [5652 kB]
+    default: Get:19 http://archive.ubuntu.com/ubuntu jammy/universe amd64 c-n-f Metadata [286 kB]
+    default: Get:20 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [217 kB]
+    default: Get:21 http://archive.ubuntu.com/ubuntu jammy/multiverse Translation-en [112 kB]
+    default: Get:22 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 c-n-f Metadata [8372 B]
+    default: Get:23 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [1988 kB]
+    default: Get:24 http://archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [349 kB]
+    default: Get:25 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 c-n-f Metadata [17.8 kB]
+    default: Get:26 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [2386 kB]
+    default: Get:27 http://archive.ubuntu.com/ubuntu jammy-updates/restricted Translation-en [410 kB]
+    default: Get:28 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 c-n-f Metadata [616 B]
+    default: Get:29 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1121 kB]
+    default: Get:30 http://archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [260 kB]
+    default: Get:31 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 c-n-f Metadata [26.1 kB]
+    default: Get:32 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [43.3 kB]
+    default: Get:33 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse Translation-en [10.8 kB]
+    default: Get:34 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 c-n-f Metadata [444 B]
+    default: Get:35 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [67.8 kB]
+    default: Get:36 http://archive.ubuntu.com/ubuntu jammy-backports/main Translation-en [11.1 kB]
+    default: Get:37 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 c-n-f Metadata [388 B]
+    default: Get:38 http://archive.ubuntu.com/ubuntu jammy-backports/restricted amd64 c-n-f Metadata [116 B]
+    default: Get:39 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [28.8 kB]
+    default: Get:40 http://archive.ubuntu.com/ubuntu jammy-backports/universe Translation-en [16.5 kB]
+    default: Get:41 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 c-n-f Metadata [672 B]
+    default: Get:42 http://archive.ubuntu.com/ubuntu jammy-backports/multiverse amd64 c-n-f Metadata [116 B]
+    default: Fetched 33.4 MB in 6min 45s (82.4 kB/s)
     default: Reading package lists...
     default: Reading package lists...
     default: Building dependency tree...
@@ -159,7 +119,7 @@ Bringing machine 'default' up with 'virtualbox' provider...
     default: Get:12 http://archive.ubuntu.com/ubuntu jammy/main amd64 bzip2 amd64 1.0.8-5build1 [34.8 kB]
     default: Get:13 http://archive.ubuntu.com/ubuntu jammy/main amd64 ssl-cert all 1.1.2 [17.4 kB]
     default: dpkg-preconfigure: unable to re-open stdin: No such file or directory
-    default: Fetched 2141 kB in 2s (1279 kB/s)
+    default: Fetched 2141 kB in 12s (183 kB/s)
     default: Selecting previously unselected package libapr1:amd64.
 (Reading database ... 63881 files and directories currently installed.)
     default: Preparing to unpack .../00-libapr1_1.7.0-8ubuntu0.22.04.1_amd64.deb ...
@@ -254,27 +214,9 @@ Bringing machine 'default' up with 'virtualbox' provider...
     default: 
     default: No VM guests are running outdated hypervisor (qemu) binaries on this host.
     default: <html><body><h1>Hello World!</h1></body></html>
-++ read -n 1 -s -r -p 'press any key to continue...'
-press any key to continue...++ echo ''
-
-++ curl http://127.0.0.1:8080
+(base) za@za-Lenovo-IdeaPad-S340-15IWL:~/try/vagrant/IaC/les18/shell$ ./curl_127.0.0.1_8080.sh 
 <html><body><h1>Hello World!</h1></body></html>
-++ read -n 1 -s -r -p 'press any key to continue...'
-press any key to continue...++ echo ''
-
-++ vagrant destroy
+(base) za@za-Lenovo-IdeaPad-S340-15IWL:~/try/vagrant/IaC/les18/shell$ vagrant destroy
     default: Are you sure you want to destroy the 'default' VM? [y/N] y
 ==> default: Forcing shutdown of VM...
 ==> default: Destroying VM and associated drives...
-++ read -n 1 -s -r -p 'press any key to continue...'
-press any key to continue...++ echo ''
-
-++ vagrant status
-Current machine states:
-
-default                   not created (virtualbox)
-
-The environment has not yet been created. Run `vagrant up` to
-create the environment. If a machine is not created, only the
-default provider will be shown. So if a provider is not listed,
-then the machine is not created for that environment.
