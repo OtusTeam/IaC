@@ -1,0 +1,57 @@
+---
+- name: Hello Minikube create, run and destroy demo
+  hosts: all
+  tasks:
+
+#  - name: Is there deployment?
+#    shell: minikube kubectl -- get deployment hello-minikube
+#    register: deployment_exists
+#    ignore_errors: true
+
+  - name: Create deployment hello-minikube
+    shell: minikube kubectl -- create deployment hello-minikube --image=kicbase/echo-server:1.0
+    ignore_errors: true
+#    when: deployment_exists.rc != 0
+
+  - name: Expose
+    shell: minikube kubectl -- expose deployment hello-minikube --type=NodePort --port=8080
+    ignore_errors: true
+
+  - name: Get services ans deployments
+    shell: minikube kubectl -- get services hello-minikube; minikube kubectl -- get deployments hello-minikube
+    register: get_services_deployments
+
+  - name: Print get service and deployments output
+    debug:
+      var: get_services_deployments.stdout
+
+  - name: Sleep
+    shell: sleep 10
+
+  - name: Minikube service hello-minikube
+    shell: minikube service hello-minikube
+    register: minikube_service
+
+  - name: Print minikube service output
+    debug:
+      var: minikube_service.stdout
+
+  - name: Curl
+    shell: curl $(minikube service hello-minikube --url)
+    register: curl
+
+  - name: Print curl output
+    debug:
+      var: curl.stdout
+
+  - name: Delete service and deployment
+    shell: minikube kubectl -- delete service,deployment hello-minikube
+
+  - name: Get services ans deployments after del
+    shell: minikube kubectl -- get services hello-minikube; minikube kubectl -- get deployments hello-minikube
+    register: get_services_deployments_after_del
+    ignore_errors: true
+
+  - name: Print get service and deployments output after del
+    debug:
+      var: get_services_deployments_after_del.stdout

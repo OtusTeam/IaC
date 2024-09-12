@@ -1,24 +1,10 @@
 ---
-- name: Install Minikube
+- name: Minikube plus
   hosts: all
-
   tasks:
-  - name: Download Minikube
-    get_url:
-      url: https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
-      dest: /tmp/minikube_latest_amd64.deb
-
-  - name: Install Minikube
-    command: dpkg -i /tmp/minikube_latest_amd64.deb
-    become: yes
-
-  - name: Check Docker
-    command: docker ps
 
   - name: Start Minikube
     command: minikube start
-
-# new tasks need to test:
 
   - name: get kubectl and interact with the cluster
     command: minikube kubectl -- get po -A

@@ -1,0 +1,118 @@
+aleksey@first:~/OtusTeam/IaC/general/argocd/mini/docker$ ansible-playbook mini_plus.yml 
+
+PLAY [Minikube plus] *************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************************************
+ok: [ac-mini-docker]
+
+TASK [Start Minikube] ************************************************************************************************************************************************************************************************************
+changed: [ac-mini-docker]
+
+TASK [get kubectl and interact with the cluster] *********************************************************************************************************************************************************************************
+changed: [ac-mini-docker]
+
+TASK [Print minikube kubectl output] *********************************************************************************************************************************************************************************************
+ok: [ac-mini-docker] => {
+    "minikube_kubectl_output": {
+        "changed": true,
+        "cmd": [
+            "minikube",
+            "kubectl",
+            "--",
+            "get",
+            "po",
+            "-A"
+        ],
+        "delta": "0:00:13.086871",
+        "end": "2024-09-12 06:15:08.270676",
+        "failed": false,
+        "msg": "",
+        "rc": 0,
+        "start": "2024-09-12 06:14:55.183805",
+        "stderr": "",
+        "stderr_lines": [],
+        "stdout": "NAMESPACE              NAME                                        READY   STATUS      RESTARTS        AGE\ndefault                balanced-84cc8c47b-f5lng                    1/1     Running     2 (13m ago)     3d15h\ndefault                bar-app                                     1/1     Running     2 (13m ago)     3d15h\ndefault                foo-app                                     1/1     Running     2 (13m ago)     3d15h\ndefault                hello-minikube-5c898d8489-jt2nx             1/1     Running     2 (13m ago)     3d17h\ningress-nginx          ingress-nginx-admission-create-5l7nd        0/1     Completed   0               3d15h\ningress-nginx          ingress-nginx-admission-patch-wrkxq         0/1     Completed   0               3d15h\ningress-nginx          ingress-nginx-controller-768f948f8f-pv6v9   0/1     Running     2 (2m48s ago)   3d15h\nkube-system            coredns-7db6d8ff4d-6gqlc                    0/1     Running     3 (13m ago)     3d20h\nkube-system            etcd-minikube                               1/1     Running     3 (13m ago)     3d20h\nkube-system            kube-apiserver-minikube                     1/1     Running     3 (13m ago)     3d20h\nkube-system            kube-controller-manager-minikube            1/1     Running     4 (62s ago)     3d20h\nkube-system            kube-proxy-g68w7                            1/1     Running     3 (13m ago)     3d20h\nkube-system            kube-scheduler-minikube                     1/1     Running     3 (13m ago)     3d20h\nkube-system            metrics-server-c59844bb4-4wmkx              0/1     Running     4 (13m ago)     3d19h\nkube-system            storage-provisioner                         1/1     Running     6 (13m ago)     3d20h\nkubernetes-dashboard   dashboard-metrics-scraper-b5fc48f67-frbch   1/1     Running     3 (13m ago)     3d19h\nkubernetes-dashboard   kubernetes-dashboard-779776cb65-gpk48       1/1     Running     5 (13m ago)     3d19h",
+        "stdout_lines": [
+            "NAMESPACE              NAME                                        READY   STATUS      RESTARTS        AGE",
+            "default                balanced-84cc8c47b-f5lng                    1/1     Running     2 (13m ago)     3d15h",
+            "default                bar-app                                     1/1     Running     2 (13m ago)     3d15h",
+            "default                foo-app                                     1/1     Running     2 (13m ago)     3d15h",
+            "default                hello-minikube-5c898d8489-jt2nx             1/1     Running     2 (13m ago)     3d17h",
+            "ingress-nginx          ingress-nginx-admission-create-5l7nd        0/1     Completed   0               3d15h",
+            "ingress-nginx          ingress-nginx-admission-patch-wrkxq         0/1     Completed   0               3d15h",
+            "ingress-nginx          ingress-nginx-controller-768f948f8f-pv6v9   0/1     Running     2 (2m48s ago)   3d15h",
+            "kube-system            coredns-7db6d8ff4d-6gqlc                    0/1     Running     3 (13m ago)     3d20h",
+            "kube-system            etcd-minikube                               1/1     Running     3 (13m ago)     3d20h",
+            "kube-system            kube-apiserver-minikube                     1/1     Running     3 (13m ago)     3d20h",
+            "kube-system            kube-controller-manager-minikube            1/1     Running     4 (62s ago)     3d20h",
+            "kube-system            kube-proxy-g68w7                            1/1     Running     3 (13m ago)     3d20h",
+            "kube-system            kube-scheduler-minikube                     1/1     Running     3 (13m ago)     3d20h",
+            "kube-system            metrics-server-c59844bb4-4wmkx              0/1     Running     4 (13m ago)     3d19h",
+            "kube-system            storage-provisioner                         1/1     Running     6 (13m ago)     3d20h",
+            "kubernetes-dashboard   dashboard-metrics-scraper-b5fc48f67-frbch   1/1     Running     3 (13m ago)     3d19h",
+            "kubernetes-dashboard   kubernetes-dashboard-779776cb65-gpk48       1/1     Running     5 (13m ago)     3d19h"
+        ]
+    }
+}
+
+TASK [Add kubectl alias to .bashrc] **********************************************************************************************************************************************************************************************
+changed: [ac-mini-docker]
+
+TASK [Enable metrics-server] *****************************************************************************************************************************************************************************************************
+changed: [ac-mini-docker]
+
+TASK [Run minikube addons list command] ******************************************************************************************************************************************************************************************
+changed: [ac-mini-docker]
+
+TASK [Print minikube addons list output] *****************************************************************************************************************************************************************************************
+ok: [ac-mini-docker] => {
+    "addons_output.stdout_lines": [
+        "|-----------------------------|----------|--------------|--------------------------------|",
+        "|         ADDON NAME          | PROFILE  |    STATUS    |           MAINTAINER           |",
+        "|-----------------------------|----------|--------------|--------------------------------|",
+        "| ambassador                  | minikube | disabled     | 3rd party (Ambassador)         |",
+        "| auto-pause                  | minikube | disabled     | minikube                       |",
+        "| cloud-spanner               | minikube | disabled     | Google                         |",
+        "| csi-hostpath-driver         | minikube | disabled     | Kubernetes                     |",
+        "| dashboard                   | minikube | enabled ✅   | Kubernetes                     |",
+        "| default-storageclass        | minikube | enabled ✅   | Kubernetes                     |",
+        "| efk                         | minikube | disabled     | 3rd party (Elastic)            |",
+        "| freshpod                    | minikube | disabled     | Google                         |",
+        "| gcp-auth                    | minikube | disabled     | Google                         |",
+        "| gvisor                      | minikube | disabled     | minikube                       |",
+        "| headlamp                    | minikube | disabled     | 3rd party (kinvolk.io)         |",
+        "| helm-tiller                 | minikube | disabled     | 3rd party (Helm)               |",
+        "| inaccel                     | minikube | disabled     | 3rd party (InAccel             |",
+        "|                             |          |              | [info@inaccel.com])            |",
+        "| ingress                     | minikube | enabled ✅   | Kubernetes                     |",
+        "| ingress-dns                 | minikube | disabled     | minikube                       |",
+        "| inspektor-gadget            | minikube | disabled     | 3rd party                      |",
+        "|                             |          |              | (inspektor-gadget.io)          |",
+        "| istio                       | minikube | disabled     | 3rd party (Istio)              |",
+        "| istio-provisioner           | minikube | disabled     | 3rd party (Istio)              |",
+        "| kong                        | minikube | disabled     | 3rd party (Kong HQ)            |",
+        "| kubeflow                    | minikube | disabled     | 3rd party                      |",
+        "| kubevirt                    | minikube | disabled     | 3rd party (KubeVirt)           |",
+        "| logviewer                   | minikube | disabled     | 3rd party (unknown)            |",
+        "| metallb                     | minikube | disabled     | 3rd party (MetalLB)            |",
+        "| metrics-server              | minikube | enabled ✅   | Kubernetes                     |",
+        "| nvidia-device-plugin        | minikube | disabled     | 3rd party (NVIDIA)             |",
+        "| nvidia-driver-installer     | minikube | disabled     | 3rd party (Nvidia)             |",
+        "| nvidia-gpu-device-plugin    | minikube | disabled     | 3rd party (Nvidia)             |",
+        "| olm                         | minikube | disabled     | 3rd party (Operator Framework) |",
+        "| pod-security-policy         | minikube | disabled     | 3rd party (unknown)            |",
+        "| portainer                   | minikube | disabled     | 3rd party (Portainer.io)       |",
+        "| registry                    | minikube | disabled     | minikube                       |",
+        "| registry-aliases            | minikube | disabled     | 3rd party (unknown)            |",
+        "| registry-creds              | minikube | disabled     | 3rd party (UPMC Enterprises)   |",
+        "| storage-provisioner         | minikube | enabled ✅   | minikube                       |",
+        "| storage-provisioner-gluster | minikube | disabled     | 3rd party (Gluster)            |",
+        "| storage-provisioner-rancher | minikube | disabled     | 3rd party (Rancher)            |",
+        "| volumesnapshots             | minikube | disabled     | Kubernetes                     |",
+        "| yakd                        | minikube | disabled     | 3rd party (marcnuri.com)       |",
+        "|-----------------------------|----------|--------------|--------------------------------|"
+    ]
+}
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************
+ac-mini-docker             : ok=8    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   

@@ -881,3 +881,68 @@ docker@minikube:~$ ip a
        valid_lft forever preferred_lft forever
 docker@minikube:~$ exit
 logout
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl get pods --all-namespaces
+NAMESPACE              NAME                                        READY   STATUS      RESTARTS        AGE
+default                balanced-84cc8c47b-f5lng                    1/1     Running     2 (20m ago)     3d16h
+default                bar-app                                     1/1     Running     2 (20m ago)     3d15h
+default                foo-app                                     1/1     Running     2 (20m ago)     3d15h
+default                hello-minikube-5c898d8489-jt2nx             1/1     Running     2 (20m ago)     3d17h
+ingress-nginx          ingress-nginx-admission-create-5l7nd        0/1     Completed   0               3d15h
+ingress-nginx          ingress-nginx-admission-patch-wrkxq         0/1     Completed   0               3d15h
+ingress-nginx          ingress-nginx-controller-768f948f8f-pv6v9   1/1     Running     3 (6m36s ago)   3d15h
+kube-system            coredns-7db6d8ff4d-6gqlc                    1/1     Running     3 (20m ago)     3d20h
+kube-system            etcd-minikube                               1/1     Running     3 (20m ago)     3d20h
+kube-system            kube-apiserver-minikube                     1/1     Running     3 (20m ago)     3d20h
+kube-system            kube-controller-manager-minikube            1/1     Running     4 (8m5s ago)    3d20h
+kube-system            kube-proxy-g68w7                            1/1     Running     3 (20m ago)     3d20h
+kube-system            kube-scheduler-minikube                     1/1     Running     3 (20m ago)     3d20h
+kube-system            metrics-server-c59844bb4-4wmkx              1/1     Running     5 (6m42s ago)   3d19h
+kube-system            storage-provisioner                         1/1     Running     7 (6m58s ago)   3d20h
+kubernetes-dashboard   dashboard-metrics-scraper-b5fc48f67-frbch   1/1     Running     3 (20m ago)     3d19h
+kubernetes-dashboard   kubernetes-dashboard-779776cb65-gpk48       1/1     Running     6 (6m48s ago)   3d19h
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl get nodes
+NAME       STATUS   ROLES           AGE     VERSION
+minikube   Ready    control-plane   3d20h   v1.30.0
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl get deployments
+NAME             READY   UP-TO-DATE   AVAILABLE   AGE
+balanced         1/1     1            1           3d16h
+hello-minikube   1/1     1            1           3d17h
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl get services
+NAME             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)          AGE
+balanced         LoadBalancer   10.102.20.175    10.102.20.175   8080:32502/TCP   3d16h
+bar-service      ClusterIP      10.105.171.144   <none>          8080/TCP         3d15h
+foo-service      ClusterIP      10.100.2.159     <none>          8080/TCP         3d15h
+hello-minikube   NodePort       10.105.141.49    <none>          8080:30921/TCP   3d17h
+kubernetes       ClusterIP      10.96.0.1        <none>          443/TCP          3d20h
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube service hello-minikube --url
+http://192.168.49.2:30921
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ curl $(minikube service hello-minikube --url)
+Request served by hello-minikube-5c898d8489-jt2nx
+
+HTTP/1.1 GET /
+
+Host: 192.168.49.2:30921
+Accept: */*
+User-Agent: curl/7.81.0
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ minikube service balanced --url
+http://192.168.49.2:32502
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ curl $(minikube service balanced --url)
+Request served by balanced-84cc8c47b-f5lng
+
+HTTP/1.1 GET /
+
+Host: 192.168.49.2:32502
+Accept: */*
+User-Agent: curl/7.81.0
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl delete service,deployment hello-minikube
+service "hello-minikube" deleted
+deployment.apps "hello-minikube" deleted
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl get nodes
+NAME       STATUS   ROLES           AGE     VERSION
+minikube   Ready    control-plane   3d22h   v1.30.0
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl get services
+NAME          TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)          AGE
+balanced      LoadBalancer   10.102.20.175    10.102.20.175   8080:32502/TCP   3d18h
+bar-service   ClusterIP      10.105.171.144   <none>          8080/TCP         3d18h
+foo-service   ClusterIP      10.100.2.159     <none>          8080/TCP         3d18h
+kubernetes    ClusterIP      10.96.0.1        <none>          443/TCP          3d22h
