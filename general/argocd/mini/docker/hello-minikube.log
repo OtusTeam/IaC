@@ -16,7 +16,7 @@ changed: [ac-mini-docker]
 
 TASK [Print get service and deployments output] **********************************************************************************************************************************************************************************
 ok: [ac-mini-docker] => {
-    "get_services_deployments.stdout": "NAME             TYPE       CLUSTER-IP   EXTERNAL-IP   PORT(S)          AGE\nhello-minikube   NodePort   10.99.3.50   <none>        8080:32457/TCP   1s\nNAME             READY   UP-TO-DATE   AVAILABLE   AGE\nhello-minikube   0/1     1            0           1s"
+    "get_services_deployments.stdout": "NAME             TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE\nhello-minikube   NodePort   10.103.186.12   <none>        8080:31761/TCP   1s\nNAME             READY   UP-TO-DATE   AVAILABLE   AGE\nhello-minikube   0/1     1            0           1s"
 }
 
 TASK [Sleep] *********************************************************************************************************************************************************************************************************************
@@ -27,7 +27,7 @@ changed: [ac-mini-docker]
 
 TASK [Print minikube service output] *********************************************************************************************************************************************************************************************
 ok: [ac-mini-docker] => {
-    "minikube_service.stdout": "|-----------|----------------|-------------|---------------------------|\n| NAMESPACE |      NAME      | TARGET PORT |            URL            |\n|-----------|----------------|-------------|---------------------------|\n| default   | hello-minikube |        8080 | http://192.168.49.2:32457 |\n|-----------|----------------|-------------|---------------------------|\n* Opening service default/hello-minikube in default browser...\n  http://192.168.49.2:32457"
+    "minikube_service.stdout": "|-----------|----------------|-------------|---------------------------|\n| NAMESPACE |      NAME      | TARGET PORT |            URL            |\n|-----------|----------------|-------------|---------------------------|\n| default   | hello-minikube |        8080 | http://192.168.49.2:31761 |\n|-----------|----------------|-------------|---------------------------|\n* Opening service default/hello-minikube in default browser...\n  http://192.168.49.2:31761"
 }
 
 TASK [Curl] **********************************************************************************************************************************************************************************************************************
@@ -35,15 +35,14 @@ changed: [ac-mini-docker]
 
 TASK [Print curl output] *********************************************************************************************************************************************************************************************************
 ok: [ac-mini-docker] => {
-    "curl.stdout": "Request served by hello-minikube-5c898d8489-ptvzk\n\nHTTP/1.1 GET /\n\nHost: 192.168.49.2:32457\nAccept: */*\nUser-Agent: curl/7.81.0"
+    "msg": "Request served by hello-minikube-5c898d8489-ndhcr\n\nHTTP/1.1 GET /\n\nHost: 192.168.49.2:31761\nAccept: */*\nUser-Agent: curl/7.81.0"
 }
 
 TASK [Delete service and deployment] *********************************************************************************************************************************************************************************************
 changed: [ac-mini-docker]
 
 TASK [Get services ans deployments after del] ************************************************************************************************************************************************************************************
-fatal: [ac-mini-docker]: FAILED! => {"changed": true, "cmd": "minikube kubectl -- get services hello-minikube; minikube kubectl -- get deployments hello-minikube", "delta": "0:00:00.525413", "end": "2024-09-12 11:19:17.379083", "msg": "non-zero return code", "rc": 1, "start": "2024-09-12 11:19:16.853670", "stderr": "Error from server (NotFound): services \"hello-minikube\" not found\nError from server (NotFound): deployments.apps \"hello-minikube\" not found", "stderr_lines": ["Error from server (NotFound): services \"hello-minikube\" not found", "Error from server (NotFound): deployments.apps \"hello-minikube\" not found"], "stdout": "", "stdout_lines": []}
-...ignoring
+changed: [ac-mini-docker]
 
 TASK [Print get service and deployments output after del] ************************************************************************************************************************************************************************
 ok: [ac-mini-docker] => {
@@ -51,5 +50,5 @@ ok: [ac-mini-docker] => {
 }
 
 PLAY RECAP ***********************************************************************************************************************************************************************************************************************
-ac-mini-docker             : ok=13   changed=8    unreachable=0    failed=0    skipped=0    rescued=0    ignored=1   
+ac-mini-docker             : ok=13   changed=8    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 

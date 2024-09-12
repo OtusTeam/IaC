@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  gather_facts: false
+  vars:
+    my_var: "Hello, world!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+
+  tasks:
+  - name: Print curl output
+    copy:
+      content: "{{ my_var }}"
+#      dest: '/dev/stdout'
+      dest: /dev/tty
+#    delegate_to: localhost
+#    become: yes
