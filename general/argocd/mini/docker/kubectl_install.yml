@@ -1,0 +1,29 @@
+---
+- name: Install kubectl using snap
+  hosts: all
+
+  tasks:
+  - name: Install snap
+    apt:
+      name: snapd
+      state: present
+    # Install snap package manager
+    become: yes
+
+  - name: Install kubectl
+    shell:
+      cmd: "snap install kubectl --classic"
+    # Install kubectl using snap with classic confinement
+    become: yes
+
+  - name: Verify kubectl installation
+    shell:
+      cmd: "kubectl version"
+    register: kubectl_version
+    # Check if kubectl is installed and get its version
+
+  - name: Print kubectl version
+    debug:
+      msg: "kubectl version: {{ kubectl_version.stdout }}"
+    # Print the version of kubectl
+
