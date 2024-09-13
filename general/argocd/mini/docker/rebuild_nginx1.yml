@@ -1,0 +1,39 @@
+---
+- hosts: all
+  vars:
+    nname: nginx1
+  tasks:
+    - name: Remove existing Nginx image
+      docker_image:
+        name: "{{ nname }}"
+        state: absent
+
+    - name: Commit changes to Nginx container
+      command: docker commit "{{ nname }}" "{{ nname }}"
+
+    - name: Remove existing Nginx container
+      docker_container:
+        name: "{{ nname }}"
+        state: absent
+
+    - name: Run Nginx container
+      docker_container:
+        name: "{{ nname }}"
+        image: "{{ nname }}"
+        ports:
+          - "80:80"
+        state: started
+
+    - name: Wait for Nginx to start
+      wait_for:
+        timeout: 5
+
+    - name: Test Nginx container
+      uri:
+        url: http://localhost
+        return_content: true
+      register: web_response
+
+    - name: Print web server response
+      debug:
+        var: web_response.content
