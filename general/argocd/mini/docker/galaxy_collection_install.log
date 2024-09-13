@@ -1,0 +1,22 @@
+aleksey@first:~/OtusTeam/IaC/general/argocd/mini/docker$ ./galaxy_collection_install.sh 
+++ ansible-galaxy collection install -r requirements.yml
+Starting galaxy collection install process
+[WARNING]: Collection vyos.vyos does not support Ansible version 2.15.5
+[WARNING]: Collection frr.frr does not support Ansible version 2.15.5
+[WARNING]: Collection ansible.netcommon does not support Ansible version 2.15.5
+[WARNING]: Collection cisco.iosxr does not support Ansible version 2.15.5
+[WARNING]: Collection splunk.es does not support Ansible version 2.15.5
+[WARNING]: Collection openvswitch.openvswitch does not support Ansible version 2.15.5
+[WARNING]: Collection cisco.asa does not support Ansible version 2.15.5
+[WARNING]: Collection cisco.nxos does not support Ansible version 2.15.5
+[WARNING]: Collection ibm.qradar does not support Ansible version 2.15.5
+[WARNING]: Collection ansible.posix does not support Ansible version 2.15.5
+[WARNING]: Collection junipernetworks.junos does not support Ansible version 2.15.5
+Process install dependency map
+Starting collection install process
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/community-docker-3.12.1.tar.gz to /home/aleksey/.ansible/tmp/ansible-local-10441969vqxycbg/tmp10uy777c/community-docker-3.12.1-t51430mt
+Installing 'community.docker:3.12.1' to '/home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/collections/ansible_collections/community/docker'
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/community-library_inventory_filtering_v1-1.0.1.tar.gz to /home/aleksey/.ansible/tmp/ansible-local-10441969vqxycbg/tmp10uy777c/community-library_inventory_filtering_v1-1.0.1-nj49fndf
+community.docker:3.12.1 was installed successfully
+Installing 'community.library_inventory_filtering_v1:1.0.1' to '/home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/collections/ansible_collections/community/library_inventory_filtering_v1'
+community.library_inventory_filtering_v1:1.0.1 was installed successfully

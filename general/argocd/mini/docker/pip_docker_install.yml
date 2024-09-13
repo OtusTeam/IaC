@@ -1,0 +1,10 @@
+- hosts: all
+  gather_facts: true
+  become: true
+
+  vars:
+    pip_install_packages:
+      - name: docker
+
+  roles:
+    - geerlingguy.pip

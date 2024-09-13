@@ -1,0 +1,66 @@
+---
+- name: Deploy Nginx container
+  hosts: all
+  vars:
+    nname: nginx1
+    src_dir: hello
+
+  tasks:
+  - name: Remove existing Nginx container
+    community.docker.docker_container:
+      name: "{{ nname }}"
+      state: absent
+      force_kill: yes
+
+  - name: Run Nginx container
+    community.docker.docker_container:
+      name: "{{ nname }}"
+      image: nginx
+      ports:
+        - "80:80"
+      hostname: "{{ nname }}"
+      restart: yes
+      state: started
+#      command: ["sh", "-c", "service nginx start && tail -f /dev/null"]
+
+  - name: Create index.html from template on remote host
+    template:
+      src: "{{ src_dir }}/index.html.j2"
+      dest: "/tmp/index.html"
+      mode: '0644'
+
+  - name: Copy nginx.conf to remote host
+    copy:
+      mode: '0644'
+      dest: "/tmp/nginx.conf"
+      src: "{{ src_dir }}/nginx.conf"
+
+  - name: Copy index.html to Nginx container
+    community.docker.docker_container_copy_into:
+      container: "{{ nname }}"
+      path: /tmp/index.html
+      container_path: /usr/share/nginx/html/index.html
+
+  - name: Copy nginx.conf to Nginx container
+    community.docker.docker_container_copy_into:
+      container: "{{ nname }}"
+      path: /tmp/nginx.conf
+      container_path: /etc/nginx/nginx.conf
+
+#  - name: Reload Nginx service
+#    community.docker.docker_container:
+#      name: "{{ nname }}"
+#      command: service nginx reload
+#      detach: true
+
+  - name: Check Nginx
+    uri:
+      url: http://localhost
+      return_content: true
+    register: result
+    tags: check
+
+  - name: Print resul
+    debug:
+      msg: "{{ result.content }}"
+    tags: check
