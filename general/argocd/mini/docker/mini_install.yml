@@ -20,19 +20,19 @@
 
 # new tasks need to test:
 
-  - name: get kubectl and interact with the cluster
+  - name: get minikube kubectl and interact with the cluster
     command: minikube kubectl -- get po -A
     register: minikube_kubectl_output
 
   - name: Print minikube kubectl output
     debug:
-      var: minikube_kubectl_output
+      var: minikube_kubectl_output.stdout
 
-  - name: Add kubectl alias to .bashrc
-    lineinfile:
-      path: "~/.bashrc"
-      line: "alias kubectl=\"minikube kubectl --\""
-      state: present
+#  - name: Add kubectl alias to .bashrc
+#    lineinfile:
+#      path: "~/.bashrc"
+#      line: "alias kubectl=\"minikube kubectl --\""
+#      state: present
 
   - name: Enable metrics-server
     command: minikube addons enable metrics-server
@@ -45,6 +45,37 @@
     debug:
       var: addons_output.stdout_lines
 
+  tasks:
+  - name: Install snap
+    apt:
+      name: snapd
+      state: present
+    # Install snap package manager
+    become: yes
+
+  - name: Install kubectl
+    shell:
+      cmd: "snap install kubectl --classic"
+    # Install kubectl using snap with classic confinement
+    become: yes
+
+  - name: Verify kubectl installation
+    shell:
+      cmd: "kubectl version"
+    register: kubectl_version
+    # Check if kubectl is installed and get its version
+
+  - name: Print kubectl version
+    debug:
+      msg: "kubectl version: {{ kubectl_version.stdout }}"
+
+  - name: get kubectl and interact with the cluster
+    command: kubectl get po -A
+    register: kubectl_output
+
+  - name: Print kubectl output
+    debug:
+      var: kubectl_output.stdout
 
 #  - name: Start minikube dashboard in the background
 #    shell: "minikube dashboard --port=3333 --url=true"

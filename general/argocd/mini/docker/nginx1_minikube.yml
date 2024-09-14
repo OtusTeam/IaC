@@ -1,0 +1,53 @@
+---
+- name: nginx1 on minikube create, run and destroy demo
+  hosts: all
+  vars:
+    nname: nginx1
+  tasks:
+
+  - name: Create deployment
+    shell: "kubectl create deployment {{ nname }} --image={{ nname }}"
+    ignore_errors: true
+
+  - name: Expose
+    shell: "kubectl expose deployment {{ nname }} --type=NodePort --port=80"
+    ignore_errors: true
+
+  - name: Get services ans deployments
+    shell: "kubectl get services {{ nname }}; kubectl get deployments {{ nname }}"
+    register: get_services_deployments
+
+  - name: Print get service and deployments output
+    debug:
+      var: get_services_deployments.stdout_lines
+
+  - name: Sleep
+    shell: sleep 10
+
+  - name: Minikube service
+    shell: "minikube service {{ nname }}"
+    register: minikube_service
+
+  - name: Print minikube service output
+    debug:
+      var: minikube_service.stdout_lines
+
+  - name: Curl
+    shell: "curl $(minikube service {{ nname }} --url)"
+    register: curl
+
+  - name: Print curl output
+    debug:
+      var: curl.stdout_lines
+
+  - name: Delete service and deployment
+    shell: "kubectl delete service,deployment {{ nname }}"
+
+  - name: Get services ans deployments after del
+    shell: "kubectl get services {{ nname }} --ignore-not-found=true; kubectl get deployments {{ nname }} --ignore-not-found=true"
+    register: get_services_deployments_after_del
+    ignore_errors: true
+
+  - name: Print get service and deployments output after del
+    debug:
+      var: get_services_deployments_after_del.stdout_lines

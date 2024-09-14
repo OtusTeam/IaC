@@ -12,3 +12,16 @@
       dest: /dev/tty
 #    delegate_to: localhost
 #    become: yes
+
+#  - name: Print the name of the currently executing playbook file
+#    debug:
+#       var: __file__
+
+  - name: cat content of the currently executing playbook file
+#    shell: "cat {{ __file__ }}"
+    shell: cat print.yml
+    register: playbook_file_content
+
+  - debug:
+      var: playbook_file_content.stdout_lines
+

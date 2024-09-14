@@ -14,11 +14,11 @@
     debug:
       var: minikube_kubectl_output
 
-  - name: Add kubectl alias to .bashrc
-    lineinfile:
-      path: "~/.bashrc"
-      line: "alias kubectl=\"minikube kubectl --\""
-      state: present
+#  - name: Add kubectl alias to .bashrc
+#    lineinfile:
+#      path: "~/.bashrc"
+#      line: "alias kubectl=\"minikube kubectl --\""
+#      state: present
 
   - name: Enable metrics-server
     command: minikube addons enable metrics-server

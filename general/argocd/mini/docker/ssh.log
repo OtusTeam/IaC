@@ -940,9 +940,259 @@ deployment.apps "hello-minikube" deleted
 ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl get nodes
 NAME       STATUS   ROLES           AGE     VERSION
 minikube   Ready    control-plane   3d22h   v1.30.0
-ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl get services
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl create deployment ng --image=nginx
+deployment.apps/ng created
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl expose deployment ng --type=NodePort --port=80
+service/ng exposed
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ curl $(minikube service ng --url)
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ [200~kubectl delete service,deployment ng
+[200~kubectl: command not found
+ubuntu@fhm3u5vsb7q5j2rcpl77:~$ kubectl delete service,deployment ng
+service "ng" deleted
+deployment.apps "ng" deleted
+ubuntu@fhm3u5vsb7q5j2rcpl77:~/hello$ eval $(minikube docker-env)
+ubuntu@fhm3u5vsb7q5j2rcpl77:~/hello$ nano rebuild.sh 
+ubuntu@fhm3u5vsb7q5j2rcpl77:~/hello$ ./rebuild.sh 
+++ docker rmi nginx1
+Error response from daemon: No such image: nginx1:latest
+++ docker commit nginx1 nginx1
+sha256:6cf84e7904db2915eae2fdfc34587d5c28c3670da48c47a1daf2d404e2cd92b3
+++ docker rm -f nginx1
+nginx1
+++ docker run -d --rm --name nginx1 -p 8888:80 nginx1
+983540cea03ec651fb3723ae6cf2e3e8341b52594f930fca3adb0dff69682a68
+++ sleep 5
+++ curl http://localhost
+curl: (7) Failed to connect to localhost port 80 after 0 ms: Connection refused
+ubuntu@fhm3u5vsb7q5j2rcpl77:~/hello$ curl http://192.168.49.2:8888
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Hello</h1>
+<p>My IP address is: <script>document.write("<b>" + window.location.hostname + "</b>");</script></p>
+<p>My hostname is: nginx1</p>
+</body>
+</html>
+ubuntu@fhm3u5vsb7q5j2rcpl77:~/hello$ docker images
+REPOSITORY                                           TAG        IMAGE ID       CREATED              SIZE
+nginx1                                               latest     6cf84e7904db   About a minute ago   188MB
+nginx                                                latest     39286ab8a5e1   4 weeks ago          188MB
+registry.k8s.io/kube-apiserver                       v1.30.0    c42f13656d0b   4 months ago         117MB
+registry.k8s.io/kube-controller-manager              v1.30.0    c7aad43836fa   4 months ago         111MB
+registry.k8s.io/kube-scheduler                       v1.30.0    259c8277fcbb   4 months ago         62MB
+registry.k8s.io/kube-proxy                           v1.30.0    a0bf559e280c   4 months ago         84.7MB
+registry.k8s.io/ingress-nginx/controller             <none>     ee54966f3891   5 months ago         282MB
+registry.k8s.io/ingress-nginx/kube-webhook-certgen   <none>     684c5ea3b61b   5 months ago         55.3MB
+registry.k8s.io/metrics-server/metrics-server        <none>     a24c7c057ec8   5 months ago         66.9MB
+gcr.io/k8s-minikube/kube-registry-proxy              <none>     38c5e506fa55   5 months ago         187MB
+registry.k8s.io/etcd                                 3.5.12-0   3861cfcd7c04   7 months ago         149MB
+registry                                             <none>     d6b2c32a0f14   11 months ago        25.4MB
+registry.k8s.io/coredns/coredns                      v1.11.1    cbb01a7bd410   13 months ago        59.8MB
+registry.k8s.io/pause                                3.9        e6f181688397   23 months ago        744kB
+kubernetesui/dashboard                               <none>     07655ddf2eeb   24 months ago        246MB
+kicbase/echo-server                                  1.0        9056ab77afb8   2 years ago          4.94MB
+kubernetesui/metrics-scraper                         <none>     115053965e86   2 years ago          43.8MB
+gcr.io/k8s-minikube/storage-provisioner              v5         6e38f40d628d   3 years ago          31.5MB
+ubuntu@fhm3u5vsb7q5j2rcpl77:~/hello$ docker rm -f nginx1
+nginx1
+ubuntu@fhm3u5vsb7q5j2rcpl77:~/hello$ minikube ip
+192.168.49.2
+ubuntu@fhm3u5vsb7q5j2rcpl77:~/hello$ echo $MINIKUBE_ACTIVE_DOCKERD
+minikube
+ubuntu@fhm3u5vsb7q5j2rcpl77:~/hello$ docker image inspect nginx1
+[
+    {
+        "Id": "sha256:6cf84e7904db2915eae2fdfc34587d5c28c3670da48c47a1daf2d404e2cd92b3",
+        "RepoTags": [
+            "nginx1:latest"
+        ],
+        "RepoDigests": [],
+        "Parent": "sha256:39286ab8a5e14aeaf5fdd6e2fac76e0c8d31a0c07224f0ee5e6be502f12e93f3",
+        "Comment": "",
+        "Created": "2024-09-14T16:13:32.464856158Z",
+        "DockerVersion": "26.1.1",
+        "Author": "",
+        "Config": {
+            "Hostname": "nginx1",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "80/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "NGINX_VERSION=1.27.1",
+                "NJS_VERSION=0.8.5",
+                "NJS_RELEASE=1~bookworm",
+                "PKG_RELEASE=1~bookworm",
+                "DYNPKG_RELEASE=2~bookworm"
+            ],
+            "Cmd": [
+                "nginx",
+                "-g",
+                "daemon off;"
+            ],
+            "Image": "nginx",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": [
+                "/docker-entrypoint.sh"
+            ],
+            "OnBuild": null,
+            "Labels": {
+                "maintainer": "NGINX Docker Maintainers <docker-maint@nginx.com>"
+            },
+            "StopSignal": "SIGQUIT"
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 187708541,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/a2fbc25fff1e2a866604e0262fa4a2b27650d011f206b5028b7f1f0297ab7a43/diff:/var/lib/docker/overlay2/2fc72f1e098533fc6f3ca56009c54f227aced46590649738303ed0f99f56a17f/diff:/var/lib/docker/overlay2/d802f6fac2c792ebeb8251a5ee777ecbdf21eb459e035121731c0e3c7761a19c/diff:/var/lib/docker/overlay2/f380d15945c0c285e6a4d162d015c9d5a7600ff4811ee907c16478b73f0f31ca/diff:/var/lib/docker/overlay2/58ef82578fb3fccfdfaef61dc71b29a2639924cb260da23a1b6961857ea9308d/diff:/var/lib/docker/overlay2/bde7d1bd2dbf5dd14db07c05962286c389ac75cbcbde7ff4fe75907ecd0b4710/diff:/var/lib/docker/overlay2/0bdebf6b7f4af712248a0f3387f0156bd5db3bd02e122b8a6168cd43aaedbd26/diff",
+                "MergedDir": "/var/lib/docker/overlay2/f4db1124e0e90317c155584bd4c0bad5e1551043b447840a3c5adb99c8507d08/merged",
+                "UpperDir": "/var/lib/docker/overlay2/f4db1124e0e90317c155584bd4c0bad5e1551043b447840a3c5adb99c8507d08/diff",
+                "WorkDir": "/var/lib/docker/overlay2/f4db1124e0e90317c155584bd4c0bad5e1551043b447840a3c5adb99c8507d08/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:8e2ab394fabf557b00041a8f080b10b4e91c7027b7c174f095332c7ebb6501cb",
+                "sha256:67796e30ff042303e3c8cbd8478e4f4f6377fd1754a168704f829c4e8a128f40",
+                "sha256:eda13eb24d4c7b2c4cf60fbef992e18936613ad9067421ae1b59a413f3393267",
+                "sha256:0fc6bb94eec5602c08d4261eedf9f122af7d122983c5ad8d8cf9ab108d9fd7bd",
+                "sha256:2bdf51597158f7b0335cb1c082f8449a7ba1af678876158a05747eecca9b7604",
+                "sha256:16907864a2d01d70c5c1e740085ace628f9d85b9eb38ced8c623e2c3ae36734d",
+                "sha256:11de3d47036d69ed34dcf240a2d82e0ffc8a9dc8b77deeed65fb6380fbc84c8d",
+                "sha256:afa211717561feec18a1933f6302ac7ba7d19b8d04568e8735368d2988eb52cc"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2024-09-14T16:13:32.548328504Z"
+        }
+    }
+]
+ubuntu@fhm3u5vsb7q5j2rcpl77:~/hello$ kubectl create deployment nginx1 --image=sha256:6cf84e7904db2915eae2fdfc34587d5c28c3670da48c47a1daf2d404e2cd92b3
+deployment.apps/nginx1 created
+ubuntu@fhm3u5vsb7q5j2rcpl77:~/hello$ kubectl get services
 NAME          TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)          AGE
-balanced      LoadBalancer   10.102.20.175    10.102.20.175   8080:32502/TCP   3d18h
-bar-service   ClusterIP      10.105.171.144   <none>          8080/TCP         3d18h
-foo-service   ClusterIP      10.100.2.159     <none>          8080/TCP         3d18h
-kubernetes    ClusterIP      10.96.0.1        <none>          443/TCP          3d22h
+balanced      LoadBalancer   10.102.20.175    10.102.20.175   8080:32502/TCP   6d3h
+bar-service   ClusterIP      10.105.171.144   <none>          8080/TCP         6d3h
+foo-service   ClusterIP      10.100.2.159     <none>          8080/TCP         6d3h
+kubernetes    ClusterIP      10.96.0.1        <none>          443/TCP          6d8h
+ubuntu@fhm3u5vsb7q5j2rcpl77:~/hello$ kubectl get pods
+NAME                       READY   STATUS    RESTARTS      AGE
+balanced-84cc8c47b-f5lng   1/1     Running   4 (11h ago)   6d3h
+bar-app                    1/1     Running   4 (11h ago)   6d3h
+foo-app                    1/1     Running   4 (11h ago)   6d3h
+nginx1-6bfd47968b-2sd78    1/1     Running   0             16s
+ubuntu@fhm3u5vsb7q5j2rcpl77:~/hello$ kubectl get services
+NAME          TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)          AGE
+balanced      LoadBalancer   10.102.20.175    10.102.20.175   8080:32502/TCP   6d3h
+bar-service   ClusterIP      10.105.171.144   <none>          8080/TCP         6d3h
+foo-service   ClusterIP      10.100.2.159     <none>          8080/TCP         6d3h
+kubernetes    ClusterIP      10.96.0.1        <none>          443/TCP          6d8h
+ubuntu@fhm3u5vsb7q5j2rcpl77:~/hello$ kubectl get deployments
+NAME       READY   UP-TO-DATE   AVAILABLE   AGE
+balanced   1/1     1            1           6d3h
+nginx1     1/1     1            1           51s
+ubuntu@fhm3u5vsb7q5j2rcpl77:~/hello$ kubectl expose deployment nginx1 --type=NodePort --port=80
+service/nginx1 exposed
+ubuntu@fhm3u5vsb7q5j2rcpl77:~/hello$ echo $(minikube service nginx1 --url)
+http://192.168.49.2:30932
+ubuntu@fhm3u5vsb7q5j2rcpl77:~/hello$ kubectl get services
+NAME          TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)          AGE
+balanced      LoadBalancer   10.102.20.175    10.102.20.175   8080:32502/TCP   6d3h
+bar-service   ClusterIP      10.105.171.144   <none>          8080/TCP         6d3h
+foo-service   ClusterIP      10.100.2.159     <none>          8080/TCP         6d3h
+kubernetes    ClusterIP      10.96.0.1        <none>          443/TCP          6d8h
+nginx1        NodePort       10.108.209.101   <none>          80:30932/TCP     77s
+ubuntu@fhm3u5vsb7q5j2rcpl77:~/hello$ curl $(minikube service nginx1 --url)
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Hello</h1>
+<p>My IP address is: <script>document.write("<b>" + window.location.hostname + "</b>");</script></p>
+<p>My hostname is: nginx1</p>
+</body>
+</html>
+ubuntu@fhm3u5vsb7q5j2rcpl77:~/hello$ ./deploy.sh
++++ minikube docker-env
+++ eval export 'DOCKER_TLS_VERIFY="1"' export 'DOCKER_HOST="tcp://192.168.49.2:2376"' export 'DOCKER_CERT_PATH="/home/ubuntu/.minikube/certs"' export 'MINIKUBE_ACTIVE_DOCKERD="minikube"' '#' To point your shell to 'minikube'\''s' docker-daemon, run: '#' eval '$(minikube' -p minikube 'docker-env)'
++++ export DOCKER_TLS_VERIFY=1 export DOCKER_HOST=tcp://192.168.49.2:2376 export DOCKER_CERT_PATH=/home/ubuntu/.minikube/certs export MINIKUBE_ACTIVE_DOCKERD=minikube
++++ DOCKER_TLS_VERIFY=1
++++ DOCKER_HOST=tcp://192.168.49.2:2376
++++ DOCKER_CERT_PATH=/home/ubuntu/.minikube/certs
++++ MINIKUBE_ACTIVE_DOCKERD=minikube
+++ kubectl create deployment nginx1 --image=nginx1:1
+deployment.apps/nginx1 created
+++ kubectl get deployments nginx1
+NAME     READY   UP-TO-DATE   AVAILABLE   AGE
+nginx1   0/1     1            0           1s
+++ kubectl get pods nginx1
+Error from server (NotFound): pods "nginx1" not found
+++ kubectl get services
+NAME          TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)          AGE
+balanced      LoadBalancer   10.102.20.175    10.102.20.175   8080:32502/TCP   6d5h
+bar-service   ClusterIP      10.105.171.144   <none>          8080/TCP         6d5h
+foo-service   ClusterIP      10.100.2.159     <none>          8080/TCP         6d5h
+kubernetes    ClusterIP      10.96.0.1        <none>          443/TCP          6d10h
+++ kubectl expose deployment nginx1 --type=NodePort --port=80
+service/nginx1 exposed
+++ kubectl get services nginx1
+NAME     TYPE       CLUSTER-IP    EXTERNAL-IP   PORT(S)        AGE
+nginx1   NodePort   10.98.12.82   <none>        80:32244/TCP   1s
+++ sleep 5
+++ minikube service nginx1
+|-----------|--------|-------------|---------------------------|
+| NAMESPACE |  NAME  | TARGET PORT |            URL            |
+|-----------|--------|-------------|---------------------------|
+| default   | nginx1 |          80 | http://192.168.49.2:32244 |
+|-----------|--------|-------------|---------------------------|
+🎉  Opening service default/nginx1 in default browser...
+👉  http://192.168.49.2:32244
++++ minikube service nginx1 --url
+++ curl http://192.168.49.2:32244
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Hello</h1>
+<p>My IP address is: <script>document.write("<b>" + window.location.hostname + "</b>");</script></p>
+<p>My hostname is: nginx1</p>
+</body>
+</html>
+++ kubectl delete service,deployment nginx1
+service "nginx1" deleted
+deployment.apps "nginx1" deleted
+
