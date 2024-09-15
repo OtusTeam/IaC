@@ -1,0 +1,78 @@
+---
+- name: Установка переменных окружения для Minikube Docker
+  hosts: all
+  become: no
+#  gather_facts: no
+
+  pre_tasks:
+  - name: Check Minikube's status.
+    command: minikube status
+    register: minikube_status
+    changed_when: false
+    ignore_errors: true
+
+  - name: Start Minikube if it's not running.
+    command: minikube start
+    when: "not minikube_status.stdout or 'Running' not in minikube_status.stdout"
+
+
+  tasks:
+  - name: Вызов minikube docker-env
+    shell: minikube docker-env
+    register: minikube_env
+
+#  - name: Парсинг результата
+#    set_fact:
+#      minikube_env_vars: "{{ minikube_env.stdout_lines | map('regex_replace', 'export ', '') | map('split', '=') | items2dict }}"
+
+
+#  - name: Парсинг результата
+#    set_fact:
+#      minikube_env_vars: "{{ minikube_env.stdout_lines | select('match', '^export ') | map('regex_replace', 'export ', '') | map('split', '=') | items2dict }}"
+
+
+  - name: Парсинг результата
+    set_fact:
+      minikube_env_vars: "{{ dict(minikube_env.stdout_lines | select('match', '^export ') | map('regex_replace', 'export ', '') | map('split', '=') | list) }}"
+
+  - name: Парсинг результата
+    set_fact:
+      minikube_env_vars: "{{ dict(minikube_env.stdout_lines | select('match', '^export ') | map('regex_replace', 'export ', '') | map('split', '=') | list) }}"
+
+  - name: Вывод переменных окружения
+    debug:
+      var: minikube_env_vars
+      verbosity: 2
+
+
+  - name: Установка переменных окружения
+    set_fact:
+      DOCKER_TLS_VERIFY: "{{ minikube_env_vars.DOCKER_TLS_VERIFY }}"
+      DOCKER_HOST: "{{ minikube_env_vars.DOCKER_HOST }}"
+      DOCKER_CERT_PATH: "{{ minikube_env_vars.DOCKER_CERT_PATH }}"
+      MINIKUBE_ACTIVE_DOCKERD: "{{ minikube_env_vars.MINIKUBE_ACTIVE_DOCKERD }}"
+
+  - name: Get env var values
+    shell: set
+    register: get_envs
+
+  - name: Print *DOCKER* env var values
+    debug:
+ #     var: get_envs.stdout_lines
+     msg: "{{ get_envs.stdout_lines | select('match', 'DOCKER') | list }}"
+     verbosity: 2
+
+  - name: Inspect an image
+    community.docker.docker_image_info:
+#      name: nginx
+      name: registry.k8s.io/etcd
+      tls: true
+      ca_path: /home/ubuntu/.minikube/certs
+#minikube_env_vars.DOCKER_CERT_PATH
+      docker_host: https://192.168.49.2:2376
+#"{{ minikube_env_vars.DOCKER_HOST }}"
+    register: image_info
+
+  - name: Print image info
+    debug:
+      var: image_info

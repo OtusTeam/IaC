@@ -1,0 +1,113 @@
+---
+- name: Build and deploy nginx1 to minikube, run and destroy demo
+  hosts: all
+  vars:
+    nname: nginx1
+    ntag: 1
+    nnametag: "{{ nname }}:{{ ntag }}"
+    src_dir: hello
+
+  pre_tasks:
+
+  - name: Check the status of minikube.
+    command: minikube status
+    register: minikube_status
+    changed_when: false
+    ignore_errors: true
+
+  - name: Start minikube if it's not running.
+    command: minikube start
+    when: "not minikube_status.stdout or 'Running' not in minikube_status.stdout"
+
+  tasks:
+
+  - name: Delete Nginx existing service and deployment
+    shell: "kubectl delete service,deployment {{ nname }} --ignore-not-found=true"
+
+  - name: Wait for 5 seconds
+    pause:
+      seconds: 5
+
+  - name: Remove existing Nginx image
+    shell: "minikube image rm {{ nnametag }}"
+    ignore_errors: true
+
+  - name: Create index.html from template on remote host
+    template:
+      src: "{{ src_dir }}/index.html.j2"
+      dest: index.html
+      mode: '0644'
+
+  - name: Copy nginx.conf to remote host
+    copy:
+      mode: '0644'
+      dest: nginx.conf
+      src: "{{ src_dir }}/nginx.conf"
+
+
+  - name: Copy Dockerfile to remote host
+    copy:
+      mode: '0644'
+      dest: Dockerfile
+      src: "{{ src_dir }}/Dockerfile"
+
+  - name: Build Nginx image
+    shell: "minikube image build -t {{ nnametag }} ."
+
+  - name: Create Nginx deployment
+    shell: "kubectl create deployment nginx1 --image={{ nnametag }}"
+
+  - name: Wait for 15 seconds
+    pause:
+      seconds: 15
+
+  - name: Get Nginx deployment info
+    shell: "kubectl get deployments {{ nname }}"
+    register: deployment_info
+  - debug:
+      var: deployment_info.stdout_lines
+
+  - name: Get Nginx pod info
+    shell: "kubectl get pods"
+    register: pod_info
+  - debug:
+      var: pod_info.stdout_lines
+
+  - name: Get services info
+    shell: kubectl get services
+    register: service_info
+  - debug:
+      var: service_info.stdout_lines
+
+  - name: Expose Nginx deployment as NodePort service
+    shell: "kubectl expose deployment {{ nname }} --type=NodePort --port=80"
+
+  - name: Get Nginx service info
+    shell: "kubectl get services {{ nname }}"
+    register: our_service_info
+  - debug:
+      var: our_service_info.stdout_lines
+
+  - name: Wait for 5 seconds
+    pause:
+      seconds: 5
+
+#  - name: Open Nginx service in Minikube
+#    shell: "minikube service nginx1
+
+  - name: Test Nginx service
+    shell: "curl $(minikube service {{ nname }} --url)"
+    register: test_result
+  - debug:
+      var: test_result.stdout_lines
+
+  - name: Delete Nginx existing service and deployment
+    shell: "kubectl delete service,deployment {{ nname }} --ignore-not-found=true"
+
+  - name: Wait for 5 seconds
+    pause:
+      seconds: 5
+
+  - name: Remove existing Nginx image
+    shell: "minikube image rm {{ nnametag }}"
+    ignore_errors: true

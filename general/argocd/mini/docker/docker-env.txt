@@ -1,0 +1,45 @@
+Вот пример Ansible playbook, который вызывает `minikube docker-env` и сохраняет результат в переменных:
+
+```yml
+---
+- name: Установка переменных окружения для Minikube Docker
+  hosts: localhost
+  become: no
+  gather_facts: no
+
+  tasks:
+  - name: Вызов minikube docker-env
+    shell: minikube docker-env
+    register: minikube_env
+
+  - name: Парсинг результата
+    set_fact:
+      minikube_env_vars: "{{ minikube_env.stdout_lines | map('regex_replace', 'export ', '') | map('split', '=') | items2dict }}"
+
+  - name: Вывод переменных окружения
+    debug:
+      var: minikube_env_vars
+```
+
+Этот playbook вызывает `minikube docker-env` и сохраняет результат в переменной `minikube_env`. Затем он парсит результат и сохраняет переменные окружения в словаре `minikube_env_vars`.
+
+Если вы хотите использовать эти переменные окружения в дальнейших задачах, вы можете обратиться к ним как к словарю, например:
+
+```yml
+- name: Вывод значения DOCKER_HOST
+  debug:
+    var: minikube_env_vars.DOCKER_HOST
+```
+
+Или вы можете установить эти переменные окружения для текущей сессии Ansible:
+
+```yml
+- name: Установка переменных окружения
+  set_fact:
+    DOCKER_TLS_VERIFY: "{{ minikube_env_vars.DOCKER_TLS_VERIFY }}"
+    DOCKER_HOST: "{{ minikube_env_vars.DOCKER_HOST }}"
+    DOCKER_CERT_PATH: "{{ minikube_env_vars.DOCKER_CERT_PATH }}"
+    MINIKUBE_ACTIVE_DOCKERD: "{{ minikube_env_vars.MINIKUBE_ACTIVE_DOCKERD }}"
+```
+
+После этого вы можете использовать эти переменные окружения в дальнейших задачах.
