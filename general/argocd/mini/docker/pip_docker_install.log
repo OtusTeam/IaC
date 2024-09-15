@@ -12,10 +12,11 @@ TASK [geerlingguy.pip : Remove EXTERNALLY-MANAGED] *****************************
 skipping: [ac-mini-docker]
 
 TASK [geerlingguy.pip : Ensure Pip is installed.] ********************************************************************************************************************************************************************************
-changed: [ac-mini-docker]
+ok: [ac-mini-docker]
 
 TASK [geerlingguy.pip : Ensure pip_install_packages are installed.] **************************************************************************************************************************************************************
-changed: [ac-mini-docker] => (item={'name': 'docker'})
+ok: [ac-mini-docker] => (item={'name': 'docker'})
+changed: [ac-mini-docker] => (item={'name': 'kubernetes'})
 
 PLAY RECAP ***********************************************************************************************************************************************************************************************************************
-ac-mini-docker             : ok=3    changed=2    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+ac-mini-docker             : ok=3    changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
