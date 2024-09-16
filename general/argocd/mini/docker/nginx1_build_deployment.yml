@@ -103,8 +103,25 @@
   - debug:
       var: service_info.stdout_lines
 
+#  - name: Expose Nginx deployment as NodePort service
+#    shell: "kubectl expose deployment {{ nname }} --type=NodePort --port=80"
   - name: Expose Nginx deployment as NodePort service
-    shell: "kubectl expose deployment {{ nname }} --type=NodePort --port=80"
+    kubernetes.core.k8s:
+      definition:
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: "{{ nname }}"
+          namespace: default
+        spec:
+          selector:
+            app: "{{ nname }}"
+          ports:
+          - name: http
+            port: 80
+            targetPort: 80
+#            nodePort: 30080
+          type: NodePort
 
   - name: Get Nginx service info
     shell: "kubectl get services {{ nname }}"
@@ -124,6 +141,34 @@
     register: test_result
   - debug:
       var: test_result.stdout_lines
+
+  - name: Start port forwarding with kubectl
+    shell: "kubectl port-forward service/{{ nname }} 80:80 &"
+    async: 1
+    poll: 0
+
+  - name: Wait for port forwarding to start
+    pause:
+      seconds: 5
+
+  - name: Test Nginx service from Internet
+    uri:
+      url: http://{{ ansible_host }}:80
+      method: GET
+      return_content: yes
+    register: uri_result_external
+    delegate_to: localhost
+  - debug:
+      var: uri_result_external.stdout_lines
+
+  - name: Find the port-forward process ID
+    shell: "pgrep -f 'kubectl port-forward service/{{ nname }}'"
+    register: result
+    ignore_errors: true
+
+  - name: Kill the port-forward process
+    shell: "kill {{ result.stdout }}"
+    when: result.stdout != ""
 
   - name: Delete Nginx existing service and deployment
     shell: "kubectl delete service,deployment {{ nname }} --ignore-not-found=true"

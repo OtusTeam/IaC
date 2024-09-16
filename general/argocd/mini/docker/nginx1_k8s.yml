@@ -1,0 +1,126 @@
+---
+- name: Deploy and remove Nginx on Minikube
+  hosts: localhost
+  become: no
+  vars:
+    nname: nginx1
+
+  tasks:
+  - name: Remove existing Nginx image
+    shell: minikube image rm {{ nname }}:1
+
+  - name: Build Nginx image
+    shell: minikube image build -t {{ nname }}:1 .
+
+  - name: Create Nginx deployment
+    k8s:
+      definition:
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: {{ nname }}
+        spec:
+          replicas: 1
+          selector:
+            matchLabels:
+              app: {{ nname }}
+          template:
+            metadata:
+              labels:
+                app: {{ nname }}
+            spec:
+              containers:
+              - name: {{ nname }}
+                image: {{ nname }}:1
+                ports:
+                - containerPort: 80
+
+  - name: Get Nginx deployment info
+    k8s_info:
+      api_version: v1
+      kind: Deployment
+      name: {{ nname }}
+    register: deployment_info
+  - debug:
+      msg: "Развертывание Nginx: {{ deployment_info.resources | to_nice_yaml }}"
+
+  - name: Get Nginx pod info
+    k8s_info:
+      api_version: v1
+      kind: Pod
+      label_selectors:
+        - app={{ nname }}
+    register: pod_info
+  - debug:
+      msg: "Под Nginx: {{ pod_info.resources | to_nice_yaml }}"
+
+  - name: Get services info
+    k8s_info:
+      api_version: v1
+      kind: Service
+    register: services_info
+  - debug:
+      msg: "Сервисы: {{ services_info.resources | to_nice_yaml }}"
+
+  - name: Expose Nginx deployment as NodePort service
+    k8s:
+      definition:
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: {{ nname }}
+        spec:
+          selector:
+            app: {{ nname }}
+          ports:
+          - name: http
+            port: 80
+            targetPort: 80
+            nodePort: 30080
+          type: NodePort
+
+  - name: Get Nginx service info
+    k8s_info:
+      api_version: v1
+      kind: Service
+      name: {{ nname }}
+    register: service_info
+  - debug:
+      msg: "Сервис Nginx: {{ service_info.resources | to_nice_yaml }}"
+
+  - name: Wait for 5 seconds
+    pause:
+      seconds: 5
+
+  - name: Open Nginx service in Minikube
+    shell: minikube service {{ nname }}
+
+  - name: Test Nginx service
+    uri:
+      url: "http://{{ lookup('ansible_host') }}:30080"
+    register: test_result
+  - debug:
+      msg: "Результат теста сервиса Nginx: {{ test_result.status }}"
+
+  - name: Delete Nginx service and deployment
+    k8s:
+      state: absent
+      definition:
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: {{ nname }}
+    k8s:
+      state: absent
+      definition:
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: {{ nname }}
+
+  - name: Wait for 5 seconds
+    pause:
+      seconds: 5
+
+  - name: Remove Nginx image
+    shell: minikube image rm {{ nname }}:1

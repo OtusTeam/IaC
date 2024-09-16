@@ -1,0 +1,85 @@
+---
+- name: Build and deploy nginx1 to minikube, run and destroy demo
+  hosts: all
+  vars:
+    nname: nginx1
+    ntag: 1
+    nnametag: "{{ nname }}:{{ ntag }}"
+    src_dir: hello
+
+  tasks:
+
+  - name: Test Nginx service
+    shell: "curl $(minikube service {{ nname }} --url)"
+    register: test_result
+  - debug:
+      var: test_result.stdout_lines
+
+  - name: Start port forwarding with kubectl
+    shell: "kubectl port-forward --address 0.0.0.0 service/{{ nname }} 8080:80"
+    args:
+      executable: /bin/bash
+    async: 1
+    poll: 0
+    register: job
+  - debug:
+      var: job
+      verbosity: 2
+
+#  - name: Wait for port forwarding to start
+#    pause:
+#      seconds: 500
+
+  - name: Получить статус задачи в фоне
+    async_status:
+      jid: "{{ job.ansible_job_id }}"
+    register: job_status
+  - debug:
+      msg: "{{ job_status }}"
+      verbosity: 2
+
+
+  - name: Прочитать файл с удаленного хоста
+    slurp:
+      src: "{{ job_status.results_file }}"
+    register: file_content
+  - debug:
+      msg: "{{ file_content['content'] | b64decode }}"
+      verbosity: 2
+
+#  - name: Wait for port forwarding to start
+#    pause:
+#      seconds: 500
+
+  - name: Find the port-forward process ID
+    shell: "pgrep -f 'kubectl port-forward --address 0.0.0.0 service/{{ nname }}'"
+    register: pgrep_result
+    ignore_errors: true
+  - debug:
+      var: pgrep_result.stdout
+      verbosity: 2
+
+  - name: Прочитать файл с удаленного хоста
+    slurp:
+      src: "/proc/{{ pgrep_result.stdout_lines[0] }}/cmdline"
+    register: proc_cmdline
+  - debug:
+      msg: "{{ proc_cmdline['content'] | b64decode }}"
+      verbosity: 2
+
+  - name: Test Nginx service from Internet
+    uri:
+      url: http://{{ ansible_host }}:8080
+      method: GET
+      return_content: yes
+    register: uri_result_external
+    delegate_to: localhost
+  - debug:
+      var: uri_result_external.content
+#.stdout_lines
+
+  - name: Kill the port-forward process
+    shell: "kill {{ pgrep_result.stdout }}"
+    when: pgrep_result.stdout != ""
+    ignore_errors: true
+
