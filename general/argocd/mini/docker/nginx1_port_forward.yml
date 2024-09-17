@@ -22,9 +22,9 @@
     async: 10
     poll: 0
     register: job
-  - debug:
-      var: job
-      verbosity: 2
+#  - debug:
+#      var: job
+#      verbosity: 2
 
   - name: Wait for port forwarding to start
     pause:
