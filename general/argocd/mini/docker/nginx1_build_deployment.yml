@@ -119,8 +119,8 @@
         - "NAME: {{ pod_info.resources[0].metadata.name | default('') }}"
         - "READY: {{ pod_info.resources[0].status.containerStatuses | selectattr('ready', 'equalto', true) | list | length | default(0) }}/{{ pod_info.resources[0].spec.containers | length | default(0) }}"
         - "STATUS: {{ pod_info.resources[0].status.phase | default('') }}"
-        - "RESTARTS: {{ pod_info.resources[0].status.containerStatuses[0].restartCount | default(0) }} ({{ (ansible_date_time.iso8601 | to_datetime('%Y-%m-%dT%H:%M:%SZ') - pod_info.resources[0].status.containerStatuses[0].lastState.terminated.finishedAt | to_datetime('%Y-%m-%dT%H:%M:%SZ')).total_seconds() | default(0) | int | humanize }})"
-        - "AGE: {{ (ansible_date_time.iso8601 | to_datetime('%Y-%m-%dT%H:%M:%SZ') - pod_info.resources[0].metadata.creationTimestamp | to_datetime('%Y-%m-%dT%H:%M:%SZ')).days | default(0) }}d"
+        - "RESTARTS: {{ pod_info.resources[0].status.containerStatuses[0].restartCount | default(0) }} ({{ pod_info.resources[0].status.containerStatuses[0].lastState.terminated.finishedAt | default('unknown') }})"
+        - "AGE: {{ pod_info.resources[0].metadata.creationTimestamp | default('unknown') }}"
     when: pod_info.resources | length > 0
 
   - name: Get services info
