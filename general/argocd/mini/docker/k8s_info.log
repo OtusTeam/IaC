@@ -8,308 +8,44 @@ ok: [ac-mini-docker]
 TASK [Get Nginx deployment info] *************************************************************************************************************************************************************************************************
 ok: [ac-mini-docker]
 
-TASK [debug] *********************************************************************************************************************************************************************************************************************
+TASK [Print deployment info] *****************************************************************************************************************************************************************************************************
 ok: [ac-mini-docker] => {
-    "deployment_info.resources": []
+    "msg": [
+        "NAME: balanced",
+        "READY: 1/1",
+        "UP-TO-DATE: 1",
+        "AVAILABLE: 1",
+        "AGE: 2024-09-08 14:17:57"
+    ]
 }
 
 TASK [Get Nginx pod info] ********************************************************************************************************************************************************************************************************
 ok: [ac-mini-docker]
 
-TASK [debug] *********************************************************************************************************************************************************************************************************************
+TASK [Print pod information] *****************************************************************************************************************************************************************************************************
 ok: [ac-mini-docker] => {
-    "pod_info.resources": [
-        {
-            "apiVersion": "v1",
-            "kind": "Pod",
-            "metadata": {
-                "creationTimestamp": "2024-09-08T14:17:57Z",
-                "generateName": "balanced-84cc8c47b-",
-                "labels": {
-                    "app": "balanced",
-                    "pod-template-hash": "84cc8c47b"
-                },
-                "managedFields": [
-                    {
-                        "apiVersion": "v1",
-                        "fieldsType": "FieldsV1",
-                        "fieldsV1": {
-                            "f:metadata": {
-                                "f:generateName": {},
-                                "f:labels": {
-                                    ".": {},
-                                    "f:app": {},
-                                    "f:pod-template-hash": {}
-                                },
-                                "f:ownerReferences": {
-                                    ".": {},
-                                    "k:{\"uid\":\"fcee80dd-c034-49df-8c85-da79c88ea0a9\"}": {}
-                                }
-                            },
-                            "f:spec": {
-                                "f:containers": {
-                                    "k:{\"name\":\"echo-server\"}": {
-                                        ".": {},
-                                        "f:image": {},
-                                        "f:imagePullPolicy": {},
-                                        "f:name": {},
-                                        "f:resources": {},
-                                        "f:terminationMessagePath": {},
-                                        "f:terminationMessagePolicy": {}
-                                    }
-                                },
-                                "f:dnsPolicy": {},
-                                "f:enableServiceLinks": {},
-                                "f:restartPolicy": {},
-                                "f:schedulerName": {},
-                                "f:securityContext": {},
-                                "f:terminationGracePeriodSeconds": {}
-                            }
-                        },
-                        "manager": "kube-controller-manager",
-                        "operation": "Update",
-                        "time": "2024-09-08T14:17:57Z"
-                    },
-                    {
-                        "apiVersion": "v1",
-                        "fieldsType": "FieldsV1",
-                        "fieldsV1": {
-                            "f:status": {
-                                "f:conditions": {
-                                    "k:{\"type\":\"ContainersReady\"}": {
-                                        ".": {},
-                                        "f:lastProbeTime": {},
-                                        "f:lastTransitionTime": {},
-                                        "f:status": {},
-                                        "f:type": {}
-                                    },
-                                    "k:{\"type\":\"Initialized\"}": {
-                                        ".": {},
-                                        "f:lastProbeTime": {},
-                                        "f:lastTransitionTime": {},
-                                        "f:status": {},
-                                        "f:type": {}
-                                    },
-                                    "k:{\"type\":\"PodReadyToStartContainers\"}": {
-                                        ".": {},
-                                        "f:lastProbeTime": {},
-                                        "f:lastTransitionTime": {},
-                                        "f:status": {},
-                                        "f:type": {}
-                                    },
-                                    "k:{\"type\":\"Ready\"}": {
-                                        ".": {},
-                                        "f:lastProbeTime": {},
-                                        "f:lastTransitionTime": {},
-                                        "f:status": {},
-                                        "f:type": {}
-                                    }
-                                },
-                                "f:containerStatuses": {},
-                                "f:hostIP": {},
-                                "f:hostIPs": {},
-                                "f:phase": {},
-                                "f:podIP": {},
-                                "f:podIPs": {
-                                    ".": {},
-                                    "k:{\"ip\":\"10.244.0.113\"}": {
-                                        ".": {},
-                                        "f:ip": {}
-                                    }
-                                },
-                                "f:startTime": {}
-                            }
-                        },
-                        "manager": "kubelet",
-                        "operation": "Update",
-                        "subresource": "status",
-                        "time": "2024-09-16T14:47:05Z"
-                    }
-                ],
-                "name": "balanced-84cc8c47b-f5lng",
-                "namespace": "default",
-                "ownerReferences": [
-                    {
-                        "apiVersion": "apps/v1",
-                        "blockOwnerDeletion": true,
-                        "controller": true,
-                        "kind": "ReplicaSet",
-                        "name": "balanced-84cc8c47b",
-                        "uid": "fcee80dd-c034-49df-8c85-da79c88ea0a9"
-                    }
-                ],
-                "resourceVersion": "389941",
-                "uid": "00e9a286-60d1-40d8-8a46-7e0c632343d4"
-            },
-            "spec": {
-                "containers": [
-                    {
-                        "image": "kicbase/echo-server:1.0",
-                        "imagePullPolicy": "IfNotPresent",
-                        "name": "echo-server",
-                        "resources": {},
-                        "terminationMessagePath": "/dev/termination-log",
-                        "terminationMessagePolicy": "File",
-                        "volumeMounts": [
-                            {
-                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
-                                "name": "kube-api-access-qzv8n",
-                                "readOnly": true
-                            }
-                        ]
-                    }
-                ],
-                "dnsPolicy": "ClusterFirst",
-                "enableServiceLinks": true,
-                "nodeName": "minikube",
-                "preemptionPolicy": "PreemptLowerPriority",
-                "priority": 0,
-                "restartPolicy": "Always",
-                "schedulerName": "default-scheduler",
-                "securityContext": {},
-                "serviceAccount": "default",
-                "serviceAccountName": "default",
-                "terminationGracePeriodSeconds": 30,
-                "tolerations": [
-                    {
-                        "effect": "NoExecute",
-                        "key": "node.kubernetes.io/not-ready",
-                        "operator": "Exists",
-                        "tolerationSeconds": 300
-                    },
-                    {
-                        "effect": "NoExecute",
-                        "key": "node.kubernetes.io/unreachable",
-                        "operator": "Exists",
-                        "tolerationSeconds": 300
-                    }
-                ],
-                "volumes": [
-                    {
-                        "name": "kube-api-access-qzv8n",
-                        "projected": {
-                            "defaultMode": 420,
-                            "sources": [
-                                {
-                                    "serviceAccountToken": {
-                                        "expirationSeconds": 3607,
-                                        "path": "token"
-                                    }
-                                },
-                                {
-                                    "configMap": {
-                                        "items": [
-                                            {
-                                                "key": "ca.crt",
-                                                "path": "ca.crt"
-                                            }
-                                        ],
-                                        "name": "kube-root-ca.crt"
-                                    }
-                                },
-                                {
-                                    "downwardAPI": {
-                                        "items": [
-                                            {
-                                                "fieldRef": {
-                                                    "apiVersion": "v1",
-                                                    "fieldPath": "metadata.namespace"
-                                                },
-                                                "path": "namespace"
-                                            }
-                                        ]
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                ]
-            },
-            "status": {
-                "conditions": [
-                    {
-                        "lastProbeTime": null,
-                        "lastTransitionTime": "2024-09-16T14:46:15Z",
-                        "status": "True",
-                        "type": "PodReadyToStartContainers"
-                    },
-                    {
-                        "lastProbeTime": null,
-                        "lastTransitionTime": "2024-09-08T14:17:57Z",
-                        "status": "True",
-                        "type": "Initialized"
-                    },
-                    {
-                        "lastProbeTime": null,
-                        "lastTransitionTime": "2024-09-16T14:47:05Z",
-                        "status": "True",
-                        "type": "Ready"
-                    },
-                    {
-                        "lastProbeTime": null,
-                        "lastTransitionTime": "2024-09-16T14:47:05Z",
-                        "status": "True",
-                        "type": "ContainersReady"
-                    },
-                    {
-                        "lastProbeTime": null,
-                        "lastTransitionTime": "2024-09-08T14:17:57Z",
-                        "status": "True",
-                        "type": "PodScheduled"
-                    }
-                ],
-                "containerStatuses": [
-                    {
-                        "containerID": "docker://039f63379d34fec2f7a17b7a42603a55705f598340baf222cbebb5c3395a6abe",
-                        "image": "kicbase/echo-server:1.0",
-                        "imageID": "docker-pullable://kicbase/echo-server@sha256:127ac38a2bb9537b7f252addff209ea6801edcac8a92c8b1104dacd66a583ed6",
-                        "lastState": {
-                            "terminated": {
-                                "containerID": "docker://dc77804ef7ec7dc07017c09b817bf576a61695b7de4ff362d4b7e4106887d37f",
-                                "exitCode": 2,
-                                "finishedAt": "2024-09-16T09:39:34Z",
-                                "reason": "Error",
-                                "startedAt": "2024-09-15T15:37:07Z"
-                            }
-                        },
-                        "name": "echo-server",
-                        "ready": true,
-                        "restartCount": 7,
-                        "started": true,
-                        "state": {
-                            "running": {
-                                "startedAt": "2024-09-16T14:47:05Z"
-                            }
-                        }
-                    }
-                ],
-                "hostIP": "192.168.49.2",
-                "hostIPs": [
-                    {
-                        "ip": "192.168.49.2"
-                    }
-                ],
-                "phase": "Running",
-                "podIP": "10.244.0.113",
-                "podIPs": [
-                    {
-                        "ip": "10.244.0.113"
-                    }
-                ],
-                "qosClass": "BestEffort",
-                "startTime": "2024-09-08T14:17:57Z"
-            }
-        }
+    "msg": [
+        "NAME: balanced-84cc8c47b-f5lng",
+        "READY: 1/1",
+        "STATUS: Running",
+        "RESTARTS: 7 (1d 4h 1m ago)",
+        "AGE: 8d"
     ]
 }
 
 TASK [Get services info] *********************************************************************************************************************************************************************************************************
 ok: [ac-mini-docker]
 
-TASK [debug] *********************************************************************************************************************************************************************************************************************
+TASK [Print service information] *************************************************************************************************************************************************************************************************
 ok: [ac-mini-docker] => {
-    "services_info.resources": []
+    "msg": [
+        "NAME: balanced",
+        "TYPE: LoadBalancer",
+        "CLUSTER-IP: 10.102.20.175",
+        "EXTERNAL-IP: <pending>",
+        "PORT(S): 8080:32502/TCP"
+    ]
 }
 
 PLAY RECAP ***********************************************************************************************************************************************************************************************************************
-ac-mini-docker             : ok=7    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+ac-mini-docker             : ok=7    changed=0    unreachable=0    failed=0    
