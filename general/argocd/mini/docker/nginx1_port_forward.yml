@@ -19,16 +19,16 @@
     shell: "kubectl port-forward --address 0.0.0.0 service/{{ nname }} 8080:80"
     args:
       executable: /bin/bash
-    async: 1
+    async: 10
     poll: 0
     register: job
   - debug:
       var: job
       verbosity: 2
 
-#  - name: Wait for port forwarding to start
-#    pause:
-#      seconds: 500
+  - name: Wait for port forwarding to start
+    pause:
+      seconds: 2
 
   - name: Получить статус задачи в фоне
     async_status:
@@ -78,8 +78,13 @@
       var: uri_result_external.content
 #.stdout_lines
 
+  - name: Print pid
+    debug:
+      var: pgrep_result.stdout_lines[0]
+      verbosity: 2
+
   - name: Kill the port-forward process
-    shell: "kill {{ pgrep_result.stdout }}"
+    shell: "kill {{ pgrep_result.stdout_lines[0] }}"
     when: pgrep_result.stdout != ""
     ignore_errors: true
 

@@ -1,14 +1,34 @@
-aleksey@first:~/OtusTeam/IaC/general/argocd/mini/docker$ ansible-playbook nginx1_port_forward.yml 
+aleksey@first:~/OtusTeam/IaC/general/argocd/mini/docker$ ansible-playbook nginx1_port_forward.yml -vv
+ansible-playbook [core 2.15.5]
+  config file = /home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/ansible.cfg
+  configured module search path = ['/home/aleksey/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/aleksey/.local/lib/python3.10/site-packages/ansible
+  ansible collection location = /home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/collections
+  executable location = /home/aleksey/.local/bin/ansible-playbook
+  python version = 3.10.12 (main, Jul 29 2024, 16:56:48) [GCC 11.4.0] (/usr/bin/python3)
+  jinja version = 3.0.3
+  libyaml = True
+Using /home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/ansible.cfg as config file
+Using inventory plugin 'yacloud_compute' to process inventory source '/home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/inventory/yacloud_compute.yml'
+Skipping callback 'default', as we already have a stdout callback.
+Skipping callback 'minimal', as we already have a stdout callback.
+Skipping callback 'oneline', as we already have a stdout callback.
+
+PLAYBOOK: nginx1_port_forward.yml ************************************************************************************************************************************************************************************************
+1 plays in nginx1_port_forward.yml
 
 PLAY [Build and deploy nginx1 to minikube, run and destroy demo] *****************************************************************************************************************************************************************
 
 TASK [Gathering Facts] ***********************************************************************************************************************************************************************************************************
+task path: /home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/nginx1_port_forward.yml:2
 ok: [ac-mini-docker]
 
 TASK [Test Nginx service] ********************************************************************************************************************************************************************************************************
-changed: [ac-mini-docker]
+task path: /home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/nginx1_port_forward.yml:12
+changed: [ac-mini-docker] => {"changed": true, "cmd": "curl $(minikube service nginx1 --url)", "delta": "0:00:01.178199", "end": "2024-09-17 06:20:03.654433", "msg": "", "rc": 0, "start": "2024-09-17 06:20:02.476234", "stderr": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100   188  100   188    0     0   167k      0 --:--:-- --:--:-- --:--:--  183k", "stderr_lines": ["  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current", "                                 Dload  Upload   Total   Spent    Left  Speed", "", "  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0", "100   188  100   188    0     0   167k      0 --:--:-- --:--:-- --:--:--  183k"], "stdout": "<!DOCTYPE html>\n<html>\n<body>\n<h1>Hello</h1>\n<p>My IP address is: <script>document.write(\"<b>\" + window.location.hostname + \"</b>\");</script></p>\n<p>My name is: nginx1</p>\n</body>\n</html>", "stdout_lines": ["<!DOCTYPE html>", "<html>", "<body>", "<h1>Hello</h1>", "<p>My IP address is: <script>document.write(\"<b>\" + window.location.hostname + \"</b>\");</script></p>", "<p>My name is: nginx1</p>", "</body>", "</html>"]}
 
 TASK [debug] *********************************************************************************************************************************************************************************************************************
+task path: /home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/nginx1_port_forward.yml:15
 ok: [ac-mini-docker] => {
     "test_result.stdout_lines": [
         "<!DOCTYPE html>",
@@ -23,46 +43,103 @@ ok: [ac-mini-docker] => {
 }
 
 TASK [Start port forwarding with kubectl] ****************************************************************************************************************************************************************************************
-changed: [ac-mini-docker]
+task path: /home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/nginx1_port_forward.yml:18
+changed: [ac-mini-docker] => {"ansible_job_id": "j598191048932.194384", "changed": true, "finished": 0, "results_file": "/home/ubuntu/.ansible_async/j598191048932.194384", "started": 1}
 
 TASK [debug] *********************************************************************************************************************************************************************************************************************
-skipping: [ac-mini-docker]
+task path: /home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/nginx1_port_forward.yml:25
+ok: [ac-mini-docker] => {
+    "job": {
+        "ansible_job_id": "j598191048932.194384",
+        "changed": true,
+        "failed": 0,
+        "finished": 0,
+        "results_file": "/home/ubuntu/.ansible_async/j598191048932.194384",
+        "started": 1
+    }
+}
+
+TASK [Wait for port forwarding to start] *****************************************************************************************************************************************************************************************
+task path: /home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/nginx1_port_forward.yml:29
+Pausing for 2 seconds
+(ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+ok: [ac-mini-docker] => {"changed": false, "delta": 2, "echo": true, "rc": 0, "start": "2024-09-17 06:20:04.384440", "stderr": "", "stdout": "Paused for 2.0 seconds", "stop": "2024-09-17 06:20:06.387916", "user_input": ""}
 
 TASK [Получить статус задачи в фоне] *********************************************************************************************************************************************************************************************
-ok: [ac-mini-docker]
+task path: /home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/nginx1_port_forward.yml:33
+ok: [ac-mini-docker] => {"ansible_job_id": "j598191048932.194384", "changed": false, "finished": 0, "results_file": "/home/ubuntu/.ansible_async/j598191048932.194384", "started": 1, "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
 
 TASK [debug] *********************************************************************************************************************************************************************************************************************
-skipping: [ac-mini-docker]
+task path: /home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/nginx1_port_forward.yml:37
+ok: [ac-mini-docker] => {
+    "msg": {
+        "ansible_job_id": "j598191048932.194384",
+        "changed": false,
+        "failed": false,
+        "finished": 0,
+        "results_file": "/home/ubuntu/.ansible_async/j598191048932.194384",
+        "started": 1,
+        "stderr": "",
+        "stderr_lines": [],
+        "stdout": "",
+        "stdout_lines": []
+    }
+}
 
 TASK [Прочитать файл с удаленного хоста] *****************************************************************************************************************************************************************************************
-ok: [ac-mini-docker]
+task path: /home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/nginx1_port_forward.yml:42
+ok: [ac-mini-docker] => {"changed": false, "content": "eyJzdGFydGVkIjogMSwgImZpbmlzaGVkIjogMCwgImFuc2libGVfam9iX2lkIjogImo1OTgxOTEwNDg5MzIuMTk0Mzg0In0=", "encoding": "base64", "source": "/home/ubuntu/.ansible_async/j598191048932.194384"}
 
 TASK [debug] *********************************************************************************************************************************************************************************************************************
-skipping: [ac-mini-docker]
+task path: /home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/nginx1_port_forward.yml:46
+ok: [ac-mini-docker] => {
+    "msg": {
+        "ansible_job_id": "j598191048932.194384",
+        "finished": 0,
+        "started": 1
+    }
+}
 
 TASK [Find the port-forward process ID] ******************************************************************************************************************************************************************************************
-changed: [ac-mini-docker]
+task path: /home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/nginx1_port_forward.yml:54
+changed: [ac-mini-docker] => {"changed": true, "cmd": "pgrep -f 'kubectl port-forward --address 0.0.0.0 service/nginx1'", "delta": "0:00:00.017701", "end": "2024-09-17 06:20:07.794812", "msg": "", "rc": 0, "start": "2024-09-17 06:20:07.777111", "stderr": "", "stderr_lines": [], "stdout": "194391\n194470", "stdout_lines": ["194391", "194470"]}
 
 TASK [debug] *********************************************************************************************************************************************************************************************************************
-skipping: [ac-mini-docker]
+task path: /home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/nginx1_port_forward.yml:58
+ok: [ac-mini-docker] => {
+    "pgrep_result.stdout": "194391\n194470"
+}
 
 TASK [Прочитать файл с удаленного хоста] *****************************************************************************************************************************************************************************************
-ok: [ac-mini-docker]
+task path: /home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/nginx1_port_forward.yml:62
+ok: [ac-mini-docker] => {"changed": false, "content": "L3NuYXAva3ViZWN0bC8zMzczL2t1YmVjdGwAcG9ydC1mb3J3YXJkAC0tYWRkcmVzcwAwLjAuMC4wAHNlcnZpY2UvbmdpbngxADgwODA6ODAA", "encoding": "base64", "source": "/proc/194391/cmdline"}
 
 TASK [debug] *********************************************************************************************************************************************************************************************************************
-skipping: [ac-mini-docker]
+task path: /home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/nginx1_port_forward.yml:66
+ok: [ac-mini-docker] => {
+    "msg": "/snap/kubectl/3373/kubectl\u0000port-forward\u0000--address\u00000.0.0.0\u0000service/nginx1\u00008080:80\u0000"
+}
 
 TASK [Test Nginx service from Internet] ******************************************************************************************************************************************************************************************
-ok: [ac-mini-docker -> localhost]
+task path: /home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/nginx1_port_forward.yml:70
+ok: [ac-mini-docker -> localhost] => {"accept_ranges": "bytes", "changed": false, "connection": "close", "content": "<!DOCTYPE html>\n<html>\n<body>\n<h1>Hello</h1>\n<p>My IP address is: <script>document.write(\"<b>\" + window.location.hostname + \"</b>\");</script></p>\n<p>My name is: nginx1</p>\n</body>\n</html>\n", "content_length": "188", "content_type": "text/html", "cookies": {}, "cookies_string": "", "date": "Tue, 17 Sep 2024 06:20:08 GMT", "elapsed": 0, "etag": "\"66e6f62c-bc\"", "last_modified": "Sun, 15 Sep 2024 14:58:52 GMT", "msg": "OK (188 bytes)", "redirected": false, "server": "nginx/1.27.1", "status": 200, "url": "http://84.252.129.73:8080"}
 
 TASK [debug] *********************************************************************************************************************************************************************************************************************
+task path: /home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/nginx1_port_forward.yml:77
 ok: [ac-mini-docker] => {
     "uri_result_external.content": "<!DOCTYPE html>\n<html>\n<body>\n<h1>Hello</h1>\n<p>My IP address is: <script>document.write(\"<b>\" + window.location.hostname + \"</b>\");</script></p>\n<p>My name is: nginx1</p>\n</body>\n</html>\n"
 }
 
+TASK [Print pid] *****************************************************************************************************************************************************************************************************************
+task path: /home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/nginx1_port_forward.yml:81
+ok: [ac-mini-docker] => {
+    "pgrep_result.stdout_lines[0]": "194391"
+}
+
 TASK [Kill the port-forward process] *********************************************************************************************************************************************************************************************
-fatal: [ac-mini-docker]: FAILED! => {"changed": true, "cmd": "kill 72303\n72381", "delta": "0:00:00.004557", "end": "2024-09-16 19:12:51.519696", "msg": "non-zero return code", "rc": 127, "start": "2024-09-16 19:12:51.515139", "stderr": "/bin/sh: 2: 72381: not found", "stderr_lines": ["/bin/sh: 2: 72381: not found"], "stdout": "", "stdout_lines": []}
-...ignoring
+task path: /home/aleksey/OtusTeam/IaC/general/argocd/mini/docker/nginx1_port_forward.yml:86
+changed: [ac-mini-docker] => {"changed": true, "cmd": "kill 194391", "delta": "0:00:00.007182", "end": "2024-09-17 06:20:09.197154", "msg": "", "rc": 0, "start": "2024-09-17 06:20:09.189972", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
 
 PLAY RECAP ***********************************************************************************************************************************************************************************************************************
-ac-mini-docker             : ok=11   changed=4    unreachable=0    failed=0    skipped=5    rescued=0    ignored=1   
+ac-mini-docker             : ok=18   changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
