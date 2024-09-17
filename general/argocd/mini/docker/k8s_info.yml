@@ -37,11 +37,11 @@
   - name: Print pod information
     debug:
       msg:
-        - "NAME: {{ pod_info.resources[0].metadata.name }}"
-        - "READY: {{ pod_info.resources[0].status.containerStatuses | selectattr('ready', 'equalto', true) | list | length }}/{{ pod_info.resources[0].spec.containers | length }}" 
-        - "STATUS: {{ pod_info.resources[0].status.phase }}"
-        - "RESTARTS: {{ pod_info.resources[0].status.containerStatuses[0].restartCount }} ({{ (ansible_date_time.iso8601 | to_datetime('%Y-%m-%dT%H:%M:%SZ') - pod_info.resources[0].status.containerStatuses[0].lastState.terminated.finishedAt | to_datetime('%Y-%m-%dT%H:%M:%SZ')).days }}d {{ (ansible_date_time.iso8601 | to_datetime('%Y-%m-%dT%H:%M:%SZ') - pod_info.resources[0].status.containerStatuses[0].lastState.terminated.finishedAt | to_datetime('%Y-%m-%dT%H:%M:%SZ')).seconds // 3600 }}h {{ ((ansible_date_time.iso8601 | to_datetime('%Y-%m-%dT%H:%M:%SZ') - pod_info.resources[0].status.containerStatuses[0].lastState.terminated.finishedAt | to_datetime('%Y-%m-%dT%H:%M:%SZ')).seconds // 60) % 60 }}m ago)"
-        - "AGE: {{ (ansible_date_time.iso8601 | to_datetime('%Y-%m-%dT%H:%M:%SZ') - pod_info.resources[0].metadata.creationTimestamp | to_datetime('%Y-%m-%dT%H:%M:%SZ')).days }}d"
+        - "NAME: {{ pod_info.resources[0].metadata.name | default('') }}"
+        - "READY: {{ pod_info.resources[0].status.containerStatuses | selectattr('ready', 'equalto', true) | list | length | default(0) }}/{{ pod_info.resources[0].spec.containers | length | default(0) }}"
+        - "STATUS: {{ pod_info.resources[0].status.phase | default('') }}"
+        - "RESTARTS: {{ pod_info.resources[0].status.containerStatuses[0].restartCount | default(0) }} ({{ pod_info.resources[0].status.containerStatuses[0].lastState.terminated.finishedAt | default('unknown') }})"
+        - "AGE: {{ pod_info.resources[0].metadata.creationTimestamp | default('unknown') }}"
     when: pod_info.resources | length > 0
 
   - name: Get services info

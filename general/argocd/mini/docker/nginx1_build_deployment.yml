@@ -85,50 +85,61 @@
     pause:
       seconds: 15
 
-#  - name: Get Nginx deployment info
-#    shell: "kubectl get deployments {{ nname }}"
-#    register: deployment_info
-#  - debug:
-#      var: deployment_info.stdout_lines
-
-#  - name: Get Nginx pod info
-#    shell: "kubectl get pods"
-#    register: pod_info
-#  - debug:
-#      var: pod_info.stdout_lines
-
-#  - name: Get services info
-#    shell: kubectl get services
-#    register: service_info
-#  - debug:
-#      var: service_info.stdout_lines
-
   - name: Get Nginx deployment info
     k8s_info:
       api_version: v1
       kind: Deployment
       name: "{{ nname }}"
+      namespace: default
     register: deployment_info
-  - debug:
-      msg: "{{ deployment_info.resources | to_nice_yaml }}"
+
+  - name: Print deployment info
+    debug:
+      msg:
+        - "NAME: {{ deployment_info.resources[0].metadata.name }}"
+        - "READY: {{ deployment_info.resources[0].status.readyReplicas }}/{{ deployment_info.resources[0].spec.replicas }}"
+        - "UP-TO-DATE: {{ deployment_info.resources[0].status.updatedReplicas }}"
+        - "AVAILABLE: {{ deployment_info.resources[0].status.availableReplicas }}"
+        - "AGE: {{ deployment_info.resources[0].metadata.creationTimestamp | regex_replace('T', ' ') | regex_replace('Z', '') }}"
+    when: deployment_info.resources | length > 0
 
   - name: Get Nginx pod info
     k8s_info:
       api_version: v1
       kind: Pod
+      namespace: default
       label_selectors:
         - app={{ nname }}
     register: pod_info
-  - debug:
-      msg: "{{ pod_info.resources | to_nice_yaml }}"
+
+
+  - name: Print pod information
+    debug:
+      msg:
+        - "NAME: {{ pod_info.resources[0].metadata.name | default('') }}"
+        - "READY: {{ pod_info.resources[0].status.containerStatuses | selectattr('ready', 'equalto', true) | list | length | default(0) }}/{{ pod_info.resources[0].spec.containers | length | default(0) }}"
+        - "STATUS: {{ pod_info.resources[0].status.phase | default('') }}"
+        - "RESTARTS: {{ pod_info.resources[0].status.containerStatuses[0].restartCount | default(0) }} ({{ (ansible_date_time.iso8601 | to_datetime('%Y-%m-%dT%H:%M:%SZ') - pod_info.resources[0].status.containerStatuses[0].lastState.terminated.finishedAt | to_datetime('%Y-%m-%dT%H:%M:%SZ')).total_seconds() | default(0) | int | humanize }})"
+        - "AGE: {{ (ansible_date_time.iso8601 | to_datetime('%Y-%m-%dT%H:%M:%SZ') - pod_info.resources[0].metadata.creationTimestamp | to_datetime('%Y-%m-%dT%H:%M:%SZ')).days | default(0) }}d"
+    when: pod_info.resources | length > 0
 
   - name: Get services info
     k8s_info:
       api_version: v1
       kind: Service
+      name: "{{ nname }}"
+      namespace: default
     register: services_info
-  - debug:
-      msg: "{{ services_info.resources | to_nice_yaml }}"
+
+  - name: Print service information
+    debug:
+      msg:
+        - "NAME: {{ services_info.resources[0].metadata.name }}"
+        - "TYPE: {{ services_info.resources[0].spec.type }}"
+        - "CLUSTER-IP: {{ services_info.resources[0].spec.clusterIP }}"
+        - "EXTERNAL-IP: {% if services_info.resources[0].status.loadBalancer.ingress is defined %}{{ services_info.resources[0].status.loadBalancer.ingress[0].ip }}{% else %}<pending>{% endif %}"
+        - "PORT(S): {{ services_info.resources[0].spec.ports[0].port }}:{{ services_info.resources[0].spec.ports[0].nodePort }}/{{ services_info.resources[0].spec.ports[0].protocol }}"
+    when: services_info.resources | length > 0
 
 #  - name: Expose Nginx deployment as NodePort service
 #    shell: "kubectl expose deployment {{ nname }} --type=NodePort --port=80"
@@ -147,21 +158,29 @@
           - name: http
             port: 80
             targetPort: 80
-#            nodePort: 30080
           type: NodePort
 
-  - name: Get Nginx service info
-    shell: "kubectl get services {{ nname }}"
-    register: our_service_info
-  - debug:
-      var: our_service_info.stdout_lines
+  - name: Get services info
+    k8s_info:
+      api_version: v1
+      kind: Service
+      name: "{{ nname }}"
+      namespace: default
+    register: services_info
+
+  - name: Print service information
+    debug:
+      msg:
+        - "NAME: {{ services_info.resources[0].metadata.name }}"
+        - "TYPE: {{ services_info.resources[0].spec.type }}"
+        - "CLUSTER-IP: {{ services_info.resources[0].spec.clusterIP }}"
+        - "EXTERNAL-IP: {% if services_info.resources[0].status.loadBalancer.ingress is defined %}{{ services_info.resources[0].status.loadBalancer.ingress[0].ip }}{% else %}<pending>{% endif %}"
+        - "PORT(S): {{ services_info.resources[0].spec.ports[0].port }}:{{ services_info.resources[0].spec.ports[0].nodePort }}/{{ services_info.resources[0].spec.ports[0].protocol }}"
+    when: services_info.resources | length > 0
 
   - name: Wait for 5 seconds
     pause:
       seconds: 5
-
-#  - name: Open Nginx service in Minikube
-#    shell: "minikube service nginx1
 
   - name: Test Nginx service
     shell: "curl $(minikube service {{ nname }} --url)"
