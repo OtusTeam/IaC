@@ -49,7 +49,7 @@ TASK [debug] *******************************************************************
 ok: [ac-mini-docker] => {
     "deployment_info.stdout_lines": [
         "NAME     READY   UP-TO-DATE   AVAILABLE   AGE",
-        "nginx1   1/1     1            1           18s"
+        "nginx1   1/1     1            1           17s"
     ]
 }
 
@@ -59,12 +59,12 @@ changed: [ac-mini-docker]
 TASK [debug] *********************************************************************************************************************************************************************************************************************
 ok: [ac-mini-docker] => {
     "pod_info.stdout_lines": [
-        "NAME                       READY   STATUS    RESTARTS       AGE",
-        "balanced-84cc8c47b-f5lng   1/1     Running   6 (175m ago)   7d4h",
-        "bar-app                    1/1     Running   6 (175m ago)   7d3h",
-        "foo-app                    1/1     Running   6 (175m ago)   7d3h",
-        "nginx-bf5d5cf98-c6hx8      1/1     Running   0              148m",
-        "nginx1-7bb68ffbbc-n4bd5    1/1     Running   0              19s"
+        "NAME                       READY   STATUS    RESTARTS      AGE",
+        "balanced-84cc8c47b-f5lng   1/1     Running   7 (21h ago)   8d",
+        "bar-app                    1/1     Running   7 (21h ago)   8d",
+        "foo-app                    1/1     Running   7 (21h ago)   8d",
+        "nginx-bf5d5cf98-c6hx8      1/1     Running   1 (21h ago)   39h",
+        "nginx1-7bb68ffbbc-ckkm5    1/1     Running   0             17s"
     ]
 }
 
@@ -74,11 +74,12 @@ changed: [ac-mini-docker]
 TASK [debug] *********************************************************************************************************************************************************************************************************************
 ok: [ac-mini-docker] => {
     "service_info.stdout_lines": [
-        "NAME          TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)          AGE",
-        "balanced      LoadBalancer   10.102.20.175    10.102.20.175   8080:32502/TCP   7d4h",
-        "bar-service   ClusterIP      10.105.171.144   <none>          8080/TCP         7d3h",
-        "foo-service   ClusterIP      10.100.2.159     <none>          8080/TCP         7d3h",
-        "kubernetes    ClusterIP      10.96.0.1        <none>          443/TCP          7d8h"
+        "NAME          TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE",
+        "balanced      LoadBalancer   10.102.20.175    <pending>     8080:32502/TCP   8d",
+        "bar-service   ClusterIP      10.105.171.144   <none>        8080/TCP         8d",
+        "foo-service   ClusterIP      10.100.2.159     <none>        8080/TCP         8d",
+        "kubernetes    ClusterIP      10.96.0.1        <none>        443/TCP          8d",
+        "nginx         NodePort       10.101.4.116     <none>        80:31646/TCP     26h"
     ]
 }
 
@@ -92,7 +93,7 @@ TASK [debug] *******************************************************************
 ok: [ac-mini-docker] => {
     "our_service_info.stdout_lines": [
         "NAME     TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE",
-        "nginx1   NodePort   10.96.250.57   <none>        80:31962/TCP   1s"
+        "nginx1   NodePort   10.103.177.0   <none>        80:31312/TCP   1s"
     ]
 }
 
@@ -118,6 +119,28 @@ ok: [ac-mini-docker] => {
     ]
 }
 
+TASK [Start port forwarding with kubectl] ****************************************************************************************************************************************************************************************
+changed: [ac-mini-docker]
+
+TASK [Wait for port forwarding to start] *****************************************************************************************************************************************************************************************
+Pausing for 2 seconds
+(ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+ok: [ac-mini-docker]
+
+TASK [Find the port-forward process ID] ******************************************************************************************************************************************************************************************
+changed: [ac-mini-docker]
+
+TASK [Test Nginx service from Internet] ******************************************************************************************************************************************************************************************
+ok: [ac-mini-docker -> localhost]
+
+TASK [debug] *********************************************************************************************************************************************************************************************************************
+ok: [ac-mini-docker] => {
+    "uri_result_external.content": "<!DOCTYPE html>\n<html>\n<body>\n<h1>Hello</h1>\n<p>My IP address is: <script>document.write(\"<b>\" + window.location.hostname + \"</b>\");</script></p>\n<p>My name is: nginx1</p>\n</body>\n</html>\n"
+}
+
+TASK [Kill the port-forward process] *********************************************************************************************************************************************************************************************
+changed: [ac-mini-docker]
+
 TASK [Delete Nginx existing service and deployment] ******************************************************************************************************************************************************************************
 changed: [ac-mini-docker]
 
@@ -130,4 +153,5 @@ TASK [Remove existing Nginx image] *********************************************
 changed: [ac-mini-docker]
 
 PLAY RECAP ***********************************************************************************************************************************************************************************************************************
-ac-mini-docker             : ok=26   changed=12   unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+ac-mini-docker             : ok=32   changed=15   unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+

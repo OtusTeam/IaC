@@ -143,32 +143,36 @@
       var: test_result.stdout_lines
 
   - name: Start port forwarding with kubectl
-    shell: "kubectl port-forward service/{{ nname }} 80:80 &"
-    async: 1
+    shell: "kubectl port-forward --address 0.0.0.0 service/{{ nname }} 8080:80"
+    args:
+      executable: /bin/bash
+    async: 10
     poll: 0
+    register: job
 
   - name: Wait for port forwarding to start
     pause:
-      seconds: 5
+      seconds: 2
+
+  - name: Find the port-forward process ID
+    shell: "pgrep -f 'kubectl port-forward --address 0.0.0.0 service/{{ nname }}'"
+    register: pgrep_result
+    ignore_errors: true
 
   - name: Test Nginx service from Internet
     uri:
-      url: http://{{ ansible_host }}:80
+      url: http://{{ ansible_host }}:8080
       method: GET
       return_content: yes
     register: uri_result_external
     delegate_to: localhost
   - debug:
-      var: uri_result_external.stdout_lines
-
-  - name: Find the port-forward process ID
-    shell: "pgrep -f 'kubectl port-forward service/{{ nname }}'"
-    register: result
-    ignore_errors: true
+      var: uri_result_external.content
 
   - name: Kill the port-forward process
-    shell: "kill {{ result.stdout }}"
-    when: result.stdout != ""
+    shell: "kill {{ pgrep_result.stdout_lines[0] }}"
+    when: pgrep_result.stdout != ""
+    ignore_errors: true
 
   - name: Delete Nginx existing service and deployment
     shell: "kubectl delete service,deployment {{ nname }} --ignore-not-found=true"
