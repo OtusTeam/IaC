@@ -22,6 +22,7 @@
         - "UP-TO-DATE: {{ deployment_info.resources[0].status.updatedReplicas }}"
         - "AVAILABLE: {{ deployment_info.resources[0].status.availableReplicas }}"
         - "AGE: {{ deployment_info.resources[0].metadata.creationTimestamp | regex_replace('T', ' ') | regex_replace('Z', '') }}"
+    when: deployment_info.resources | length > 0
 
   - name: Get Nginx pod info
     k8s_info:
@@ -41,6 +42,7 @@
         - "STATUS: {{ pod_info.resources[0].status.phase }}"
         - "RESTARTS: {{ pod_info.resources[0].status.containerStatuses[0].restartCount }} ({{ (ansible_date_time.iso8601 | to_datetime('%Y-%m-%dT%H:%M:%SZ') - pod_info.resources[0].status.containerStatuses[0].lastState.terminated.finishedAt | to_datetime('%Y-%m-%dT%H:%M:%SZ')).days }}d {{ (ansible_date_time.iso8601 | to_datetime('%Y-%m-%dT%H:%M:%SZ') - pod_info.resources[0].status.containerStatuses[0].lastState.terminated.finishedAt | to_datetime('%Y-%m-%dT%H:%M:%SZ')).seconds // 3600 }}h {{ ((ansible_date_time.iso8601 | to_datetime('%Y-%m-%dT%H:%M:%SZ') - pod_info.resources[0].status.containerStatuses[0].lastState.terminated.finishedAt | to_datetime('%Y-%m-%dT%H:%M:%SZ')).seconds // 60) % 60 }}m ago)"
         - "AGE: {{ (ansible_date_time.iso8601 | to_datetime('%Y-%m-%dT%H:%M:%SZ') - pod_info.resources[0].metadata.creationTimestamp | to_datetime('%Y-%m-%dT%H:%M:%SZ')).days }}d"
+    when: pod_info.resources | length > 0
 
   - name: Get services info
     k8s_info:
@@ -58,3 +60,4 @@
         - "CLUSTER-IP: {{ services_info.resources[0].spec.clusterIP }}"
         - "EXTERNAL-IP: {% if services_info.resources[0].status.loadBalancer.ingress is defined %}{{ services_info.resources[0].status.loadBalancer.ingress[0].ip }}{% else %}<pending>{% endif %}"
         - "PORT(S): {{ services_info.resources[0].spec.ports[0].port }}:{{ services_info.resources[0].spec.ports[0].nodePort }}/{{ services_info.resources[0].spec.ports[0].protocol }}"
+    when: services_info.resources | length > 0
