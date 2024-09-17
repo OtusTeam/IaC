@@ -1,0 +1,38 @@
+---
+- name: Print k8s services info
+  hosts: all
+  vars:
+    nname: balanced
+
+  tasks:
+
+  - name: Get Nginx deployment info
+    k8s_info:
+      api_version: v1
+      kind: Deployment
+      name: "{{ nname }}"
+    register: deployment_info
+  - debug:
+      var: deployment_info.resources
+#      msg: "{{ deployment_info.resources | to_nice_yaml }}"
+
+  - name: Get Nginx pod info
+    k8s_info:
+      api_version: v1
+      kind: Pod
+      label_selectors:
+        - app={{ nname }}
+    register: pod_info
+  - debug:
+       var: pod_info.resources
+#      msg: "{{ pod_info.resources | to_nice_yaml }}"
+
+  - name: Get services info
+    k8s_info:
+      api_version: v1
+      kind: Service
+      name: "{{ nname }}"
+    register: services_info
+  - debug:
+       var: services_info.resources
+#      msg: "{{ services_info.resources | to_nice_yaml }}"

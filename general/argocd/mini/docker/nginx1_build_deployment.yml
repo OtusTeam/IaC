@@ -85,23 +85,50 @@
     pause:
       seconds: 15
 
+#  - name: Get Nginx deployment info
+#    shell: "kubectl get deployments {{ nname }}"
+#    register: deployment_info
+#  - debug:
+#      var: deployment_info.stdout_lines
+
+#  - name: Get Nginx pod info
+#    shell: "kubectl get pods"
+#    register: pod_info
+#  - debug:
+#      var: pod_info.stdout_lines
+
+#  - name: Get services info
+#    shell: kubectl get services
+#    register: service_info
+#  - debug:
+#      var: service_info.stdout_lines
+
   - name: Get Nginx deployment info
-    shell: "kubectl get deployments {{ nname }}"
+    k8s_info:
+      api_version: v1
+      kind: Deployment
+      name: "{{ nname }}"
     register: deployment_info
   - debug:
-      var: deployment_info.stdout_lines
+      msg: "{{ deployment_info.resources | to_nice_yaml }}"
 
   - name: Get Nginx pod info
-    shell: "kubectl get pods"
+    k8s_info:
+      api_version: v1
+      kind: Pod
+      label_selectors:
+        - app={{ nname }}
     register: pod_info
   - debug:
-      var: pod_info.stdout_lines
+      msg: "{{ pod_info.resources | to_nice_yaml }}"
 
   - name: Get services info
-    shell: kubectl get services
-    register: service_info
+    k8s_info:
+      api_version: v1
+      kind: Service
+    register: services_info
   - debug:
-      var: service_info.stdout_lines
+      msg: "{{ services_info.resources | to_nice_yaml }}"
 
 #  - name: Expose Nginx deployment as NodePort service
 #    shell: "kubectl expose deployment {{ nname }} --type=NodePort --port=80"
