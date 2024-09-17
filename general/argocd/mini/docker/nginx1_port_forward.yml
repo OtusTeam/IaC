@@ -30,22 +30,22 @@
     pause:
       seconds: 2
 
-  - name: Получить статус задачи в фоне
-    async_status:
-      jid: "{{ job.ansible_job_id }}"
-    register: job_status
-  - debug:
-      msg: "{{ job_status }}"
-      verbosity: 2
+#  - name: Получить статус задачи в фоне
+#    async_status:
+#      jid: "{{ job.ansible_job_id }}"
+#    register: job_status
+#  - debug:
+#      msg: "{{ job_status }}"
+#      verbosity: 2
 
 
-  - name: Прочитать файл с удаленного хоста
-    slurp:
-      src: "{{ job_status.results_file }}"
-    register: file_content
-  - debug:
-      msg: "{{ file_content['content'] | b64decode }}"
-      verbosity: 2
+#  - name: Прочитать файл с удаленного хоста
+#    slurp:
+#      src: "{{ job_status.results_file }}"
+#    register: file_content
+#  - debug:
+#      msg: "{{ file_content['content'] | b64decode }}"
+#      verbosity: 2
 
 #  - name: Wait for port forwarding to start
 #    pause:
@@ -55,17 +55,17 @@
     shell: "pgrep -f 'kubectl port-forward --address 0.0.0.0 service/{{ nname }}'"
     register: pgrep_result
     ignore_errors: true
-  - debug:
-      var: pgrep_result.stdout
-      verbosity: 2
+#  - debug:
+#      var: pgrep_result.stdout
+#      verbosity: 2
 
-  - name: Прочитать файл с удаленного хоста
-    slurp:
-      src: "/proc/{{ pgrep_result.stdout_lines[0] }}/cmdline"
-    register: proc_cmdline
-  - debug:
-      msg: "{{ proc_cmdline['content'] | b64decode }}"
-      verbosity: 2
+#  - name: Прочитать файл с удаленного хоста
+#    slurp:
+#      src: "/proc/{{ pgrep_result.stdout_lines[0] }}/cmdline"
+#    register: proc_cmdline
+#  - debug:
+#      msg: "{{ proc_cmdline['content'] | b64decode }}"
+#      verbosity: 2
 
   - name: Test Nginx service from Internet
     uri:
@@ -76,12 +76,11 @@
     delegate_to: localhost
   - debug:
       var: uri_result_external.content
-#.stdout_lines
 
-  - name: Print pid
-    debug:
-      var: pgrep_result.stdout_lines[0]
-      verbosity: 2
+#  - name: Print pid
+#    debug:
+#      var: pgrep_result.stdout_lines[0]
+#      verbosity: 2
 
   - name: Kill the port-forward process
     shell: "kill {{ pgrep_result.stdout_lines[0] }}"
