@@ -28,4 +28,5 @@ export TF_VAR_yc_test_folder="$YC_TEST_FOLDER_ID"
 # export TF_VAR_yc_default_zone="$YC_ZONE"
 export TF_VAR_db_password="gPtSkz3enjQ"
 
-export ANSIBLE_REMOTE_USER="yc-user"
+export ANSIBLE_REMOTE_USER="ubuntu"
+#"yc-user"
