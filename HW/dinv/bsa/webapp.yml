@@ -1,0 +1,80 @@
+---
+- name: deploy app on containers and run
+  hosts: webservers
+  vars:
+    webroot: "/tmp/webroot/"
+    approot: "/tmp/approot/"
+  tasks:
+
+    - name: pull image
+      community.docker.docker_image:
+        name: python
+        source: pull
+        tag: latest
+
+    - name: webroot present
+      ansible.builtin.file:
+        path: "{{ webroot }}"
+        state: directory
+
+    - name: approot present
+      ansible.builtin.file:
+        path: "{{ approot }}"
+        state: directory
+
+    - name: deploy myapp.py
+      ansible.builtin.copy:
+        src: ./myapp.py
+        dest: "{{ approot}}myapp.py"
+      notify: stop and remove previous myapp container
+
+    - name: Flush handlers
+      meta: flush_handlers
+
+    - name: run myapp container
+      community.docker.docker_container:
+        name: myapp
+        image: python
+        state: started
+        command: python /tmp/app/myapp.py
+        detach: yes
+        auto_remove: yes
+        volumes:
+          - "{{ approot }}:/tmp/app/"
+          - "{{ webroot }}:/tmp/web/"
+      register: runapp_result
+
+    - name: Print myapp result
+      debug:
+        msg: "{{ runapp_result }}"
+        verbosity: 2
+
+    - name: custom index.html
+      ansible.builtin.copy:
+        dest: "{{ webroot}}index.html"
+        content: |
+          Start Web Page from {{ inventory_hostname }}
+          <a href="forecast.html">Forecast here!</a>
+
+  handlers:
+
+    - name: stop and remove previous myapp container
+      community.docker.docker_container:
+        name: myapp
+        image: python
+        state: stopped
+        auto_remove: yes
+
+  post_tasks:
+
+    - name: Verify httpd response
+      uri:
+        url: "http://{{ ansible_host }}:80"
+        return_content: yes
+      register: result
+      tags: check
+
+    - name: Print httpd response
+      debug:
+        var: result.content
+      tags: check

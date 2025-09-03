@@ -1,0 +1,18 @@
+all:
+  hosts:
+{% for host in yandex_cloud_hosts %}
+    {{ host.name }}:
+      yandex_cloud_subnet: {{ host.subnet }}
+      yandex_cloud_platform: {{ host.platform }}
+      yandex_cloud_group: {{ host.group }}
+{% endfor %}
+
+  subnets:
+{% for subnet in yandex_cloud_subnets %}
+    {{ subnet.name }}:
+      yandex_cloud_cidr: {{ subnet.cidr }}
+      yandex_cloud_zone: {{ subnet.zone }}
+{% endfor %}
+
+  vars:
+    net_name: {{ yandex_cloud_net_name }} 

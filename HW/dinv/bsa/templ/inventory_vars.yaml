@@ -1,0 +1,19 @@
+yandex_cloud_hosts:
+  - name: les04-host1
+    subnet: les04-sub1
+    platform: standard-v2
+    group: webservers
+  - name: les04-host2
+    subnet: les04-sub2
+    platform: standard-v2
+    group: webservers
+
+yandex_cloud_subnets:
+  - name: les04-sub1
+    cidr: 10.10.0.0/16
+    zone: ru-central1-b
+  - name: les04-sub2
+    cidr: 10.20.0.0/16
+    zone: ru-central1-a
+
+yandex_cloud_net_name: les04-net

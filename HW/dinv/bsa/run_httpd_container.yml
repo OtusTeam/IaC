@@ -1,0 +1,66 @@
+---
+- name: run httpd container
+  hosts: webservers
+
+  vars:
+    webroot: "/tmp/webroot/"
+
+  tasks:
+
+    - name: pull image
+      community.docker.docker_image:
+        name: httpd
+        source: pull
+        tag: latest
+      notify: stop and remove previous container
+
+    - name: webroot present
+      ansible.builtin.file:
+        path: "{{ webroot }}"
+        state: directory
+
+    - name: custom index.html
+      ansible.builtin.copy:
+        dest: "{{ webroot}}index.html"
+        content: |
+          Custom Web Page from {{inventory_hostname}}
+      notify: stop and remove previous container
+
+    - name: Flush handlers
+      meta: flush_handlers
+
+    - name: run httpd container
+      community.docker.docker_container:
+        name: webserver
+        image: httpd
+        state: started
+        detach: true
+        auto_remove: yes
+        exposed_ports:
+          - '80'
+        ports:
+          - '80:80'
+        volumes: "{{ webroot }}:/usr/local/apache2/htdocs/"
+
+  handlers:
+
+    - name: stop and remove previous container
+      community.docker.docker_container:
+        name: webserver
+        image: httpd
+        state: stopped
+        auto_remove: yes
+
+  post_tasks:
+
+    - name: Verify httpd response
+      uri:
+        url: "http://{{ ansible_host }}"
+        return_content: yes
+      register: result
+      tags: check
+
+    - name: Print httpd response
+      debug:
+        var: result.content
+      tags: check
