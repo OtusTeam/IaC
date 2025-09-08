@@ -1,0 +1,105 @@
+aleksey@first:~/OtusTeam/IaC/general/argocd/mini/docker$ tf destroy
+yandex_compute_instance.ac_mini_docker: Refreshing state... [id=fhm3u5vsb7q5j2rcpl77]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.ac_mini_docker will be destroyed
+  - resource "yandex_compute_instance" "ac_mini_docker" {
+      - created_at                = "2024-09-08T09:23:16Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "fhm3u5vsb7q5j2rcpl77.auto.internal" -> null
+      - id                        = "fhm3u5vsb7q5j2rcpl77" -> null
+      - labels                    = {
+          - "group" = "minidocker"
+        } -> null
+      - metadata                  = {
+          - "ssh-keys"  = (sensitive value)
+          - "user-data" = <<-EOT
+                #cloud-config
+                package_update: true
+                packages:
+                  - ca-certificates 
+                  - curl 
+                  - gnupg 
+                  - lsb-release
+            EOT
+        } -> null
+      - name                      = "ac-mini-docker" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "stopped" -> null
+      - zone                      = "ru-central1-a" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "fhmp1ornjkpdbngquvt6" -> null
+          - disk_id     = "fhmp1ornjkpdbngquvt6" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd8lh1aqti7987pcqt11" -> null
+                name        = null
+              - size        = 50 -> null
+              - type        = "network-hdd" -> null
+                # (2 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.128.0.6" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:3f:17:fc:59" -> null
+          - nat                = true -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e9bop98iu12teftg4uj8" -> null
+            # (2 unchanged attributes hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 20 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 8 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = true -> null
+        }
+    }
+
+Plan: 0 to add, 0 to change, 1 to destroy.
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+yandex_compute_instance.ac_mini_docker: Destroying... [id=fhm3u5vsb7q5j2rcpl77]
+yandex_compute_instance.ac_mini_docker: Still destroying... [id=fhm3u5vsb7q5j2rcpl77, 10s elapsed]
+yandex_compute_instance.ac_mini_docker: Still destroying... [id=fhm3u5vsb7q5j2rcpl77, 20s elapsed]
+yandex_compute_instance.ac_mini_docker: Destruction complete after 22s
+
+Destroy complete! Resources: 1 destroyed.
+
