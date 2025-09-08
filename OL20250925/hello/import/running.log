@@ -1,0 +1,131 @@
+za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/OL20250925/hello/before$ . create_vm.sh 
+done (35s)
+id: fhmcf1aeng9be8ggf2kn
+folder_id: b1gmesrdjgklgkvcp704
+created_at: "2025-09-08T04:20:29Z"
+name: test
+zone_id: ru-central1-a
+platform_id: standard-v2
+resources:
+  memory: "2147483648"
+  cores: "2"
+  core_fraction: "20"
+status: RUNNING
+metadata_options:
+  gce_http_endpoint: ENABLED
+  aws_v1_http_endpoint: ENABLED
+  gce_http_token: ENABLED
+  aws_v1_http_token: DISABLED
+boot_disk:
+  mode: READ_WRITE
+  device_name: fhm9j8fu6gcjj0klb8jv
+  auto_delete: true
+  disk_id: fhm9j8fu6gcjj0klb8jv
+network_interfaces:
+  - index: "0"
+    mac_address: d0:0d:c7:85:4e:bc
+    subnet_id: e9bop98iu12teftg4uj8
+    primary_v4_address:
+      address: 10.128.0.12
+      one_to_one_nat:
+        address: 51.250.92.192
+        ip_version: IPV4
+serial_port_settings:
+  ssh_authorization: OS_LOGIN
+gpu_settings: {}
+fqdn: test.ru-central1.internal
+scheduling_policy:
+  preemptible: true
+network_settings:
+  type: STANDARD
+placement_policy: {}
+hardware_generation:
+  legacy_features:
+    pci_topology: PCI_TOPOLOGY_V1
+
+za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/OL20250925/hello/before$ ping 51.250.92.192
+PING 51.250.92.192 (51.250.92.192) 56(84) bytes of data.
+64 bytes from 51.250.92.192: icmp_seq=6 ttl=56 time=68.1 ms
+64 bytes from 51.250.92.192: icmp_seq=7 ttl=56 time=69.3 ms
+64 bytes from 51.250.92.192: icmp_seq=8 ttl=56 time=67.5 ms
+^C
+--- 51.250.92.192 ping statistics ---
+8 packets transmitted, 3 received, 62.5% packet loss, time 7077ms
+rtt min/avg/max/mdev = 67.492/68.311/69.330/0.763 ms
+za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/OL20250925/hello/before$ set | grep VM
+VM_NAME=test
+za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/OL20250925/hello/import$ tf init
+Initializing the backend...
+Initializing provider plugins...
+- Finding latest version of yandex-cloud/yandex...
+- Installing yandex-cloud/yandex v0.157.0...
+- Installed yandex-cloud/yandex v0.157.0 (unauthenticated)
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+
+╷
+│ Warning: Incomplete lock file information for providers
+│ 
+│ Due to your customized provider installation methods, Terraform was forced to calculate lock file checksums locally for the following providers:
+│   - yandex-cloud/yandex
+│ 
+│ The current .terraform.lock.hcl file only includes checksums for linux_amd64, so Terraform running on another platform will fail to install these providers.
+│ 
+│ To calculate additional checksums for another platform, run:
+│   terraform providers lock -platform=linux_amd64
+│ (where linux_amd64 is the platform to generate)
+╵
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+
+za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/OL20250925/hello/import$ tf validate
+╷
+│ Error: Insufficient boot_disk blocks
+│ 
+│   on vm.tf line 1, in resource "yandex_compute_instance" "test":
+│    1: resource "yandex_compute_instance" "test" {
+│ 
+│ At least 1 "boot_disk" blocks are required.
+╵
+╷
+│ Error: Insufficient network_interface blocks
+│ 
+│   on vm.tf line 1, in resource "yandex_compute_instance" "test":
+│    1: resource "yandex_compute_instance" "test" {
+│ 
+│ At least 1 "network_interface" blocks are required.
+╵
+╷
+│ Error: Insufficient resources blocks
+│ 
+│   on vm.tf line 1, in resource "yandex_compute_instance" "test":
+│    1: resource "yandex_compute_instance" "test" {
+│ 
+│ At least 1 "resources" blocks are required.
+╵
+
+za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/OL20250925/hello/import$ tf import yandex_compute_instance.test fhmcf1aeng9be8ggf2kn
+var.yc_default_zone
+  Yandex Cloud default zone
+
+  Enter a value: 
+
+yandex_compute_instance.test: Importing from ID "fhmcf1aeng9be8ggf2kn"...
+yandex_compute_instance.test: Import prepared!
+  Prepared yandex_compute_instance for import
+yandex_compute_instance.test: Refreshing state... [id=fhmcf1aeng9be8ggf2kn]
+
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+
