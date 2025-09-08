@@ -1,7 +1,8 @@
 
 # added by JA:
 
-export PUB_KEY_FILE="$HOME/.ssh/id_rsa.pub"
+export PUB_KEY_PATH="$HOME/.ssh/id_rsa.pub"
+export SEC_KEY_PATH="$HOME/.ssh/id_rsa"
 
 export YC_CLOUD_ID=$(yc config get cloud-id)
 export YC_GET_FOLDER_ID=$(yc config get folder-id)
@@ -24,6 +25,8 @@ export TF_VAR_yc_otus_folder="$YC_OTUS_FOLDER_ID"
 export TF_VAR_yc_prod_folder="$YC_PROD_FOLDER_ID"
 export TF_VAR_yc_sand_folder="$YC_SAND_FOLDER_ID"
 export TF_VAR_yc_test_folder="$YC_TEST_FOLDER_ID"
+export TF_VAR_pub_key_path="$PUB_KEY_PATH"
+export TF_VAR_sec_key_path="$SEC_KEY_PATH"
 
 # export TF_VAR_yc_default_zone="$YC_ZONE"
 export TF_VAR_db_password="gPtSkz3enjQ"

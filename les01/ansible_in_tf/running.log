@@ -1,0 +1,345 @@
+za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/les01/ansible_in_terraform$ tf apply
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.les01-vm will be created
+  + resource "yandex_compute_instance" "les01-vm" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hardware_generation       = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = (sensitive value)
+        }
+      + name                      = "les01-test-provisioners"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + service_account_id        = (known after apply)
+      + status                    = (known after apply)
+      + zone                      = "ru-central1-a"
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd8pecdhv50nec1qf9im"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index          = (known after apply)
+          + ip_address     = (known after apply)
+          + ipv4           = true
+          + ipv6           = (known after apply)
+          + ipv6_address   = (known after apply)
+          + mac_address    = (known after apply)
+          + nat            = true
+          + nat_ip_address = (known after apply)
+          + nat_ip_version = (known after apply)
+          + subnet_id      = (known after apply)
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 100
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy (known after apply)
+    }
+
+  # yandex_vpc_network.les01-network will be created
+  + resource "yandex_vpc_network" "les01-network" {
+      + created_at                = (known after apply)
+      + default_security_group_id = (known after apply)
+      + folder_id                 = (known after apply)
+      + id                        = (known after apply)
+      + labels                    = (known after apply)
+      + name                      = "wp-network"
+      + subnet_ids                = (known after apply)
+    }
+
+  # yandex_vpc_subnet.les01-subnet-a will be created
+  + resource "yandex_vpc_subnet" "les01-subnet-a" {
+      + created_at     = (known after apply)
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + labels         = (known after apply)
+      + name           = "wp-subnet-a"
+      + network_id     = (known after apply)
+      + v4_cidr_blocks = [
+          + "10.2.0.0/16",
+        ]
+      + v6_cidr_blocks = (known after apply)
+      + zone           = "ru-central1-a"
+    }
+
+Plan: 3 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+yandex_vpc_network.les01-network: Creating...
+yandex_vpc_network.les01-network: Creation complete after 2s [id=enptklb42clrdh0mfiqg]
+yandex_vpc_subnet.les01-subnet-a: Creating...
+yandex_vpc_subnet.les01-subnet-a: Creation complete after 1s [id=e9bp78i709ktifg389jf]
+yandex_compute_instance.les01-vm: Creating...
+yandex_compute_instance.les01-vm: Still creating... [00m10s elapsed]
+yandex_compute_instance.les01-vm: Still creating... [00m20s elapsed]
+yandex_compute_instance.les01-vm: Still creating... [00m30s elapsed]
+yandex_compute_instance.les01-vm: Still creating... [00m40s elapsed]
+yandex_compute_instance.les01-vm: Still creating... [00m50s elapsed]
+yandex_compute_instance.les01-vm: Still creating... [01m00s elapsed]
+yandex_compute_instance.les01-vm: Still creating... [01m10s elapsed]
+yandex_compute_instance.les01-vm: Still creating... [01m20s elapsed]
+yandex_compute_instance.les01-vm: Still creating... [01m30s elapsed]
+yandex_compute_instance.les01-vm: Still creating... [01m40s elapsed]
+yandex_compute_instance.les01-vm: Provisioning with 'local-exec'...
+yandex_compute_instance.les01-vm (local-exec): Executing: ["/bin/sh" "-c" "echo 'The name of our server is les01-test-provisioners and its public IP is 84.252.129.154'"]
+yandex_compute_instance.les01-vm (local-exec): The name of our server is les01-test-provisioners and its public IP is 84.252.129.154
+yandex_compute_instance.les01-vm: Provisioning with 'remote-exec'...
+yandex_compute_instance.les01-vm (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.les01-vm (remote-exec):   Host: 84.252.129.154
+yandex_compute_instance.les01-vm (remote-exec):   User: ubuntu
+yandex_compute_instance.les01-vm (remote-exec):   Password: false
+yandex_compute_instance.les01-vm (remote-exec):   Private key: true
+yandex_compute_instance.les01-vm (remote-exec):   Certificate: false
+yandex_compute_instance.les01-vm (remote-exec):   SSH Agent: true
+yandex_compute_instance.les01-vm (remote-exec):   Checking Host Key: false
+yandex_compute_instance.les01-vm (remote-exec):   Target Platform: unix
+yandex_compute_instance.les01-vm: Still creating... [01m50s elapsed]
+yandex_compute_instance.les01-vm: Still creating... [02m00s elapsed]
+yandex_compute_instance.les01-vm (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.les01-vm (remote-exec):   Host: 84.252.129.154
+yandex_compute_instance.les01-vm (remote-exec):   User: ubuntu
+yandex_compute_instance.les01-vm (remote-exec):   Password: false
+yandex_compute_instance.les01-vm (remote-exec):   Private key: true
+yandex_compute_instance.les01-vm (remote-exec):   Certificate: false
+yandex_compute_instance.les01-vm (remote-exec):   SSH Agent: true
+yandex_compute_instance.les01-vm (remote-exec):   Checking Host Key: false
+yandex_compute_instance.les01-vm (remote-exec):   Target Platform: unix
+yandex_compute_instance.les01-vm: Still creating... [02m10s elapsed]
+yandex_compute_instance.les01-vm: Still creating... [02m20s elapsed]
+yandex_compute_instance.les01-vm (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.les01-vm (remote-exec):   Host: 84.252.129.154
+yandex_compute_instance.les01-vm (remote-exec):   User: ubuntu
+yandex_compute_instance.les01-vm (remote-exec):   Password: false
+yandex_compute_instance.les01-vm (remote-exec):   Private key: true
+yandex_compute_instance.les01-vm (remote-exec):   Certificate: false
+yandex_compute_instance.les01-vm (remote-exec):   SSH Agent: true
+yandex_compute_instance.les01-vm (remote-exec):   Checking Host Key: false
+yandex_compute_instance.les01-vm (remote-exec):   Target Platform: unix
+yandex_compute_instance.les01-vm (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.les01-vm (remote-exec):   Host: 84.252.129.154
+yandex_compute_instance.les01-vm (remote-exec):   User: ubuntu
+yandex_compute_instance.les01-vm (remote-exec):   Password: false
+yandex_compute_instance.les01-vm (remote-exec):   Private key: true
+yandex_compute_instance.les01-vm (remote-exec):   Certificate: false
+yandex_compute_instance.les01-vm (remote-exec):   SSH Agent: true
+yandex_compute_instance.les01-vm (remote-exec):   Checking Host Key: false
+yandex_compute_instance.les01-vm (remote-exec):   Target Platform: unix
+yandex_compute_instance.les01-vm: Still creating... [02m30s elapsed]
+yandex_compute_instance.les01-vm (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.les01-vm (remote-exec):   Host: 84.252.129.154
+yandex_compute_instance.les01-vm (remote-exec):   User: ubuntu
+yandex_compute_instance.les01-vm (remote-exec):   Password: false
+yandex_compute_instance.les01-vm (remote-exec):   Private key: true
+yandex_compute_instance.les01-vm (remote-exec):   Certificate: false
+yandex_compute_instance.les01-vm (remote-exec):   SSH Agent: true
+yandex_compute_instance.les01-vm (remote-exec):   Checking Host Key: false
+yandex_compute_instance.les01-vm (remote-exec):   Target Platform: unix
+yandex_compute_instance.les01-vm: Still creating... [02m40s elapsed]
+yandex_compute_instance.les01-vm: Still creating... [02m50s elapsed]
+yandex_compute_instance.les01-vm (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.les01-vm (remote-exec):   Host: 84.252.129.154
+yandex_compute_instance.les01-vm (remote-exec):   User: ubuntu
+yandex_compute_instance.les01-vm (remote-exec):   Password: false
+yandex_compute_instance.les01-vm (remote-exec):   Private key: true
+yandex_compute_instance.les01-vm (remote-exec):   Certificate: false
+yandex_compute_instance.les01-vm (remote-exec):   SSH Agent: true
+yandex_compute_instance.les01-vm (remote-exec):   Checking Host Key: false
+yandex_compute_instance.les01-vm (remote-exec):   Target Platform: unix
+yandex_compute_instance.les01-vm (remote-exec): Connected!
+yandex_compute_instance.les01-vm: Provisioning with 'local-exec'...
+yandex_compute_instance.les01-vm (local-exec): Executing: ["/bin/sh" "-c" "export ANSIBLE_HOST_KEY_CHECKING=False && ansible -u ubuntu -i '84.252.129.154,' --private-key /home/za/.ssh/id_rsa -m ping all"]
+yandex_compute_instance.les01-vm (local-exec): [WARNING]: Platform linux on host 84.252.129.154 is using the discovered Python
+yandex_compute_instance.les01-vm (local-exec): interpreter at /usr/bin/python3.10, but future installation of another Python
+yandex_compute_instance.les01-vm (local-exec): interpreter could change the meaning of that path. See
+yandex_compute_instance.les01-vm (local-exec): https://docs.ansible.com/ansible-
+yandex_compute_instance.les01-vm (local-exec): core/2.17/reference_appendices/interpreter_discovery.html for more information.
+yandex_compute_instance.les01-vm (local-exec): 84.252.129.154 | SUCCESS => {
+yandex_compute_instance.les01-vm (local-exec):     "ansible_facts": {
+yandex_compute_instance.les01-vm (local-exec):         "discovered_interpreter_python": "/usr/bin/python3.10"
+yandex_compute_instance.les01-vm (local-exec):     },
+yandex_compute_instance.les01-vm (local-exec):     "changed": false,
+yandex_compute_instance.les01-vm (local-exec):     "ping": "pong"
+yandex_compute_instance.les01-vm (local-exec): }
+yandex_compute_instance.les01-vm: Creation complete after 2m58s [id=fhmofed62vrnr0id28ms]
+
+Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/les01/ansible_in_terraform$ tf destroy
+yandex_vpc_network.les01-network: Refreshing state... [id=enptklb42clrdh0mfiqg]
+yandex_vpc_subnet.les01-subnet-a: Refreshing state... [id=e9bp78i709ktifg389jf]
+yandex_compute_instance.les01-vm: Refreshing state... [id=fhmofed62vrnr0id28ms]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.les01-vm will be destroyed
+  - resource "yandex_compute_instance" "les01-vm" {
+      - created_at                = "2025-09-05T14:31:05Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "fhmofed62vrnr0id28ms.auto.internal" -> null
+      - hardware_generation       = [
+          - {
+              - generation2_features = []
+              - legacy_features      = [
+                  - {
+                      - pci_topology = "PCI_TOPOLOGY_V1"
+                    },
+                ]
+            },
+        ] -> null
+      - id                        = "fhmofed62vrnr0id28ms" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = (sensitive value)
+        } -> null
+      - name                      = "les01-test-provisioners" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-a" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "fhmqmvk7rb8s0bmp5u6c" -> null
+          - disk_id     = "fhmqmvk7rb8s0bmp5u6c" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd8pecdhv50nec1qf9im" -> null
+                name        = null
+              - size        = 8 -> null
+              - type        = "network-hdd" -> null
+                # (3 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.2.0.23" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:18:7b:9a:61" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "84.252.129.154" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e9bp78i709ktifg389jf" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 100 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = false -> null
+        }
+    }
+
+  # yandex_vpc_network.les01-network will be destroyed
+  - resource "yandex_vpc_network" "les01-network" {
+      - created_at                = "2025-09-05T14:31:02Z" -> null
+      - default_security_group_id = "enpsm3bk66bluvt74j7l" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - id                        = "enptklb42clrdh0mfiqg" -> null
+      - labels                    = {} -> null
+      - name                      = "wp-network" -> null
+      - subnet_ids                = [
+          - "e9bp78i709ktifg389jf",
+        ] -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # yandex_vpc_subnet.les01-subnet-a will be destroyed
+  - resource "yandex_vpc_subnet" "les01-subnet-a" {
+      - created_at     = "2025-09-05T14:31:04Z" -> null
+      - folder_id      = "b1gmesrdjgklgkvcp704" -> null
+      - id             = "e9bp78i709ktifg389jf" -> null
+      - labels         = {} -> null
+      - name           = "wp-subnet-a" -> null
+      - network_id     = "enptklb42clrdh0mfiqg" -> null
+      - v4_cidr_blocks = [
+          - "10.2.0.0/16",
+        ] -> null
+      - v6_cidr_blocks = [] -> null
+      - zone           = "ru-central1-a" -> null
+        # (2 unchanged attributes hidden)
+    }
+
+Plan: 0 to add, 0 to change, 3 to destroy.
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+yandex_compute_instance.les01-vm: Destroying... [id=fhmofed62vrnr0id28ms]
+yandex_compute_instance.les01-vm: Still destroying... [id=fhmofed62vrnr0id28ms, 00m10s elapsed]
+yandex_compute_instance.les01-vm: Still destroying... [id=fhmofed62vrnr0id28ms, 00m20s elapsed]
+yandex_compute_instance.les01-vm: Still destroying... [id=fhmofed62vrnr0id28ms, 00m30s elapsed]
+yandex_compute_instance.les01-vm: Still destroying... [id=fhmofed62vrnr0id28ms, 00m40s elapsed]
+yandex_compute_instance.les01-vm: Destruction complete after 42s
+yandex_vpc_subnet.les01-subnet-a: Destroying... [id=e9bp78i709ktifg389jf]
+yandex_vpc_subnet.les01-subnet-a: Destruction complete after 2s
+yandex_vpc_network.les01-network: Destroying... [id=enptklb42clrdh0mfiqg]
+yandex_vpc_network.les01-network: Destruction complete after 1s
+
+Destroy complete! Resources: 3 destroyed.

@@ -30,7 +30,8 @@ resource "yandex_compute_instance" "les01-vm" {
 
   boot_disk {
     initialize_params {
-      image_id = "fd80viupr3qjr5g6g9du"
+      image_id = "fd8pecdhv50nec1qf9im"
+                 #fd80viupr3qjr5g6g9du"
     }
   }
 
