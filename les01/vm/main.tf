@@ -1,4 +1,4 @@
-resource "yandex_compute_instance" "test" {
+resource "yandex_compute_instance" "les01-first-vm" {
   name = "test"
 
   resources {
@@ -8,7 +8,7 @@ resource "yandex_compute_instance" "test" {
 
   boot_disk {
     initialize_params {
-      image_id = "fd8p8rslnsmtkkqojh50"
+      image_id = "fd8pecdhv50nec1qf9im"
     }
   }
 

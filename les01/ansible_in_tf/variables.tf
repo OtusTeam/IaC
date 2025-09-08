@@ -27,11 +27,11 @@ variable "username" {
 variable "pub_key_path" {
    type = string
    sensitive = true
-   default = "~/.ssh/id_rsa.pub"
+#   default = "~/.ssh/id_rsa.pub"
 }
 
 variable "sec_key_path" {
    type = string
 #   sensitive = true
-   default = "~/.ssh/id_rsa"
+#   default = "~/.ssh/id_rsa"
 }
