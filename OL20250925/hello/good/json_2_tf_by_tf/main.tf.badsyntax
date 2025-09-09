@@ -1,0 +1,118 @@
+variable "input_file" {
+  type    = string
+  default = "input.json"
+}
+
+locals {
+  raw = jsondecode(file(var.input_file))
+
+  resource_name = join("", regexall("[A-Za-z0-9_]", coalesce(local.raw.name, "instance")))
+  resource_name_final = local.resource_name != "" ? local.resource_name : "instance"
+  raw_map = { (local.resource_name_final) = local.raw }
+
+  # resources
+  cores_raw = try(local.raw.resources.cores, null)
+  memory_raw = try(local.raw.resources.memory, null)
+  core_fraction = try(tonumber(try(local.raw.resources.core_fraction, null)), null)
+
+  cores = try(tonumber(cores_raw), null)
+
+  # memory: support numeric bytes or suffix G (e.g. "2G")
+  memory = (
+    can(tonumber(memory_raw)) ? tonumber(memory_raw) :
+    (length(regexall("^([0-9]+)G$", coalesce(tostring(memory_raw), ""))) > 0 ?
+      tonumber(regexall("^([0-9]+)G$", tostring(memory_raw))[0]) * 1073741824 :
+      null)
+  )
+
+  # boot disk
+  image_id = try(local.raw.boot_disk.image_id, null)
+  disk_id  = try(local.raw.boot_disk.disk_id, null)
+  disk_size = try(local.raw.boot_disk.size, null)
+
+  initialize_params_needed = image_id != null || disk_size != null
+  attach_existing_disk = disk_id != null
+
+  network_interfaces = try(local.raw.network_interfaces, [])
+
+  preemptible = try(local.raw.scheduling_policy.preemptible, null)
+
+  ssh_key_single = try(local.raw.ssh_key, null)
+  metadata_ssh_keys = try(try(local.raw.metadata, {}).ssh_keys, null)
+  metadata_options = try(local.raw.metadata_options, {})
+
+  fqdn = try(local.raw.fqdn, null)
+  folder_id = coalesce(try(local.raw.folder_id, null), "")
+}
+
+resource "yandex_compute_instance" "this" {
+  for_each = local.raw_map
+
+  name      = each.value.name
+  folder_id = local.folder_id
+  zone      = lookup(each.value, "zone_id", null)
+  platform_id = lookup(each.value, "platform_id", null)
+
+  dynamic "resources" {
+    for_each = (local.cores == null && local.memory == null && local.core_fraction == null) ? [] : [1]
+    content {
+      cores         = local.cores == null ? null : local.cores
+      memory        = local.memory == null ? null : local.memory
+      core_fraction = local.core_fraction == null ? null : local.core_fraction
+    }
+  }
+
+  dynamic "boot_disk" {
+    for_each = (local.attach_existing_disk == false && local.initialize_params_needed == false) ? [] : [1]
+    content {
+      disk_id     = local.attach_existing_disk ? local.disk_id : null
+      auto_delete = local.attach_existing_disk ? try(local.raw.boot_disk.auto_delete, null) : null
+
+      dynamic "initialize_params" {
+        for_each = local.initialize_params_needed ? [1] : []
+        content {
+          image_id = local.image_id != null ? local.image_id : null
+          size     = local.disk_size != null ? local.disk_size : null
+        }
+      }
+    }
+  }
+
+  dynamic "network_interface" {
+    for_each = local.network_interfaces
+    content {
+      subnet_id = lookup(network_interface.value, "subnet_id", null)
+
+      nat = (
+        contains(keys(network_interface.value), "nat") ?
+          lookup(network_interface.value, "nat", null) :
+          (
+            contains(keys(network_interface.value), "primary_v4_address") && contains(keys(lookup(network_interface.value, "primary_v4_address", {})), "one_to_one_nat")
+            ? true
+            : null
+          )
+      )
+    }
+  }
+
+  dynamic "scheduling_policy" {
+    for_each = local.preemptible == null ? [] : [1]
+    content {
+      preemptible = local.preemptible
+    }
+  }
+
+  metadata = (
+    length(keys(local.metadata_options)) == 0 && local.ssh_key_single == null && local.metadata_ssh_keys == null
+  ) ? null : merge(
+    (length(keys(local.metadata_options)) == 0 ? {} : tomap({ for k, v in local.metadata_options : k => tostring(v) })),
+    (local.ssh_key_single == null ? {} : tomap({ "ssh-keys" => tostring(local.ssh_key_single) })),
+    (local.metadata_ssh_keys == null ? {} : tomap({ "ssh-keys" => tostring(local.metadata_ssh_keys) }))
+  )
+
+  hostname = local.fqdn == null ? null : local.fqdn
+}
+
+output "instance_ids" {
+  value = { for k, v in yandex_compute_instance.this : k => v.id }
+}

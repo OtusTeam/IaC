@@ -12,17 +12,11 @@ locals {
 
   # карта для for_each
   raw_map = { (local.resource_name_final) = local.raw }
-  
+
   # ресурсы CPU/Memory (попытка привести к числам, иначе null)
   resources = {
     cores         = try(tonumber(try(local.raw.resources.cores, null)), null)
-#    memory        = try(tonumber(try(local.raw.resources.memory, null)), null)
-#    memory = (can(tonumber(local.raw.resources.memory)) ? tonumber(local.raw.resources.memory) :
-#              (length(regexall("^([0-9]+)G$", coalesce(tostring(local.raw.resources.memory), ""))) > 0 ?
-#               tonumber(regexall("^([0-9]+)G$", tostring(local.raw.resources.memory))[0]) * 1073741824 :
-#               null)
-#    )
-    memory = ceil(tonumber(local.raw.resources.memory) / (1024 * 1024 * 1024))
+    memory        = try(tonumber(try(local.raw.resources.memory, null)), null)
     core_fraction = try(tonumber(try(local.raw.resources.core_fraction, null)), null)
   }
 
@@ -59,7 +53,7 @@ resource "yandex_compute_instance" "this" {
       # если в JSON есть disk_id — используем disk_id как existing disk (provider-specific),
       # иначе попытка поставить initialize_params.image_id из metadata boot_disk.image_id или из имени образа в raw
       initialize_params {
-        image_id = lookup(boot_disk.value, "image_id", "fd8pecdhv50nec1qf9im")
+        image_id = lookup(boot_disk.value, "image_id", null)
       }
     }
   }
