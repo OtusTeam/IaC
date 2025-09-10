@@ -1,0 +1,42 @@
+za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/OL20250925/terraformer/import_folder$ . before.sh 
+++ yc iam service-account create --name folderviewer --description OL20250925
+done (1s)
+id: ajepuie6f0gl5si650va
+folder_id: b1gmesrdjgklgkvcp704
+created_at: "2025-09-10T06:48:37.516307943Z"
+name: folderviewer
+description: OL20250925
+
++++ yc iam service-account get --name folderviewer --format json
++++ jq -r .id
+++ export YC_VIEWER_SA_ID=ajepuie6f0gl5si650va
+++ YC_VIEWER_SA_ID=ajepuie6f0gl5si650va
+++ yc resource-manager folder add-access-binding otus --role viewer --subject serviceAccount:ajepuie6f0gl5si650va
+done (1s)
+effective_deltas:
+  - action: ADD
+    access_binding:
+      role_id: viewer
+      subject:
+        id: ajepuie6f0gl5si650va
+        type: serviceAccount
+
++++ yc iam create-token --impersonate-service-account-id ajepuie6f0gl5si650va
+++ export YC_TOKEN=t1.9euelZqPjZiOj5GLicnJkpmLk4qKlO3rnpWaj4qWmsmZz5iTyoyWycrPiZ7l8_czQXs5-e8YCxxR_N3z93NveDn57xgLHFH8zef1656VmpuWzZGXl46XyZaSzY-VnMiN7_zF656VmpuWzZGXl46XyZaSzY-VnMiNveuelZqJzpKNmIzPlcqSiYyPx47HnrXrnpWaj5eNi56PkJCRip2PlIqQmJc.6zGGaEr3B9y_8yfW9BBvnsmbsodbnscMpL7LV8IFwDTKYrvfMlqeIrkYTHF9nuMO8aao-_hYA0kuVQxR5MKqBg
+++ YC_TOKEN=t1.9euelZqPjZiOj5GLicnJkpmLk4qKlO3rnpWaj4qWmsmZz5iTyoyWycrPiZ7l8_czQXs5-e8YCxxR_N3z93NveDn57xgLHFH8zef1656VmpuWzZGXl46XyZaSzY-VnMiN7_zF656VmpuWzZGXl46XyZaSzY-VnMiNveuelZqJzpKNmIzPlcqSiYyPx47HnrXrnpWaj5eNi56PkJCRip2PlIqQmJc.6zGGaEr3B9y_8yfW9BBvnsmbsodbnscMpL7LV8IFwDTKYrvfMlqeIrkYTHF9nuMO8aao-_hYA0kuVQxR5MKqBg
+++ grep --color=auto YC_
+++ set
+YC_CLOUD_ID=b1glq0cg9jigrj5lcp63
+YC_DEV_FOLDER_ID=b1glf35jjq6imk8i8k4m
+YC_FOLDER_ID=b1gmesrdjgklgkvcp704
+YC_GET_FOLDER_ID=b1gmesrdjgklgkvcp704
+YC_OTUS_FOLDER_ID=b1gmesrdjgklgkvcp704
+YC_PROD_FOLDER_ID=b1gghsrjt34t9qvqbkm1
+YC_SAND_FOLDER_ID=b1ggm2k4duhi62vkadtq
+YC_TEST_FOLDER_ID=b1gphr6mcggqjvd9kl4h
+YC_TOKEN=t1.9euelZqPjZiOj5GLicnJkpmLk4qKlO3rnpWaj4qWmsmZz5iTyoyWycrPiZ7l8_czQXs5-e8YCxxR_N3z93NveDn57xgLHFH8zef1656VmpuWzZGXl46XyZaSzY-VnMiN7_zF656VmpuWzZGXl46XyZaSzY-VnMiNveuelZqJzpKNmIzPlcqSiYyPx47HnrXrnpWaj5eNi56PkJCRip2PlIqQmJc.6zGGaEr3B9y_8yfW9BBvnsmbsodbnscMpL7LV8IFwDTKYrvfMlqeIrkYTHF9nuMO8aao-_hYA0kuVQxR5MKqBg
+YC_VIEWER_SA_ID=ajepuie6f0gl5si650va
+YC_ZONE=ru-central1-a
+_=YC_TOKEN=t1.9euelZqPjZiOj5GLicnJkpmLk4qKlO3rnpWaj4qWmsmZz5iTyoyWycrPiZ7l8_czQXs5-e8YCxxR_N3z93NveDn57xgLHFH8zef1656VmpuWzZGXl46XyZaSzY-VnMiN7_zF656VmpuWzZGXl46XyZaSzY-VnMiNveuelZqJzpKNmIzPlcqSiYyPx47HnrXrnpWaj5eNi56PkJCRip2PlIqQmJc.6zGGaEr3B9y_8yfW9BBvnsmbsodbnscMpL7LV8IFwDTKYrvfMlqeIrkYTHF9nuMO8aao-_hYA0kuVQxR5MKqBg
+    requestComp="YC_ACTIVE_HELP=0 ${words[0]} __completeNoDesc ${args[*]}";
+++ set +x

@@ -1,0 +1,254 @@
+za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/OL20250925/terraformer/import_folder$ ./yc-terraformer.py --import-ids --with-state --debug --recursive vpc network default enpjr0b65u0olvuotmdf
+2025-09-10 16:01:43,278 - DEBUG - DEBUG MODE Enable
+2025-09-10 16:01:43,279 - INFO - Variables: vpc, network, default, enpjr0b65u0olvuotmdf
+2025-09-10 16:01:43,279 - DEBUG - get_endpoint_api: url:https://api.cloud.yandex.net/endpoints/vpc
+2025-09-10 16:01:43,280 - DEBUG - Starting new HTTPS connection (1): api.cloud.yandex.net:443
+2025-09-10 16:01:43,640 - DEBUG - https://api.cloud.yandex.net:443 "GET /endpoints/vpc HTTP/1.1" 200 61
+2025-09-10 16:01:43,642 - DEBUG - get_endpoint_api: data:{'id': 'vpc', 'address': 'vpc.api.cloud.yandex.net:443'}
+2025-09-10 16:01:45,727 - DEBUG - resource_tfstate_import: Manifest:resource "yandex_vpc_network" "default_enpjr0b65u0olvuotmdf" {
+	name="default"
+	}
+
+
+Import command:terraform import yandex_vpc_network.default_enpjr0b65u0olvuotmdf enpjr0b65u0olvuotmdf
+Import Result:yandex_vpc_network.default_enpjr0b65u0olvuotmdf: Importing from ID "enpjr0b65u0olvuotmdf"...
+yandex_vpc_network.default_enpjr0b65u0olvuotmdf: Import prepared!
+  Prepared yandex_vpc_network for import
+yandex_vpc_network.default_enpjr0b65u0olvuotmdf: Refreshing state... [id=enpjr0b65u0olvuotmdf]
+
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+
+2025-09-10 16:01:46,728 - DEBUG - resource_tfstate_import: resource_name:['default_enpjr0b65u0olvuotmdf']
+2025-09-10 16:01:46,728 - INFO - Import success: resource vpc_network with name:['default_enpjr0b65u0olvuotmdf']
+2025-09-10 16:01:46,728 - INFO - service:vpc
+2025-09-10 16:01:46,729 - INFO - Recursive import enabled
+2025-09-10 16:01:46,729 - DEBUG - Get vpc: enpjr0b65u0olvuotmdf
+2025-09-10 16:01:46,730 - DEBUG - get_json_api_url: full_url:https://vpc.api.cloud.yandex.net:443/vpc/v1/networks/enpjr0b65u0olvuotmdf/subnets
+2025-09-10 16:01:46,733 - DEBUG - Starting new HTTPS connection (1): vpc.api.cloud.yandex.net:443
+2025-09-10 16:01:47,171 - DEBUG - https://vpc.api.cloud.yandex.net:443 "GET /vpc/v1/networks/enpjr0b65u0olvuotmdf/subnets HTTP/1.1" 200 1466
+2025-09-10 16:01:47,179 - DEBUG - Get vpc subnets: {'subnets': [{'v4CidrBlocks': ['10.130.0.0/24'], 'id': 'b0c677i6avc5inub53kj', 'folderId': 'b1gmesrdjgklgkvcp704', 'createdAt': '2024-02-16T06:40:55Z', 'name': 'default-ru-central1-c', 'description': 'Auto-created default subnet for zone ru-central1-c in default', 'networkId': 'enpjr0b65u0olvuotmdf', 'zoneId': 'ru-central1-c'}, {'v4CidrBlocks': ['10.129.0.0/24'], 'dhcpOptions': {}, 'id': 'e2l3co6r10mp14ro4ff6', 'folderId': 'b1gmesrdjgklgkvcp704', 'createdAt': '2024-02-16T06:40:54Z', 'name': 'default-ru-central1-b', 'description': 'Auto-created default subnet for zone ru-central1-b in default', 'networkId': 'enpjr0b65u0olvuotmdf', 'zoneId': 'ru-central1-b'}, {'v4CidrBlocks': ['10.128.0.0/24'], 'id': 'e9bop98iu12teftg4uj8', 'folderId': 'b1gmesrdjgklgkvcp704', 'createdAt': '2024-02-16T06:40:54Z', 'name': 'default-ru-central1-a', 'description': 'Auto-created default subnet for zone ru-central1-a in default', 'networkId': 'enpjr0b65u0olvuotmdf', 'zoneId': 'ru-central1-a'}, {'v4CidrBlocks': ['10.131.0.0/24'], 'id': 'fl8n8apm16arg05hh4k3', 'folderId': 'b1gmesrdjgklgkvcp704', 'createdAt': '2024-02-16T06:40:55Z', 'name': 'default-ru-central1-d', 'description': 'Auto-created default subnet for zone ru-central1-d in default', 'networkId': 'enpjr0b65u0olvuotmdf', 'zoneId': 'ru-central1-d'}]}
+2025-09-10 16:01:49,043 - DEBUG - resource_tfstate_import: Manifest:resource "yandex_vpc_subnet" "default-ru-central1-c_enpjr0b65u0olvuotmdf" {
+	name="default-ru-central1-c"
+	}
+
+
+Import command:terraform import yandex_vpc_subnet.default-ru-central1-c_enpjr0b65u0olvuotmdf b0c677i6avc5inub53kj
+Import Result:yandex_vpc_subnet.default-ru-central1-c_enpjr0b65u0olvuotmdf: Importing from ID "b0c677i6avc5inub53kj"...
+yandex_vpc_subnet.default-ru-central1-c_enpjr0b65u0olvuotmdf: Import prepared!
+  Prepared yandex_vpc_subnet for import
+yandex_vpc_subnet.default-ru-central1-c_enpjr0b65u0olvuotmdf: Refreshing state... [id=b0c677i6avc5inub53kj]
+
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+
+2025-09-10 16:01:50,043 - DEBUG - resource_tfstate_import: resource_name:['default-ru-central1-c_enpjr0b65u0olvuotmdf']
+2025-09-10 16:01:50,044 - INFO - Import success: resource vpc_subnet with name:['default-ru-central1-c_enpjr0b65u0olvuotmdf']
+2025-09-10 16:01:52,021 - DEBUG - resource_tfstate_import: Manifest:resource "yandex_vpc_subnet" "default-ru-central1-b_enpjr0b65u0olvuotmdf" {
+	name="default-ru-central1-b"
+	}
+
+
+Import command:terraform import yandex_vpc_subnet.default-ru-central1-b_enpjr0b65u0olvuotmdf e2l3co6r10mp14ro4ff6
+Import Result:yandex_vpc_subnet.default-ru-central1-b_enpjr0b65u0olvuotmdf: Importing from ID "e2l3co6r10mp14ro4ff6"...
+yandex_vpc_subnet.default-ru-central1-b_enpjr0b65u0olvuotmdf: Import prepared!
+  Prepared yandex_vpc_subnet for import
+yandex_vpc_subnet.default-ru-central1-b_enpjr0b65u0olvuotmdf: Refreshing state... [id=e2l3co6r10mp14ro4ff6]
+
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+
+2025-09-10 16:01:53,022 - DEBUG - resource_tfstate_import: resource_name:['default-ru-central1-b_enpjr0b65u0olvuotmdf']
+2025-09-10 16:01:53,022 - INFO - Import success: resource vpc_subnet with name:['default-ru-central1-b_enpjr0b65u0olvuotmdf']
+2025-09-10 16:01:54,841 - DEBUG - resource_tfstate_import: Manifest:resource "yandex_vpc_subnet" "default-ru-central1-a_enpjr0b65u0olvuotmdf" {
+	name="default-ru-central1-a"
+	}
+
+
+Import command:terraform import yandex_vpc_subnet.default-ru-central1-a_enpjr0b65u0olvuotmdf e9bop98iu12teftg4uj8
+Import Result:yandex_vpc_subnet.default-ru-central1-a_enpjr0b65u0olvuotmdf: Importing from ID "e9bop98iu12teftg4uj8"...
+yandex_vpc_subnet.default-ru-central1-a_enpjr0b65u0olvuotmdf: Import prepared!
+  Prepared yandex_vpc_subnet for import
+yandex_vpc_subnet.default-ru-central1-a_enpjr0b65u0olvuotmdf: Refreshing state... [id=e9bop98iu12teftg4uj8]
+
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+
+2025-09-10 16:01:55,842 - DEBUG - resource_tfstate_import: resource_name:['default-ru-central1-a_enpjr0b65u0olvuotmdf']
+2025-09-10 16:01:55,842 - INFO - Import success: resource vpc_subnet with name:['default-ru-central1-a_enpjr0b65u0olvuotmdf']
+2025-09-10 16:01:57,758 - DEBUG - resource_tfstate_import: Manifest:resource "yandex_vpc_subnet" "default-ru-central1-d_enpjr0b65u0olvuotmdf" {
+	name="default-ru-central1-d"
+	}
+
+
+Import command:terraform import yandex_vpc_subnet.default-ru-central1-d_enpjr0b65u0olvuotmdf fl8n8apm16arg05hh4k3
+Import Result:yandex_vpc_subnet.default-ru-central1-d_enpjr0b65u0olvuotmdf: Importing from ID "fl8n8apm16arg05hh4k3"...
+yandex_vpc_subnet.default-ru-central1-d_enpjr0b65u0olvuotmdf: Import prepared!
+  Prepared yandex_vpc_subnet for import
+yandex_vpc_subnet.default-ru-central1-d_enpjr0b65u0olvuotmdf: Refreshing state... [id=fl8n8apm16arg05hh4k3]
+
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+
+2025-09-10 16:01:58,759 - DEBUG - resource_tfstate_import: resource_name:['default-ru-central1-d_enpjr0b65u0olvuotmdf']
+2025-09-10 16:01:58,759 - INFO - Import success: resource vpc_subnet with name:['default-ru-central1-d_enpjr0b65u0olvuotmdf']
+2025-09-10 16:01:58,760 - DEBUG - resource_mame:default_enpjr0b65u0olvuotmdf
+2025-09-10 16:01:58,760 - DEBUG - resource:{'mode': 'managed', 'type': 'yandex_vpc_network', 'name': 'default_enpjr0b65u0olvuotmdf', 'provider': 'provider["registry.terraform.io/yandex-cloud/yandex"]', 'instances': [{'schema_version': 0, 'attributes': {'created_at': '2024-02-16T06:40:52Z', 'default_security_group_id': 'enp4kcfh25qiq4r841or', 'description': 'Auto-created network', 'folder_id': 'b1gmesrdjgklgkvcp704', 'id': 'enpjr0b65u0olvuotmdf', 'labels': {}, 'name': 'default', 'subnet_ids': ['b0c677i6avc5inub53kj', 'e2l3co6r10mp14ro4ff6', 'e9bop98iu12teftg4uj8', 'fl8n8apm16arg05hh4k3'], 'timeouts': None}, 'sensitive_attributes': [], 'identity_schema_version': 0, 'private': 'eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMCwiZGVsZXRlIjo2MDAwMDAwMDAwMCwidXBkYXRlIjo2MDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMCJ9'}]}
+2025-09-10 16:01:58,760 - DEBUG - convert_to_terraform: keys2remove from root: ['created_at', 'id', 'status', 'hardware_generation']
+2025-09-10 16:01:58,761 - DEBUG - remove_keys: is root of JSON
+2025-09-10 16:01:58,761 - DEBUG - remove_keys: check created_at in root!
+2025-09-10 16:01:58,761 - DEBUG - remove_keys: REMOVE created_at from root!
+2025-09-10 16:01:58,761 - DEBUG - remove_keys: check default_security_group_id in root!
+2025-09-10 16:01:58,761 - DEBUG - remove_keys: check description in root!
+2025-09-10 16:01:58,761 - DEBUG - remove_keys: check folder_id in root!
+2025-09-10 16:01:58,762 - DEBUG - remove_keys: check id in root!
+2025-09-10 16:01:58,762 - DEBUG - remove_keys: REMOVE id from root!
+2025-09-10 16:01:58,762 - DEBUG - remove_keys: check labels in root!
+2025-09-10 16:01:58,762 - DEBUG - remove_keys: check name in root!
+2025-09-10 16:01:58,762 - DEBUG - remove_keys: check subnet_ids in root!
+2025-09-10 16:01:58,762 - DEBUG - remove_keys: check timeouts in root!
+2025-09-10 16:01:58,763 - DEBUG - convert_to_terraform: yandex_vpc_network: keys2remove: dict_items([('', ['subnet_ids', 'default_security_group_id'])])
+2025-09-10 16:01:58,763 - DEBUG - convert_to_terraform: yandex_vpc_network: remove: ['subnet_ids', 'default_security_group_id'] in 
+2025-09-10 16:01:58,763 - DEBUG - remove_keys: is root of JSON
+2025-09-10 16:01:58,763 - DEBUG - remove_keys: check default_security_group_id in root!
+2025-09-10 16:01:58,763 - DEBUG - remove_keys: REMOVE default_security_group_id from root!
+2025-09-10 16:01:58,764 - DEBUG - remove_keys: check description in root!
+2025-09-10 16:01:58,764 - DEBUG - remove_keys: check folder_id in root!
+2025-09-10 16:01:58,764 - DEBUG - remove_keys: check labels in root!
+2025-09-10 16:01:58,764 - DEBUG - remove_keys: check name in root!
+2025-09-10 16:01:58,764 - DEBUG - remove_keys: check subnet_ids in root!
+2025-09-10 16:01:58,765 - DEBUG - remove_keys: REMOVE subnet_ids from root!
+2025-09-10 16:01:58,765 - DEBUG - remove_keys: check timeouts in root!
+2025-09-10 16:01:58,765 - DEBUG - convert_to_terraform: attributes JSON:{'description': 'Auto-created network', 'folder_id': 'b1gmesrdjgklgkvcp704', 'labels': {}, 'name': 'default', 'timeouts': None}
+2025-09-10 16:01:58,765 - DEBUG - convert_attributes_to_terraform: Value is str: description - Auto-created network
+2025-09-10 16:01:58,765 - DEBUG - convert_attributes_to_terraform: Value is str: folder_id - b1gmesrdjgklgkvcp704
+2025-09-10 16:01:58,765 - DEBUG - convert_attributes_to_terraform: Value is dict: labels - {}
+2025-09-10 16:01:58,766 - DEBUG - convert_attributes_to_terraform: Value is str: name - default
+2025-09-10 16:01:58,766 - INFO - Write manifest file:yandex_vpc_network_default_enpjr0b65u0olvuotmdf.tf
+2025-09-10 16:01:58,767 - DEBUG - resource_mame:default-ru-central1-c_enpjr0b65u0olvuotmdf
+2025-09-10 16:01:58,767 - DEBUG - resource:{'mode': 'managed', 'type': 'yandex_vpc_subnet', 'name': 'default-ru-central1-c_enpjr0b65u0olvuotmdf', 'provider': 'provider["registry.terraform.io/yandex-cloud/yandex"]', 'instances': [{'schema_version': 0, 'attributes': {'created_at': '2024-02-16T06:40:55Z', 'description': 'Auto-created default subnet for zone ru-central1-c in default', 'dhcp_options': [], 'folder_id': 'b1gmesrdjgklgkvcp704', 'id': 'b0c677i6avc5inub53kj', 'labels': {}, 'name': 'default-ru-central1-c', 'network_id': 'enpjr0b65u0olvuotmdf', 'route_table_id': '', 'timeouts': None, 'v4_cidr_blocks': ['10.130.0.0/24'], 'v6_cidr_blocks': [], 'zone': 'ru-central1-c'}, 'sensitive_attributes': [], 'identity_schema_version': 0, 'private': 'eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAsImRlbGV0ZSI6MTgwMDAwMDAwMDAwLCJ1cGRhdGUiOjE4MDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMCJ9'}]}
+2025-09-10 16:01:58,767 - DEBUG - convert_to_terraform: keys2remove from root: ['created_at', 'id', 'status', 'hardware_generation']
+2025-09-10 16:01:58,767 - DEBUG - remove_keys: is root of JSON
+2025-09-10 16:01:58,767 - DEBUG - remove_keys: check created_at in root!
+2025-09-10 16:01:58,768 - DEBUG - remove_keys: REMOVE created_at from root!
+2025-09-10 16:01:58,768 - DEBUG - remove_keys: check description in root!
+2025-09-10 16:01:58,768 - DEBUG - remove_keys: check dhcp_options in root!
+2025-09-10 16:01:58,768 - DEBUG - remove_keys: check folder_id in root!
+2025-09-10 16:01:58,768 - DEBUG - remove_keys: check id in root!
+2025-09-10 16:01:58,768 - DEBUG - remove_keys: REMOVE id from root!
+2025-09-10 16:01:58,769 - DEBUG - remove_keys: check labels in root!
+2025-09-10 16:01:58,769 - DEBUG - remove_keys: check name in root!
+2025-09-10 16:01:58,769 - DEBUG - remove_keys: check network_id in root!
+2025-09-10 16:01:58,769 - DEBUG - remove_keys: check route_table_id in root!
+2025-09-10 16:01:58,769 - DEBUG - remove_keys: check timeouts in root!
+2025-09-10 16:01:58,769 - DEBUG - remove_keys: check v4_cidr_blocks in root!
+2025-09-10 16:01:58,770 - DEBUG - remove_keys: check v6_cidr_blocks in root!
+2025-09-10 16:01:58,770 - DEBUG - remove_keys: check zone in root!
+2025-09-10 16:01:58,770 - DEBUG - convert_to_terraform: attributes JSON:{'description': 'Auto-created default subnet for zone ru-central1-c in default', 'dhcp_options': [], 'folder_id': 'b1gmesrdjgklgkvcp704', 'labels': {}, 'name': 'default-ru-central1-c', 'network_id': 'enpjr0b65u0olvuotmdf', 'route_table_id': '', 'timeouts': None, 'v4_cidr_blocks': ['10.130.0.0/24'], 'v6_cidr_blocks': [], 'zone': 'ru-central1-c'}
+2025-09-10 16:01:58,770 - DEBUG - convert_attributes_to_terraform: Value is str: description - Auto-created default subnet for zone ru-central1-c in default
+2025-09-10 16:01:58,771 - DEBUG - convert_attributes_to_terraform: Value is str: folder_id - b1gmesrdjgklgkvcp704
+2025-09-10 16:01:58,771 - DEBUG - convert_attributes_to_terraform: Value is dict: labels - {}
+2025-09-10 16:01:58,771 - DEBUG - convert_attributes_to_terraform: Value is str: name - default-ru-central1-c
+2025-09-10 16:01:58,771 - DEBUG - convert_attributes_to_terraform: Value is str: network_id - enpjr0b65u0olvuotmdf
+2025-09-10 16:01:58,772 - DEBUG - convert_attributes_to_terraform: Value is str: v4_cidr_blocks - ['10.130.0.0/24']
+2025-09-10 16:01:58,772 - DEBUG - format_value: format items in list: ['10.130.0.0/24']
+2025-09-10 16:01:58,773 - DEBUG - convert_attributes_to_terraform: Value is str: zone - ru-central1-c
+2025-09-10 16:01:58,774 - INFO - Write manifest file:yandex_vpc_subnet_default-ru-central1-c_enpjr0b65u0olvuotmdf.tf
+2025-09-10 16:01:58,775 - DEBUG - resource_mame:default-ru-central1-b_enpjr0b65u0olvuotmdf
+2025-09-10 16:01:58,776 - DEBUG - resource:{'mode': 'managed', 'type': 'yandex_vpc_subnet', 'name': 'default-ru-central1-b_enpjr0b65u0olvuotmdf', 'provider': 'provider["registry.terraform.io/yandex-cloud/yandex"]', 'instances': [{'schema_version': 0, 'attributes': {'created_at': '2024-02-16T06:40:54Z', 'description': 'Auto-created default subnet for zone ru-central1-b in default', 'dhcp_options': [], 'folder_id': 'b1gmesrdjgklgkvcp704', 'id': 'e2l3co6r10mp14ro4ff6', 'labels': {}, 'name': 'default-ru-central1-b', 'network_id': 'enpjr0b65u0olvuotmdf', 'route_table_id': '', 'timeouts': None, 'v4_cidr_blocks': ['10.129.0.0/24'], 'v6_cidr_blocks': [], 'zone': 'ru-central1-b'}, 'sensitive_attributes': [], 'identity_schema_version': 0, 'private': 'eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAsImRlbGV0ZSI6MTgwMDAwMDAwMDAwLCJ1cGRhdGUiOjE4MDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMCJ9'}]}
+2025-09-10 16:01:58,776 - DEBUG - convert_to_terraform: keys2remove from root: ['created_at', 'id', 'status', 'hardware_generation']
+2025-09-10 16:01:58,776 - DEBUG - remove_keys: is root of JSON
+2025-09-10 16:01:58,777 - DEBUG - remove_keys: check created_at in root!
+2025-09-10 16:01:58,777 - DEBUG - remove_keys: REMOVE created_at from root!
+2025-09-10 16:01:58,777 - DEBUG - remove_keys: check description in root!
+2025-09-10 16:01:58,777 - DEBUG - remove_keys: check dhcp_options in root!
+2025-09-10 16:01:58,777 - DEBUG - remove_keys: check folder_id in root!
+2025-09-10 16:01:58,777 - DEBUG - remove_keys: check id in root!
+2025-09-10 16:01:58,778 - DEBUG - remove_keys: REMOVE id from root!
+2025-09-10 16:01:58,778 - DEBUG - remove_keys: check labels in root!
+2025-09-10 16:01:58,778 - DEBUG - remove_keys: check name in root!
+2025-09-10 16:01:58,778 - DEBUG - remove_keys: check network_id in root!
+2025-09-10 16:01:58,778 - DEBUG - remove_keys: check route_table_id in root!
+2025-09-10 16:01:58,779 - DEBUG - remove_keys: check timeouts in root!
+2025-09-10 16:01:58,779 - DEBUG - remove_keys: check v4_cidr_blocks in root!
+2025-09-10 16:01:58,779 - DEBUG - remove_keys: check v6_cidr_blocks in root!
+2025-09-10 16:01:58,779 - DEBUG - remove_keys: check zone in root!
+2025-09-10 16:01:58,779 - DEBUG - convert_to_terraform: attributes JSON:{'description': 'Auto-created default subnet for zone ru-central1-b in default', 'dhcp_options': [], 'folder_id': 'b1gmesrdjgklgkvcp704', 'labels': {}, 'name': 'default-ru-central1-b', 'network_id': 'enpjr0b65u0olvuotmdf', 'route_table_id': '', 'timeouts': None, 'v4_cidr_blocks': ['10.129.0.0/24'], 'v6_cidr_blocks': [], 'zone': 'ru-central1-b'}
+2025-09-10 16:01:58,780 - DEBUG - convert_attributes_to_terraform: Value is str: description - Auto-created default subnet for zone ru-central1-b in default
+2025-09-10 16:01:58,780 - DEBUG - convert_attributes_to_terraform: Value is str: folder_id - b1gmesrdjgklgkvcp704
+2025-09-10 16:01:58,780 - DEBUG - convert_attributes_to_terraform: Value is dict: labels - {}
+2025-09-10 16:01:58,780 - DEBUG - convert_attributes_to_terraform: Value is str: name - default-ru-central1-b
+2025-09-10 16:01:58,780 - DEBUG - convert_attributes_to_terraform: Value is str: network_id - enpjr0b65u0olvuotmdf
+2025-09-10 16:01:58,781 - DEBUG - convert_attributes_to_terraform: Value is str: v4_cidr_blocks - ['10.129.0.0/24']
+2025-09-10 16:01:58,781 - DEBUG - format_value: format items in list: ['10.129.0.0/24']
+2025-09-10 16:01:58,781 - DEBUG - convert_attributes_to_terraform: Value is str: zone - ru-central1-b
+2025-09-10 16:01:58,782 - INFO - Write manifest file:yandex_vpc_subnet_default-ru-central1-b_enpjr0b65u0olvuotmdf.tf
+2025-09-10 16:01:58,782 - DEBUG - resource_mame:default-ru-central1-a_enpjr0b65u0olvuotmdf
+2025-09-10 16:01:58,782 - DEBUG - resource:{'mode': 'managed', 'type': 'yandex_vpc_subnet', 'name': 'default-ru-central1-a_enpjr0b65u0olvuotmdf', 'provider': 'provider["registry.terraform.io/yandex-cloud/yandex"]', 'instances': [{'schema_version': 0, 'attributes': {'created_at': '2024-02-16T06:40:54Z', 'description': 'Auto-created default subnet for zone ru-central1-a in default', 'dhcp_options': [], 'folder_id': 'b1gmesrdjgklgkvcp704', 'id': 'e9bop98iu12teftg4uj8', 'labels': {}, 'name': 'default-ru-central1-a', 'network_id': 'enpjr0b65u0olvuotmdf', 'route_table_id': '', 'timeouts': None, 'v4_cidr_blocks': ['10.128.0.0/24'], 'v6_cidr_blocks': [], 'zone': 'ru-central1-a'}, 'sensitive_attributes': [], 'identity_schema_version': 0, 'private': 'eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAsImRlbGV0ZSI6MTgwMDAwMDAwMDAwLCJ1cGRhdGUiOjE4MDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMCJ9'}]}
+2025-09-10 16:01:58,782 - DEBUG - convert_to_terraform: keys2remove from root: ['created_at', 'id', 'status', 'hardware_generation']
+2025-09-10 16:01:58,783 - DEBUG - remove_keys: is root of JSON
+2025-09-10 16:01:58,783 - DEBUG - remove_keys: check created_at in root!
+2025-09-10 16:01:58,783 - DEBUG - remove_keys: REMOVE created_at from root!
+2025-09-10 16:01:58,783 - DEBUG - remove_keys: check description in root!
+2025-09-10 16:01:58,783 - DEBUG - remove_keys: check dhcp_options in root!
+2025-09-10 16:01:58,783 - DEBUG - remove_keys: check folder_id in root!
+2025-09-10 16:01:58,784 - DEBUG - remove_keys: check id in root!
+2025-09-10 16:01:58,784 - DEBUG - remove_keys: REMOVE id from root!
+2025-09-10 16:01:58,784 - DEBUG - remove_keys: check labels in root!
+2025-09-10 16:01:58,784 - DEBUG - remove_keys: check name in root!
+2025-09-10 16:01:58,784 - DEBUG - remove_keys: check network_id in root!
+2025-09-10 16:01:58,784 - DEBUG - remove_keys: check route_table_id in root!
+2025-09-10 16:01:58,785 - DEBUG - remove_keys: check timeouts in root!
+2025-09-10 16:01:58,785 - DEBUG - remove_keys: check v4_cidr_blocks in root!
+2025-09-10 16:01:58,785 - DEBUG - remove_keys: check v6_cidr_blocks in root!
+2025-09-10 16:01:58,785 - DEBUG - remove_keys: check zone in root!
+2025-09-10 16:01:58,785 - DEBUG - convert_to_terraform: attributes JSON:{'description': 'Auto-created default subnet for zone ru-central1-a in default', 'dhcp_options': [], 'folder_id': 'b1gmesrdjgklgkvcp704', 'labels': {}, 'name': 'default-ru-central1-a', 'network_id': 'enpjr0b65u0olvuotmdf', 'route_table_id': '', 'timeouts': None, 'v4_cidr_blocks': ['10.128.0.0/24'], 'v6_cidr_blocks': [], 'zone': 'ru-central1-a'}
+2025-09-10 16:01:58,785 - DEBUG - convert_attributes_to_terraform: Value is str: description - Auto-created default subnet for zone ru-central1-a in default
+2025-09-10 16:01:58,786 - DEBUG - convert_attributes_to_terraform: Value is str: folder_id - b1gmesrdjgklgkvcp704
+2025-09-10 16:01:58,786 - DEBUG - convert_attributes_to_terraform: Value is dict: labels - {}
+2025-09-10 16:01:58,786 - DEBUG - convert_attributes_to_terraform: Value is str: name - default-ru-central1-a
+2025-09-10 16:01:58,786 - DEBUG - convert_attributes_to_terraform: Value is str: network_id - enpjr0b65u0olvuotmdf
+2025-09-10 16:01:58,786 - DEBUG - convert_attributes_to_terraform: Value is str: v4_cidr_blocks - ['10.128.0.0/24']
+2025-09-10 16:01:58,787 - DEBUG - format_value: format items in list: ['10.128.0.0/24']
+2025-09-10 16:01:58,787 - DEBUG - convert_attributes_to_terraform: Value is str: zone - ru-central1-a
+2025-09-10 16:01:58,787 - INFO - Write manifest file:yandex_vpc_subnet_default-ru-central1-a_enpjr0b65u0olvuotmdf.tf
+2025-09-10 16:01:58,788 - DEBUG - resource_mame:default-ru-central1-d_enpjr0b65u0olvuotmdf
+2025-09-10 16:01:58,788 - DEBUG - resource:{'mode': 'managed', 'type': 'yandex_vpc_subnet', 'name': 'default-ru-central1-d_enpjr0b65u0olvuotmdf', 'provider': 'provider["registry.terraform.io/yandex-cloud/yandex"]', 'instances': [{'schema_version': 0, 'attributes': {'created_at': '2024-02-16T06:40:55Z', 'description': 'Auto-created default subnet for zone ru-central1-d in default', 'dhcp_options': [], 'folder_id': 'b1gmesrdjgklgkvcp704', 'id': 'fl8n8apm16arg05hh4k3', 'labels': {}, 'name': 'default-ru-central1-d', 'network_id': 'enpjr0b65u0olvuotmdf', 'route_table_id': '', 'timeouts': None, 'v4_cidr_blocks': ['10.131.0.0/24'], 'v6_cidr_blocks': [], 'zone': 'ru-central1-d'}, 'sensitive_attributes': [], 'identity_schema_version': 0, 'private': 'eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAsImRlbGV0ZSI6MTgwMDAwMDAwMDAwLCJ1cGRhdGUiOjE4MDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMCJ9'}]}
+2025-09-10 16:01:58,788 - DEBUG - convert_to_terraform: keys2remove from root: ['created_at', 'id', 'status', 'hardware_generation']
+2025-09-10 16:01:58,788 - DEBUG - remove_keys: is root of JSON
+2025-09-10 16:01:58,789 - DEBUG - remove_keys: check created_at in root!
+2025-09-10 16:01:58,789 - DEBUG - remove_keys: REMOVE created_at from root!
+2025-09-10 16:01:58,789 - DEBUG - remove_keys: check description in root!
+2025-09-10 16:01:58,789 - DEBUG - remove_keys: check dhcp_options in root!
+2025-09-10 16:01:58,789 - DEBUG - remove_keys: check folder_id in root!
+2025-09-10 16:01:58,789 - DEBUG - remove_keys: check id in root!
+2025-09-10 16:01:58,790 - DEBUG - remove_keys: REMOVE id from root!
+2025-09-10 16:01:58,790 - DEBUG - remove_keys: check labels in root!
+2025-09-10 16:01:58,790 - DEBUG - remove_keys: check name in root!
+2025-09-10 16:01:58,790 - DEBUG - remove_keys: check network_id in root!
+2025-09-10 16:01:58,790 - DEBUG - remove_keys: check route_table_id in root!
+2025-09-10 16:01:58,790 - DEBUG - remove_keys: check timeouts in root!
+2025-09-10 16:01:58,791 - DEBUG - remove_keys: check v4_cidr_blocks in root!
+2025-09-10 16:01:58,791 - DEBUG - remove_keys: check v6_cidr_blocks in root!
+2025-09-10 16:01:58,791 - DEBUG - remove_keys: check zone in root!
+2025-09-10 16:01:58,791 - DEBUG - convert_to_terraform: attributes JSON:{'description': 'Auto-created default subnet for zone ru-central1-d in default', 'dhcp_options': [], 'folder_id': 'b1gmesrdjgklgkvcp704', 'labels': {}, 'name': 'default-ru-central1-d', 'network_id': 'enpjr0b65u0olvuotmdf', 'route_table_id': '', 'timeouts': None, 'v4_cidr_blocks': ['10.131.0.0/24'], 'v6_cidr_blocks': [], 'zone': 'ru-central1-d'}
+2025-09-10 16:01:58,791 - DEBUG - convert_attributes_to_terraform: Value is str: description - Auto-created default subnet for zone ru-central1-d in default
+2025-09-10 16:01:58,792 - DEBUG - convert_attributes_to_terraform: Value is str: folder_id - b1gmesrdjgklgkvcp704
+2025-09-10 16:01:58,792 - DEBUG - convert_attributes_to_terraform: Value is dict: labels - {}
+2025-09-10 16:01:58,792 - DEBUG - convert_attributes_to_terraform: Value is str: name - default-ru-central1-d
+2025-09-10 16:01:58,792 - DEBUG - convert_attributes_to_terraform: Value is str: network_id - enpjr0b65u0olvuotmdf
+2025-09-10 16:01:58,793 - DEBUG - convert_attributes_to_terraform: Value is str: v4_cidr_blocks - ['10.131.0.0/24']
+2025-09-10 16:01:58,793 - DEBUG - format_value: format items in list: ['10.131.0.0/24']
+2025-09-10 16:01:58,793 - DEBUG - convert_attributes_to_terraform: Value is str: zone - ru-central1-d
+2025-09-10 16:01:58,793 - INFO - Write manifest file:yandex_vpc_subnet_default-ru-central1-d_enpjr0b65u0olvuotmdf.tf
+2025-09-10 16:01:58,794 - INFO - Terraform manifests creation completed!
