@@ -10,5 +10,6 @@ export YC_TOKEN=$(yc iam create-token --impersonate-service-account-id $YC_VIEWE
 export TF_VAR_yc_token="$YC_TOKEN"
 
 set | grep YC_
+set | grep TF_VAR_
 
 set +x

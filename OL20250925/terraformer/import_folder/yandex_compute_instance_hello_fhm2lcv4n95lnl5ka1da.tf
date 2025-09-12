@@ -1,7 +1,7 @@
-resource "yandex_compute_instance" "hello_fhm86a6e84kge31qfili" {
+resource "yandex_compute_instance" "hello_fhm2lcv4n95lnl5ka1da" {
 	boot_disk {
 		auto_delete = true
-		device_name = "fhmm3athsgsttkil438e"
+		device_name = "fhmtah90vt5i36d8cr5j"
 		disk_id = var.disk_id
 		initialize_params {
 			block_size = 4096
@@ -25,11 +25,10 @@ resource "yandex_compute_instance" "hello_fhm86a6e84kge31qfili" {
 	network_acceleration_type = "standard"
 	network_interface {
 		index = 0
-		ip_address = "10.128.0.27"
+		ip_address = "10.128.0.23"
 		ipv4 = true
 		ipv6 = false
 		nat = true
-		nat_ip_address = "84.201.175.40"
 		subnet_id = var.subnet_id
 	}
 	placement_policy {

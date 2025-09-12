@@ -1,4 +1,4 @@
-resource "yandex_compute_disk" "_fhm86a6e84kge31qfili" {
+resource "yandex_compute_disk" "_fhm2lcv4n95lnl5ka1da" {
 	block_size = 4096
 	folder_id = var.folder_id
 	image_id = var.image_id
