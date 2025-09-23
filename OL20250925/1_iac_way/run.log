@@ -1,4 +1,4 @@
-za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/OL20250925/iac_way$ ./run.sh 
+za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/OL20250925/1_iac_way$ ./run.sh
 ++ terraform init
 Initializing the backend...
 Initializing provider plugins...
@@ -24,8 +24,8 @@ Terraform used the selected providers to generate the following execution plan. 
 
 Terraform will perform the following actions:
 
-  # yandex_compute_instance.test will be created
-  + resource "yandex_compute_instance" "test" {
+  # yandex_compute_instance.iac_way will be created
+  + resource "yandex_compute_instance" "iac_way" {
       + created_at                = (known after apply)
       + folder_id                 = (known after apply)
       + fqdn                      = (known after apply)
@@ -40,7 +40,7 @@ Terraform will perform the following actions:
                 ubuntu:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3HIUrr6iRefESWSlgO8y+zFjJH27t7WO4atyPLGqLAi1GesgJD1zTnzE/KKGUAndumJkbhZN6XbFsbojpxNGONJi+NfocGFgUYdK5fSv+/m7zcLWWqxovUHP0FfLhWjzMFWahBybZDK9p+QKAdnPAgHzmC0Jfn+PM3VrbvfiNnai3rQiIMvxIExMsqn3LSc+BYlliS72nv+BWyufLVCJ3arVh9OsvnvbAKefKkNkTl1G8nQDYowL/57teF+Z53lNZh3ywkWaCgVXYQw+/4H8xcqG38frBrSEtJWcx2E0VGqpoAZ1fwZHp7zgKCsTF5SrGXpd7hX6z+45h2zTRZTFH za@za-Lenovo-IdeaPad-S340-15IWL
             EOT
         }
-      + name                      = "test"
+      + name                      = "iac-way"
       + network_acceleration_type = "standard"
       + platform_id               = "standard-v1"
       + service_account_id        = (known after apply)
@@ -102,8 +102,8 @@ Terraform used the selected providers to generate the following execution plan. 
 
 Terraform will perform the following actions:
 
-  # yandex_compute_instance.test will be created
-  + resource "yandex_compute_instance" "test" {
+  # yandex_compute_instance.iac_way will be created
+  + resource "yandex_compute_instance" "iac_way" {
       + created_at                = (known after apply)
       + folder_id                 = (known after apply)
       + fqdn                      = (known after apply)
@@ -118,7 +118,7 @@ Terraform will perform the following actions:
                 ubuntu:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3HIUrr6iRefESWSlgO8y+zFjJH27t7WO4atyPLGqLAi1GesgJD1zTnzE/KKGUAndumJkbhZN6XbFsbojpxNGONJi+NfocGFgUYdK5fSv+/m7zcLWWqxovUHP0FfLhWjzMFWahBybZDK9p+QKAdnPAgHzmC0Jfn+PM3VrbvfiNnai3rQiIMvxIExMsqn3LSc+BYlliS72nv+BWyufLVCJ3arVh9OsvnvbAKefKkNkTl1G8nQDYowL/57teF+Z53lNZh3ywkWaCgVXYQw+/4H8xcqG38frBrSEtJWcx2E0VGqpoAZ1fwZHp7zgKCsTF5SrGXpd7hX6z+45h2zTRZTFH za@za-Lenovo-IdeaPad-S340-15IWL
             EOT
         }
-      + name                      = "test"
+      + name                      = "iac-way"
       + network_acceleration_type = "standard"
       + platform_id               = "standard-v1"
       + service_account_id        = (known after apply)
@@ -176,21 +176,30 @@ Do you want to perform these actions?
 
   Enter a value: yes
 
-yandex_compute_instance.test: Creating...
-yandex_compute_instance.test: Still creating... [00m10s elapsed]
-yandex_compute_instance.test: Still creating... [00m20s elapsed]
-yandex_compute_instance.test: Still creating... [00m30s elapsed]
-yandex_compute_instance.test: Creation complete after 34s [id=fhmufk2vj45qsom88auv]
+yandex_compute_instance.iac_way: Creating...
+yandex_compute_instance.iac_way: Still creating... [00m10s elapsed]
+yandex_compute_instance.iac_way: Still creating... [00m20s elapsed]
+yandex_compute_instance.iac_way: Still creating... [00m30s elapsed]
+yandex_compute_instance.iac_way: Still creating... [00m40s elapsed]
+yandex_compute_instance.iac_way: Still creating... [00m50s elapsed]
+yandex_compute_instance.iac_way: Still creating... [01m00s elapsed]
+yandex_compute_instance.iac_way: Still creating... [01m10s elapsed]
+yandex_compute_instance.iac_way: Still creating... [01m20s elapsed]
+yandex_compute_instance.iac_way: Still creating... [01m30s elapsed]
+yandex_compute_instance.iac_way: Still creating... [01m40s elapsed]
+yandex_compute_instance.iac_way: Still creating... [01m50s elapsed]
+yandex_compute_instance.iac_way: Still creating... [02m00s elapsed]
+yandex_compute_instance.iac_way: Creation complete after 2m9s [id=fhm7smb2rmk1js8mbbea]
 
 Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 ++ ls
-main.tf  provider.tf  run.sh  terraform.tfstate  terraform.tfstate.backup
-++ yc compute instance get --full --name test --format json
+main.tf  provider.tf  run.log  run.sh  terraform.tfstate  terraform.tfstate.backup
+++ yc compute instance get --full --name iac-way --format json
 {
-  "id": "fhmufk2vj45qsom88auv",
+  "id": "fhm7smb2rmk1js8mbbea",
   "folder_id": "b1gmesrdjgklgkvcp704",
-  "created_at": "2025-09-22T05:44:44Z",
-  "name": "test",
+  "created_at": "2025-09-23T17:13:12Z",
+  "name": "iac-way",
   "zone_id": "ru-central1-a",
   "platform_id": "standard-v1",
   "resources": {
@@ -210,19 +219,19 @@ main.tf  provider.tf  run.sh  terraform.tfstate  terraform.tfstate.backup
   },
   "boot_disk": {
     "mode": "READ_WRITE",
-    "device_name": "fhm85m1r5lchklvksbg5",
+    "device_name": "fhmn1rff74qppjrjn2un",
     "auto_delete": true,
-    "disk_id": "fhm85m1r5lchklvksbg5"
+    "disk_id": "fhmn1rff74qppjrjn2un"
   },
   "network_interfaces": [
     {
       "index": "0",
-      "mac_address": "d0:0d:1e:7d:05:f9",
+      "mac_address": "d0:0d:7e:59:62:dd",
       "subnet_id": "e9bop98iu12teftg4uj8",
       "primary_v4_address": {
-        "address": "10.128.0.35",
+        "address": "10.128.0.22",
         "one_to_one_nat": {
-          "address": "89.169.149.16",
+          "address": "158.160.32.105",
           "ip_version": "IPV4"
         }
       }
@@ -232,7 +241,7 @@ main.tf  provider.tf  run.sh  terraform.tfstate  terraform.tfstate.backup
     "ssh_authorization": "OS_LOGIN"
   },
   "gpu_settings": {},
-  "fqdn": "fhmufk2vj45qsom88auv.auto.internal",
+  "fqdn": "fhm7smb2rmk1js8mbbea.auto.internal",
   "scheduling_policy": {},
   "network_settings": {
     "type": "STANDARD"
@@ -245,19 +254,22 @@ main.tf  provider.tf  run.sh  terraform.tfstate  terraform.tfstate.backup
   }
 }
 
+++ read -n 1 -s -r -p 'press any key to continue...'
+press any key to continue...++ echo ''
+
 ++ terraform destroy
-yandex_compute_instance.test: Refreshing state... [id=fhmufk2vj45qsom88auv]
+yandex_compute_instance.iac_way: Refreshing state... [id=fhm7smb2rmk1js8mbbea]
 
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
   - destroy
 
 Terraform will perform the following actions:
 
-  # yandex_compute_instance.test will be destroyed
-  - resource "yandex_compute_instance" "test" {
-      - created_at                = "2025-09-22T05:44:44Z" -> null
+  # yandex_compute_instance.iac_way will be destroyed
+  - resource "yandex_compute_instance" "iac_way" {
+      - created_at                = "2025-09-23T17:13:12Z" -> null
       - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
-      - fqdn                      = "fhmufk2vj45qsom88auv.auto.internal" -> null
+      - fqdn                      = "fhm7smb2rmk1js8mbbea.auto.internal" -> null
       - hardware_generation       = [
           - {
               - generation2_features = []
@@ -268,14 +280,14 @@ Terraform will perform the following actions:
                 ]
             },
         ] -> null
-      - id                        = "fhmufk2vj45qsom88auv" -> null
+      - id                        = "fhm7smb2rmk1js8mbbea" -> null
       - labels                    = {} -> null
       - metadata                  = {
           - "ssh-keys" = <<-EOT
                 ubuntu:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3HIUrr6iRefESWSlgO8y+zFjJH27t7WO4atyPLGqLAi1GesgJD1zTnzE/KKGUAndumJkbhZN6XbFsbojpxNGONJi+NfocGFgUYdK5fSv+/m7zcLWWqxovUHP0FfLhWjzMFWahBybZDK9p+QKAdnPAgHzmC0Jfn+PM3VrbvfiNnai3rQiIMvxIExMsqn3LSc+BYlliS72nv+BWyufLVCJ3arVh9OsvnvbAKefKkNkTl1G8nQDYowL/57teF+Z53lNZh3ywkWaCgVXYQw+/4H8xcqG38frBrSEtJWcx2E0VGqpoAZ1fwZHp7zgKCsTF5SrGXpd7hX6z+45h2zTRZTFH za@za-Lenovo-IdeaPad-S340-15IWL
             EOT
         } -> null
-      - name                      = "test" -> null
+      - name                      = "iac-way" -> null
       - network_acceleration_type = "standard" -> null
       - platform_id               = "standard-v1" -> null
       - status                    = "running" -> null
@@ -284,8 +296,8 @@ Terraform will perform the following actions:
 
       - boot_disk {
           - auto_delete = true -> null
-          - device_name = "fhm85m1r5lchklvksbg5" -> null
-          - disk_id     = "fhm85m1r5lchklvksbg5" -> null
+          - device_name = "fhmn1rff74qppjrjn2un" -> null
+          - disk_id     = "fhmn1rff74qppjrjn2un" -> null
           - mode        = "READ_WRITE" -> null
 
           - initialize_params {
@@ -307,12 +319,12 @@ Terraform will perform the following actions:
 
       - network_interface {
           - index              = 0 -> null
-          - ip_address         = "10.128.0.35" -> null
+          - ip_address         = "10.128.0.22" -> null
           - ipv4               = true -> null
           - ipv6               = false -> null
-          - mac_address        = "d0:0d:1e:7d:05:f9" -> null
+          - mac_address        = "d0:0d:7e:59:62:dd" -> null
           - nat                = true -> null
-          - nat_ip_address     = "89.169.149.16" -> null
+          - nat_ip_address     = "158.160.32.105" -> null
           - nat_ip_version     = "IPV4" -> null
           - security_group_ids = [] -> null
           - subnet_id          = "e9bop98iu12teftg4uj8" -> null
@@ -345,12 +357,14 @@ Do you really want to destroy all resources?
 
   Enter a value: yes
 
-yandex_compute_instance.test: Destroying... [id=fhmufk2vj45qsom88auv]
-yandex_compute_instance.test: Still destroying... [id=fhmufk2vj45qsom88auv, 00m10s elapsed]
-yandex_compute_instance.test: Still destroying... [id=fhmufk2vj45qsom88auv, 00m20s elapsed]
-yandex_compute_instance.test: Still destroying... [id=fhmufk2vj45qsom88auv, 00m30s elapsed]
-yandex_compute_instance.test: Still destroying... [id=fhmufk2vj45qsom88auv, 00m40s elapsed]
-yandex_compute_instance.test: Destruction complete after 40s
+yandex_compute_instance.iac_way: Destroying... [id=fhm7smb2rmk1js8mbbea]
+yandex_compute_instance.iac_way: Still destroying... [id=fhm7smb2rmk1js8mbbea, 00m10s elapsed]
+yandex_compute_instance.iac_way: Still destroying... [id=fhm7smb2rmk1js8mbbea, 00m20s elapsed]
+yandex_compute_instance.iac_way: Still destroying... [id=fhm7smb2rmk1js8mbbea, 00m30s elapsed]
+yandex_compute_instance.iac_way: Still destroying... [id=fhm7smb2rmk1js8mbbea, 00m40s elapsed]
+yandex_compute_instance.iac_way: Still destroying... [id=fhm7smb2rmk1js8mbbea, 00m50s elapsed]
+yandex_compute_instance.iac_way: Still destroying... [id=fhm7smb2rmk1js8mbbea, 01m01s elapsed]
+yandex_compute_instance.iac_way: Destruction complete after 1m6s
 
 Destroy complete! Resources: 1 destroyed.
 ++ set +x

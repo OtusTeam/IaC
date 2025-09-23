@@ -1,5 +1,5 @@
-resource "yandex_compute_instance" "test" {
-  name = "test"
+resource "yandex_compute_instance" "iac_way" {
+  name = "iac-way"
 
   resources {
     cores  = 2
