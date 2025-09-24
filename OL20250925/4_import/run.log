@@ -1,0 +1,202 @@
+za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/OL20250925/4_import$ ./run.sh 
++ VM_NAME=import
++ YC_IMAGE_ID=fd8pecdhv50nec1qf9im
++ YC_SUBNET_ID=e9bop98iu12teftg4uj8
++ yc compute instance create --name import --hostname import --zone=ru-central1-a --create-boot-disk size=20GB,image-id=fd8pecdhv50nec1qf9im --cores=2 --memory=2G --core-fraction=20 --preemptible --network-interface subnet-id=e9bop98iu12teftg4uj8,ipv4-address=auto,nat-ip-version=ipv4 --ssh-key /home/za/.ssh/id_rsa.pub
+done (37s)
+id: fhmuil8scu9i8f7nfvop
+folder_id: b1gmesrdjgklgkvcp704
+created_at: "2025-09-24T05:32:20Z"
+name: import
+zone_id: ru-central1-a
+platform_id: standard-v2
+resources:
+  memory: "2147483648"
+  cores: "2"
+  core_fraction: "20"
+status: RUNNING
+metadata_options:
+  gce_http_endpoint: ENABLED
+  aws_v1_http_endpoint: ENABLED
+  gce_http_token: ENABLED
+  aws_v1_http_token: DISABLED
+boot_disk:
+  mode: READ_WRITE
+  device_name: fhmptj90g8f0s9vggiau
+  auto_delete: true
+  disk_id: fhmptj90g8f0s9vggiau
+network_interfaces:
+  - index: "0"
+    mac_address: d0:0d:1e:95:51:c6
+    subnet_id: e9bop98iu12teftg4uj8
+    primary_v4_address:
+      address: 10.128.0.6
+      one_to_one_nat:
+        address: 158.160.58.228
+        ip_version: IPV4
+serial_port_settings:
+  ssh_authorization: OS_LOGIN
+gpu_settings: {}
+fqdn: import.ru-central1.internal
+scheduling_policy:
+  preemptible: true
+network_settings:
+  type: STANDARD
+placement_policy: {}
+hardware_generation:
+  legacy_features:
+    pci_topology: PCI_TOPOLOGY_V1
+
+++ yc compute instance get --name import --format json
+++ jq -r .id
++ VM_ID=fhmuil8scu9i8f7nfvop
++ rm terraform.tfstate
++ ls
+create_vm.sh  get_vm_id.sh  import.sh  provider.tf  run.sh  variables.tf  vm_bulk.tf
++ terraform import yandex_compute_instance.import fhmuil8scu9i8f7nfvop
+yandex_compute_instance.import: Importing from ID "fhmuil8scu9i8f7nfvop"...
+yandex_compute_instance.import: Import prepared!
+  Prepared yandex_compute_instance for import
+yandex_compute_instance.import: Refreshing state... [id=fhmuil8scu9i8f7nfvop]
+
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+
++ cat terraform.tfstate
+{
+  "version": 4,
+  "terraform_version": "1.13.1",
+  "serial": 1,
+  "lineage": "d6fb98c6-47bb-9766-6363-c824bc7a07af",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "yandex_compute_instance",
+      "name": "import",
+      "provider": "provider[\"registry.terraform.io/yandex-cloud/yandex\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "allow_recreate": null,
+            "allow_stopping_for_update": null,
+            "boot_disk": [
+              {
+                "auto_delete": true,
+                "device_name": "fhmptj90g8f0s9vggiau",
+                "disk_id": "fhmptj90g8f0s9vggiau",
+                "initialize_params": [
+                  {
+                    "block_size": 4096,
+                    "description": "",
+                    "image_id": "fd8pecdhv50nec1qf9im",
+                    "kms_key_id": "",
+                    "name": "",
+                    "size": 20,
+                    "snapshot_id": "",
+                    "type": "network-hdd"
+                  }
+                ],
+                "mode": "READ_WRITE"
+              }
+            ],
+            "created_at": "2025-09-24T05:32:20Z",
+            "description": "",
+            "filesystem": [],
+            "folder_id": "b1gmesrdjgklgkvcp704",
+            "fqdn": "import.ru-central1.internal",
+            "gpu_cluster_id": "",
+            "hardware_generation": [
+              {
+                "generation2_features": [],
+                "legacy_features": [
+                  {
+                    "pci_topology": "PCI_TOPOLOGY_V1"
+                  }
+                ]
+              }
+            ],
+            "hostname": "import",
+            "id": "fhmuil8scu9i8f7nfvop",
+            "labels": {},
+            "local_disk": [],
+            "maintenance_grace_period": "",
+            "maintenance_policy": null,
+            "metadata": {
+              "ssh-keys": "yc-user:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3HIUrr6iRefESWSlgO8y+zFjJH27t7WO4atyPLGqLAi1GesgJD1zTnzE/KKGUAndumJkbhZN6XbFsbojpxNGONJi+NfocGFgUYdK5fSv+/m7zcLWWqxovUHP0FfLhWjzMFWahBybZDK9p+QKAdnPAgHzmC0Jfn+PM3VrbvfiNnai3rQiIMvxIExMsqn3LSc+BYlliS72nv+BWyufLVCJ3arVh9OsvnvbAKefKkNkTl1G8nQDYowL/57teF+Z53lNZh3ywkWaCgVXYQw+/4H8xcqG38frBrSEtJWcx2E0VGqpoAZ1fwZHp7zgKCsTF5SrGXpd7hX6z+45h2zTRZTFH za@za-Lenovo-IdeaPad-S340-15IWL\n",
+              "user-data": "#cloud-config\ndatasource:\n Ec2:\n  strict_id: false\nssh_pwauth: no\nusers:\n- name: yc-user\n  sudo: ALL=(ALL) NOPASSWD:ALL\n  shell: /bin/bash\n  ssh_authorized_keys:\n  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3HIUrr6iRefESWSlgO8y+zFjJH27t7WO4atyPLGqLAi1GesgJD1zTnzE/KKGUAndumJkbhZN6XbFsbojpxNGONJi+NfocGFgUYdK5fSv+/m7zcLWWqxovUHP0FfLhWjzMFWahBybZDK9p+QKAdnPAgHzmC0Jfn+PM3VrbvfiNnai3rQiIMvxIExMsqn3LSc+BYlliS72nv+BWyufLVCJ3arVh9OsvnvbAKefKkNkTl1G8nQDYowL/57teF+Z53lNZh3ywkWaCgVXYQw+/4H8xcqG38frBrSEtJWcx2E0VGqpoAZ1fwZHp7zgKCsTF5SrGXpd7hX6z+45h2zTRZTFH za@za-Lenovo-IdeaPad-S340-15IWL\n\n"
+            },
+            "metadata_options": [
+              {
+                "aws_v1_http_endpoint": 1,
+                "aws_v1_http_token": 2,
+                "gce_http_endpoint": 1,
+                "gce_http_token": 1
+              }
+            ],
+            "name": "import",
+            "network_acceleration_type": "standard",
+            "network_interface": [
+              {
+                "dns_record": [],
+                "index": 0,
+                "ip_address": "10.128.0.6",
+                "ipv4": true,
+                "ipv6": false,
+                "ipv6_address": "",
+                "ipv6_dns_record": [],
+                "mac_address": "d0:0d:1e:95:51:c6",
+                "nat": true,
+                "nat_dns_record": [],
+                "nat_ip_address": "158.160.58.228",
+                "nat_ip_version": "IPV4",
+                "security_group_ids": [],
+                "subnet_id": "e9bop98iu12teftg4uj8"
+              }
+            ],
+            "placement_policy": [
+              {
+                "host_affinity_rules": [],
+                "placement_group_id": "",
+                "placement_group_partition": 0
+              }
+            ],
+            "platform_id": "standard-v2",
+            "resources": [
+              {
+                "core_fraction": 20,
+                "cores": 2,
+                "gpus": 0,
+                "memory": 2
+              }
+            ],
+            "scheduling_policy": [
+              {
+                "preemptible": true
+              }
+            ],
+            "secondary_disk": [],
+            "service_account_id": "",
+            "status": "running",
+            "timeouts": null,
+            "zone": "ru-central1-a"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjMwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9"
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}
++ terraform show -json
+{"format_version":"1.0","terraform_version":"1.13.1","values":{"root_module":{"resources":[{"address":"yandex_compute_instance.import","mode":"managed","type":"yandex_compute_instance","name":"import","provider_name":"registry.terraform.io/yandex-cloud/yandex","schema_version":1,"values":{"allow_recreate":null,"allow_stopping_for_update":null,"boot_disk":[{"auto_delete":true,"device_name":"fhmptj90g8f0s9vggiau","disk_id":"fhmptj90g8f0s9vggiau","initialize_params":[{"block_size":4096,"description":"","image_id":"fd8pecdhv50nec1qf9im","kms_key_id":"","name":"","size":20,"snapshot_id":"","type":"network-hdd"}],"mode":"READ_WRITE"}],"created_at":"2025-09-24T05:32:20Z","description":"","filesystem":[],"folder_id":"b1gmesrdjgklgkvcp704","fqdn":"import.ru-central1.internal","gpu_cluster_id":"","hardware_generation":[{"generation2_features":[],"legacy_features":[{"pci_topology":"PCI_TOPOLOGY_V1"}]}],"hostname":"import","id":"fhmuil8scu9i8f7nfvop","labels":{},"local_disk":[],"maintenance_grace_period":"","maintenance_policy":null,"metadata":{"ssh-keys":"yc-user:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3HIUrr6iRefESWSlgO8y+zFjJH27t7WO4atyPLGqLAi1GesgJD1zTnzE/KKGUAndumJkbhZN6XbFsbojpxNGONJi+NfocGFgUYdK5fSv+/m7zcLWWqxovUHP0FfLhWjzMFWahBybZDK9p+QKAdnPAgHzmC0Jfn+PM3VrbvfiNnai3rQiIMvxIExMsqn3LSc+BYlliS72nv+BWyufLVCJ3arVh9OsvnvbAKefKkNkTl1G8nQDYowL/57teF+Z53lNZh3ywkWaCgVXYQw+/4H8xcqG38frBrSEtJWcx2E0VGqpoAZ1fwZHp7zgKCsTF5SrGXpd7hX6z+45h2zTRZTFH za@za-Lenovo-IdeaPad-S340-15IWL\n","user-data":"#cloud-config\ndatasource:\n Ec2:\n  strict_id: false\nssh_pwauth: no\nusers:\n- name: yc-user\n  sudo: ALL=(ALL) NOPASSWD:ALL\n  shell: /bin/bash\n  ssh_authorized_keys:\n  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3HIUrr6iRefESWSlgO8y+zFjJH27t7WO4atyPLGqLAi1GesgJD1zTnzE/KKGUAndumJkbhZN6XbFsbojpxNGONJi+NfocGFgUYdK5fSv+/m7zcLWWqxovUHP0FfLhWjzMFWahBybZDK9p+QKAdnPAgHzmC0Jfn+PM3VrbvfiNnai3rQiIMvxIExMsqn3LSc+BYlliS72nv+BWyufLVCJ3arVh9OsvnvbAKefKkNkTl1G8nQDYowL/57teF+Z53lNZh3ywkWaCgVXYQw+/4H8xcqG38frBrSEtJWcx2E0VGqpoAZ1fwZHp7zgKCsTF5SrGXpd7hX6z+45h2zTRZTFH za@za-Lenovo-IdeaPad-S340-15IWL\n\n"},"metadata_options":[{"aws_v1_http_endpoint":1,"aws_v1_http_token":2,"gce_http_endpoint":1,"gce_http_token":1}],"name":"import","network_acceleration_type":"standard","network_interface":[{"dns_record":[],"index":0,"ip_address":"10.128.0.6","ipv4":true,"ipv6":false,"ipv6_address":"","ipv6_dns_record":[],"mac_address":"d0:0d:1e:95:51:c6","nat":true,"nat_dns_record":[],"nat_ip_address":"158.160.58.228","nat_ip_version":"IPV4","security_group_ids":[],"subnet_id":"e9bop98iu12teftg4uj8"}],"placement_policy":[{"host_affinity_rules":[],"placement_group_id":"","placement_group_partition":0}],"platform_id":"standard-v2","resources":[{"core_fraction":20,"cores":2,"gpus":0,"memory":2}],"scheduling_policy":[{"preemptible":true}],"secondary_disk":[],"service_account_id":"","status":"running","timeouts":null,"zone":"ru-central1-a"},"sensitive_values":{"boot_disk":[{"initialize_params":[{}]}],"filesystem":[],"hardware_generation":[{"generation2_features":[],"legacy_features":[{}]}],"labels":{},"local_disk":[],"metadata":{},"metadata_options":[{}],"network_interface":[{"dns_record":[],"ipv6_dns_record":[],"nat_dns_record":[],"security_group_ids":[]}],"placement_policy":[{"host_affinity_rules":[]}],"resources":[{}],"scheduling_policy":[{}],"secondary_disk":[]}}]}}}
++ read -n 1 -s -r -p 'Instance of VM will be DELETED in the cloud, press any key to continue...'
+Instance of VM will be DELETED in the cloud, press any key to continue...+ echo ''
+
++ yc compute instance delete --id fhmuil8scu9i8f7nfvop
+done (33s)

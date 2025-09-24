@@ -1,0 +1,62 @@
+{
+  "id": "fhmpscaea88bualv7m8j",
+  "folder_id": "b1gmesrdjgklgkvcp704",
+  "created_at": "2025-09-24T06:59:30Z",
+  "name": "yc-cli",
+  "zone_id": "ru-central1-a",
+  "platform_id": "standard-v2",
+  "resources": {
+    "memory": "2147483648",
+    "cores": "2",
+    "core_fraction": "20"
+  },
+  "status": "RUNNING",
+  "metadata": {
+    "ssh-keys": "yc-user:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3HIUrr6iRefESWSlgO8y+zFjJH27t7WO4atyPLGqLAi1GesgJD1zTnzE/KKGUAndumJkbhZN6XbFsbojpxNGONJi+NfocGFgUYdK5fSv+/m7zcLWWqxovUHP0FfLhWjzMFWahBybZDK9p+QKAdnPAgHzmC0Jfn+PM3VrbvfiNnai3rQiIMvxIExMsqn3LSc+BYlliS72nv+BWyufLVCJ3arVh9OsvnvbAKefKkNkTl1G8nQDYowL/57teF+Z53lNZh3ywkWaCgVXYQw+/4H8xcqG38frBrSEtJWcx2E0VGqpoAZ1fwZHp7zgKCsTF5SrGXpd7hX6z+45h2zTRZTFH za@za-Lenovo-IdeaPad-S340-15IWL\n",
+    "user-data": "#cloud-config\ndatasource:\n Ec2:\n  strict_id: false\nssh_pwauth: no\nusers:\n- name: yc-user\n  sudo: ALL=(ALL) NOPASSWD:ALL\n  shell: /bin/bash\n  ssh_authorized_keys:\n  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3HIUrr6iRefESWSlgO8y+zFjJH27t7WO4atyPLGqLAi1GesgJD1zTnzE/KKGUAndumJkbhZN6XbFsbojpxNGONJi+NfocGFgUYdK5fSv+/m7zcLWWqxovUHP0FfLhWjzMFWahBybZDK9p+QKAdnPAgHzmC0Jfn+PM3VrbvfiNnai3rQiIMvxIExMsqn3LSc+BYlliS72nv+BWyufLVCJ3arVh9OsvnvbAKefKkNkTl1G8nQDYowL/57teF+Z53lNZh3ywkWaCgVXYQw+/4H8xcqG38frBrSEtJWcx2E0VGqpoAZ1fwZHp7zgKCsTF5SrGXpd7hX6z+45h2zTRZTFH za@za-Lenovo-IdeaPad-S340-15IWL\n\n"
+  },
+  "metadata_options": {
+    "gce_http_endpoint": "ENABLED",
+    "aws_v1_http_endpoint": "ENABLED",
+    "gce_http_token": "ENABLED",
+    "aws_v1_http_token": "DISABLED"
+  },
+  "boot_disk": {
+    "mode": "READ_WRITE",
+    "device_name": "fhmjrcrbh8449l7rh4vt",
+    "auto_delete": true,
+    "disk_id": "fhmjrcrbh8449l7rh4vt"
+  },
+  "network_interfaces": [
+    {
+      "index": "0",
+      "mac_address": "d0:0d:19:e3:14:e5",
+      "subnet_id": "e9bop98iu12teftg4uj8",
+      "primary_v4_address": {
+        "address": "10.128.0.19",
+        "one_to_one_nat": {
+          "address": "89.169.144.149",
+          "ip_version": "IPV4"
+        }
+      }
+    }
+  ],
+  "serial_port_settings": {
+    "ssh_authorization": "OS_LOGIN"
+  },
+  "gpu_settings": {},
+  "fqdn": "yc-cli.ru-central1.internal",
+  "scheduling_policy": {
+    "preemptible": true
+  },
+  "network_settings": {
+    "type": "STANDARD"
+  },
+  "placement_policy": {},
+  "hardware_generation": {
+    "legacy_features": {
+      "pci_topology": "PCI_TOPOLOGY_V1"
+    }
+  }
+}
+
