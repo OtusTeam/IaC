@@ -1,0 +1,62 @@
+za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/OL20250925/yc_terraformer/network$ ./run.sh
+++ read -p 'ВНИМАНИЕ!!! Относящиеся к Terraform файлы и каталог будет стерты (Terraform'\''s files and dir will be erased)! Продолжить (Continue)? (Y/[n]) ' -n 1 -r
+ВНИМАНИЕ!!! Относящиеся к Terraform файлы и каталог будет стерты (Terraform's files and dir will be erased)! Продолжить (Continue)? (Y/[n]) Y++ [[ Y =~ ^[Y]$ ]]
+++ echo 'Продолжаем выполнение скрипта (script will run!)'
+Продолжаем выполнение скрипта (script will run!)
+++ rm -r .terraform
+++ rm .terraform.lock.hcl
+++ rm .terraform.tfstate.lock.info
+rm: невозможно удалить '.terraform.tfstate.lock.info': Нет такого файла или каталога
+++ rm terraform.tfstate
+++ rm terraform.tfstate.backup
+++ rm provider.tf variables_4_init.tf yandex_vpc_network_default_enpjr0b65u0olvuotmdf.tf yandex_vpc_subnet_default-ru-central1-a_enpjr0b65u0olvuotmdf.tf yandex_vpc_subnet_default-ru-central1-b_enpjr0b65u0olvuotmdf.tf yandex_vpc_subnet_default-ru-central1-c_enpjr0b65u0olvuotmdf.tf yandex_vpc_subnet_default-ru-central1-d_enpjr0b65u0olvuotmdf.tf
+++ rm '*.tfvars'
+rm: невозможно удалить '*.tfvars': Нет такого файла или каталога
+++ cp -r init/.terraform init/.terraform.lock.hcl init/.terraform.tfstate.lock.info ./
+++ cp -r init/provider.tf init/variables_4_init.tf ./
+++ ./yc-terraformer.py --import-ids --with-state --recursive vpc network default enpjr0b65u0olvuotmdf
+2025-09-25 21:54:07,375 - INFO - Variables: vpc, network, default, enpjr0b65u0olvuotmdf
+2025-09-25 21:54:10,697 - INFO - Import success: resource vpc_network with name:['default_enpjr0b65u0olvuotmdf']
+2025-09-25 21:54:10,697 - INFO - service:vpc
+2025-09-25 21:54:10,698 - INFO - Recursive import enabled
+2025-09-25 21:54:13,941 - INFO - Import success: resource vpc_subnet with name:['default-ru-central1-c_enpjr0b65u0olvuotmdf']
+2025-09-25 21:54:16,828 - INFO - Import success: resource vpc_subnet with name:['default-ru-central1-b_enpjr0b65u0olvuotmdf']
+2025-09-25 21:54:19,668 - INFO - Import success: resource vpc_subnet with name:['default-ru-central1-a_enpjr0b65u0olvuotmdf']
+2025-09-25 21:54:22,535 - INFO - Import success: resource vpc_subnet with name:['default-ru-central1-d_enpjr0b65u0olvuotmdf']
+2025-09-25 21:54:22,537 - INFO - Write manifest file:yandex_vpc_network_default_enpjr0b65u0olvuotmdf.tf
+2025-09-25 21:54:22,538 - INFO - Write manifest file:yandex_vpc_subnet_default-ru-central1-c_enpjr0b65u0olvuotmdf.tf
+2025-09-25 21:54:22,539 - INFO - Write manifest file:yandex_vpc_subnet_default-ru-central1-b_enpjr0b65u0olvuotmdf.tf
+2025-09-25 21:54:22,540 - INFO - Write manifest file:yandex_vpc_subnet_default-ru-central1-a_enpjr0b65u0olvuotmdf.tf
+2025-09-25 21:54:22,540 - INFO - Write manifest file:yandex_vpc_subnet_default-ru-central1-d_enpjr0b65u0olvuotmdf.tf
+2025-09-25 21:54:22,540 - INFO - Terraform manifests creation completed!
+++ cat yandex_vpc_network_default_enpjr0b65u0olvuotmdf.tf
+resource "yandex_vpc_network" "default_enpjr0b65u0olvuotmdf" {
+	description = "Auto-created network"
+	folder_id = "b1gmesrdjgklgkvcp704"
+	labels = {
+	}
+	name = "default"
+}
+++ cat yandex_vpc_subnet_default-ru-central1-c_enpjr0b65u0olvuotmdf.tf
+resource "yandex_vpc_subnet" "default-ru-central1-c_enpjr0b65u0olvuotmdf" {
+	description = "Auto-created default subnet for zone ru-central1-c in default"
+	folder_id = "b1gmesrdjgklgkvcp704"
+	labels = {
+	}
+	name = "default-ru-central1-c"
+	network_id = "enpjr0b65u0olvuotmdf"
+	v4_cidr_blocks = ["10.130.0.0/24"]
+	zone = "ru-central1-c"
+}
+++ terraform plan
+yandex_vpc_subnet.default-ru-central1-d_enpjr0b65u0olvuotmdf: Refreshing state... [id=fl8n8apm16arg05hh4k3]
+yandex_vpc_subnet.default-ru-central1-c_enpjr0b65u0olvuotmdf: Refreshing state... [id=b0c677i6avc5inub53kj]
+yandex_vpc_subnet.default-ru-central1-b_enpjr0b65u0olvuotmdf: Refreshing state... [id=e2l3co6r10mp14ro4ff6]
+yandex_vpc_subnet.default-ru-central1-a_enpjr0b65u0olvuotmdf: Refreshing state... [id=e9bop98iu12teftg4uj8]
+yandex_vpc_network.default_enpjr0b65u0olvuotmdf: Refreshing state... [id=enpjr0b65u0olvuotmdf]
+
+No changes. Your infrastructure matches the configuration.
+
+Terraform has compared your real infrastructure against your configuration and found no differences, so no changes are needed.
+++ set +x
+

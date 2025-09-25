@@ -1,0 +1,101 @@
+za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/OL20250925/yc_terraformer$ ./run.sh
+++ read -p 'ВНИМАНИЕ!!! Относящиеся к Terraform файлы и каталог будет стерты (Terraform'\''s files and dir will be erased)! Продолжить (Continue)? (Y/[n]) ' -n 1 -r
+ВНИМАНИЕ!!! Относящиеся к Terraform файлы и каталог будет стерты (Terraform's files and dir will be erased)! Продолжить (Continue)? (Y/[n]) 
+++ [[ '' =~ ^[Y]$ ]]
+++ echo 'Выходим из скрипта (script is canceled)'
+Выходим из скрипта (script is canceled)
+++ exit 1
+
+za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/OL20250925/yc_terraformer$ ./run.sh
+++ read -p 'ВНИМАНИЕ!!! Относящиеся к Terraform файлы и каталог будет стерты (Terraform'\''s files and dir will be erased)! Продолжить (Continue)? (Y/[n]) ' -n 1 -r
+ВНИМАНИЕ!!! Относящиеся к Terraform файлы и каталог будет стерты (Terraform's files and dir will be erased)! Продолжить (Continue)? (Y/[n]) Y++ [[ Y =~ ^[Y]$ ]]
+++ echo 'Продолжаем выполнение скрипта (script will run!)'
+Продолжаем выполнение скрипта (script will run!)
+++ rm -r .terraform
+rm: невозможно удалить '.terraform': Нет такого файла или каталога
+++ rm .terraform.lock.hcl
+rm: невозможно удалить '.terraform.lock.hcl': Нет такого файла или каталога
+++ rm .terraform.tfstate.lock.info
+rm: невозможно удалить '.terraform.tfstate.lock.info': Нет такого файла или каталога
+++ rm terraform.tfstate
+rm: невозможно удалить 'terraform.tfstate': Нет такого файла или каталога
+++ rm 'terraform.tfstate.*'
+rm: невозможно удалить 'terraform.tfstate.*': Нет такого файла или каталога
+++ rm '*.tf'
+rm: невозможно удалить '*.tf': Нет такого файла или каталога
+++ rm '*.tfvars'
+rm: невозможно удалить '*.tfvars': Нет такого файла или каталога
+++ cp -r init/.terraform init/.terraform.lock.hcl init/.terraform.tfstate.lock.info ./
+++ cp -r init/provider.tf init/variables_4_init.tf ./
+++ VM_NAME=hello
++++ yc compute instance get --name hello --format json
++++ jq -r .id
+++ VM_ID=fhm2lcv4n95lnl5ka1da
+++ ./yc-terraformer.py --import-metadata --with-state compute instance hello fhm2lcv4n95lnl5ka1da
+2025-09-25 21:46:26,158 - INFO - Variables: compute, instance, hello, fhm2lcv4n95lnl5ka1da
+2025-09-25 21:46:29,545 - INFO - Import success: resource compute_instance with name:['hello_fhm2lcv4n95lnl5ka1da']
+2025-09-25 21:46:29,545 - INFO - service:compute
+2025-09-25 21:46:29,546 - INFO - Write manifest file:yandex_compute_instance_hello_fhm2lcv4n95lnl5ka1da.tf
+2025-09-25 21:46:29,547 - INFO - Terraform manifests creation completed!
+++ cat yandex_compute_instance_hello_fhm2lcv4n95lnl5ka1da.tf
+resource "yandex_compute_instance" "hello_fhm2lcv4n95lnl5ka1da" {
+	boot_disk {
+		auto_delete = true
+		device_name = "fhmtah90vt5i36d8cr5j"
+		disk_id = var.disk_id
+		initialize_params {
+			block_size = 4096
+			image_id = var.image_id
+			size = 20
+			type = "network-hdd"
+		}
+		mode = "READ_WRITE"
+	}
+	folder_id = var.folder_id
+	hostname = "hello"
+	labels = {
+	}
+	metadata = {
+		ssh-keys = "yc-user:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3HIUrr6iRefESWSlgO8y+zFjJH27t7WO4atyPLGqLAi1GesgJD1zTnzE/KKGUAndumJkbhZN6XbFsbojpxNGONJi+NfocGFgUYdK5fSv+/m7zcLWWqxovUHP0FfLhWjzMFWahBybZDK9p+QKAdnPAgHzmC0Jfn+PM3VrbvfiNnai3rQiIMvxIExMsqn3LSc+BYlliS72nv+BWyufLVCJ3arVh9OsvnvbAKefKkNkTl1G8nQDYowL/57teF+Z53lNZh3ywkWaCgVXYQw+/4H8xcqG38frBrSEtJWcx2E0VGqpoAZ1fwZHp7zgKCsTF5SrGXpd7hX6z+45h2zTRZTFH za@za-Lenovo-IdeaPad-S340-15IWL\n"
+		user-data = "#cloud-config\ndatasource:\n Ec2:\n  strict_id: false\nssh_pwauth: no\nusers:\n- name: yc-user\n  sudo: ALL=(ALL) NOPASSWD:ALL\n  shell: /bin/bash\n  ssh_authorized_keys:\n  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3HIUrr6iRefESWSlgO8y+zFjJH27t7WO4atyPLGqLAi1GesgJD1zTnzE/KKGUAndumJkbhZN6XbFsbojpxNGONJi+NfocGFgUYdK5fSv+/m7zcLWWqxovUHP0FfLhWjzMFWahBybZDK9p+QKAdnPAgHzmC0Jfn+PM3VrbvfiNnai3rQiIMvxIExMsqn3LSc+BYlliS72nv+BWyufLVCJ3arVh9OsvnvbAKefKkNkTl1G8nQDYowL/57teF+Z53lNZh3ywkWaCgVXYQw+/4H8xcqG38frBrSEtJWcx2E0VGqpoAZ1fwZHp7zgKCsTF5SrGXpd7hX6z+45h2zTRZTFH za@za-Lenovo-IdeaPad-S340-15IWL\n\n"
+	}
+	metadata_options {
+		aws_v1_http_endpoint = 1
+		aws_v1_http_token = 2
+		gce_http_endpoint = 1
+		gce_http_token = 1
+	}
+	name = "hello"
+	network_acceleration_type = "standard"
+	network_interface {
+		index = 0
+		ip_address = "10.128.0.23"
+		ipv4 = true
+		ipv6 = false
+		nat = true
+		subnet_id = var.subnet_id
+	}
+	placement_policy {
+		placement_group_partition = 0
+	}
+	platform_id = var.platform_id
+	resources {
+		core_fraction = 20
+		cores = 2
+		gpus = 0
+		memory = 2
+	}
+	scheduling_policy {
+		preemptible = true
+	}
+	zone = "ru-central1-a"
+}
+++ cp vars_4_instance/terraform.tfvars vars_4_instance/variables.tf ./
+++ terraform plan
+yandex_compute_instance.hello_fhm2lcv4n95lnl5ka1da: Refreshing state... [id=fhm2lcv4n95lnl5ka1da]
+
+No changes. Your infrastructure matches the configuration.
+
+Terraform has compared your real infrastructure against your configuration and found no differences, so no changes are needed.
+++ set +x
+
