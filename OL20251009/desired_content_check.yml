@@ -1,0 +1,26 @@
+---
+- name: Локальная проверка расхождений в файле (не вносит изменений с --check)
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars:
+    target_path: /tmp/example.conf
+    desired_content: |
+      # Example configuration
+      setting_a = true
+      setting_b = 42
+      # Конец файла
+
+  tasks:
+    - name: Создать целевой файл с желаемым содержимым, если его нет (с --diff будут показаны различия если они есть)
+      ansible.builtin.copy:
+        dest: "{{ target_path }}"
+        content: "{{ desired_content }}"
+        owner: "{{ lookup('env','USER') }}"
+        mode: '0644'
+      register: ensure_result
+
+    - name: Показать статус создания или изменения (с --check будет "would be changed" если файла c желаемым содержимым нет)
+      ansible.builtin.debug:
+        msg: "{{ 'файл создан или изменен' if ensure_result.changed else 'файл уже существует — изменений не требовалось' }}"

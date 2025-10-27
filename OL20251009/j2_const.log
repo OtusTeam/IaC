@@ -1,0 +1,34 @@
+(.venv) za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/OL20251009$ ./j2_const.sh
+++ jinja2 const.yml.j2
+all:
+  children:
+    webservers:
+      hosts:
+
+        web-1:
+          ansible_host: 192.168.1.1
+
+        web-2:
+          ansible_host: 192.168.1.2
+
+        web-3:
+          ansible_host: 192.168.1.3
+
+        web-4:
+          ansible_host: 192.168.1.4
+
+        web-5:
+          ansible_host: 192.168.1.5
+
+        web-6:
+          ansible_host: 192.168.1.6
+
+    loadbalancer:
+      hosts:
+        lb:
+          ansible_host: 192.168.1.100
+
+
+
+
+++ set +x

@@ -1,0 +1,31 @@
+
+- name: Configure web nodes with nginx
+  hosts: webservers
+  ...
+  roles:
+    - role: geerlingguy.nginx
+
+  tasks:
+    - name: Deploy content
+      ...
+
+- name: Configure load balancer using nginx and upstream from webservers
+  hosts: loadbalancer
+  ...
+  roles:
+    - role: geerlingguy.nginx
+
+  tasks:
+    - name: Gather backend IPs from webservers group
+      set_fact:
+        backend_servers: >-
+          {{ lookup('groups','webservers') |
+             map('extract', hostvars, ['ansible_host']) |
+             list }}
+      ...
+
+
+
+
+
+
