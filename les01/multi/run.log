@@ -1,0 +1,507 @@
+za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/les01/multi$ ./run.sh 
+++ terraform apply
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated
+with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.lemp[0] will be created
+  + resource "yandex_compute_instance" "lemp" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hardware_generation       = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = <<-EOT
+                ubuntu:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3HIUrr6iRefESWSlgO8y+zFjJH27t7WO4atyPLGqLAi1GesgJD1zTnzE/KKGUAndumJkbhZN6XbFsbojpxNGONJi+NfocGFgUYdK5fSv+/m7zcLWWqxovUHP0FfLhWjzMFWahBybZDK9p+QKAdnPAgHzmC0Jfn+PM3VrbvfiNnai3rQiIMvxIExMsqn3LSc+BYlliS72nv+BWyufLVCJ3arVh9OsvnvbAKefKkNkTl1G8nQDYowL/57teF+Z53lNZh3ywkWaCgVXYQw+/4H8xcqG38frBrSEtJWcx2E0VGqpoAZ1fwZHp7zgKCsTF5SrGXpd7hX6z+45h2zTRZTFH za@za-Lenovo-IdeaPad-S340-15IWL
+            EOT
+        }
+      + name                      = "les01-auto-lemp-1"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + status                    = (known after apply)
+      + zone                      = (known after apply)
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd89eh9ba36b7cggtan6"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index          = (known after apply)
+          + ip_address     = (known after apply)
+          + ipv4           = true
+          + ipv6           = (known after apply)
+          + ipv6_address   = (known after apply)
+          + mac_address    = (known after apply)
+          + nat            = true
+          + nat_ip_address = (known after apply)
+          + nat_ip_version = (known after apply)
+          + subnet_id      = "e9bop98iu12teftg4uj8"
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 100
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy (known after apply)
+    }
+
+  # yandex_compute_instance.lemp[1] will be created
+  + resource "yandex_compute_instance" "lemp" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hardware_generation       = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = <<-EOT
+                ubuntu:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3HIUrr6iRefESWSlgO8y+zFjJH27t7WO4atyPLGqLAi1GesgJD1zTnzE/KKGUAndumJkbhZN6XbFsbojpxNGONJi+NfocGFgUYdK5fSv+/m7zcLWWqxovUHP0FfLhWjzMFWahBybZDK9p+QKAdnPAgHzmC0Jfn+PM3VrbvfiNnai3rQiIMvxIExMsqn3LSc+BYlliS72nv+BWyufLVCJ3arVh9OsvnvbAKefKkNkTl1G8nQDYowL/57teF+Z53lNZh3ywkWaCgVXYQw+/4H8xcqG38frBrSEtJWcx2E0VGqpoAZ1fwZHp7zgKCsTF5SrGXpd7hX6z+45h2zTRZTFH za@za-Lenovo-IdeaPad-S340-15IWL
+            EOT
+        }
+      + name                      = "les01-auto-lemp-2"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + status                    = (known after apply)
+      + zone                      = (known after apply)
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd89eh9ba36b7cggtan6"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index          = (known after apply)
+          + ip_address     = (known after apply)
+          + ipv4           = true
+          + ipv6           = (known after apply)
+          + ipv6_address   = (known after apply)
+          + mac_address    = (known after apply)
+          + nat            = true
+          + nat_ip_address = (known after apply)
+          + nat_ip_version = (known after apply)
+          + subnet_id      = "e9bop98iu12teftg4uj8"
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 100
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy (known after apply)
+    }
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + instance_names   = [
+      + "les01-auto-lemp-1",
+      + "les01-auto-lemp-2",
+    ]
+  + nat_ip_addresses = [
+      + (known after apply),
+      + (known after apply),
+    ]
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+yandex_compute_instance.lemp[1]: Creating...
+yandex_compute_instance.lemp[0]: Creating...
+yandex_compute_instance.lemp[1]: Still creating... [00m10s elapsed]
+yandex_compute_instance.lemp[0]: Still creating... [00m10s elapsed]
+yandex_compute_instance.lemp[1]: Still creating... [00m20s elapsed]
+yandex_compute_instance.lemp[0]: Still creating... [00m20s elapsed]
+yandex_compute_instance.lemp[1]: Still creating... [00m30s elapsed]
+yandex_compute_instance.lemp[0]: Still creating... [00m30s elapsed]
+yandex_compute_instance.lemp[0]: Creation complete after 37s [id=fhmdlnivmdbsdqkrf8h9]
+yandex_compute_instance.lemp[1]: Creation complete after 39s [id=fhm3r728tpopdgtmgkk3]
+
+Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+instance_names = [
+  "les01-auto-lemp-1",
+  "les01-auto-lemp-2",
+]
+nat_ip_addresses = [
+  "84.252.128.15",
+  "158.160.127.103",
+]
+++ true
++++ terraform output -json nat_ip_addresses
+++ ips_json='["84.252.128.15","158.160.127.103"]'
+++ echo '["84.252.128.15","158.160.127.103"]'
+++ jq -r '.[]'
+++ read -r ip
+++ echo '==> 84.252.128.15'
+==> 84.252.128.15
+++ curl -sS http://84.252.128.15
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+++ read -r ip
+++ echo '==> 158.160.127.103'
+==> 158.160.127.103
+++ curl -sS http://158.160.127.103
+curl: (7) Failed to connect to 158.160.127.103 port 80 after 78 ms: Couldn't connect to server
+++ echo 'curl failed for 158.160.127.103'
+curl failed for 158.160.127.103
+++ read -r ip
+++ read -r -n1 -p 'Press Y to destroy or any key to wait: ' ans
+Press Y to destroy or any key to wait: n++ echo
+
+++ [[ n == \Y ]]
+++ sleep 1
+++ true
++++ terraform output -json nat_ip_addresses
+++ ips_json='["84.252.128.15","158.160.127.103"]'
+++ echo '["84.252.128.15","158.160.127.103"]'
+++ jq -r '.[]'
+++ read -r ip
+++ echo '==> 84.252.128.15'
+==> 84.252.128.15
+++ curl -sS http://84.252.128.15
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+++ read -r ip
+++ echo '==> 158.160.127.103'
+==> 158.160.127.103
+++ curl -sS http://158.160.127.103
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+++ read -r ip
+++ read -r -n1 -p 'Press Y to destroy or any key to wait: ' ans
+Press Y to destroy or any key to wait: Y++ echo
+
+++ [[ Y == \Y ]]
+++ break
+++ echo Destroying...
+Destroying...
+++ terraform destroy
+yandex_compute_instance.lemp[1]: Refreshing state... [id=fhm3r728tpopdgtmgkk3]
+yandex_compute_instance.lemp[0]: Refreshing state... [id=fhmdlnivmdbsdqkrf8h9]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated
+with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.lemp[0] will be destroyed
+  - resource "yandex_compute_instance" "lemp" {
+      - created_at                = "2025-10-27T10:28:46Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "fhmdlnivmdbsdqkrf8h9.auto.internal" -> null
+      - hardware_generation       = [
+          - {
+              - generation2_features = []
+              - legacy_features      = [
+                  - {
+                      - pci_topology = "PCI_TOPOLOGY_V1"
+                    },
+                ]
+            },
+        ] -> null
+      - id                        = "fhmdlnivmdbsdqkrf8h9" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = <<-EOT
+                ubuntu:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3HIUrr6iRefESWSlgO8y+zFjJH27t7WO4atyPLGqLAi1GesgJD1zTnzE/KKGUAndumJkbhZN6XbFsbojpxNGONJi+NfocGFgUYdK5fSv+/m7zcLWWqxovUHP0FfLhWjzMFWahBybZDK9p+QKAdnPAgHzmC0Jfn+PM3VrbvfiNnai3rQiIMvxIExMsqn3LSc+BYlliS72nv+BWyufLVCJ3arVh9OsvnvbAKefKkNkTl1G8nQDYowL/57teF+Z53lNZh3ywkWaCgVXYQw+/4H8xcqG38frBrSEtJWcx2E0VGqpoAZ1fwZHp7zgKCsTF5SrGXpd7hX6z+45h2zTRZTFH za@za-Lenovo-IdeaPad-S340-15IWL
+            EOT
+        } -> null
+      - name                      = "les01-auto-lemp-1" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-a" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "fhmln2pgtj3k8kcre3m0" -> null
+          - disk_id     = "fhmln2pgtj3k8kcre3m0" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd89eh9ba36b7cggtan6" -> null
+                name        = null
+              - size        = 3 -> null
+              - type        = "network-hdd" -> null
+                # (3 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.128.0.33" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:da:de:5f:b3" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "84.252.128.15" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e9bop98iu12teftg4uj8" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 100 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = false -> null
+        }
+    }
+
+  # yandex_compute_instance.lemp[1] will be destroyed
+  - resource "yandex_compute_instance" "lemp" {
+      - created_at                = "2025-10-27T10:28:46Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "fhm3r728tpopdgtmgkk3.auto.internal" -> null
+      - hardware_generation       = [
+          - {
+              - generation2_features = []
+              - legacy_features      = [
+                  - {
+                      - pci_topology = "PCI_TOPOLOGY_V1"
+                    },
+                ]
+            },
+        ] -> null
+      - id                        = "fhm3r728tpopdgtmgkk3" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = <<-EOT
+                ubuntu:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3HIUrr6iRefESWSlgO8y+zFjJH27t7WO4atyPLGqLAi1GesgJD1zTnzE/KKGUAndumJkbhZN6XbFsbojpxNGONJi+NfocGFgUYdK5fSv+/m7zcLWWqxovUHP0FfLhWjzMFWahBybZDK9p+QKAdnPAgHzmC0Jfn+PM3VrbvfiNnai3rQiIMvxIExMsqn3LSc+BYlliS72nv+BWyufLVCJ3arVh9OsvnvbAKefKkNkTl1G8nQDYowL/57teF+Z53lNZh3ywkWaCgVXYQw+/4H8xcqG38frBrSEtJWcx2E0VGqpoAZ1fwZHp7zgKCsTF5SrGXpd7hX6z+45h2zTRZTFH za@za-Lenovo-IdeaPad-S340-15IWL
+            EOT
+        } -> null
+      - name                      = "les01-auto-lemp-2" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-a" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "fhmc6qc7s2saknfsv8i8" -> null
+          - disk_id     = "fhmc6qc7s2saknfsv8i8" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd89eh9ba36b7cggtan6" -> null
+                name        = null
+              - size        = 3 -> null
+              - type        = "network-hdd" -> null
+                # (3 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.128.0.6" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:3d:9c:48:ee" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "158.160.127.103" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e9bop98iu12teftg4uj8" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 100 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = false -> null
+        }
+    }
+
+Plan: 0 to add, 0 to change, 2 to destroy.
+
+Changes to Outputs:
+  - instance_names   = [
+      - "les01-auto-lemp-1",
+      - "les01-auto-lemp-2",
+    ] -> null
+  - nat_ip_addresses = [
+      - "84.252.128.15",
+      - "158.160.127.103",
+    ] -> null
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+yandex_compute_instance.lemp[0]: Destroying... [id=fhmdlnivmdbsdqkrf8h9]
+yandex_compute_instance.lemp[1]: Destroying... [id=fhm3r728tpopdgtmgkk3]
+yandex_compute_instance.lemp[0]: Still destroying... [id=fhmdlnivmdbsdqkrf8h9, 00m10s elapsed]
+yandex_compute_instance.lemp[1]: Still destroying... [id=fhm3r728tpopdgtmgkk3, 00m10s elapsed]
+yandex_compute_instance.lemp[0]: Still destroying... [id=fhmdlnivmdbsdqkrf8h9, 00m20s elapsed]
+yandex_compute_instance.lemp[1]: Still destroying... [id=fhm3r728tpopdgtmgkk3, 00m20s elapsed]
+yandex_compute_instance.lemp[0]: Still destroying... [id=fhmdlnivmdbsdqkrf8h9, 00m30s elapsed]
+yandex_compute_instance.lemp[1]: Still destroying... [id=fhm3r728tpopdgtmgkk3, 00m30s elapsed]
+yandex_compute_instance.lemp[1]: Destruction complete after 32s
+yandex_compute_instance.lemp[0]: Destruction complete after 34s
+
+Destroy complete! Resources: 2 destroyed.
+++ set +x
