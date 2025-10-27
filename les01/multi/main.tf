@@ -6,6 +6,11 @@ resource "yandex_compute_instance" "lemp" {
   resources {
     cores  = var.cores
     memory = var.memory
+    core_fraction = 20
+  }
+
+  scheduling_policy {
+    preemptible = true
   }
 
   boot_disk {

@@ -2,10 +2,17 @@ resource "yandex_compute_instance" "lemp" {
   count = var.instance_count
 
   name = "${var.name_prefix}-backend-lemp-${count.index + 1}"
-
+  zone = local.default_subnet_zones[count.index % local.subnet_count]
+  platform_id = "standard-v2"
+  
   resources {
     cores  = var.cores
     memory = var.memory
+    core_fraction = 20
+  }
+
+  scheduling_policy {
+    preemptible = true
   }
 
   boot_disk {
@@ -13,9 +20,10 @@ resource "yandex_compute_instance" "lemp" {
       image_id = var.image_id
     }
   }
-
+ 
   network_interface {
-    subnet_id = var.subnet_id
+    subnet_id = local.default_subnet_ids[count.index % local.subnet_count]
+    # round-robin instead var.subnet_id
     nat       = true
   }
 

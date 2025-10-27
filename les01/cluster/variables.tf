@@ -17,6 +17,11 @@ variable "image_id" {
   default = "fd89eh9ba36b7cggtan6" # lemp
 }
 
+variable "network_name" {
+  type    = string
+  default = "default"
+}
+
 variable "subnet_id" {
   type = string
   description = "ID подсети"
@@ -31,6 +36,7 @@ variable "username" {
 variable "pub_key_path" {
   type    = string
   default = "~/.ssh/id_rsa.pub"
+  sensitive = true
 }
 
 variable "sec_key_path" {
