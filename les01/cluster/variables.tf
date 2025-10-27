@@ -23,9 +23,19 @@ variable "subnet_id" {
   default = "e9bop98iu12teftg4uj8"
 }
 
+variable "username" {
+  type = string
+  default = "ubuntu"
+}
+
 variable "pub_key_path" {
   type    = string
   default = "~/.ssh/id_rsa.pub"
+}
+
+variable "sec_key_path" {
+  type = string
+  default = "~/.ssh/id_rsa"
 }
 
 variable "nlb_name" { default = "les01-nlb" }
