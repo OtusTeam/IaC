@@ -1,8 +1,8 @@
-za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/les01/single$ ./run.sh 
+za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/les01/single$ ./run.sh
 ++ terraform apply
 
-Terraform used the selected providers to generate the following execution plan. Resource actions are indicated
-with the following symbols:
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
+following symbols:
   + create
 
 Terraform will perform the following actions:
@@ -65,14 +65,12 @@ Terraform will perform the following actions:
       + placement_policy (known after apply)
 
       + resources {
-          + core_fraction = 20
+          + core_fraction = 100
           + cores         = 2
           + memory        = 2
         }
 
-      + scheduling_policy {
-          + preemptible = true
-        }
+      + scheduling_policy (known after apply)
     }
 
 Plan: 1 to add, 0 to change, 0 to destroy.
@@ -87,31 +85,12 @@ yandex_compute_instance.lemp: Creating...
 yandex_compute_instance.lemp: Still creating... [00m10s elapsed]
 yandex_compute_instance.lemp: Still creating... [00m20s elapsed]
 yandex_compute_instance.lemp: Still creating... [00m30s elapsed]
-yandex_compute_instance.lemp: Still creating... [00m40s elapsed]
-yandex_compute_instance.lemp: Still creating... [00m50s elapsed]
-yandex_compute_instance.lemp: Still creating... [01m00s elapsed]
-yandex_compute_instance.lemp: Still creating... [01m10s elapsed]
-yandex_compute_instance.lemp: Still creating... [01m20s elapsed]
-yandex_compute_instance.lemp: Still creating... [01m30s elapsed]
-yandex_compute_instance.lemp: Still creating... [01m40s elapsed]
-yandex_compute_instance.lemp: Still creating... [01m50s elapsed]
-yandex_compute_instance.lemp: Still creating... [02m00s elapsed]
-yandex_compute_instance.lemp: Still creating... [02m10s elapsed]
-yandex_compute_instance.lemp: Creation complete after 2m18s [id=fhmqtvihab027laeg175]
+yandex_compute_instance.lemp: Creation complete after 38s [id=fhmlqsc2j7djcgmtecrt]
 
 Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 ++ true
 +++ jq -r '.resources[].instances[].attributes.network_interface[].nat_ip_address' terraform.tfstate
-++ curl http://89.169.152.219
-curl: (7) Failed to connect to 89.169.152.219 port 80 after 19392 ms: Couldn't connect to server
-++ read -r -n1 -p 'Press Y to destroy or any key to wait: ' ans
-Press Y to destroy or any key to wait: n++ echo
-
-++ [[ n == \Y ]]
-++ sleep 1
-++ true
-+++ jq -r '.resources[].instances[].attributes.network_interface[].nat_ip_address' terraform.tfstate
-++ curl http://89.169.152.219
+++ curl http://158.160.118.29
 <!DOCTYPE html>
 <html>
 <head>
@@ -145,19 +124,19 @@ Press Y to destroy or any key to wait: Y++ echo
 ++ echo Destroying...
 Destroying...
 ++ terraform destroy
-yandex_compute_instance.lemp: Refreshing state... [id=fhmqtvihab027laeg175]
+yandex_compute_instance.lemp: Refreshing state... [id=fhmlqsc2j7djcgmtecrt]
 
-Terraform used the selected providers to generate the following execution plan. Resource actions are indicated
-with the following symbols:
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
+following symbols:
   - destroy
 
 Terraform will perform the following actions:
 
   # yandex_compute_instance.lemp will be destroyed
   - resource "yandex_compute_instance" "lemp" {
-      - created_at                = "2025-10-27T19:21:51Z" -> null
+      - created_at                = "2025-10-28T06:27:38Z" -> null
       - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
-      - fqdn                      = "fhmqtvihab027laeg175.auto.internal" -> null
+      - fqdn                      = "fhmlqsc2j7djcgmtecrt.auto.internal" -> null
       - hardware_generation       = [
           - {
               - generation2_features = []
@@ -168,7 +147,7 @@ Terraform will perform the following actions:
                 ]
             },
         ] -> null
-      - id                        = "fhmqtvihab027laeg175" -> null
+      - id                        = "fhmlqsc2j7djcgmtecrt" -> null
       - labels                    = {} -> null
       - metadata                  = {
           - "ssh-keys" = <<-EOT
@@ -184,8 +163,8 @@ Terraform will perform the following actions:
 
       - boot_disk {
           - auto_delete = true -> null
-          - device_name = "fhmusrqjb0kur8n57bot" -> null
-          - disk_id     = "fhmusrqjb0kur8n57bot" -> null
+          - device_name = "fhmp8a6fminegmevj8on" -> null
+          - disk_id     = "fhmp8a6fminegmevj8on" -> null
           - mode        = "READ_WRITE" -> null
 
           - initialize_params {
@@ -207,12 +186,12 @@ Terraform will perform the following actions:
 
       - network_interface {
           - index              = 0 -> null
-          - ip_address         = "10.128.0.18" -> null
+          - ip_address         = "10.128.0.4" -> null
           - ipv4               = true -> null
           - ipv6               = false -> null
-          - mac_address        = "d0:0d:1a:ef:e5:15" -> null
+          - mac_address        = "d0:0d:15:d7:18:29" -> null
           - nat                = true -> null
-          - nat_ip_address     = "89.169.152.219" -> null
+          - nat_ip_address     = "158.160.118.29" -> null
           - nat_ip_version     = "IPV4" -> null
           - security_group_ids = [] -> null
           - subnet_id          = "e9bop98iu12teftg4uj8" -> null
@@ -226,14 +205,14 @@ Terraform will perform the following actions:
         }
 
       - resources {
-          - core_fraction = 20 -> null
+          - core_fraction = 100 -> null
           - cores         = 2 -> null
           - gpus          = 0 -> null
           - memory        = 2 -> null
         }
 
       - scheduling_policy {
-          - preemptible = true -> null
+          - preemptible = false -> null
         }
     }
 
@@ -245,11 +224,11 @@ Do you really want to destroy all resources?
 
   Enter a value: yes
 
-yandex_compute_instance.lemp: Destroying... [id=fhmqtvihab027laeg175]
-yandex_compute_instance.lemp: Still destroying... [id=fhmqtvihab027laeg175, 00m10s elapsed]
-yandex_compute_instance.lemp: Still destroying... [id=fhmqtvihab027laeg175, 00m20s elapsed]
-yandex_compute_instance.lemp: Still destroying... [id=fhmqtvihab027laeg175, 00m30s elapsed]
-yandex_compute_instance.lemp: Destruction complete after 32s
+yandex_compute_instance.lemp: Destroying... [id=fhmlqsc2j7djcgmtecrt]
+yandex_compute_instance.lemp: Still destroying... [id=fhmlqsc2j7djcgmtecrt, 00m10s elapsed]
+yandex_compute_instance.lemp: Still destroying... [id=fhmlqsc2j7djcgmtecrt, 00m20s elapsed]
+yandex_compute_instance.lemp: Still destroying... [id=fhmlqsc2j7djcgmtecrt, 00m30s elapsed]
+yandex_compute_instance.lemp: Destruction complete after 35s
 
 Destroy complete! Resources: 1 destroyed.
 ++ set +x

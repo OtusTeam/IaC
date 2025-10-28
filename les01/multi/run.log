@@ -1,8 +1,8 @@
 za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/les01/multi$ ./run.sh 
 ++ terraform apply
 
-Terraform used the selected providers to generate the following execution plan. Resource actions are indicated
-with the following symbols:
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
+following symbols:
   + create
 
 Terraform will perform the following actions:
@@ -157,15 +157,44 @@ Do you want to perform these actions?
 
 yandex_compute_instance.lemp[0]: Creating...
 yandex_compute_instance.lemp[1]: Creating...
-yandex_compute_instance.lemp[1]: Still creating... [00m10s elapsed]
 yandex_compute_instance.lemp[0]: Still creating... [00m10s elapsed]
-yandex_compute_instance.lemp[0]: Still creating... [00m20s elapsed]
+yandex_compute_instance.lemp[1]: Still creating... [00m10s elapsed]
 yandex_compute_instance.lemp[1]: Still creating... [00m20s elapsed]
+yandex_compute_instance.lemp[0]: Still creating... [00m20s elapsed]
 yandex_compute_instance.lemp[0]: Still creating... [00m30s elapsed]
 yandex_compute_instance.lemp[1]: Still creating... [00m30s elapsed]
-yandex_compute_instance.lemp[0]: Creation complete after 39s [id=fhmth67sqs4smplnsbf8]
+yandex_compute_instance.lemp[1]: Provisioning with 'file'...
+yandex_compute_instance.lemp[0]: Provisioning with 'file'...
 yandex_compute_instance.lemp[1]: Still creating... [00m40s elapsed]
-yandex_compute_instance.lemp[1]: Creation complete after 47s [id=fhm8307j5grd1bkma29v]
+yandex_compute_instance.lemp[0]: Still creating... [00m40s elapsed]
+yandex_compute_instance.lemp[0]: Still creating... [00m50s elapsed]
+yandex_compute_instance.lemp[1]: Still creating... [00m50s elapsed]
+yandex_compute_instance.lemp[0]: Still creating... [01m00s elapsed]
+yandex_compute_instance.lemp[1]: Still creating... [01m00s elapsed]
+yandex_compute_instance.lemp[0]: Provisioning with 'remote-exec'...
+yandex_compute_instance.lemp[0] (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.lemp[0] (remote-exec):   Host: 130.193.49.17
+yandex_compute_instance.lemp[0] (remote-exec):   User: ubuntu
+yandex_compute_instance.lemp[0] (remote-exec):   Password: false
+yandex_compute_instance.lemp[0] (remote-exec):   Private key: true
+yandex_compute_instance.lemp[0] (remote-exec):   Certificate: false
+yandex_compute_instance.lemp[0] (remote-exec):   SSH Agent: true
+yandex_compute_instance.lemp[0] (remote-exec):   Checking Host Key: false
+yandex_compute_instance.lemp[0] (remote-exec):   Target Platform: unix
+yandex_compute_instance.lemp[0] (remote-exec): Connected!
+yandex_compute_instance.lemp[0]: Creation complete after 1m6s [id=fhmrp5ivfoghj4j62t0v]
+yandex_compute_instance.lemp[1]: Provisioning with 'remote-exec'...
+yandex_compute_instance.lemp[1] (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.lemp[1] (remote-exec):   Host: 89.169.147.168
+yandex_compute_instance.lemp[1] (remote-exec):   User: ubuntu
+yandex_compute_instance.lemp[1] (remote-exec):   Password: false
+yandex_compute_instance.lemp[1] (remote-exec):   Private key: true
+yandex_compute_instance.lemp[1] (remote-exec):   Certificate: false
+yandex_compute_instance.lemp[1] (remote-exec):   SSH Agent: true
+yandex_compute_instance.lemp[1] (remote-exec):   Checking Host Key: false
+yandex_compute_instance.lemp[1] (remote-exec):   Target Platform: unix
+yandex_compute_instance.lemp[1] (remote-exec): Connected!
+yandex_compute_instance.lemp[1]: Creation complete after 1m9s [id=fhmti5h3n6qu01siqoc4]
 
 Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
 
@@ -176,97 +205,28 @@ instance_names = [
   "les01-auto-lemp-2",
 ]
 nat_ip_addresses = [
-  "158.160.55.211",
-  "51.250.89.0",
+  "130.193.49.17",
+  "89.169.147.168",
 ]
 ++ true
 +++ terraform output -json nat_ip_addresses
-++ ips_json='["158.160.55.211","51.250.89.0"]'
-++ echo '["158.160.55.211","51.250.89.0"]'
+++ ips_json='["130.193.49.17","89.169.147.168"]'
+++ echo '["130.193.49.17","89.169.147.168"]'
 ++ jq -r '.[]'
 ++ read -r ip
-++ echo '==> 158.160.55.211'
-==> 158.160.55.211
-++ curl -sS http://158.160.55.211
-curl: (7) Failed to connect to 158.160.55.211 port 80 after 11298 ms: Couldn't connect to server
-++ echo 'curl failed for 158.160.55.211'
-curl failed for 158.160.55.211
+++ echo '==> 130.193.49.17'
+==> 130.193.49.17
+++ curl -sS http://130.193.49.17
+instance=les01-auto-lemp-1
+private_ip=10.128.0.16
+nat_ip=130.193.49.17
 ++ read -r ip
-++ echo '==> 51.250.89.0'
-==> 51.250.89.0
-++ curl -sS http://51.250.89.0
-curl: (7) Failed to connect to 51.250.89.0 port 80 after 7248 ms: Couldn't connect to server
-++ echo 'curl failed for 51.250.89.0'
-curl failed for 51.250.89.0
-++ read -r ip
-++ read -r -n1 -p 'Press Y to destroy or any key to wait: ' ans
-Press Y to destroy or any key to wait: n++ echo
-
-++ [[ n == \Y ]]
-++ sleep 1
-++ true
-+++ terraform output -json nat_ip_addresses
-++ ips_json='["158.160.55.211","51.250.89.0"]'
-++ echo '["158.160.55.211","51.250.89.0"]'
-++ jq -r '.[]'
-++ read -r ip
-++ echo '==> 158.160.55.211'
-==> 158.160.55.211
-++ curl -sS http://158.160.55.211
-<!DOCTYPE html>
-<html>
-<head>
-<title>Welcome to nginx!</title>
-<style>
-    body {
-        width: 35em;
-        margin: 0 auto;
-        font-family: Tahoma, Verdana, Arial, sans-serif;
-    }
-</style>
-</head>
-<body>
-<h1>Welcome to nginx!</h1>
-<p>If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.</p>
-
-<p>For online documentation and support please refer to
-<a href="http://nginx.org/">nginx.org</a>.<br/>
-Commercial support is available at
-<a href="http://nginx.com/">nginx.com</a>.</p>
-
-<p><em>Thank you for using nginx.</em></p>
-</body>
-</html>
-++ read -r ip
-++ echo '==> 51.250.89.0'
-==> 51.250.89.0
-++ curl -sS http://51.250.89.0
-<!DOCTYPE html>
-<html>
-<head>
-<title>Welcome to nginx!</title>
-<style>
-    body {
-        width: 35em;
-        margin: 0 auto;
-        font-family: Tahoma, Verdana, Arial, sans-serif;
-    }
-</style>
-</head>
-<body>
-<h1>Welcome to nginx!</h1>
-<p>If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.</p>
-
-<p>For online documentation and support please refer to
-<a href="http://nginx.org/">nginx.org</a>.<br/>
-Commercial support is available at
-<a href="http://nginx.com/">nginx.com</a>.</p>
-
-<p><em>Thank you for using nginx.</em></p>
-</body>
-</html>
+++ echo '==> 89.169.147.168'
+==> 89.169.147.168
+++ curl -sS http://89.169.147.168
+instance=les01-auto-lemp-2
+private_ip=10.128.0.33
+nat_ip=89.169.147.168
 ++ read -r ip
 ++ read -r -n1 -p 'Press Y to destroy or any key to wait: ' ans
 Press Y to destroy or any key to wait: Y++ echo
@@ -276,20 +236,20 @@ Press Y to destroy or any key to wait: Y++ echo
 ++ echo Destroying...
 Destroying...
 ++ terraform destroy
-yandex_compute_instance.lemp[0]: Refreshing state... [id=fhmth67sqs4smplnsbf8]
-yandex_compute_instance.lemp[1]: Refreshing state... [id=fhm8307j5grd1bkma29v]
+yandex_compute_instance.lemp[0]: Refreshing state... [id=fhmrp5ivfoghj4j62t0v]
+yandex_compute_instance.lemp[1]: Refreshing state... [id=fhmti5h3n6qu01siqoc4]
 
-Terraform used the selected providers to generate the following execution plan. Resource actions are indicated
-with the following symbols:
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
+following symbols:
   - destroy
 
 Terraform will perform the following actions:
 
   # yandex_compute_instance.lemp[0] will be destroyed
   - resource "yandex_compute_instance" "lemp" {
-      - created_at                = "2025-10-27T19:17:13Z" -> null
+      - created_at                = "2025-10-28T06:56:39Z" -> null
       - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
-      - fqdn                      = "fhmth67sqs4smplnsbf8.auto.internal" -> null
+      - fqdn                      = "fhmrp5ivfoghj4j62t0v.auto.internal" -> null
       - hardware_generation       = [
           - {
               - generation2_features = []
@@ -300,7 +260,7 @@ Terraform will perform the following actions:
                 ]
             },
         ] -> null
-      - id                        = "fhmth67sqs4smplnsbf8" -> null
+      - id                        = "fhmrp5ivfoghj4j62t0v" -> null
       - labels                    = {} -> null
       - metadata                  = {
           - "ssh-keys" = (sensitive value)
@@ -314,8 +274,8 @@ Terraform will perform the following actions:
 
       - boot_disk {
           - auto_delete = true -> null
-          - device_name = "fhm6d3v5mpc5cmsn2loc" -> null
-          - disk_id     = "fhm6d3v5mpc5cmsn2loc" -> null
+          - device_name = "fhmjkmvkkhcqo91ucgco" -> null
+          - disk_id     = "fhmjkmvkkhcqo91ucgco" -> null
           - mode        = "READ_WRITE" -> null
 
           - initialize_params {
@@ -340,9 +300,9 @@ Terraform will perform the following actions:
           - ip_address         = "10.128.0.16" -> null
           - ipv4               = true -> null
           - ipv6               = false -> null
-          - mac_address        = "d0:0d:1d:89:8f:cd" -> null
+          - mac_address        = "d0:0d:1b:c9:65:f7" -> null
           - nat                = true -> null
-          - nat_ip_address     = "158.160.55.211" -> null
+          - nat_ip_address     = "130.193.49.17" -> null
           - nat_ip_version     = "IPV4" -> null
           - security_group_ids = [] -> null
           - subnet_id          = "e9bop98iu12teftg4uj8" -> null
@@ -369,9 +329,9 @@ Terraform will perform the following actions:
 
   # yandex_compute_instance.lemp[1] will be destroyed
   - resource "yandex_compute_instance" "lemp" {
-      - created_at                = "2025-10-27T19:17:13Z" -> null
+      - created_at                = "2025-10-28T06:56:39Z" -> null
       - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
-      - fqdn                      = "fhm8307j5grd1bkma29v.auto.internal" -> null
+      - fqdn                      = "fhmti5h3n6qu01siqoc4.auto.internal" -> null
       - hardware_generation       = [
           - {
               - generation2_features = []
@@ -382,7 +342,7 @@ Terraform will perform the following actions:
                 ]
             },
         ] -> null
-      - id                        = "fhm8307j5grd1bkma29v" -> null
+      - id                        = "fhmti5h3n6qu01siqoc4" -> null
       - labels                    = {} -> null
       - metadata                  = {
           - "ssh-keys" = (sensitive value)
@@ -396,8 +356,8 @@ Terraform will perform the following actions:
 
       - boot_disk {
           - auto_delete = true -> null
-          - device_name = "fhml5j1dqrhtbgmgveb2" -> null
-          - disk_id     = "fhml5j1dqrhtbgmgveb2" -> null
+          - device_name = "fhm2ct1j53dbvigak2hi" -> null
+          - disk_id     = "fhm2ct1j53dbvigak2hi" -> null
           - mode        = "READ_WRITE" -> null
 
           - initialize_params {
@@ -419,12 +379,12 @@ Terraform will perform the following actions:
 
       - network_interface {
           - index              = 0 -> null
-          - ip_address         = "10.128.0.30" -> null
+          - ip_address         = "10.128.0.33" -> null
           - ipv4               = true -> null
           - ipv6               = false -> null
-          - mac_address        = "d0:0d:81:80:f3:2c" -> null
+          - mac_address        = "d0:0d:1d:91:62:3b" -> null
           - nat                = true -> null
-          - nat_ip_address     = "51.250.89.0" -> null
+          - nat_ip_address     = "89.169.147.168" -> null
           - nat_ip_version     = "IPV4" -> null
           - security_group_ids = [] -> null
           - subnet_id          = "e9bop98iu12teftg4uj8" -> null
@@ -457,8 +417,8 @@ Changes to Outputs:
       - "les01-auto-lemp-2",
     ] -> null
   - nat_ip_addresses = [
-      - "158.160.55.211",
-      - "51.250.89.0",
+      - "130.193.49.17",
+      - "89.169.147.168",
     ] -> null
 
 Do you really want to destroy all resources?
@@ -467,16 +427,17 @@ Do you really want to destroy all resources?
 
   Enter a value: yes
 
-yandex_compute_instance.lemp[1]: Destroying... [id=fhm8307j5grd1bkma29v]
-yandex_compute_instance.lemp[0]: Destroying... [id=fhmth67sqs4smplnsbf8]
-yandex_compute_instance.lemp[1]: Still destroying... [id=fhm8307j5grd1bkma29v, 00m10s elapsed]
-yandex_compute_instance.lemp[0]: Still destroying... [id=fhmth67sqs4smplnsbf8, 00m10s elapsed]
-yandex_compute_instance.lemp[1]: Still destroying... [id=fhm8307j5grd1bkma29v, 00m20s elapsed]
-yandex_compute_instance.lemp[0]: Still destroying... [id=fhmth67sqs4smplnsbf8, 00m20s elapsed]
-yandex_compute_instance.lemp[1]: Still destroying... [id=fhm8307j5grd1bkma29v, 00m30s elapsed]
-yandex_compute_instance.lemp[0]: Still destroying... [id=fhmth67sqs4smplnsbf8, 00m30s elapsed]
-yandex_compute_instance.lemp[1]: Destruction complete after 32s
+yandex_compute_instance.lemp[1]: Destroying... [id=fhmti5h3n6qu01siqoc4]
+yandex_compute_instance.lemp[0]: Destroying... [id=fhmrp5ivfoghj4j62t0v]
+yandex_compute_instance.lemp[0]: Still destroying... [id=fhmrp5ivfoghj4j62t0v, 00m10s elapsed]
+yandex_compute_instance.lemp[1]: Still destroying... [id=fhmti5h3n6qu01siqoc4, 00m10s elapsed]
+yandex_compute_instance.lemp[1]: Still destroying... [id=fhmti5h3n6qu01siqoc4, 00m20s elapsed]
+yandex_compute_instance.lemp[0]: Still destroying... [id=fhmrp5ivfoghj4j62t0v, 00m20s elapsed]
+yandex_compute_instance.lemp[0]: Still destroying... [id=fhmrp5ivfoghj4j62t0v, 00m30s elapsed]
+yandex_compute_instance.lemp[1]: Still destroying... [id=fhmti5h3n6qu01siqoc4, 00m30s elapsed]
 yandex_compute_instance.lemp[0]: Destruction complete after 34s
+yandex_compute_instance.lemp[1]: Still destroying... [id=fhmti5h3n6qu01siqoc4, 00m40s elapsed]
+yandex_compute_instance.lemp[1]: Destruction complete after 41s
 
 Destroy complete! Resources: 2 destroyed.
 ++ set +x
