@@ -2,6 +2,14 @@ output "instance_names" {
   value = [for inst in yandex_compute_instance.lemp : inst.name]
 }
 
+output "instance_zones" {
+  value = [for inst in yandex_compute_instance.lemp : inst.zone]
+}
+
+output "instance_platform" {
+  value = [for inst in yandex_compute_instance.lemp : inst.platform_id]
+}
+
 output "instance_private_ips" {
   value = [for inst in yandex_compute_instance.lemp : inst.network_interface[0].ip_address]
 }

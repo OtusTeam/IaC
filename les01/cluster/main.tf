@@ -2,8 +2,8 @@ resource "yandex_compute_instance" "lemp" {
   count = var.instance_count
 
   name = "${var.name_prefix}-backend-lemp-${count.index + 1}"
-  zone = local.default_subnet_zones[count.index % local.subnet_count]
-  platform_id = "standard-v2"
+  zone = local.subnet_zones[count.index % local.subnet_count]
+  platform_id = local.platform_ids[count.index % local.subnet_count]
   
   resources {
     cores  = var.cores
@@ -22,7 +22,7 @@ resource "yandex_compute_instance" "lemp" {
   }
  
   network_interface {
-    subnet_id = local.default_subnet_ids[count.index % local.subnet_count]
+    subnet_id = local.subnet_ids[count.index % local.subnet_count]
     # round-robin instead var.subnet_id
     nat       = true
   }

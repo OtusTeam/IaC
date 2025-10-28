@@ -1,0 +1,1664 @@
+za@za-Lenovo-IdeaPad-S340-15IWL:~/Documents/IaC/2git/les01/cluster$ ./run7.sh 
+++ terraform apply -var=instance_count=7
+data.yandex_vpc_network.default: Reading...
+data.yandex_vpc_network.default: Read complete after 1s [id=enpjr0b65u0olvuotmdf]
+data.yandex_vpc_subnet.by_id["e9bop98iu12teftg4uj8"]: Reading...
+data.yandex_vpc_subnet.by_id["e2l3co6r10mp14ro4ff6"]: Reading...
+data.yandex_vpc_subnet.by_id["fl8n8apm16arg05hh4k3"]: Reading...
+data.yandex_vpc_subnet.by_id["e2l3co6r10mp14ro4ff6"]: Read complete after 0s [id=e2l3co6r10mp14ro4ff6]
+data.yandex_vpc_subnet.by_id["fl8n8apm16arg05hh4k3"]: Read complete after 0s [id=fl8n8apm16arg05hh4k3]
+data.yandex_vpc_subnet.by_id["e9bop98iu12teftg4uj8"]: Read complete after 0s [id=e9bop98iu12teftg4uj8]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
+following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.lemp[0] will be created
+  + resource "yandex_compute_instance" "lemp" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hardware_generation       = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = (sensitive value)
+        }
+      + name                      = "les01-backend-lemp-1"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + status                    = (known after apply)
+      + zone                      = "ru-central1-b"
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd89eh9ba36b7cggtan6"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index          = (known after apply)
+          + ip_address     = (known after apply)
+          + ipv4           = true
+          + ipv6           = (known after apply)
+          + ipv6_address   = (known after apply)
+          + mac_address    = (known after apply)
+          + nat            = true
+          + nat_ip_address = (known after apply)
+          + nat_ip_version = (known after apply)
+          + subnet_id      = "e2l3co6r10mp14ro4ff6"
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 20
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy {
+          + preemptible = true
+        }
+    }
+
+  # yandex_compute_instance.lemp[1] will be created
+  + resource "yandex_compute_instance" "lemp" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hardware_generation       = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = (sensitive value)
+        }
+      + name                      = "les01-backend-lemp-2"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + status                    = (known after apply)
+      + zone                      = "ru-central1-a"
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd89eh9ba36b7cggtan6"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index          = (known after apply)
+          + ip_address     = (known after apply)
+          + ipv4           = true
+          + ipv6           = (known after apply)
+          + ipv6_address   = (known after apply)
+          + mac_address    = (known after apply)
+          + nat            = true
+          + nat_ip_address = (known after apply)
+          + nat_ip_version = (known after apply)
+          + subnet_id      = "e9bop98iu12teftg4uj8"
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 20
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy {
+          + preemptible = true
+        }
+    }
+
+  # yandex_compute_instance.lemp[2] will be created
+  + resource "yandex_compute_instance" "lemp" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hardware_generation       = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = (sensitive value)
+        }
+      + name                      = "les01-backend-lemp-3"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v2"
+      + status                    = (known after apply)
+      + zone                      = "ru-central1-d"
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd89eh9ba36b7cggtan6"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index          = (known after apply)
+          + ip_address     = (known after apply)
+          + ipv4           = true
+          + ipv6           = (known after apply)
+          + ipv6_address   = (known after apply)
+          + mac_address    = (known after apply)
+          + nat            = true
+          + nat_ip_address = (known after apply)
+          + nat_ip_version = (known after apply)
+          + subnet_id      = "fl8n8apm16arg05hh4k3"
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 20
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy {
+          + preemptible = true
+        }
+    }
+
+  # yandex_compute_instance.lemp[3] will be created
+  + resource "yandex_compute_instance" "lemp" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hardware_generation       = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = (sensitive value)
+        }
+      + name                      = "les01-backend-lemp-4"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + status                    = (known after apply)
+      + zone                      = "ru-central1-b"
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd89eh9ba36b7cggtan6"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index          = (known after apply)
+          + ip_address     = (known after apply)
+          + ipv4           = true
+          + ipv6           = (known after apply)
+          + ipv6_address   = (known after apply)
+          + mac_address    = (known after apply)
+          + nat            = true
+          + nat_ip_address = (known after apply)
+          + nat_ip_version = (known after apply)
+          + subnet_id      = "e2l3co6r10mp14ro4ff6"
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 20
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy {
+          + preemptible = true
+        }
+    }
+
+  # yandex_compute_instance.lemp[4] will be created
+  + resource "yandex_compute_instance" "lemp" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hardware_generation       = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = (sensitive value)
+        }
+      + name                      = "les01-backend-lemp-5"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + status                    = (known after apply)
+      + zone                      = "ru-central1-a"
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd89eh9ba36b7cggtan6"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index          = (known after apply)
+          + ip_address     = (known after apply)
+          + ipv4           = true
+          + ipv6           = (known after apply)
+          + ipv6_address   = (known after apply)
+          + mac_address    = (known after apply)
+          + nat            = true
+          + nat_ip_address = (known after apply)
+          + nat_ip_version = (known after apply)
+          + subnet_id      = "e9bop98iu12teftg4uj8"
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 20
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy {
+          + preemptible = true
+        }
+    }
+
+  # yandex_compute_instance.lemp[5] will be created
+  + resource "yandex_compute_instance" "lemp" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hardware_generation       = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = (sensitive value)
+        }
+      + name                      = "les01-backend-lemp-6"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v2"
+      + status                    = (known after apply)
+      + zone                      = "ru-central1-d"
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd89eh9ba36b7cggtan6"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index          = (known after apply)
+          + ip_address     = (known after apply)
+          + ipv4           = true
+          + ipv6           = (known after apply)
+          + ipv6_address   = (known after apply)
+          + mac_address    = (known after apply)
+          + nat            = true
+          + nat_ip_address = (known after apply)
+          + nat_ip_version = (known after apply)
+          + subnet_id      = "fl8n8apm16arg05hh4k3"
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 20
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy {
+          + preemptible = true
+        }
+    }
+
+  # yandex_compute_instance.lemp[6] will be created
+  + resource "yandex_compute_instance" "lemp" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hardware_generation       = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = (sensitive value)
+        }
+      + name                      = "les01-backend-lemp-7"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + status                    = (known after apply)
+      + zone                      = "ru-central1-b"
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd89eh9ba36b7cggtan6"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index          = (known after apply)
+          + ip_address     = (known after apply)
+          + ipv4           = true
+          + ipv6           = (known after apply)
+          + ipv6_address   = (known after apply)
+          + mac_address    = (known after apply)
+          + nat            = true
+          + nat_ip_address = (known after apply)
+          + nat_ip_version = (known after apply)
+          + subnet_id      = "e2l3co6r10mp14ro4ff6"
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 20
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy {
+          + preemptible = true
+        }
+    }
+
+  # yandex_lb_network_load_balancer.nlb will be created
+  + resource "yandex_lb_network_load_balancer" "nlb" {
+      + allow_zonal_shift   = (known after apply)
+      + created_at          = (known after apply)
+      + deletion_protection = (known after apply)
+      + folder_id           = (known after apply)
+      + id                  = (known after apply)
+      + name                = "les01-nlb"
+      + region_id           = (known after apply)
+      + type                = "external"
+
+      + attached_target_group {
+          + target_group_id = (known after apply)
+
+          + healthcheck {
+              + healthy_threshold   = 2
+              + interval            = 2
+              + name                = "http"
+              + timeout             = 1
+              + unhealthy_threshold = 2
+
+              + http_options {
+                  + path = "/"
+                  + port = 80
+                }
+            }
+        }
+
+      + listener {
+          + name        = "les01-listener"
+          + port        = 80
+          + protocol    = (known after apply)
+          + target_port = (known after apply)
+
+          + external_address_spec {
+              + address    = (known after apply)
+              + ip_version = "ipv4"
+            }
+        }
+    }
+
+  # yandex_lb_target_group.tg will be created
+  + resource "yandex_lb_target_group" "tg" {
+      + created_at      = (known after apply)
+      + description     = (known after apply)
+      + folder_id       = (known after apply)
+      + id              = (known after apply)
+      + labels          = (known after apply)
+      + name            = "les01-tg"
+      + region_id       = (known after apply)
+      + target_group_id = (known after apply)
+
+      + target {
+          + address   = (known after apply)
+          + subnet_id = "e2l3co6r10mp14ro4ff6"
+        }
+      + target {
+          + address   = (known after apply)
+          + subnet_id = "e2l3co6r10mp14ro4ff6"
+        }
+      + target {
+          + address   = (known after apply)
+          + subnet_id = "e2l3co6r10mp14ro4ff6"
+        }
+      + target {
+          + address   = (known after apply)
+          + subnet_id = "e9bop98iu12teftg4uj8"
+        }
+      + target {
+          + address   = (known after apply)
+          + subnet_id = "e9bop98iu12teftg4uj8"
+        }
+      + target {
+          + address   = (known after apply)
+          + subnet_id = "fl8n8apm16arg05hh4k3"
+        }
+      + target {
+          + address   = (known after apply)
+          + subnet_id = "fl8n8apm16arg05hh4k3"
+        }
+    }
+
+Plan: 9 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + instance_names       = [
+      + "les01-backend-lemp-1",
+      + "les01-backend-lemp-2",
+      + "les01-backend-lemp-3",
+      + "les01-backend-lemp-4",
+      + "les01-backend-lemp-5",
+      + "les01-backend-lemp-6",
+      + "les01-backend-lemp-7",
+    ]
+  + instance_nat_ips     = [
+      + (known after apply),
+      + (known after apply),
+      + (known after apply),
+      + (known after apply),
+      + (known after apply),
+      + (known after apply),
+      + (known after apply),
+    ]
+  + instance_platform    = [
+      + "standard-v1",
+      + "standard-v1",
+      + "standard-v2",
+      + "standard-v1",
+      + "standard-v1",
+      + "standard-v2",
+      + "standard-v1",
+    ]
+  + instance_private_ips = [
+      + (known after apply),
+      + (known after apply),
+      + (known after apply),
+      + (known after apply),
+      + (known after apply),
+      + (known after apply),
+      + (known after apply),
+    ]
+  + instance_zones       = [
+      + "ru-central1-b",
+      + "ru-central1-a",
+      + "ru-central1-d",
+      + "ru-central1-b",
+      + "ru-central1-a",
+      + "ru-central1-d",
+      + "ru-central1-b",
+    ]
+  + nlb_external_ip      = (known after apply)
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+yandex_compute_instance.lemp[4]: Creating...
+yandex_compute_instance.lemp[1]: Creating...
+yandex_compute_instance.lemp[2]: Creating...
+yandex_compute_instance.lemp[0]: Creating...
+yandex_compute_instance.lemp[3]: Creating...
+yandex_compute_instance.lemp[5]: Creating...
+yandex_compute_instance.lemp[6]: Creating...
+yandex_compute_instance.lemp[4]: Still creating... [00m10s elapsed]
+yandex_compute_instance.lemp[2]: Still creating... [00m10s elapsed]
+yandex_compute_instance.lemp[1]: Still creating... [00m10s elapsed]
+yandex_compute_instance.lemp[3]: Still creating... [00m10s elapsed]
+yandex_compute_instance.lemp[0]: Still creating... [00m10s elapsed]
+yandex_compute_instance.lemp[6]: Still creating... [00m10s elapsed]
+yandex_compute_instance.lemp[5]: Still creating... [00m10s elapsed]
+yandex_compute_instance.lemp[4]: Still creating... [00m20s elapsed]
+yandex_compute_instance.lemp[2]: Still creating... [00m20s elapsed]
+yandex_compute_instance.lemp[1]: Still creating... [00m20s elapsed]
+yandex_compute_instance.lemp[3]: Still creating... [00m20s elapsed]
+yandex_compute_instance.lemp[0]: Still creating... [00m20s elapsed]
+yandex_compute_instance.lemp[6]: Still creating... [00m20s elapsed]
+yandex_compute_instance.lemp[5]: Still creating... [00m20s elapsed]
+yandex_compute_instance.lemp[0]: Provisioning with 'file'...
+yandex_compute_instance.lemp[1]: Provisioning with 'file'...
+yandex_compute_instance.lemp[4]: Still creating... [00m30s elapsed]
+yandex_compute_instance.lemp[2]: Still creating... [00m30s elapsed]
+yandex_compute_instance.lemp[1]: Still creating... [00m30s elapsed]
+yandex_compute_instance.lemp[3]: Still creating... [00m30s elapsed]
+yandex_compute_instance.lemp[6]: Still creating... [00m30s elapsed]
+yandex_compute_instance.lemp[0]: Still creating... [00m30s elapsed]
+yandex_compute_instance.lemp[5]: Still creating... [00m30s elapsed]
+yandex_compute_instance.lemp[5]: Provisioning with 'file'...
+yandex_compute_instance.lemp[4]: Provisioning with 'file'...
+yandex_compute_instance.lemp[2]: Provisioning with 'file'...
+yandex_compute_instance.lemp[6]: Provisioning with 'file'...
+yandex_compute_instance.lemp[4]: Still creating... [00m40s elapsed]
+yandex_compute_instance.lemp[1]: Still creating... [00m40s elapsed]
+yandex_compute_instance.lemp[2]: Still creating... [00m40s elapsed]
+yandex_compute_instance.lemp[3]: Still creating... [00m40s elapsed]
+yandex_compute_instance.lemp[0]: Still creating... [00m40s elapsed]
+yandex_compute_instance.lemp[6]: Still creating... [00m40s elapsed]
+yandex_compute_instance.lemp[5]: Still creating... [00m40s elapsed]
+yandex_compute_instance.lemp[3]: Provisioning with 'file'...
+yandex_compute_instance.lemp[4]: Still creating... [00m50s elapsed]
+yandex_compute_instance.lemp[2]: Still creating... [00m50s elapsed]
+yandex_compute_instance.lemp[1]: Still creating... [00m50s elapsed]
+yandex_compute_instance.lemp[3]: Still creating... [00m50s elapsed]
+yandex_compute_instance.lemp[6]: Still creating... [00m50s elapsed]
+yandex_compute_instance.lemp[0]: Still creating... [00m50s elapsed]
+yandex_compute_instance.lemp[5]: Still creating... [00m50s elapsed]
+yandex_compute_instance.lemp[5]: Provisioning with 'remote-exec'...
+yandex_compute_instance.lemp[5] (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.lemp[5] (remote-exec):   Host: 158.160.198.89
+yandex_compute_instance.lemp[5] (remote-exec):   User: ubuntu
+yandex_compute_instance.lemp[5] (remote-exec):   Password: false
+yandex_compute_instance.lemp[5] (remote-exec):   Private key: true
+yandex_compute_instance.lemp[5] (remote-exec):   Certificate: false
+yandex_compute_instance.lemp[5] (remote-exec):   SSH Agent: true
+yandex_compute_instance.lemp[5] (remote-exec):   Checking Host Key: false
+yandex_compute_instance.lemp[5] (remote-exec):   Target Platform: unix
+yandex_compute_instance.lemp[5] (remote-exec): Connected!
+yandex_compute_instance.lemp[1]: Provisioning with 'remote-exec'...
+yandex_compute_instance.lemp[1] (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.lemp[1] (remote-exec):   Host: 89.169.152.100
+yandex_compute_instance.lemp[1] (remote-exec):   User: ubuntu
+yandex_compute_instance.lemp[1] (remote-exec):   Password: false
+yandex_compute_instance.lemp[1] (remote-exec):   Private key: true
+yandex_compute_instance.lemp[1] (remote-exec):   Certificate: false
+yandex_compute_instance.lemp[1] (remote-exec):   SSH Agent: true
+yandex_compute_instance.lemp[1] (remote-exec):   Checking Host Key: false
+yandex_compute_instance.lemp[1] (remote-exec):   Target Platform: unix
+yandex_compute_instance.lemp[4]: Still creating... [01m00s elapsed]
+yandex_compute_instance.lemp[1]: Still creating... [01m00s elapsed]
+yandex_compute_instance.lemp[2]: Still creating... [01m00s elapsed]
+yandex_compute_instance.lemp[3]: Still creating... [01m00s elapsed]
+yandex_compute_instance.lemp[0]: Still creating... [01m00s elapsed]
+yandex_compute_instance.lemp[6]: Still creating... [01m00s elapsed]
+yandex_compute_instance.lemp[5]: Still creating... [01m00s elapsed]
+yandex_compute_instance.lemp[1] (remote-exec): Connected!
+yandex_compute_instance.lemp[0]: Provisioning with 'remote-exec'...
+yandex_compute_instance.lemp[0] (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.lemp[0] (remote-exec):   Host: 89.169.172.62
+yandex_compute_instance.lemp[0] (remote-exec):   User: ubuntu
+yandex_compute_instance.lemp[0] (remote-exec):   Password: false
+yandex_compute_instance.lemp[0] (remote-exec):   Private key: true
+yandex_compute_instance.lemp[0] (remote-exec):   Certificate: false
+yandex_compute_instance.lemp[0] (remote-exec):   SSH Agent: true
+yandex_compute_instance.lemp[0] (remote-exec):   Checking Host Key: false
+yandex_compute_instance.lemp[0] (remote-exec):   Target Platform: unix
+yandex_compute_instance.lemp[5]: Creation complete after 1m3s [id=fv4hvi5q5th3pdj74atc]
+yandex_compute_instance.lemp[2]: Provisioning with 'remote-exec'...
+yandex_compute_instance.lemp[2] (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.lemp[2] (remote-exec):   Host: 158.160.203.78
+yandex_compute_instance.lemp[2] (remote-exec):   User: ubuntu
+yandex_compute_instance.lemp[2] (remote-exec):   Password: false
+yandex_compute_instance.lemp[2] (remote-exec):   Private key: true
+yandex_compute_instance.lemp[2] (remote-exec):   Certificate: false
+yandex_compute_instance.lemp[2] (remote-exec):   SSH Agent: true
+yandex_compute_instance.lemp[2] (remote-exec):   Checking Host Key: false
+yandex_compute_instance.lemp[2] (remote-exec):   Target Platform: unix
+yandex_compute_instance.lemp[6]: Provisioning with 'remote-exec'...
+yandex_compute_instance.lemp[6] (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.lemp[6] (remote-exec):   Host: 89.169.161.7
+yandex_compute_instance.lemp[6] (remote-exec):   User: ubuntu
+yandex_compute_instance.lemp[6] (remote-exec):   Password: false
+yandex_compute_instance.lemp[6] (remote-exec):   Private key: true
+yandex_compute_instance.lemp[6] (remote-exec):   Certificate: false
+yandex_compute_instance.lemp[6] (remote-exec):   SSH Agent: true
+yandex_compute_instance.lemp[6] (remote-exec):   Checking Host Key: false
+yandex_compute_instance.lemp[6] (remote-exec):   Target Platform: unix
+yandex_compute_instance.lemp[4]: Provisioning with 'remote-exec'...
+yandex_compute_instance.lemp[4] (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.lemp[4] (remote-exec):   Host: 62.84.119.20
+yandex_compute_instance.lemp[4] (remote-exec):   User: ubuntu
+yandex_compute_instance.lemp[4] (remote-exec):   Password: false
+yandex_compute_instance.lemp[4] (remote-exec):   Private key: true
+yandex_compute_instance.lemp[4] (remote-exec):   Certificate: false
+yandex_compute_instance.lemp[4] (remote-exec):   SSH Agent: true
+yandex_compute_instance.lemp[4] (remote-exec):   Checking Host Key: false
+yandex_compute_instance.lemp[4] (remote-exec):   Target Platform: unix
+yandex_compute_instance.lemp[0] (remote-exec): Connected!
+yandex_compute_instance.lemp[2] (remote-exec): Connected!
+yandex_compute_instance.lemp[1]: Creation complete after 1m6s [id=fhmc93khf3ojq5mbta3e]
+yandex_compute_instance.lemp[4] (remote-exec): Connected!
+yandex_compute_instance.lemp[6] (remote-exec): Connected!
+yandex_compute_instance.lemp[2]: Creation complete after 1m8s [id=fv49dgl1so9mjhjpbmv4]
+yandex_compute_instance.lemp[0]: Creation complete after 1m9s [id=epdm9g1b8f5gn1jv1ksv]
+yandex_compute_instance.lemp[3]: Provisioning with 'remote-exec'...
+yandex_compute_instance.lemp[3] (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.lemp[3] (remote-exec):   Host: 51.250.31.208
+yandex_compute_instance.lemp[3] (remote-exec):   User: ubuntu
+yandex_compute_instance.lemp[3] (remote-exec):   Password: false
+yandex_compute_instance.lemp[3] (remote-exec):   Private key: true
+yandex_compute_instance.lemp[3] (remote-exec):   Certificate: false
+yandex_compute_instance.lemp[3] (remote-exec):   SSH Agent: true
+yandex_compute_instance.lemp[3] (remote-exec):   Checking Host Key: false
+yandex_compute_instance.lemp[3] (remote-exec):   Target Platform: unix
+yandex_compute_instance.lemp[4]: Creation complete after 1m9s [id=fhmp7e7kpfm6c0q1k1kl]
+yandex_compute_instance.lemp[3]: Still creating... [01m10s elapsed]
+yandex_compute_instance.lemp[6]: Still creating... [01m10s elapsed]
+yandex_compute_instance.lemp[3] (remote-exec): Connected!
+yandex_compute_instance.lemp[6]: Creation complete after 1m15s [id=epdqje0ov7ru5o9756rv]
+yandex_compute_instance.lemp[3]: Creation complete after 1m17s [id=epdeik1mdojj101iou5a]
+yandex_lb_target_group.tg: Creating...
+yandex_lb_target_group.tg: Creation complete after 7s [id=enpnhh52thuqa5ou1022]
+yandex_lb_network_load_balancer.nlb: Creating...
+yandex_lb_network_load_balancer.nlb: Still creating... [00m10s elapsed]
+yandex_lb_network_load_balancer.nlb: Creation complete after 15s [id=enpoahcspd6inp17l8cp]
+
+Apply complete! Resources: 9 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+instance_names = [
+  "les01-backend-lemp-1",
+  "les01-backend-lemp-2",
+  "les01-backend-lemp-3",
+  "les01-backend-lemp-4",
+  "les01-backend-lemp-5",
+  "les01-backend-lemp-6",
+  "les01-backend-lemp-7",
+]
+instance_nat_ips = [
+  "89.169.172.62",
+  "89.169.152.100",
+  "158.160.203.78",
+  "51.250.31.208",
+  "62.84.119.20",
+  "158.160.198.89",
+  "89.169.161.7",
+]
+instance_platform = [
+  "standard-v1",
+  "standard-v1",
+  "standard-v2",
+  "standard-v1",
+  "standard-v1",
+  "standard-v2",
+  "standard-v1",
+]
+instance_private_ips = [
+  "10.129.0.4",
+  "10.128.0.33",
+  "10.131.0.18",
+  "10.129.0.11",
+  "10.128.0.34",
+  "10.131.0.24",
+  "10.129.0.3",
+]
+instance_zones = [
+  "ru-central1-b",
+  "ru-central1-a",
+  "ru-central1-d",
+  "ru-central1-b",
+  "ru-central1-a",
+  "ru-central1-d",
+  "ru-central1-b",
+]
+nlb_external_ip = "158.160.151.17"
++++ terraform output -raw nlb_external_ip
+++ nlb_ip=158.160.151.17
+++ true
+++ echo 'Network Load Balancer with ip=158.160.151.17:'
+Network Load Balancer with ip=158.160.151.17:
+++ curl -sS http://158.160.151.17
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><title>les01-backend-lemp-3</title></head>
+  <body>
+    <h1>Instance: les01-backend-lemp-3</h1>
+    <p>Private IP: 10.131.0.18</p>
+    <p>NAT IP: 158.160.203.78</p>
+  </body>
+</html>++ read -r -n1 -p 'Press Y to destroy or any key to wait: ' ans
+Press Y to destroy or any key to wait: 
+++ echo
+
+++ [[ '' == \Y ]]
+++ sleep 1
+++ true
+++ echo 'Network Load Balancer with ip=158.160.151.17:'
+Network Load Balancer with ip=158.160.151.17:
+++ curl -sS http://158.160.151.17
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><title>les01-backend-lemp-6</title></head>
+  <body>
+    <h1>Instance: les01-backend-lemp-6</h1>
+    <p>Private IP: 10.131.0.24</p>
+    <p>NAT IP: 158.160.198.89</p>
+  </body>
+</html>++ read -r -n1 -p 'Press Y to destroy or any key to wait: ' ans
+Press Y to destroy or any key to wait: 
+++ echo
+
+++ [[ '' == \Y ]]
+++ sleep 1
+++ true
+++ echo 'Network Load Balancer with ip=158.160.151.17:'
+Network Load Balancer with ip=158.160.151.17:
+++ curl -sS http://158.160.151.17
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><title>les01-backend-lemp-1</title></head>
+  <body>
+    <h1>Instance: les01-backend-lemp-1</h1>
+    <p>Private IP: 10.129.0.4</p>
+    <p>NAT IP: 89.169.172.62</p>
+  </body>
+</html>++ read -r -n1 -p 'Press Y to destroy or any key to wait: ' ans
+Press Y to destroy or any key to wait: 
+++ echo
+
+++ [[ '' == \Y ]]
+++ sleep 1
+++ true
+++ echo 'Network Load Balancer with ip=158.160.151.17:'
+Network Load Balancer with ip=158.160.151.17:
+++ curl -sS http://158.160.151.17
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><title>les01-backend-lemp-2</title></head>
+  <body>
+    <h1>Instance: les01-backend-lemp-2</h1>
+    <p>Private IP: 10.128.0.33</p>
+    <p>NAT IP: 89.169.152.100</p>
+  </body>
+</html>++ read -r -n1 -p 'Press Y to destroy or any key to wait: ' ans
+Press Y to destroy or any key to wait: 
+++ echo
+
+++ [[ '' == \Y ]]
+++ sleep 1
+++ true
+++ echo 'Network Load Balancer with ip=158.160.151.17:'
+Network Load Balancer with ip=158.160.151.17:
+++ curl -sS http://158.160.151.17
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><title>les01-backend-lemp-5</title></head>
+  <body>
+    <h1>Instance: les01-backend-lemp-5</h1>
+    <p>Private IP: 10.128.0.34</p>
+    <p>NAT IP: 62.84.119.20</p>
+  </body>
+</html>++ read -r -n1 -p 'Press Y to destroy or any key to wait: ' ans
+Press Y to destroy or any key to wait: Y++ echo
+
+++ [[ Y == \Y ]]
+++ break
+++ echo Destroying...
+Destroying...
+++ terraform destroy
+data.yandex_vpc_network.default: Reading...
+data.yandex_vpc_network.default: Read complete after 1s [id=enpjr0b65u0olvuotmdf]
+data.yandex_vpc_subnet.by_id["fl8n8apm16arg05hh4k3"]: Reading...
+data.yandex_vpc_subnet.by_id["e9bop98iu12teftg4uj8"]: Reading...
+data.yandex_vpc_subnet.by_id["e2l3co6r10mp14ro4ff6"]: Reading...
+data.yandex_vpc_subnet.by_id["e2l3co6r10mp14ro4ff6"]: Read complete after 0s [id=e2l3co6r10mp14ro4ff6]
+data.yandex_vpc_subnet.by_id["fl8n8apm16arg05hh4k3"]: Read complete after 0s [id=fl8n8apm16arg05hh4k3]
+data.yandex_vpc_subnet.by_id["e9bop98iu12teftg4uj8"]: Read complete after 0s [id=e9bop98iu12teftg4uj8]
+yandex_compute_instance.lemp[2]: Refreshing state... [id=fv49dgl1so9mjhjpbmv4]
+yandex_compute_instance.lemp[5]: Refreshing state... [id=fv4hvi5q5th3pdj74atc]
+yandex_compute_instance.lemp[0]: Refreshing state... [id=epdm9g1b8f5gn1jv1ksv]
+yandex_compute_instance.lemp[1]: Refreshing state... [id=fhmc93khf3ojq5mbta3e]
+yandex_compute_instance.lemp[4]: Refreshing state... [id=fhmp7e7kpfm6c0q1k1kl]
+yandex_compute_instance.lemp[3]: Refreshing state... [id=epdeik1mdojj101iou5a]
+yandex_compute_instance.lemp[6]: Refreshing state... [id=epdqje0ov7ru5o9756rv]
+yandex_lb_target_group.tg: Refreshing state... [id=enpnhh52thuqa5ou1022]
+yandex_lb_network_load_balancer.nlb: Refreshing state... [id=enpoahcspd6inp17l8cp]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
+following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.lemp[0] will be destroyed
+  - resource "yandex_compute_instance" "lemp" {
+      - created_at                = "2025-10-28T03:58:05Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "epdm9g1b8f5gn1jv1ksv.auto.internal" -> null
+      - hardware_generation       = [
+          - {
+              - generation2_features = []
+              - legacy_features      = [
+                  - {
+                      - pci_topology = "PCI_TOPOLOGY_V1"
+                    },
+                ]
+            },
+        ] -> null
+      - id                        = "epdm9g1b8f5gn1jv1ksv" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = (sensitive value)
+        } -> null
+      - name                      = "les01-backend-lemp-1" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-b" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "epdsn66e0v5irsgjf0m9" -> null
+          - disk_id     = "epdsn66e0v5irsgjf0m9" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd89eh9ba36b7cggtan6" -> null
+                name        = null
+              - size        = 3 -> null
+              - type        = "network-hdd" -> null
+                # (3 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.129.0.4" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:16:4c:02:b4" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "89.169.172.62" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e2l3co6r10mp14ro4ff6" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 20 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = true -> null
+        }
+    }
+
+  # yandex_compute_instance.lemp[1] will be destroyed
+  - resource "yandex_compute_instance" "lemp" {
+      - created_at                = "2025-10-28T03:58:05Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "fhmc93khf3ojq5mbta3e.auto.internal" -> null
+      - hardware_generation       = [
+          - {
+              - generation2_features = []
+              - legacy_features      = [
+                  - {
+                      - pci_topology = "PCI_TOPOLOGY_V1"
+                    },
+                ]
+            },
+        ] -> null
+      - id                        = "fhmc93khf3ojq5mbta3e" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = (sensitive value)
+        } -> null
+      - name                      = "les01-backend-lemp-2" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-a" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "fhm624d41bqlnvvqqi9u" -> null
+          - disk_id     = "fhm624d41bqlnvvqqi9u" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd89eh9ba36b7cggtan6" -> null
+                name        = null
+              - size        = 3 -> null
+              - type        = "network-hdd" -> null
+                # (3 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.128.0.33" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:c4:8e:91:78" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "89.169.152.100" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e9bop98iu12teftg4uj8" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 20 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = true -> null
+        }
+    }
+
+  # yandex_compute_instance.lemp[2] will be destroyed
+  - resource "yandex_compute_instance" "lemp" {
+      - created_at                = "2025-10-28T03:58:05Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "fv49dgl1so9mjhjpbmv4.auto.internal" -> null
+      - hardware_generation       = [
+          - {
+              - generation2_features = []
+              - legacy_features      = [
+                  - {
+                      - pci_topology = "PCI_TOPOLOGY_V1"
+                    },
+                ]
+            },
+        ] -> null
+      - id                        = "fv49dgl1so9mjhjpbmv4" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = (sensitive value)
+        } -> null
+      - name                      = "les01-backend-lemp-3" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v2" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-d" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "fv4f3q1t6vb73stjk7bq" -> null
+          - disk_id     = "fv4f3q1t6vb73stjk7bq" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd89eh9ba36b7cggtan6" -> null
+                name        = null
+              - size        = 3 -> null
+              - type        = "network-hdd" -> null
+                # (3 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.131.0.18" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:96:c2:a1:e6" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "158.160.203.78" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "fl8n8apm16arg05hh4k3" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 20 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = true -> null
+        }
+    }
+
+  # yandex_compute_instance.lemp[3] will be destroyed
+  - resource "yandex_compute_instance" "lemp" {
+      - created_at                = "2025-10-28T03:58:05Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "epdeik1mdojj101iou5a.auto.internal" -> null
+      - hardware_generation       = [
+          - {
+              - generation2_features = []
+              - legacy_features      = [
+                  - {
+                      - pci_topology = "PCI_TOPOLOGY_V1"
+                    },
+                ]
+            },
+        ] -> null
+      - id                        = "epdeik1mdojj101iou5a" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = (sensitive value)
+        } -> null
+      - name                      = "les01-backend-lemp-4" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-b" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "epdrnnhig42ngundq9mi" -> null
+          - disk_id     = "epdrnnhig42ngundq9mi" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd89eh9ba36b7cggtan6" -> null
+                name        = null
+              - size        = 3 -> null
+              - type        = "network-hdd" -> null
+                # (3 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.129.0.11" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:e9:50:36:6e" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "51.250.31.208" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e2l3co6r10mp14ro4ff6" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 20 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = true -> null
+        }
+    }
+
+  # yandex_compute_instance.lemp[4] will be destroyed
+  - resource "yandex_compute_instance" "lemp" {
+      - created_at                = "2025-10-28T03:58:05Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "fhmp7e7kpfm6c0q1k1kl.auto.internal" -> null
+      - hardware_generation       = [
+          - {
+              - generation2_features = []
+              - legacy_features      = [
+                  - {
+                      - pci_topology = "PCI_TOPOLOGY_V1"
+                    },
+                ]
+            },
+        ] -> null
+      - id                        = "fhmp7e7kpfm6c0q1k1kl" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = (sensitive value)
+        } -> null
+      - name                      = "les01-backend-lemp-5" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-a" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "fhm3jdiq9lu6gh80jf1n" -> null
+          - disk_id     = "fhm3jdiq9lu6gh80jf1n" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd89eh9ba36b7cggtan6" -> null
+                name        = null
+              - size        = 3 -> null
+              - type        = "network-hdd" -> null
+                # (3 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.128.0.34" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:19:3b:8f:4c" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "62.84.119.20" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e9bop98iu12teftg4uj8" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 20 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = true -> null
+        }
+    }
+
+  # yandex_compute_instance.lemp[5] will be destroyed
+  - resource "yandex_compute_instance" "lemp" {
+      - created_at                = "2025-10-28T03:58:05Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "fv4hvi5q5th3pdj74atc.auto.internal" -> null
+      - hardware_generation       = [
+          - {
+              - generation2_features = []
+              - legacy_features      = [
+                  - {
+                      - pci_topology = "PCI_TOPOLOGY_V1"
+                    },
+                ]
+            },
+        ] -> null
+      - id                        = "fv4hvi5q5th3pdj74atc" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = (sensitive value)
+        } -> null
+      - name                      = "les01-backend-lemp-6" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v2" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-d" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "fv4nueu15aaoehf057a7" -> null
+          - disk_id     = "fv4nueu15aaoehf057a7" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd89eh9ba36b7cggtan6" -> null
+                name        = null
+              - size        = 3 -> null
+              - type        = "network-hdd" -> null
+                # (3 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.131.0.24" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:11:fc:8b:a2" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "158.160.198.89" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "fl8n8apm16arg05hh4k3" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 20 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = true -> null
+        }
+    }
+
+  # yandex_compute_instance.lemp[6] will be destroyed
+  - resource "yandex_compute_instance" "lemp" {
+      - created_at                = "2025-10-28T03:58:05Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "epdqje0ov7ru5o9756rv.auto.internal" -> null
+      - hardware_generation       = [
+          - {
+              - generation2_features = []
+              - legacy_features      = [
+                  - {
+                      - pci_topology = "PCI_TOPOLOGY_V1"
+                    },
+                ]
+            },
+        ] -> null
+      - id                        = "epdqje0ov7ru5o9756rv" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = (sensitive value)
+        } -> null
+      - name                      = "les01-backend-lemp-7" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-b" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "epdq0rktls5epo8mfhuk" -> null
+          - disk_id     = "epdq0rktls5epo8mfhuk" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd89eh9ba36b7cggtan6" -> null
+                name        = null
+              - size        = 3 -> null
+              - type        = "network-hdd" -> null
+                # (3 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.129.0.3" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:1a:9b:81:8f" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "89.169.161.7" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e2l3co6r10mp14ro4ff6" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 20 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = true -> null
+        }
+    }
+
+  # yandex_lb_network_load_balancer.nlb will be destroyed
+  - resource "yandex_lb_network_load_balancer" "nlb" {
+      - allow_zonal_shift   = false -> null
+      - created_at          = "2025-10-28T03:59:40Z" -> null
+      - deletion_protection = false -> null
+      - folder_id           = "b1gmesrdjgklgkvcp704" -> null
+      - id                  = "enpoahcspd6inp17l8cp" -> null
+      - labels              = {} -> null
+      - name                = "les01-nlb" -> null
+      - region_id           = "ru-central1" -> null
+      - type                = "external" -> null
+        # (1 unchanged attribute hidden)
+
+      - attached_target_group {
+          - target_group_id = "enpnhh52thuqa5ou1022" -> null
+
+          - healthcheck {
+              - healthy_threshold   = 2 -> null
+              - interval            = 2 -> null
+              - name                = "http" -> null
+              - timeout             = 1 -> null
+              - unhealthy_threshold = 2 -> null
+
+              - http_options {
+                  - path = "/" -> null
+                  - port = 80 -> null
+                }
+            }
+        }
+
+      - listener {
+          - name        = "les01-listener" -> null
+          - port        = 80 -> null
+          - protocol    = "tcp" -> null
+          - target_port = 80 -> null
+
+          - external_address_spec {
+              - address    = "158.160.151.17" -> null
+              - ip_version = "ipv4" -> null
+            }
+        }
+    }
+
+  # yandex_lb_target_group.tg will be destroyed
+  - resource "yandex_lb_target_group" "tg" {
+      - created_at      = "2025-10-28T03:59:21Z" -> null
+      - folder_id       = "b1gmesrdjgklgkvcp704" -> null
+      - id              = "enpnhh52thuqa5ou1022" -> null
+      - name            = "les01-tg" -> null
+      - region_id       = "ru-central1" -> null
+      - target_group_id = "enpnhh52thuqa5ou1022" -> null
+        # (1 unchanged attribute hidden)
+
+      - target {
+          - address   = "10.128.0.33" -> null
+          - subnet_id = "e9bop98iu12teftg4uj8" -> null
+        }
+      - target {
+          - address   = "10.128.0.34" -> null
+          - subnet_id = "e9bop98iu12teftg4uj8" -> null
+        }
+      - target {
+          - address   = "10.129.0.11" -> null
+          - subnet_id = "e2l3co6r10mp14ro4ff6" -> null
+        }
+      - target {
+          - address   = "10.129.0.3" -> null
+          - subnet_id = "e2l3co6r10mp14ro4ff6" -> null
+        }
+      - target {
+          - address   = "10.129.0.4" -> null
+          - subnet_id = "e2l3co6r10mp14ro4ff6" -> null
+        }
+      - target {
+          - address   = "10.131.0.18" -> null
+          - subnet_id = "fl8n8apm16arg05hh4k3" -> null
+        }
+      - target {
+          - address   = "10.131.0.24" -> null
+          - subnet_id = "fl8n8apm16arg05hh4k3" -> null
+        }
+    }
+
+Plan: 0 to add, 0 to change, 9 to destroy.
+
+Changes to Outputs:
+  - instance_names       = [
+      - "les01-backend-lemp-1",
+      - "les01-backend-lemp-2",
+      - "les01-backend-lemp-3",
+    ] -> null
+  - instance_nat_ips     = [
+      - "89.169.172.62",
+      - "89.169.152.100",
+      - "158.160.203.78",
+    ] -> null
+  - instance_platform    = [
+      - "standard-v1",
+      - "standard-v1",
+      - "standard-v2",
+    ] -> null
+  - instance_private_ips = [
+      - "10.129.0.4",
+      - "10.128.0.33",
+      - "10.131.0.18",
+    ] -> null
+  - instance_zones       = [
+      - "ru-central1-b",
+      - "ru-central1-a",
+      - "ru-central1-d",
+    ] -> null
+  - nlb_external_ip      = "158.160.151.17" -> null
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+yandex_lb_network_load_balancer.nlb: Destroying... [id=enpoahcspd6inp17l8cp]
+yandex_lb_network_load_balancer.nlb: Destruction complete after 3s
+yandex_lb_target_group.tg: Destroying... [id=enpnhh52thuqa5ou1022]
+yandex_lb_target_group.tg: Destruction complete after 7s
+yandex_compute_instance.lemp[1]: Destroying... [id=fhmc93khf3ojq5mbta3e]
+yandex_compute_instance.lemp[2]: Destroying... [id=fv49dgl1so9mjhjpbmv4]
+yandex_compute_instance.lemp[4]: Destroying... [id=fhmp7e7kpfm6c0q1k1kl]
+yandex_compute_instance.lemp[0]: Destroying... [id=epdm9g1b8f5gn1jv1ksv]
+yandex_compute_instance.lemp[3]: Destroying... [id=epdeik1mdojj101iou5a]
+yandex_compute_instance.lemp[5]: Destroying... [id=fv4hvi5q5th3pdj74atc]
+yandex_compute_instance.lemp[6]: Destroying... [id=epdqje0ov7ru5o9756rv]
+yandex_compute_instance.lemp[1]: Still destroying... [id=fhmc93khf3ojq5mbta3e, 00m10s elapsed]
+yandex_compute_instance.lemp[2]: Still destroying... [id=fv49dgl1so9mjhjpbmv4, 00m10s elapsed]
+yandex_compute_instance.lemp[4]: Still destroying... [id=fhmp7e7kpfm6c0q1k1kl, 00m10s elapsed]
+yandex_compute_instance.lemp[0]: Still destroying... [id=epdm9g1b8f5gn1jv1ksv, 00m10s elapsed]
+yandex_compute_instance.lemp[3]: Still destroying... [id=epdeik1mdojj101iou5a, 00m10s elapsed]
+yandex_compute_instance.lemp[5]: Still destroying... [id=fv4hvi5q5th3pdj74atc, 00m10s elapsed]
+yandex_compute_instance.lemp[6]: Still destroying... [id=epdqje0ov7ru5o9756rv, 00m10s elapsed]
+yandex_compute_instance.lemp[1]: Still destroying... [id=fhmc93khf3ojq5mbta3e, 00m20s elapsed]
+yandex_compute_instance.lemp[2]: Still destroying... [id=fv49dgl1so9mjhjpbmv4, 00m20s elapsed]
+yandex_compute_instance.lemp[4]: Still destroying... [id=fhmp7e7kpfm6c0q1k1kl, 00m20s elapsed]
+yandex_compute_instance.lemp[0]: Still destroying... [id=epdm9g1b8f5gn1jv1ksv, 00m20s elapsed]
+yandex_compute_instance.lemp[5]: Still destroying... [id=fv4hvi5q5th3pdj74atc, 00m20s elapsed]
+yandex_compute_instance.lemp[3]: Still destroying... [id=epdeik1mdojj101iou5a, 00m20s elapsed]
+yandex_compute_instance.lemp[6]: Still destroying... [id=epdqje0ov7ru5o9756rv, 00m20s elapsed]
+yandex_compute_instance.lemp[2]: Still destroying... [id=fv49dgl1so9mjhjpbmv4, 00m30s elapsed]
+yandex_compute_instance.lemp[1]: Still destroying... [id=fhmc93khf3ojq5mbta3e, 00m30s elapsed]
+yandex_compute_instance.lemp[4]: Still destroying... [id=fhmp7e7kpfm6c0q1k1kl, 00m30s elapsed]
+yandex_compute_instance.lemp[0]: Still destroying... [id=epdm9g1b8f5gn1jv1ksv, 00m30s elapsed]
+yandex_compute_instance.lemp[5]: Still destroying... [id=fv4hvi5q5th3pdj74atc, 00m30s elapsed]
+yandex_compute_instance.lemp[6]: Still destroying... [id=epdqje0ov7ru5o9756rv, 00m30s elapsed]
+yandex_compute_instance.lemp[3]: Still destroying... [id=epdeik1mdojj101iou5a, 00m30s elapsed]
+yandex_compute_instance.lemp[1]: Destruction complete after 35s
+yandex_compute_instance.lemp[5]: Destruction complete after 36s
+yandex_compute_instance.lemp[4]: Destruction complete after 37s
+yandex_compute_instance.lemp[6]: Destruction complete after 38s
+yandex_compute_instance.lemp[2]: Still destroying... [id=fv49dgl1so9mjhjpbmv4, 00m40s elapsed]
+yandex_compute_instance.lemp[0]: Still destroying... [id=epdm9g1b8f5gn1jv1ksv, 00m40s elapsed]
+yandex_compute_instance.lemp[3]: Still destroying... [id=epdeik1mdojj101iou5a, 00m40s elapsed]
+yandex_compute_instance.lemp[3]: Destruction complete after 42s
+yandex_compute_instance.lemp[2]: Destruction complete after 43s
+yandex_compute_instance.lemp[0]: Destruction complete after 43s
+
+Destroy complete! Resources: 9 destroyed.
+++ set +x
