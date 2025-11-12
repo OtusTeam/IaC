@@ -1,0 +1,22 @@
+---
+- hosts: lemp
+  become: yes
+  tasks:
+    - name: Скопировать файлы веб-сайта
+      copy:
+        src: ./site-content/
+        dest: /var/www/html/
+        owner: www-data
+        group: www-data
+        mode: '0755'
+
+    - name: Убедиться, что nginx запущен и включен
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Перезапустить nginx для применения изменений
+      systemd:
+        name: nginx
+        state: restarted

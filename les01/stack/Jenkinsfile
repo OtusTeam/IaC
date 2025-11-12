@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    triggers {
+        // Автоматический запуск при коммите в ветку main/master
+        pollSCM('H/5 * * * *') // или webhook на стороне репозитория для мгновенного запуска
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Terraform Lint & Security Scan') {
+            steps {
+                // Запуск tfsec для статического анализа Terraform
+                sh 'tfsec .'
+            }
+        }
+
+        stage('Build Packer Image') {
+            steps {
+                sh 'packer build lemp.json'
+            }
+        }
+
+        stage('Terraform Init & Apply') {
+            steps {
+                sh 'terraform init'
+                sh 'terraform apply -auto-approve'
+            }
+        }
+        
+        stage('Ansible Provision') {
+            steps {
+                sh 'ansible-playbook -i inventory lemp.yml'
+            }
+        }
+    }
+}
