@@ -1,0 +1,37 @@
+<mxfile host="65bd71144e">
+    <diagram id="LEMP_IaC_process" name="LEMP IaC Process">
+        <mxGraphModel dx="1086" dy="534" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="Packer: Создание образа ОС" style="rounded=1;fillColor=#A3C1FF;strokeColor=#0047B3;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="150" width="180" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="Terraform: Развёртывание VM из образа" style="rounded=1;fillColor=#A3E1A3;strokeColor=#268326;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="150" width="240" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="Ansible: Настройка LEMP на VM" style="rounded=1;fillColor=#FFD480;strokeColor=#B37800;" parent="1" vertex="1">
+                    <mxGeometry x="640" y="150" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="Jenkins: Автоматизация и оркестрация пайплайна CI/CD" style="rounded=1;fillColor=#FF9999;strokeColor=#B30000;" parent="1" vertex="1">
+                    <mxGeometry x="320" y="300" width="320" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#003366;" parent="1" source="2" target="3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#003366;" parent="1" source="3" target="4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#003366;" parent="1" source="5" target="2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#003366;" parent="1" source="5" target="3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#003366;" parent="1" source="5" target="4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
