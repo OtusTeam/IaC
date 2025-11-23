@@ -3,7 +3,8 @@
 
 # Конфигурация target group с динамическими блоками
 resource "yandex_lb_target_group" "nlb_target_group" {
-  name      = "nlb-target-group"
+  count = 2
+  name      = "nlb-target-group-${count.index}"
   region_id = "ru-central1"
 
   # Динамический блок для целевых ресурсов
@@ -35,7 +36,7 @@ resource "yandex_lb_network_load_balancer" "nlb" {
 
   # Динамический блок для аттачмента target group
   dynamic "attached_target_group" {
-    for_each = local.target_groups
+    for_each = yandex_lb_target_group.nlb_target_group
     content {
       target_group_id = attached_target_group.value.target_group_id
       
@@ -93,7 +94,6 @@ variable "listeners" {
 }
 
 locals { 
-  target_groups = toset([yandex_lb_target_group.nlb_target_group])
   healthchecks = {
     http = {
       port = 80
