@@ -17,22 +17,9 @@ resource "yandex_lb_target_group" "nlb_target_group" {
   }
 }
 
-# Конфигурация самого балансировщика
 resource "yandex_lb_network_load_balancer" "nlb" {
   name = "network-load-balancer"
   type = "external"
-
-  # Динамический блок для listener'ов
-  dynamic "listener" {
-    for_each = var.listeners
-    content {
-      name = listener.value.name
-      port = listener.value.port
-      external_address_spec {
-        ip_version = listener.value.ip_version
-      }
-    }
-  }
 
   # Динамический блок для аттачмента target group
   dynamic "attached_target_group" {
@@ -44,7 +31,7 @@ resource "yandex_lb_network_load_balancer" "nlb" {
       dynamic "healthcheck" {
         for_each = local.healthchecks
         content {
-          name = healthcheck.key
+          name = "${attached_target_group.value.name}-${healthcheck.key}" 
           http_options {
             port = healthcheck.value.port
             path = healthcheck.value.path
@@ -53,6 +40,18 @@ resource "yandex_lb_network_load_balancer" "nlb" {
       }
     }
   }
+
+  dynamic "listener" {
+    for_each = var.listeners
+    content {
+      name = listener.value.name
+      port = listener.value.port
+      external_address_spec {
+        ip_version = listener.value.ip_version
+      }
+    }
+  }
+
 }
 
 # Переменные для конфигурации
@@ -68,7 +67,7 @@ variable "target_instances" {
     },
     {
       subnet_id = "subnet-id-2" 
-      address   = "192.168.1.11"
+      address   = "192.168.2.11"
     }
   ]
 }

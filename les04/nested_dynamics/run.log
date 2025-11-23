@@ -1,6 +1,7 @@
 za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les04/nested_dynamics$ terraform plan
 
-Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+Terraform used the selected providers to generate the following execution plan. Resource
+actions are indicated with the following symbols:
   + create
 
 Terraform will perform the following actions:
@@ -22,7 +23,7 @@ Terraform will perform the following actions:
           + healthcheck {
               + healthy_threshold   = 2
               + interval            = 2
-              + name                = "http"
+              + name                = "nlb-target-group-0-http"
               + timeout             = 1
               + unhealthy_threshold = 2
 
@@ -34,7 +35,7 @@ Terraform will perform the following actions:
           + healthcheck {
               + healthy_threshold   = 2
               + interval            = 2
-              + name                = "https"
+              + name                = "nlb-target-group-0-https"
               + timeout             = 1
               + unhealthy_threshold = 2
 
@@ -50,7 +51,7 @@ Terraform will perform the following actions:
           + healthcheck {
               + healthy_threshold   = 2
               + interval            = 2
-              + name                = "http"
+              + name                = "nlb-target-group-1-http"
               + timeout             = 1
               + unhealthy_threshold = 2
 
@@ -62,7 +63,7 @@ Terraform will perform the following actions:
           + healthcheck {
               + healthy_threshold   = 2
               + interval            = 2
-              + name                = "https"
+              + name                = "nlb-target-group-1-https"
               + timeout             = 1
               + unhealthy_threshold = 2
 
@@ -113,7 +114,7 @@ Terraform will perform the following actions:
           + subnet_id = "subnet-id-1"
         }
       + target {
-          + address   = "192.168.1.11"
+          + address   = "192.168.2.11"
           + subnet_id = "subnet-id-2"
         }
     }
@@ -134,13 +135,14 @@ Terraform will perform the following actions:
           + subnet_id = "subnet-id-1"
         }
       + target {
-          + address   = "192.168.1.11"
+          + address   = "192.168.2.11"
           + subnet_id = "subnet-id-2"
         }
     }
 
 Plan: 3 to add, 0 to change, 0 to destroy.
 
-─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────────────────────────────────
 
-Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
+Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to
+take exactly these actions if you run "terraform apply" now.
