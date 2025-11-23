@@ -1,0 +1,97 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les04/ignore/nested_dynamics$ terraform plan
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # yandex_lb_network_load_balancer.nlb will be created
+  + resource "yandex_lb_network_load_balancer" "nlb" {
+      + allow_zonal_shift   = (known after apply)
+      + created_at          = (known after apply)
+      + deletion_protection = (known after apply)
+      + folder_id           = (known after apply)
+      + id                  = (known after apply)
+      + name                = "network-load-balancer"
+      + region_id           = (known after apply)
+      + type                = "external"
+
+      + attached_target_group {
+          + target_group_id = (known after apply)
+
+          + healthcheck {
+              + healthy_threshold   = 2
+              + interval            = 2
+              + name                = "http"
+              + timeout             = 1
+              + unhealthy_threshold = 2
+
+              + http_options {
+                  + path = "/"
+                  + port = 80
+                }
+            }
+          + healthcheck {
+              + healthy_threshold   = 2
+              + interval            = 2
+              + name                = "https"
+              + timeout             = 1
+              + unhealthy_threshold = 2
+
+              + http_options {
+                  + path = "/"
+                  + port = 443
+                }
+            }
+        }
+
+      + listener {
+          + name        = "http-listener"
+          + port        = 80
+          + protocol    = (known after apply)
+          + target_port = (known after apply)
+
+          + external_address_spec {
+              + address    = (known after apply)
+              + ip_version = "ipv4"
+            }
+        }
+      + listener {
+          + name        = "https-listener"
+          + port        = 443
+          + protocol    = (known after apply)
+          + target_port = (known after apply)
+
+          + external_address_spec {
+              + address    = (known after apply)
+              + ip_version = "ipv4"
+            }
+        }
+    }
+
+  # yandex_lb_target_group.nlb_target_group will be created
+  + resource "yandex_lb_target_group" "nlb_target_group" {
+      + created_at      = (known after apply)
+      + description     = (known after apply)
+      + folder_id       = (known after apply)
+      + id              = (known after apply)
+      + labels          = (known after apply)
+      + name            = "nlb-target-group"
+      + region_id       = "ru-central1"
+      + target_group_id = (known after apply)
+
+      + target {
+          + address   = "192.168.1.10"
+          + subnet_id = "subnet-id-1"
+        }
+      + target {
+          + address   = "192.168.1.11"
+          + subnet_id = "subnet-id-2"
+        }
+    }
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
