@@ -1,0 +1,24 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les04/console$ ./run.sh
+++ echo 'toset([1, 5, 2, 3, 1])'
+++ terraform console
+toset([
+  1,
+  2,
+  3,
+  5,
+])
+++ echo 'flatten([["a", "b"], [], ["c"]])'
+++ terraform console
+[
+  "a",
+  "b",
+  "c",
+]
+++ echo 'flatten([[["a", "b"], []], ["c"]])'
+++ terraform console
+[
+  "a",
+  "b",
+  "c",
+]
+++ set +x
