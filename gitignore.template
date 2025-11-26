@@ -102,3 +102,6 @@ collections
 
 # JA: for terragrunt
 .terragrunt-cache
+
+# JA: for vagrant
+.vagrant

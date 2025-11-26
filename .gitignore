@@ -94,5 +94,14 @@ collections
 .venv
 *.pyc
 
+# JA: for ignore sensetive files:
+*sensitive*
+*.sensitive*
+*sensitive.*
+*.sensitive.*
+
+# JA: for terragrunt
+.terragrunt-cache
+
 # JA: for vagrant
 .vagrant
