@@ -7,40 +7,46 @@ terraform {
   }
 }
 
+# пример составной локальной переменной типа set:
 locals {
   names_set = toset(["alice", "bob", "carol"])
 }
 
-resource "null_resource" "example" {
+resource "null_resource" "each_of_set" {
   for_each = local.names_set
 
-  # используем both each.key and each.value
+  # используем each.key и each.value в качестве значений атрибутов экземпларов each_of_set:
   triggers = {
     key   = each.key
     value = each.value
   }
 }
 
-output "instances" {
-  value = { for k, r in null_resource.example : k => r.triggers }
+# выводим значения атрибутов экземпляров each_of_set:
+output "values_each_of_sets" {
+  value = { for k, r in null_resource.each_of_set : k => r.triggers }
 }
 
+# пример составной локальной переменной типа map:
 locals {
-  m = {
+  example_of_map  = {
     a = "x"
     b = "x"
     c = "y"
   }
 }
 
-resource "null_resource" "r" {
-  for_each = local.m
+resource "null_resource" "each_of_map" {
+  for_each = local.example_of_map
+
+  # используем each.key и each.value в качестве значений атрибутов экземпларов each_of_map:
   triggers = {
     key   = each.key
     value = each.value
   }
 }
 
-output "out" {
-  value = { for k, v in null_resource.r : k => v.triggers }
+# выводим значения атрибутов экземпляров each_of_map:
+output "values_each_of_map" {
+  value = { for k, v in null_resource.each_of_map : k => v.triggers }
 }

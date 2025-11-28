@@ -21,4 +21,19 @@ toset([
   "b",
   "c",
 ]
+++ echo 'flatten([[["a", "b"], ["b"]], ["c"]])'
+++ terraform console
+[
+  "a",
+  "b",
+  "b",
+  "c",
+]
+++ echo 'toset(flatten([[["a", "b"], ["b"]], ["c"]]))'
+++ terraform console
+toset([
+  "a",
+  "b",
+  "c",
+])
 ++ set +x
