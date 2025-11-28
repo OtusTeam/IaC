@@ -1,4 +1,5 @@
-za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les04/console$ ./run.sh
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les04/console$ ./run.sh 
+++ echo 'повторяющиеся элементы списка не будут повторятся после преобразования во множество:'
 ++ echo 'toset([1, 5, 2, 3, 1])'
 ++ terraform console
 toset([
@@ -7,6 +8,7 @@ toset([
   3,
   5,
 ])
+++ echo 'вложенные списки преобразуются в один плоский список, но все конечные элементы (включая повторяющиеся) сохранятся, лишние и пустые списки исчезнут:'
 ++ echo 'flatten([["a", "b"], [], ["c"]])'
 ++ terraform console
 [
@@ -29,6 +31,7 @@ toset([
   "b",
   "c",
 ]
+++ echo 'повторяющиеся элементы списка не будут повторятся после преобразования во множество:'
 ++ echo 'toset(flatten([[["a", "b"], ["b"]], ["c"]]))'
 ++ terraform console
 toset([
