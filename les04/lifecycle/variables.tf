@@ -13,12 +13,6 @@ variable "yc_token" {
   description = "Yandex Cloud OAuth token"
 }
 
-variable "pub_key_file" {
-   type = string
-   description = "Public key file path"
-   sensitive = true
-}
-
 variable "yc_default_zone" {
    type = string
    description = "Yandex Cloud default zone"
@@ -29,6 +23,8 @@ variable "yc_subnet_id" {
    description = "Yandex Cloud subnet id"
 }
 
-
-
-
+variable "image_name" {
+  type = string
+  default = "ubuntu-2204-lts"
+  description = "Yandex Image Name"
+}

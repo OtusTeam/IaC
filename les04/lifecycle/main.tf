@@ -1,5 +1,5 @@
-resource "yandex_compute_instance" "les04_db" {
-  name = "les04-db"
+resource "yandex_compute_instance" "les04_lifecycle" {
+  name = "les04-lifecycle"
 
   resources {
     cores  = 2
@@ -20,11 +20,6 @@ resource "yandex_compute_instance" "les04_db" {
 
   scheduling_policy {
     preemptible = true
-  }
-
-
-  metadata = {
-    ssh-keys = "ubuntu:${file(var.pub_key_file)}"
   }
 
   lifecycle {
