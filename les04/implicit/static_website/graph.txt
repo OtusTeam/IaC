@@ -1,0 +1,19 @@
+digraph G {
+  rankdir = "RL";
+  node [shape = rect, fontname = "sans-serif"];
+  "yandex_iam_service_account.sa" [label="yandex_iam_service_account.sa"];
+  "yandex_iam_service_account_static_access_key.sa_static_key" [label="yandex_iam_service_account_static_access_key.sa_static_key"];
+  "yandex_resourcemanager_folder_iam_member.sa_editor" [label="yandex_resourcemanager_folder_iam_member.sa_editor"];
+  "yandex_storage_bucket.website" [label="yandex_storage_bucket.website"];
+  "yandex_storage_bucket_grant.public_read" [label="yandex_storage_bucket_grant.public_read"];
+  "yandex_storage_bucket_iam_binding.storage_admin" [label="yandex_storage_bucket_iam_binding.storage_admin"];
+  "yandex_storage_object.error-html" [label="yandex_storage_object.error-html"];
+  "yandex_storage_object.index-html" [label="yandex_storage_object.index-html"];
+  "yandex_iam_service_account_static_access_key.sa_static_key" -> "yandex_iam_service_account.sa";
+  "yandex_resourcemanager_folder_iam_member.sa_editor" -> "yandex_iam_service_account.sa";
+  "yandex_storage_bucket.website" -> "yandex_iam_service_account_static_access_key.sa_static_key";
+  "yandex_storage_bucket_grant.public_read" -> "yandex_iam_service_account_static_access_key.sa_static_key";
+  "yandex_storage_bucket_iam_binding.storage_admin" -> "yandex_iam_service_account.sa";
+  "yandex_storage_object.error-html" -> "yandex_storage_bucket.website";
+  "yandex_storage_object.index-html" -> "yandex_storage_bucket.website";
+}

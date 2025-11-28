@@ -1,0 +1,334 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les04/implicit/static_website$ ./run.sh
+++ terraform validate
+Success! The configuration is valid.
+
+++ read -p 'Press enter to continue...'
+Press enter to continue...
+++ terraform graph
+++ cat graph.txt
+digraph G {
+  rankdir = "RL";
+  node [shape = rect, fontname = "sans-serif"];
+  "yandex_iam_service_account.sa" [label="yandex_iam_service_account.sa"];
+  "yandex_iam_service_account_static_access_key.sa_static_key" [label="yandex_iam_service_account_static_access_key.sa_static_key"];
+  "yandex_resourcemanager_folder_iam_member.sa_editor" [label="yandex_resourcemanager_folder_iam_member.sa_editor"];
+  "yandex_storage_bucket.website" [label="yandex_storage_bucket.website"];
+  "yandex_storage_bucket_grant.public_read" [label="yandex_storage_bucket_grant.public_read"];
+  "yandex_storage_bucket_iam_binding.storage_admin" [label="yandex_storage_bucket_iam_binding.storage_admin"];
+  "yandex_storage_object.error-html" [label="yandex_storage_object.error-html"];
+  "yandex_storage_object.index-html" [label="yandex_storage_object.index-html"];
+  "yandex_iam_service_account_static_access_key.sa_static_key" -> "yandex_iam_service_account.sa";
+  "yandex_resourcemanager_folder_iam_member.sa_editor" -> "yandex_iam_service_account.sa";
+  "yandex_storage_bucket.website" -> "yandex_iam_service_account_static_access_key.sa_static_key";
+  "yandex_storage_bucket_grant.public_read" -> "yandex_iam_service_account_static_access_key.sa_static_key";
+  "yandex_storage_bucket_iam_binding.storage_admin" -> "yandex_iam_service_account.sa";
+  "yandex_storage_object.error-html" -> "yandex_storage_bucket.website";
+  "yandex_storage_object.index-html" -> "yandex_storage_bucket.website";
+}
+++ read -p 'Press enter to continue...'
+Press enter to continue...
+++ cat graph.txt
+++ dot -Tsvg
+++ read -p 'Press enter to continue...'
+Press enter to continue...
+++ xdg-open graph.svg
+++ read -p 'Press enter to continue...'
+Press enter to continue...
+++ terraform apply
+
+Terraform used the selected providers to generate the following execution plan. Resource
+actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # yandex_iam_service_account.sa will be created
+  + resource "yandex_iam_service_account" "sa" {
+      + created_at         = (known after apply)
+      + description        = (known after apply)
+      + folder_id          = (known after apply)
+      + id                 = (known after apply)
+      + name               = "les04-static-sa"
+      + service_account_id = (known after apply)
+    }
+
+  # yandex_iam_service_account_static_access_key.sa_static_key will be created
+  + resource "yandex_iam_service_account_static_access_key" "sa_static_key" {
+      + access_key                   = (known after apply)
+      + created_at                   = (known after apply)
+      + description                  = "static access key for object storage"
+      + encrypted_secret_key         = (known after apply)
+      + id                           = (known after apply)
+      + key_fingerprint              = (known after apply)
+      + output_to_lockbox_version_id = (known after apply)
+      + secret_key                   = (sensitive value)
+      + service_account_id           = (known after apply)
+    }
+
+  # yandex_resourcemanager_folder_iam_member.sa_editor will be created
+  + resource "yandex_resourcemanager_folder_iam_member" "sa_editor" {
+      + folder_id = "b1gmesrdjgklgkvcp704"
+      + member    = (known after apply)
+      + role      = "storage.editor"
+    }
+
+  # yandex_storage_bucket.website will be created
+  + resource "yandex_storage_bucket" "website" {
+      + access_key            = (known after apply)
+      + acl                   = (known after apply)
+      + bucket                = "les04-static-web"
+      + bucket_domain_name    = (known after apply)
+      + default_storage_class = (known after apply)
+      + folder_id             = (known after apply)
+      + force_destroy         = false
+      + id                    = (known after apply)
+      + max_size              = 1073741824
+      + policy                = (known after apply)
+      + secret_key            = (sensitive value)
+      + website_domain        = (known after apply)
+      + website_endpoint      = (known after apply)
+
+      + anonymous_access_flags (known after apply)
+
+      + grant (known after apply)
+
+      + versioning (known after apply)
+
+      + website {
+          + error_document = "error.html"
+          + index_document = "index.html"
+        }
+    }
+
+  # yandex_storage_bucket_grant.public_read will be created
+  + resource "yandex_storage_bucket_grant" "public_read" {
+      + access_key = (known after apply)
+      + acl        = "public-read"
+      + bucket     = "les04-static-web"
+      + secret_key = (sensitive value)
+    }
+
+  # yandex_storage_bucket_iam_binding.storage_admin will be created
+  + resource "yandex_storage_bucket_iam_binding" "storage_admin" {
+      + bucket  = "les04-static-web"
+      + members = [
+          + (known after apply),
+        ]
+      + role    = "storage.admin"
+    }
+
+  # yandex_storage_object.error-html will be created
+  + resource "yandex_storage_object" "error-html" {
+      + access_key   = (known after apply)
+      + acl          = "private"
+      + bucket       = (known after apply)
+      + content_type = (known after apply)
+      + id           = (known after apply)
+      + key          = "error.html"
+      + secret_key   = (sensitive value)
+      + source       = "error.html"
+    }
+
+  # yandex_storage_object.index-html will be created
+  + resource "yandex_storage_object" "index-html" {
+      + access_key   = (known after apply)
+      + acl          = "private"
+      + bucket       = (known after apply)
+      + content_type = (known after apply)
+      + id           = (known after apply)
+      + key          = "index.html"
+      + secret_key   = (sensitive value)
+      + source       = "index.html"
+    }
+
+Plan: 8 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + website_endpoint = (known after apply)
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+yandex_iam_service_account.sa: Creating...
+yandex_iam_service_account.sa: Creation complete after 3s [id=aje2k2jr9cs53feg7o4e]
+yandex_resourcemanager_folder_iam_member.sa_editor: Creating...
+yandex_storage_bucket_iam_binding.storage_admin: Creating...
+yandex_iam_service_account_static_access_key.sa_static_key: Creating...
+yandex_iam_service_account_static_access_key.sa_static_key: Creation complete after 2s [id=ajeti34r3j5t5pv8gnqe]
+yandex_storage_bucket_grant.public_read: Creating...
+yandex_storage_bucket.website: Creating...
+yandex_resourcemanager_folder_iam_member.sa_editor: Creation complete after 3s
+yandex_storage_bucket.website: Still creating... [00m10s elapsed]
+yandex_storage_bucket.website: Still creating... [00m20s elapsed]
+yandex_storage_bucket.website: Creation complete after 25s [id=les04-static-web]
+yandex_storage_object.index-html: Creating...
+yandex_storage_object.error-html: Creating...
+yandex_storage_object.error-html: Creation complete after 0s [id=error.html]
+yandex_storage_object.index-html: Creation complete after 0s [id=index.html]
+╷
+│ Error: error while resolve instance
+│ 
+│   with yandex_storage_bucket_iam_binding.storage_admin,
+│   on main.tf line 28, in resource "yandex_storage_bucket_iam_binding" "storage_admin":
+│   28: resource "yandex_storage_bucket_iam_binding" "storage_admin" {
+│ 
+│ Cannot get ResourceId for bucket les04-static-web (failed to find bucket with name
+│ "les04-static-web" : client-request-id = bcb24f04-580b-45ea-a26f-47cf111a634d
+│ client-trace-id = 66c783d6-ff47-4ce7-bd65-e507939ddeaf rpc error: code = NotFound desc =
+│ The specified bucket does not exist.)
+╵
+╷
+│ Error: Error updating bucket ACL
+│ 
+│   with yandex_storage_bucket_grant.public_read,
+│   on main.tf line 38, in resource "yandex_storage_bucket_grant" "public_read":
+│   38: resource "yandex_storage_bucket_grant" "public_read" {
+│ 
+│ error putting Storage Bucket ACL: AccessDenied: Access Denied
+│       status code: 403, request id: b3e4fde8d702dd07, host id: 
+╵
++++ terraform output -raw website_endpoint
+++ curl https://les04-static-web.website.yandexcloud.net
+<html>
+<head><title>403 Forbidden</title></head>
+<body>
+<h1>403 Forbidden</h1>
+<ul>
+<li>Code: AccessDenied</li>
+<li>Message: Access Denied</li>
+<li>RequestID: 0c94b9d9a4b30c83</li>
+</ul>
+<hr/>
+</body>
+</html>++ read -p 'Press enter to destroy infra...'
+Press enter to destroy infra...
+++ terraform destroy
+yandex_iam_service_account.sa: Refreshing state... [id=aje2k2jr9cs53feg7o4e]
+yandex_resourcemanager_folder_iam_member.sa_editor: Refreshing state...
+yandex_iam_service_account_static_access_key.sa_static_key: Refreshing state... [id=ajeti34r3j5t5pv8gnqe]
+yandex_storage_bucket.website: Refreshing state... [id=les04-static-web]
+yandex_storage_object.index-html: Refreshing state... [id=index.html]
+yandex_storage_object.error-html: Refreshing state... [id=error.html]
+
+Terraform used the selected providers to generate the following execution plan. Resource
+actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # yandex_iam_service_account.sa will be destroyed
+  - resource "yandex_iam_service_account" "sa" {
+      - created_at         = "2025-11-28T06:34:03Z" -> null
+      - folder_id          = "b1gmesrdjgklgkvcp704" -> null
+      - id                 = "aje2k2jr9cs53feg7o4e" -> null
+      - name               = "les04-static-sa" -> null
+      - service_account_id = "aje2k2jr9cs53feg7o4e" -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # yandex_iam_service_account_static_access_key.sa_static_key will be destroyed
+  - resource "yandex_iam_service_account_static_access_key" "sa_static_key" {
+      - access_key         = "YCAJECNmqzJnXDnO_aNDJuZoM" -> null
+      - created_at         = "2025-11-28T06:34:06Z" -> null
+      - description        = "static access key for object storage" -> null
+      - id                 = "ajeti34r3j5t5pv8gnqe" -> null
+      - secret_key         = (sensitive value) -> null
+      - service_account_id = "aje2k2jr9cs53feg7o4e" -> null
+    }
+
+  # yandex_resourcemanager_folder_iam_member.sa_editor will be destroyed
+  - resource "yandex_resourcemanager_folder_iam_member" "sa_editor" {
+      - folder_id = "b1gmesrdjgklgkvcp704" -> null
+      - member    = "serviceAccount:aje2k2jr9cs53feg7o4e" -> null
+      - role      = "storage.editor" -> null
+    }
+
+  # yandex_storage_bucket.website will be destroyed
+  - resource "yandex_storage_bucket" "website" {
+      - access_key            = "YCAJECNmqzJnXDnO_aNDJuZoM" -> null
+      - bucket                = "les04-static-web" -> null
+      - bucket_domain_name    = "les04-static-web.storage.yandexcloud.net" -> null
+      - default_storage_class = "STANDARD" -> null
+      - folder_id             = "b1gmesrdjgklgkvcp704" -> null
+      - force_destroy         = false -> null
+      - id                    = "les04-static-web" -> null
+      - max_size              = 1073741824 -> null
+      - secret_key            = (sensitive value) -> null
+      - tags                  = {} -> null
+      - website_domain        = "website.yandexcloud.net" -> null
+      - website_endpoint      = "les04-static-web.website.yandexcloud.net" -> null
+        # (1 unchanged attribute hidden)
+
+      - anonymous_access_flags {
+          - config_read = false -> null
+          - list        = false -> null
+          - read        = false -> null
+        }
+
+      - versioning {
+          - enabled = false -> null
+        }
+
+      - website {
+          - error_document           = "error.html" -> null
+          - index_document           = "index.html" -> null
+            # (2 unchanged attributes hidden)
+        }
+    }
+
+  # yandex_storage_object.error-html will be destroyed
+  - resource "yandex_storage_object" "error-html" {
+      - access_key   = "YCAJECNmqzJnXDnO_aNDJuZoM" -> null
+      - acl          = "private" -> null
+      - bucket       = "les04-static-web" -> null
+      - content_type = "application/octet-stream" -> null
+      - id           = "error.html" -> null
+      - key          = "error.html" -> null
+      - secret_key   = (sensitive value) -> null
+      - source       = "error.html" -> null
+      - tags         = {} -> null
+    }
+
+  # yandex_storage_object.index-html will be destroyed
+  - resource "yandex_storage_object" "index-html" {
+      - access_key   = "YCAJECNmqzJnXDnO_aNDJuZoM" -> null
+      - acl          = "private" -> null
+      - bucket       = "les04-static-web" -> null
+      - content_type = "application/octet-stream" -> null
+      - id           = "index.html" -> null
+      - key          = "index.html" -> null
+      - secret_key   = (sensitive value) -> null
+      - source       = "index.html" -> null
+      - tags         = {} -> null
+    }
+
+Plan: 0 to add, 0 to change, 6 to destroy.
+
+Changes to Outputs:
+  - website_endpoint = "les04-static-web.website.yandexcloud.net" -> null
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+yandex_resourcemanager_folder_iam_member.sa_editor: Destroying...
+yandex_storage_object.index-html: Destroying... [id=index.html]
+yandex_storage_object.error-html: Destroying... [id=error.html]
+yandex_storage_object.error-html: Destruction complete after 0s
+yandex_storage_object.index-html: Destruction complete after 0s
+yandex_storage_bucket.website: Destroying... [id=les04-static-web]
+yandex_resourcemanager_folder_iam_member.sa_editor: Destruction complete after 3s
+yandex_storage_bucket.website: Still destroying... [id=les04-static-web, 00m10s elapsed]
+yandex_storage_bucket.website: Destruction complete after 12s
+yandex_iam_service_account_static_access_key.sa_static_key: Destroying... [id=ajeti34r3j5t5pv8gnqe]
+yandex_iam_service_account_static_access_key.sa_static_key: Destruction complete after 1s
+yandex_iam_service_account.sa: Destroying... [id=aje2k2jr9cs53feg7o4e]
+yandex_iam_service_account.sa: Destruction complete after 3s
+
+Destroy complete! Resources: 6 destroyed.
+++ set +x
