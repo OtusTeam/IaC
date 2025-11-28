@@ -1,0 +1,24 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les04/implicit/network$ ./run.sh
+++ terraform validate
+Success! The configuration is valid.
+
+++ read -p 'Press enter to continue...'
+Press enter to continue...
+++ terraform graph
+++ cat graph.txt
+digraph G {
+  rankdir = "RL";
+  node [shape = rect, fontname = "sans-serif"];
+  "yandex_vpc_network.les04_implicit_network" [label="yandex_vpc_network.les04_implicit_network"];
+  "yandex_vpc_subnet.les04_implicit_subnet" [label="yandex_vpc_subnet.les04_implicit_subnet"];
+  "yandex_vpc_subnet.les04_implicit_subnet" -> "yandex_vpc_network.les04_implicit_network";
+}
+++ read -p 'Press enter to continue...'
+Press enter to continue...
+++ terraform graph
+++ dot -Tsvg
+++ read -p 'Press enter to continue...'
+Press enter to continue...
+++ xdg-open graph.svg
+++ set +x
+see graph.svg

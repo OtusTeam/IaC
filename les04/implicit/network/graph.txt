@@ -1,0 +1,7 @@
+digraph G {
+  rankdir = "RL";
+  node [shape = rect, fontname = "sans-serif"];
+  "yandex_vpc_network.les04_implicit_network" [label="yandex_vpc_network.les04_implicit_network"];
+  "yandex_vpc_subnet.les04_implicit_subnet" [label="yandex_vpc_subnet.les04_implicit_subnet"];
+  "yandex_vpc_subnet.les04_implicit_subnet" -> "yandex_vpc_network.les04_implicit_network";
+}
