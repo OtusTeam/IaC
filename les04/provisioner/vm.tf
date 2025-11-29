@@ -1,22 +1,14 @@
-resource "null_resource" "ansible" {
+resource "null_resource" "check_sudo_permission" {
   provisioner "local-exec" {
-    command = <<-EOT
-      export ANSIBLE_HOST_KEY_CHECKING=False &&
-      ansible -u ${var.username} -i hosts --private-key ${var.sec_key_path} -m ping all
-    EOT
+    command = "bash command.txt"
   }
 
-  depends_on = [yandex_compute_instance.les04_explicit]
+  depends_on = [yandex_compute_instance.vm, local_file.save_rendered]
 }
 
-
-resource "yandex_compute_instance" "les04_explicit" {
-  name = "les04-explicit"
+resource "yandex_compute_instance" "vm" {
+  name = "${var.prefix}-vm-for-provisioner-example"
   zone = var.yc_default_zone
-
-  provisioner "local-exec" {
-    command = "echo '${self.name} ansible_host=${self.network_interface.0.nat_ip_address}' > hosts"
-  }
 
   provisioner "remote-exec" {
     inline = ["sleep 1"]
@@ -31,7 +23,7 @@ resource "yandex_compute_instance" "les04_explicit" {
 
   provisioner "local-exec" {
     when       = destroy
-    command    = "rm hosts"
+    command    = "rm command.txt"
     on_failure = continue
   }
 
@@ -57,6 +49,19 @@ resource "yandex_compute_instance" "les04_explicit" {
   }
 
   metadata = {
-    ssh-keys = "ubuntu:${file(var.pub_key_path)}"
+    ssh-keys = "${var.username}:${file(var.pub_key_path)}"
   }
+}
+
+locals {
+  rendered = templatefile("command.tpl", {
+       username = var.username
+       ip = yandex_compute_instance.vm.network_interface.0.nat_ip_address
+    }
+  )
+}
+
+resource "local_file" "save_rendered" {
+  filename = "command.txt"
+  content  = local.rendered
 }

@@ -16,7 +16,6 @@ variable "yc_token" {
 variable "yc_default_zone" {
   type = string
   description = "Yandex Cloud default zone"
-  default = "ru-central1-a"
 }
 
 variable "yc_image_id" {
@@ -27,7 +26,6 @@ variable "yc_image_id" {
 variable "yc_subnet_id" {
   type = string
   description = "Yandec Cloud default subnet"
-#  default = "e9bop98iu12teftg4uj8"
 }
 
 variable "username" {
@@ -43,6 +41,10 @@ variable "pub_key_path" {
 
 variable "sec_key_path" {
    type = string
-#   sensitive = true
    default = "~/.ssh/id_rsa"
+}
+
+variable "prefix" {
+   type = string
+   default = "les04"
 }
