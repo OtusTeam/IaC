@@ -1,1 +1,1 @@
-ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${username}@${ip} "bash -lc 'sudo ls -la /etc/sudoers.d/README && sudo cat /etc/sudoers.d/README'"
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${username}@${ip} "bash -lc 'sudo ls -la /etc/sudoers.d/README && sudo cat /etc/sudoers.d/README && cat .terraformrc'"

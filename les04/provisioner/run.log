@@ -1,0 +1,333 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les04/provisioner$ ./run.sh
+++ terraform apply
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
+following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # local_file.save_rendered will be created
+  + resource "local_file" "save_rendered" {
+      + content              = (known after apply)
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + directory_permission = "0777"
+      + file_permission      = "0777"
+      + filename             = "command.txt"
+      + id                   = (known after apply)
+    }
+
+  # null_resource.delete_on_destroy will be created
+  + resource "null_resource" "delete_on_destroy" {
+      + id = (known after apply)
+    }
+
+  # null_resource.run_command will be created
+  + resource "null_resource" "run_command" {
+      + id = (known after apply)
+    }
+
+  # yandex_compute_instance.vm will be created
+  + resource "yandex_compute_instance" "vm" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hardware_generation       = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = (sensitive value)
+        }
+      + name                      = "les04-vm-for-provisioner-example"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + status                    = (known after apply)
+      + zone                      = "ru-central1-a"
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd80viupr3qjr5g6g9du"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index          = (known after apply)
+          + ip_address     = (known after apply)
+          + ipv4           = true
+          + ipv6           = (known after apply)
+          + ipv6_address   = (known after apply)
+          + mac_address    = (known after apply)
+          + nat            = true
+          + nat_ip_address = (known after apply)
+          + nat_ip_version = (known after apply)
+          + subnet_id      = "e9bop98iu12teftg4uj8"
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 100
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy {
+          + preemptible = true
+        }
+    }
+
+Plan: 4 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+null_resource.delete_on_destroy: Creating...
+null_resource.delete_on_destroy: Creation complete after 0s [id=8132351245520916048]
+yandex_compute_instance.vm: Creating...
+yandex_compute_instance.vm: Still creating... [00m10s elapsed]
+yandex_compute_instance.vm: Still creating... [00m20s elapsed]
+yandex_compute_instance.vm: Still creating... [00m30s elapsed]
+yandex_compute_instance.vm: Still creating... [00m40s elapsed]
+yandex_compute_instance.vm: Still creating... [00m50s elapsed]
+yandex_compute_instance.vm: Provisioning with 'remote-exec'...
+yandex_compute_instance.vm (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.vm (remote-exec):   Host: 158.160.63.12
+yandex_compute_instance.vm (remote-exec):   User: ubuntu
+yandex_compute_instance.vm (remote-exec):   Password: false
+yandex_compute_instance.vm (remote-exec):   Private key: true
+yandex_compute_instance.vm (remote-exec):   Certificate: false
+yandex_compute_instance.vm (remote-exec):   SSH Agent: true
+yandex_compute_instance.vm (remote-exec):   Checking Host Key: false
+yandex_compute_instance.vm (remote-exec):   Target Platform: unix
+yandex_compute_instance.vm: Still creating... [01m00s elapsed]
+yandex_compute_instance.vm (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.vm (remote-exec):   Host: 158.160.63.12
+yandex_compute_instance.vm (remote-exec):   User: ubuntu
+yandex_compute_instance.vm (remote-exec):   Password: false
+yandex_compute_instance.vm (remote-exec):   Private key: true
+yandex_compute_instance.vm (remote-exec):   Certificate: false
+yandex_compute_instance.vm (remote-exec):   SSH Agent: true
+yandex_compute_instance.vm (remote-exec):   Checking Host Key: false
+yandex_compute_instance.vm (remote-exec):   Target Platform: unix
+yandex_compute_instance.vm: Still creating... [01m10s elapsed]
+yandex_compute_instance.vm (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.vm (remote-exec):   Host: 158.160.63.12
+yandex_compute_instance.vm (remote-exec):   User: ubuntu
+yandex_compute_instance.vm (remote-exec):   Password: false
+yandex_compute_instance.vm (remote-exec):   Private key: true
+yandex_compute_instance.vm (remote-exec):   Certificate: false
+yandex_compute_instance.vm (remote-exec):   SSH Agent: true
+yandex_compute_instance.vm (remote-exec):   Checking Host Key: false
+yandex_compute_instance.vm (remote-exec):   Target Platform: unix
+yandex_compute_instance.vm (remote-exec): Connected!
+yandex_compute_instance.vm: Provisioning with 'file'...
+yandex_compute_instance.vm: Creation complete after 1m17s [id=fhm8iasvgh780jjpm0b0]
+local_file.save_rendered: Creating...
+local_file.save_rendered: Creation complete after 0s [id=ebff947dadf4612e4ba93fff79ca5754e40931fc]
+null_resource.run_command: Creating...
+null_resource.run_command: Provisioning with 'local-exec'...
+null_resource.run_command (local-exec): Executing: ["/bin/sh" "-c" "bash command.txt"]
+null_resource.run_command (local-exec): Warning: Permanently added '158.160.63.12' (ED25519) to the list of known hosts.
+null_resource.run_command (local-exec): -r--r----- 1 root root 958 Jan 18  2018 /etc/sudoers.d/README
+null_resource.run_command (local-exec): #
+null_resource.run_command (local-exec): # As of Debian version 1.7.2p1-1, the default /etc/sudoers file created on
+null_resource.run_command (local-exec): # installation of the package now includes the directive:
+null_resource.run_command (local-exec): #
+null_resource.run_command (local-exec): #       #includedir /etc/sudoers.d
+null_resource.run_command (local-exec): #
+null_resource.run_command (local-exec): # This will cause sudo to read and parse any files in the /etc/sudoers.d
+null_resource.run_command (local-exec): # directory that do not end in '~' or contain a '.' character.
+null_resource.run_command (local-exec): #
+null_resource.run_command (local-exec): # Note that there must be at least one file in the sudoers.d directory (this
+null_resource.run_command (local-exec): # one will do), and all files in this directory should be mode 0440.
+null_resource.run_command (local-exec): #
+null_resource.run_command (local-exec): # Note also, that because sudoers contents can vary widely, no attempt is
+null_resource.run_command (local-exec): # made to add this directive to existing sudoers files on upgrade.  Feel free
+null_resource.run_command (local-exec): # to add the above directive to the end of your /etc/sudoers file to enable
+null_resource.run_command (local-exec): # this functionality for existing installations if you wish!
+null_resource.run_command (local-exec): #
+null_resource.run_command (local-exec): # Finally, please note that using the visudo command is the recommended way
+null_resource.run_command (local-exec): # to update sudoers content, since it protects against many failure modes.
+null_resource.run_command (local-exec): # See the man page for visudo for more information.
+null_resource.run_command (local-exec): #
+null_resource.run_command (local-exec): provider_installation {
+null_resource.run_command (local-exec):   network_mirror {
+null_resource.run_command (local-exec):     url = "https://terraform-mirror.yandexcloud.net/"
+null_resource.run_command (local-exec):     include = ["registry.terraform.io/*/*"]
+null_resource.run_command (local-exec):   }
+null_resource.run_command (local-exec):   direct {
+null_resource.run_command (local-exec):     exclude = ["registry.terraform.io/*/*"]
+null_resource.run_command (local-exec):   }
+null_resource.run_command (local-exec): }
+null_resource.run_command: Creation complete after 1s [id=1637754097638883925]
+
+Apply complete! Resources: 4 added, 0 changed, 0 destroyed.
+++ read -p 'Press enter to continue ...'
+Press enter to continue ...
+++ terraform destroy
+null_resource.delete_on_destroy: Refreshing state... [id=8132351245520916048]
+yandex_compute_instance.vm: Refreshing state... [id=fhm8iasvgh780jjpm0b0]
+local_file.save_rendered: Refreshing state... [id=ebff947dadf4612e4ba93fff79ca5754e40931fc]
+null_resource.run_command: Refreshing state... [id=1637754097638883925]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
+following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # local_file.save_rendered will be destroyed
+  - resource "local_file" "save_rendered" {
+      - content              = "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@158.160.63.12 \"bash -lc 'sudo ls -la /etc/sudoers.d/README && sudo cat /etc/sudoers.d/README && cat .terraformrc'\"" -> null
+      - content_base64sha256 = "/JT18cATNo9E9W07zRQH8EyXArC1JZtbgE+6IOB4Dmc=" -> null
+      - content_base64sha512 = "Hn0pJgvmF1PYzRk8KDClyAitgFl7f0YcICKYT4tpCwaM7gDe1I8f+evpsvu3zbHdV0GdtLR0bKo9GIujG+wiAg==" -> null
+      - content_md5          = "07b0abc5e9b3a71f6e8e26280c474e43" -> null
+      - content_sha1         = "ebff947dadf4612e4ba93fff79ca5754e40931fc" -> null
+      - content_sha256       = "fc94f5f1c013368f44f56d3bcd1407f04c9702b0b5259b5b804fba20e0780e67" -> null
+      - content_sha512       = "1e7d29260be61753d8cd193c2830a5c808ad80597b7f461c2022984f8b690b068cee00ded48f1ff9ebe9b2fbb7cdb1dd57419db4b4746caa3d188ba31bec2202" -> null
+      - directory_permission = "0777" -> null
+      - file_permission      = "0777" -> null
+      - filename             = "command.txt" -> null
+      - id                   = "ebff947dadf4612e4ba93fff79ca5754e40931fc" -> null
+    }
+
+  # null_resource.delete_on_destroy will be destroyed
+  - resource "null_resource" "delete_on_destroy" {
+      - id = "8132351245520916048" -> null
+    }
+
+  # null_resource.run_command will be destroyed
+  - resource "null_resource" "run_command" {
+      - id = "1637754097638883925" -> null
+    }
+
+  # yandex_compute_instance.vm will be destroyed
+  - resource "yandex_compute_instance" "vm" {
+      - created_at                = "2025-11-30T13:40:46Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "fhm8iasvgh780jjpm0b0.auto.internal" -> null
+      - hardware_generation       = [
+          - {
+              - generation2_features = []
+              - legacy_features      = [
+                  - {
+                      - pci_topology = "PCI_TOPOLOGY_V1"
+                    },
+                ]
+            },
+        ] -> null
+      - id                        = "fhm8iasvgh780jjpm0b0" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = (sensitive value)
+        } -> null
+      - name                      = "les04-vm-for-provisioner-example" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-a" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "fhmn0ahunnj7bho11k9f" -> null
+          - disk_id     = "fhmn0ahunnj7bho11k9f" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd80viupr3qjr5g6g9du" -> null
+                name        = null
+              - size        = 3 -> null
+              - type        = "network-hdd" -> null
+                # (3 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.128.0.31" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:89:2b:9f:84" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "158.160.63.12" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e9bop98iu12teftg4uj8" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 100 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = true -> null
+        }
+    }
+
+Plan: 0 to add, 0 to change, 4 to destroy.
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+null_resource.delete_on_destroy: Destroying... [id=8132351245520916048]
+null_resource.run_command: Destroying... [id=1637754097638883925]
+null_resource.delete_on_destroy: Provisioning with 'local-exec'...
+null_resource.delete_on_destroy (local-exec): Executing: ["/bin/sh" "-c" "rm command.txt"]
+null_resource.run_command: Destruction complete after 0s
+null_resource.delete_on_destroy: Destruction complete after 0s
+local_file.save_rendered: Destroying... [id=ebff947dadf4612e4ba93fff79ca5754e40931fc]
+local_file.save_rendered: Destruction complete after 0s
+yandex_compute_instance.vm: Destroying... [id=fhm8iasvgh780jjpm0b0]
+yandex_compute_instance.vm: Still destroying... [id=fhm8iasvgh780jjpm0b0, 00m10s elapsed]
+yandex_compute_instance.vm: Still destroying... [id=fhm8iasvgh780jjpm0b0, 00m20s elapsed]
+yandex_compute_instance.vm: Still destroying... [id=fhm8iasvgh780jjpm0b0, 00m30s elapsed]
+yandex_compute_instance.vm: Destruction complete after 35s
+
+Destroy complete! Resources: 4 destroyed.
+++ set +x
