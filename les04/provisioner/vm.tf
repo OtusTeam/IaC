@@ -58,7 +58,7 @@ resource "yandex_compute_instance" "jump" {
       }
     }
     EOF
-    destination = "/home/ubuntu/.terraformrc"
+    destination = "/home/${var.username}/.terraformrc"
   }
 
   resources {
