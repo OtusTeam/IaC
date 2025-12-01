@@ -16,8 +16,8 @@ curl https://$(terraform output -raw website_endpoint)
 read -p "Press enter to destroy infra..."
 terraform destroy
 
-yc storage buckets delete les04-static-web --folder-id $YC_OTUS_FOLDER_ID
-yc iam service-account delete les04-static-sa --folder-id $YC_OTUS_FOLDER_ID
+yc storage buckets delete les04-explicit-static-web --folder-id $YC_OTUS_FOLDER_ID
+yc iam service-account delete les04-explicit-static-sa --folder-id $YC_OTUS_FOLDER_ID
 
 echo 'If not deleted use the web console to delete bucket "les04-static-sa" and sa "les04-static-sa"!'
 read -p "Press enter to continue to clear current terraform.tfstate..."
