@@ -1,5 +1,4 @@
-# Модуль для создания Network Load Balancer в Yandex Cloud
-# Источник: https://github.com/terraform-yacloud-modules/terraform-yandex-nlb
+# Cоздание Network Load Balancer в Yandex Cloud
 
 # Конфигурация target group с динамическими блоками
 resource "yandex_lb_target_group" "nlb_target_group" {
