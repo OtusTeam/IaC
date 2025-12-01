@@ -1,8 +1,8 @@
 za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les04/provisioner$ ./run.sh
 ++ terraform apply
 
-Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
-following symbols:
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated
+with the following symbols:
   + create
 
 Terraform will perform the following actions:
@@ -32,8 +32,8 @@ Terraform will perform the following actions:
       + id = (known after apply)
     }
 
-  # yandex_compute_instance.vm will be created
-  + resource "yandex_compute_instance" "vm" {
+  # yandex_compute_instance.jump will be created
+  + resource "yandex_compute_instance" "jump" {
       + created_at                = (known after apply)
       + folder_id                 = (known after apply)
       + fqdn                      = (known after apply)
@@ -46,7 +46,7 @@ Terraform will perform the following actions:
       + metadata                  = {
           + "ssh-keys" = (sensitive value)
         }
-      + name                      = "les04-vm-for-provisioner-example"
+      + name                      = "les04-provisioner-jump"
       + network_acceleration_type = "standard"
       + platform_id               = "standard-v1"
       + status                    = (known after apply)
@@ -61,7 +61,7 @@ Terraform will perform the following actions:
           + initialize_params {
               + block_size  = (known after apply)
               + description = (known after apply)
-              + image_id    = "fd80viupr3qjr5g6g9du"
+              + image_id    = "fd8n0go6ioq7r8clk6ru"
               + name        = (known after apply)
               + size        = (known after apply)
               + snapshot_id = (known after apply)
@@ -106,74 +106,514 @@ Do you want to perform these actions?
   Enter a value: yes
 
 null_resource.delete_on_destroy: Creating...
-null_resource.delete_on_destroy: Creation complete after 0s [id=8132351245520916048]
-yandex_compute_instance.vm: Creating...
-yandex_compute_instance.vm: Still creating... [00m10s elapsed]
-yandex_compute_instance.vm: Still creating... [00m20s elapsed]
-yandex_compute_instance.vm: Still creating... [00m30s elapsed]
-yandex_compute_instance.vm: Still creating... [00m40s elapsed]
-yandex_compute_instance.vm: Still creating... [00m50s elapsed]
-yandex_compute_instance.vm: Provisioning with 'remote-exec'...
-yandex_compute_instance.vm (remote-exec): Connecting to remote host via SSH...
-yandex_compute_instance.vm (remote-exec):   Host: 158.160.63.12
-yandex_compute_instance.vm (remote-exec):   User: ubuntu
-yandex_compute_instance.vm (remote-exec):   Password: false
-yandex_compute_instance.vm (remote-exec):   Private key: true
-yandex_compute_instance.vm (remote-exec):   Certificate: false
-yandex_compute_instance.vm (remote-exec):   SSH Agent: true
-yandex_compute_instance.vm (remote-exec):   Checking Host Key: false
-yandex_compute_instance.vm (remote-exec):   Target Platform: unix
-yandex_compute_instance.vm: Still creating... [01m00s elapsed]
-yandex_compute_instance.vm (remote-exec): Connecting to remote host via SSH...
-yandex_compute_instance.vm (remote-exec):   Host: 158.160.63.12
-yandex_compute_instance.vm (remote-exec):   User: ubuntu
-yandex_compute_instance.vm (remote-exec):   Password: false
-yandex_compute_instance.vm (remote-exec):   Private key: true
-yandex_compute_instance.vm (remote-exec):   Certificate: false
-yandex_compute_instance.vm (remote-exec):   SSH Agent: true
-yandex_compute_instance.vm (remote-exec):   Checking Host Key: false
-yandex_compute_instance.vm (remote-exec):   Target Platform: unix
-yandex_compute_instance.vm: Still creating... [01m10s elapsed]
-yandex_compute_instance.vm (remote-exec): Connecting to remote host via SSH...
-yandex_compute_instance.vm (remote-exec):   Host: 158.160.63.12
-yandex_compute_instance.vm (remote-exec):   User: ubuntu
-yandex_compute_instance.vm (remote-exec):   Password: false
-yandex_compute_instance.vm (remote-exec):   Private key: true
-yandex_compute_instance.vm (remote-exec):   Certificate: false
-yandex_compute_instance.vm (remote-exec):   SSH Agent: true
-yandex_compute_instance.vm (remote-exec):   Checking Host Key: false
-yandex_compute_instance.vm (remote-exec):   Target Platform: unix
-yandex_compute_instance.vm (remote-exec): Connected!
-yandex_compute_instance.vm: Provisioning with 'file'...
-yandex_compute_instance.vm: Creation complete after 1m17s [id=fhm8iasvgh780jjpm0b0]
+null_resource.delete_on_destroy: Creation complete after 0s [id=2755629971861863640]
+yandex_compute_instance.jump: Creating...
+yandex_compute_instance.jump: Still creating... [00m10s elapsed]
+yandex_compute_instance.jump: Still creating... [00m20s elapsed]
+yandex_compute_instance.jump: Still creating... [00m30s elapsed]
+yandex_compute_instance.jump: Still creating... [00m40s elapsed]
+yandex_compute_instance.jump: Provisioning with 'remote-exec'...
+yandex_compute_instance.jump (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.jump (remote-exec):   Host: 158.160.101.28
+yandex_compute_instance.jump (remote-exec):   User: ubuntu
+yandex_compute_instance.jump (remote-exec):   Password: false
+yandex_compute_instance.jump (remote-exec):   Private key: true
+yandex_compute_instance.jump (remote-exec):   Certificate: false
+yandex_compute_instance.jump (remote-exec):   SSH Agent: true
+yandex_compute_instance.jump (remote-exec):   Checking Host Key: false
+yandex_compute_instance.jump (remote-exec):   Target Platform: unix
+yandex_compute_instance.jump: Still creating... [00m50s elapsed]
+yandex_compute_instance.jump (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.jump (remote-exec):   Host: 158.160.101.28
+yandex_compute_instance.jump (remote-exec):   User: ubuntu
+yandex_compute_instance.jump (remote-exec):   Password: false
+yandex_compute_instance.jump (remote-exec):   Private key: true
+yandex_compute_instance.jump (remote-exec):   Certificate: false
+yandex_compute_instance.jump (remote-exec):   SSH Agent: true
+yandex_compute_instance.jump (remote-exec):   Checking Host Key: false
+yandex_compute_instance.jump (remote-exec):   Target Platform: unix
+yandex_compute_instance.jump: Still creating... [01m00s elapsed]
+yandex_compute_instance.jump (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.jump (remote-exec):   Host: 158.160.101.28
+yandex_compute_instance.jump (remote-exec):   User: ubuntu
+yandex_compute_instance.jump (remote-exec):   Password: false
+yandex_compute_instance.jump (remote-exec):   Private key: true
+yandex_compute_instance.jump (remote-exec):   Certificate: false
+yandex_compute_instance.jump (remote-exec):   SSH Agent: true
+yandex_compute_instance.jump (remote-exec):   Checking Host Key: false
+yandex_compute_instance.jump (remote-exec):   Target Platform: unix
+yandex_compute_instance.jump (remote-exec): Connecting to remote host via SSH...
+yandex_compute_instance.jump (remote-exec):   Host: 158.160.101.28
+yandex_compute_instance.jump (remote-exec):   User: ubuntu
+yandex_compute_instance.jump (remote-exec):   Password: false
+yandex_compute_instance.jump (remote-exec):   Private key: true
+yandex_compute_instance.jump (remote-exec):   Certificate: false
+yandex_compute_instance.jump (remote-exec):   SSH Agent: true
+yandex_compute_instance.jump (remote-exec):   Checking Host Key: false
+yandex_compute_instance.jump (remote-exec):   Target Platform: unix
+yandex_compute_instance.jump: Still creating... [01m10s elapsed]
+yandex_compute_instance.jump (remote-exec): Connected!
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 0% [Working]
+yandex_compute_instance.jump (remote-exec): Hit:1 http://mirror.yandex.ru/ubuntu noble InRelease
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 0% [Waiting for headers] [Connecting to
+yandex_compute_instance.jump (remote-exec): Get:2 http://mirror.yandex.ru/ubuntu noble-updates InRelease [126 kB]
+yandex_compute_instance.jump (remote-exec): Get:3 http://mirror.yandex.ru/ubuntu noble-backports InRelease [126 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 0% [Connecting to security.ubuntu.com (
+yandex_compute_instance.jump (remote-exec): Get:4 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 0% [4 InRelease 0 B/126 kB 0%]
+yandex_compute_instance.jump (remote-exec): 0% [4 InRelease 14.2 kB/126 kB 11%]
+yandex_compute_instance.jump (remote-exec): 0% [4 InRelease 40.2 kB/126 kB 32%]
+yandex_compute_instance.jump (remote-exec): Get:5 http://mirror.yandex.ru/ubuntu noble-updates/main amd64 Packages [1620 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages 129 kB/1620 kB 8%] [4 In
+yandex_compute_instance.jump (remote-exec): 0% [4 InRelease 63.4 kB/126 kB 50%]
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages store 0 B] [Waiting for 
+yandex_compute_instance.jump (remote-exec): Get:6 http://mirror.yandex.ru/ubuntu noble-updates/main Translation-en [303 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages store 0 B] [6 Translatio
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages store 0 B] [4 InRelease 
+yandex_compute_instance.jump (remote-exec): Get:7 http://mirror.yandex.ru/ubuntu noble-updates/main amd64 Components [175 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages store 0 B] [7 Components
+yandex_compute_instance.jump (remote-exec): Get:8 http://mirror.yandex.ru/ubuntu noble-updates/main amd64 c-n-f Metadata [15.7 kB]
+yandex_compute_instance.jump (remote-exec): Get:9 http://mirror.yandex.ru/ubuntu noble-updates/universe amd64 Packages [1500 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages store 0 B] [9 Packages 7
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages store 0 B] [4 InRelease 
+yandex_compute_instance.jump (remote-exec): Get:10 http://mirror.yandex.ru/ubuntu noble-updates/universe Translation-en [304 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages store 0 B] [10 Translati
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages store 0 B] [4 InRelease 
+yandex_compute_instance.jump (remote-exec): Get:11 http://mirror.yandex.ru/ubuntu noble-updates/universe amd64 Components [377 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages store 0 B] [11 Component
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages store 0 B] [4 InRelease 
+yandex_compute_instance.jump (remote-exec): Get:12 http://mirror.yandex.ru/ubuntu noble-updates/universe amd64 c-n-f Metadata [31.4 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages store 0 B] [12 Commands-
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages store 0 B] [4 InRelease 
+yandex_compute_instance.jump (remote-exec): Get:13 http://mirror.yandex.ru/ubuntu noble-updates/restricted amd64 Packages [2307 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages store 0 B] [13 Packages 
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages store 0 B] [13 Packages 
+yandex_compute_instance.jump (remote-exec): Get:14 http://mirror.yandex.ru/ubuntu noble-updates/restricted Translation-en [526 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages store 0 B] [14 Translati
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages store 0 B]
+yandex_compute_instance.jump (remote-exec): Get:15 http://mirror.yandex.ru/ubuntu noble-updates/restricted amd64 Components [212 B]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages store 0 B] [15 Component
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages store 0 B]
+yandex_compute_instance.jump (remote-exec): Get:16 http://mirror.yandex.ru/ubuntu noble-updates/multiverse amd64 Components [940 B]
+yandex_compute_instance.jump (remote-exec): Get:17 http://mirror.yandex.ru/ubuntu noble-backports/main amd64 Components [7144 B]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages store 0 B] [Waiting for 
+yandex_compute_instance.jump (remote-exec): Get:18 http://mirror.yandex.ru/ubuntu noble-backports/universe amd64 Components [11.0 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages store 0 B] [18 Component
+yandex_compute_instance.jump (remote-exec): Get:19 http://mirror.yandex.ru/ubuntu noble-backports/restricted amd64 Components [216 B]
+yandex_compute_instance.jump (remote-exec): Get:20 http://mirror.yandex.ru/ubuntu noble-backports/multiverse amd64 Components [212 B]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 0% [5 Packages store 0 B]
+yandex_compute_instance.jump (remote-exec): 61% [5 Packages store 0 B]
+yandex_compute_instance.jump (remote-exec): 62% [Waiting for headers]
+yandex_compute_instance.jump (remote-exec): 62% [6 Translation-en store 0 B] [Waiti
+yandex_compute_instance.jump (remote-exec): Get:21 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1340 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 62% [6 Translation-en store 0 B] [21 Pa
+yandex_compute_instance.jump (remote-exec): 63% [21 Packages 121 kB/1340 kB 9%]
+yandex_compute_instance.jump (remote-exec): 63% [7 Components-amd64 store 0 B] [21 
+yandex_compute_instance.jump (remote-exec): 63% [21 Packages 174 kB/1340 kB 13%]
+yandex_compute_instance.jump (remote-exec): 63% [8 Commands-amd64 store 0 B] [21 Pa
+yandex_compute_instance.jump (remote-exec): 63% [21 Packages 179 kB/1340 kB 13%]
+yandex_compute_instance.jump (remote-exec): 63% [9 Packages store 0 B] [21 Packages
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 70% [21 Packages 1241 kB/1340 kB 93%]
+yandex_compute_instance.jump (remote-exec): 70% [10 Translation-en store 0 B] [21 P
+yandex_compute_instance.jump (remote-exec): 71% [10 Translation-en store 0 B]
+yandex_compute_instance.jump (remote-exec): 71% [Waiting for headers]
+yandex_compute_instance.jump (remote-exec): 71% [11 Components-amd64 store 0 B] [Wa
+yandex_compute_instance.jump (remote-exec): Get:22 http://security.ubuntu.com/ubuntu noble-security/main Translation-en [219 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 71% [11 Components-amd64 store 0 B] [22
+yandex_compute_instance.jump (remote-exec): 72% [11 Components-amd64 store 0 B]
+yandex_compute_instance.jump (remote-exec): Get:23 http://security.ubuntu.com/ubuntu noble-security/main amd64 Components [21.5 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 72% [11 Components-amd64 store 0 B] [23
+yandex_compute_instance.jump (remote-exec): 72% [11 Components-amd64 store 0 B]
+yandex_compute_instance.jump (remote-exec): Get:24 http://security.ubuntu.com/ubuntu noble-security/main amd64 c-n-f Metadata [9452 B]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 72% [11 Components-amd64 store 0 B] [24
+yandex_compute_instance.jump (remote-exec): 72% [11 Components-amd64 store 0 B]
+yandex_compute_instance.jump (remote-exec): Get:25 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [915 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 72% [11 Components-amd64 store 0 B] [25
+yandex_compute_instance.jump (remote-exec): Get:26 http://security.ubuntu.com/ubuntu noble-security/universe Translation-en [206 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 78% [11 Components-amd64 store 0 B] [26
+yandex_compute_instance.jump (remote-exec): 79% [11 Components-amd64 store 0 B]
+yandex_compute_instance.jump (remote-exec): Get:27 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Components [71.4 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 79% [11 Components-amd64 store 0 B] [27
+yandex_compute_instance.jump (remote-exec): 80% [27 Components-amd64 60.1 kB/71.4 k
+yandex_compute_instance.jump (remote-exec): 80% [12 Commands-amd64 store 0 B] [27 C
+yandex_compute_instance.jump (remote-exec): 80% [27 Components-amd64 60.1 kB/71.4 k
+yandex_compute_instance.jump (remote-exec): 80% [13 Packages store 0 B] [27 Compone
+yandex_compute_instance.jump (remote-exec): 80% [13 Packages store 0 B]
+yandex_compute_instance.jump (remote-exec): Get:28 http://security.ubuntu.com/ubuntu noble-security/universe amd64 c-n-f Metadata [19.5 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 80% [13 Packages store 0 B] [28 Command
+yandex_compute_instance.jump (remote-exec): 80% [13 Packages store 0 B] [Waiting fo
+yandex_compute_instance.jump (remote-exec): Get:29 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [2194 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 80% [13 Packages store 0 B] [29 Package
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 93% [13 Packages store 0 B]
+yandex_compute_instance.jump (remote-exec): Get:30 http://security.ubuntu.com/ubuntu noble-security/restricted Translation-en [501 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 94% [13 Packages store 0 B] [30 Transla
+yandex_compute_instance.jump (remote-exec): 97% [13 Packages store 0 B]
+yandex_compute_instance.jump (remote-exec): Get:31 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Components [212 B]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 97% [13 Packages store 0 B] [31 Compone
+yandex_compute_instance.jump (remote-exec): 97% [13 Packages store 0 B]
+yandex_compute_instance.jump (remote-exec): Get:32 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Components [208 B]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 97% [13 Packages store 0 B] [32 Compone
+yandex_compute_instance.jump (remote-exec): 97% [13 Packages store 0 B]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 97% [Working]
+yandex_compute_instance.jump (remote-exec): 97% [14 Translation-en store 0 B]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 97% [Working]
+yandex_compute_instance.jump (remote-exec): 97% [15 Components-amd64 store 0 B]
+yandex_compute_instance.jump (remote-exec): 97% [Working]
+yandex_compute_instance.jump (remote-exec): 97% [16 Components-amd64 store 0 B]
+yandex_compute_instance.jump (remote-exec): 97% [Working]
+yandex_compute_instance.jump (remote-exec): 97% [17 Components-amd64 store 0 B]
+yandex_compute_instance.jump (remote-exec): 97% [Working]
+yandex_compute_instance.jump (remote-exec): 97% [18 Components-amd64 store 0 B]
+yandex_compute_instance.jump (remote-exec): 98% [Working]
+yandex_compute_instance.jump (remote-exec): 98% [Working]
+yandex_compute_instance.jump (remote-exec): 98% [20 Components-amd64 store 0 B]
+yandex_compute_instance.jump (remote-exec): 98% [Working]
+yandex_compute_instance.jump (remote-exec): 98% [21 Packages store 0 B]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 98% [Working]
+yandex_compute_instance.jump (remote-exec): 98% [22 Translation-en store 0 B]
+yandex_compute_instance.jump (remote-exec): 98% [Working]
+yandex_compute_instance.jump (remote-exec): 98% [23 Components-amd64 store 0 B]
+yandex_compute_instance.jump (remote-exec): 98% [Working]
+yandex_compute_instance.jump (remote-exec): 99% [Working]
+yandex_compute_instance.jump (remote-exec): 99% [25 Packages store 0 B]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 99% [Working]
+yandex_compute_instance.jump (remote-exec): 99% [26 Translation-en store 0 B]
+yandex_compute_instance.jump (remote-exec): 99% [Working]
+yandex_compute_instance.jump (remote-exec): 99% [27 Components-amd64 store 0 B]
+yandex_compute_instance.jump (remote-exec): 99% [Working]
+yandex_compute_instance.jump (remote-exec): 99% [28 Commands-amd64 store 0 B]
+yandex_compute_instance.jump (remote-exec): 99% [Working]
+yandex_compute_instance.jump (remote-exec): 99% [29 Packages store 0 B]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 99% [Working]
+yandex_compute_instance.jump (remote-exec): 99% [30 Translation-en store 0 B]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 100% [Working]
+yandex_compute_instance.jump (remote-exec): 100% [Working]
+yandex_compute_instance.jump (remote-exec): 100% [32 Components-amd64 store 0 B]
+yandex_compute_instance.jump (remote-exec): 100% [Working]
+yandex_compute_instance.jump (remote-exec): Fetched 13.1 MB in 3s (4225 kB/s)
+yandex_compute_instance.jump: Still creating... [01m20s elapsed]
+yandex_compute_instance.jump (remote-exec): Reading package lists... 0%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 0%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 0%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 3%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 3%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 4%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 4%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 37%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 38%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 38%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 53%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 53%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 54%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 54%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 54%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 54%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 54%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 54%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 55%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 55%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 59%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 59%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 62%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 62%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 66%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 66%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 67%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 67%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 74%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 74%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 79%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 79%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 79%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 79%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 79%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 79%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 79%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 79%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 79%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 79%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 79%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 79%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 79%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 79%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 82%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 82%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 85%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 85%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 88%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 88%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 88%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 88%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 95%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 95%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 99%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 99%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 99%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 99%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 99%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 99%
+yandex_compute_instance.jump (remote-exec): Reading package lists... Done
+yandex_compute_instance.jump (remote-exec): Building dependency tree... 0%
+yandex_compute_instance.jump (remote-exec): Building dependency tree... 0%
+yandex_compute_instance.jump (remote-exec): Building dependency tree... 0%
+yandex_compute_instance.jump (remote-exec): Building dependency tree... 50%
+yandex_compute_instance.jump (remote-exec): Building dependency tree... 50%
+yandex_compute_instance.jump (remote-exec): Building dependency tree... Done
+yandex_compute_instance.jump (remote-exec): Reading state information... 0%
+yandex_compute_instance.jump (remote-exec): Reading state information... 0%
+yandex_compute_instance.jump (remote-exec): Reading state information... Done
+yandex_compute_instance.jump (remote-exec): 19 packages can be upgraded. Run 'apt list --upgradable' to see them.
+yandex_compute_instance.jump (remote-exec): Reading package lists... 0%
+yandex_compute_instance.jump (remote-exec): Reading package lists... 100%
+yandex_compute_instance.jump (remote-exec): Reading package lists... Done
+yandex_compute_instance.jump (remote-exec): Building dependency tree... 0%
+yandex_compute_instance.jump (remote-exec): Building dependency tree... 0%
+yandex_compute_instance.jump (remote-exec): Building dependency tree... 50%
+yandex_compute_instance.jump (remote-exec): Building dependency tree... 50%
+yandex_compute_instance.jump (remote-exec): Building dependency tree... Done
+yandex_compute_instance.jump (remote-exec): Reading state information... 0%
+yandex_compute_instance.jump (remote-exec): Reading state information... 0%
+yandex_compute_instance.jump (remote-exec): Reading state information... Done
+yandex_compute_instance.jump (remote-exec): Suggested packages:
+yandex_compute_instance.jump (remote-exec):   zip
+yandex_compute_instance.jump (remote-exec): The following NEW packages will be installed:
+yandex_compute_instance.jump (remote-exec):   unzip
+yandex_compute_instance.jump (remote-exec): 0 upgraded, 1 newly installed, 0 to remove and 19 not upgraded.
+yandex_compute_instance.jump (remote-exec): Need to get 174 kB of archives.
+yandex_compute_instance.jump (remote-exec): After this operation, 384 kB of additional disk space will be used.
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 0% [Working]
+yandex_compute_instance.jump (remote-exec): Get:1 http://mirror.yandex.ru/ubuntu noble-updates/main amd64 unzip amd64 6.0-28ubuntu4.1 [174 kB]
+yandex_compute_instance.jump (remote-exec): 
+yandex_compute_instance.jump (remote-exec): 5% [1 unzip 11.8 kB/174 kB 7%]
+yandex_compute_instance.jump (remote-exec): 100% [Working]
+yandex_compute_instance.jump (remote-exec): Fetched 174 kB in 0s (2049 kB/s)
+yandex_compute_instance.jump: Still creating... [01m30s elapsed]
+                                            Selecting previously unselected package unzip.
+yandex_compute_instance.jump (remote-exec): (Reading database ...
+yandex_compute_instance.jump (remote-exec): (Reading database ... 5%
+yandex_compute_instance.jump (remote-exec): (Reading database ... 10%
+yandex_compute_instance.jump (remote-exec): (Reading database ... 15%
+yandex_compute_instance.jump (remote-exec): (Reading database ... 20%
+yandex_compute_instance.jump (remote-exec): (Reading database ... 25%
+yandex_compute_instance.jump (remote-exec): (Reading database ... 30%
+yandex_compute_instance.jump (remote-exec): (Reading database ... 35%
+yandex_compute_instance.jump (remote-exec): (Reading database ... 40%
+yandex_compute_instance.jump (remote-exec): (Reading database ... 45%
+yandex_compute_instance.jump (remote-exec): (Reading database ... 50%
+yandex_compute_instance.jump (remote-exec): (Reading database ... 55%
+yandex_compute_instance.jump (remote-exec): (Reading database ... 60%
+yandex_compute_instance.jump (remote-exec): (Reading database ... 65%
+yandex_compute_instance.jump (remote-exec): (Reading database ... 70%
+yandex_compute_instance.jump (remote-exec): (Reading database ... 75%
+yandex_compute_instance.jump (remote-exec): (Reading database ... 80%
+yandex_compute_instance.jump (remote-exec): (Reading database ... 85%
+yandex_compute_instance.jump (remote-exec): (Reading database ... 90%
+yandex_compute_instance.jump (remote-exec): (Reading database ... 95%
+yandex_compute_instance.jump (remote-exec): (Reading database ... 100%
+yandex_compute_instance.jump (remote-exec): (Reading database ... 106288 files and directories currently installed.)
+yandex_compute_instance.jump (remote-exec): Preparing to unpack .../unzip_6.0-28ubuntu4.1_amd64.deb ...
+Progress: [ 20%] [###...............] xec): Unpacking unzip (6.0-28ubuntu4.1) ...
+Progress: [ 40%] [#######...........] xec): 
+yandex_compute_instance.jump (remote-exec): Setting up unzip (6.0-28ubuntu4.1) ...
+Progress: [ 80%] [##############....] xec): Processing triggers for man-db (2.12.0-4build2) ...
+
+yandex_compute_instance.jump (remote-exec): Scanning processes... [                ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [                ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [                ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [                ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [                ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [                ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [                ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=               ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=               ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=               ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=               ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=               ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=               ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=               ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [==              ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [==              ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [==              ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [==              ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [==              ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [==              ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [==              ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [===             ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [===             ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [===             ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [===             ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [===             ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [===             ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [====            ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [====            ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [====            ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [====            ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [====            ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [====            ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [====            ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=====           ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=====           ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=====           ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=====           ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=====           ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=====           ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=====           ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [======          ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [======          ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [======          ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [======          ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [======          ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [======          ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=======         ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=======         ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=======         ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=======         ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=======         ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=======         ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=======         ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [========        ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [========        ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [========        ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [========        ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [========        ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [========        ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [========        ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=========       ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=========       ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=========       ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=========       ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=========       ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=========       ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [==========      ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [==========      ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [==========      ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [==========      ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [==========      ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [==========      ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [==========      ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [===========     ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [===========     ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [===========     ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [===========     ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [===========     ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [===========     ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [===========     ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [============    ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [============    ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [============    ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [============    ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [============    ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [============    ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=============   ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=============   ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=============   ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=============   ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=============   ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=============   ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=============   ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [==============  ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [==============  ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [==============  ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [==============  ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [==============  ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [==============  ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [==============  ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=============== ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=============== ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=============== ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=============== ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=============== ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [=============== ]
+yandex_compute_instance.jump (remote-exec): Scanning processes... [================]
+yandex_compute_instance.jump (remote-exec): Scanning processes...
+yandex_compute_instance.jump (remote-exec): Scanning linux images... [             ]
+yandex_compute_instance.jump (remote-exec): Scanning linux images... [===          ]
+yandex_compute_instance.jump (remote-exec): Scanning linux images... [======       ]
+yandex_compute_instance.jump (remote-exec): Scanning linux images... [=========    ]
+yandex_compute_instance.jump (remote-exec): Scanning linux images... [=============]
+yandex_compute_instance.jump (remote-exec): Scanning linux images...
+
+yandex_compute_instance.jump (remote-exec): Running kernel seems to be up-to-date.
+
+yandex_compute_instance.jump (remote-exec): No services need to be restarted.
+
+yandex_compute_instance.jump (remote-exec): No containers need to be restarted.
+
+yandex_compute_instance.jump (remote-exec): No user sessions are running outdated
+yandex_compute_instance.jump (remote-exec):  binaries.
+
+yandex_compute_instance.jump (remote-exec): No VM guests are running outdated
+yandex_compute_instance.jump (remote-exec):  hypervisor (qemu) binaries on this
+yandex_compute_instance.jump (remote-exec):  host.
+yandex_compute_instance.jump: Still creating... [01m40s elapsed]
+yandex_compute_instance.jump (remote-exec): --2025-12-01 06:18:58--  https://hashicorp-releases.yandexcloud.net/terraform/1.13.5/terraform_1.13.5_linux_amd64.zip
+yandex_compute_instance.jump (remote-exec): Resolving hashicorp-releases.yandexcloud.net (hashicorp-releases.yandexcloud.net)... 51.250.76.140, 2a0d:d6c1:0:1a::2db
+yandex_compute_instance.jump (remote-exec): Connecting to hashicorp-releases.yandexcloud.net (hashicorp-releases.yandexcloud.net)|51.250.76.140|:443... connected.
+yandex_compute_instance.jump (remote-exec): HTTP request sent, awaiting response... 302 Found
+yandex_compute_instance.jump (remote-exec): Location: https://storage.yandexcloud.net/hc-releases/terraform/1.13.5/terraform_1.13.5_linux_amd64.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=YCAJEMDf6v-2QzhEWzeRT4aQM%2F20251201%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251201T061858Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=b2be085bf4a5bc5b090cb127402d31312f4dbaf2090061ac4fe6bd7f99f5424d [following]
+yandex_compute_instance.jump (remote-exec): --2025-12-01 06:18:58--  https://storage.yandexcloud.net/hc-releases/terraform/1.13.5/terraform_1.13.5_linux_amd64.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=YCAJEMDf6v-2QzhEWzeRT4aQM%2F20251201%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251201T061858Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=b2be085bf4a5bc5b090cb127402d31312f4dbaf2090061ac4fe6bd7f99f5424d
+yandex_compute_instance.jump (remote-exec): Resolving storage.yandexcloud.net (storage.yandexcloud.net)... 213.180.193.243, 2a02:6b8::1d9
+yandex_compute_instance.jump (remote-exec): Connecting to storage.yandexcloud.net (storage.yandexcloud.net)|213.180.193.243|:443... connected.
+yandex_compute_instance.jump (remote-exec): HTTP request sent, awaiting response...
+yandex_compute_instance.jump (remote-exec): 200 OK
+yandex_compute_instance.jump (remote-exec): Length: 29969182 (29M) [application/octet-stream]
+yandex_compute_instance.jump (remote-exec): Saving to: ‘terraform_1.13.5_linux_amd64.zip’
+
+yandex_compute_instance.jump (remote-exec):       terraf   0%       0  --.-KB/s
+yandex_compute_instance.jump (remote-exec):      terrafo  35%  10.02M  46.6MB/s
+yandex_compute_instance.jump (remote-exec): terraform_1. 100%  28.58M  76.9MB/s    in 0.4s
+
+yandex_compute_instance.jump (remote-exec): 2025-12-01 06:18:59 (76.9 MB/s) - ‘terraform_1.13.5_linux_amd64.zip’ saved [29969182/29969182]
+
+yandex_compute_instance.jump (remote-exec): Archive:  terraform_1.13.5_linux_amd64.zip
+yandex_compute_instance.jump (remote-exec):   inflating: /usr/local/bin/terraform
+
+yandex_compute_instance.jump: Provisioning with 'file'...
+yandex_compute_instance.jump: Creation complete after 1m45s [id=fhm5ssb7vj0i163bmro5]
 local_file.save_rendered: Creating...
-local_file.save_rendered: Creation complete after 0s [id=ebff947dadf4612e4ba93fff79ca5754e40931fc]
+local_file.save_rendered: Creation complete after 0s [id=bba079a42ece1bfe6fa78f6b3d35505f69d9feae]
 null_resource.run_command: Creating...
 null_resource.run_command: Provisioning with 'local-exec'...
 null_resource.run_command (local-exec): Executing: ["/bin/sh" "-c" "bash command.txt"]
-null_resource.run_command (local-exec): Warning: Permanently added '158.160.63.12' (ED25519) to the list of known hosts.
-null_resource.run_command (local-exec): -r--r----- 1 root root 958 Jan 18  2018 /etc/sudoers.d/README
-null_resource.run_command (local-exec): #
-null_resource.run_command (local-exec): # As of Debian version 1.7.2p1-1, the default /etc/sudoers file created on
-null_resource.run_command (local-exec): # installation of the package now includes the directive:
-null_resource.run_command (local-exec): #
-null_resource.run_command (local-exec): #       #includedir /etc/sudoers.d
-null_resource.run_command (local-exec): #
-null_resource.run_command (local-exec): # This will cause sudo to read and parse any files in the /etc/sudoers.d
-null_resource.run_command (local-exec): # directory that do not end in '~' or contain a '.' character.
-null_resource.run_command (local-exec): #
-null_resource.run_command (local-exec): # Note that there must be at least one file in the sudoers.d directory (this
-null_resource.run_command (local-exec): # one will do), and all files in this directory should be mode 0440.
-null_resource.run_command (local-exec): #
-null_resource.run_command (local-exec): # Note also, that because sudoers contents can vary widely, no attempt is
-null_resource.run_command (local-exec): # made to add this directive to existing sudoers files on upgrade.  Feel free
-null_resource.run_command (local-exec): # to add the above directive to the end of your /etc/sudoers file to enable
-null_resource.run_command (local-exec): # this functionality for existing installations if you wish!
-null_resource.run_command (local-exec): #
-null_resource.run_command (local-exec): # Finally, please note that using the visudo command is the recommended way
-null_resource.run_command (local-exec): # to update sudoers content, since it protects against many failure modes.
-null_resource.run_command (local-exec): # See the man page for visudo for more information.
-null_resource.run_command (local-exec): #
+null_resource.run_command (local-exec): Warning: Permanently added '158.160.101.28' (ED25519) to the list of known hosts.
 null_resource.run_command (local-exec): provider_installation {
 null_resource.run_command (local-exec):   network_mirror {
 null_resource.run_command (local-exec):     url = "https://terraform-mirror.yandexcloud.net/"
@@ -183,69 +623,71 @@ null_resource.run_command (local-exec):   direct {
 null_resource.run_command (local-exec):     exclude = ["registry.terraform.io/*/*"]
 null_resource.run_command (local-exec):   }
 null_resource.run_command (local-exec): }
-null_resource.run_command: Creation complete after 1s [id=1637754097638883925]
+null_resource.run_command (local-exec): Terraform v1.13.5
+null_resource.run_command (local-exec): on linux_amd64
+null_resource.run_command: Creation complete after 2s [id=115346907256343753]
 
 Apply complete! Resources: 4 added, 0 changed, 0 destroyed.
 ++ read -p 'Press enter to continue ...'
 Press enter to continue ...
 ++ terraform destroy
-null_resource.delete_on_destroy: Refreshing state... [id=8132351245520916048]
-yandex_compute_instance.vm: Refreshing state... [id=fhm8iasvgh780jjpm0b0]
-local_file.save_rendered: Refreshing state... [id=ebff947dadf4612e4ba93fff79ca5754e40931fc]
-null_resource.run_command: Refreshing state... [id=1637754097638883925]
+null_resource.delete_on_destroy: Refreshing state... [id=2755629971861863640]
+yandex_compute_instance.jump: Refreshing state... [id=fhm5ssb7vj0i163bmro5]
+local_file.save_rendered: Refreshing state... [id=bba079a42ece1bfe6fa78f6b3d35505f69d9feae]
+null_resource.run_command: Refreshing state... [id=115346907256343753]
 
-Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
-following symbols:
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated
+with the following symbols:
   - destroy
 
 Terraform will perform the following actions:
 
   # local_file.save_rendered will be destroyed
   - resource "local_file" "save_rendered" {
-      - content              = "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@158.160.63.12 \"bash -lc 'sudo ls -la /etc/sudoers.d/README && sudo cat /etc/sudoers.d/README && cat .terraformrc'\"" -> null
-      - content_base64sha256 = "/JT18cATNo9E9W07zRQH8EyXArC1JZtbgE+6IOB4Dmc=" -> null
-      - content_base64sha512 = "Hn0pJgvmF1PYzRk8KDClyAitgFl7f0YcICKYT4tpCwaM7gDe1I8f+evpsvu3zbHdV0GdtLR0bKo9GIujG+wiAg==" -> null
-      - content_md5          = "07b0abc5e9b3a71f6e8e26280c474e43" -> null
-      - content_sha1         = "ebff947dadf4612e4ba93fff79ca5754e40931fc" -> null
-      - content_sha256       = "fc94f5f1c013368f44f56d3bcd1407f04c9702b0b5259b5b804fba20e0780e67" -> null
-      - content_sha512       = "1e7d29260be61753d8cd193c2830a5c808ad80597b7f461c2022984f8b690b068cee00ded48f1ff9ebe9b2fbb7cdb1dd57419db4b4746caa3d188ba31bec2202" -> null
+      - content              = "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@158.160.101.28 \"bash -lc 'cat .terraformrc && terraform version'\"" -> null
+      - content_base64sha256 = "6CTUBhojec/ipJ2WWYpvNt404LCgdS4XfgYbMDV0uMI=" -> null
+      - content_base64sha512 = "QWsmrH7GkdQ4kb7ZjHCohViBmNnM0L72b+pZ47/CxQgdmWllOi+PbCQ646iD/31RBMncWEiMEuxDCYYCcbcc+A==" -> null
+      - content_md5          = "cef09c06f2f68bcf7f4e7aa54528364f" -> null
+      - content_sha1         = "bba079a42ece1bfe6fa78f6b3d35505f69d9feae" -> null
+      - content_sha256       = "e824d4061a2379cfe2a49d96598a6f36de34e0b0a0752e177e061b303574b8c2" -> null
+      - content_sha512       = "416b26ac7ec691d43891bed98c70a885588198d9ccd0bef66fea59e3bfc2c5081d9969653a2f8f6c243ae3a883ff7d5104c9dc58488c12ec4309860271b71cf8" -> null
       - directory_permission = "0777" -> null
       - file_permission      = "0777" -> null
       - filename             = "command.txt" -> null
-      - id                   = "ebff947dadf4612e4ba93fff79ca5754e40931fc" -> null
+      - id                   = "bba079a42ece1bfe6fa78f6b3d35505f69d9feae" -> null
     }
 
   # null_resource.delete_on_destroy will be destroyed
   - resource "null_resource" "delete_on_destroy" {
-      - id = "8132351245520916048" -> null
+      - id = "2755629971861863640" -> null
     }
 
   # null_resource.run_command will be destroyed
   - resource "null_resource" "run_command" {
-      - id = "1637754097638883925" -> null
+      - id = "115346907256343753" -> null
     }
 
-  # yandex_compute_instance.vm will be destroyed
-  - resource "yandex_compute_instance" "vm" {
-      - created_at                = "2025-11-30T13:40:46Z" -> null
+  # yandex_compute_instance.jump will be destroyed
+  - resource "yandex_compute_instance" "jump" {
+      - created_at                = "2025-12-01T06:17:18Z" -> null
       - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
-      - fqdn                      = "fhm8iasvgh780jjpm0b0.auto.internal" -> null
+      - fqdn                      = "fhm5ssb7vj0i163bmro5.auto.internal" -> null
       - hardware_generation       = [
           - {
               - generation2_features = []
               - legacy_features      = [
                   - {
-                      - pci_topology = "PCI_TOPOLOGY_V1"
+                      - pci_topology = "PCI_TOPOLOGY_V2"
                     },
                 ]
             },
         ] -> null
-      - id                        = "fhm8iasvgh780jjpm0b0" -> null
+      - id                        = "fhm5ssb7vj0i163bmro5" -> null
       - labels                    = {} -> null
       - metadata                  = {
           - "ssh-keys" = (sensitive value)
         } -> null
-      - name                      = "les04-vm-for-provisioner-example" -> null
+      - name                      = "les04-provisioner-jump" -> null
       - network_acceleration_type = "standard" -> null
       - platform_id               = "standard-v1" -> null
       - status                    = "running" -> null
@@ -254,15 +696,15 @@ Terraform will perform the following actions:
 
       - boot_disk {
           - auto_delete = true -> null
-          - device_name = "fhmn0ahunnj7bho11k9f" -> null
-          - disk_id     = "fhmn0ahunnj7bho11k9f" -> null
+          - device_name = "fhmcftn54a5uf94kjtdf" -> null
+          - disk_id     = "fhmcftn54a5uf94kjtdf" -> null
           - mode        = "READ_WRITE" -> null
 
           - initialize_params {
               - block_size  = 4096 -> null
-              - image_id    = "fd80viupr3qjr5g6g9du" -> null
+              - image_id    = "fd8n0go6ioq7r8clk6ru" -> null
                 name        = null
-              - size        = 3 -> null
+              - size        = 10 -> null
               - type        = "network-hdd" -> null
                 # (3 unchanged attributes hidden)
             }
@@ -277,12 +719,12 @@ Terraform will perform the following actions:
 
       - network_interface {
           - index              = 0 -> null
-          - ip_address         = "10.128.0.31" -> null
+          - ip_address         = "10.128.0.15" -> null
           - ipv4               = true -> null
           - ipv6               = false -> null
-          - mac_address        = "d0:0d:89:2b:9f:84" -> null
+          - mac_address        = "d0:0d:5e:71:67:fc" -> null
           - nat                = true -> null
-          - nat_ip_address     = "158.160.63.12" -> null
+          - nat_ip_address     = "158.160.101.28" -> null
           - nat_ip_version     = "IPV4" -> null
           - security_group_ids = [] -> null
           - subnet_id          = "e9bop98iu12teftg4uj8" -> null
@@ -315,19 +757,19 @@ Do you really want to destroy all resources?
 
   Enter a value: yes
 
-null_resource.delete_on_destroy: Destroying... [id=8132351245520916048]
-null_resource.run_command: Destroying... [id=1637754097638883925]
+null_resource.run_command: Destroying... [id=115346907256343753]
+null_resource.delete_on_destroy: Destroying... [id=2755629971861863640]
 null_resource.delete_on_destroy: Provisioning with 'local-exec'...
 null_resource.delete_on_destroy (local-exec): Executing: ["/bin/sh" "-c" "rm command.txt"]
 null_resource.run_command: Destruction complete after 0s
 null_resource.delete_on_destroy: Destruction complete after 0s
-local_file.save_rendered: Destroying... [id=ebff947dadf4612e4ba93fff79ca5754e40931fc]
+local_file.save_rendered: Destroying... [id=bba079a42ece1bfe6fa78f6b3d35505f69d9feae]
 local_file.save_rendered: Destruction complete after 0s
-yandex_compute_instance.vm: Destroying... [id=fhm8iasvgh780jjpm0b0]
-yandex_compute_instance.vm: Still destroying... [id=fhm8iasvgh780jjpm0b0, 00m10s elapsed]
-yandex_compute_instance.vm: Still destroying... [id=fhm8iasvgh780jjpm0b0, 00m20s elapsed]
-yandex_compute_instance.vm: Still destroying... [id=fhm8iasvgh780jjpm0b0, 00m30s elapsed]
-yandex_compute_instance.vm: Destruction complete after 35s
+yandex_compute_instance.jump: Destroying... [id=fhm5ssb7vj0i163bmro5]
+yandex_compute_instance.jump: Still destroying... [id=fhm5ssb7vj0i163bmro5, 00m10s elapsed]
+yandex_compute_instance.jump: Still destroying... [id=fhm5ssb7vj0i163bmro5, 00m20s elapsed]
+yandex_compute_instance.jump: Still destroying... [id=fhm5ssb7vj0i163bmro5, 00m30s elapsed]
+yandex_compute_instance.jump: Destruction complete after 32s
 
 Destroy complete! Resources: 4 destroyed.
 ++ set +x

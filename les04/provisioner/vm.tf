@@ -1,4 +1,4 @@
-# пример провижнера вне ресурса
+# провижнер вне ресурса для проверки правильно ли настроена jump-ВМ:
 resource "null_resource" "run_command" {
 
   # команда из файла command.txt будет выполнена локально
@@ -7,11 +7,12 @@ resource "null_resource" "run_command" {
   }
 
   # провижинер будет выполняться только после завершения создания ВМ и локального файла command.txt:
-  depends_on = [yandex_compute_instance.vm, local_file.save_rendered]
+  depends_on = [yandex_compute_instance.jump, local_file.save_rendered]
 }
 
-resource "yandex_compute_instance" "vm" {
-  name = "${var.prefix}-vm-for-provisioner-example"
+# создаем ВМ "подскока" для удаленного управления инфраструктурой в облаке:
+resource "yandex_compute_instance" "jump" {
+  name = "${var.prefix}-provisioner-jump"
   zone = var.yc_default_zone
 
   # общее описание параметров ssh-подключения для провижнеров ресурса:
@@ -22,9 +23,26 @@ resource "yandex_compute_instance" "vm" {
     private_key = file(var.sec_key_path)
   }
 
-  # намеренно задерживает создание ВМ до соединения с ВМ по ssh: 
+  # чтобы внешние провижнеры могли в нужный момент времени подключаться к ВМ по ssh,
+  # в описании ресурса ВМ у вас должен быть хотя бы один провижнер, 
+  # подключающийся к ВМ по ssh, например даже такой : 
+  #provisioner "remote-exec" {
+  #  inline = ["sleep 1"]
+  #}
+
+  # скачиваем и устанавливаем terraform:
   provisioner "remote-exec" {
-    inline = ["sleep 1"]
+    inline = [
+      "sleep 1",
+      "sudo apt update",
+      "sleep 1",
+      "sudo apt install unzip -y",
+      "sleep 1",
+      "wget https://hashicorp-releases.yandexcloud.net/terraform/${var.tf_version}/terraform_${var.tf_version}_linux_amd64.zip",
+      "sudo unzip terraform_${var.tf_version}_linux_amd64.zip terraform -d /usr/local/bin",
+      "sudo chmod +x /usr/local/bin/terraform",
+      "rm terraform_${var.tf_version}_linux_amd64.zip"
+    ] 
   }
 
   # создаем в удаленной ВМ файл с настройкой терраформ:   
@@ -73,7 +91,7 @@ resource "yandex_compute_instance" "vm" {
 locals {
   rendered = templatefile("command.tpl", {
        username = var.username
-       ip = yandex_compute_instance.vm.network_interface.0.nat_ip_address
+       ip = yandex_compute_instance.jump.network_interface.0.nat_ip_address
     }
   )
 }
