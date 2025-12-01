@@ -1,6 +1,7 @@
 digraph G {
   rankdir = "RL";
   node [shape = rect, fontname = "sans-serif"];
+  "null_resource.curl" [label="null_resource.curl"];
   "yandex_iam_service_account.sa" [label="yandex_iam_service_account.sa"];
   "yandex_iam_service_account_static_access_key.sa_static_key" [label="yandex_iam_service_account_static_access_key.sa_static_key"];
   "yandex_resourcemanager_folder_iam_member.sa_editor" [label="yandex_resourcemanager_folder_iam_member.sa_editor"];
