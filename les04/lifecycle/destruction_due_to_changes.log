@@ -1,0 +1,332 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les04/lifecycle$ ./run.sh
+++ terraform apply
+data.yandex_compute_image.ubuntu_image: Reading...
+data.yandex_compute_image.ubuntu_image: Read complete after 1s [id=fd8rci345ntlm193inbs]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated
+with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.ubuntu_lts will be created
+  + resource "yandex_compute_instance" "ubuntu_lts" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hardware_generation       = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + name                      = "les04-lifecycle"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + status                    = (known after apply)
+      + zone                      = (known after apply)
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd8rci345ntlm193inbs"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index          = (known after apply)
+          + ip_address     = (known after apply)
+          + ipv4           = true
+          + ipv6           = (known after apply)
+          + ipv6_address   = (known after apply)
+          + mac_address    = (known after apply)
+          + nat            = true
+          + nat_ip_address = (known after apply)
+          + nat_ip_version = (known after apply)
+          + subnet_id      = "e9bop98iu12teftg4uj8"
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 20
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy {
+          + preemptible = true
+        }
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + image_id = "fd8rci345ntlm193inbs"
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+yandex_compute_instance.ubuntu_lts: Creating...
+yandex_compute_instance.ubuntu_lts: Still creating... [00m10s elapsed]
+yandex_compute_instance.ubuntu_lts: Still creating... [00m20s elapsed]
+yandex_compute_instance.ubuntu_lts: Still creating... [00m30s elapsed]
+yandex_compute_instance.ubuntu_lts: Creation complete after 37s [id=fhm6pmcdrfsa7jrgnv54]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+image_id = "fd8rci345ntlm193inbs"
+++ read -p 'Press enter to continue ...'
+Press enter to continue ...
+++ terraform apply -var image_name=ubuntu-2404-lts
+data.yandex_compute_image.ubuntu_image: Reading...
+data.yandex_compute_image.ubuntu_image: Read complete after 0s [id=fd8n0go6ioq7r8clk6ru]
+yandex_compute_instance.ubuntu_lts: Refreshing state... [id=fhm6pmcdrfsa7jrgnv54]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated
+with the following symbols:
+-/+ destroy and then create replacement
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.ubuntu_lts must be replaced
+-/+ resource "yandex_compute_instance" "ubuntu_lts" {
+      ~ created_at                = "2025-12-01T10:27:36Z" -> (known after apply)
+      ~ folder_id                 = "b1gmesrdjgklgkvcp704" -> (known after apply)
+      ~ fqdn                      = "fhm6pmcdrfsa7jrgnv54.auto.internal" -> (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      ~ hardware_generation       = [
+          - {
+              - generation2_features = []
+              - legacy_features      = [
+                  - {
+                      - pci_topology = "PCI_TOPOLOGY_V2"
+                    },
+                ]
+            },
+        ] -> (known after apply)
+      + hostname                  = (known after apply)
+      ~ id                        = "fhm6pmcdrfsa7jrgnv54" -> (known after apply)
+      - labels                    = {} -> null
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      - metadata                  = {} -> null
+        name                      = "les04-lifecycle"
+      ~ status                    = "running" -> (known after apply)
+      ~ zone                      = "ru-central1-a" -> (known after apply)
+        # (4 unchanged attributes hidden)
+
+      ~ boot_disk {
+          ~ device_name = "fhman07dc4c0goivtp0f" -> (known after apply)
+          ~ disk_id     = "fhman07dc4c0goivtp0f" -> (known after apply)
+          ~ mode        = "READ_WRITE" -> (known after apply)
+            # (1 unchanged attribute hidden)
+
+          ~ initialize_params {
+              ~ block_size  = 4096 -> (known after apply)
+              + description = (known after apply)
+              ~ image_id    = "fd8rci345ntlm193inbs" -> "fd8n0go6ioq7r8clk6ru" # forces replacement
+              + name        = (known after apply)
+              ~ size        = 8 -> (known after apply)
+              + snapshot_id = (known after apply)
+                # (2 unchanged attributes hidden)
+            }
+        }
+
+      ~ metadata_options (known after apply)
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      ~ network_interface {
+          ~ index              = 0 -> (known after apply)
+          ~ ip_address         = "10.128.0.9" -> (known after apply)
+          ~ ipv6               = false -> (known after apply)
+          + ipv6_address       = (known after apply)
+          ~ mac_address        = "d0:0d:6c:d9:8d:db" -> (known after apply)
+          ~ nat_ip_address     = "158.160.125.113" -> (known after apply)
+          ~ nat_ip_version     = "IPV4" -> (known after apply)
+          - security_group_ids = [] -> null
+            # (3 unchanged attributes hidden)
+        }
+
+      ~ placement_policy (known after apply)
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      ~ resources {
+          - gpus          = 0 -> null
+            # (3 unchanged attributes hidden)
+        }
+
+        # (1 unchanged block hidden)
+    }
+
+Plan: 1 to add, 0 to change, 1 to destroy.
+
+Changes to Outputs:
+  ~ image_id = "fd8rci345ntlm193inbs" -> "fd8n0go6ioq7r8clk6ru"
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+yandex_compute_instance.ubuntu_lts: Destroying... [id=fhm6pmcdrfsa7jrgnv54]
+yandex_compute_instance.ubuntu_lts: Still destroying... [id=fhm6pmcdrfsa7jrgnv54, 00m10s elapsed]
+yandex_compute_instance.ubuntu_lts: Still destroying... [id=fhm6pmcdrfsa7jrgnv54, 00m20s elapsed]
+yandex_compute_instance.ubuntu_lts: Still destroying... [id=fhm6pmcdrfsa7jrgnv54, 00m30s elapsed]
+yandex_compute_instance.ubuntu_lts: Still destroying... [id=fhm6pmcdrfsa7jrgnv54, 00m40s elapsed]
+yandex_compute_instance.ubuntu_lts: Still destroying... [id=fhm6pmcdrfsa7jrgnv54, 00m50s elapsed]
+yandex_compute_instance.ubuntu_lts: Still destroying... [id=fhm6pmcdrfsa7jrgnv54, 01m00s elapsed]
+yandex_compute_instance.ubuntu_lts: Destruction complete after 1m2s
+yandex_compute_instance.ubuntu_lts: Creating...
+yandex_compute_instance.ubuntu_lts: Still creating... [00m10s elapsed]
+yandex_compute_instance.ubuntu_lts: Still creating... [00m20s elapsed]
+yandex_compute_instance.ubuntu_lts: Still creating... [00m30s elapsed]
+yandex_compute_instance.ubuntu_lts: Creation complete after 39s [id=fhm8mnke8bkjpvb83ke6]
+
+Apply complete! Resources: 1 added, 0 changed, 1 destroyed.
+
+Outputs:
+
+image_id = "fd8n0go6ioq7r8clk6ru"
+++ read -p 'Press enter to continue ...'
+Press enter to continue ...
+++ terraform destroy
+data.yandex_compute_image.ubuntu_image: Reading...
+data.yandex_compute_image.ubuntu_image: Read complete after 1s [id=fd8rci345ntlm193inbs]
+yandex_compute_instance.ubuntu_lts: Refreshing state... [id=fhm8mnke8bkjpvb83ke6]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated
+with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.ubuntu_lts will be destroyed
+  - resource "yandex_compute_instance" "ubuntu_lts" {
+      - created_at                = "2025-12-01T10:29:36Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "fhm8mnke8bkjpvb83ke6.auto.internal" -> null
+      - hardware_generation       = [
+          - {
+              - generation2_features = []
+              - legacy_features      = [
+                  - {
+                      - pci_topology = "PCI_TOPOLOGY_V2"
+                    },
+                ]
+            },
+        ] -> null
+      - id                        = "fhm8mnke8bkjpvb83ke6" -> null
+      - labels                    = {} -> null
+      - metadata                  = {} -> null
+      - name                      = "les04-lifecycle" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-a" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "fhmj9hhdfnfihdu184a2" -> null
+          - disk_id     = "fhmj9hhdfnfihdu184a2" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd8n0go6ioq7r8clk6ru" -> null
+                name        = null
+              - size        = 10 -> null
+              - type        = "network-hdd" -> null
+                # (3 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.128.0.28" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:8b:5e:8e:42" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "158.160.125.112" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e9bop98iu12teftg4uj8" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 20 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = true -> null
+        }
+    }
+
+Plan: 0 to add, 0 to change, 1 to destroy.
+
+Changes to Outputs:
+  - image_id = "fd8rci345ntlm193inbs" -> null
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+yandex_compute_instance.ubuntu_lts: Destroying... [id=fhm8mnke8bkjpvb83ke6]
+yandex_compute_instance.ubuntu_lts: Still destroying... [id=fhm8mnke8bkjpvb83ke6, 00m10s elapsed]
+yandex_compute_instance.ubuntu_lts: Still destroying... [id=fhm8mnke8bkjpvb83ke6, 00m20s elapsed]
+yandex_compute_instance.ubuntu_lts: Still destroying... [id=fhm8mnke8bkjpvb83ke6, 00m30s elapsed]
+yandex_compute_instance.ubuntu_lts: Still destroying... [id=fhm8mnke8bkjpvb83ke6, 00m40s elapsed]
+yandex_compute_instance.ubuntu_lts: Still destroying... [id=fhm8mnke8bkjpvb83ke6, 00m50s elapsed]
+yandex_compute_instance.ubuntu_lts: Still destroying... [id=fhm8mnke8bkjpvb83ke6, 01m00s elapsed]
+yandex_compute_instance.ubuntu_lts: Destruction complete after 1m0s
+
+Destroy complete! Resources: 1 destroyed.
+++ set +x

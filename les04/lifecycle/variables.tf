@@ -28,3 +28,8 @@ variable "image_name" {
   default = "ubuntu-2204-lts"
   description = "Yandex Image Name"
 }
+
+variable "prefix" {
+   type = string
+   default = "les04"
+}
