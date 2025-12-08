@@ -1,0 +1,17 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les06/count$ ./run_tf_test_on_all.test_only.sh 
+++ terraform test -filter=tests/all.tftest.hcl
+tests/all.tftest.hcl... in progress
+  run "check_instances_number"... pass
+  run "create_instances"... pass
+  run "create_website"... pass
+  run "instances_are_running"... pass
+  run "website_is_running"... pass
+  run "stop_nginx_on_instance_0"... pass
+  run "website_is_running_without_one_instance"... pass
+  run "stop_nginx_on_instance_2"... pass
+  run "website_is_running_without_two_instances"... pass
+tests/all.tftest.hcl... tearing down
+tests/all.tftest.hcl... pass
+
+Success! 9 passed, 0 failed.
+++ set +x
