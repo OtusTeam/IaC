@@ -1,0 +1,49 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/general/argocd/lesson$ ./install_alb.sh 
+++ mkdir -p charts
+++ export HELM_EXPERIMENTAL_OCI=1
+++ HELM_EXPERIMENTAL_OCI=1
+++ cat sensitive/sa-key.json
+++ helm registry login cr.yandex --username json_key --password-stdin
+Login Succeeded
+++ helm pull oci://cr.yandex/yc-marketplace/yandex-cloud/yc-alb-ingress/yc-alb-ingress-controller-chart --version v0.2.6 --untar --untardir=charts
+Warning: chart media type application/tar+gzip is deprecated
+Pulled: cr.yandex/yc-marketplace/yandex-cloud/yc-alb-ingress/yc-alb-ingress-controller-chart:v0.2.6
+Digest: sha256:f286f12877aa38efec042dab34b49932ed4ea60288d7eae30780bdf9fc7ee873
++++ yc managed-kubernetes cluster get yc-lesson-kube-infra --jq .id
+++ export YC_CLUSTER_ID=catg5kcfhkp5jbapp9un
+++ YC_CLUSTER_ID=catg5kcfhkp5jbapp9un
+++ helm install --create-namespace --namespace yc-alb-ingress --set folderId=b1ggm2k4duhi62vkadtq --set clusterId=catg5kcfhkp5jbapp9un --set-file saKeySecretKey=sensitive/sa-key.json yc-alb-ingress-controller ./charts/yc-alb-ingress-controller-chart/
+NAME: yc-alb-ingress-controller
+LAST DEPLOYED: Mon Dec 15 23:40:59 2025
+NAMESPACE: yc-alb-ingress
+STATUS: deployed
+REVISION: 1
+DESCRIPTION: Install complete
+TEST SUITE: None
+++ kubectl -n yc-alb-ingress get all
+NAME                                             READY   STATUS              RESTARTS   AGE
+pod/yc-alb-ingress-controller-56df448c67-22xdt   0/1     ContainerCreating   0          3s
+pod/yc-alb-ingress-controller-hc-p4v7q           0/1     ContainerCreating   0          3s
+
+NAME                                          DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+daemonset.apps/yc-alb-ingress-controller-hc   1         1         1       1            1           <none>          3s
+
+NAME                                        READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/yc-alb-ingress-controller   0/1     1            0           3s
+
+NAME                                                   DESIRED   CURRENT   READY   AGE
+replicaset.apps/yc-alb-ingress-controller-56df448c67   1         1         0       3s
+++ set +x
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/general/argocd/lesson$ kubectl -n yc-alb-ingress get all
+NAME                                             READY   STATUS    RESTARTS   AGE
+pod/yc-alb-ingress-controller-56df448c67-22xdt   1/1     Running   0          116s
+pod/yc-alb-ingress-controller-hc-p4v7q           1/1     Running   0          116s
+
+NAME                                          DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+daemonset.apps/yc-alb-ingress-controller-hc   1         1         1       1            1           <none>          116s
+
+NAME                                        READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/yc-alb-ingress-controller   1/1     1            1           116s
+
+NAME                                                   DESIRED   CURRENT   READY   AGE
+replicaset.apps/yc-alb-ingress-controller-56df448c67   1         1         1       116s

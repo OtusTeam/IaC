@@ -1,0 +1,59 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/general/argocd/lesson$ ./create_ig.sh 
+++ yc iam service-account create --name yc-lesson-kube-infra-ingress-controller
+done (3s)
+id: ajecpd4vlro5p780646t
+folder_id: b1ggm2k4duhi62vkadtq
+created_at: "2025-12-15T14:37:54Z"
+name: yc-lesson-kube-infra-ingress-controller
+
+++ yc iam service-account create --name yc-lesson-kube-infra-ingress-controller
+ERROR: rpc error: code = AlreadyExists desc = Service account 'ajecpd4vlro5p780646t' already exists
+++ yc resource-manager folder add-access-binding --id=b1ggm2k4duhi62vkadtq --service-account-name=yc-lesson-kube-infra-ingress-controller --role alb.editor
+done (3s)
+effective_deltas:
+  - action: ADD
+    access_binding:
+      role_id: alb.editor
+      subject:
+        id: ajecpd4vlro5p780646t
+        type: serviceAccount
+
+++ yc resource-manager folder add-access-binding --id=b1ggm2k4duhi62vkadtq --service-account-name=yc-lesson-kube-infra-ingress-controller --role vpc.publicAdmin
+done (3s)
+effective_deltas:
+  - action: ADD
+    access_binding:
+      role_id: vpc.publicAdmin
+      subject:
+        id: ajecpd4vlro5p780646t
+        type: serviceAccount
+
+++ yc resource-manager folder add-access-binding --id=b1ggm2k4duhi62vkadtq --service-account-name=yc-lesson-kube-infra-ingress-controller --role certificate-manager.certificates.downloader
+done (3s)
+effective_deltas:
+  - action: ADD
+    access_binding:
+      role_id: certificate-manager.certificates.downloader
+      subject:
+        id: ajecpd4vlro5p780646t
+        type: serviceAccount
+
+++ yc resource-manager folder add-access-binding --id=b1ggm2k4duhi62vkadtq --service-account-name=yc-lesson-kube-infra-ingress-controller --role compute.viewer
+done (1s)
+effective_deltas:
+  - action: ADD
+    access_binding:
+      role_id: compute.viewer
+      subject:
+        id: ajecpd4vlro5p780646t
+        type: serviceAccount
+
+++ mkdir -p sensitive
+++ yc iam key create --service-account-name yc-lesson-kube-infra-ingress-controller --output sensitive/sa-key.json
+id: ajeciqmm7u09m6gqtrcj
+service_account_id: ajecpd4vlro5p780646t
+created_at: "2025-12-15T14:50:36.675192419Z"
+key_algorithm: RSA_2048
+
+
+++ set +x

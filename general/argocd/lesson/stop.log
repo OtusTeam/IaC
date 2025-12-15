@@ -1,0 +1,67 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/general/argocd/lesson$ ./stop.sh 
+++ yc managed-kubernetes cluster stop yc-lesson-kube-infra
+done (51s)
+id: catg5kcfhkp5jbapp9un
+folder_id: b1ggm2k4duhi62vkadtq
+created_at: "2025-12-15T06:55:50Z"
+name: yc-lesson-kube-infra
+status: STOPPED
+health: HEALTHY
+network_id: enpukmj62k2i9nsggca6
+master:
+  zonal_master:
+    zone_id: ru-central1-a
+    internal_v4_address: 10.35.0.27
+    external_v4_address: 158.160.43.14
+  locations:
+    - zone_id: ru-central1-a
+      subnet_id: e9bttif63mhqlgqe713n
+  etcd_cluster_size: "1"
+  version: "1.33"
+  endpoints:
+    internal_v4_endpoint: https://10.35.0.27
+    external_v4_endpoint: https://158.160.43.14
+  master_auth:
+    cluster_ca_certificate: |
+      -----BEGIN CERTIFICATE-----
+      MIIC5zCCAc+gAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+      cm5ldGVzMB4XDTI1MTIxNTA2NTU1MloXDTM1MTIxMzA2NTU1MlowFTETMBEGA1UE
+      AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMdM
+      6BcVVQiLHGBVeCJInwybfbv3mlgoSmNCqz92yxs7sIambTuVPW3yk3wbT/ZCvy+v
+      hU+MsLUD2bBy5v4Ap78hS3mHhXqBPImH5Y6WcaIYFyeROrI7dpF/meuk8qWIa+Cs
+      zSthoXFyxNFboNSAtHBb5EqZNTVO9tepQ1r2J9EC+snv8cflCXJC6MI0GOn0v1WA
+      /xJPob1fUOWQakfDxoFoHQajO/IXzh2mOMbfg0h/z6NqedL9lXJsJ0/UIpmSIjLd
+      9rc0chWpkHrnFt+1kQVfTfURfoMMyqVTTAA+ZBzdIOXmcmSZCEFBPzKjyLTtQ+Fx
+      XxIxgzMfozjmdK/NwTECAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+      /wQFMAMBAf8wHQYDVR0OBBYEFO+WQ6qDJD8GyETMA6IBKB28JG2gMA0GCSqGSIb3
+      DQEBCwUAA4IBAQCxAO8tBgLcJIjwhO9nB2+TLxTwIzN64eNpNeNkeO2B3AYXabTO
+      2Au/C5bbsQm0pa+39GxDEjiYI9ut/AZwrS0f1iQUnRlmDhgxm54AJRWVBRXvT7Qq
+      zUNm8JY4wWsAWVvAUQBtsxvxfJr8WjN2uVffT/GeFLjcs58SIMYXrOXwbu1ehmmu
+      chQCYXDVLXXEFB84i8ozBfmzYgW2X8Bn53ryOX3OSkhRyjdhgZRiqFq+6OorudZF
+      lqSccAk/tI8lJGc/XqewoQc6zi1AbUejYKV/4nWWyHk68tvotWV5sLw1mbcyc++g
+      eSegC72sfkqSER8xW/+RDo9yR0o+IJ+Qb90y
+      -----END CERTIFICATE-----
+  version_info:
+    current_version: "1.33"
+  maintenance_policy:
+    auto_upgrade: true
+    maintenance_window:
+      anytime: {}
+  security_group_ids:
+    - enpagf9lkq146nq2siat
+  resources:
+    cores: "2"
+    core_fraction: "100"
+    memory: "8589934592"
+  scale_policy:
+    auto_scale:
+      min_resource_preset_id: s-c2-m8
+ip_allocation_policy:
+  cluster_ipv4_cidr_block: 10.112.0.0/16
+  node_ipv4_cidr_mask_size: "24"
+  service_ipv4_cidr_block: 10.96.0.0/16
+service_account_id: ajelpjinqtsa8210j92i
+node_service_account_id: ajelpjinqtsa8210j92i
+release_channel: RAPID
+
+++ set +x

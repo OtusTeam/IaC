@@ -1,0 +1,56 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/general/argocd/lesson$ ./create_ng.sh 
++++ cat /home/za/.ssh/id_rsa.pub
+++ yc managed-kubernetes node-group create --name=group-1 --cluster-name=yc-lesson-kube-infra --cores=2 --memory=4G --preemptible --auto-scale=initial=1,min=1,max=2 --network-interface=subnets=default-ru-central1-b,ipv4-address=nat,security-group-ids=enpagf9lkq146nq2siat --folder-id b1ggm2k4duhi62vkadtq '--metadata=ssh-keys=aleksey:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC+7dvCUWfbjUARtfbinFKmPN/LAqKpWbYQNBqFDHBKfe/Q8MVoZnjC8VAtAfRmpJBvCxa/tZj51srHOplY0kud7pGByJ5ftVEomVwdAo2WDtql9FD/0jdI8mWjnXzIU+8fek+XAn87yM9BpuNpb9nBxpj/jRwE6eo+T7Cx/qQ0cCAha4l71OLDPo+OYL9Edht2S73sSP+8KxWj2t8+4wUL3uPdx3a0trzAcVhXuDQzZ9GCDKpwJh4IDrtFhHSLXHY5LR/46eAalxEer4PddFh7ujgBUMJ8JjomwHvBfoy3clTA0vNtt5IanJ5SKqGh42eG5RFMR0WYsQDpWFVumouuZMhM6iroHbJwKE22UDNC17JUTkMhF5RcPmyGuDqEX+0ZgB0qz0GuehlI5qAo703OKkBEo76TlCr6pKPBUqmShzadf3ugOWnojJ+HEr5qvVPwZTGk1apt/JUJqbJo/qPQDa+obS9x7gEBXzkfml1sMo3I9/Dp0LfmdxUEpROnbRM= za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA'
+done (1m41s)
+id: catq2emhgrju7ggq0qun
+cluster_id: catg5kcfhkp5jbapp9un
+created_at: "2025-12-15T14:06:23Z"
+name: group-1
+status: RUNNING
+node_template:
+  platform_id: standard-v2
+  resources_spec:
+    memory: "4294967296"
+    cores: "2"
+    core_fraction: "100"
+  boot_disk_spec:
+    disk_type_id: network-hdd
+    disk_size: "103079215104"
+  v4_address_spec:
+    one_to_one_nat_spec:
+      ip_version: IPV4
+  scheduling_policy:
+    preemptible: true
+  network_interface_specs:
+    - subnet_ids:
+        - e2l0ngd4doggtiuk1cbu
+      primary_v4_address_spec:
+        one_to_one_nat_spec:
+          ip_version: IPV4
+      security_group_ids:
+        - enpagf9lkq146nq2siat
+  network_settings: {}
+  container_runtime_settings: {}
+  container_network_settings: {}
+scale_policy:
+  auto_scale:
+    min_size: "1"
+    max_size: "2"
+    initial_size: "1"
+allocation_policy:
+  locations:
+    - zone_id: ru-central1-b
+      subnet_id: e2l0ngd4doggtiuk1cbu
+deploy_policy:
+  max_expansion: "3"
+instance_group_id: cl1s9a0dtqtpf2q8hq4g
+node_version: "1.33"
+version_info:
+  current_version: "1.33"
+maintenance_policy:
+  auto_upgrade: true
+  auto_repair: true
+  maintenance_window:
+    anytime: {}
+
+++ set +x

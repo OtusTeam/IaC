@@ -1,0 +1,12 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/general/argocd/lesson$ ./get_kube_config.sh 
+++ yc managed-kubernetes cluster get-credentials --name=yc-lesson-kube-infra --external
+
+Context 'yc-yc-lesson-kube-infra' was added as default to kubeconfig '/home/za/.kube/config'.
+Check connection to cluster using 'kubectl cluster-info --kubeconfig /home/za/.kube/config'.
+
+Note, that authentication depends on 'yc' and its config profile 'default'.
+To access clusters using the Kubernetes API, please use Kubernetes Service Account.
+++ kubectl get nodes
+NAME                        STATUS   ROLES    AGE   VERSION
+cl1s9a0dtqtpf2q8hq4g-ucuq   Ready    <none>   16m   v1.33.3
+++ set +x
