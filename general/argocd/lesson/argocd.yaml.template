@@ -1,0 +1,8 @@
+configs:
+  repositories:
+    infra:
+      password: $YC_PROJECT_TOKEN
+      project: default
+      type: git
+      url: https://aj-$YC_PREFIX.gitlab.yandexcloud.net/$YC_PREFIX/$YC_PROJECT.git
+      username: argo-cd

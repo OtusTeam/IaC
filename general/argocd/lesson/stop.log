@@ -1,6 +1,47 @@
 za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/general/argocd/lesson$ ./stop.sh 
+++ yc managed-gitlab instance stop main
+done (1m1s)
+id: c172hco7sgvfgj947mr0
+folder_id: b1ggm2k4duhi62vkadtq
+created_at: "2025-12-14T06:01:22.183Z"
+updated_at: "2025-12-14T06:01:22.183Z"
+name: main
+description: yc-lesson
+resource_preset_id: s2.micro
+disk_size: "32212254720"
+status: STOPPED
+admin_login: aleksey-jhuravlev
+admin_email: aleksey.jhuravlev@yandex.ru
+domain: aj-yc-lesson.gitlab.yandexcloud.net
+subnet_id: e9bttif63mhqlgqe713n
+backup_retain_period_days: "7"
+approval_rules_id: NONE
+gitlab_version: 18.5.4
+
+There is a new yc version '0.182.0' available. Current version: '0.181.0'.
+See release notes at https://yandex.cloud/ru/docs/cli/release-notes
+You can install it by running the following command in your shell:
+	$ yc components update
+
 ++ yc managed-kubernetes cluster stop yc-lesson-kube-infra
-done (51s)
+\ 12sHandling connection for 8080
+/ 19serror: lost connection to pod
+++ ret argocd-initial-admin-secret -o 'jsonpath={.data.password}'
+./install_argocd.sh: строка 21: ret: команда не найдена
+++ base64 -d
+++ echo
+
+++ echo configs:
+++ echo '  repositories:'
+++ echo '    infra:'
++++ cat sensitive/project.argocd.token
+++ echo '      password: glpat-l7VgsB5g2ZI4AJgPYNnLv286MQp1OjUH.01.0w0wk39re'
+++ echo '      project: default'
+++ echo '      type: git'
+++ echo '      url: https://aj-yc-lesson.gitlab.yandexcloud.net/yc-lesson/.git'
+++ echo '      username: argo-cd'
+++ read -p 'Press any key to continue... '
+done (54s)key to continue... 
 id: catg5kcfhkp5jbapp9un
 folder_id: b1ggm2k4duhi62vkadtq
 created_at: "2025-12-15T06:55:50Z"
@@ -65,3 +106,5 @@ node_service_account_id: ajelpjinqtsa8210j92i
 release_channel: RAPID
 
 ++ set +x
+
+[1]+  Остановлен    ./install_argocd.sh
