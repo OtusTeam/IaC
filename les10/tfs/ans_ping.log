@@ -1,0 +1,9 @@
+aleksey@first:~/OtusTeam/IaC/les10/tfs$ ./ans_ping.sh 
+++ ansible -m ping all
+les10-tfs-vm | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}

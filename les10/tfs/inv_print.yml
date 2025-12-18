@@ -1,0 +1,15 @@
+---
+- name: Print host info without gathering facts
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Print host details
+      debug:
+        # msg: |
+          # name: {{ inventory_hostname }}
+          # ansible_host: {{ hostvars[inventory_hostname].ansible_host | default('<undefined>') }}
+          # ansible_user: {{ hostvars[inventory_hostname].ansible_user | default('<undefined>') }}
+          # groups: {{ group_names | join(',') }}
+        msg: "name={{ inventory_hostname }} ansible_host={{ hostvars[inventory_hostname].ansible_host | default('<undef>') }} ansible_user={{ hostvars[inventory_hostname].ansible_user | default('<undef>') }} groups={{ group_names | join(',') }}"
+

@@ -23,6 +23,10 @@ resource "yandex_compute_instance" "vm" {
     nat       = true
   }
 
+  labels = {
+    group = "tfs"
+  } 
+
   metadata = {
     ssh-keys = "${var.username}:${file(var.pub_key_path)}"
   }
