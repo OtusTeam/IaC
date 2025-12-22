@@ -141,8 +141,9 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
         group_label = str(self.get_option('yacloud_group_label'))
 
         for instance in self.hosts:
-            if group_label and group_label in instance["labels"]:
-                group = instance["labels"][group_label]
+#           no labels case added by JA:
+            if group_label and (labels := instance.setdefault('labels')) and group_label in labels:
+                group = labels[group_label]
             else:
                 group = "yacloud"
 
