@@ -1,0 +1,21 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les10/yc_api$ ./ans_inv_list.sh
+++ ansible-inventory --list
+{
+    "_meta": {
+        "hostvars": {
+            "les06-plg-vm": {
+                "ansible_host": "178.154.231.177"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped"
+        ]
+    },
+    "ungrouped": {
+        "hosts": [
+            "les06-plg-vm"
+        ]
+    }
+}

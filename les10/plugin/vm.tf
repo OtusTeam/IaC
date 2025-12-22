@@ -1,5 +1,5 @@
 resource "yandex_compute_instance" "vm" {
-  name = "les10-plg-vm"
+  name = "${var.prefix}-plg-vm"
   zone = var.yc_default_zone
 
   resources {
@@ -23,7 +23,13 @@ resource "yandex_compute_instance" "vm" {
     nat       = true
   }
 
+  labels = {
+    group = "plg"
+  } 
+
   metadata = {
     ssh-keys = "${var.username}:${file(var.pub_key_path)}"
   }
 }
+
+

@@ -8,10 +8,6 @@ variable "yc_folder" {
   description = "Yandex Cloud folder"
 }
 
-variable "yc_subnet_id" {
-  type = string
-}
-
 variable "yc_token" {
   type = string
   description = "Yandex Cloud OAuth token"
@@ -25,7 +21,8 @@ variable "yc_default_zone" {
 
 variable "username" {
    type = string
-   default = "ubuntu"
+   default = "ubuntu" 
+#"yc-user"
 }
 
 variable "pub_key_path" {
@@ -42,10 +39,6 @@ variable "sec_key_path" {
 
 variable "image" {
    type = string
-   default = "fd84kp940dsrccckilj6"
-}
-
-variable "prefix" {
-   type = string
-   default = "les10"
+   default = "fd8pecdhv50nec1qf9im" 
+# "fd84kp940dsrccckilj6"
 }

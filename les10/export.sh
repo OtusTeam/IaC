@@ -2,6 +2,7 @@
 export YC_CLOUD_ID=$(yc config get cloud-id)
 export YC_ZONE=$(yc config get compute-default-zone)
 export YC_TOKEN=$(yc iam create-token)
+export YC_FOLDER_ID="b1gmesrdjgklgkvcp704"              # otus
 
 export ANSIBLE_REMOTE_USER="ubuntu"
 export ANSIBLE_INVENTORY="./inv"

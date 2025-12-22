@@ -1,0 +1,11 @@
+---
+- name: Generate inventory file
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - inventory_vars.yaml
+  tasks:
+    - name: Generate inventory
+      template:
+        src: inventory_template.j2
+        dest: inventory.yaml
