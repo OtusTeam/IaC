@@ -1,0 +1,1 @@
+export GRPC_DNS_RESOLVER=native
