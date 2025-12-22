@@ -1,9 +1,23 @@
-aleksey@first:~/OtusTeam/IaC/les10/tfs$ ./ans_ping.sh 
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les10/tfs$ ./ans_ping.sh
 ++ ansible -m ping all
-les10-tfs-vm | SUCCESS => {
+[WARNING]: Platform linux on host les06-tfs-1 is using the discovered Python interpreter at /usr/bin/python3.10, but future
+installation of another Python interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-
+core/2.17/reference_appendices/interpreter_discovery.html for more information.
+les06-tfs-1 | SUCCESS => {
     "ansible_facts": {
-        "discovered_interpreter_python": "/usr/bin/python3"
+        "discovered_interpreter_python": "/usr/bin/python3.10"
     },
     "changed": false,
     "ping": "pong"
 }
+[WARNING]: Platform linux on host les06-tfs-2 is using the discovered Python interpreter at /usr/bin/python3.10, but future
+installation of another Python interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-
+core/2.17/reference_appendices/interpreter_discovery.html for more information.
+les06-tfs-2 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3.10"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+++ set +x

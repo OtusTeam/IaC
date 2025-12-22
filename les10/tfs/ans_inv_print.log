@@ -1,0 +1,18 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les10/tfs$ ./ans_inv_print.sh
+++ ansible-playbook inv_print.yml
+
+PLAY [Print host info without gathering facts] ***************************************************************************************
+
+TASK [Print host details] ************************************************************************************************************
+ok: [les06-tfs-2] => {
+    "msg": "name=les06-tfs-2 ansible_host=46.21.247.60 ansible_user=ubuntu groups=tfs"
+}
+ok: [les06-tfs-1] => {
+    "msg": "name=les06-tfs-1 ansible_host=89.169.151.151 ansible_user=ubuntu groups=tfs"
+}
+
+PLAY RECAP ***************************************************************************************************************************
+les06-tfs-1                : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+les06-tfs-2                : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+++ set +x

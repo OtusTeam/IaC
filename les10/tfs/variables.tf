@@ -44,3 +44,13 @@ variable "image" {
    type = string
    default = "fd84kp940dsrccckilj6"
 }
+
+variable "prefix" {
+   type = string
+   default = "les10"
+}
+
+variable "tfs_vms" {
+   type = number
+   default = "2"
+}

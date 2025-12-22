@@ -1,0 +1,13 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les10/tfs$ ./ans_inv_list_y.sh
+++ ansible-inventory --list -y
+all:
+  children:
+    tfs:
+      hosts:
+        les06-tfs-1:
+          ansible_host: 89.169.151.151
+          ansible_user: ubuntu
+        les06-tfs-2:
+          ansible_host: 46.21.247.60
+          ansible_user: ubuntu
+++ set +x

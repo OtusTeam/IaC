@@ -1,0 +1,200 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les10/tfs$ terraform destroy
+yandex_compute_instance.vm[1]: Refreshing state... [id=fhms11gal5lgdusdrb0e]
+yandex_compute_instance.vm[0]: Refreshing state... [id=fhmveh4dtgi81ghjuncm]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following
+symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.vm[0] will be destroyed
+  - resource "yandex_compute_instance" "vm" {
+      - created_at                = "2025-12-22T09:14:06Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "fhmveh4dtgi81ghjuncm.auto.internal" -> null
+      - hardware_generation       = [
+          - {
+              - generation2_features = []
+              - legacy_features      = [
+                  - {
+                      - pci_topology = "PCI_TOPOLOGY_V1"
+                    },
+                ]
+            },
+        ] -> null
+      - id                        = "fhmveh4dtgi81ghjuncm" -> null
+      - labels                    = {
+          - "group" = "tfs"
+        } -> null
+      - metadata                  = {
+          - "ssh-keys" = (sensitive value)
+        } -> null
+      - name                      = "les06-tfs-1" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-a" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "fhmocf7t4nrr1eptbd6r" -> null
+          - disk_id     = "fhmocf7t4nrr1eptbd6r" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd84kp940dsrccckilj6" -> null
+                name        = null
+              - size        = 8 -> null
+              - type        = "network-hdd" -> null
+                # (3 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.128.0.9" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:1f:74:48:de" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "89.169.151.151" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e9bop98iu12teftg4uj8" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 5 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = true -> null
+        }
+    }
+
+  # yandex_compute_instance.vm[1] will be destroyed
+  - resource "yandex_compute_instance" "vm" {
+      - created_at                = "2025-12-22T09:14:06Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "fhms11gal5lgdusdrb0e.auto.internal" -> null
+      - hardware_generation       = [
+          - {
+              - generation2_features = []
+              - legacy_features      = [
+                  - {
+                      - pci_topology = "PCI_TOPOLOGY_V1"
+                    },
+                ]
+            },
+        ] -> null
+      - id                        = "fhms11gal5lgdusdrb0e" -> null
+      - labels                    = {
+          - "group" = "tfs"
+        } -> null
+      - metadata                  = {
+          - "ssh-keys" = (sensitive value)
+        } -> null
+      - name                      = "les06-tfs-2" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-a" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "fhmv9h01br0r0vqju2gr" -> null
+          - disk_id     = "fhmv9h01br0r0vqju2gr" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd84kp940dsrccckilj6" -> null
+                name        = null
+              - size        = 8 -> null
+              - type        = "network-hdd" -> null
+                # (3 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.128.0.30" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:1c:08:60:aa" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "46.21.247.60" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e9bop98iu12teftg4uj8" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 5 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = true -> null
+        }
+    }
+
+Plan: 0 to add, 0 to change, 2 to destroy.
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+yandex_compute_instance.vm[1]: Destroying... [id=fhms11gal5lgdusdrb0e]
+yandex_compute_instance.vm[0]: Destroying... [id=fhmveh4dtgi81ghjuncm]
+yandex_compute_instance.vm[1]: Still destroying... [id=fhms11gal5lgdusdrb0e, 00m10s elapsed]
+yandex_compute_instance.vm[0]: Still destroying... [id=fhmveh4dtgi81ghjuncm, 00m10s elapsed]
+yandex_compute_instance.vm[0]: Still destroying... [id=fhmveh4dtgi81ghjuncm, 00m20s elapsed]
+yandex_compute_instance.vm[1]: Still destroying... [id=fhms11gal5lgdusdrb0e, 00m20s elapsed]
+yandex_compute_instance.vm[1]: Still destroying... [id=fhms11gal5lgdusdrb0e, 00m30s elapsed]
+yandex_compute_instance.vm[0]: Still destroying... [id=fhmveh4dtgi81ghjuncm, 00m30s elapsed]
+yandex_compute_instance.vm[0]: Still destroying... [id=fhmveh4dtgi81ghjuncm, 00m40s elapsed]
+yandex_compute_instance.vm[1]: Still destroying... [id=fhms11gal5lgdusdrb0e, 00m40s elapsed]
+yandex_compute_instance.vm[1]: Destruction complete after 41s
+yandex_compute_instance.vm[0]: Destruction complete after 41s
+
+Destroy complete! Resources: 2 destroyed.

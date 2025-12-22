@@ -1,5 +1,6 @@
 resource "yandex_compute_instance" "vm" {
-  name = "les10-tfs-vm"
+  count = var.tfs_vms
+  name = "${var.prefix}-tfs-${count.index+1}"
   zone = var.yc_default_zone
 
   resources {
