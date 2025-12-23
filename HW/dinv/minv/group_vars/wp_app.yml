@@ -1,0 +1,4 @@
+wordpress_db_name: wpdb
+wordpress_db_user: wpuser
+wordpress_db_password: wp123456
+wordpress_db_host: wp.rw.mdb.yandexcloud.net
