@@ -1,0 +1,27 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/HW/dinv/minv$ ./ans_inv_list.sh 
+++ ansible-inventory --list
+{
+    "_meta": {
+        "hostvars": {
+            "les10-plg-vm": {
+                "ansible_host": "89.169.147.160",
+                "wordpress_db_host": "wp.rw.mdb.yandexcloud.net",
+                "wordpress_db_name": "wpdb",
+                "wordpress_db_password": "wp123456",
+                "wordpress_db_user": "wpuser"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped",
+            "yacloud",
+            "wp_app"
+        ]
+    },
+    "wp_app": {
+        "hosts": [
+            "les10-plg-vm"
+        ]
+    }
+}

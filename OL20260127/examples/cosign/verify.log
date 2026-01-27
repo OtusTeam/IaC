@@ -1,0 +1,5 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/cosign$ ./verify.sh 
+ghcr.io/sigstore/cosign/cosign:v2.4.1 is
+ok
+docker.io/library/alpine:3.23 is
+bad

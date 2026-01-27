@@ -1,0 +1,14 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/id$ ./run.sh 
+++ docker run --rm alpine:3.20 id
+Unable to find image 'alpine:3.20' locally
+3.20: Pulling from library/alpine
+5311e7f182d0: Pull complete 
+70671e0b57b3: Download complete 
+891808b14b12: Download complete 
+Digest: sha256:765942a4039992336de8dd5db680586e1a206607dd06170ff0a37267a9e01958
+Status: Downloaded newer image for alpine:3.20
+uid=0(root) gid=0(root) groups=0(root),0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel),11(floppy),20(dialout),26(tape),27(video)
+++ read -p 'press any key to continue...'
+press any key to continue...
+++ docker run --rm -u 4000:4000 alpine:3.20 id
+uid=4000 gid=4000 groups=4000

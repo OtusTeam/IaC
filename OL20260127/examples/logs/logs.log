@@ -1,0 +1,86 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/logs$ ./logs.sh
+++ docker info
+++ grep Log
+ Logging Driver: json-file
+  Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+++ docker run --rm -d --name log_demo --log-driver json-file --log-opt max-size=10m --log-opt max-file=3 alpine:3.20 sh -c 'for i in $(seq 1 5); do echo "INFO: $(date) — run $i"; echo "ERR: $(date) — error $i" 1>&2; sleep 1; done; sleep 3600'
+d1814fdab9daaade39da4977b718d9ea219c8699151db05cace31ee69d127735
+++ sleep 1
+++ docker logs log_demo
+INFO: Sat Jan 24 07:28:32 UTC 2026 — run 1
+ERR: Sat Jan 24 07:28:32 UTC 2026 — error 1
+INFO: Sat Jan 24 07:28:33 UTC 2026 — run 2
+ERR: Sat Jan 24 07:28:33 UTC 2026 — error 2
+++ sleep 1
+++ docker logs log_demo
+INFO: Sat Jan 24 07:28:32 UTC 2026 — run 1
+ERR: Sat Jan 24 07:28:32 UTC 2026 — error 1
+INFO: Sat Jan 24 07:28:33 UTC 2026 — run 2
+ERR: Sat Jan 24 07:28:33 UTC 2026 — error 2
+INFO: Sat Jan 24 07:28:34 UTC 2026 — run 3
+ERR: Sat Jan 24 07:28:34 UTC 2026 — error 3
+++ sleep 1
+++ docker logs log_demo
+INFO: Sat Jan 24 07:28:32 UTC 2026 — run 1
+ERR: Sat Jan 24 07:28:32 UTC 2026 — error 1
+INFO: Sat Jan 24 07:28:33 UTC 2026 — run 2
+ERR: Sat Jan 24 07:28:33 UTC 2026 — error 2
+INFO: Sat Jan 24 07:28:34 UTC 2026 — run 3
+ERR: Sat Jan 24 07:28:34 UTC 2026 — error 3
+INFO: Sat Jan 24 07:28:35 UTC 2026 — run 4
+ERR: Sat Jan 24 07:28:35 UTC 2026 — error 4
+++ sleep 1
+++ docker logs log_demo
+INFO: Sat Jan 24 07:28:32 UTC 2026 — run 1
+ERR: Sat Jan 24 07:28:32 UTC 2026 — error 1
+INFO: Sat Jan 24 07:28:33 UTC 2026 — run 2
+ERR: Sat Jan 24 07:28:33 UTC 2026 — error 2
+INFO: Sat Jan 24 07:28:34 UTC 2026 — run 3
+ERR: Sat Jan 24 07:28:34 UTC 2026 — error 3
+INFO: Sat Jan 24 07:28:35 UTC 2026 — run 4
+ERR: Sat Jan 24 07:28:35 UTC 2026 — error 4
+INFO: Sat Jan 24 07:28:36 UTC 2026 — run 5
+ERR: Sat Jan 24 07:28:36 UTC 2026 — error 5
+++ docker stop log_demo
+log_demo
+++ docker run --rm -d --name log_demo --log-driver journald alpine:3.20 sh -c 'for i in $(seq 1 5); do echo "INFO: $(date) — run $i"; echo "ERR: $(date) — error $i" 1>&2; sleep 1; done; sleep 3600'
+696bd2f395e43f5b87596ced88357b26de244a178f52db7ecafaac025bf15f4b
+++ sleep 1
+++ journalctl CONTAINER_NAME=log_demo --since '1 minute ago'
+янв 24 15:28:46 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: INFO: Sat Jan 24 07:28:46 UTC 2026 — run 1
+янв 24 15:28:46 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: ERR: Sat Jan 24 07:28:46 UTC 2026 — error 1
+янв 24 15:28:47 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: INFO: Sat Jan 24 07:28:47 UTC 2026 — run 2
+янв 24 15:28:47 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: ERR: Sat Jan 24 07:28:47 UTC 2026 — error 2
+++ sleep 1
+++ journalctl CONTAINER_NAME=log_demo --since '1 minute ago'
+янв 24 15:28:46 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: INFO: Sat Jan 24 07:28:46 UTC 2026 — run 1
+янв 24 15:28:46 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: ERR: Sat Jan 24 07:28:46 UTC 2026 — error 1
+янв 24 15:28:47 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: INFO: Sat Jan 24 07:28:47 UTC 2026 — run 2
+янв 24 15:28:47 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: ERR: Sat Jan 24 07:28:47 UTC 2026 — error 2
+янв 24 15:28:48 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: INFO: Sat Jan 24 07:28:48 UTC 2026 — run 3
+янв 24 15:28:48 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: ERR: Sat Jan 24 07:28:48 UTC 2026 — error 3
+++ sleep 1
+++ journalctl CONTAINER_NAME=log_demo --since '1 minute ago'
+янв 24 15:28:46 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: INFO: Sat Jan 24 07:28:46 UTC 2026 — run 1
+янв 24 15:28:46 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: ERR: Sat Jan 24 07:28:46 UTC 2026 — error 1
+янв 24 15:28:47 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: INFO: Sat Jan 24 07:28:47 UTC 2026 — run 2
+янв 24 15:28:47 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: ERR: Sat Jan 24 07:28:47 UTC 2026 — error 2
+янв 24 15:28:48 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: INFO: Sat Jan 24 07:28:48 UTC 2026 — run 3
+янв 24 15:28:48 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: ERR: Sat Jan 24 07:28:48 UTC 2026 — error 3
+янв 24 15:28:49 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: INFO: Sat Jan 24 07:28:49 UTC 2026 — run 4
+янв 24 15:28:49 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: ERR: Sat Jan 24 07:28:49 UTC 2026 — error 4
+++ sleep 1
+++ journalctl CONTAINER_NAME=log_demo --since '1 minute ago'
+янв 24 15:28:46 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: INFO: Sat Jan 24 07:28:46 UTC 2026 — run 1
+янв 24 15:28:46 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: ERR: Sat Jan 24 07:28:46 UTC 2026 — error 1
+янв 24 15:28:47 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: INFO: Sat Jan 24 07:28:47 UTC 2026 — run 2
+янв 24 15:28:47 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: ERR: Sat Jan 24 07:28:47 UTC 2026 — error 2
+янв 24 15:28:48 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: INFO: Sat Jan 24 07:28:48 UTC 2026 — run 3
+янв 24 15:28:48 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: ERR: Sat Jan 24 07:28:48 UTC 2026 — error 3
+янв 24 15:28:49 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: INFO: Sat Jan 24 07:28:49 UTC 2026 — run 4
+янв 24 15:28:49 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: ERR: Sat Jan 24 07:28:49 UTC 2026 — error 4
+янв 24 15:28:50 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: INFO: Sat Jan 24 07:28:50 UTC 2026 — run 5
+янв 24 15:28:50 za-Vivobook-ASUSLaptop-M3504YA-M3504YA 696bd2f395e4[199343]: ERR: Sat Jan 24 07:28:50 UTC 2026 — error 5
+++ docker stop log_demo
+log_demo
+++ exit 0

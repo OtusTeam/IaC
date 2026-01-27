@@ -1,0 +1,10 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/options/bind$ ./run.sh 
+Drop all the capabilities and only add those necessary
+but we add NET_BIND_SERVICE to bind to a port under1024 like 80:
+++ docker run --rm -d --name bind --security-opt no-new-privileges --cap-drop=ALL --cap-add=NET_BIND_SERVICE -p 127.0.0.1:8080:80 alpine:3.20 sh -c 'while true; do printf "HTTP/1.1 200 OK\r\nContent-Length: 5\r\nContent-Type: text/plain\r\n\r\nhello!\n" | nc -l -p 80; done'
+490dc8ea858e9f27c4783e680e9be3de03908dc0de132277f310a37d9ebf28bb
+++ sleep 5
+++ curl http://127.0.0.1:8080
+hello++ docker stop bind
+bind
+++ set +x

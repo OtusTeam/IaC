@@ -1,0 +1,13 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/seccomp$ ./run.sh 
++++ uname -r
+++ grep CONFIG_SECCOMP= /boot/config-5.15.0-164-generic
+CONFIG_SECCOMP=y
+++ read -p 'press any key to continue...'
+press any key to continue...
+++ docker run --rm -it --security-opt seccomp=default.json alpine:3.20 sh -c whoami
+root
+++ docker run --rm -it --security-opt seccomp=default.json alpine:3.20 unshare --map-root-user --user sh -c whoami
+unshare: unshare(0x10000000): Operation not permitted
+++ docker run --rm -it --security-opt seccomp=unconfined alpine:3.20 unshare --map-root-user --user sh -c whoami
+root
+++ set +x

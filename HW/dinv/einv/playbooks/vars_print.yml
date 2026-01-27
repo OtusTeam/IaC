@@ -1,0 +1,19 @@
+---
+- name: Print host info without gathering facts
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Print host details
+      debug:
+         msg: |
+           name: {{ inventory_hostname }}
+           ansible_host: {{ hostvars[inventory_hostname].ansible_host | default('<undefined>') }}
+           ansible_user: {{ hostvars[inventory_hostname].ansible_user | default('<undefined>') }}
+           groups: {{ group_names | join(',') }}
+           wordpress_db_name: {{ hostvars[inventory_hostname].wordpress_db_name | default('<undefined>') }}
+           wordpress_db_user: {{ hostvars[inventory_hostname].wordpress_db_user | default('<undefined>') }}
+           wordpress_db_password: {{ hostvars[inventory_hostname].wordpress_db_password | default('<undefined>') }}
+           wordpress_db_host: {{ hostvars[inventory_hostname].wordpress_db_host | default('<undefined>') }}
+
+

@@ -1,0 +1,11 @@
+---
+- hosts: second
+  tasks:
+
+  - name: Run container
+    command: docker run --rm -v /tmp/hello:/tmp busybox:latest sh -c "echo Hello!"
+    register: output
+
+  - name: Show results
+    ansible.builtin.debug:
+      var: output

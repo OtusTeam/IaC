@@ -1,0 +1,92 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/python$ ./run.sh 
+++ cat fat/Dockerfile
+# Use the stable Alpine image as the base image
+FROM alpine:3.20
+
+# Update the package index and install Python 3 and pip
+RUN apk add --update-cache
+RUN apk add python3
+RUN apk add python3-dev
+RUN apk add py-pip
+RUN apk add build-base
+# Clear cache
+RUN rm -rf /var/cache/apk/*
+
+# Set the default command to run when the container is started
+CMD ["python3", "--version"]
+++ read -p 'press any key to continue...'
+press any key to continue...
+++ docker build -t fat fat
+[+] Building 0.2s (11/11) FINISHED                                                                                                                                                                                             docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                                                     0.0s
+ => => transferring dockerfile: 409B                                                                                                                                                                                                     0.0s
+ => [internal] load metadata for docker.io/library/alpine:3.20                                                                                                                                                                           0.0s
+ => [internal] load .dockerignore                                                                                                                                                                                                        0.0s
+ => => transferring context: 2B                                                                                                                                                                                                          0.0s
+ => [1/7] FROM docker.io/library/alpine:3.20@sha256:765942a4039992336de8dd5db680586e1a206607dd06170ff0a37267a9e01958                                                                                                                     0.0s
+ => => resolve docker.io/library/alpine:3.20@sha256:765942a4039992336de8dd5db680586e1a206607dd06170ff0a37267a9e01958                                                                                                                     0.0s
+ => CACHED [2/7] RUN apk add --update-cache                                                                                                                                                                                              0.0s
+ => CACHED [3/7] RUN apk add python3                                                                                                                                                                                                     0.0s
+ => CACHED [4/7] RUN apk add python3-dev                                                                                                                                                                                                 0.0s
+ => CACHED [5/7] RUN apk add py-pip                                                                                                                                                                                                      0.0s
+ => CACHED [6/7] RUN apk add build-base                                                                                                                                                                                                  0.0s
+ => CACHED [7/7] RUN rm -rf /var/cache/apk/*                                                                                                                                                                                             0.0s
+ => exporting to image                                                                                                                                                                                                                   0.1s
+ => => exporting layers                                                                                                                                                                                                                  0.0s
+ => => exporting manifest sha256:e9787c483ecd2bd31ebe7a73012593f53efa2cb7e94b116caa26f6eb650b1280                                                                                                                                        0.0s
+ => => exporting config sha256:e0df5b17f5e3d956af3db4a14bc50c620da83f22e8405f1f67bae626830ac723                                                                                                                                          0.0s
+ => => exporting attestation manifest sha256:d350e4a65764df2a70fabd30e4be53570f1d1dd988c11c59682ad9fb6975e342                                                                                                                            0.0s
+ => => exporting manifest list sha256:43574a10f711e4a4bddb9609cb5fbe275497339242acb1d690c9659e9acd553b                                                                                                                                   0.0s
+ => => naming to docker.io/library/fat:latest                                                                                                                                                                                            0.0s
+ => => unpacking to docker.io/library/fat:latest                                                                                                                                                                                         0.0s
+++ docker run fat
+Python 3.12.12
+++ cat thin/Dockerfile
+# Use the stable Alpine image as the base image
+FROM alpine:3.20
+
+# Update the package index and install Python 3 and pip
+RUN apk cache clean \
+&& apk update \
+&& apk add python3 \
+&& rm -rf /var/cache/apk/*
+
+# Set the default command to run when the container is started
+CMD ["python3", "--version"]
+++ read -p 'press any key to continue...'
+press any key to continue...
+++ docker build -t thin thin
+[+] Building 0.2s (6/6) FINISHED                                                                                                                                                                                               docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                                                     0.0s
+ => => transferring dockerfile: 340B                                                                                                                                                                                                     0.0s
+ => [internal] load metadata for docker.io/library/alpine:3.20                                                                                                                                                                           0.0s
+ => [internal] load .dockerignore                                                                                                                                                                                                        0.0s
+ => => transferring context: 2B                                                                                                                                                                                                          0.0s
+ => [1/2] FROM docker.io/library/alpine:3.20@sha256:765942a4039992336de8dd5db680586e1a206607dd06170ff0a37267a9e01958                                                                                                                     0.0s
+ => => resolve docker.io/library/alpine:3.20@sha256:765942a4039992336de8dd5db680586e1a206607dd06170ff0a37267a9e01958                                                                                                                     0.0s
+ => CACHED [2/2] RUN apk cache clean && apk update && apk add python3 && rm -rf /var/cache/apk/*                                                                                                                                         0.0s
+ => exporting to image                                                                                                                                                                                                                   0.1s
+ => => exporting layers                                                                                                                                                                                                                  0.0s
+ => => exporting manifest sha256:e5361f5c26554e1ff0572245a51c950c33168b8eaa6957952c626e323146a2dd                                                                                                                                        0.0s
+ => => exporting config sha256:e9a0f5a049cb01f974d084c2e4682b1a4cc455524c5623c16bb7b9741fdfa293                                                                                                                                          0.0s
+ => => exporting attestation manifest sha256:42a3d25e7e3076d9b49fe2acfcbb3f33bd54d8b501be2972f202503f0a5f97ea                                                                                                                            0.0s
+ => => exporting manifest list sha256:bddf7111c49eb4cc4003fc2fb251f4beaffe4d560ed2307d6cc5b4fda31a0d8b                                                                                                                                   0.0s
+ => => naming to docker.io/library/thin:latest                                                                                                                                                                                           0.0s
+ => => unpacking to docker.io/library/thin:latest                                                                                                                                                                                        0.0s
+++ docker run thin
+Python 3.12.12
+++ docker images
+                                                                                                                                                                                                                          i Info →   U  In Use
+IMAGE                   ID             DISK USAGE   CONTENT SIZE   EXTRA
+alpine:3.20             765942a40399       12.2MB         3.71MB        
+dperson/samba:latest    66088b78a198       76.4MB           20MB        
+fat:latest              43574a10f711        560MB          158MB    U   
+thin:latest             bddf7111c49e       70.8MB         18.6MB    U   
+wettyoss/wetty:latest   45a22660cfc8        678MB          110MB        
+++ read -p 'press any key to continue...'
+press any key to continue...
+++ docker image rm -f thin
+Untagged: thin:latest
+++ docker image rm -f fat
+Untagged: fat:latest
+++ set +x

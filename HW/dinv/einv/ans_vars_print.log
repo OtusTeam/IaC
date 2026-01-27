@@ -1,0 +1,12 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/HW/dinv/minv$ ansible-playbook vars_print.yml 
+
+PLAY [Print host info without gathering facts] ***********************************************************************************************************************************************************************************************
+
+TASK [Print host details] ********************************************************************************************************************************************************************************************************************
+ok: [les10-plg-vm] => {
+    "msg": "name: les10-plg-vm\nansible_host: 89.169.147.160\nansible_user: <undefined>\ngroups: wp_app\nwordpress_db_name: wpdb\nwordpress_db_user: wpuser\nwordpress_db_password: wp123456\nwordpress_db_host: wp.rw.mdb.yandexcloud.net\n"
+}
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+les10-plg-vm               : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

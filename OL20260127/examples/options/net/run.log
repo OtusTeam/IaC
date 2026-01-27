@@ -1,0 +1,72 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/options/net$ ./run.sh 
+++ docker network create web
+ded1a1e73c84b994fee578a76703da02de27d643a58f82639fd7dbf19ef3e6c5
+++ docker network ls
+NETWORK ID     NAME              DRIVER    SCOPE
+b0634aa61007   bridge            bridge    local
+e11e89e0bdd6   docker_gwbridge   bridge    local
+75695214f4c1   host              host      local
+av9566bip83t   ingress           overlay   swarm
+408de2d38c53   none              null      local
+ded1a1e73c84   web               bridge    local
+80a5f8dfdfb3   wetty             bridge    local
+++ docker network inspect web
+[
+    {
+        "Name": "web",
+        "Id": "ded1a1e73c84b994fee578a76703da02de27d643a58f82639fd7dbf19ef3e6c5",
+        "Created": "2026-01-25T01:55:47.553068079+08:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.20.0.0/16",
+                    "IPRange": "",
+                    "Gateway": "172.20.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Options": {},
+        "Labels": {},
+        "Containers": {},
+        "Status": {
+            "IPAM": {
+                "Subnets": {
+                    "172.20.0.0/16": {
+                        "IPsInUse": 3,
+                        "DynamicIPsAvailable": 65533
+                    }
+                }
+            }
+        }
+    }
+]
+++ read -p 'press any key to continue...'
+press any key to continue...
+++ echo Disable the default bridge, host, ... and use a dedicated network to expose the host interface:
+Disable the default bridge, host, ... and use a dedicated network to expose the host interface:
+++ docker run --rm --network=web alpine:3.20 ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0@if506: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 1500 qdisc noqueue state UP 
+    link/ether 5e:18:d5:da:e9:48 brd ff:ff:ff:ff:ff:ff
+    inet 172.20.0.2/16 brd 172.20.255.255 scope global eth0
+       valid_lft forever preferred_lft forever
+++ docker network rm -f web
+web

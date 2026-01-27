@@ -1,0 +1,22 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/options/ro$ ./run.sh 
+Limit the mounted root filesystem to be read-only.
+Provide an in-memory storage for temporary files at /tmp /run /var/log.
+Bind your local partition /usr/local/bin using the read-only option too.
+++ docker run --rm --read-only --tmpfs /tmp:rw,noexec,nosuid --tmpfs /run:rw,noexec,nosuid --tmpfs /var/log:rw,noexec,nosuid alpine:3.20 sh -c 'mount | grep tmpfs && dd if=/dev/zero of=/file bs=1M count=1'
+tmpfs on /dev type tmpfs (rw,nosuid,size=65536k,mode=755,inode64)
+shm on /dev/shm type tmpfs (rw,nosuid,nodev,noexec,relatime,size=65536k,inode64)
+tmpfs on /tmp type tmpfs (rw,nosuid,nodev,noexec,relatime,inode64)
+tmpfs on /run type tmpfs (rw,nosuid,nodev,noexec,relatime,mode=755,inode64)
+tmpfs on /var/log type tmpfs (rw,nosuid,nodev,noexec,relatime,mode=755,inode64)
+tmpfs on /proc/acpi type tmpfs (ro,relatime,inode64)
+tmpfs on /proc/asound type tmpfs (ro,relatime,inode64)
+tmpfs on /proc/interrupts type tmpfs (rw,nosuid,size=65536k,mode=755,inode64)
+tmpfs on /proc/kcore type tmpfs (rw,nosuid,size=65536k,mode=755,inode64)
+tmpfs on /proc/keys type tmpfs (rw,nosuid,size=65536k,mode=755,inode64)
+tmpfs on /proc/scsi type tmpfs (ro,relatime,inode64)
+tmpfs on /proc/timer_list type tmpfs (rw,nosuid,size=65536k,mode=755,inode64)
+tmpfs on /sys/devices/virtual/powercap type tmpfs (ro,relatime,inode64)
+tmpfs on /sys/firmware type tmpfs (ro,relatime,inode64)
+dd: can't open '/file': Read-only file system
+++ docker run --rm -v /usr/local/bin:/app/:ro alpine:3.20 sh -c 'dd if=/dev/zero of=/app/file bs=1M count=1'
+dd: can't open '/app/file': Read-only file system

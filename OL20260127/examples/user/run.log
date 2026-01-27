@@ -1,0 +1,50 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/python$ docker images
+                                                                                                                                                                                                                          i Info →   U  In Use
+IMAGE                   ID             DISK USAGE   CONTENT SIZE   EXTRA
+alpine:3.20             765942a40399       12.2MB         3.71MB        
+dperson/samba:latest    66088b78a198       76.4MB           20MB        
+wettyoss/wetty:latest   45a22660cfc8        678MB          110MB        
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/python$ cd ../user
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/user$ cd -
+/home/za/clone/test_env/otus/IB_Pro/ol/20260127/examples/python
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/python$ nano run.log
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/python$ cd -
+/home/za/clone/test_env/otus/IB_Pro/ol/20260127/examples/user
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/user$ ./run.sh 
+++ docker run --rm alpine:3.20 id
+uid=0(root) gid=0(root) groups=0(root),0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel),11(floppy),20(dialout),26(tape),27(video)
+++ read -p 'press any key to continue...'
+press any key to continue...
+++ cat Dockerfile
+FROM alpine:3.20
+
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup 
+
+USER appuser
+
+CMD ["id"]
+++ read -p 'press any key to continue...'
+press any key to continue...
+++ docker build -t myimage .
+[+] Building 0.5s (6/6) FINISHED                                                                                                                                                                                               docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                                                     0.0s
+ => => transferring dockerfile: 141B                                                                                                                                                                                                     0.0s
+ => [internal] load metadata for docker.io/library/alpine:3.20                                                                                                                                                                           0.0s
+ => [internal] load .dockerignore                                                                                                                                                                                                        0.0s
+ => => transferring context: 2B                                                                                                                                                                                                          0.0s
+ => CACHED [1/2] FROM docker.io/library/alpine:3.20@sha256:765942a4039992336de8dd5db680586e1a206607dd06170ff0a37267a9e01958                                                                                                              0.0s
+ => => resolve docker.io/library/alpine:3.20@sha256:765942a4039992336de8dd5db680586e1a206607dd06170ff0a37267a9e01958                                                                                                                     0.0s
+ => [2/2] RUN addgroup -S appgroup && adduser -S appuser -G appgroup                                                                                                                                                                     0.2s
+ => exporting to image                                                                                                                                                                                                                   0.1s
+ => => exporting layers                                                                                                                                                                                                                  0.1s
+ => => exporting manifest sha256:807430b77de149b584dc87468918306136a8fa698f17b66de221ae6f6f141ce9                                                                                                                                        0.0s
+ => => exporting config sha256:640b9b9cd792161c6e0451ac517ed7f457e465cd76b57eadb94f77ef8b4f6168                                                                                                                                          0.0s
+ => => exporting attestation manifest sha256:c897cf81b401b4cbb4a6e84c99d28002d8f5d677c4c7007b3120832bac638e24                                                                                                                            0.0s
+ => => exporting manifest list sha256:05bcdb45cc4d36f250a4a7793d7410156e162a11be8053eb3fdb387facbd388b                                                                                                                                   0.0s
+ => => naming to docker.io/library/myimage:latest                                                                                                                                                                                        0.0s
+ => => unpacking to docker.io/library/myimage:latest                                                                                                                                                                                     0.0s
+++ docker run --rm myimage
+uid=100(appuser) gid=101(appgroup) groups=101(appgroup),101(appgroup)
+++ docker image rm -f myimage
+Untagged: myimage:latest
+Deleted: sha256:05bcdb45cc4d36f250a4a7793d7410156e162a11be8053eb3fdb387facbd388b

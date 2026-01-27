@@ -1,0 +1,17 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/hadolint$ ./run.sh 
+++ export IMAGE=hadolint/hadolint:v2.14.0-alpine
+++ IMAGE=hadolint/hadolint:v2.14.0-alpine
+++ docker run --rm -i hadolint/hadolint:v2.14.0-alpine
+Unable to find image 'hadolint/hadolint:v2.14.0-alpine' locally
+v2.14.0-alpine: Pulling from hadolint/hadolint
+c8f581594091: Pull complete 
+9824c27679d3: Pull complete 
+4f2ae31847c5: Download complete 
+Digest: sha256:7aba693c1442eb31c0b015c129697cb3b6cb7da589d85c7562f9deb435a6657c
+Status: Downloaded newer image for hadolint/hadolint:v2.14.0-alpine
+-:5 DL3018 warning: Pin versions in apk add. Instead of `apk add <package>` use `apk add <package>=<version>`
+-:5 DL3019 info: Use the `--no-cache` switch to avoid the need to use `--update` and remove `/var/cache/apk/*` when done installing packages
+++ docker image rm -f hadolint/hadolint:v2.14.0-alpine
+Untagged: hadolint/hadolint:v2.14.0-alpine
+Deleted: sha256:7aba693c1442eb31c0b015c129697cb3b6cb7da589d85c7562f9deb435a6657c
+++ set +x

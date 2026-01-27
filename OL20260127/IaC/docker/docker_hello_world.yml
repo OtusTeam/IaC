@@ -1,0 +1,21 @@
+---
+- hosts: second
+  tasks:
+
+  - name: Создание директории для монтирования
+    ansible.builtin.file:
+        path: /tmp/hello
+        state: directory
+
+  - name: Remove file output.txt
+    ansible.builtin.file:
+      path: /tmp/hello/output.txt
+      state: absent
+
+  - name: Run container
+    command: docker run --rm -v /tmp/hello:/tmp busybox:latest sh -c "echo Hello, world! > /tmp/output.txt"
+
+  - name: Проверка наличия строки 'Hello, world!' в файл output.txt (если ее там нет, то файл будет изменен!) 
+    lineinfile:
+      path: /tmp/hello/output.txt
+      line: "Hello, world!"

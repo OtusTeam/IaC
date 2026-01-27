@@ -1,0 +1,47 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/use_copy_instead_add/copy$ ./run.sh 
+++ rm install.sh
+rm: невозможно удалить 'install.sh': Нет такого файла или каталога
+++ curl -fsSL https://get.docker.com -o install.sh
+++ read -p 'press any key to continue...'
+press any key to continue...
+++ cat Dockerfile
+FROM ubuntu:22.04
+
+COPY install.sh /install.sh
+RUN chmod +x /install.sh
+RUN /install.sh
+
+CMD docker --version
+++ read -p 'press any key to continue...'
+press any key to continue...
+++ docker buildx build -t copy .
+[+] Building 1.0s (9/9) FINISHED                                                                                                                                                                                               docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                                                     0.0s
+ => => transferring dockerfile: 147B                                                                                                                                                                                                     0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:22.04                                                                                                                                                                          0.9s
+ => [internal] load .dockerignore                                                                                                                                                                                                        0.0s
+ => => transferring context: 2B                                                                                                                                                                                                          0.0s
+ => [internal] load build context                                                                                                                                                                                                        0.0s
+ => => transferring context: 22.45kB                                                                                                                                                                                                     0.0s
+ => [1/4] FROM docker.io/library/ubuntu:22.04@sha256:c7eb020043d8fc2ae0793fb35a37bff1cf33f156d4d4b12ccc7f3ef8706c38b1                                                                                                                    0.0s
+ => => resolve docker.io/library/ubuntu:22.04@sha256:c7eb020043d8fc2ae0793fb35a37bff1cf33f156d4d4b12ccc7f3ef8706c38b1                                                                                                                    0.0s
+ => CACHED [2/4] COPY install.sh /install.sh                                                                                                                                                                                             0.0s
+ => CACHED [3/4] RUN chmod +x /install.sh                                                                                                                                                                                                0.0s
+ => CACHED [4/4] RUN /install.sh                                                                                                                                                                                                         0.0s
+ => exporting to image                                                                                                                                                                                                                   0.1s
+ => => exporting layers                                                                                                                                                                                                                  0.0s
+ => => exporting manifest sha256:c40379cc30a74dd8a7ecb0c217ada1c1ed86319bb8b1a2bd6187a3dabed57876                                                                                                                                        0.0s
+ => => exporting config sha256:c9aeb5f4939a96488c642988c25e2e23accd194a99d655b102aaa35e6762b2a4                                                                                                                                          0.0s
+ => => exporting attestation manifest sha256:abd7e2fbfb94f5d48f05816c0c7dd2f4937133e4aecd04ae3642a37cb41eaaa9                                                                                                                            0.0s
+ => => exporting manifest list sha256:ad0bb0e88701306bbd661d503e7b00dc061b102f8616866bc40a41c4f8b72613                                                                                                                                   0.0s
+ => => naming to docker.io/library/copy:latest                                                                                                                                                                                           0.0s
+ => => unpacking to docker.io/library/copy:latest                                                                                                                                                                                        0.0s
+
+ 1 warning found (use docker --debug to expand):
+ - JSONArgsRecommended: JSON arguments recommended for CMD to prevent unintended behavior related to OS signals (line 7)
+++ docker run copy
+Docker version 29.1.5, build 0e6fee6
+++ docker image rm -f copy
+Untagged: copy:latest
+++ rm install.sh
+++ set +x

@@ -1,0 +1,39 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/use_copy_instead_add/add$ ./run.sh 
+++ cat Dockerfile
+FROM ubuntu:22.04
+
+ADD https://get.docker.com/ /install.sh
+RUN chmod +x /install.sh
+RUN /install.sh
+
+CMD docker --version
+++ read -p 'press any key to continue...'
+press any key to continue...
+++ docker buildx build -t add .
+[+] Building 4.3s (9/9) FINISHED                                                                                                                                                                                               docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                                                     0.0s
+ => => transferring dockerfile: 159B                                                                                                                                                                                                     0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:22.04                                                                                                                                                                          1.3s
+ => [internal] load .dockerignore                                                                                                                                                                                                        0.0s
+ => => transferring context: 2B                                                                                                                                                                                                          0.0s
+ => [2/4] ADD https://get.docker.com/ /install.sh                                                                                                                                                                                        0.5s
+ => [1/4] FROM docker.io/library/ubuntu:22.04@sha256:c7eb020043d8fc2ae0793fb35a37bff1cf33f156d4d4b12ccc7f3ef8706c38b1                                                                                                                    0.0s
+ => => resolve docker.io/library/ubuntu:22.04@sha256:c7eb020043d8fc2ae0793fb35a37bff1cf33f156d4d4b12ccc7f3ef8706c38b1                                                                                                                    0.0s
+ => CACHED [2/4] ADD https://get.docker.com/ /install.sh                                                                                                                                                                                 0.0s
+ => CACHED [3/4] RUN chmod +x /install.sh                                                                                                                                                                                                0.0s
+ => CACHED [4/4] RUN /install.sh                                                                                                                                                                                                         0.0s
+ => exporting to image                                                                                                                                                                                                                   2.4s
+ => => exporting layers                                                                                                                                                                                                                  0.0s
+ => => exporting manifest sha256:fed624a6186e46435b2ea477b181b085808682f69395af831a091d73dac35c0d                                                                                                                                        0.0s
+ => => exporting config sha256:6bf0d8a42d60316abd7d0d01e13250878ff70dfb26e70c058798cde23b6f67cb                                                                                                                                          0.0s
+ => => exporting attestation manifest sha256:c98dd90a3a3f5e0b9a47142daa9cff27f8d594851ef0679dc9c97a5f3decfc6f                                                                                                                            0.0s
+ => => exporting manifest list sha256:400ac003c820d704490c77b257c8b449eb4c16347289a861bbd4ca07dc6f5e10                                                                                                                                   0.0s
+ => => naming to docker.io/library/add:latest                                                                                                                                                                                            0.0s
+ => => unpacking to docker.io/library/add:latest                                                                                                                                                                                         2.3s
+
+ 1 warning found (use docker --debug to expand):
+ - JSONArgsRecommended: JSON arguments recommended for CMD to prevent unintended behavior related to OS signals (line 7)
+++ docker run add
+Docker version 29.1.5, build 0e6fee6
+++ docker image rm -f add
+Untagged: add:latest

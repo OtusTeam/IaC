@@ -1,0 +1,21 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/cosign$ ./install.sh
+++ sudo curl -sSLf https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64 -o /usr/local/bin/cosign
+[sudo] пароль для za:         
+++ sudo chmod +x /usr/local/bin/cosign
+++ cosign version
+  ______   ______        _______. __    _______ .__   __.
+ /      | /  __  \      /       ||  |  /  _____||  \ |  |
+|  ,----'|  |  |  |    |   (----`|  | |  |  __  |   \|  |
+|  |     |  |  |  |     \   \    |  | |  | |_ | |  . `  |
+|  `----.|  `--'  | .----)   |   |  | |  |__| | |  |\   |
+ \______| \______/  |_______/    |__|  \______| |__| \__|
+cosign: A tool for Container Signing, Verification and Storage in an OCI registry.
+
+GitVersion:    v3.0.4
+GitCommit:     6832fba4928c1ad69400235bbc41212de5006176
+GitTreeState:  clean
+BuildDate:     2026-01-09T21:17:16Z
+GoVersion:     go1.25.5
+Compiler:      gc
+Platform:      linux/amd64
+

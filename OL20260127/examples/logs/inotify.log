@@ -1,0 +1,51 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/logs$ ./inotify.sh
+++ docker build -t tmpfs-monitor-img .
+[+] Building 0.2s (6/6) FINISHED                                                                                                                                                                                               docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                                                     0.0s
+ => => transferring dockerfile: 1.19kB                                                                                                                                                                                                   0.0s
+ => [internal] load metadata for docker.io/library/alpine:3.20                                                                                                                                                                           0.0s
+ => [internal] load .dockerignore                                                                                                                                                                                                        0.0s
+ => => transferring context: 2B                                                                                                                                                                                                          0.0s
+ => [1/2] FROM docker.io/library/alpine:3.20@sha256:765942a4039992336de8dd5db680586e1a206607dd06170ff0a37267a9e01958                                                                                                                     0.0s
+ => => resolve docker.io/library/alpine:3.20@sha256:765942a4039992336de8dd5db680586e1a206607dd06170ff0a37267a9e01958                                                                                                                     0.0s
+ => CACHED [2/2] RUN apk add --no-cache inotify-tools coreutils                                                                                                                                                                          0.0s
+ => exporting to image                                                                                                                                                                                                                   0.1s
+ => => exporting layers                                                                                                                                                                                                                  0.0s
+ => => exporting manifest sha256:5b6daa4ee22bff125d742d1e2fcc22cf9c099d445fc6c0999c750214c4dbbc89                                                                                                                                        0.0s
+ => => exporting config sha256:39a108f830972b15697e6abe9d2367d28ec8bec92f868ac76d519ca14f5ceb7b                                                                                                                                          0.0s
+ => => exporting attestation manifest sha256:71e670097445d864f28ce210cee60c8ec296555c635eb7dd2117c28d2d710779                                                                                                                            0.0s
+ => => exporting manifest list sha256:95a89eca3d09d62847e17fe0adc3da6ccf80fe82a7468579d18dfaabbcf7502b                                                                                                                                   0.0s
+ => => naming to docker.io/library/tmpfs-monitor-img:latest                                                                                                                                                                              0.0s
+ => => unpacking to docker.io/library/tmpfs-monitor-img:latest                                                                                                                                                                           0.0s
+++ docker run -d --rm --name tmpfs-monitor --tmpfs /tmp:rw,size=100m --log-driver json-file tmpfs-monitor-img
+7fb34c3137af3fea9e636838c148d3f2bac696b0d52805d194603e36d1bbb80c
+++ docker exec tmpfs-monitor sh -c 'touch /tmp/exec_test && echo test > /tmp/exec_test'
+++ docker logs tmpfs-monitor
+Starting tmpfs monitor (inotify+mode)...
+Setting up watches.  Beware: since -r was given, this may take a while!
+Watches established.
+2026-01-24 05:36:46 ATTR_EVENT: /tmp/exec_test mode=-rw-r--r--(644) flags=-
+2026-01-24 05:36:46 ATTR_EVENT: /tmp/exec_test mode=-rw-r--r--(644) flags=-
+2026-01-24 05:36:46 ATTR_EVENT: /tmp/exec_test mode=-rw-r--r--(644) flags=-
+2026-01-24 05:36:46 ATTR_EVENT: /tmp/exec_test mode=-rw-r--r--(644) flags=-
+2026-01-24 05:36:46 ATTR_EVENT: /tmp/exec_test mode=-rw-r--r--(644) flags=-
+++ docker exec tmpfs-monitor sh -c 'chmod +x /tmp/exec_test'
+++ docker logs tmpfs-monitor
+Starting tmpfs monitor (inotify+mode)...
+Setting up watches.  Beware: since -r was given, this may take a while!
+Watches established.
+2026-01-24 05:36:46 ATTR_EVENT: /tmp/exec_test mode=-rw-r--r--(644) flags=-
+2026-01-24 05:36:46 ATTR_EVENT: /tmp/exec_test mode=-rw-r--r--(644) flags=-
+2026-01-24 05:36:46 ATTR_EVENT: /tmp/exec_test mode=-rw-r--r--(644) flags=-
+2026-01-24 05:36:46 ATTR_EVENT: /tmp/exec_test mode=-rw-r--r--(644) flags=-
+2026-01-24 05:36:46 ATTR_EVENT: /tmp/exec_test mode=-rw-r--r--(644) flags=-
+2026-01-24 05:36:46 ATTR_EVENT: /tmp/exec_test mode=-rw-r--r--(644) flags=-
+2026-01-24 05:36:46 ATTR_EVENT: /tmp/exec_test mode=-rw-r--r--(644) flags=-
+2026-01-24 05:36:46 ATTR_EVENT: /tmp/exec_test mode=-rw-r--r--(644) flags=-
+2026-01-24 05:36:46 ATTR_EVENT: /tmp/exec_test mode=-rwxr-xr-x(755) flags=exec
+++ docker stop tmpfs-monitor
+tmpfs-monitor
+++ docker image rm -f tmpfs-monitor-img
+Untagged: tmpfs-monitor-img:latest
+Deleted: sha256:95a89eca3d09d62847e17fe0adc3da6ccf80fe82a7468579d18dfaabbcf7502b
+++ set +x

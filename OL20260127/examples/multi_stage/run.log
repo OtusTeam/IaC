@@ -1,0 +1,70 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/multi_stage$ ./run.sh 
+++ docker pull golang:1.21
+1.21: Pulling from library/golang
+Digest: sha256:4746d26432a9117a5f58e95cb9f954ddf0de128e9d5816886514199316e4a2fb
+Status: Downloaded newer image for golang:1.21
+docker.io/library/golang:1.21
+++ cat Dockerfile
+# syntax=docker/dockerfile:1
+FROM golang:1.21
+WORKDIR /src
+COPY <<EOF ./main.go
+package main
+
+import "fmt"
+
+func main() {
+  fmt.Println("hello, world")
+}
+EOF
+RUN go build -o /bin/hello ./main.go
+
+FROM scratch
+COPY --from=0 /bin/hello /bin/hello
+CMD ["/bin/hello"]
+++ read -p 'press any key to continue...'
+press any key to continue...
+++ docker buildx build -t multi_stage_hello .
+[+] Building 2.3s (12/12) FINISHED                                                                                                                                                                                             docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                                                     0.0s
+ => => transferring dockerfile: 303B                                                                                                                                                                                                     0.0s
+ => resolve image config for docker-image://docker.io/docker/dockerfile:1                                                                                                                                                                1.2s
+ => CACHED docker-image://docker.io/docker/dockerfile:1@sha256:b6afd42430b15f2d2a4c5a02b919e98a525b785b1aaff16747d2f623364e39b6                                                                                                          0.0s
+ => => resolve docker.io/docker/dockerfile:1@sha256:b6afd42430b15f2d2a4c5a02b919e98a525b785b1aaff16747d2f623364e39b6                                                                                                                     0.0s
+ => [internal] load metadata for docker.io/library/golang:1.21                                                                                                                                                                           0.8s
+ => [internal] load .dockerignore                                                                                                                                                                                                        0.0s
+ => => transferring context: 2B                                                                                                                                                                                                          0.0s
+ => [stage-0 1/4] FROM docker.io/library/golang:1.21@sha256:4746d26432a9117a5f58e95cb9f954ddf0de128e9d5816886514199316e4a2fb                                                                                                             0.0s
+ => => resolve docker.io/library/golang:1.21@sha256:4746d26432a9117a5f58e95cb9f954ddf0de128e9d5816886514199316e4a2fb                                                                                                                     0.0s
+ => [internal] preparing inline document                                                                                                                                                                                                 0.0s
+ => CACHED [stage-0 2/4] WORKDIR /src                                                                                                                                                                                                    0.0s
+ => CACHED [stage-0 3/4] COPY <<EOF ./main.go                                                                                                                                                                                            0.0s
+ => CACHED [stage-0 4/4] RUN go build -o /bin/hello ./main.go                                                                                                                                                                            0.0s
+ => CACHED [stage-1 1/1] COPY --from=0 /bin/hello /bin/hello                                                                                                                                                                             0.0s
+ => exporting to image                                                                                                                                                                                                                   0.1s
+ => => exporting layers                                                                                                                                                                                                                  0.0s
+ => => exporting manifest sha256:611103ce5e4a9c0b6fe0f3b6c8f1cb2fa45982ca10c950c6f432f04ec38849d8                                                                                                                                        0.0s
+ => => exporting config sha256:b9e11b196cba8c9ca713edc9bd91759e4a82d0e08a497fa7540c9251eb52556c                                                                                                                                          0.0s
+ => => exporting attestation manifest sha256:eb865d8f27801e9b8681c6532f5dabbd00109f23f26634ed7e40c11c0a5af9e3                                                                                                                            0.0s
+ => => exporting manifest list sha256:56f33fb97ad64bd825000a6b5f37c1a49956042c2dff309f1e3d650988c00987                                                                                                                                   0.0s
+ => => naming to docker.io/library/multi_stage_hello:latest                                                                                                                                                                              0.0s
+ => => unpacking to docker.io/library/multi_stage_hello:latest                                                                                                                                                                           0.0s
+++ docker run --rm multi_stage_hello
+hello, world
+++ docker images
+                                                                                                                                                                                                                          i Info →   U  In Use
+IMAGE                      ID             DISK USAGE   CONTENT SIZE   EXTRA
+alpine:3.20                765942a40399       12.2MB         3.71MB        
+dperson/samba:latest       66088b78a198       76.4MB           20MB        
+golang:1.21                4746d26432a9       1.21GB          307MB        
+multi_stage_hello:latest   56f33fb97ad6       2.93MB         1.12MB        
+wettyoss/wetty:latest      45a22660cfc8        678MB          110MB        
+++ read -p 'press any key to continue...'
+press any key to continue...
+++ docker image rm -f multi_stage_hello
+Untagged: multi_stage_hello:latest
+Deleted: sha256:56f33fb97ad64bd825000a6b5f37c1a49956042c2dff309f1e3d650988c00987
+++ docker image rm -f golang:1.21
+Untagged: golang:1.21
+Deleted: sha256:4746d26432a9117a5f58e95cb9f954ddf0de128e9d5816886514199316e4a2fb
+++ set +x

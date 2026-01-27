@@ -1,0 +1,13 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/options/constraints$ ./run.sh 
+Avoid DoS attacks by explicitly constraining the use of resources.
+++ docker run --rm --cpus=0.5 --ulimit nofile=50 --ulimit nproc=50 --memory 006m --mount type=tmpfs,destination=/mnt,tmpfs-size=001M alpine:3.20 sh -c 'dd if=/dev/zero of=/mnt/bigfile bs=1K count=512'
+512+0 records in
+512+0 records out
+524288 bytes (512.0KB) copied, 0.000776 seconds, 644.3MB/s
+++ docker run --rm --cpus=0.5 --ulimit nofile=50 --ulimit nproc=50 --memory 100m --mount type=tmpfs,destination=/mnt,tmpfs-size=001M alpine:3.20 sh -c 'dd if=/dev/zero of=/mnt/bigfile bs=1M count=007 && sleep 3600'
+dd: error writing '/mnt/bigfile': No space left on device
+2+0 records in
+1+0 records out
+1048576 bytes (1.0MB) copied, 0.000769 seconds, 1.3GB/s
+++ docker run --rm --cpus=0.5 --ulimit nofile=50 --ulimit nproc=50 --memory 006m --mount type=tmpfs,destination=/mnt,tmpfs-size=001G alpine:3.20 sh -c 'dd if=/dev/zero of=/mnt/bigfile bs=1M count=200 && sleep 3600'
+Killed

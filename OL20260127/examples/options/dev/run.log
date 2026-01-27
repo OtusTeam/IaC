@@ -1,0 +1,11 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/clone/test_env/otus/IB_Pro/ol/20260127/examples/options/dev$ ./run.sh 
+
+If you need to setup access to host devices,
+use the [r|w|m] options to selectively
+enable read, write, or mknod.
+
+++ docker run --rm --device=/dev/snd:/dev/snd:r alpine:3.20 sh -c 'dd if=/dev/zero bs=4096 count=44100 of=/dev/snd/pcmC0D0p'
+dd: error writing '/dev/snd/pcmC0D0p': No space left on device
+16385+0 records in
+16384+0 records out
+67108864 bytes (64.0MB) copied, 0.036930 seconds, 1.7GB/s

@@ -1,0 +1,31 @@
+---
+- name: Создание и запуск контейнера Docker
+  hosts: second
+
+  tasks:
+
+    - name: Создание директории для монтирования
+      file:
+        path: /tmp/hello2
+        state: directory
+
+    - name: Удаление файла output2.txt, если он существует
+      file:
+        path: /tmp/hello2/output2.txt
+        state: absent
+
+    - name: Создание и выполнение Docker контейнера
+      docker_container:
+        name: hello_world_container
+        image: busybox:latest
+        command: sh -c "echo 'Hello world' > /tmp/output2.txt"
+        volumes:
+          - /tmp/hello2:/tmp
+        state: started
+        detach: no
+        cleanup: yes
+
+    - name: Проверка наличия строки 'Hello world' в файле output2.txt
+      lineinfile:
+        path: /tmp/hello2/output2.txt
+        line: "Hello world"

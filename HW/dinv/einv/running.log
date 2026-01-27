@@ -1,0 +1,224 @@
+aleksey@first:~/OtusTeam/IaC/les10/plugin$ tf apply
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.vm will be created
+  + resource "yandex_compute_instance" "vm" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = (sensitive value)
+        }
+      + name                      = "les10-plg-vm"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + service_account_id        = (known after apply)
+      + status                    = (known after apply)
+      + zone                      = "ru-central1-a"
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd84kp940dsrccckilj6"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index              = (known after apply)
+          + ip_address         = (known after apply)
+          + ipv4               = true
+          + ipv6               = (known after apply)
+          + ipv6_address       = (known after apply)
+          + mac_address        = (known after apply)
+          + nat                = true
+          + nat_ip_address     = (known after apply)
+          + nat_ip_version     = (known after apply)
+          + security_group_ids = (known after apply)
+          + subnet_id          = "e9bop98iu12teftg4uj8"
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 5
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy {
+          + preemptible = true
+        }
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+yandex_compute_instance.vm: Creating...
+yandex_compute_instance.vm: Still creating... [10s elapsed]
+yandex_compute_instance.vm: Still creating... [20s elapsed]
+yandex_compute_instance.vm: Still creating... [30s elapsed]
+yandex_compute_instance.vm: Creation complete after 38s [id=fhmtachb2pegq4he61of]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+aleksey@first:~/OtusTeam/IaC/les10/plugin$ . export_plg.sh 
+++ export ANSIBLE_INVENTORY=../plugin/inventory
+++ ANSIBLE_INVENTORY=../plugin/inventory
+++ export ANSIBLE_PLUGINS_INVENTORY=../plugin/plugins/inventory
+++ ANSIBLE_PLUGINS_INVENTORY=../plugin/plugins/inventory
+++ set +x
+aleksey@first:~/OtusTeam/IaC/les10/plugin$ ./ans_inv_list.sh 
+++ ansible-inventory --list
+{
+    "_meta": {
+        "hostvars": {
+            "les10-plg-vm": {
+                "ansible_host": "89.169.141.170"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped",
+            "yacloud"
+        ]
+    },
+    "yacloud": {
+        "hosts": [
+            "les10-plg-vm"
+        ]
+    }
+}
+aleksey@first:~/OtusTeam/IaC/les10/plugin$ ./ans_ping.sh 
+++ ansible -m ping all
+les10-plg-vm | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+aleksey@first:~/OtusTeam/IaC/les10/plugin$ tf destroy
+yandex_compute_instance.vm: Refreshing state... [id=fhmtachb2pegq4he61of]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.vm will be destroyed
+  - resource "yandex_compute_instance" "vm" {
+      - created_at                = "2024-07-31T10:04:09Z" -> null
+      - folder_id                 = "b1gmesrdjgklgkvcp704" -> null
+      - fqdn                      = "fhmtachb2pegq4he61of.auto.internal" -> null
+      - id                        = "fhmtachb2pegq4he61of" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = (sensitive value)
+        } -> null
+      - name                      = "les10-plg-vm" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-a" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "fhmi1l38dgod2rrrqmv6" -> null
+          - disk_id     = "fhmi1l38dgod2rrrqmv6" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd84kp940dsrccckilj6" -> null
+                name        = null
+              - size        = 8 -> null
+              - type        = "network-hdd" -> null
+                # (2 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.128.0.18" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:1d:53:22:b1" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "89.169.141.170" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e9bop98iu12teftg4uj8" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 5 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = true -> null
+        }
+    }
+
+Plan: 0 to add, 0 to change, 1 to destroy.
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+yandex_compute_instance.vm: Destroying... [id=fhmtachb2pegq4he61of]
+yandex_compute_instance.vm: Still destroying... [id=fhmtachb2pegq4he61of, 10s elapsed]
+yandex_compute_instance.vm: Still destroying... [id=fhmtachb2pegq4he61of, 20s elapsed]
+yandex_compute_instance.vm: Still destroying... [id=fhmtachb2pegq4he61of, 30s elapsed]
+yandex_compute_instance.vm: Still destroying... [id=fhmtachb2pegq4he61of, 40s elapsed]
+yandex_compute_instance.vm: Still destroying... [id=fhmtachb2pegq4he61of, 50s elapsed]
+yandex_compute_instance.vm: Destruction complete after 51s
+
+Destroy complete! Resources: 1 destroyed.
+

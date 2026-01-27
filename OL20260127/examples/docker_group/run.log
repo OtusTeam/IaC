@@ -1,0 +1,5 @@
+test@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:/tmp/docker_group$ ./run.sh 
+++ sudo usermod -aG docker test
+++ newgrp docker
+test@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:/tmp/docker_group$ groups
+docker sudo test

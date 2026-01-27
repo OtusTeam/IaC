@@ -1,0 +1,16 @@
+aleksey@first:~/OtusTeam/IaC/CloudSecurity/les11$ ansible-playbook docker_remap.yml 
+
+PLAY [Create /etc/docker/daemon.json file and restart Docker service] **********
+
+TASK [Gathering Facts] *********************************************************
+ok: [test]
+
+TASK [Create /etc/docker/daemon.json file] *************************************
+changed: [test]
+
+RUNNING HANDLER [Restart Docker service] ***************************************
+changed: [test]
+
+PLAY RECAP *********************************************************************
+test                       : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

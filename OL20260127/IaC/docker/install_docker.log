@@ -1,0 +1,64 @@
+aleksey@first:~/OtusTeam/IaC/CloudSecurity/les11$ ansible-playbook install_docker.yml 
+
+PLAY [docker] ******************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [test]
+
+TASK [Update apt cache] ********************************************************
+changed: [test]
+
+TASK [install dependencies] ****************************************************
+changed: [test]
+
+TASK [add GPG key] *************************************************************
+changed: [test]
+
+TASK [add docker repository to apt] ********************************************
+changed: [test]
+
+TASK [install docker] **********************************************************
+changed: [test]
+
+TASK [check docker is active] **************************************************
+ok: [test]
+
+TASK [adding ansible user to docker group] *************************************
+changed: [test]
+
+TASK [Check how docker user runs docker command] *******************************
+changed: [test]
+
+TASK [Print output] ************************************************************
+ok: [test] => {
+    "msg": [
+        "Docker version 27.1.2, build d01f264"
+    ]
+}
+
+PLAY RECAP *********************************************************************
+test                       : ok=10   changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+aleksey@first:~/OtusTeam/IaC/CloudSecurity/les11$ ansible-playbook install_docker.yml -t check
+
+PLAY [docker] ******************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [test]
+
+TASK [check docker is active] **************************************************
+ok: [test]
+
+TASK [Check how docker user runs docker command] *******************************
+changed: [test]
+
+TASK [Print output] ************************************************************
+ok: [test] => {
+    "msg": [
+        "Docker version 27.1.2, build d01f264"
+    ]
+}
+
+PLAY RECAP *********************************************************************
+test                       : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
