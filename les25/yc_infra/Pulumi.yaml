@@ -1,0 +1,10 @@
+name: pulumi_example
+description: AN Example Yandex Python Pulumi program
+runtime:
+  name: python
+  options:
+    virtualenv: .venv
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: yandex-python

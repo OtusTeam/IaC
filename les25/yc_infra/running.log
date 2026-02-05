@@ -1,0 +1,205 @@
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/yc_infra$ ./init.sh 
+Collecting pulumi<4.0.0,>=3.0.0
+  Downloading pulumi-3.219.0-py3-none-any.whl (389 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 389.5/389.5 KB 764.5 kB/s eta 0:00:00
+Collecting pulumi-yandex>=0.13.0
+  Using cached pulumi_yandex-0.13.0.tar.gz (425 kB)
+  Preparing metadata (setup.py) ... done
+Collecting setuptools>=80.1.0
+  Using cached setuptools-80.10.2-py3-none-any.whl (1.1 MB)
+Collecting grpcio<2,>=1.68.1
+  Using cached grpcio-1.76.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (6.6 MB)
+Collecting pip>=24.3.1
+  Using cached pip-26.0.1-py3-none-any.whl (1.8 MB)
+Collecting debugpy~=1.8.7
+  Using cached debugpy-1.8.20-cp310-cp310-manylinux_2_34_x86_64.whl (3.1 MB)
+Collecting semver~=3.0
+  Using cached semver-3.0.4-py3-none-any.whl (17 kB)
+Collecting dill~=0.4
+  Using cached dill-0.4.1-py3-none-any.whl (120 kB)
+Collecting protobuf<7,>=3.20.3
+  Downloading protobuf-6.33.5-cp39-abi3-manylinux2014_x86_64.whl (323 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 323.5/323.5 KB 641.4 kB/s eta 0:00:00
+Collecting pyyaml~=6.0
+  Using cached pyyaml-6.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (770 kB)
+Collecting parver>=0.2.1
+  Using cached parver-0.5-py3-none-any.whl (15 kB)
+Collecting typing-extensions~=4.12
+  Using cached typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+Collecting arpeggio>=1.7
+  Using cached Arpeggio-2.0.3-py2.py3-none-any.whl (54 kB)
+Collecting attrs>=19.2
+  Using cached attrs-25.4.0-py3-none-any.whl (67 kB)
+Using legacy 'setup.py install' for pulumi-yandex, since package 'wheel' is not installed.
+Installing collected packages: arpeggio, typing-extensions, setuptools, semver, pyyaml, protobuf, pip, dill, debugpy, attrs, parver, grpcio, pulumi, pulumi-yandex
+  Attempting uninstall: setuptools
+    Found existing installation: setuptools 59.6.0
+    Uninstalling setuptools-59.6.0:
+      Successfully uninstalled setuptools-59.6.0
+  Attempting uninstall: pip
+    Found existing installation: pip 22.0.2
+    Uninstalling pip-22.0.2:
+      Successfully uninstalled pip-22.0.2
+  Running setup.py install for pulumi-yandex ... done
+Successfully installed arpeggio-2.0.3 attrs-25.4.0 debugpy-1.8.20 dill-0.4.1 grpcio-1.76.0 parver-0.5 pip-26.0.1 protobuf-6.33.5 pulumi-3.219.0 pulumi-yandex-0.13.0 pyyaml-6.0.3 semver-3.0.4 setuptools-80.10.2 typing-extensions-4.15.0
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/yc_infra$ which pip3
+/home/za/Documents/IaC/2git/les25/hello/.venv/bin/pip3
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/yc_infra$ deactivate
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/yc_infra$ . .venv/bin/activate
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/yc_infra$ ./run.sh 
++++ yc config get cloud-id
+++ YC_CLOUD_ID=b1glq0cg9jigrj5lcp63
+++ YC_FOLDER_ID=b1gmesrdjgklgkvcp704
++++ yc iam create-token
+++ YC_TOKEN=...
+++ YC_ZONE=ru-central1-a
+++ YC_CIDR=192.168.25.0/25
+++ YC_PREFIX=les25
+++ YC_REMOTE_USERNAME=ubuntu
+++ YC_IMAGE_ID=fd84kp940dsrccckilj6
+++ YC_PUB_KEY_PATH=/home/za/.ssh/id_rsa.pub
+++ PULUMI_CONFIG_PASSPHRASE=MyVerySecurePassword
+++ pulumi stack init dev
+Enter your passphrase to unlock config/secrets
+    (set PULUMI_CONFIG_PASSPHRASE or PULUMI_CONFIG_PASSPHRASE_FILE to remember):  
+Enter your passphrase to unlock config/secrets
+error: stack 'organization/pulumi_example/dev' already exists
+++ pulumi config set yandex:cloudId b1glq0cg9jigrj5lcp63
+++ pulumi config set yandex:folderId b1gmesrdjgklgkvcp704
+++ pulumi config set yandex:token ...
+Enter your passphrase to unlock config/secrets
+    (set PULUMI_CONFIG_PASSPHRASE or PULUMI_CONFIG_PASSPHRASE_FILE to remember):  
+Enter your passphrase to unlock config/secrets
+++ pulumi config set yandex:prefix les25
+++ pulumi config set yandex:zone ru-central1-a
+++ pulumi config set yandex:cidr 192.168.25.0/25
+++ pulumi config set yandex:pub /home/za/.ssh/id_rsa.pub
+++ pulumi config set yandex:username ubuntu
+++ pulumi config set yandex:imageId fd84kp940dsrccckilj6
+++ pulumi config
+KEY              VALUE
+pulumi:tags      {"pulumi:template":"yandex-python"}
+yandex:cidr      192.168.25.0/25
+yandex:cloudId   b1glq0cg9jigrj5lcp63
+yandex:folderId  b1gmesrdjgklgkvcp704
+yandex:imageId   fd84kp940dsrccckilj6
+yandex:prefix    les25
+yandex:pub       /home/za/.ssh/id_rsa.pub
+yandex:token     [secret]
+yandex:username  ubuntu
+yandex:zone      ru-central1-a
+++ pulumi preview
+Enter your passphrase to unlock config/secrets
+    (set PULUMI_CONFIG_PASSPHRASE or PULUMI_CONFIG_PASSPHRASE_FILE to remember):  
+Enter your passphrase to unlock config/secrets
+Previewing update (dev):
+     Type                             Name                Plan       Info
+ +   pulumi:pulumi:Stack              pulumi_example-dev  create     2 messages
+ +   ├─ pulumi:providers:yandex       yandex              create     
+ +   ├─ yandex:index:VpcNetwork       les25-network       create     
+ +   ├─ yandex:index:VpcSubnet        les25-subnet        create     
+ +   └─ yandex:index:ComputeInstance  les25instance       create     
+
+Diagnostics:
+  pulumi:pulumi:Stack (pulumi_example-dev):
+    /home/za/Documents/IaC/2git/les25/yc_infra/.venv/lib/python3.10/site-packages/pulumi_yandex/_utilities.py:10: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+      import pkg_resources
+
+Outputs:
+    instance_name: "les25instance-0075430"
+    public_ip    : [unknown]
+
+Resources:
+    + 5 to create
+
+++ pulumi up
+Enter your passphrase to unlock config/secrets
+    (set PULUMI_CONFIG_PASSPHRASE or PULUMI_CONFIG_PASSPHRASE_FILE to remember):  
+Enter your passphrase to unlock config/secrets
+Previewing update (dev):
+     Type                             Name                Plan       Info
+ +   pulumi:pulumi:Stack              pulumi_example-dev  create     2 messages
+ +   ├─ pulumi:providers:yandex       yandex              create     
+ +   ├─ yandex:index:VpcNetwork       les25-network       create     
+ +   ├─ yandex:index:VpcSubnet        les25-subnet        create     
+ +   └─ yandex:index:ComputeInstance  les25instance       create     
+
+Diagnostics:
+  pulumi:pulumi:Stack (pulumi_example-dev):
+    /home/za/Documents/IaC/2git/les25/yc_infra/.venv/lib/python3.10/site-packages/pulumi_yandex/_utilities.py:10: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+      import pkg_resources
+
+Outputs:
+    instance_name: "les25instance-2752f9b"
+    public_ip    : [unknown]
+
+Resources:
+    + 5 to create
+
+Do you want to perform this update? yes
+Updating (dev):
+     Type                             Name                Status              Info
+ +   pulumi:pulumi:Stack              pulumi_example-dev  created (41s)       2 messages
+ +   ├─ pulumi:providers:yandex       yandex              created (0.00s)     
+ +   ├─ yandex:index:VpcNetwork       les25-network       created (3s)        
+ +   ├─ yandex:index:VpcSubnet        les25-subnet        created (0.39s)     
+ +   └─ yandex:index:ComputeInstance  les25instance       created (38s)       
+
+Diagnostics:
+  pulumi:pulumi:Stack (pulumi_example-dev):
+    /home/za/Documents/IaC/2git/les25/yc_infra/.venv/lib/python3.10/site-packages/pulumi_yandex/_utilities.py:10: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+      import pkg_resources
+
+Outputs:
+    instance_name: "les25instance-7b4582f"
+    public_ip    : "51.250.87.2"
+
+Resources:
+    + 5 created
+
+Duration: 43s
+
+++ pulumi destroy
+Enter your passphrase to unlock config/secrets
+    (set PULUMI_CONFIG_PASSPHRASE or PULUMI_CONFIG_PASSPHRASE_FILE to remember):  
+Enter your passphrase to unlock config/secrets
+Previewing destroy (dev):
+     Type                             Name                Plan       
+ -   pulumi:pulumi:Stack              pulumi_example-dev  delete     
+ -   ├─ yandex:index:VpcNetwork       les25-network       delete     
+ -   ├─ pulumi:providers:yandex       yandex              delete     
+ -   ├─ yandex:index:ComputeInstance  les25instance       delete     
+ -   └─ yandex:index:VpcSubnet        les25-subnet        delete     
+
+Outputs:
+  - instance_name: "les25instance-7b4582f"
+  - public_ip    : "51.250.87.2"
+
+Resources:
+    - 5 to delete
+
+Do you want to perform this destroy? yes
+Destroying (dev):
+     Type                             Name                Status              
+ -   pulumi:pulumi:Stack              pulumi_example-dev  deleted (0.00s)     
+ -   ├─ yandex:index:ComputeInstance  les25instance       deleted (34s)       
+ -   ├─ yandex:index:VpcSubnet        les25-subnet        deleted (1s)        
+ -   ├─ yandex:index:VpcNetwork       les25-network       deleted (0.64s)     
+ -   └─ pulumi:providers:yandex       yandex              deleted (0.01s)     
+
+Outputs:
+  - instance_name: "les25instance-7b4582f"
+  - public_ip    : "51.250.87.2"
+
+Resources:
+    - 5 deleted
+
+Duration: 37s
+
+The resources in the stack have been deleted, but the history and configuration associated with the stack are still maintained. 
+If you want to remove the stack completely, run `pulumi stack rm dev`.
+++ pulumi stack rm dev
+This will permanently remove the 'dev' stack!
+Please confirm that this is what you'd like to do by typing `dev`: dev
+Stack 'dev' has been removed!
+++ set +x

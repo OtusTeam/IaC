@@ -2,4 +2,4 @@
 
 import pulumi
 
-pulumi.export("message", "Hello World!")
+pulumi.export("message", "Hello, World!")
