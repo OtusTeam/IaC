@@ -1,0 +1,8 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/general/gitlab/runner$ yc compute instance list --folder-name otus
++----------------------+---------------+---------------+---------+----------------+-------------+
+|          ID          |     NAME      |    ZONE ID    | STATUS  |  EXTERNAL IP   | INTERNAL IP |
++----------------------+---------------+---------------+---------+----------------+-------------+
+| fhm2lcv4n95lnl5ka1da | hello         | ru-central1-a | STOPPED |                | 10.128.0.23 |
+| fhmargvhrkj1rj8i6oqn | gitlab-runner | ru-central1-a | RUNNING | 89.169.129.235 | 10.128.0.16 |
++----------------------+---------------+---------------+---------+----------------+-------------+
+

@@ -1,0 +1,167 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/general/gitlab/runner$ ssh.sh ubuntu@89.169.129.235
++ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@89.169.129.235
+Warning: Permanently added '89.169.129.235' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-164-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Thu Jan 29 11:04:38 UTC 2026
+
+  System load:  0.08              Processes:             92
+  Usage of /:   24.8% of 7.11GB   Users logged in:       0
+  Memory usage: 8%                IPv4 address for eth0: 10.128.0.16
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@fhmargvhrkj1rj8i6oqn:~$ sudo apt-get --yes install git jq
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+git is already the newest version (1:2.34.1-1ubuntu1.15).
+git set to manually installed.
+The following additional packages will be installed:
+  libjq1 libonig5
+The following NEW packages will be installed:
+  jq libjq1 libonig5
+0 upgraded, 3 newly installed, 0 to remove and 0 not upgraded.
+Need to get 357 kB of archives.
+After this operation, 1087 kB of additional disk space will be used.
+Get:1 http://mirror.yandex.ru/ubuntu jammy/main amd64 libonig5 amd64 6.9.7.1-2build1 [172 kB]
+Get:2 http://mirror.yandex.ru/ubuntu jammy-updates/main amd64 libjq1 amd64 1.6-2.1ubuntu3.1 [133 kB]
+Get:3 http://mirror.yandex.ru/ubuntu jammy-updates/main amd64 jq amd64 1.6-2.1ubuntu3.1 [52.5 kB]
+Fetched 357 kB in 0s (1992 kB/s)
+Selecting previously unselected package libonig5:amd64.
+(Reading database ... 94092 files and directories currently installed.)
+Preparing to unpack .../libonig5_6.9.7.1-2build1_amd64.deb ...
+Unpacking libonig5:amd64 (6.9.7.1-2build1) ...
+Selecting previously unselected package libjq1:amd64.
+Preparing to unpack .../libjq1_1.6-2.1ubuntu3.1_amd64.deb ...
+Unpacking libjq1:amd64 (1.6-2.1ubuntu3.1) ...
+Selecting previously unselected package jq.
+Preparing to unpack .../jq_1.6-2.1ubuntu3.1_amd64.deb ...
+Unpacking jq (1.6-2.1ubuntu3.1) ...
+Setting up libonig5:amd64 (6.9.7.1-2build1) ...
+Setting up libjq1:amd64 (1.6-2.1ubuntu3.1) ...
+Setting up jq (1.6-2.1ubuntu3.1) ...
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.11) ...
+Scanning processes...                                                                                                                                                                                                                         
+Scanning linux images...                                                                                                                                                                                                                      
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@fhmargvhrkj1rj8i6oqn:~$ curl --location https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh | sudo bash
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  7228  100  7228    0     0  18144      0 --:--:-- --:--:-- --:--:-- 18160
+Detected operating system as Ubuntu/jammy.
+Checking for curl...
+Detected curl...
+Checking for gpg...
+Detected gpg...
+Detected apt version as 2.4.14
+Running apt-get update... done.
+Installing apt-transport-https... done.
+Installing /etc/apt/sources.list.d/runner_gitlab-runner.list...done.
+Importing packagecloud gpg key... Packagecloud gpg key imported to /etc/apt/keyrings/runner_gitlab-runner-archive-keyring.gpg
+done.
+Running apt-get update... done.
+
+The repository is setup! You can now install packages.
+ubuntu@fhmargvhrkj1rj8i6oqn:~$ sudo apt-get -y install gitlab-runner
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  gitlab-runner-helper-images
+Suggested packages:
+  docker-engine
+The following NEW packages will be installed:
+  gitlab-runner gitlab-runner-helper-images
+0 upgraded, 2 newly installed, 0 to remove and 12 not upgraded.
+Need to get 573 MB of archives.
+After this operation, 651 MB of additional disk space will be used.
+Get:1 https://packages.gitlab.com/runner/gitlab-runner/ubuntu jammy/main amd64 gitlab-runner-helper-images all 18.8.0-1 [545 MB]
+Get:2 https://packages.gitlab.com/runner/gitlab-runner/ubuntu jammy/main amd64 gitlab-runner amd64 18.8.0-1 [27.4 MB]                                                                                                                        
+Fetched 573 MB in 18s (31.7 MB/s)                                                                                                                                                                                                            
+Selecting previously unselected package gitlab-runner-helper-images.
+(Reading database ... 94109 files and directories currently installed.)
+Preparing to unpack .../gitlab-runner-helper-images_18.8.0-1_all.deb ...
+Unpacking gitlab-runner-helper-images (18.8.0-1) ...
+Selecting previously unselected package gitlab-runner.
+Preparing to unpack .../gitlab-runner_18.8.0-1_amd64.deb ...
+Unpacking gitlab-runner (18.8.0-1) ...
+Setting up gitlab-runner-helper-images (18.8.0-1) ...
+Setting up gitlab-runner (18.8.0-1) ...
+GitLab Runner: creating gitlab-runner...
+Home directory skeleton not used
+Runtime platform                                    arch=amd64 os=linux pid=1773 revision=9ffb4aa0 version=18.8.0
+gitlab-runner: the service is not installed
+Runtime platform                                    arch=amd64 os=linux pid=1781 revision=9ffb4aa0 version=18.8.0
+gitlab-ci-multi-runner: the service is not installed
+Runtime platform                                    arch=amd64 os=linux pid=1803 revision=9ffb4aa0 version=18.8.0
+Runtime platform                                    arch=amd64 os=linux pid=1861 revision=9ffb4aa0 version=18.8.0
+INFO: Docker installation not found, skipping clear-docker-cache
+Scanning processes...                                                                                                                                                                                                                         
+Scanning linux images...                                                                                                                                                                                                                      
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@fhmargvhrkj1rj8i6oqn:~$ sudo gitlab-runner register
+Runtime platform                                    arch=amd64 os=linux pid=1939 revision=9ffb4aa0 version=18.8.0
+Running in system-mode.                            
+                                                   
+Enter the GitLab instance URL (for example, https://gitlab.com/):
+https://otusteam.gitlab.yandexcloud.net/                                             
+Enter the registration token:
+glrt-dxCpv2eeiQRblxDF4JflBW86MQpwOjFiMgp0OjMKdToycxI.01.1b0h6wgz0
+Verifying runner... is valid                        correlation_id=01KG4Q5S59SSNGPW8QWV63004W runner=dxCpv2eei
+Enter a name for the runner. This is stored only in the local config.toml file:
+[fhmargvhrkj1rj8i6oqn]: 
+Enter an executor: docker+machine, kubernetes, shell, docker-autoscaler, instance, custom, ssh, parallels, virtualbox, docker, docker-windows:
+shell
+Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded!
+ 
+Configuration (with the authentication token) was saved in "/etc/gitlab-runner/config.toml" 
+ubuntu@fhmargvhrkj1rj8i6oqn:~$ 
+ubuntu@fhmargvhrkj1rj8i6oqn:~$ gitlab-runner status
+Runtime platform                                    arch=amd64 os=linux pid=1966 revision=9ffb4aa0 version=18.8.0
+gitlab-runner: Service is running

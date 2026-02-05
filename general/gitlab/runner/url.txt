@@ -1,0 +1,4 @@
+https://yandex.cloud/ru/docs/compute/tutorials/install-gitlab-runner
+https://otusteam.gitlab.yandexcloud.net/iac-2025-10/my_project/-/settings/ci_cd#js-runners-settings
+/home/za/Documents/IaC/2git/general/gitlab/runner
+/home/za/Documents/IaC/gitlab
