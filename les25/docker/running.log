@@ -1,0 +1,233 @@
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/asus_vivobook_15x/try/ansible/pulumi$ ./install_pulumi.sh 
+Tarball already exists: /home/za/distr/pulumi-v3.218.0-linux-x64.tar.gz
+Checking tarball integrity...
+Tarball looks OK.
+Extracting tarball...
+Installing binaries from /tmp/tmp.YGoFE6jKhQ/pulumi-extract/pulumi to ../.venv/bin
+Installed: pulumi
+Installed: pulumi-analyzer-policy
+Installed: pulumi-analyzer-policy-python
+Installed: pulumi-language-dotnet
+Installed: pulumi-language-go
+Installed: pulumi-language-java
+Installed: pulumi-language-nodejs
+Installed: pulumi-language-python
+Installed: pulumi-language-python-exec
+Installed: pulumi-language-yaml
+Installed: pulumi-resource-pulumi-nodejs
+Installed: pulumi-resource-pulumi-python
+Installed: pulumi-watch
+Done. Pulumi 3.218.0 installed into ../.venv/bin.
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/asus_vivobook_15x/try/ansible/pulumi$ pulumi version
+v3.218.0
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/asus_vivobook_15x/try/ansible/pulumi$ nano ./install_pulumi.log
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/asus_vivobook_15x/try/ansible/pulumi$ cd ~/Documents/IaC/2git/les25
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25$ puluni init
+puluni: команда не найдена
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25$ puluni up
+puluni: команда не найдена
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25$ pulumi init
+error: unknown command "init" for "pulumi"
+
+Did you mean this?
+	new
+
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25$ pulumi preview
+error: no Pulumi.yaml project file found (searching upwards from /home/za/Documents/IaC/2git/les25). If you have not created a project yet, use `pulumi new` to do so: no project file found
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25$ pulumi new
+Manage your Pulumi stacks by logging in.
+Run `pulumi login --help` for alternative login options.
+Enter your access token from https://app.pulumi.com/account/tokens
+    or hit <ENTER> to log in using your browser                   :  
+We've launched your web browser to complete the login process.
+
+Waiting for login to complete...
+
+^C
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25$ ls -la
+итого 8
+drwxrwxr-x  2 za za 4096 фев  4 16:07 .
+drwxrwxr-x 33 za za 4096 фев  4 16:07 ..
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25$ cd docker
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ $ pulumi stack init dev
+$: команда не найдена
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ $ pulumi version
+$: команда не найдена
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ which pulumi
+/home/za/asus_vivobook_15x/try/ansible/.venv/bin/pulumi
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ $ pulumi version
+$: команда не найдена
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ pulumi version
+v3.218.0
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ pulumi stack init dev
+Manage your Pulumi stacks by logging in.
+Run `pulumi login --help` for alternative login options.
+Enter your access token from https://app.pulumi.com/account/tokens
+    or hit <ENTER> to log in using your browser                   :  
+
+
+  Welcome to Pulumi!
+
+  Pulumi helps you create, deploy, and manage infrastructure on any cloud using
+  your favorite language. You can get started today with Pulumi at:
+
+      https://www.pulumi.com/docs/get-started/
+
+  Tip: Resources you create with Pulumi are given unique names (a randomly
+  generated suffix) by default. To learn more about auto-naming or customizing resource
+  names see https://www.pulumi.com/docs/intro/concepts/resources/#autonaming.
+
+
+error: no current project found, pass the fully qualified stack name (org/project/stack)
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ ls
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ ls -la
+итого 8
+drwxrwxr-x 2 za za 4096 фев  5 17:34 .
+drwxrwxr-x 3 za za 4096 фев  5 17:34 ..
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ pulumi stack init dev
+error: no current project found, pass the fully qualified stack name (org/project/stack)
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ pulumi stack init otus/dev
+error: no current project found, pass the fully qualified stack name (org/project/stack)
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ pulumi stack select Zhuravlev-A-E/otus/dev
+error: no Pulumi.yaml project file found (searching upwards from /home/za/Documents/IaC/2git/les25/docker). If you have not created a project yet, use `pulumi new` to do so: no project file found
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ pulumi stack select Zhuravlev-A-E/otus/dev
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ pulumi up
+error: provided project name "otus" doesn't match Pulumi.yaml
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ $ pulumi stack init dev
+$: команда не найдена
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ pulumi stack init dev
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ which pip
+/home/za/asus_vivobook_15x/try/ansible/.venv/bin/pip
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ pip3 install -r requirements.txt
+Requirement already satisfied: pulumi<4.0.0,>=3.5.1 in /home/za/asus_vivobook_15x/try/ansible/.venv/lib/python3.10/site-packages (from -r requirements.txt (line 1)) (3.218.0)
+Collecting pulumi-docker<4.7.0,>=4.6.0 (from -r requirements.txt (line 2))
+  Downloading pulumi_docker-4.6.2-py3-none-any.whl.metadata (2.4 kB)
+Requirement already satisfied: debugpy~=1.8.7 in /home/za/asus_vivobook_15x/try/ansible/.venv/lib/python3.10/site-packages (from pulumi<4.0.0,>=3.5.1->-r requirements.txt (line 1)) (1.8.20)
+Requirement already satisfied: dill~=0.4 in /home/za/asus_vivobook_15x/try/ansible/.venv/lib/python3.10/site-packages (from pulumi<4.0.0,>=3.5.1->-r requirements.txt (line 1)) (0.4.1)
+Requirement already satisfied: grpcio<2,>=1.68.1 in /home/za/asus_vivobook_15x/try/ansible/.venv/lib/python3.10/site-packages (from pulumi<4.0.0,>=3.5.1->-r requirements.txt (line 1)) (1.76.0)
+Requirement already satisfied: pip<26,>=24.3.1 in /home/za/asus_vivobook_15x/try/ansible/.venv/lib/python3.10/site-packages (from pulumi<4.0.0,>=3.5.1->-r requirements.txt (line 1)) (25.3)
+Requirement already satisfied: protobuf<6,>=3.20.3 in /home/za/asus_vivobook_15x/try/ansible/.venv/lib/python3.10/site-packages (from pulumi<4.0.0,>=3.5.1->-r requirements.txt (line 1)) (4.25.8)
+Requirement already satisfied: pyyaml~=6.0 in /home/za/asus_vivobook_15x/try/ansible/.venv/lib/python3.10/site-packages (from pulumi<4.0.0,>=3.5.1->-r requirements.txt (line 1)) (6.0.3)
+Requirement already satisfied: semver~=3.0 in /home/za/asus_vivobook_15x/try/ansible/.venv/lib/python3.10/site-packages (from pulumi<4.0.0,>=3.5.1->-r requirements.txt (line 1)) (3.0.4)
+Requirement already satisfied: parver>=0.2.1 in /home/za/asus_vivobook_15x/try/ansible/.venv/lib/python3.10/site-packages (from pulumi-docker<4.7.0,>=4.6.0->-r requirements.txt (line 2)) (0.5)
+Requirement already satisfied: typing-extensions>=4.11 in /home/za/asus_vivobook_15x/try/ansible/.venv/lib/python3.10/site-packages (from pulumi-docker<4.7.0,>=4.6.0->-r requirements.txt (line 2)) (4.15.0)
+Requirement already satisfied: arpeggio>=1.7 in /home/za/asus_vivobook_15x/try/ansible/.venv/lib/python3.10/site-packages (from parver>=0.2.1->pulumi-docker<4.7.0,>=4.6.0->-r requirements.txt (line 2)) (2.0.3)
+Requirement already satisfied: attrs>=19.2 in /home/za/asus_vivobook_15x/try/ansible/.venv/lib/python3.10/site-packages (from parver>=0.2.1->pulumi-docker<4.7.0,>=4.6.0->-r requirements.txt (line 2)) (25.4.0)
+Downloading pulumi_docker-4.6.2-py3-none-any.whl (110 kB)
+Installing collected packages: pulumi-docker
+Successfully installed pulumi-docker-4.6.2
+
+[notice] A new release of pip is available: 25.3 -> 26.0.1
+[notice] To update, run: pip install --upgrade pip
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ pulumi up
+Previewing update (dev)
+
+View in Browser (Ctrl+O): https://app.pulumi.com/Zhuravlev-A-E-org/docker-py-multi-container-app/dev/previews/bb726093-dc09-49b6-916e-7b5c614b13b4
+
+     Type                         Name                               Plan      
+ +   pulumi:pulumi:Stack          docker-py-multi-container-app-dev  create    
+ +   ├─ docker:index:Network      network                            create    
+ +   ├─ docker:index:RemoteImage  redis_image                        create    
+ +   ├─ docker:index:Image        app_image                          create    
+ +   ├─ docker:index:Container    redis_container                    create    
+ +   └─ docker:index:Container    app_container                      create    
+
+Diagnostics:
+  docker:index:Image (app_image):
+    Building your image for linux/amd64 architecture.
+    To ensure you are building for the correct platform, consider explicitly setting the `platform` field on ImageBuildOptions.
+
+    [Pulumi Neo] Would you like help with these diagnostics?
+    https://app.pulumi.com/Zhuravlev-A-E-org/docker-py-multi-container-app/dev/previews/bb726093-dc09-49b6-916e-7b5c614b13b4?explainFailure
+
+Outputs:
+    url: "http://localhost:5000"
+
+Resources:
+    + 6 to create
+
+Do you want to perform this update? yes
+Updating (dev)
+
+View in Browser (Ctrl+O): https://app.pulumi.com/Zhuravlev-A-E-org/docker-py-multi-container-app/dev/updates/1
+
+     Type                         Name                               Status    
+ +   pulumi:pulumi:Stack          docker-py-multi-container-app-dev  created (5
+ +   ├─ docker:index:RemoteImage  redis_image                        created (3
+ +   ├─ docker:index:Network      network                            created (4
+ +   ├─ docker:index:Image        app_image                          created (4
+ +   ├─ docker:index:Container    redis_container                    created (1
+ +   └─ docker:index:Container    app_container                      created (1
+
+Diagnostics:
+  docker:index:Image (app_image):
+    Building your image for linux/amd64 architecture.
+    To ensure you are building for the correct platform, consider explicitly setting the `platform` field on ImageBuildOptions.
+
+    [Pulumi Neo] Would you like help with these diagnostics?
+    https://app.pulumi.com/Zhuravlev-A-E-org/docker-py-multi-container-app/dev/updates/1?explainFailure
+
+Outputs:
+    url: "http://localhost:5000"
+
+Resources:
+    + 6 created
+
+Duration: 56s
+
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ curl http://localhost:5000
+I have been viewed 1 times.
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ curl http://localhost:5000
+I have been viewed 2 times.
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ curl http://localhost:5000
+I have been viewed 3 times.
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ curl http://localhost:5000
+I have been viewed 4 times.
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ pulumi destroy
+Previewing destroy (dev)
+
+View in Browser (Ctrl+O): https://app.pulumi.com/Zhuravlev-A-E-org/docker-py-multi-container-app/dev/previews/3b5fba79-1f96-49a7-b1b0-b18b359c7120
+
+     Type                         Name                               Plan      
+ -   pulumi:pulumi:Stack          docker-py-multi-container-app-dev  delete    
+ -   ├─ docker:index:Image        app_image                          delete    
+ -   ├─ docker:index:Network      network                            delete    
+ -   ├─ docker:index:RemoteImage  redis_image                        delete    
+ -   ├─ docker:index:Container    app_container                      delete    
+ -   └─ docker:index:Container    redis_container                    delete    
+
+Outputs:
+  - url: "http://localhost:5000"
+
+Resources:
+    - 6 to delete
+
+Do you want to perform this destroy? yes
+Destroying (dev)
+
+View in Browser (Ctrl+O): https://app.pulumi.com/Zhuravlev-A-E-org/docker-py-multi-container-app/dev/updates/2
+
+     Type                         Name                               Status    
+ -   pulumi:pulumi:Stack          docker-py-multi-container-app-dev  deleted (1
+ -   ├─ docker:index:Container    app_container                      deleted (0
+ -   ├─ docker:index:Container    redis_container                    deleted (1
+ -   ├─ docker:index:RemoteImage  redis_image                        deleted (2
+ -   ├─ docker:index:Image        app_image                          deleted (1
+ -   └─ docker:index:Network      network                            deleted (3
+
+Outputs:
+  - url: "http://localhost:5000"
+
+Resources:
+    - 6 deleted
+
+Duration: 11s
+
+The resources in the stack have been deleted, but the history and configuration associated with the stack are still maintained. 
+If you want to remove the stack completely, run `pulumi stack rm dev`.
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ pulumi stack rm
+This will permanently remove the 'dev' stack!
+Please confirm that this is what you'd like to do by typing `dev`: dev
+Stack 'dev' has been removed!
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ pulumi logout
+Logged out of https://api.pulumi.com
