@@ -1,0 +1,6 @@
+name: hello
+runtime:
+  name: python
+  options:
+    virtualenv: .venv
+description: Example simple python app to print Hello World!
