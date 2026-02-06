@@ -48,7 +48,7 @@ instance = yandex.ComputeInstance(
     prefix+"-instance",
     zone=zone,
     resources=yandex.ComputeInstanceResourcesArgs(
-        core_fraction=100,
+        core_fraction=5,
         cores=2,
         memory=2,
     ),
@@ -65,6 +65,9 @@ instance = yandex.ComputeInstance(
     ],
     metadata={
         "ssh-keys": pulumi.Output.format(username+":{0}", ssh_pub_key),
+    },
+    scheduling_policy={
+        "preemptible": True,
     },
     opts=pulumi.ResourceOptions(provider=provider),
 )
