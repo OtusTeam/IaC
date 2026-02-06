@@ -96,3 +96,107 @@ Please confirm that this is what you'd like to do by typing `dev`: dev
 Stack 'dev' has been removed!
 ++ rm input.txt
 ++ set +x
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/inout$ > run.log
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/inout$ nano run.log
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/inout$ ./run.sh 
+++ echo 'One is 1'
+++ export 'MY_VAR=Two is 2'
+++ MY_VAR='Two is 2'
+++ pulumi stack init dev
+Enter your passphrase to protect config/secrets:  
+Re-enter your passphrase to confirm:  
+Created stack 'dev'
+++ pulumi config set inout:three 'Three is 3'
+++ set +x
+Enter your passphrase to unlock config/secrets
+    (set PULUMI_CONFIG_PASSPHRASE or PULUMI_CONFIG_PASSPHRASE_FILE to remember):  
+Enter your passphrase to unlock config/secrets
+9
+++ cat input.txt
+One is 1
+++ pulumi config
+KEY    VALUE
+four   [secret]
+three  Three is 3
+++ pulumi up
+Enter your passphrase to unlock config/secrets
+    (set PULUMI_CONFIG_PASSPHRASE or PULUMI_CONFIG_PASSPHRASE_FILE to remember):  
+Enter your passphrase to unlock config/secrets
+Previewing update (dev):
+     Type                 Name       Plan       Info
+ +   pulumi:pulumi:Stack  inout-dev  create     4 messages
+
+Diagnostics:
+  pulumi:pulumi:Stack (inout-dev):
+    Из файла: One is 1
+    Из окружения: Two is 2
+    Из конфига: Three is 3
+    Размер секрета: 9
+
+Outputs:
+    message  : "One is 1, Two is 2, Three is 3, 9"
+    my_secret: [secret]
+
+Resources:
+    + 1 to create
+
+info: There are no resources in your stack (other than the stack resource).
+
+Do you want to perform this update? yes
+Updating (dev):
+     Type                 Name       Status              Info
+ +   pulumi:pulumi:Stack  inout-dev  created (0.01s)     4 messages
+
+Diagnostics:
+  pulumi:pulumi:Stack (inout-dev):
+    Из файла: One is 1
+    Из окружения: Two is 2
+    Из конфига: Three is 3
+    Размер секрета: 9
+
+Outputs:
+    message  : "One is 1, Two is 2, Three is 3, 9"
+    my_secret: [secret]
+
+Resources:
+    + 1 created
+
+Duration: 1s
+
+++ pulumi destroy
+Enter your passphrase to unlock config/secrets
+    (set PULUMI_CONFIG_PASSPHRASE or PULUMI_CONFIG_PASSPHRASE_FILE to remember):  
+Enter your passphrase to unlock config/secrets
+Previewing destroy (dev):
+     Type                 Name       Plan       
+ -   pulumi:pulumi:Stack  inout-dev  delete     
+
+Outputs:
+  - message  : "One is 1, Two is 2, Three is 3, 9"
+  - my_secret: [secret]
+
+Resources:
+    - 1 to delete
+
+Do you want to perform this destroy? yes
+Destroying (dev):
+     Type                 Name       Status              
+ -   pulumi:pulumi:Stack  inout-dev  deleted (0.00s)     
+
+Outputs:
+  - message  : "One is 1, Two is 2, Three is 3, 9"
+  - my_secret: [secret]
+
+Resources:
+    - 1 deleted
+
+Duration: 1s
+
+The resources in the stack have been deleted, but the history and configuration associated with the stack are still maintained. 
+If you want to remove the stack completely, run `pulumi stack rm dev`.
+++ pulumi stack rm dev
+This will permanently remove the 'dev' stack!
+Please confirm that this is what you'd like to do by typing `dev`: dev
+Stack 'dev' has been removed!
+++ rm input.txt
+++ set +x

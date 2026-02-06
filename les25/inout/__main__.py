@@ -22,4 +22,7 @@ print("Из конфига:", config_line)
 print(f"Размер секрета: {len(secret_line)}", )
 
 pulumi.export("message", ", ".join([file_line, env_line, config_line, str(len(secret_line))]))
-                       
+
+# пометить как секретный Output — Pulumi шифрует его в стейте
+secret_output = pulumi.Output.secret(secret_line)
+pulumi.export("my_secret", secret_output)                       
