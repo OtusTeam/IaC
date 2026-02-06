@@ -25,8 +25,9 @@ fi
 
 echo "Public IP: $ip"
 
+sleep 10
+
 while true; do
-  sleep 10
   echo "Curl http://$ip/ ..."
   if curl -fsS --max-time 30 "http://$ip/"; then
     echo "curl succeeded, exiting."

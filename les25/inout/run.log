@@ -4,24 +4,16 @@
 ONE
 ++ export ONE=Two
 ++ ONE=Two
-++ pulumi stack init dev
-Enter your passphrase to protect config/secrets:  
-Re-enter your passphrase to confirm:  
-Created stack 'dev'
-++ pulumi config set inout:Two Three
 ++ set +x
-Enter your passphrase to unlock config/secrets
-    (set PULUMI_CONFIG_PASSPHRASE or PULUMI_CONFIG_PASSPHRASE_FILE to remember):  
-Enter your passphrase to unlock config/secrets
-14
+Enter Pulumi passphrase: 
+Created stack 'dev'
+5
+++ pulumi config set inout:Three Four
 ++ pulumi config
 KEY    VALUE
-Three  [secret]
-Two    Three
+Three  Four
+Two    [secret]
 ++ pulumi up
-Enter your passphrase to unlock config/secrets
-    (set PULUMI_CONFIG_PASSPHRASE or PULUMI_CONFIG_PASSPHRASE_FILE to remember):  
-Enter your passphrase to unlock config/secrets
 Previewing update (dev):
      Type                 Name       Plan       Info
  +   pulumi:pulumi:Stack  inout-dev  create     4 messages
@@ -30,12 +22,12 @@ Diagnostics:
   pulumi:pulumi:Stack (inout-dev):
     Из файла: ONE
     Из окружения: Two
-    Из конфига: Three
-    Размер секрета: 14
+    Размер секрета: 5
+    Из конфига: Four
 
 Outputs:
-    message  : "ONE, Two, Three, 14"
-    my_secret: [secret]
+    joined_line: "ONE, Two, 5, Four"
+    my_secret  : [secret]
 
 Resources:
     + 1 to create
@@ -45,18 +37,18 @@ info: There are no resources in your stack (other than the stack resource).
 Do you want to perform this update? yes
 Updating (dev):
      Type                 Name       Status              Info
- +   pulumi:pulumi:Stack  inout-dev  created (0.02s)     4 messages
+ +   pulumi:pulumi:Stack  inout-dev  created (0.07s)     4 messages
 
 Diagnostics:
   pulumi:pulumi:Stack (inout-dev):
     Из файла: ONE
     Из окружения: Two
-    Из конфига: Three
-    Размер секрета: 14
+    Размер секрета: 5
+    Из конфига: Four
 
 Outputs:
-    message  : "ONE, Two, Three, 14"
-    my_secret: [secret]
+    joined_line: "ONE, Two, 5, Four"
+    my_secret  : [secret]
 
 Resources:
     + 1 created
@@ -64,16 +56,13 @@ Resources:
 Duration: 1s
 
 ++ pulumi destroy
-Enter your passphrase to unlock config/secrets
-    (set PULUMI_CONFIG_PASSPHRASE or PULUMI_CONFIG_PASSPHRASE_FILE to remember):  
-Enter your passphrase to unlock config/secrets
 Previewing destroy (dev):
      Type                 Name       Plan       
  -   pulumi:pulumi:Stack  inout-dev  delete     
 
 Outputs:
-  - message  : "ONE, Two, Three, 14"
-  - my_secret: [secret]
+  - joined_line: "ONE, Two, 5, Four"
+  - my_secret  : [secret]
 
 Resources:
     - 1 to delete
@@ -84,8 +73,8 @@ Destroying (dev):
  -   pulumi:pulumi:Stack  inout-dev  deleted (0.00s)     
 
 Outputs:
-  - message  : "ONE, Two, Three, 14"
-  - my_secret: [secret]
+  - joined_line: "ONE, Two, 5, Four"
+  - my_secret  : [secret]
 
 Resources:
     - 1 deleted

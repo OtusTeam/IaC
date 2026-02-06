@@ -9,19 +9,19 @@ with open("zero.txt", "r", encoding="utf-8") as f:
 env_line = os.getenv(file_line, "")
 
 config = pulumi.Config("inout")
-# чтение строки из конфига
-config_line = config.require(env_line)
 
 # чтение строки из секрета
-secret_line = config.require(config_line)
+secret_line = config.require(env_line)
 
+# чтение строки из конфига
+config_line = config.require(secret_line)
 
 print("Из файла:", file_line)
 print("Из окружения:", env_line)
+print(f"Размер секрета: {len(secret_line)}")
 print("Из конфига:", config_line)
-print(f"Размер секрета: {len(secret_line)}", )
 
-pulumi.export("message", ", ".join([file_line, env_line, config_line, str(len(secret_line))]))
+pulumi.export("joined_line", ", ".join([file_line, env_line, str(len(secret_line)), config_line]))
 
 # пометить как секретный Output — Pulumi шифрует его в стейте
 secret_output = pulumi.Output.secret(secret_line)
