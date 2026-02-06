@@ -46,7 +46,7 @@ Diagnostics:
       import pkg_resources
 
 Outputs:
-    instance_name: "les25-instance-e4f5dc2"
+    instance_name: "les25-instance-13e298d"
     public_ip    : [unknown]
 
 Resources:
@@ -67,7 +67,7 @@ Diagnostics:
       import pkg_resources
 
 Outputs:
-    instance_name: "les25-instance-54a5a07"
+    instance_name: "les25-instance-54b7a72"
     public_ip    : [unknown]
 
 Resources:
@@ -76,11 +76,11 @@ Resources:
 Do you want to perform this update? yes
 Updating (dev):
      Type                             Name                Status              Info
- +   pulumi:pulumi:Stack              pulumi_example-dev  created (47s)       2 messages
+ +   pulumi:pulumi:Stack              pulumi_example-dev  created (46s)       2 messages
  +   ├─ pulumi:providers:yandex       yandex              created (0.00s)     
- +   ├─ yandex:index:VpcNetwork       les25-network       created (2s)        
- +   ├─ yandex:index:VpcSubnet        les25-subnet        created (0.44s)     
- +   └─ yandex:index:ComputeInstance  les25-instance      created (43s)       
+ +   ├─ yandex:index:VpcNetwork       les25-network       created (3s)        
+ +   ├─ yandex:index:VpcSubnet        les25-subnet        created (0.58s)     
+ +   └─ yandex:index:ComputeInstance  les25-instance      created (42s)       
 
 Diagnostics:
   pulumi:pulumi:Stack (pulumi_example-dev):
@@ -88,8 +88,8 @@ Diagnostics:
       import pkg_resources
 
 Outputs:
-    instance_name: "les25-instance-cbb2d9c"
-    public_ip    : "84.252.131.37"
+    instance_name: "les25-instance-c2307a8"
+    public_ip    : "62.84.117.108"
 
 Resources:
     + 5 created
@@ -99,32 +99,18 @@ Duration: 48s
 ++ pulumi stack output
 Current stack outputs (2):
     OUTPUT         VALUE
-    instance_name  les25-instance-cbb2d9c
-    public_ip      84.252.131.37
-+++ pulumi stack output --json
-++ raw='{
-  "instance_name": "les25-instance-cbb2d9c",
-  "public_ip": "84.252.131.37"
-}'
-++ '[' -z '{
-  "instance_name": "les25-instance-cbb2d9c",
-  "public_ip": "84.252.131.37"
-}' ']'
-++ command -v jq
-+++ printf %s '{
-  "instance_name": "les25-instance-cbb2d9c",
-  "public_ip": "84.252.131.37"
-}'
-+++ jq -r 'if .public_ip then .public_ip elif .public_ip.value then .public_ip.value else empty end'
-++ ip=84.252.131.37
-++ '[' -z 84.252.131.37 ']'
-++ echo 'Public IP: 84.252.131.37'
-Public IP: 84.252.131.37
-++ true
+    instance_name  les25-instance-c2307a8
+    public_ip      62.84.117.108
++++ pulumi stack output public_ip
+++ IP=62.84.117.108
+++ '[' -z 62.84.117.108 ']'
+++ echo 'Public IP: 62.84.117.108'
+Public IP: 62.84.117.108
 ++ sleep 10
-++ echo 'Curl http://84.252.131.37/ ...'
-Curl http://84.252.131.37/ ...
-++ curl -fsS --max-time 30 http://84.252.131.37/
+++ true
+++ echo 'Curl http://62.84.117.108/ ...'
+Curl http://62.84.117.108/ ...
+++ curl -fsS --max-time 30 http://62.84.117.108/
 curl: (56) Recv failure: Соединение разорвано другой стороной
 ++ echo 'curl failed.'
 curl failed.
@@ -134,10 +120,9 @@ cancel (y/N)?
 ++ echo Retrying...
 Retrying...
 ++ true
-++ sleep 10
-++ echo 'Curl http://84.252.131.37/ ...'
-Curl http://84.252.131.37/ ...
-++ curl -fsS --max-time 30 http://84.252.131.37/
+++ echo 'Curl http://62.84.117.108/ ...'
+Curl http://62.84.117.108/ ...
+++ curl -fsS --max-time 30 http://62.84.117.108/
 <!DOCTYPE html>
 <html>
 <head>
@@ -176,8 +161,8 @@ Previewing destroy (dev):
  -   └─ yandex:index:VpcNetwork       les25-network       delete     
 
 Outputs:
-  - instance_name: "les25-instance-cbb2d9c"
-  - public_ip    : "84.252.131.37"
+  - instance_name: "les25-instance-c2307a8"
+  - public_ip    : "62.84.117.108"
 
 Resources:
     - 5 to delete
@@ -186,19 +171,19 @@ Do you want to perform this destroy? yes
 Destroying (dev):
      Type                             Name                Status              
  -   pulumi:pulumi:Stack              pulumi_example-dev  deleted (0.00s)     
- -   ├─ yandex:index:ComputeInstance  les25-instance      deleted (51s)       
- -   ├─ yandex:index:VpcSubnet        les25-subnet        deleted (5s)        
- -   ├─ yandex:index:VpcNetwork       les25-network       deleted (0.61s)     
+ -   ├─ yandex:index:ComputeInstance  les25-instance      deleted (32s)       
+ -   ├─ yandex:index:VpcSubnet        les25-subnet        deleted (4s)        
+ -   ├─ yandex:index:VpcNetwork       les25-network       deleted (0.64s)     
  -   └─ pulumi:providers:yandex       yandex              deleted (0.01s)     
 
 Outputs:
-  - instance_name: "les25-instance-cbb2d9c"
-  - public_ip    : "84.252.131.37"
+  - instance_name: "les25-instance-c2307a8"
+  - public_ip    : "62.84.117.108"
 
 Resources:
     - 5 deleted
 
-Duration: 58s
+Duration: 39s
 
 The resources in the stack have been deleted, but the history and configuration associated with the stack are still maintained. 
 If you want to remove the stack completely, run `pulumi stack rm dev`.
