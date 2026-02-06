@@ -1,0 +1,6 @@
+name: inout
+runtime:
+  name: python
+  options:
+    virtualenv: .venv
+description: An example python app to input & output demo
