@@ -1,0 +1,7 @@
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/random-yaml$ pulumi login --local
+Logged in to za-Vivobook-ASUSLaptop-M3504YA-M3504YA as za (file://~)
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/random-yaml$ pulumi plugin install resource random 4.3.1
+[resource plugin random-4.3.1] installing
+Downloading plugin: 13.62 MiB / 13.62 MiB [=========================] 100.00% 4s
+
+warning: A new version of Pulumi is available. To upgrade from version '3.218.0' to '3.219.0', visit https://pulumi.com/docs/install/ for manual instructions and release notes.

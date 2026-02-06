@@ -1,0 +1,66 @@
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/random-yaml$ ./run.sh 
+Enter Pulumi passphrase: 
+Created stack 'dev'
+++ pulumi up
+Previewing update (dev):
+     Type                            Name            Plan       
+ +   pulumi:pulumi:Stack             random-dev      create     
+ +   └─ random:index:RandomPassword  randomPassword  create     
+
+Outputs:
+    password: [unknown]
+
+Resources:
+    + 2 to create
+
+Do you want to perform this update? yes
+Updating (dev):
+     Type                            Name            Status              
+ +   pulumi:pulumi:Stack             random-dev      created (0.03s)     
+ +   └─ random:index:RandomPassword  randomPassword  created (0.00s)     
+
+Outputs:
+    password: [secret]
+
+Resources:
+    + 2 created
+
+Duration: 1s
+
+++ pulumi stack output --show-secrets
+Current stack outputs (1):
+    OUTPUT    VALUE
+    password  6N4hGshDRNUTl6TW
+++ pulumi destroy
+Previewing destroy (dev):
+     Type                            Name            Plan       
+ -   pulumi:pulumi:Stack             random-dev      delete     
+ -   └─ random:index:RandomPassword  randomPassword  delete     
+
+Outputs:
+  - password: [secret]
+
+Resources:
+    - 2 to delete
+
+Do you want to perform this destroy? yes
+Destroying (dev):
+     Type                            Name            Status              
+ -   pulumi:pulumi:Stack             random-dev      deleted (0.00s)     
+ -   └─ random:index:RandomPassword  randomPassword  deleted (0.00s)     
+
+Outputs:
+  - password: [secret]
+
+Resources:
+    - 2 deleted
+
+Duration: 1s
+
+The resources in the stack have been deleted, but the history and configuration associated with the stack are still maintained. 
+If you want to remove the stack completely, run `pulumi stack rm dev`.
+++ pulumi stack rm dev
+This will permanently remove the 'dev' stack!
+Please confirm that this is what you'd like to do by typing `dev`: dev
+Stack 'dev' has been removed!
+++ set +x
