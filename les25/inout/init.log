@@ -1,8 +1,4 @@
-(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/hello$ pulumi stack init dev
-Enter your passphrase to protect config/secrets:  
-Re-enter your passphrase to confirm:  
-Created stack 'dev'
-(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/hello$ pip install -r requirements.txt
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/inout$ pip install -r requirements.txt
 Collecting pulumi<4.0.0,>=3.5.1 (from -r requirements.txt (line 1))
   Downloading pulumi-3.219.0-py3-none-any.whl.metadata (3.8 kB)
 Collecting debugpy~=1.8.7 (from pulumi<4.0.0,>=3.5.1->-r requirements.txt (line 1))
@@ -30,65 +26,3 @@ Using cached semver-3.0.4-py3-none-any.whl (17 kB)
 Using cached typing_extensions-4.15.0-py3-none-any.whl (44 kB)
 Installing collected packages: typing-extensions, semver, pyyaml, protobuf, dill, debugpy, grpcio, pulumi
 Successfully installed debugpy-1.8.20 dill-0.4.1 grpcio-1.76.0 protobuf-6.33.5 pulumi-3.219.0 pyyaml-6.0.3 semver-3.0.4 typing-extensions-4.15.0
-(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/hello$ pulumi up
-Enter your passphrase to unlock config/secrets
-    (set PULUMI_CONFIG_PASSPHRASE or PULUMI_CONFIG_PASSPHRASE_FILE to remember):  
-Enter your passphrase to unlock config/secrets
-Previewing update (dev):
-     Type                 Name       Plan       
- +   pulumi:pulumi:Stack  hello-dev  create     
-
-Outputs:
-    message: "Hello World!"
-
-Resources:
-    + 1 to create
-
-info: There are no resources in your stack (other than the stack resource).
-
-Do you want to perform this update? yes
-Updating (dev):
-     Type                 Name       Status              
- +   pulumi:pulumi:Stack  hello-dev  created (0.02s)     
-
-Outputs:
-    message: "Hello World!"
-
-Resources:
-    + 1 created
-
-Duration: 1s
-
-(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/hello$ pulumi destroy
-Enter your passphrase to unlock config/secrets
-    (set PULUMI_CONFIG_PASSPHRASE or PULUMI_CONFIG_PASSPHRASE_FILE to remember):  
-Enter your passphrase to unlock config/secrets
-Previewing destroy (dev):
-     Type                 Name       Plan       
- -   pulumi:pulumi:Stack  hello-dev  delete     
-
-Outputs:
-  - message: "Hello World!"
-
-Resources:
-    - 1 to delete
-
-Do you want to perform this destroy? yes
-Destroying (dev):
-     Type                 Name       Status              
- -   pulumi:pulumi:Stack  hello-dev  deleted (0.00s)     
-
-Outputs:
-  - message: "Hello World!"
-
-Resources:
-    - 1 deleted
-
-Duration: 1s
-
-The resources in the stack have been deleted, but the history and configuration associated with the stack are still maintained. 
-If you want to remove the stack completely, run `pulumi stack rm dev`.
-(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/hello$ pulumi stack rm dev
-This will permanently remove the 'dev' stack!
-Please confirm that this is what you'd like to do by typing `dev`: dev
-Stack 'dev' has been removed!

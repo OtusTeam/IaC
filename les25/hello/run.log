@@ -1,0 +1,64 @@
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/hello$ ./run.sh 
+Enter Pulumi passphrase: 
+Created stack 'dev'
+++ pulumi up
+Previewing update (dev):
+     Type                 Name       Plan       
+ +   pulumi:pulumi:Stack  hello-dev  create     
+
+Outputs:
+    message: "Hello, World!"
+
+Resources:
+    + 1 to create
+
+info: There are no resources in your stack (other than the stack resource).
+
+Do you want to perform this update? yes
+Updating (dev):
+     Type                 Name       Status              
+ +   pulumi:pulumi:Stack  hello-dev  created (0.02s)     
+
+Outputs:
+    message: "Hello, World!"
+
+Resources:
+    + 1 created
+
+Duration: 1s
+
+++ pulumi stack output
+Current stack outputs (1):
+    OUTPUT   VALUE
+    message  Hello, World!
+++ pulumi destroy
+Previewing destroy (dev):
+     Type                 Name       Plan       
+ -   pulumi:pulumi:Stack  hello-dev  delete     
+
+Outputs:
+  - message: "Hello, World!"
+
+Resources:
+    - 1 to delete
+
+Do you want to perform this destroy? yes
+Destroying (dev):
+     Type                 Name       Status              
+ -   pulumi:pulumi:Stack  hello-dev  deleted (0.00s)     
+
+Outputs:
+  - message: "Hello, World!"
+
+Resources:
+    - 1 deleted
+
+Duration: 1s
+
+The resources in the stack have been deleted, but the history and configuration associated with the stack are still maintained. 
+If you want to remove the stack completely, run `pulumi stack rm dev`.
+++ pulumi stack rm dev
+This will permanently remove the 'dev' stack!
+Please confirm that this is what you'd like to do by typing `dev`: dev
+Stack 'dev' has been removed!
+++ set +x

@@ -1,4 +1,4 @@
-"""A Python Pulumi program"""
+"""A Simple Python Pulumi program"""
 
 import pulumi
 

@@ -3,4 +3,4 @@ runtime:
   name: python
   options:
     virtualenv: .venv
-description: Simple python app to print Hello, World!
+description: Simple python app to print "Hello, World!"
