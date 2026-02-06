@@ -9,10 +9,10 @@ pulumi config set inout:three "Three is 3"
 set +x
 MY_SECRET="Four is 4"
 pulumi config set inout:four "$MY_SECRET" --secret
-set -x
-
-cat input.txt
 echo -n "$MY_SECRET" | wc -c
+set -x
+cat input.txt
+
 pulumi config
 pulumi up
 pulumi destroy

@@ -21,5 +21,5 @@ print("Из окружения:", env_line)
 print("Из конфига:", config_line)
 print(f"Размер секрета: {len(secret_line)}", )
 
-pulumi.export("message", "inout")
+pulumi.export("message", ", ".join([file_line, env_line, config_line, str(len(secret_line))]))
                        
