@@ -54,7 +54,7 @@ instance = yandex.ComputeInstance(
     ),
     boot_disk=yandex.ComputeInstanceBootDiskArgs(
         initialize_params=yandex.ComputeInstanceBootDiskInitializeParamsArgs(
-            image_id=image_id,  # Ubuntu 22.04 LTS?
+            image_id=image_id,  # LEMP
         ),
     ),
     network_interfaces=[

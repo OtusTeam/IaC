@@ -1,0 +1,109 @@
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ ./run.sh 
+Enter Pulumi passphrase: 
+Created stack 'dev'
+++ pulumi up
+Previewing update (dev):
+     Type                         Name                               Plan       Info
+ +   pulumi:pulumi:Stack          docker-py-multi-container-app-dev  create     
+ +   ├─ docker:index:Network      network                            create     
+ +   ├─ docker:index:RemoteImage  redis_image                        create     
+ +   ├─ docker:index:Image        app_image                          create     1 message
+ +   ├─ docker:index:Container    redis_container                    create     
+ +   └─ docker:index:Container    app_container                      create     
+
+Diagnostics:
+  docker:index:Image (app_image):
+    Building your image for linux/amd64 architecture.
+    To ensure you are building for the correct platform, consider explicitly setting the `platform` field on ImageBuildOptions.
+
+Outputs:
+    url: "http://localhost:5000"
+
+Resources:
+    + 6 to create
+
+Do you want to perform this update? yes
+Updating (dev):
+     Type                         Name                               Status              Info
+ +   pulumi:pulumi:Stack          docker-py-multi-container-app-dev  created (21s)       
+ +   ├─ docker:index:Image        app_image                          created (1s)        1 message
+ +   ├─ docker:index:RemoteImage  redis_image                        created (20s)       
+ +   ├─ docker:index:Network      network                            created (2s)        
+ +   ├─ docker:index:Container    redis_container                    created (0.57s)     
+ +   └─ docker:index:Container    app_container                      created (0.45s)     
+
+Diagnostics:
+  docker:index:Image (app_image):
+    Building your image for linux/amd64 architecture.
+    To ensure you are building for the correct platform, consider explicitly setting the `platform` field on ImageBuildOptions.
+
+Outputs:
+    url: "http://localhost:5000"
+
+Resources:
+    + 6 created
+
+Duration: 22s
+
++++ pulumi stack output url
+++ URL=http://localhost:5000
+++ docker ps
+CONTAINER ID   IMAGE       COMMAND                  CREATED        STATUS                  PORTS                    NAMES
+6cf3a9187473   app         "flask run"              1 second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   app_container-d36c050
+4dd1e44a296b   redis:6.2   "docker-entrypoint.s…"   1 second ago   Up 1 second             0.0.0.0:6379->6379/tcp   redis_container-de48c37
+++ sleep 10
+++ curl http://localhost:5000
+I have been viewed 1 times.
+++ curl http://localhost:5000
+I have been viewed 2 times.
+++ curl http://localhost:5000
+I have been viewed 3 times.
+++ pulumi destroy
+Previewing destroy (dev):
+     Type                         Name                               Plan       
+ -   pulumi:pulumi:Stack          docker-py-multi-container-app-dev  delete     
+ -   ├─ docker:index:Container    app_container                      delete     
+ -   ├─ docker:index:Container    redis_container                    delete     
+ -   ├─ docker:index:Image        app_image                          delete     
+ -   ├─ docker:index:RemoteImage  redis_image                        delete     
+ -   └─ docker:index:Network      network                            delete     
+
+Outputs:
+  - url: "http://localhost:5000"
+
+Resources:
+    - 6 to delete
+
+Do you want to perform this destroy? yes
+Destroying (dev):
+     Type                         Name                               Status              
+ -   pulumi:pulumi:Stack          docker-py-multi-container-app-dev  deleted (0.00s)     
+ -   ├─ docker:index:Container    app_container                      deleted (0.46s)     
+ -   ├─ docker:index:Container    redis_container                    deleted (0.42s)     
+ -   ├─ docker:index:RemoteImage  redis_image                        deleted (0.00s)     
+ -   ├─ docker:index:Image        app_image                          deleted (0.00s)     
+ -   └─ docker:index:Network      network                            deleted (2s)        
+
+Outputs:
+  - url: "http://localhost:5000"
+
+Resources:
+    - 6 deleted
+
+Duration: 4s
+
+The resources in the stack have been deleted, but the history and configuration associated with the stack are still maintained. 
+If you want to remove the stack completely, run `pulumi stack rm dev`.
+++ pulumi stack rm dev
+This will permanently remove the 'dev' stack!
+Please confirm that this is what you'd like to do by typing `dev`: dev
+Stack 'dev' has been removed!
+++ docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+++ docker image rm app:latest
+Untagged: app:latest
+Deleted: sha256:bd070428446a7483c1bff13ed1ba666188ca5cd064ddefbc192383026235320a
+++ docker image rm redis:6.2
+Untagged: redis:6.2
+Deleted: sha256:3469dce13fc6b4f0c217de73fc108fef9419dd15132689542fe12712bd1ffd03
+++ set +x
