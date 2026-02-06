@@ -1,19 +1,19 @@
 import pulumi
 import os
 
-# чтение строки из файла (первой строки файла "input.txt")
-with open("input.txt", "r", encoding="utf-8") as f:
+# чтение строки из файла (первой строки файла "zero.txt")
+with open("zero.txt", "r", encoding="utf-8") as f:
     file_line = f.readline().rstrip("\n")
 
-# чтение строки из переменной окружения MY_VAR
-env_line = os.getenv("MY_VAR", "")
+# чтение строки из переменной окружения
+env_line = os.getenv(file_line, "")
 
 config = pulumi.Config("inout")
 # чтение строки из конфига
-config_line = config.require("three")
+config_line = config.require(env_line)
 
 # чтение строки из секрета
-secret_line = config.require("four")
+secret_line = config.require(config_line)
 
 
 print("Из файла:", file_line)

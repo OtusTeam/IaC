@@ -1,23 +1,24 @@
 set -x
 
-echo "One is 1" > input.txt
-export MY_VAR="Two is 2"
+echo "ONE" > zero.txt
+cat zero.txt
+
+export ONE="Two"
 
 pulumi stack init dev
 
-pulumi config set inout:three "Three is 3"
+pulumi config set inout:Two "Three"
 set +x
-MY_SECRET="Four is 4"
-pulumi config set inout:four "$MY_SECRET" --secret
-echo -n "$MY_SECRET" | wc -c
+FOUR="My Secret Four"
+pulumi config set inout:Three "$FOUR" --secret
+echo -n "$FOUR" | wc -c
 set -x
-cat input.txt
 
 pulumi config
 pulumi up
 pulumi destroy
 
 pulumi stack rm dev
-rm input.txt
+rm zero.txt
 
 set +x
