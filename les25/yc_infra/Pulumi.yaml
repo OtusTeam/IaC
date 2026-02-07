@@ -1,5 +1,5 @@
-name: pulumi_example
-description: AN Example Yandex Python Pulumi program
+name: yc_infra
+description: An example of python Pulumi program for creating an infra (vpc, subnet, LEMP instance) in the yandex cloud 
 runtime:
   name: python
   options:

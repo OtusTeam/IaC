@@ -7,13 +7,9 @@ YC_FOLDER_ID="b1gmesrdjgklgkvcp704" # otus instead $(yc config get folder-id)
 # get IAM-token
 #YC_TOKEN=$(yc iam create-token)
 
-YC_ZONE="ru-central1-a"
-YC_CIDR="192.168.25.0/25" 
+#YC_ZONE="ru-central1-a"
 YC_PREFIX="les25"
-YC_REMOTE_USERNAME="ubuntu"
-YC_IMAGE_ID="fd85r147n5huljgijb47" # LEMP insead "fd84kp940dsrccckilj6" Ubunta 22.04 LTS
-YC_PUB_KEY_PATH="$HOME/.ssh/id_rsa.pub"
-
+FROM_URL="https://jsonplaceholder.typicode.com/posts"
 
 set +x
 # Запрос пасфразы (не отображается при вводе)
@@ -27,11 +23,8 @@ set -x
 pulumi config set yandex:cloudId $YC_CLOUD_ID
 pulumi config set yandex:folderId $YC_FOLDER_ID
 pulumi config set yandex:prefix $YC_PREFIX
-pulumi config set yandex:zone $YC_ZONE
-pulumi config set yandex:cidr $YC_CIDR
-pulumi config set yandex:pub $YC_PUB_KEY_PATH
-pulumi config set yandex:username $YC_REMOTE_USERNAME
-pulumi config set yandex:imageId $YC_IMAGE_ID
+#pulumi config set yandex:zone $YC_ZONE
+pulumi config set yandex:fromUrl $FROM_URL
 
 pulumi config
 pulumi preview
