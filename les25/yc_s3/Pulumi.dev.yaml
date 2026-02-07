@@ -1,8 +1,0 @@
-encryptionsalt: v1:U/74yjK+ubA=:v1:m/yVluptAM57vQy4:435RA3xdkSw7XojBP9H8Bqi1CcMmiw==
-config:
-  yandex:token:
-    secure: v1:9IEMBHLsTgH5xfMF:RfgqLPakQ9jc20xf9uDss7eJOfuaFczgL7I38LVem5Jzo6LuLDCc8RGc2Lf7utplAVO+B2nXJYZhNOw9G8kHRK30MA4oiWVM4Mh13UAofAJiv+T1eGeaonJx7jqMm3cy4F09GzYJQo9BnY8Q9MlrrKhsb11kW3ODlOqMCBkj/FZ5KTTUlKjTx8/o5mB8+WkZd2CvkRCO18CBYEg+9AEDBfWCkvwBdEqK5W4SJTvwfUWbqok52cg0W/3uZLfJEVcJuv6SE99+y5UJj92O5fokKRaEy9sLydDADi21nK5obsKQVSWcLWVryUjU4rLkgJtdPFTOjDQbHFkoBqeJIaAnMNS8nNfaLIkD7X0=
-  yandex:cloudId: b1glq0cg9jigrj5lcp63
-  yandex:folderId: b1gmesrdjgklgkvcp704
-  yandex:prefix: les25
-  yandex:fromUrl: https://jsonplaceholder.typicode.com/posts

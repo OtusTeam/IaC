@@ -31,38 +31,8 @@ pulumi preview
 pulumi up
 pulumi stack output
 
-IP="$(pulumi stack output public_ip)" 
-
-if [ -z "$IP" ]; then
-  echo "Не удалось извлечь public_ip из вывода" >&2
-  exit 3
-fi
-
-echo "Public IP: $IP"
-
-sleep 10
-
-while true; do
-  echo "Curl http://$IP/ ..."
-  if curl -fsS --max-time 30 "http://$IP/"; then
-    echo "curl succeeded, exiting."
-    break
-  else
-    echo "curl failed."
-    # спросить пользователя, отменить ли
-    read -rp "cancel (y/N)? " ans
-    case "${ans,,}" in
-      y|yes)
-        echo "Cancelled by user."
-        exit 0
-        ;;
-      *)
-        echo "Retrying..."
-        ;;
-    esac
-  fi
-done
-
+read -p "press any key to destroy and remove stack ..."
+				      
 pulumi destroy
 
 pulumi stack rm dev

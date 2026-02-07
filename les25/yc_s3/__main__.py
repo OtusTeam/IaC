@@ -35,7 +35,8 @@ items = resp.json()[:3]
 sa = yandex.IamServiceAccount(
     prefix+"-s3",
     folder_id=folder_id,
-    description="Service account for pulumi demo"
+    description="Service account for pulumi demo",
+    opts=pulumi.ResourceOptions(provider=provider),
 )
 
 # 3) Дать сервисному аккаунту роль storage.editor в папке
@@ -44,13 +45,15 @@ sa_role = yandex.ResourcemanagerFolderIamMember(
     folder_id=folder_id,
     role="storage.editor",
     member=sa.id.apply(lambda id: f"serviceAccount:{id}"),
+    opts=pulumi.ResourceOptions(provider=provider,depends_on=[sa]),
 )
 
 # 4) Создать статический ключ сервисного аккаунта (используется для доступа к Object Storage)
 sa_key = yandex.IamServiceAccountStaticAccessKey(
     prefix+"sa-static-key",
     service_account_id=sa.id,
-    description="static key for object storage"
+    description="static key for object storage",
+    opts=pulumi.ResourceOptions(provider=provider,depends_on=[sa_role]),
 )
 
 # 5) Создать Storage Bucket (Yandex Object Storage)
@@ -60,6 +63,7 @@ bucket = yandex.StorageBucket(
     secret_key=sa_key.secret_key,
     bucket=bucket_name,
     acl="private",
+    opts=pulumi.ResourceOptions(provider=provider,depends_on=[sa_key]),
 )
 
 # 6) Динамически создать объекты в бакете на основании items
@@ -74,6 +78,9 @@ for it in items:
         key=key,
         content_base64=base64.b64encode(content.encode("utf-8")).decode("utf-8"),
         acl="private",
+        access_key=sa_key.access_key,   # ключи для управления бакетом
+        secret_key=sa_key.secret_key,
+        opts=pulumi.ResourceOptions(provider=provider,depends_on=[bucket]),
     )
     objects.append(obj)
 

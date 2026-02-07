@@ -1,189 +1,181 @@
-(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/yc_infra$ ./run.sh 
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/yc_s3$ ./run.sh 
 +++ yc config get cloud-id
 ++ YC_CLOUD_ID=b1glq0cg9jigrj5lcp63
 ++ YC_FOLDER_ID=b1gmesrdjgklgkvcp704
-++ YC_ZONE=ru-central1-a
-++ YC_CIDR=192.168.25.0/25
 ++ YC_PREFIX=les25
-++ YC_REMOTE_USERNAME=ubuntu
-++ YC_IMAGE_ID=fd85r147n5huljgijb47
-++ YC_PUB_KEY_PATH=/home/za/.ssh/id_rsa.pub
+++ FROM_URL=https://jsonplaceholder.typicode.com/posts
 ++ set +x
 Enter Pulumi passphrase: 
 Created stack 'dev'
 ++ pulumi config set yandex:cloudId b1glq0cg9jigrj5lcp63
 ++ pulumi config set yandex:folderId b1gmesrdjgklgkvcp704
 ++ pulumi config set yandex:prefix les25
-++ pulumi config set yandex:zone ru-central1-a
-++ pulumi config set yandex:cidr 192.168.25.0/25
-++ pulumi config set yandex:pub /home/za/.ssh/id_rsa.pub
-++ pulumi config set yandex:username ubuntu
-++ pulumi config set yandex:imageId fd85r147n5huljgijb47
+++ pulumi config set yandex:fromUrl https://jsonplaceholder.typicode.com/posts
 ++ pulumi config
 KEY              VALUE
 pulumi:tags      {"pulumi:template":"yandex-python"}
-yandex:cidr      192.168.25.0/25
 yandex:cloudId   b1glq0cg9jigrj5lcp63
 yandex:folderId  b1gmesrdjgklgkvcp704
-yandex:imageId   fd85r147n5huljgijb47
+yandex:fromUrl   https://jsonplaceholder.typicode.com/posts
 yandex:prefix    les25
-yandex:pub       /home/za/.ssh/id_rsa.pub
 yandex:token     [secret]
-yandex:username  ubuntu
-yandex:zone      ru-central1-a
 ++ pulumi preview
 Previewing update (dev):
-     Type                             Name                Plan       Info
- +   pulumi:pulumi:Stack              pulumi_example-dev  create     2 messages
- +   ├─ pulumi:providers:yandex       yandex              create     
- +   ├─ yandex:index:VpcNetwork       les25-network       create     
- +   ├─ yandex:index:VpcSubnet        les25-subnet        create     
- +   └─ yandex:index:ComputeInstance  les25-instance      create     
+     Type                                              Name                    Plan       Info
+ +   pulumi:pulumi:Stack                               yc_s3-dev               create     2 messages
+ +   ├─ pulumi:providers:yandex                        yandex                  create     
+ +   ├─ yandex:index:IamServiceAccount                 les25-s3                create     
+ +   ├─ yandex:index:ResourcemanagerFolderIamMember    les25sa-storage-editor  create     
+ +   ├─ yandex:index:IamServiceAccountStaticAccessKey  les25sa-static-key      create     
+ +   ├─ yandex:index:StorageBucket                     les25-s3-dev            create     
+ +   ├─ yandex:index:StorageObject                     obj-1                   create     
+ +   ├─ yandex:index:StorageObject                     obj-2                   create     
+ +   └─ yandex:index:StorageObject                     obj-3                   create     
 
 Diagnostics:
-  pulumi:pulumi:Stack (pulumi_example-dev):
-    /home/za/Documents/IaC/2git/les25/yc_infra/.venv/lib/python3.10/site-packages/pulumi_yandex/_utilities.py:10: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  pulumi:pulumi:Stack (yc_s3-dev):
+    /home/za/Documents/IaC/2git/les25/yc_s3/.venv/lib/python3.10/site-packages/pulumi_yandex/_utilities.py:10: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
       import pkg_resources
 
 Outputs:
-    instance_name: "les25-instance-13e298d"
-    public_ip    : [unknown]
+    bucket_name     : "les25-s3-dev"
+    created_keys    : [
+        [0]: "post-1.txt"
+        [1]: "post-2.txt"
+        [2]: "post-3.txt"
+    ]
+    sa_access_key_id: [unknown]
+    sa_secret_key   : [unknown]
 
 Resources:
-    + 5 to create
+    + 9 to create
 
 ++ pulumi up
 Previewing update (dev):
-     Type                             Name                Plan       Info
- +   pulumi:pulumi:Stack              pulumi_example-dev  create     2 messages
- +   ├─ pulumi:providers:yandex       yandex              create     
- +   ├─ yandex:index:VpcNetwork       les25-network       create     
- +   ├─ yandex:index:VpcSubnet        les25-subnet        create     
- +   └─ yandex:index:ComputeInstance  les25-instance      create     
+     Type                                              Name                    Plan       Info
+ +   pulumi:pulumi:Stack                               yc_s3-dev               create     2 messages
+ +   ├─ pulumi:providers:yandex                        yandex                  create     
+ +   ├─ yandex:index:IamServiceAccount                 les25-s3                create     
+ +   ├─ yandex:index:ResourcemanagerFolderIamMember    les25sa-storage-editor  create     
+ +   ├─ yandex:index:IamServiceAccountStaticAccessKey  les25sa-static-key      create     
+ +   ├─ yandex:index:StorageBucket                     les25-s3-dev            create     
+ +   ├─ yandex:index:StorageObject                     obj-2                   create     
+ +   ├─ yandex:index:StorageObject                     obj-3                   create     
+ +   └─ yandex:index:StorageObject                     obj-1                   create     
 
 Diagnostics:
-  pulumi:pulumi:Stack (pulumi_example-dev):
-    /home/za/Documents/IaC/2git/les25/yc_infra/.venv/lib/python3.10/site-packages/pulumi_yandex/_utilities.py:10: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  pulumi:pulumi:Stack (yc_s3-dev):
+    /home/za/Documents/IaC/2git/les25/yc_s3/.venv/lib/python3.10/site-packages/pulumi_yandex/_utilities.py:10: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
       import pkg_resources
 
 Outputs:
-    instance_name: "les25-instance-54b7a72"
-    public_ip    : [unknown]
+    bucket_name     : "les25-s3-dev"
+    created_keys    : [
+        [0]: "post-1.txt"
+        [1]: "post-2.txt"
+        [2]: "post-3.txt"
+    ]
+    sa_access_key_id: [unknown]
+    sa_secret_key   : [unknown]
 
 Resources:
-    + 5 to create
+    + 9 to create
 
 Do you want to perform this update? yes
 Updating (dev):
-     Type                             Name                Status              Info
- +   pulumi:pulumi:Stack              pulumi_example-dev  created (46s)       2 messages
- +   ├─ pulumi:providers:yandex       yandex              created (0.00s)     
- +   ├─ yandex:index:VpcNetwork       les25-network       created (3s)        
- +   ├─ yandex:index:VpcSubnet        les25-subnet        created (0.58s)     
- +   └─ yandex:index:ComputeInstance  les25-instance      created (42s)       
+     Type                                              Name                    Status              Info
+ +   pulumi:pulumi:Stack                               yc_s3-dev               created (9s)        2 messages
+ +   ├─ pulumi:providers:yandex                        yandex                  created (0.00s)     
+ +   ├─ yandex:index:IamServiceAccount                 les25-s3                created (2s)        
+ +   ├─ yandex:index:ResourcemanagerFolderIamMember    les25sa-storage-editor  created (2s)        
+ +   ├─ yandex:index:IamServiceAccountStaticAccessKey  les25sa-static-key      created (1s)        
+ +   ├─ yandex:index:StorageBucket                     les25-s3-dev            created (2s)        
+ +   ├─ yandex:index:StorageObject                     obj-1                   created (0.19s)     
+ +   ├─ yandex:index:StorageObject                     obj-3                   created (0.22s)     
+ +   └─ yandex:index:StorageObject                     obj-2                   created (0.22s)     
 
 Diagnostics:
-  pulumi:pulumi:Stack (pulumi_example-dev):
-    /home/za/Documents/IaC/2git/les25/yc_infra/.venv/lib/python3.10/site-packages/pulumi_yandex/_utilities.py:10: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  pulumi:pulumi:Stack (yc_s3-dev):
+    /home/za/Documents/IaC/2git/les25/yc_s3/.venv/lib/python3.10/site-packages/pulumi_yandex/_utilities.py:10: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
       import pkg_resources
 
 Outputs:
-    instance_name: "les25-instance-c2307a8"
-    public_ip    : "62.84.117.108"
+    bucket_name     : "les25-s3-dev"
+    created_keys    : [
+        [0]: "post-1.txt"
+        [1]: "post-2.txt"
+        [2]: "post-3.txt"
+    ]
+    sa_access_key_id: "YCAJEfd47xShW5cXANUYxdl1y"
+    sa_secret_key   : [secret]
 
 Resources:
-    + 5 created
+    + 9 created
 
-Duration: 48s
+Duration: 12s
 
 ++ pulumi stack output
-Current stack outputs (2):
-    OUTPUT         VALUE
-    instance_name  les25-instance-c2307a8
-    public_ip      62.84.117.108
-+++ pulumi stack output public_ip
-++ IP=62.84.117.108
-++ '[' -z 62.84.117.108 ']'
-++ echo 'Public IP: 62.84.117.108'
-Public IP: 62.84.117.108
-++ sleep 10
-++ true
-++ echo 'Curl http://62.84.117.108/ ...'
-Curl http://62.84.117.108/ ...
-++ curl -fsS --max-time 30 http://62.84.117.108/
-curl: (56) Recv failure: Соединение разорвано другой стороной
-++ echo 'curl failed.'
-curl failed.
-++ read -rp 'cancel (y/N)? ' ans
-cancel (y/N)? 
-++ case "${ans,,}" in
-++ echo Retrying...
-Retrying...
-++ true
-++ echo 'Curl http://62.84.117.108/ ...'
-Curl http://62.84.117.108/ ...
-++ curl -fsS --max-time 30 http://62.84.117.108/
-<!DOCTYPE html>
-<html>
-<head>
-<title>Welcome to nginx!</title>
-<style>
-    body {
-        width: 35em;
-        margin: 0 auto;
-        font-family: Tahoma, Verdana, Arial, sans-serif;
-    }
-</style>
-</head>
-<body>
-<h1>Welcome to nginx!</h1>
-<p>If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.</p>
-
-<p>For online documentation and support please refer to
-<a href="http://nginx.org/">nginx.org</a>.<br/>
-Commercial support is available at
-<a href="http://nginx.com/">nginx.com</a>.</p>
-
-<p><em>Thank you for using nginx.</em></p>
-</body>
-</html>
-++ echo 'curl succeeded, exiting.'
-curl succeeded, exiting.
-++ break
+Current stack outputs (4):
+    OUTPUT            VALUE
+    bucket_name       les25-s3-dev
+    created_keys      ["post-1.txt","post-2.txt","post-3.txt"]
+    sa_access_key_id  YCAJEfd47xShW5cXANUYxdl1y
+    sa_secret_key     [secret]
+++ read -p 'press any key to destroy and remove stack ...'
+press any key to destroy and remove stack ...
 ++ pulumi destroy
 Previewing destroy (dev):
-     Type                             Name                Plan       
- -   pulumi:pulumi:Stack              pulumi_example-dev  delete     
- -   ├─ pulumi:providers:yandex       yandex              delete     
- -   ├─ yandex:index:ComputeInstance  les25-instance      delete     
- -   ├─ yandex:index:VpcSubnet        les25-subnet        delete     
- -   └─ yandex:index:VpcNetwork       les25-network       delete     
+     Type                                              Name                    Plan       
+ -   pulumi:pulumi:Stack                               yc_s3-dev               delete     
+ -   ├─ yandex:index:StorageObject                     obj-2                   delete     
+ -   ├─ yandex:index:StorageBucket                     les25-s3-dev            delete     
+ -   ├─ yandex:index:ResourcemanagerFolderIamMember    les25sa-storage-editor  delete     
+ -   ├─ yandex:index:IamServiceAccount                 les25-s3                delete     
+ -   ├─ yandex:index:StorageObject                     obj-3                   delete     
+ -   ├─ yandex:index:StorageObject                     obj-1                   delete     
+ -   ├─ yandex:index:IamServiceAccountStaticAccessKey  les25sa-static-key      delete     
+ -   └─ pulumi:providers:yandex                        yandex                  delete     
 
 Outputs:
-  - instance_name: "les25-instance-c2307a8"
-  - public_ip    : "62.84.117.108"
+  - bucket_name     : "les25-s3-dev"
+  - created_keys    : [
+  -     [0]: "post-1.txt"
+  -     [1]: "post-2.txt"
+  -     [2]: "post-3.txt"
+    ]
+  - sa_access_key_id: "YCAJEfd47xShW5cXANUYxdl1y"
+  - sa_secret_key   : [secret]
 
 Resources:
-    - 5 to delete
+    - 9 to delete
 
 Do you want to perform this destroy? yes
 Destroying (dev):
-     Type                             Name                Status              
- -   pulumi:pulumi:Stack              pulumi_example-dev  deleted (0.00s)     
- -   ├─ yandex:index:ComputeInstance  les25-instance      deleted (32s)       
- -   ├─ yandex:index:VpcSubnet        les25-subnet        deleted (4s)        
- -   ├─ yandex:index:VpcNetwork       les25-network       deleted (0.64s)     
- -   └─ pulumi:providers:yandex       yandex              deleted (0.01s)     
+     Type                                              Name                    Status              
+ -   pulumi:pulumi:Stack                               yc_s3-dev               deleted (0.00s)     
+ -   ├─ yandex:index:StorageObject                     obj-3                   deleted (0.31s)     
+ -   ├─ yandex:index:StorageObject                     obj-2                   deleted (0.36s)     
+ -   ├─ yandex:index:StorageObject                     obj-1                   deleted (0.35s)     
+ -   ├─ yandex:index:StorageBucket                     les25-s3-dev            deleted (11s)       
+ -   ├─ yandex:index:IamServiceAccountStaticAccessKey  les25sa-static-key      deleted (0.96s)     
+ -   ├─ yandex:index:ResourcemanagerFolderIamMember    les25sa-storage-editor  deleted (3s)        
+ -   ├─ yandex:index:IamServiceAccount                 les25-s3                deleted (2s)        
+ -   └─ pulumi:providers:yandex                        yandex                  deleted (0.01s)     
 
 Outputs:
-  - instance_name: "les25-instance-c2307a8"
-  - public_ip    : "62.84.117.108"
+  - bucket_name     : "les25-s3-dev"
+  - created_keys    : [
+  -     [0]: "post-1.txt"
+  -     [1]: "post-2.txt"
+  -     [2]: "post-3.txt"
+    ]
+  - sa_access_key_id: "YCAJEfd47xShW5cXANUYxdl1y"
+  - sa_secret_key   : [secret]
 
 Resources:
-    - 5 deleted
+    - 9 deleted
 
-Duration: 39s
+Duration: 20s
 
 The resources in the stack have been deleted, but the history and configuration associated with the stack are still maintained. 
 If you want to remove the stack completely, run `pulumi stack rm dev`.
