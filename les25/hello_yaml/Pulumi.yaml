@@ -1,0 +1,10 @@
+name: pulumi-hello-yaml
+runtime: yaml
+
+config:
+  message:
+    default: "Hello, World from Pulumi YAML!"
+
+outputs:
+  message:
+    value: ${message}
