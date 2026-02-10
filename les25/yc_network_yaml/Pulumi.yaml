@@ -1,4 +1,4 @@
-name: yc-hello-world
+name: yc-hello-world-network
 runtime: yaml
 
 variables:
@@ -6,9 +6,9 @@ variables:
 
 resources:
   network:
-    type: yandex:index/vpcNetwork:VpcNetwork
+    type: yandex:VpcNetwork
     properties:
-      name: ${prefix}-network
+      name: ${prefix}-hello-world-network
 
 outputs:
   networkId: ${network.id}

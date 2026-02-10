@@ -11,9 +11,9 @@ Created stack 'dev'
 ++ pulumi config set prefix les25
 ++ pulumi up
 Previewing update (dev):
-     Type                        Name                Plan       
- +   pulumi:pulumi:Stack         yc-hello-world-dev  create     
- +   └─ yandex:index:VpcNetwork  network             create     
+     Type                        Name                        Plan       
+ +   pulumi:pulumi:Stack         yc-hello-world-network-dev  create     
+ +   └─ yandex:index:VpcNetwork  network                     create     
 
 Outputs:
     networkId: [unknown]
@@ -23,12 +23,12 @@ Resources:
 
 Do you want to perform this update? yes
 Updating (dev):
-     Type                        Name                Status           
- +   pulumi:pulumi:Stack         yc-hello-world-dev  created (3s)     
- +   └─ yandex:index:VpcNetwork  network             created (3s)     
+     Type                        Name                        Status           
+ +   pulumi:pulumi:Stack         yc-hello-world-network-dev  created (3s)     
+ +   └─ yandex:index:VpcNetwork  network                     created (3s)     
 
 Outputs:
-    networkId: "enp96l7g6ed0bkik6dd4"
+    networkId: "enp626647tii2dda8348"
 
 Resources:
     + 2 created
@@ -38,35 +38,35 @@ Duration: 4s
 ++ pulumi stack output
 Current stack outputs (1):
     OUTPUT     VALUE
-    networkId  enp96l7g6ed0bkik6dd4
+    networkId  enp626647tii2dda8348
 +++ pulumi stack output networkId
-++ yc vpc network get enp96l7g6ed0bkik6dd4
-id: enp96l7g6ed0bkik6dd4
+++ yc vpc network get enp626647tii2dda8348
+id: enp626647tii2dda8348
 folder_id: b1gmesrdjgklgkvcp704
-created_at: "2026-02-10T06:00:44Z"
-name: les25-network
-default_security_group_id: enps1s6cn260glioec0d
+created_at: "2026-02-10T06:07:43Z"
+name: les25-hello-world-network
+default_security_group_id: enp0nqu006rf0bpt1vvj
 
 ++ pulumi destroy
 Previewing destroy (dev):
-     Type                        Name                Plan       
- -   pulumi:pulumi:Stack         yc-hello-world-dev  delete     
- -   └─ yandex:index:VpcNetwork  network             delete     
+     Type                        Name                        Plan       
+ -   pulumi:pulumi:Stack         yc-hello-world-network-dev  delete     
+ -   └─ yandex:index:VpcNetwork  network                     delete     
 
 Outputs:
-  - networkId: "enp96l7g6ed0bkik6dd4"
+  - networkId: "enp626647tii2dda8348"
 
 Resources:
     - 2 to delete
 
 Do you want to perform this destroy? yes
 Destroying (dev):
-     Type                        Name                Status              
- -   pulumi:pulumi:Stack         yc-hello-world-dev  deleted (0.00s)     
- -   └─ yandex:index:VpcNetwork  network             deleted (1s)        
+     Type                        Name                        Status              
+ -   pulumi:pulumi:Stack         yc-hello-world-network-dev  deleted (0.00s)     
+ -   └─ yandex:index:VpcNetwork  network                     deleted (1s)        
 
 Outputs:
-  - networkId: "enp96l7g6ed0bkik6dd4"
+  - networkId: "enp626647tii2dda8348"
 
 Resources:
     - 2 deleted
