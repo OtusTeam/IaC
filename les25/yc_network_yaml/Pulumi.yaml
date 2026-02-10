@@ -1,0 +1,14 @@
+name: yc-hello-world
+runtime: yaml
+
+variables:
+  prefix: ${config:prefix}
+
+resources:
+  network:
+    type: yandex:index/vpcNetwork:VpcNetwork
+    properties:
+      name: ${prefix}-network
+
+outputs:
+  networkId: ${network.id}
