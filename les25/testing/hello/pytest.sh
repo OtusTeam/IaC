@@ -7,14 +7,14 @@ export PULUMI_CONFIG_PASSPHRASE
 pulumi stack init test
 set -x
 
-pulumi up
+pulumi up --yes
 
-pytest test.py
+pytest --verbosity=1 test.py
 
 echo
 
 set -x
 
-pulumi destroy
-pulumi stack rm test
+pulumi destroy --yes
+pulumi stack rm test -y
 set +x

@@ -7,7 +7,7 @@ export PULUMI_CONFIG_PASSPHRASE
 pulumi stack init test
 set -x
 
-pulumi up
+pulumi up --yes
 
 set +x
 
@@ -60,6 +60,6 @@ echo
 
 set -x
 
-pulumi destroy
-pulumi stack rm test
+pulumi destroy --yes
+pulumi stack rm test -y
 set +x
