@@ -1,0 +1,69 @@
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/testing/hello$ ./convert_and_run.sh 
+++ pulumi convert --from terraform --language python --generate-only
+Converting from terraform...
+Converting to python...
+You can import the SDK in your Python code with:
+
+
+++ set +x
+Enter Pulumi passphrase: 
+Created stack 'dev'
+++ pulumi up
+Previewing update (dev):
+     Type                 Name       Plan       
+ +   pulumi:pulumi:Stack  hello-dev  create     
+
+Outputs:
+    helloWorld: "Hello, World!"
+
+Resources:
+    + 1 to create
+
+info: There are no resources in your stack (other than the stack resource).
+
+Do you want to perform this update? yes
+Updating (dev):
+     Type                 Name       Status              
+ +   pulumi:pulumi:Stack  hello-dev  created (0.05s)     
+
+Outputs:
+    helloWorld: "Hello, World!"
+
+Resources:
+    + 1 created
+
+Duration: 1s
+
+++ read -p 'Press any key to continue ...'
+Press any key to continue ...
+++ pulumi destroy
+Previewing destroy (dev):
+     Type                 Name       Plan       
+ -   pulumi:pulumi:Stack  hello-dev  delete     
+
+Outputs:
+  - helloWorld: "Hello, World!"
+
+Resources:
+    - 1 to delete
+
+Do you want to perform this destroy? yes
+Destroying (dev):
+     Type                 Name       Status              
+ -   pulumi:pulumi:Stack  hello-dev  deleted (0.00s)     
+
+Outputs:
+  - helloWorld: "Hello, World!"
+
+Resources:
+    - 1 deleted
+
+Duration: 1s
+
+The resources in the stack have been deleted, but the history and configuration associated with the stack are still maintained. 
+If you want to remove the stack completely, run `pulumi stack rm dev`.
+++ pulumi stack rm dev
+This will permanently remove the 'dev' stack!
+Please confirm that this is what you'd like to do by typing `dev`: dev
+Stack 'dev' has been removed!
+++ set +x
