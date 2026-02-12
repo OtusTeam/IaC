@@ -1,0 +1,11 @@
+name: single
+runtime: python
+config:
+  yandex:cloudId:
+    value: 'TODO: var.yc_cloud_id'
+  yandex:folderId:
+    value: 'TODO: var.yc_folder_id'
+  yandex:token:
+    value: 'TODO: var.yc_token'
+  yandex:zone:
+    value: 'TODO: var.yc_default_zone'

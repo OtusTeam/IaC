@@ -1,0 +1,19 @@
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/testing/single$ ./convert.sh 
+++ pulumi convert --from terraform --language python --generate-only
+Converting from terraform...
+Downloading provider: terraform-provider
+warning: /home/za/Documents/IaC/2git/les25/testing/single/provider.tf:1,1-18: Failed to evaluate provider config; Could not evaluate expression for yandex:token
+warning: /home/za/Documents/IaC/2git/les25/testing/single/provider.tf:1,1-18: Failed to evaluate provider config; Could not evaluate expression for yandex:cloud_id
+warning: /home/za/Documents/IaC/2git/les25/testing/single/provider.tf:1,1-18: Failed to evaluate provider config; Could not evaluate expression for yandex:folder_id
+warning: /home/za/Documents/IaC/2git/les25/testing/single/provider.tf:1,1-18: Failed to evaluate provider config; Could not evaluate expression for yandex:zone
+Converting to python...
+Downloading provider: terraform-provider
+Downloading provider: std
+warning: <nil>: #/functions/pulumi:providers:yandex%2FterraformConfig/inputs/properties/__self__/$ref: reference to provider resource '/resources/pulumi:providers:yandex' is deprecated, use '#/provider' instead; 
+warning: <nil>: #/functions/pulumi:providers:yandex%2FterraformConfig/inputs/properties/__self__/$ref: reference to provider resource '/resources/pulumi:providers:yandex' is deprecated, use '#/provider' instead; 
+Generated local SDK for package 'terraform-provider:yandex'
+You can import the SDK in your Python code with:
+
+  import pulumi_yandex as yandex
+
+++ set +x

@@ -1,0 +1,10 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/testing/single$ ./run_tf_test.sh 
+++ terraform test
+tests/ssh_connect.tftest.hcl... in progress
+  run "check_ip"... pass
+  run "check_ssh_connect"... pass
+tests/ssh_connect.tftest.hcl... tearing down
+tests/ssh_connect.tftest.hcl... pass
+
+Success! 2 passed, 0 failed.
+++ set +x

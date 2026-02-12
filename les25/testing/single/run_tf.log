@@ -1,0 +1,312 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/testing/single$ ./run_tf.sh 
+++ terraform apply
+data.yandex_compute_image.ubuntu_image: Reading...
+data.yandex_compute_image.ubuntu_image: Read complete after 1s [id=fd8f4n6vfhcd5mh6qpn0]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.vm will be created
+  + resource "yandex_compute_instance" "vm" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hardware_generation       = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = (sensitive value)
+        }
+      + name                      = "les25-single"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + status                    = (known after apply)
+      + zone                      = (known after apply)
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd8f4n6vfhcd5mh6qpn0"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index          = (known after apply)
+          + ip_address     = (known after apply)
+          + ipv4           = true
+          + ipv6           = (known after apply)
+          + ipv6_address   = (known after apply)
+          + mac_address    = (known after apply)
+          + nat            = true
+          + nat_ip_address = (known after apply)
+          + nat_ip_version = (known after apply)
+          + subnet_id      = (known after apply)
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 5
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy {
+          + preemptible = true
+        }
+    }
+
+  # yandex_vpc_network.network will be created
+  + resource "yandex_vpc_network" "network" {
+      + created_at                = (known after apply)
+      + default_security_group_id = (known after apply)
+      + description               = "the net for some single subnet and vm"
+      + folder_id                 = (known after apply)
+      + id                        = (known after apply)
+      + labels                    = (known after apply)
+      + name                      = "les25-single"
+      + subnet_ids                = (known after apply)
+    }
+
+  # yandex_vpc_subnet.subnet will be created
+  + resource "yandex_vpc_subnet" "subnet" {
+      + created_at     = (known after apply)
+      + description    = "the subnet for some single vm"
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + labels         = (known after apply)
+      + name           = "les25-single"
+      + network_id     = (known after apply)
+      + v4_cidr_blocks = [
+          + "192.168.1.0/24",
+        ]
+      + v6_cidr_blocks = (known after apply)
+      + zone           = "ru-central1-a"
+    }
+
+Plan: 3 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + vm_public_ip = (known after apply)
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+yandex_vpc_network.network: Creating...
+yandex_vpc_network.network: Creation complete after 3s [id=enpuu9p9v4on8f959aj7]
+yandex_vpc_subnet.subnet: Creating...
+yandex_vpc_subnet.subnet: Creation complete after 1s [id=e9bj250kg57vudr3pmtq]
+yandex_compute_instance.vm: Creating...
+yandex_compute_instance.vm: Still creating... [00m10s elapsed]
+yandex_compute_instance.vm: Still creating... [00m20s elapsed]
+yandex_compute_instance.vm: Still creating... [00m30s elapsed]
+yandex_compute_instance.vm: Still creating... [00m40s elapsed]
+yandex_compute_instance.vm: Still creating... [00m50s elapsed]
+yandex_compute_instance.vm: Still creating... [01m00s elapsed]
+yandex_compute_instance.vm: Still creating... [01m10s elapsed]
+yandex_compute_instance.vm: Still creating... [01m20s elapsed]
+yandex_compute_instance.vm: Still creating... [01m30s elapsed]
+yandex_compute_instance.vm: Still creating... [01m40s elapsed]
+yandex_compute_instance.vm: Still creating... [01m50s elapsed]
+yandex_compute_instance.vm: Still creating... [02m00s elapsed]
+yandex_compute_instance.vm: Creation complete after 2m3s [id=fhme45pd1cjf0f1vrikk]
+
+Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+vm_public_ip = "93.77.184.188"
++++ terraform output -raw vm_public_ip
+++ export VM_PUBLIC_IP=93.77.184.188
+++ VM_PUBLIC_IP=93.77.184.188
+++ ping 93.77.184.188
+PING 93.77.184.188 (93.77.184.188) 56(84) bytes of data.
+64 bytes from 93.77.184.188: icmp_seq=15 ttl=58 time=70.9 ms
+64 bytes from 93.77.184.188: icmp_seq=16 ttl=58 time=70.4 ms
+64 bytes from 93.77.184.188: icmp_seq=17 ttl=58 time=70.9 ms
+64 bytes from 93.77.184.188: icmp_seq=18 ttl=58 time=70.9 ms
+64 bytes from 93.77.184.188: icmp_seq=19 ttl=58 time=70.3 ms
+^C
+--- 93.77.184.188 ping statistics ---
+19 packets transmitted, 5 received, 73.6842% packet loss, time 18322ms
+rtt min/avg/max/mdev = 70.284/70.667/70.944/0.268 ms
+++ ssh.sh ubuntu@93.77.184.188 ping -c 1 otus.ru
++ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@93.77.184.188 ping -c 1 otus.ru
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@93.77.184.188 ping -c 1 otus.ru
+Warning: Permanently added '93.77.184.188' (ED25519) to the list of known hosts.
+PING otus.ru (212.193.157.90) 56(84) bytes of data.
+64 bytes from cdn.ngenix.net (212.193.157.90): icmp_seq=1 ttl=59 time=4.67 ms
+
+--- otus.ru ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 4.665/4.665/4.665/0.000 ms
+++ read -p 'press any key to continue ...'
+press any key to continue ...
+++ terraform destroy
+data.yandex_compute_image.ubuntu_image: Reading...
+yandex_vpc_network.network: Refreshing state... [id=enpuu9p9v4on8f959aj7]
+data.yandex_compute_image.ubuntu_image: Read complete after 1s [id=fd8f4n6vfhcd5mh6qpn0]
+yandex_vpc_subnet.subnet: Refreshing state... [id=e9bj250kg57vudr3pmtq]
+yandex_compute_instance.vm: Refreshing state... [id=fhme45pd1cjf0f1vrikk]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.vm will be destroyed
+  - resource "yandex_compute_instance" "vm" {
+      - created_at                = "2026-02-11T13:18:24Z" -> null
+      - folder_id                 = "b1gphr6mcggqjvd9kl4h" -> null
+      - fqdn                      = "fhme45pd1cjf0f1vrikk.auto.internal" -> null
+      - hardware_generation       = [
+          - {
+              - generation2_features = []
+              - legacy_features      = [
+                  - {
+                      - pci_topology = "PCI_TOPOLOGY_V2"
+                    },
+                ]
+            },
+        ] -> null
+      - id                        = "fhme45pd1cjf0f1vrikk" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = (sensitive value)
+        } -> null
+      - name                      = "les25-single" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-a" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "fhmvc2bhn7858ubcdgqq" -> null
+          - disk_id     = "fhmvc2bhn7858ubcdgqq" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd8f4n6vfhcd5mh6qpn0" -> null
+                name        = null
+              - size        = 8 -> null
+              - type        = "network-hdd" -> null
+                # (3 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "192.168.1.13" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:e2:17:2d:0b" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "93.77.184.188" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e9bj250kg57vudr3pmtq" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 5 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = true -> null
+        }
+    }
+
+  # yandex_vpc_network.network will be destroyed
+  - resource "yandex_vpc_network" "network" {
+      - created_at                = "2026-02-11T13:18:20Z" -> null
+      - default_security_group_id = "enp1qorvhoopqb2nra9g" -> null
+      - description               = "the net for some single subnet and vm" -> null
+      - folder_id                 = "b1gphr6mcggqjvd9kl4h" -> null
+      - id                        = "enpuu9p9v4on8f959aj7" -> null
+      - labels                    = {} -> null
+      - name                      = "les25-single" -> null
+      - subnet_ids                = [
+          - "e9bj250kg57vudr3pmtq",
+        ] -> null
+    }
+
+  # yandex_vpc_subnet.subnet will be destroyed
+  - resource "yandex_vpc_subnet" "subnet" {
+      - created_at     = "2026-02-11T13:18:23Z" -> null
+      - description    = "the subnet for some single vm" -> null
+      - folder_id      = "b1gphr6mcggqjvd9kl4h" -> null
+      - id             = "e9bj250kg57vudr3pmtq" -> null
+      - labels         = {} -> null
+      - name           = "les25-single" -> null
+      - network_id     = "enpuu9p9v4on8f959aj7" -> null
+      - v4_cidr_blocks = [
+          - "192.168.1.0/24",
+        ] -> null
+      - v6_cidr_blocks = [] -> null
+      - zone           = "ru-central1-a" -> null
+        # (1 unchanged attribute hidden)
+    }
+
+Plan: 0 to add, 0 to change, 3 to destroy.
+
+Changes to Outputs:
+  - vm_public_ip = "93.77.184.188" -> null
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+yandex_compute_instance.vm: Destroying... [id=fhme45pd1cjf0f1vrikk]
+yandex_compute_instance.vm: Still destroying... [id=fhme45pd1cjf0f1vrikk, 00m10s elapsed]
+yandex_compute_instance.vm: Still destroying... [id=fhme45pd1cjf0f1vrikk, 00m20s elapsed]
+yandex_compute_instance.vm: Still destroying... [id=fhme45pd1cjf0f1vrikk, 00m30s elapsed]
+yandex_compute_instance.vm: Destruction complete after 35s
+yandex_vpc_subnet.subnet: Destroying... [id=e9bj250kg57vudr3pmtq]
+yandex_vpc_subnet.subnet: Destruction complete after 5s
+yandex_vpc_network.network: Destroying... [id=enpuu9p9v4on8f959aj7]
+yandex_vpc_network.network: Destruction complete after 1s
+
+Destroy complete! Resources: 3 destroyed.
+++ set +x

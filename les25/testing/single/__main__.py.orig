@@ -1,0 +1,54 @@
+import pulumi
+import pulumi_std as std
+import pulumi_yandex as yandex
+
+ubuntu_image = yandex.get_compute_image_output(family="ubuntu-2204-lts")
+config = pulumi.Config()
+# Yandex Cloud ID
+prefix = config.require("prefix")
+# Yandex Cloud ID
+yc_cloud_id = config.require("ycCloudId")
+# Yandex Cloud folder
+yc_folder_id = config.require("ycFolderId")
+# Yandex Cloud OAuth token
+yc_token = config.require("ycToken")
+# Yandex Cloud default zone
+yc_default_zone = config.get("ycDefaultZone")
+if yc_default_zone is None:
+    yc_default_zone = "ru-central1-a"
+yc_username = config.get("ycUsername")
+if yc_username is None:
+    yc_username = "ubuntu"
+pub_key_path = config.require("pubKeyPath")
+network = yandex.VpcNetwork("network",
+    name=f"{prefix}-single",
+    description="the net for some single subnet and vm")
+subnet = yandex.VpcSubnet("subnet",
+    name=f"{prefix}-single",
+    description="the subnet for some single vm",
+    v4_cidr_blocks=["192.168.1.0/24"],
+    zone=yc_default_zone,
+    network_id=network.vpc_network_id)
+vm = yandex.ComputeInstance("vm",
+    name=f"{prefix}-single",
+    resources={
+        "core_fraction": 5,
+        "cores": 2,
+        "memory": 2,
+    },
+    boot_disk={
+        "initialize_params": {
+            "image_id": ubuntu_image.id,
+        },
+    },
+    network_interfaces=[{
+        "subnet_id": subnet.vpc_subnet_id,
+        "nat": True,
+    }],
+    metadata={
+        "ssh-keys": std.file_output(input=pub_key_path).apply(lambda invoke: f"{yc_username}:{invoke.result}"),
+    },
+    scheduling_policy={
+        "preemptible": True,
+    })
+pulumi.export("vmPublicIp", vm.network_interfaces[0].nat_ip_address)
