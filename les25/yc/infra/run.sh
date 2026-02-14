@@ -19,7 +19,7 @@ pulumi config set pub $PUB_KEY_PATH
 
 pulumi config
 #pulumi preview
-pulumi up # -y
+pulumi up -y
 pulumi stack output
 
 IP="$(pulumi stack output public_ip)" 
@@ -56,6 +56,6 @@ done
 
 pulumi destroy # -y
 
-pulumi stack rm dev # -y
+pulumi stack rm dev -y -f
 
 set +x

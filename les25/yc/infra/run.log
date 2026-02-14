@@ -1,0 +1,144 @@
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/yc/infra$ ./run.sh 
+Enter Pulumi passphrase: 
+Created stack 'dev'
+++ pulumi config set yandex:cloudId b1glq0cg9jigrj5lcp63
+++ pulumi config set yandex:folderId b1glf35jjq6imk8i8k4m
+++ pulumi config set yandex:zone ru-central1-a
+++ pulumi config set username ubuntu
+++ pulumi config set imageId fd85r147n5huljgijb47
+++ pulumi config set cidr 192.168.25.0/25
+++ pulumi config set prefix les25
+++ pulumi config set pub /home/za/.ssh/id_rsa.pub
+++ pulumi config
+KEY              VALUE
+pulumi:tags      {"pulumi:template":"yandex-python"}
+yandex:cloudId   b1glq0cg9jigrj5lcp63
+yandex:folderId  b1glf35jjq6imk8i8k4m
+yandex:token     [secret]
+yandex:zone      ru-central1-a
+cidr             192.168.25.0/25
+imageId          fd85r147n5huljgijb47
+prefix           les25
+pub              /home/za/.ssh/id_rsa.pub
+username         ubuntu
+++ pulumi up -y
+Previewing update (dev):
+     Type                             Name            Plan       Info
+ +   pulumi:pulumi:Stack              yc_infra-dev    create     2 messages
+ +   ├─ yandex:index:VpcNetwork       les25-network   create     
+ +   ├─ yandex:index:VpcSubnet        les25-subnet    create     
+ +   └─ yandex:index:ComputeInstance  les25-instance  create     
+
+Diagnostics:
+  pulumi:pulumi:Stack (yc_infra-dev):
+    /home/za/Documents/IaC/2git/les25/yc/infra/.venv/lib/python3.10/site-packages/pulumi_yandex/_utilities.py:10: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+      import pkg_resources
+
+Outputs:
+    instance_name: "les25-instance-042e228"
+    public_ip    : [unknown]
+
+Resources:
+    + 4 to create
+
+Updating (dev):
+     Type                             Name            Status              Info
+ +   pulumi:pulumi:Stack              yc_infra-dev    created (138s)      2 messages
+ +   ├─ yandex:index:VpcNetwork       les25-network   created (3s)        
+ +   ├─ yandex:index:VpcSubnet        les25-subnet    created (0.40s)     
+ +   └─ yandex:index:ComputeInstance  les25-instance  created (134s)      
+
+Diagnostics:
+  pulumi:pulumi:Stack (yc_infra-dev):
+    /home/za/Documents/IaC/2git/les25/yc/infra/.venv/lib/python3.10/site-packages/pulumi_yandex/_utilities.py:10: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+      import pkg_resources
+
+Outputs:
+    instance_name: "les25-instance-44bc2df"
+    public_ip    : "93.77.182.45"
+
+Resources:
+    + 4 created
+
+Duration: 2m19s
+
+++ pulumi stack output
+Current stack outputs (2):
+    OUTPUT         VALUE
+    instance_name  les25-instance-44bc2df
+    public_ip      93.77.182.45
++++ pulumi stack output public_ip
+++ IP=93.77.182.45
+++ '[' -z 93.77.182.45 ']'
+++ echo 'Public IP: 93.77.182.45'
+Public IP: 93.77.182.45
+++ sleep 10
+++ true
+++ echo 'Curl http://93.77.182.45/ ...'
+Curl http://93.77.182.45/ ...
+++ curl -fsS --max-time 30 http://93.77.182.45/
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+++ echo 'curl succeeded, exiting.'
+curl succeeded, exiting.
+++ break
+++ pulumi destroy
+Previewing destroy (dev):
+     Type                             Name            Plan       
+ -   pulumi:pulumi:Stack              yc_infra-dev    delete     
+ -   ├─ yandex:index:ComputeInstance  les25-instance  delete     
+ -   ├─ yandex:index:VpcSubnet        les25-subnet    delete     
+ -   └─ yandex:index:VpcNetwork       les25-network   delete     
+
+Outputs:
+  - instance_name: "les25-instance-44bc2df"
+  - public_ip    : "93.77.182.45"
+
+Resources:
+    - 4 to delete
+
+Do you want to perform this destroy? yes
+Destroying (dev):
+     Type                             Name            Status              
+ -   pulumi:pulumi:Stack              yc_infra-dev    deleted (0.00s)     
+ -   ├─ yandex:index:ComputeInstance  les25-instance  deleted (32s)       
+ -   ├─ yandex:index:VpcSubnet        les25-subnet    deleted (5s)        
+ -   └─ yandex:index:VpcNetwork       les25-network   deleted (0.83s)     
+
+Outputs:
+  - instance_name: "les25-instance-44bc2df"
+  - public_ip    : "93.77.182.45"
+
+Resources:
+    - 4 deleted
+
+Duration: 38s
+
+The resources in the stack have been deleted, but the history and configuration associated with the stack are still maintained. 
+If you want to remove the stack completely, run `pulumi stack rm dev`.
+++ pulumi stack rm dev -y -f
+Stack 'dev' has been removed!
+++ set +x
