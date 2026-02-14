@@ -18,7 +18,7 @@ pulumi config set fromUrl $FROM_URL
 
 pulumi config
 #pulumi preview
-pulumi up
+pulumi up -y
 pulumi stack output
 
 read -p "press any key to destroy and remove stack ..."
