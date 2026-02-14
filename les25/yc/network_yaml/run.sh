@@ -1,0 +1,22 @@
+set +x
+# Запрос пасфразы (не отображается при вводе)
+read -rsp "Enter Pulumi passphrase: " PULUMI_CONFIG_PASSPHRASE
+echo
+# Экспортировать только для этого скрипта
+export PULUMI_CONFIG_PASSPHRASE
+pulumi stack init dev
+pulumi config set yandex:token $YC_TOKEN --secret
+set -x
+pulumi config set yandex:cloudId $YC_CLOUD_ID
+pulumi config set yandex:folderId $YC_FOLDER_ID
+pulumi config set prefix $PREFIX 
+
+pulumi up -y
+pulumi stack output
+#yc vpc network list --folder-id "$YC_FOLDER_ID"
+yc vpc network get "$(pulumi stack output networkId)"
+read -p "Press any key to continue..."
+pulumi destroy -y
+pulumi stack rm dev -y -f
+
+set +x
