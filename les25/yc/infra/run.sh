@@ -54,7 +54,9 @@ while true; do
   fi
 done
 
-pulumi destroy # -y
+read -p "press any key to destroy and remove stack ..."
+
+pulumi destroy -y
 
 pulumi stack rm dev -y -f
 

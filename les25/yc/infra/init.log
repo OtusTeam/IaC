@@ -1,4 +1,4 @@
-(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/yc/infra$ . pulumi.init 
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/yc/infra$ . init.sh 
 Collecting pulumi<4.0.0,>=3.0.0
   Using cached pulumi-3.220.0-py3-none-any.whl (390 kB)
 Collecting pulumi-yandex>=0.13.0

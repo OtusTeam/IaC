@@ -1,5 +1,6 @@
 set -x
-rm object.txt
+
+FROM_URL="https://jsonplaceholder.typicode.com/posts"
 
 set +x
 # Запрос пасфразы (не отображается при вводе)
@@ -12,20 +13,18 @@ pulumi config set yandex:token $YC_TOKEN --secret
 set -x
 pulumi config set yandex:cloudId $YC_CLOUD_ID
 pulumi config set yandex:folderId $YC_FOLDER_ID
-pulumi config set prefix $PREFIX 
+pulumi config set prefix $PREFIX
+pulumi config set fromUrl $FROM_URL
 
-pulumi up -y
-yc storage bucket get "$(pulumi stack output bucketName)"
-yc storage s3api get-object --bucket "$(pulumi stack output bucketName)" --key "$(pulumi stack output objectKey)" ./object.txt 
-set +x
-echo
-echo "Содержимое объекта: $(cat object.txt)"
-echo
-set -x
-
-rm object.txt
+pulumi config
+#pulumi preview
+pulumi up
+pulumi stack output
 
 read -p "press any key to destroy and remove stack ..."
-
+				      
 pulumi destroy -y
+
 pulumi stack rm dev -y -f
+
+set +x

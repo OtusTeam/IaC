@@ -15,7 +15,9 @@ pulumi up -y
 pulumi stack output
 #yc vpc network list --folder-id "$YC_FOLDER_ID"
 yc vpc network get "$(pulumi stack output networkId)"
-read -p "Press any key to continue..."
+
+read -p "press any key to destroy and remove stack ..."
+
 pulumi destroy -y
 pulumi stack rm dev -y -f
 
