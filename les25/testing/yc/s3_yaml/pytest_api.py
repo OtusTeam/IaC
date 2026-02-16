@@ -43,21 +43,17 @@ def test_bucketName_value_is_not_null(stack):
     assert value != None and value != ""
 
 
-def test_s3_object_content_matches_expected(stack):
+def test_s3_object_exists(stack):
     outputs = stack.outputs()
-
     bucket = outputs["bucketName"].value
     key = outputs["objectKey"].value
 
-    # Берём ключи доступа из outputs
     access_key = outputs["accessKey"].value
     secret_key = outputs["secretKey"].value
-
     assert access_key and secret_key, "accessKey and secretKey must be present in Pulumi outputs"
 
-    # Для Yandex Object Storage (измените endpoint при необходимости)
     endpoint = os.environ.get("YC_S3_ENDPOINT", "https://storage.yandexcloud.net")
-    region = os.environ.get("YC_ZONE", None)
+    zone = os.environ.get("YC_ZONE", None)
 
     s3 = boto3.client(
         "s3",
@@ -65,19 +61,42 @@ def test_s3_object_content_matches_expected(stack):
         aws_secret_access_key=secret_key,
         endpoint_url=endpoint,
         config=Config(signature_version="s3v4"),
-        region_name=region,
+        region_name=zone,
+    )
+
+    # Проверяем существование объекта без скачивания тела
+    resp = s3.head_object(Bucket=bucket, Key=key)
+    # Проверка: успешно получили метаданные и ContentLength >= 0
+    assert "ContentLength" in resp and resp["ContentLength"] >= 0
+
+
+def test_s3_object_content(stack):
+    outputs = stack.outputs()
+    bucket = outputs["bucketName"].value
+    key = outputs["objectKey"].value
+
+    access_key = outputs["accessKey"].value
+    secret_key = outputs["secretKey"].value
+    assert access_key and secret_key, "accessKey and secretKey must be present in Pulumi outputs"
+
+    endpoint = os.environ.get("YC_S3_ENDPOINT", "https://storage.yandexcloud.net")
+    zone = os.environ.get("YC_ZONE", None)
+
+    s3 = boto3.client(
+        "s3",
+        aws_access_key_id=access_key,
+        aws_secret_access_key=secret_key,
+        endpoint_url=endpoint,
+        config=Config(signature_version="s3v4"),
+        region_name=zone,
     )
 
     resp = s3.get_object(Bucket=bucket, Key=key)
     body_bytes = resp["Body"].read()
-    # Попробуем декодировать как utf-8, иначе оставить bytes
     try:
         content = body_bytes.decode("utf-8")
     except Exception:
         content = body_bytes
 
     expected = os.environ.get("EXPECTED_OBJECT_CONTENT", "Hello, World!")
-    if expected is not None:
-        assert content == expected
-    else:
-        assert len(body_bytes) > 0
+    assert content == expected

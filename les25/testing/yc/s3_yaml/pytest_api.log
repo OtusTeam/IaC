@@ -5,11 +5,12 @@ Enter Pulumi passphrase:
 platform linux -- Python 3.10.12, pytest-9.0.2, pluggy-1.6.0 -- /home/za/Documents/IaC/2git/les25/testing/yc/s3_yaml/.venv/bin/python3
 cachedir: .pytest_cache
 rootdir: /home/za/Documents/IaC/2git/les25/testing/yc/s3_yaml
-collected 3 items                                                                                                                                                                                                                            
+collected 4 items                                                                                                                                                                                                                            
 
-pytest_api.py::test_bucketName_output_exists PASSED                                                                                                                                                                                    [ 33%]
-pytest_api.py::test_bucketName_value_is_not_null PASSED                                                                                                                                                                                [ 66%]
-pytest_api.py::test_s3_object_content_matches_expected PASSED                                                                                                                                                                          [100%]
+pytest_api.py::test_bucketName_output_exists PASSED                                                                                                                                                                                    [ 25%]
+pytest_api.py::test_bucketName_value_is_not_null PASSED                                                                                                                                                                                [ 50%]
+pytest_api.py::test_s3_object_exists PASSED                                                                                                                                                                                            [ 75%]
+pytest_api.py::test_s3_object_content PASSED                                                                                                                                                                                           [100%]
 
-============================================================================================================= 3 passed in 38.78s =============================================================================================================
+============================================================================================================= 4 passed in 38.04s =============================================================================================================
 ++ set +x
