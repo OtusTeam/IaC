@@ -1,3 +1,5 @@
+deactivate
+source .venv/bin/activate
 set +x
 # Запрос пасфразы (не отображается при вводе)
 read -rsp "Enter Pulumi passphrase: " PULUMI_CONFIG_PASSPHRASE
@@ -7,7 +9,7 @@ export PULUMI_CONFIG_PASSPHRASE
 pulumi stack init test
 set -x
 
-pulumi up --yes
+pulumi up -y
 
 set +x
 
@@ -60,6 +62,6 @@ echo
 
 set -x
 
-pulumi destroy --yes
-pulumi stack rm test -y
+pulumi destroy -y
+pulumi stack rm test -y -f
 set +x

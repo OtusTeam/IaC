@@ -6,13 +6,13 @@ read -rsp "Enter Pulumi passphrase: " PULUMI_CONFIG_PASSPHRASE
 echo
 # Экспортировать только для этого скрипта
 export PULUMI_CONFIG_PASSPHRASE
-pulumi stack init dev
+pulumi stack init test		
 set -x
 
-pulumi up
+pulumi up -y
 
 read -p "Press any key to continue ..."
 
-pulumi destroy
-pulumi stack rm dev
+pulumi destroy -y
+pulumi stack rm test -y -f
 set +x

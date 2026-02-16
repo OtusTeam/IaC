@@ -4,17 +4,8 @@ read -rsp "Enter Pulumi passphrase: " PULUMI_CONFIG_PASSPHRASE
 echo
 # Экспортировать только для этого скрипта
 export PULUMI_CONFIG_PASSPHRASE
-pulumi stack init test
 set -x
 
-pulumi up -y
+pytest --verbosity=1 test_api.py
 
-pytest --verbosity=1 test.py
-
-echo
-
-set -x
-
-pulumi destroy -y
-pulumi stack rm test -y -f
 set +x
