@@ -1,0 +1,16 @@
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/testing/yc/s3$ ./pytest_api.sh 
+Enter Pulumi passphrase: 
+++ pytest --verbosity=1 pytest_api.py
+============================================================================================================ test session starts =============================================================================================================
+platform linux -- Python 3.10.12, pytest-9.0.2, pluggy-1.6.0 -- /home/za/Documents/IaC/2git/les25/testing/yc/s3/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/za/Documents/IaC/2git/les25/testing/yc/s3
+collected 4 items                                                                                                                                                                                                                            
+
+pytest_api.py::test_bucketName_output_exists PASSED                                                                                                                                                                                    [ 25%]
+pytest_api.py::test_bucketName_value_is_not_null PASSED                                                                                                                                                                                [ 50%]
+pytest_api.py::test_s3_objects_exist PASSED                                                                                                                                                                                            [ 75%]
+pytest_api.py::test_s3_objects_content_matches_remote PASSED                                                                                                                                                                           [100%]
+
+============================================================================================================= 4 passed in 42.00s =============================================================================================================
+++ set +x
