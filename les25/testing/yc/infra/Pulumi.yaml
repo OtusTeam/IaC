@@ -1,0 +1,10 @@
+name: testing_yc_infra
+description: An example of python Pulumi program for creating an infra (vpc, subnet, LEMP instance) in the yandex cloud 
+runtime:
+  name: python
+  options:
+    virtualenv: .venv
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: yandex-python

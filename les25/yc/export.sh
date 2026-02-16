@@ -21,6 +21,6 @@ export TF_VAR_yc_username="$YC_USERNAME"
 export TF_VAR_pub_key_path="$PUB_KEY_PATH"
 export TF_VAR_sec_key_path="$SEC_KEY_PATH"
 export TF_VAR_image_id="$YC_IMAGE_ID" 	
-export TF_VAR_yc_cidr="YC_CIDR" 
+export TF_VAR_yc_cidr="$YC_CIDR" 
 
 

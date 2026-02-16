@@ -1,0 +1,14 @@
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/testing/yc/infra$ ./pytest_api.sh 
+Enter Pulumi passphrase: 
+++ pytest --verbosity=1 pytest_api.py
+============================================================================================================ test session starts =============================================================================================================
+platform linux -- Python 3.10.12, pytest-9.0.2, pluggy-1.6.0 -- /home/za/Documents/IaC/2git/les25/testing/yc/infra/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/za/Documents/IaC/2git/les25/testing/yc/infra
+collected 2 items                                                                                                                                                                                                                            
+
+pytest_api.py::test_outputs_exists PASSED                                                                                                                                                                                              [ 50%]
+pytest_api.py::test_outputs_values_is_not_null PASSED                                                                                                                                                                                  [100%]
+
+======================================================================================================= 2 passed in 134.91s (0:02:14) ========================================================================================================
+++ set +x
