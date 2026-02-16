@@ -7,9 +7,9 @@ export PULUMI_CONFIG_PASSPHRASE
 pulumi stack init dev
 set -x
 
-pulumi up
+pulumi up #-y
 pulumi stack output
-pulumi destroy
-pulumi stack rm dev
+pulumi destroy #-y
+pulumi stack rm dev #-y -f
 
 set +x

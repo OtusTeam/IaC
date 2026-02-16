@@ -19,10 +19,10 @@ Resources:
 Updating (dev):
      Type                        Name                        Status           
  +   pulumi:pulumi:Stack         yc-hello-world-network-dev  created (3s)     
- +   └─ yandex:index:VpcNetwork  network                     created (2s)     
+ +   └─ yandex:index:VpcNetwork  network                     created (3s)     
 
 Outputs:
-    networkId: "enp9vrbvjj4412a2222n"
+    networkId: "enprel86sncaqmpt9hio"
 
 Resources:
     + 2 created
@@ -32,22 +32,9 @@ Duration: 4s
 ++ pulumi stack output
 Current stack outputs (1):
     OUTPUT     VALUE
-    networkId  enp9vrbvjj4412a2222n
-+++ pulumi stack output networkId
-++ yc vpc network get enp9vrbvjj4412a2222n
-id: enp9vrbvjj4412a2222n
-folder_id: b1glf35jjq6imk8i8k4m
-created_at: "2026-02-14T18:48:47Z"
-name: les25-hello-world-network
-default_security_group_id: enphuemd8ncj4gcj22q8
-
-There is a new yc version '0.192.0' available. Current version: '0.188.0'.
-See release notes at https://yandex.cloud/ru/docs/cli/release-notes
-You can install it by running the following command in your shell:
-	$ yc components update
-
-++ read -p 'Press any key to continue...'
-Press any key to continue...
+    networkId  enprel86sncaqmpt9hio
+++ read -p 'press any key to destroy and remove stack ...'
+press any key to destroy and remove stack ...
 ++ pulumi destroy -y
 Previewing destroy (dev):
      Type                        Name                        Plan       
@@ -55,18 +42,18 @@ Previewing destroy (dev):
  -   └─ yandex:index:VpcNetwork  network                     delete     
 
 Outputs:
-  - networkId: "enp9vrbvjj4412a2222n"
+  - networkId: "enprel86sncaqmpt9hio"
 
 Resources:
     - 2 to delete
 
 Destroying (dev):
-     Type                        Name                        Status              
- -   pulumi:pulumi:Stack         yc-hello-world-network-dev  deleted (0.00s)     
- -   └─ yandex:index:VpcNetwork  network                     deleted (1s)        
+     Type                        Name                        Status            
+ -   pulumi:pulumi:Stack         yc-hello-world-network-dev  deleted (0.00s)   
+ -   └─ yandex:index:VpcNetwork  network                     deleted (1s)      
 
 Outputs:
-  - networkId: "enp9vrbvjj4412a2222n"
+  - networkId: "enprel86sncaqmpt9hio"
 
 Resources:
     - 2 deleted
