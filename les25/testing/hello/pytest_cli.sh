@@ -9,7 +9,7 @@ set -x
 
 pulumi up -y
 
-pytest --verbosity=1 test.py
+pytest --verbosity=1 pytest_cli.py
 
 echo
 

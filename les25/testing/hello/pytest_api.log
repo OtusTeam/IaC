@@ -1,14 +1,14 @@
 (.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/testing/hello$ ./pytest_api.sh 
 Enter Pulumi passphrase: 
-++ pytest --verbosity=1 test_api.py
+++ pytest --verbosity=1 pytest_api.py
 ============================================================================================================ test session starts =============================================================================================================
 platform linux -- Python 3.10.12, pytest-9.0.2, pluggy-1.6.0 -- /home/za/Documents/IaC/2git/les25/testing/hello/.venv/bin/python3
 cachedir: .pytest_cache
 rootdir: /home/za/Documents/IaC/2git/les25/testing/hello
 collected 2 items                                                                                                                                                                                                                            
 
-test_api.py::test_hello_key PASSED                                                                                                                                                                                                     [ 50%]
-test_api.py::test_hello_value PASSED                                                                                                                                                                                                   [100%]
+pytest_api.py::test_hello_key PASSED                                                                                                                                                                                                   [ 50%]
+pytest_api.py::test_hello_value PASSED                                                                                                                                                                                                 [100%]
 
-============================================================================================================= 2 passed in 4.08s ==============================================================================================================
+============================================================================================================= 2 passed in 4.41s ==============================================================================================================
 ++ set +x

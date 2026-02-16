@@ -1,7 +1,7 @@
-(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/testing/hello$ ./pytest.sh 
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/testing/hello$ ./pytest_cli.sh 
 Enter Pulumi passphrase: 
 Created stack 'test'
-++ pulumi up --yes
+++ pulumi up -y
 Previewing update (test):
      Type                 Name        Plan       
  +   pulumi:pulumi:Stack  hello-test  create     
@@ -14,7 +14,7 @@ Resources:
 
 Updating (test):
      Type                 Name        Status              
- +   pulumi:pulumi:Stack  hello-test  created (0.32s)     
+ +   pulumi:pulumi:Stack  hello-test  created (0.02s)     
 
 Outputs:
     helloWorld: "Hello, World!"
@@ -24,21 +24,21 @@ Resources:
 
 Duration: 1s
 
-++ pytest --verbosity=1 test.py
+++ pytest --verbosity=1 pytest_cli.py
 ============================================================================================================ test session starts =============================================================================================================
 platform linux -- Python 3.10.12, pytest-9.0.2, pluggy-1.6.0 -- /home/za/Documents/IaC/2git/les25/testing/hello/.venv/bin/python3
 cachedir: .pytest_cache
 rootdir: /home/za/Documents/IaC/2git/les25/testing/hello
 collected 2 items                                                                                                                                                                                                                            
 
-test.py::test_hello_output_exists PASSED                                                                                                                                                                                               [ 50%]
-test.py::test_hello_output_value PASSED                                                                                                                                                                                                [100%]
+pytest_cli.py::test_hello_output_exists PASSED                                                                                                                                                                                         [ 50%]
+pytest_cli.py::test_hello_output_value PASSED                                                                                                                                                                                          [100%]
 
-============================================================================================================= 2 passed in 0.27s ==============================================================================================================
+============================================================================================================= 2 passed in 0.31s ==============================================================================================================
 ++ echo
 
 ++ set -x
-++ pulumi destroy --yes
+++ pulumi destroy -y
 Previewing destroy (test):
      Type                 Name        Plan       
  -   pulumi:pulumi:Stack  hello-test  delete     
@@ -63,6 +63,6 @@ Duration: 1s
 
 The resources in the stack have been deleted, but the history and configuration associated with the stack are still maintained. 
 If you want to remove the stack completely, run `pulumi stack rm test`.
-++ pulumi stack rm test -y
+++ pulumi stack rm test -y -f
 Stack 'test' has been removed!
 ++ set +x

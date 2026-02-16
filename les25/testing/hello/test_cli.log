@@ -1,4 +1,4 @@
-(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/testing/hello$ ./test.sh 
+(.venv) za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/testing/hello$ ./test_cli.sh 
 Enter Pulumi passphrase: 
 Created stack 'test'
 ++ pulumi up --yes
