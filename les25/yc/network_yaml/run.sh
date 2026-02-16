@@ -13,8 +13,6 @@ pulumi config set prefix $PREFIX
 
 pulumi up -y
 pulumi stack output
-#yc vpc network list --folder-id "$YC_FOLDER_ID"
-#yc vpc network get "$(pulumi stack output networkId)"
 
 read -p "press any key to destroy and remove stack ..."
 

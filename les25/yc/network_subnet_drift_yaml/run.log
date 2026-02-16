@@ -1,0 +1,104 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/yc/network_subnet_drift_yaml$ ./run.sh 
+Enter Pulumi passphrase: 
+Created stack 'dev'
+++ pulumi config set yandex:cloudId b1glq0cg9jigrj5lcp63
+++ pulumi config set yandex:folderId b1glf35jjq6imk8i8k4m
+++ pulumi config set yandex:zone ru-central1-a
+++ pulumi config set cidr 192.168.25.0/25
+++ pulumi config set prefix les25
+++ pulumi config
+KEY              VALUE
+yandex:cloudId   b1glq0cg9jigrj5lcp63
+yandex:folderId  b1glf35jjq6imk8i8k4m
+yandex:token     [secret]
+yandex:zone      ru-central1-a
+cidr             192.168.25.0/25
+prefix           les25
+++ pulumi up -y
+Previewing update (dev):
+     Type                        Name                         Plan       
+ +   pulumi:pulumi:Stack         yc-network-subnet-drift-dev  create     
+ +   ├─ yandex:index:VpcNetwork  network                      create     
+ +   └─ yandex:index:VpcSubnet   subnet                       create     
+
+Outputs:
+    subnet_id: [unknown]
+    vpc_id   : [unknown]
+
+Resources:
+    + 3 to create
+
+Updating (dev):
+     Type                        Name                         Status              
+ +   pulumi:pulumi:Stack         yc-network-subnet-drift-dev  created (5s)        
+ +   ├─ yandex:index:VpcNetwork  network                      created (4s)        
+ +   └─ yandex:index:VpcSubnet   subnet                       created (0.75s)     
+
+Outputs:
+    subnet_id: {
+        description: "ID созданной подсети"
+        value      : "e9bjaqr5r6uj9esas14m"
+    }
+    vpc_id   : {
+        description: "ID созданной сети (VPC)"
+        value      : "enp58c5p45fj61f9c78c"
+    }
+
+Resources:
+    + 3 created
+
+Duration: 6s
+
+++ pulumi stack output
+Current stack outputs (2):
+    OUTPUT     VALUE
+    subnet_id  {"description":"ID созданной подсети","value":"e9bjaqr5r6uj9esas14m"}
+    vpc_id     {"description":"ID созданной сети (VPC)","value":"enp58c5p45fj61f9c78c"}
+++ read -p 'press any key to destroy and remove stack ...'
+press any key to destroy and remove stack ...
+++ pulumi destroy -y
+Previewing destroy (dev):
+     Type                        Name                         Plan       
+ -   pulumi:pulumi:Stack         yc-network-subnet-drift-dev  delete     
+ -   ├─ yandex:index:VpcNetwork  network                      delete     
+ -   └─ yandex:index:VpcSubnet   subnet                       delete     
+
+Outputs:
+  - subnet_id: {
+      - description: "ID созданной подсети"
+      - value      : "e9bjaqr5r6uj9esas14m"
+    }
+  - vpc_id   : {
+      - description: "ID созданной сети (VPC)"
+      - value      : "enp58c5p45fj61f9c78c"
+    }
+
+Resources:
+    - 3 to delete
+
+Destroying (dev):
+     Type                        Name                         Status              
+ -   pulumi:pulumi:Stack         yc-network-subnet-drift-dev  deleted (0.00s)     
+ -   ├─ yandex:index:VpcSubnet   subnet                       deleted (1s)        
+ -   └─ yandex:index:VpcNetwork  network                      deleted (0.57s)     
+
+Outputs:
+  - subnet_id: {
+      - description: "ID созданной подсети"
+      - value      : "e9bjaqr5r6uj9esas14m"
+    }
+  - vpc_id   : {
+      - description: "ID созданной сети (VPC)"
+      - value      : "enp58c5p45fj61f9c78c"
+    }
+
+Resources:
+    - 3 deleted
+
+Duration: 3s
+
+The resources in the stack have been deleted, but the history and configuration associated with the stack are still maintained. 
+If you want to remove the stack completely, run `pulumi stack rm dev`.
+++ pulumi stack rm dev -y -f
+Stack 'dev' has been removed!
+++ set +x

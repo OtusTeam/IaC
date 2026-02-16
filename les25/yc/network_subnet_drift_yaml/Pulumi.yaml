@@ -1,0 +1,30 @@
+name: yc-network-subnet-drift
+runtime: yaml
+description: Pulumi stack to create Yandex.Cloud VPC network and subnet
+
+variables:
+  prefix: ${config:prefix}
+  cidr: ${config:cidr}
+
+resources:
+  network:
+    type: yandex:VpcNetwork
+    properties:
+      name: ${prefix}-pulumi-vpc
+      description: VPC created by Pulumi
+
+  subnet:
+    type: yandex:VpcSubnet
+    properties:
+      name: ${prefix}-subnet-drift
+      v4CidrBlocks:
+        - ${cidr}
+      networkId: ${network.id} 
+
+outputs:
+  vpc_id:
+    value: ${network.id}
+    description: ID созданной сети (VPC)
+  subnet_id:
+    value: ${subnet.id}
+    description: ID созданной подсети
