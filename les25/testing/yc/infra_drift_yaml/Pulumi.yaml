@@ -1,0 +1,51 @@
+name: yc-infra-drift
+runtime: yaml                                                                                                                        
+description: Pulumi stack to create Yandex.Cloud VPC network, subnet and instance
+
+variables:
+  prefix: 	${config:prefix}
+  cidr: 	${config:cidr}
+  pub:  	${config:pub}
+  username: 	${config:username}
+  imageId:	${config:imageId}
+
+resources:
+  network:
+    type: yandex:VpcNetwork
+    properties:
+      name: ${prefix}-network-drift
+      description: VPC network created by Pulumi
+
+  subnet:
+    type: yandex:VpcSubnet
+    properties:
+      name: ${prefix}-subnet-drift
+      v4CidrBlocks:
+        - ${cidr}
+      networkId: ${network.id}
+  
+  instance:
+    type: yandex:ComputeInstance
+    properties:
+      name: ${prefix}-instance-drift
+      resources:
+        memory: 4
+        cores: 2
+      bootDisk:
+        initializeParams:
+          imageId: ${imageId}
+          size: 50
+      networkInterfaces:
+        - subnetId: ${subnet.id} 
+          nat: true
+      metadata:
+        ssh-keys: ${username}:${pub} 
+
+outputs:
+  network_id: 		${network.id}
+  network_name: 	${network.name}
+  subnet_id: 		${subnet.id}
+  subnet_name: 		${subnet.name}
+  instance_name:	${instance.name}
+  instance_id:		${instance.id}
+  instance_nat_ip:	${instance.networkInterfaces.[0].natIpAddress}
