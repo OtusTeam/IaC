@@ -22,56 +22,96 @@ Previewing update (dev):
  +   └─ yandex:index:VpcSubnet   subnet                       create     
 
 Outputs:
-    subnet_id: [unknown]
-    vpc_id   : [unknown]
+    network_id : [unknown]
+    subnet_id  : [unknown]
+    subnet_name: "les25-subnet-drift"
 
 Resources:
     + 3 to create
 
 Updating (dev):
      Type                        Name                         Status              
- +   pulumi:pulumi:Stack         yc-network-subnet-drift-dev  created (5s)        
- +   ├─ yandex:index:VpcNetwork  network                      created (4s)        
- +   └─ yandex:index:VpcSubnet   subnet                       created (0.75s)     
+ +   pulumi:pulumi:Stack         yc-network-subnet-drift-dev  created (3s)        
+ +   ├─ yandex:index:VpcNetwork  network                      created (2s)        
+ +   └─ yandex:index:VpcSubnet   subnet                       created (0.61s)     
 
 Outputs:
-    subnet_id: {
-        description: "ID созданной подсети"
-        value      : "e9bjaqr5r6uj9esas14m"
-    }
-    vpc_id   : {
-        description: "ID созданной сети (VPC)"
-        value      : "enp58c5p45fj61f9c78c"
-    }
+    network_id : "enp8ilvme9qpftnecpl3"
+    subnet_id  : "e9b8p0rf5qhef923dp1j"
+    subnet_name: "les25-subnet-drift"
 
 Resources:
     + 3 created
 
-Duration: 6s
+Duration: 4s
 
 ++ pulumi stack output
-Current stack outputs (2):
-    OUTPUT     VALUE
-    subnet_id  {"description":"ID созданной подсети","value":"e9bjaqr5r6uj9esas14m"}
-    vpc_id     {"description":"ID созданной сети (VPC)","value":"enp58c5p45fj61f9c78c"}
+Current stack outputs (3):
+    OUTPUT       VALUE
+    network_id   enp8ilvme9qpftnecpl3
+    subnet_id    e9b8p0rf5qhef923dp1j
+    subnet_name  les25-subnet-drift
++++ pulumi stack output subnet_name
+++ export SAVED_NAME=les25-subnet-drift
+++ SAVED_NAME=les25-subnet-drift
+++ read -p 'press any key to subnet update to drift on ...'
+press any key to subnet update to drift on ...
++++ pulumi stack output subnet_id
+++ yc vpc subnet update --id e9b8p0rf5qhef923dp1j --folder-id b1glf35jjq6imk8i8k4m --new-name les25-subnet-drifted
+id: e9b8p0rf5qhef923dp1j
+folder_id: b1glf35jjq6imk8i8k4m
+created_at: "2026-02-17T11:54:34Z"
+name: les25-subnet-drifted
+network_id: enp8ilvme9qpftnecpl3
+zone_id: ru-central1-a
+v4_cidr_blocks:
+  - 192.168.25.0/25
+dhcp_options: {}
+
+++ pulumi refresh --preview-only --diff
+Previewing refresh (dev):
+  pulumi:pulumi:Stack: (same)
+    [urn=urn:pulumi:dev::yc-network-subnet-drift::pulumi:pulumi:Stack::yc-network-subnet-drift-dev]
+    ~ yandex:index/vpcSubnet:VpcSubnet: (update)
+        [id=e9b8p0rf5qhef923dp1j]
+        [urn=urn:pulumi:dev::yc-network-subnet-drift::yandex:index/vpcSubnet:VpcSubnet::subnet]
+      ~ name: "les25-subnet-drift" => "les25-subnet-drifted"
+Resources:              
+    ~ 1 to update
+    2 unchanged
+++ read -p 'press any key to subnet update to drift off ...'
+press any key to subnet update to drift off ...
++++ pulumi stack output subnet_id
+++ yc vpc subnet update --id e9b8p0rf5qhef923dp1j --folder-id b1glf35jjq6imk8i8k4m --new-name les25-subnet-drift
+id: e9b8p0rf5qhef923dp1j
+folder_id: b1glf35jjq6imk8i8k4m
+created_at: "2026-02-17T11:54:34Z"
+name: les25-subnet-drift
+network_id: enp8ilvme9qpftnecpl3
+zone_id: ru-central1-a
+v4_cidr_blocks:
+  - 192.168.25.0/25
+dhcp_options: {}
+
+++ pulumi refresh --preview-only --diff
+Previewing refresh (dev):
+  pulumi:pulumi:Stack: (same)
+    [urn=urn:pulumi:dev::yc-network-subnet-drift::pulumi:pulumi:Stack::yc-network-subnet-drift-dev]
+Resources:              
+    3 unchanged
 ++ read -p 'press any key to destroy and remove stack ...'
 press any key to destroy and remove stack ...
 ++ pulumi destroy -y
 Previewing destroy (dev):
      Type                        Name                         Plan       
  -   pulumi:pulumi:Stack         yc-network-subnet-drift-dev  delete     
- -   ├─ yandex:index:VpcNetwork  network                      delete     
- -   └─ yandex:index:VpcSubnet   subnet                       delete     
+ -   ├─ yandex:index:VpcSubnet   subnet                       delete     
+ -   └─ yandex:index:VpcNetwork  network                      delete     
 
 Outputs:
-  - subnet_id: {
-      - description: "ID созданной подсети"
-      - value      : "e9bjaqr5r6uj9esas14m"
-    }
-  - vpc_id   : {
-      - description: "ID созданной сети (VPC)"
-      - value      : "enp58c5p45fj61f9c78c"
-    }
+  - network_id : "enp8ilvme9qpftnecpl3"
+  - subnet_id  : "e9b8p0rf5qhef923dp1j"
+  - subnet_name: "les25-subnet-drift"
 
 Resources:
     - 3 to delete
@@ -80,17 +120,12 @@ Destroying (dev):
      Type                        Name                         Status              
  -   pulumi:pulumi:Stack         yc-network-subnet-drift-dev  deleted (0.00s)     
  -   ├─ yandex:index:VpcSubnet   subnet                       deleted (1s)        
- -   └─ yandex:index:VpcNetwork  network                      deleted (0.57s)     
+ -   └─ yandex:index:VpcNetwork  network                      deleted (0.71s)     
 
 Outputs:
-  - subnet_id: {
-      - description: "ID созданной подсети"
-      - value      : "e9bjaqr5r6uj9esas14m"
-    }
-  - vpc_id   : {
-      - description: "ID созданной сети (VPC)"
-      - value      : "enp58c5p45fj61f9c78c"
-    }
+  - network_id : "enp8ilvme9qpftnecpl3"
+  - subnet_id  : "e9b8p0rf5qhef923dp1j"
+  - subnet_name: "les25-subnet-drift"
 
 Resources:
     - 3 deleted

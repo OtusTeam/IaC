@@ -22,9 +22,6 @@ resources:
       networkId: ${network.id} 
 
 outputs:
-  vpc_id:
-    value: ${network.id}
-    description: ID созданной сети (VPC)
-  subnet_id:
-    value: ${subnet.id}
-    description: ID созданной подсети
+  network_id: ${network.id}
+  subnet_id: ${subnet.id}
+  subnet_name: ${subnet.name}

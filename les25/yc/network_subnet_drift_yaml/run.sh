@@ -16,6 +16,24 @@ pulumi config
 pulumi up -y
 pulumi stack output
 
+export SAVED_NAME=$(pulumi stack output subnet_name)
+			    
+read -p "press any key to subnet update to drift on ..."
+yc vpc subnet update \
+  --id $(pulumi stack output subnet_id) \
+  --folder-id $YC_FOLDER_ID \
+  --new-name "$PREFIX-subnet-drifted"  
+
+pulumi refresh --preview-only --diff 
+
+read -p "press any key to subnet update to drift off ..."
+yc vpc subnet update \
+  --id $(pulumi stack output subnet_id) \
+  --folder-id $YC_FOLDER_ID \
+  --new-name "$SAVED_NAME" 
+
+pulumi refresh --preview-only --diff
+
 read -p "press any key to destroy and remove stack ..."
 
 pulumi destroy -y
