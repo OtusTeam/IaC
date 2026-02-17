@@ -47,23 +47,28 @@ def stack():
         stack.workspace.remove_stack(stack.name)
 
 
-def test_outputs_exists(stack):
-    outputs = stack.outputs()
-    assert "instance_name" in outputs
-    assert "instance_nat_ip" in outputs
+def _checked_output_value(outputs, name):
+    value = outputs[name].value
+    assert value != None and value != ""
+    return value
+    
 
-
-def test_outputs_values_is_not_null(stack):
+def test_outputs_values(stack):
     outputs = stack.outputs()
-    instance_name = outputs["instance_name"].value
-    assert instance_name != None and instance_name != ""
-    public_ip = outputs["instance_nat_ip"].value
-    assert public_ip != None and public_ip != ""
+    assert all(k in outputs for k in ("instance_id", "instance_name", "instance_nat_ip",
+                                      "network_id", "network_name", "subnet_id", "subnet_name"))
+    instance_id     = _checked_output_value(outputs, "instance_id")
+    instance_name   = _checked_output_value(outputs, "instance_name")
+    instance_nat_ip = _checked_output_value(outputs, "instance_nat_ip")
+    network_id      = _checked_output_value(outputs, "network_id")
+    network_name    = _checked_output_value(outputs, "network_name")
+    subnet_id       = _checked_output_value(outputs, "subnet_id")
+    subnet_name     = _checked_output_value(outputs, "subnet_name")
 
 
 def test_lemp_server_responds(stack):
     outputs = stack.outputs()
-    ip = outputs["instance_nat_ip"].value
+    ip = _checked_output_value(outputs, "instance_nat_ip")
 
     url = f"http://{ip}/"
 
