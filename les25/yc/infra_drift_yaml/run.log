@@ -40,68 +40,94 @@ Resources:
     + 4 to create
 
 Updating (dev):
-     Type                             Name                Status            
- +   pulumi:pulumi:Stack              yc-infra-drift-dev  created (60s)     
- +   ├─ yandex:index:VpcNetwork       network             created (4s)      
- +   ├─ yandex:index:VpcSubnet        subnet              created (1s)      
- +   └─ yandex:index:ComputeInstance  instance            created (54s)     
+     Type                             Name                Status              
+ +   pulumi:pulumi:Stack              yc-infra-drift-dev  created (50s)       
+ +   ├─ yandex:index:VpcNetwork       network             created (3s)        
+ +   ├─ yandex:index:VpcSubnet        subnet              created (0.57s)     
+ +   └─ yandex:index:ComputeInstance  instance            created (46s)       
 
 Outputs:
-    instance_id    : "fhmukiu3cpnurs6fjpce"
+    instance_id    : "fhm8mbi5k4g5i30ofu56"
     instance_name  : "les25-instance-drift"
-    instance_nat_ip: "93.77.190.193"
-    network_id     : "enprbhjefrirllint933"
+    instance_nat_ip: "93.77.189.252"
+    network_id     : "enpc2sfh0l2th5gj4vo8"
     network_name   : "les25-network-drift"
-    subnet_id      : "e9b9sbqhns4vdbu2uug3"
+    subnet_id      : "e9b9jprgntck20m1u56r"
     subnet_name    : "les25-subnet-drift"
 
 Resources:
     + 4 created
 
-Duration: 1m1s
+Duration: 51s
 
 ++ pulumi stack output
 Current stack outputs (7):
     OUTPUT           VALUE
-    instance_id      fhmukiu3cpnurs6fjpce
+    instance_id      fhm8mbi5k4g5i30ofu56
     instance_name    les25-instance-drift
-    instance_nat_ip  93.77.190.193
-    network_id       enprbhjefrirllint933
+    instance_nat_ip  93.77.189.252
+    network_id       enpc2sfh0l2th5gj4vo8
     network_name     les25-network-drift
-    subnet_id        e9b9sbqhns4vdbu2uug3
+    subnet_id        e9b9jprgntck20m1u56r
     subnet_name      les25-subnet-drift
++++ pulumi stack output subnet_name
+++ export SAVED_NAME=les25-subnet-drift
+++ SAVED_NAME=les25-subnet-drift
+++ read -p 'press any key to subnet update to drift on ...'
+press any key to subnet update to drift on ...
++++ pulumi stack output subnet_id
+++ yc vpc subnet update --id e9b9jprgntck20m1u56r --folder-id b1glf35jjq6imk8i8k4m --new-name les25-subnet-drifted
+done (4s)
+id: e9b9jprgntck20m1u56r
+folder_id: b1glf35jjq6imk8i8k4m
+created_at: "2026-02-17T16:38:28Z"
+name: les25-subnet-drifted
+network_id: enpc2sfh0l2th5gj4vo8
+zone_id: ru-central1-a
+v4_cidr_blocks:
+  - 192.168.25.0/25
+dhcp_options: {}
+
+++ pulumi refresh --preview-only --diff
+Previewing refresh (dev):
+  pulumi:pulumi:Stack: (same)
+    [urn=urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev]
+    ~ yandex:index/vpcSubnet:VpcSubnet: (update)
+        [id=e9b9jprgntck20m1u56r]
+        [urn=urn:pulumi:dev::yc-infra-drift::yandex:index/vpcSubnet:VpcSubnet::subnet]
+      ~ name: "les25-subnet-drift" => "les25-subnet-drifted"
+Resources:
+    ~ 1 to update
+    3 unchanged
+++ read -p 'press any key to subnet update to drift off ...'
+press any key to subnet update to drift off ...
++++ pulumi stack output subnet_id
+++ yc vpc subnet update --id e9b9jprgntck20m1u56r --folder-id b1glf35jjq6imk8i8k4m --new-name les25-subnet-drift
+done (5s)
+id: e9b9jprgntck20m1u56r
+folder_id: b1glf35jjq6imk8i8k4m
+created_at: "2026-02-17T16:38:28Z"
+name: les25-subnet-drift
+network_id: enpc2sfh0l2th5gj4vo8
+zone_id: ru-central1-a
+v4_cidr_blocks:
+  - 192.168.25.0/25
+dhcp_options: {}
+
+++ pulumi refresh --preview-only --diff
+Previewing refresh (dev):
+  pulumi:pulumi:Stack: (same)
+    [urn=urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev]
+Resources:              
+    4 unchanged
 +++ pulumi stack output instance_nat_ip
-++ export IP=93.77.190.193
-++ IP=93.77.190.193
+++ export IP=93.77.189.252
+++ IP=93.77.189.252
 ++ sleep 10
 ++ true
-++ echo 'Curl http://93.77.190.193/ ...'
-Curl http://93.77.190.193/ ...
-++ curl -fsS --max-time 30 http://93.77.190.193/
-curl: (7) Failed to connect to 93.77.190.193 port 80 after 7547 ms: В соединении отказано
-++ echo 'curl failed.'
-curl failed.
-++ read -rp 'cancel (y/N)? ' ans
-cancel (y/N)? 
-++ case "${ans,,}" in
-++ echo Retrying...
-Retrying...
-++ true
-++ echo 'Curl http://93.77.190.193/ ...'
-Curl http://93.77.190.193/ ...
-++ curl -fsS --max-time 30 http://93.77.190.193/
-curl: (7) Failed to connect to 93.77.190.193 port 80 after 333 ms: В соединении отказано
-++ echo 'curl failed.'
-curl failed.
-++ read -rp 'cancel (y/N)? ' ans
-cancel (y/N)? 
-++ case "${ans,,}" in
-++ echo Retrying...
-Retrying...
-++ true
-++ echo 'Curl http://93.77.190.193/ ...'
-Curl http://93.77.190.193/ ...
-++ curl -fsS --max-time 30 http://93.77.190.193/
+++ echo 'Curl http://93.77.189.252/ ...'
+Curl http://93.77.189.252/ ...
+++ curl -fsS --max-time 30 http://93.77.189.252/
 <!DOCTYPE html>
 <html>
 <head>
@@ -141,12 +167,12 @@ Previewing destroy (dev):
  -   └─ yandex:index:VpcNetwork       network             delete     
 
 Outputs:
-  - instance_id    : "fhmukiu3cpnurs6fjpce"
+  - instance_id    : "fhm8mbi5k4g5i30ofu56"
   - instance_name  : "les25-instance-drift"
-  - instance_nat_ip: "93.77.190.193"
-  - network_id     : "enprbhjefrirllint933"
+  - instance_nat_ip: "93.77.189.252"
+  - network_id     : "enpc2sfh0l2th5gj4vo8"
   - network_name   : "les25-network-drift"
-  - subnet_id      : "e9b9sbqhns4vdbu2uug3"
+  - subnet_id      : "e9b9jprgntck20m1u56r"
   - subnet_name    : "les25-subnet-drift"
 
 Resources:
@@ -155,23 +181,23 @@ Resources:
 Destroying (dev):
      Type                             Name                Status              
  -   pulumi:pulumi:Stack              yc-infra-drift-dev  deleted (0.00s)     
- -   ├─ yandex:index:ComputeInstance  instance            deleted (36s)       
+ -   ├─ yandex:index:ComputeInstance  instance            deleted (35s)       
  -   ├─ yandex:index:VpcSubnet        subnet              deleted (5s)        
- -   └─ yandex:index:VpcNetwork       network             deleted (0.90s)     
+ -   └─ yandex:index:VpcNetwork       network             deleted (0.57s)     
 
 Outputs:
-  - instance_id    : "fhmukiu3cpnurs6fjpce"
+  - instance_id    : "fhm8mbi5k4g5i30ofu56"
   - instance_name  : "les25-instance-drift"
-  - instance_nat_ip: "93.77.190.193"
-  - network_id     : "enprbhjefrirllint933"
+  - instance_nat_ip: "93.77.189.252"
+  - network_id     : "enpc2sfh0l2th5gj4vo8"
   - network_name   : "les25-network-drift"
-  - subnet_id      : "e9b9sbqhns4vdbu2uug3"
+  - subnet_id      : "e9b9jprgntck20m1u56r"
   - subnet_name    : "les25-subnet-drift"
 
 Resources:
     - 4 deleted
 
-Duration: 44s
+Duration: 42s
 
 The resources in the stack have been deleted, but the history and configuration associated with the stack are still maintained. 
 If you want to remove the stack completely, run `pulumi stack rm dev`.

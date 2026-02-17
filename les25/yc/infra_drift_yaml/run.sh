@@ -19,25 +19,24 @@ pulumi config set prefix $PREFIX
 pulumi config
 pulumi up -y
 pulumi stack output
-#pulumi stack --show-urns
 
-#export SAVED_NAME=$(pulumi stack output subnet_name)
+export SAVED_NAME=$(pulumi stack output subnet_name)
 			    
-#read -p "press any key to subnet update to drift on ..."
-#yc vpc subnet update \
-#  --id $(pulumi stack output subnet_id) \
-#  --folder-id $YC_FOLDER_ID \
-#  --new-name "$PREFIX-subnet-drifted"  
+read -p "press any key to subnet update to drift on ..."
+yc vpc subnet update \
+  --id $(pulumi stack output subnet_id) \
+  --folder-id $YC_FOLDER_ID \
+  --new-name "$PREFIX-subnet-drifted"  
 
-#pulumi refresh --preview-only --diff 
+pulumi refresh --preview-only --diff 
 
-#read -p "press any key to subnet update to drift off ..."
-#yc vpc subnet update \
-#  --id $(pulumi stack output subnet_id) \
-#  --folder-id $YC_FOLDER_ID \
-#  --new-name "$SAVED_NAME" 
+read -p "press any key to subnet update to drift off ..."
+yc vpc subnet update \
+  --id $(pulumi stack output subnet_id) \
+  --folder-id $YC_FOLDER_ID \
+  --new-name "$SAVED_NAME" 
 
-#pulumi refresh --preview-only --diff
+pulumi refresh --preview-only --diff
 
 export IP=$(pulumi stack output instance_nat_ip)
 
