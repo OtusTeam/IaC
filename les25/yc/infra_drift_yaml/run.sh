@@ -22,19 +22,20 @@ pulumi stack output
 
 export SAVED_NAME=$(pulumi stack output subnet_name)
 			    
-read -p "press any key to subnet update and make drift ..."
-yc vpc subnet update \
-  --id $(pulumi stack output subnet_id) \
-  --folder-id $YC_FOLDER_ID \
-  --new-name "$PREFIX-subnet-drifted"  
+#read -p "press any key to subnet update and make drift ..."
+#yc vpc subnet update \
+#  --id $(pulumi stack output subnet_id) \
+#  --folder-id $YC_FOLDER_ID \
+#  --new-name "$PREFIX-subnet-drifted"  
 
-read -p "press any key to detect and smooth out drift  ..."
+read -p "make drift (for example: update subnet name) and press any key to detect and smooth the drift ..."
+#read -p "press any key to detect and smooth out drift  ..."
 
 pulumi refresh --diff # --preview-only 
 
 read -p "press any key to destroy and remove stack ..."
 
 pulumi destroy -y
-pulumi stack rm dev -y -f
+pulumi stack rm dev -y -f 
 
 set +x

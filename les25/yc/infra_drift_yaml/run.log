@@ -1,4 +1,4 @@
-a@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/yc/infra_drift_yaml$ ./run.sh 
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/yc/infra_drift_yaml$ ./run.sh 
 Enter Pulumi passphrase: 
 Created stack 'dev'
 ++ pulumi config set yandex:cloudId b1glq0cg9jigrj5lcp63
@@ -23,9 +23,9 @@ username         ubuntu
 Previewing update (dev):
      Type                             Name                Plan       
  +   pulumi:pulumi:Stack              yc-infra-drift-dev  create     
- +   ├─ yandex:index:VpcNetwork       network             create     
  +   ├─ yandex:index:VpcSubnet        subnet              create     
- +   └─ yandex:index:ComputeInstance  instance            create     
+ +   ├─ yandex:index:ComputeInstance  instance            create     
+ +   └─ yandex:index:VpcNetwork       network             create     
 
 Outputs:
     instance_id    : [unknown]
@@ -41,63 +41,48 @@ Resources:
 
 Updating (dev):
      Type                             Name                Status              
- +   pulumi:pulumi:Stack              yc-infra-drift-dev  created (53s)       
+ +   pulumi:pulumi:Stack              yc-infra-drift-dev  created (47s)       
  +   ├─ yandex:index:VpcNetwork       network             created (3s)        
- +   ├─ yandex:index:VpcSubnet        subnet              created (0.60s)     
- +   └─ yandex:index:ComputeInstance  instance            created (49s)       
+ +   ├─ yandex:index:VpcSubnet        subnet              created (0.44s)     
+ +   └─ yandex:index:ComputeInstance  instance            created (43s)       
 
 Outputs:
-    instance_id    : "fhmipfs1c2j2pevjg5ac"
+    instance_id    : "fhmgfhf76autorfiuc5o"
     instance_name  : "les25-instance-drift"
-    instance_nat_ip: "89.169.138.102"
-    network_id     : "enp3ra7tubut2ichfecf"
+    instance_nat_ip: "93.77.185.16"
+    network_id     : "enplqbg383785qun9u63"
     network_name   : "les25-network-drift"
-    subnet_id      : "e9bjlihpptj9gdh926bb"
+    subnet_id      : "e9bqhiocqh5vueql428a"
     subnet_name    : "les25-subnet-drift"
 
 Resources:
     + 4 created
 
-Duration: 54s
+Duration: 48s
 
 ++ pulumi stack output
 Current stack outputs (7):
     OUTPUT           VALUE
-    instance_id      fhmipfs1c2j2pevjg5ac
+    instance_id      fhmgfhf76autorfiuc5o
     instance_name    les25-instance-drift
-    instance_nat_ip  89.169.138.102
-    network_id       enp3ra7tubut2ichfecf
+    instance_nat_ip  93.77.185.16
+    network_id       enplqbg383785qun9u63
     network_name     les25-network-drift
-    subnet_id        e9bjlihpptj9gdh926bb
+    subnet_id        e9bqhiocqh5vueql428a
     subnet_name      les25-subnet-drift
 +++ pulumi stack output subnet_name
 ++ export SAVED_NAME=les25-subnet-drift
 ++ SAVED_NAME=les25-subnet-drift
-++ read -p 'press any key to subnet update and make drift ...'
-press any key to subnet update and make drift ...
-+++ pulumi stack output subnet_id
-++ yc vpc subnet update --id e9bjlihpptj9gdh926bb --folder-id b1glf35jjq6imk8i8k4m --new-name les25-subnet-drifted
-done (4s)
-id: e9bjlihpptj9gdh926bb
-folder_id: b1glf35jjq6imk8i8k4m
-created_at: "2026-02-18T06:02:15Z"
-name: les25-subnet-drifted
-network_id: enp3ra7tubut2ichfecf
-zone_id: ru-central1-a
-v4_cidr_blocks:
-  - 192.168.25.0/25
-dhcp_options: {}
-
-++ read -p 'press any key to detect and smooth out drift  ...'
-press any key to detect and smooth out drift  ...
+++ read -p 'make drift (for example: update subnet name) and press any key to detect and smooth the drift ...'
+make drift (for example: update subnet name) and press any key to detect and smooth the drift ...
 ++ pulumi refresh --diff
 Previewing refresh (dev):
   pulumi:pulumi:Stack: (same)
     [urn=urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev]
     ~ yandex:index/vpcSubnet:VpcSubnet: (update)
-        [id=e9bjlihpptj9gdh926bb]
+        [id=e9bqhiocqh5vueql428a]
         [urn=urn:pulumi:dev::yc-infra-drift::yandex:index/vpcSubnet:VpcSubnet::subnet]
-      ~ name: "les25-subnet-drift" => "les25-subnet-drifted"
+      ~ name: "les25-subnet-drift" => "les25-subnet-drift-bla-bla-bla"
 Resources:              
     ~ 1 to update
     3 unchanged
@@ -108,39 +93,39 @@ Refreshing (dev):
   pulumi:pulumi:Stack: (same)
     [urn=urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev]
     --outputs:--
-    instance_id    : "fhmipfs1c2j2pevjg5ac"
+    instance_id    : "fhmgfhf76autorfiuc5o"
     instance_name  : "les25-instance-drift"
-    instance_nat_ip: "89.169.138.102"
-    network_id     : "enp3ra7tubut2ichfecf"
+    instance_nat_ip: "93.77.185.16"
+    network_id     : "enplqbg383785qun9u63"
     network_name   : "les25-network-drift"
-    subnet_id      : "e9bjlihpptj9gdh926bb"
+    subnet_id      : "e9bqhiocqh5vueql428a"
     subnet_name    : "les25-subnet-drift"
     ~ yandex:index/vpcSubnet:VpcSubnet: (update)
-        [id=e9bjlihpptj9gdh926bb]
+        [id=e9bqhiocqh5vueql428a]
         [urn=urn:pulumi:dev::yc-infra-drift::yandex:index/vpcSubnet:VpcSubnet::subnet]
-      ~ name: "les25-subnet-drift" => "les25-subnet-drifted"
+      ~ name: "les25-subnet-drift" => "les25-subnet-drift-bla-bla-bla"
 Resources:      
     ~ 1 updated
     3 unchanged
 
 Duration: 1s
 ++ read -p 'press any key to destroy and remove stack ...'
-press any key to destroy and remove stack ...       
+press any key to destroy and remove stack ...
 ++ pulumi destroy -y
 Previewing destroy (dev):
      Type                             Name                Plan       
  -   pulumi:pulumi:Stack              yc-infra-drift-dev  delete     
+ -   ├─ yandex:index:ComputeInstance  instance            delete     
  -   ├─ yandex:index:VpcSubnet        subnet              delete     
- -   ├─ yandex:index:VpcNetwork       network             delete     
- -   └─ yandex:index:ComputeInstance  instance            delete     
+ -   └─ yandex:index:VpcNetwork       network             delete     
 
 Outputs:
-  - instance_id    : "fhmipfs1c2j2pevjg5ac"
+  - instance_id    : "fhmgfhf76autorfiuc5o"
   - instance_name  : "les25-instance-drift"
-  - instance_nat_ip: "89.169.138.102"
-  - network_id     : "enp3ra7tubut2ichfecf"
+  - instance_nat_ip: "93.77.185.16"
+  - network_id     : "enplqbg383785qun9u63"
   - network_name   : "les25-network-drift"
-  - subnet_id      : "e9bjlihpptj9gdh926bb"
+  - subnet_id      : "e9bqhiocqh5vueql428a"
   - subnet_name    : "les25-subnet-drift"
 
 Resources:
@@ -149,23 +134,23 @@ Resources:
 Destroying (dev):
      Type                             Name                Status              
  -   pulumi:pulumi:Stack              yc-infra-drift-dev  deleted (0.00s)     
- -   ├─ yandex:index:ComputeInstance  instance            deleted (34s)       
- -   ├─ yandex:index:VpcSubnet        subnet              deleted (5s)        
- -   └─ yandex:index:VpcNetwork       network             deleted (0.90s)     
+ -   ├─ yandex:index:ComputeInstance  instance            deleted (27s)       
+ -   ├─ yandex:index:VpcSubnet        subnet              deleted (3s)        
+ -   └─ yandex:index:VpcNetwork       network             deleted (0.97s)     
 
 Outputs:
-  - instance_id    : "fhmipfs1c2j2pevjg5ac"
+  - instance_id    : "fhmgfhf76autorfiuc5o"
   - instance_name  : "les25-instance-drift"
-  - instance_nat_ip: "89.169.138.102"
-  - network_id     : "enp3ra7tubut2ichfecf"
+  - instance_nat_ip: "93.77.185.16"
+  - network_id     : "enplqbg383785qun9u63"
   - network_name   : "les25-network-drift"
-  - subnet_id      : "e9bjlihpptj9gdh926bb"
+  - subnet_id      : "e9bqhiocqh5vueql428a"
   - subnet_name    : "les25-subnet-drift"
 
 Resources:
     - 4 deleted
 
-Duration: 42s
+Duration: 32s
 
 The resources in the stack have been deleted, but the history and configuration associated with the stack are still maintained. 
 If you want to remove the stack completely, run `pulumi stack rm dev`.
