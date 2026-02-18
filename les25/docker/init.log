@@ -1,0 +1,35 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/docker$ . init.sh 
+deactivate: команда не найдена
+Collecting pulumi<4.0.0,>=3.5.1
+  Downloading pulumi-3.221.0-py3-none-any.whl (390 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 390.3/390.3 KB 1.0 MB/s eta 0:00:00
+Collecting pulumi-docker<4.7.0,>=4.6.0
+  Using cached pulumi_docker-4.6.2-py3-none-any.whl (110 kB)
+Collecting dill~=0.4
+  Using cached dill-0.4.1-py3-none-any.whl (120 kB)
+Collecting pip>=24.3.1
+  Using cached pip-26.0.1-py3-none-any.whl (1.8 MB)
+Collecting protobuf<7,>=3.20.3
+  Using cached protobuf-6.33.5-cp39-abi3-manylinux2014_x86_64.whl (323 kB)
+Collecting grpcio<2,>=1.68.1
+  Using cached grpcio-1.78.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (6.7 MB)
+Collecting semver~=3.0
+  Using cached semver-3.0.4-py3-none-any.whl (17 kB)
+Collecting pyyaml~=6.0
+  Using cached pyyaml-6.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (770 kB)
+Collecting debugpy~=1.8.7
+  Using cached debugpy-1.8.20-cp310-cp310-manylinux_2_34_x86_64.whl (3.1 MB)
+Collecting parver>=0.2.1
+  Using cached parver-0.5-py3-none-any.whl (15 kB)
+Collecting typing-extensions>=4.11
+  Using cached typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+Collecting attrs>=19.2
+  Using cached attrs-25.4.0-py3-none-any.whl (67 kB)
+Collecting arpeggio>=1.7
+  Using cached Arpeggio-2.0.3-py2.py3-none-any.whl (54 kB)
+Installing collected packages: arpeggio, typing-extensions, semver, pyyaml, protobuf, pip, dill, debugpy, attrs, parver, grpcio, pulumi, pulumi-docker
+  Attempting uninstall: pip
+    Found existing installation: pip 22.0.2
+    Uninstalling pip-22.0.2:
+      Successfully uninstalled pip-22.0.2
+Successfully installed arpeggio-2.0.3 attrs-25.4.0 debugpy-1.8.20 dill-0.4.1 grpcio-1.78.0 parver-0.5 pip-26.0.1 protobuf-6.33.5 pulumi-3.221.0 pulumi-docker-4.6.2 pyyaml-6.0.3 semver-3.0.4 typing-extensions-4.15.0
