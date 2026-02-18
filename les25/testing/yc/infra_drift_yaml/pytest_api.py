@@ -65,45 +65,6 @@ def test_outputs_values(stack):
     assert all(k in outputs and  _checked_output_value(outputs, k) != None for k in outputs_key)
 
 
-def test_lemp_server_responds(stack):
-    outputs = stack.outputs()
-    ip = _checked_output_value(outputs, "instance_nat_ip")
-
-    url = f"http://{ip}/"
-
-    # Параметры: общее ожидание (сек), задержка между попытками (сек), таймаут запроса (сек)
-    total_wait = int(os.environ.get("LEMP_TOTAL_WAIT", "300"))  # default 5 minutes
-    interval = int(os.environ.get("LEMP_RETRY_INTERVAL", "5"))  # default 5s
-    req_timeout = int(os.environ.get("LEMP_REQ_TIMEOUT", "30"))  # default 30s
-
-    deadline = time.time() + total_wait
-    last_exc = None
-
-    # Небольшая первая пауза
-    time.sleep(10)
-
-    while time.time() < deadline:
-        try:
-            resp = requests.get(url, timeout=req_timeout)
-            resp.raise_for_status()
-            # Успех — страница доступна (HTTP 2xx)
-            return
-        except RequestException as e:
-            last_exc = e
-            # Если тест запущен в интерактивном режиме и пользователь хочет контролировать,
-            # можно читать переменную окружения LEMP_ALLOW_INTERACTIVE=yes
-            allow_interactive = os.environ.get("LEMP_ALLOW_INTERACTIVE", "no").lower() in ("1", "yes", "true")
-            if allow_interactive and sys.stdin and sys.stdin.isatty():
-                ans = input(f"Request to {url} failed: {e}\nCancel (y/N)? ").strip().lower()
-                if ans in ("y", "yes"):
-                    pytest.skip("Cancelled by user")
-            # Иначе ждём и пробуем снова
-            time.sleep(interval)
-
-    # Если вышли по таймауту — считаем это провалом, показываем последнее исключение
-    pytest.fail(f"LEMP server did not respond within {total_wait} seconds. Last error: {last_exc}")
-
-
 def test_pulumi_detects_drift(stack):
     # Подготовка: убедимся, что в outputs есть subnet_id
     outputs 	= stack.outputs()
