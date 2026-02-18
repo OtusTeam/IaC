@@ -1,0 +1,45 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/testing/hello/test$ ./run.sh 
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 retry.go:91: terraform [init -upgrade=false]
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: Running command terraform with args [init -upgrade=false]
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: Initializing the backend...
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: Initializing provider plugins...
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: 
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: Terraform has been successfully initialized!
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: 
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: You may now begin working with Terraform. Try running "terraform plan" to see
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: any changes that are required for your infrastructure. All Terraform commands
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: should now work.
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: 
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: If you ever set or change modules or backend configuration for Terraform,
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: rerun this command to reinitialize your working directory. If you forget, other
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: commands will detect it and remind you to do so if necessary.
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 retry.go:91: terraform [apply -input=false -auto-approve -lock=false]
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: Running command terraform with args [apply -input=false -auto-approve -lock=false]
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: 
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: Changes to Outputs:
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66:   + hello_world = "Hello, World!"
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: 
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: You can apply this plan to save these new output values to the Terraform
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: state, without changing any real infrastructure.
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: 
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: 
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: Outputs:
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: 
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: hello_world = "Hello, World!"
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 retry.go:91: terraform [output -no-color -json hello_world]
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: Running command terraform with args [output -no-color -json hello_world]
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: "Hello, World!"
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 retry.go:91: terraform [destroy -auto-approve -input=false -lock=false]
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: Running command terraform with args [destroy -auto-approve -input=false -lock=false]
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: 
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: Changes to Outputs:
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66:   - hello_world = "Hello, World!" -> null
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: 
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: You can apply this plan to save these new output values to the Terraform
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: state, without changing any real infrastructure.
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: 
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: Destroy complete! Resources: 0 destroyed.
+TestTerraformHelloWorldExample 2026-02-18T14:26:01+08:00 logger.go:66: 
+PASS
+ok  	terraform_hello_world_example_test.go	0.120s

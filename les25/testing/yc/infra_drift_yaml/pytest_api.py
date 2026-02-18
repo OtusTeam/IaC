@@ -133,9 +133,3 @@ def test_pulumi_detects_drift(stack):
         changed = int(changes.get('change', 0))
         assert (updated + changed) > 0, f"No changes detected by refresh; summary: {changes}"
 
-#    p = subprocess.run(
-#        shlex.split(f"yc vpc subnet update --id {subnet_id} --folder-id {folder_id} --new-name {subnet_name}"),
-#        stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
-#    )
-#    assert p.returncode == 0
-
