@@ -6,6 +6,6 @@ echo
 export PULUMI_CONFIG_PASSPHRASE
 set -x
 
-pytest --verbosity=1 test_api.py
+pytest --verbosity=1 pytest_api.py
 
 set +x
