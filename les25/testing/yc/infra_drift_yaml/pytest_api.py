@@ -1,10 +1,14 @@
 import os
 import time
+import subprocess, shlex, sys
 import pytest
 from pulumi import automation as auto
 import uuid	# if you need a unique name
 import requests
 from requests.exceptions import RequestException
+
+# Глобальные переменные:
+folder_id = os.environ["YC_FOLDER_ID"]
 
 
 @pytest.fixture(scope="session")
@@ -19,7 +23,7 @@ def stack():
     # Установим значения в конфиг (в namespace yandex):
     stack.set_config("yandex:token",auto.ConfigValue(value=os.environ["YC_TOKEN"],secret=True))
     stack.set_config("yandex:cloudId",auto.ConfigValue(value=os.environ["YC_CLOUD_ID"]))
-    stack.set_config("yandex:folderId",auto.ConfigValue(value=os.environ["YC_FOLDER_ID"]))
+    stack.set_config("yandex:folderId",auto.ConfigValue(value=folder_id))
     stack.set_config("yandex:zone",auto.ConfigValue(value=os.environ["YC_ZONE"]))
 
     # prefix (без namespace)
@@ -59,13 +63,6 @@ outputs_key = ("instance_id", "instance_name", "instance_nat_ip", "network_id", 
 def test_outputs_values(stack):
     outputs = stack.outputs()
     assert all(k in outputs and  _checked_output_value(outputs, k) != None for k in outputs_key)
-#    instance_id     = _checked_output_value(outputs, "instance_id")
-#    instance_name   = _checked_output_value(outputs, "instance_name")
-#    instance_nat_ip = _checked_output_value(outputs, "instance_nat_ip")
-#    network_id      = _checked_output_value(outputs, "network_id")
-#    network_name    = _checked_output_value(outputs, "network_name")
-#    subnet_id       = _checked_output_value(outputs, "subnet_id")
-#    subnet_name     = _checked_output_value(outputs, "subnet_name")
 
 
 def test_lemp_server_responds(stack):
@@ -105,4 +102,40 @@ def test_lemp_server_responds(stack):
 
     # Если вышли по таймауту — считаем это провалом, показываем последнее исключение
     pytest.fail(f"LEMP server did not respond within {total_wait} seconds. Last error: {last_exc}")
+
+
+def test_pulumi_detects_drift(stack):
+    # Подготовка: убедимся, что в outputs есть subnet_id
+    outputs 	= stack.outputs()
+    subnet_id 	= _checked_output_value(outputs, "subnet_id")
+    subnet_name = _checked_output_value(outputs, "subnet_name")
+
+    p = subprocess.run(
+        shlex.split(f"yc vpc subnet update --id {subnet_id} --folder-id {folder_id} --new-name {subnet_name+'ed'}"),
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+    )
+    assert p.returncode == 0
+
+    # Запускаем refresh preview-only через Automation API, чтобы обнаружить дрифт
+    refresh_res = stack.refresh(on_output=print)
+
+    # refresh_res.summary содержит информацию о ресурсных изменениях (create/update/delete)
+    summary = getattr(refresh_res, "summary", None)
+    if summary is None:
+        # Старые версии Automation API возвращают структуру иначе; попытаемся проверить stdout/outputs
+        pytest.fail("refresh did not return summary; cannot determine drift")
+    else:
+        changes = getattr(summary, "resource_changes", None)
+        # Ожидаем, что будет обнаружено изменение для подсети (updated)
+        assert changes is not None, "No resource_changes in refresh summary"
+        # Подход: любой ненулевой суммарный счетчик означает дрифт. Проверим updated > 0.
+        updated = int(changes.get('update', 0))
+        changed = int(changes.get('change', 0))
+        assert (updated + changed) > 0, f"No changes detected by refresh; summary: {changes}"
+
+#    p = subprocess.run(
+#        shlex.split(f"yc vpc subnet update --id {subnet_id} --folder-id {folder_id} --new-name {subnet_name}"),
+#        stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+#    )
+#    assert p.returncode == 0
 

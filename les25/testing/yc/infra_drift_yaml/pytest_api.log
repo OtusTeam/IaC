@@ -5,10 +5,11 @@ Enter Pulumi passphrase:
 platform linux -- Python 3.10.12, pytest-9.0.2, pluggy-1.6.0 -- /home/za/Documents/IaC/2git/les25/testing/yc/infra_drift_yaml/.venv/bin/python3
 cachedir: .pytest_cache
 rootdir: /home/za/Documents/IaC/2git/les25/testing/yc/infra_drift_yaml
-collected 2 items                                                                                                                                                                                                                            
+collected 3 items                                                                                                                                                                                                                            
 
-pytest_api.py::test_outputs_values PASSED                                                                                                                                                                                              [ 50%]
-pytest_api.py::test_lemp_server_responds PASSED                                                                                                                                                                                        [100%]
+pytest_api.py::test_outputs_values PASSED                                                                                                                                                                                              [ 33%]
+pytest_api.py::test_lemp_server_responds PASSED                                                                                                                                                                                        [ 66%]
+pytest_api.py::test_pulumi_detects_drift PASSED                                                                                                                                                                                        [100%]
 
-======================================================================================================= 2 passed in 202.52s (0:03:22) ========================================================================================================
+======================================================================================================= 3 passed in 121.99s (0:02:01) ========================================================================================================
 ++ set +x

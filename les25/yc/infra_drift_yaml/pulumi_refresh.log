@@ -1,0 +1,1577 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/yc/infra_drift_yaml$ pulumi refresh  --preview-only --json --non-interactive
+error: getting stack configuration: get stack secrets manager: passphrase must be set with PULUMI_CONFIG_PASSPHRASE or PULUMI_CONFIG_PASSPHRASE_FILE environment variables
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/yc/infra_drift_yaml$ export PULUMI_CONFIG_PASSPHRASE=s
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/yc/infra_drift_yaml$ pulumi refresh  --preview-only --json --non-interactive
+{
+    "config": {
+        "yandex:cloudId": "b1glq0cg9jigrj5lcp63",
+        "yandex:folderId": "b1glf35jjq6imk8i8k4m",
+        "yandex:token": "[secret]",
+        "yandex:zone": "ru-central1-a",
+        "yc-infra-drift:cidr": "192.168.25.0/25",
+        "yc-infra-drift:imageId": "fd85r147n5huljgijb47",
+        "yc-infra-drift:prefix": "les25",
+        "yc-infra-drift:pub": "[secret]",
+        "yc-infra-drift:username": "ubuntu"
+    },
+    "steps": [
+        {
+            "op": "refresh",
+            "urn": "urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev",
+            "oldState": {
+                "urn": "urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev",
+                "custom": false,
+                "type": "pulumi:pulumi:Stack",
+                "outputs": {
+                    "instance_id": "fhmebv4f8i1uk9kf3d7k",
+                    "instance_name": "les25-instance-drift",
+                    "instance_nat_ip": "93.77.181.149",
+                    "network_id": "enp1qi4pta336e54o9l5",
+                    "network_name": "les25-network-drift",
+                    "subnet_id": "e9buh4enm3qumb6gg8t5",
+                    "subnet_name": "les25-subnet-drift"
+                },
+                "created": "0001-01-01T00:00:00Z",
+                "modified": "0001-01-01T00:00:00Z",
+                "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#317",
+                "stackTrace": [
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#317"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/proto/go/language_grpc.pb.go#579"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1405"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1815"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1035"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../../opt/hostedtoolcache/go/1.24.12/x64/src/runtime/asm_amd64.s#1700"
+                    }
+                ]
+            },
+            "newState": {
+                "urn": "urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev",
+                "custom": false,
+                "type": "pulumi:pulumi:Stack",
+                "outputs": {
+                    "instance_id": "fhmebv4f8i1uk9kf3d7k",
+                    "instance_name": "les25-instance-drift",
+                    "instance_nat_ip": "93.77.181.149",
+                    "network_id": "enp1qi4pta336e54o9l5",
+                    "network_name": "les25-network-drift",
+                    "subnet_id": "e9buh4enm3qumb6gg8t5",
+                    "subnet_name": "les25-subnet-drift"
+                },
+                "created": "0001-01-01T00:00:00Z",
+                "modified": "0001-01-01T00:00:00Z",
+                "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#317",
+                "stackTrace": [
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#317"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/proto/go/language_grpc.pb.go#579"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1405"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1815"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1035"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../../opt/hostedtoolcache/go/1.24.12/x64/src/runtime/asm_amd64.s#1700"
+                    }
+                ]
+            },
+            "detailedDiff": null
+        },
+        {
+            "op": "refresh",
+            "urn": "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcNetwork:VpcNetwork::network",
+            "provider": "urn:pulumi:dev::yc-infra-drift::pulumi:providers:yandex::default::c33061fb-6986-44e7-8e31-c90598cd1462",
+            "oldState": {
+                "urn": "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcNetwork:VpcNetwork::network",
+                "custom": true,
+                "id": "enp1qi4pta336e54o9l5",
+                "type": "yandex:index/vpcNetwork:VpcNetwork",
+                "inputs": {
+                    "__defaults": [],
+                    "description": "VPC network created by Pulumi",
+                    "name": "les25-network-drift"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":60000000000,\"delete\":60000000000,\"update\":60000000000}}",
+                    "createdAt": "2026-02-18T04:55:25Z",
+                    "defaultSecurityGroupId": "enp4fmq94slm0ic20jmf",
+                    "description": "VPC network created by Pulumi",
+                    "folderId": "b1glf35jjq6imk8i8k4m",
+                    "id": "enp1qi4pta336e54o9l5",
+                    "labels": {},
+                    "name": "les25-network-drift",
+                    "subnetIds": []
+                },
+                "parent": "urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev",
+                "provider": "urn:pulumi:dev::yc-infra-drift::pulumi:providers:yandex::default::c33061fb-6986-44e7-8e31-c90598cd1462",
+                "propertyDependencies": {
+                    "description": [],
+                    "name": []
+                },
+                "created": "0001-01-01T00:00:00Z",
+                "modified": "0001-01-01T00:00:00Z",
+                "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439",
+                "stackTrace": [
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#995"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1219"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1074"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#504"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#319"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/go/pulumi/run.go#140"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#317"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/proto/go/language_grpc.pb.go#579"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1405"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1815"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1035"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../../opt/hostedtoolcache/go/1.24.12/x64/src/runtime/asm_amd64.s#1700"
+                    }
+                ]
+            },
+            "newState": {
+                "urn": "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcNetwork:VpcNetwork::network",
+                "custom": true,
+                "id": "enp1qi4pta336e54o9l5",
+                "type": "yandex:index/vpcNetwork:VpcNetwork",
+                "inputs": {
+                    "__defaults": [],
+                    "description": "VPC network created by Pulumi",
+                    "name": "les25-network-drift"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":60000000000,\"delete\":60000000000,\"update\":60000000000}}",
+                    "createdAt": "2026-02-18T04:55:25Z",
+                    "defaultSecurityGroupId": "enp4fmq94slm0ic20jmf",
+                    "description": "VPC network created by Pulumi",
+                    "folderId": "b1glf35jjq6imk8i8k4m",
+                    "id": "enp1qi4pta336e54o9l5",
+                    "labels": {},
+                    "name": "les25-network-drift",
+                    "subnetIds": []
+                },
+                "parent": "urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev",
+                "provider": "urn:pulumi:dev::yc-infra-drift::pulumi:providers:yandex::default::c33061fb-6986-44e7-8e31-c90598cd1462",
+                "propertyDependencies": {
+                    "description": [],
+                    "name": []
+                },
+                "created": "0001-01-01T00:00:00Z",
+                "modified": "0001-01-01T00:00:00Z",
+                "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439",
+                "stackTrace": [
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#995"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1219"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1074"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#504"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#319"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/go/pulumi/run.go#140"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#317"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/proto/go/language_grpc.pb.go#579"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1405"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1815"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1035"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../../opt/hostedtoolcache/go/1.24.12/x64/src/runtime/asm_amd64.s#1700"
+                    }
+                ]
+            },
+            "detailedDiff": null
+        },
+        {
+            "op": "refresh",
+            "urn": "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcSubnet:VpcSubnet::subnet",
+            "provider": "urn:pulumi:dev::yc-infra-drift::pulumi:providers:yandex::default::c33061fb-6986-44e7-8e31-c90598cd1462",
+            "oldState": {
+                "urn": "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcSubnet:VpcSubnet::subnet",
+                "custom": true,
+                "id": "e9buh4enm3qumb6gg8t5",
+                "type": "yandex:index/vpcSubnet:VpcSubnet",
+                "inputs": {
+                    "__defaults": [],
+                    "name": "les25-subnet-drift",
+                    "networkId": "enp1qi4pta336e54o9l5",
+                    "v4CidrBlocks": [
+                        "192.168.25.0/25"
+                    ]
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":180000000000,\"delete\":180000000000,\"update\":180000000000}}",
+                    "createdAt": "2026-02-18T04:55:28Z",
+                    "description": "",
+                    "dhcpOptions": null,
+                    "folderId": "b1glf35jjq6imk8i8k4m",
+                    "id": "e9buh4enm3qumb6gg8t5",
+                    "labels": {},
+                    "name": "les25-subnet-drift",
+                    "networkId": "enp1qi4pta336e54o9l5",
+                    "routeTableId": "",
+                    "v4CidrBlocks": [
+                        "192.168.25.0/25"
+                    ],
+                    "v6CidrBlocks": [],
+                    "zone": "ru-central1-a"
+                },
+                "parent": "urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev",
+                "dependencies": [
+                    "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcNetwork:VpcNetwork::network"
+                ],
+                "provider": "urn:pulumi:dev::yc-infra-drift::pulumi:providers:yandex::default::c33061fb-6986-44e7-8e31-c90598cd1462",
+                "propertyDependencies": {
+                    "name": [],
+                    "networkId": [
+                        "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcNetwork:VpcNetwork::network"
+                    ],
+                    "v4CidrBlocks": []
+                },
+                "created": "0001-01-01T00:00:00Z",
+                "modified": "0001-01-01T00:00:00Z",
+                "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439",
+                "stackTrace": [
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#995"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1219"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1074"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#504"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#319"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/go/pulumi/run.go#140"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#317"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/proto/go/language_grpc.pb.go#579"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1405"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1815"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1035"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../../opt/hostedtoolcache/go/1.24.12/x64/src/runtime/asm_amd64.s#1700"
+                    }
+                ]
+            },
+            "newState": {
+                "urn": "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcSubnet:VpcSubnet::subnet",
+                "custom": true,
+                "id": "e9buh4enm3qumb6gg8t5",
+                "type": "yandex:index/vpcSubnet:VpcSubnet",
+                "inputs": {
+                    "__defaults": [],
+                    "name": "les25-subnet-drift",
+                    "networkId": "enp1qi4pta336e54o9l5",
+                    "v4CidrBlocks": [
+                        "192.168.25.0/25"
+                    ]
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":180000000000,\"delete\":180000000000,\"update\":180000000000}}",
+                    "createdAt": "2026-02-18T04:55:28Z",
+                    "description": "",
+                    "dhcpOptions": null,
+                    "folderId": "b1glf35jjq6imk8i8k4m",
+                    "id": "e9buh4enm3qumb6gg8t5",
+                    "labels": {},
+                    "name": "les25-subnet-drift",
+                    "networkId": "enp1qi4pta336e54o9l5",
+                    "routeTableId": "",
+                    "v4CidrBlocks": [
+                        "192.168.25.0/25"
+                    ],
+                    "v6CidrBlocks": [],
+                    "zone": "ru-central1-a"
+                },
+                "parent": "urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev",
+                "dependencies": [
+                    "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcNetwork:VpcNetwork::network"
+                ],
+                "provider": "urn:pulumi:dev::yc-infra-drift::pulumi:providers:yandex::default::c33061fb-6986-44e7-8e31-c90598cd1462",
+                "propertyDependencies": {
+                    "name": [],
+                    "networkId": [
+                        "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcNetwork:VpcNetwork::network"
+                    ],
+                    "v4CidrBlocks": []
+                },
+                "created": "0001-01-01T00:00:00Z",
+                "modified": "0001-01-01T00:00:00Z",
+                "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439",
+                "stackTrace": [
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#995"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1219"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1074"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#504"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#319"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/go/pulumi/run.go#140"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#317"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/proto/go/language_grpc.pb.go#579"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1405"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1815"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1035"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../../opt/hostedtoolcache/go/1.24.12/x64/src/runtime/asm_amd64.s#1700"
+                    }
+                ]
+            },
+            "detailedDiff": null
+        },
+        {
+            "op": "refresh",
+            "urn": "urn:pulumi:dev::yc-infra-drift::yandex:index/computeInstance:ComputeInstance::instance",
+            "provider": "urn:pulumi:dev::yc-infra-drift::pulumi:providers:yandex::default::c33061fb-6986-44e7-8e31-c90598cd1462",
+            "oldState": {
+                "urn": "urn:pulumi:dev::yc-infra-drift::yandex:index/computeInstance:ComputeInstance::instance",
+                "custom": true,
+                "id": "fhmebv4f8i1uk9kf3d7k",
+                "type": "yandex:index/computeInstance:ComputeInstance",
+                "inputs": {
+                    "__defaults": [
+                        "networkAccelerationType",
+                        "platformId"
+                    ],
+                    "bootDisk": {
+                        "__defaults": [
+                            "autoDelete"
+                        ],
+                        "autoDelete": true,
+                        "initializeParams": {
+                            "__defaults": [
+                                "type"
+                            ],
+                            "imageId": "fd85r147n5huljgijb47",
+                            "size": 50,
+                            "type": "network-hdd"
+                        }
+                    },
+                    "metadata": {
+                        "__defaults": [],
+                        "ssh-keys": "[secret]"
+                    },
+                    "name": "les25-instance-drift",
+                    "networkAccelerationType": "standard",
+                    "networkInterfaces": [
+                        {
+                            "__defaults": [
+                                "ipv4"
+                            ],
+                            "ipv4": true,
+                            "nat": true,
+                            "subnetId": "e9buh4enm3qumb6gg8t5"
+                        }
+                    ],
+                    "platformId": "standard-v1",
+                    "resources": {
+                        "__defaults": [
+                            "coreFraction"
+                        ],
+                        "coreFraction": 100,
+                        "cores": 2,
+                        "memory": 4
+                    }
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":300000000000,\"delete\":300000000000,\"update\":300000000000},\"schema_version\":\"1\"}",
+                    "bootDisk": {
+                        "autoDelete": true,
+                        "deviceName": "fhmts0f440dg34sbdbsf",
+                        "diskId": "fhmts0f440dg34sbdbsf",
+                        "initializeParams": {
+                            "blockSize": 4096,
+                            "description": "",
+                            "imageId": "fd85r147n5huljgijb47",
+                            "name": "",
+                            "size": 50,
+                            "snapshotId": "",
+                            "type": "network-hdd"
+                        },
+                        "mode": "READ_WRITE"
+                    },
+                    "createdAt": "2026-02-18T04:55:30Z",
+                    "description": "",
+                    "folderId": "b1glf35jjq6imk8i8k4m",
+                    "fqdn": "fhmebv4f8i1uk9kf3d7k.auto.internal",
+                    "hostname": "fhmebv4f8i1uk9kf3d7k",
+                    "id": "fhmebv4f8i1uk9kf3d7k",
+                    "labels": {},
+                    "metadata": {
+                        "ssh-keys": "[secret]"
+                    },
+                    "name": "les25-instance-drift",
+                    "networkAccelerationType": "standard",
+                    "networkInterfaces": [
+                        {
+                            "dnsRecords": [],
+                            "index": 0,
+                            "ipAddress": "192.168.25.22",
+                            "ipv4": true,
+                            "ipv6": false,
+                            "ipv6Address": "",
+                            "ipv6DnsRecords": [],
+                            "macAddress": "d0:0d:e5:fc:8f:44",
+                            "nat": true,
+                            "natDnsRecords": [],
+                            "natIpAddress": "93.77.181.149",
+                            "natIpVersion": "IPV4",
+                            "securityGroupIds": [],
+                            "subnetId": "e9buh4enm3qumb6gg8t5"
+                        }
+                    ],
+                    "placementPolicy": {
+                        "placementGroupId": ""
+                    },
+                    "platformId": "standard-v1",
+                    "resources": {
+                        "coreFraction": 100,
+                        "cores": 2,
+                        "gpus": 0,
+                        "memory": 4
+                    },
+                    "schedulingPolicy": {
+                        "preemptible": false
+                    },
+                    "secondaryDisks": [],
+                    "serviceAccountId": "",
+                    "status": "running",
+                    "zone": "ru-central1-a"
+                },
+                "parent": "urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev",
+                "dependencies": [
+                    "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcSubnet:VpcSubnet::subnet"
+                ],
+                "provider": "urn:pulumi:dev::yc-infra-drift::pulumi:providers:yandex::default::c33061fb-6986-44e7-8e31-c90598cd1462",
+                "propertyDependencies": {
+                    "bootDisk": [],
+                    "metadata": [],
+                    "name": [],
+                    "networkInterfaces": [
+                        "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcSubnet:VpcSubnet::subnet"
+                    ],
+                    "resources": []
+                },
+                "created": "0001-01-01T00:00:00Z",
+                "modified": "0001-01-01T00:00:00Z",
+                "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439",
+                "stackTrace": [
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#995"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1219"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1074"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#504"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#319"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/go/pulumi/run.go#140"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#317"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/proto/go/language_grpc.pb.go#579"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1405"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1815"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1035"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../../opt/hostedtoolcache/go/1.24.12/x64/src/runtime/asm_amd64.s#1700"
+                    }
+                ]
+            },
+            "newState": {
+                "urn": "urn:pulumi:dev::yc-infra-drift::yandex:index/computeInstance:ComputeInstance::instance",
+                "custom": true,
+                "id": "fhmebv4f8i1uk9kf3d7k",
+                "type": "yandex:index/computeInstance:ComputeInstance",
+                "inputs": {
+                    "__defaults": [
+                        "networkAccelerationType",
+                        "platformId"
+                    ],
+                    "bootDisk": {
+                        "__defaults": [
+                            "autoDelete"
+                        ],
+                        "autoDelete": true,
+                        "initializeParams": {
+                            "__defaults": [
+                                "type"
+                            ],
+                            "imageId": "fd85r147n5huljgijb47",
+                            "size": 50,
+                            "type": "network-hdd"
+                        }
+                    },
+                    "metadata": {
+                        "__defaults": [],
+                        "ssh-keys": "[secret]"
+                    },
+                    "name": "les25-instance-drift",
+                    "networkAccelerationType": "standard",
+                    "networkInterfaces": [
+                        {
+                            "__defaults": [
+                                "ipv4"
+                            ],
+                            "ipv4": true,
+                            "nat": true,
+                            "subnetId": "e9buh4enm3qumb6gg8t5"
+                        }
+                    ],
+                    "platformId": "standard-v1",
+                    "resources": {
+                        "__defaults": [
+                            "coreFraction"
+                        ],
+                        "coreFraction": 100,
+                        "cores": 2,
+                        "memory": 4
+                    }
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":300000000000,\"delete\":300000000000,\"update\":300000000000},\"schema_version\":\"1\"}",
+                    "bootDisk": {
+                        "autoDelete": true,
+                        "deviceName": "fhmts0f440dg34sbdbsf",
+                        "diskId": "fhmts0f440dg34sbdbsf",
+                        "initializeParams": {
+                            "blockSize": 4096,
+                            "description": "",
+                            "imageId": "fd85r147n5huljgijb47",
+                            "name": "",
+                            "size": 50,
+                            "snapshotId": "",
+                            "type": "network-hdd"
+                        },
+                        "mode": "READ_WRITE"
+                    },
+                    "createdAt": "2026-02-18T04:55:30Z",
+                    "description": "",
+                    "folderId": "b1glf35jjq6imk8i8k4m",
+                    "fqdn": "fhmebv4f8i1uk9kf3d7k.auto.internal",
+                    "hostname": "fhmebv4f8i1uk9kf3d7k",
+                    "id": "fhmebv4f8i1uk9kf3d7k",
+                    "labels": {},
+                    "metadata": {
+                        "ssh-keys": "[secret]"
+                    },
+                    "name": "les25-instance-drift",
+                    "networkAccelerationType": "standard",
+                    "networkInterfaces": [
+                        {
+                            "dnsRecords": [],
+                            "index": 0,
+                            "ipAddress": "192.168.25.22",
+                            "ipv4": true,
+                            "ipv6": false,
+                            "ipv6Address": "",
+                            "ipv6DnsRecords": [],
+                            "macAddress": "d0:0d:e5:fc:8f:44",
+                            "nat": true,
+                            "natDnsRecords": [],
+                            "natIpAddress": "93.77.181.149",
+                            "natIpVersion": "IPV4",
+                            "securityGroupIds": [],
+                            "subnetId": "e9buh4enm3qumb6gg8t5"
+                        }
+                    ],
+                    "placementPolicy": {
+                        "placementGroupId": ""
+                    },
+                    "platformId": "standard-v1",
+                    "resources": {
+                        "coreFraction": 100,
+                        "cores": 2,
+                        "gpus": 0,
+                        "memory": 4
+                    },
+                    "schedulingPolicy": {
+                        "preemptible": false
+                    },
+                    "secondaryDisks": [],
+                    "serviceAccountId": "",
+                    "status": "running",
+                    "zone": "ru-central1-a"
+                },
+                "parent": "urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev",
+                "dependencies": [
+                    "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcSubnet:VpcSubnet::subnet"
+                ],
+                "provider": "urn:pulumi:dev::yc-infra-drift::pulumi:providers:yandex::default::c33061fb-6986-44e7-8e31-c90598cd1462",
+                "propertyDependencies": {
+                    "bootDisk": [],
+                    "metadata": [],
+                    "name": [],
+                    "networkInterfaces": [
+                        "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcSubnet:VpcSubnet::subnet"
+                    ],
+                    "resources": []
+                },
+                "created": "0001-01-01T00:00:00Z",
+                "modified": "0001-01-01T00:00:00Z",
+                "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439",
+                "stackTrace": [
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#995"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1219"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1074"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#504"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#319"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/go/pulumi/run.go#140"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#317"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/proto/go/language_grpc.pb.go#579"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1405"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1815"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1035"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../../opt/hostedtoolcache/go/1.24.12/x64/src/runtime/asm_amd64.s#1700"
+                    }
+                ]
+            },
+            "detailedDiff": null
+        }
+    ],
+    "duration": 1198132706,
+    "changeSummary": {
+        "same": 4
+    }
+}
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/les25/yc/infra_drift_yaml$ pulumi refresh  --preview-only --json --non-interactive
+{
+    "config": {
+        "yandex:cloudId": "b1glq0cg9jigrj5lcp63",
+        "yandex:folderId": "b1glf35jjq6imk8i8k4m",
+        "yandex:token": "[secret]",
+        "yandex:zone": "ru-central1-a",
+        "yc-infra-drift:cidr": "192.168.25.0/25",
+        "yc-infra-drift:imageId": "fd85r147n5huljgijb47",
+        "yc-infra-drift:prefix": "les25",
+        "yc-infra-drift:pub": "[secret]",
+        "yc-infra-drift:username": "ubuntu"
+    },
+    "steps": [
+        {
+            "op": "refresh",
+            "urn": "urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev",
+            "oldState": {
+                "urn": "urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev",
+                "custom": false,
+                "type": "pulumi:pulumi:Stack",
+                "outputs": {
+                    "instance_id": "fhmebv4f8i1uk9kf3d7k",
+                    "instance_name": "les25-instance-drift",
+                    "instance_nat_ip": "93.77.181.149",
+                    "network_id": "enp1qi4pta336e54o9l5",
+                    "network_name": "les25-network-drift",
+                    "subnet_id": "e9buh4enm3qumb6gg8t5",
+                    "subnet_name": "les25-subnet-drift"
+                },
+                "created": "0001-01-01T00:00:00Z",
+                "modified": "0001-01-01T00:00:00Z",
+                "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#317",
+                "stackTrace": [
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#317"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/proto/go/language_grpc.pb.go#579"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1405"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1815"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1035"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../../opt/hostedtoolcache/go/1.24.12/x64/src/runtime/asm_amd64.s#1700"
+                    }
+                ]
+            },
+            "newState": {
+                "urn": "urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev",
+                "custom": false,
+                "type": "pulumi:pulumi:Stack",
+                "outputs": {
+                    "instance_id": "fhmebv4f8i1uk9kf3d7k",
+                    "instance_name": "les25-instance-drift",
+                    "instance_nat_ip": "93.77.181.149",
+                    "network_id": "enp1qi4pta336e54o9l5",
+                    "network_name": "les25-network-drift",
+                    "subnet_id": "e9buh4enm3qumb6gg8t5",
+                    "subnet_name": "les25-subnet-drift"
+                },
+                "created": "0001-01-01T00:00:00Z",
+                "modified": "0001-01-01T00:00:00Z",
+                "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#317",
+                "stackTrace": [
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#317"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/proto/go/language_grpc.pb.go#579"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1405"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1815"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1035"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../../opt/hostedtoolcache/go/1.24.12/x64/src/runtime/asm_amd64.s#1700"
+                    }
+                ]
+            },
+            "detailedDiff": null
+        },
+        {
+            "op": "refresh",
+            "urn": "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcNetwork:VpcNetwork::network",
+            "provider": "urn:pulumi:dev::yc-infra-drift::pulumi:providers:yandex::default::c33061fb-6986-44e7-8e31-c90598cd1462",
+            "oldState": {
+                "urn": "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcNetwork:VpcNetwork::network",
+                "custom": true,
+                "id": "enp1qi4pta336e54o9l5",
+                "type": "yandex:index/vpcNetwork:VpcNetwork",
+                "inputs": {
+                    "__defaults": [],
+                    "description": "VPC network created by Pulumi",
+                    "name": "les25-network-drift"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":60000000000,\"delete\":60000000000,\"update\":60000000000}}",
+                    "createdAt": "2026-02-18T04:55:25Z",
+                    "defaultSecurityGroupId": "enp4fmq94slm0ic20jmf",
+                    "description": "VPC network created by Pulumi",
+                    "folderId": "b1glf35jjq6imk8i8k4m",
+                    "id": "enp1qi4pta336e54o9l5",
+                    "labels": {},
+                    "name": "les25-network-drift",
+                    "subnetIds": []
+                },
+                "parent": "urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev",
+                "provider": "urn:pulumi:dev::yc-infra-drift::pulumi:providers:yandex::default::c33061fb-6986-44e7-8e31-c90598cd1462",
+                "propertyDependencies": {
+                    "description": [],
+                    "name": []
+                },
+                "created": "0001-01-01T00:00:00Z",
+                "modified": "0001-01-01T00:00:00Z",
+                "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439",
+                "stackTrace": [
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#995"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1219"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1074"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#504"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#319"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/go/pulumi/run.go#140"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#317"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/proto/go/language_grpc.pb.go#579"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1405"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1815"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1035"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../../opt/hostedtoolcache/go/1.24.12/x64/src/runtime/asm_amd64.s#1700"
+                    }
+                ]
+            },
+            "newState": {
+                "urn": "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcNetwork:VpcNetwork::network",
+                "custom": true,
+                "id": "enp1qi4pta336e54o9l5",
+                "type": "yandex:index/vpcNetwork:VpcNetwork",
+                "inputs": {
+                    "__defaults": [],
+                    "description": "VPC network created by Pulumi",
+                    "name": "les25-network-drift"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":60000000000,\"delete\":60000000000,\"update\":60000000000}}",
+                    "createdAt": "2026-02-18T04:55:25Z",
+                    "defaultSecurityGroupId": "enp4fmq94slm0ic20jmf",
+                    "description": "VPC network created by Pulumi",
+                    "folderId": "b1glf35jjq6imk8i8k4m",
+                    "id": "enp1qi4pta336e54o9l5",
+                    "labels": {},
+                    "name": "les25-network-drift",
+                    "subnetIds": []
+                },
+                "parent": "urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev",
+                "provider": "urn:pulumi:dev::yc-infra-drift::pulumi:providers:yandex::default::c33061fb-6986-44e7-8e31-c90598cd1462",
+                "propertyDependencies": {
+                    "description": [],
+                    "name": []
+                },
+                "created": "0001-01-01T00:00:00Z",
+                "modified": "0001-01-01T00:00:00Z",
+                "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439",
+                "stackTrace": [
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#995"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1219"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1074"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#504"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#319"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/go/pulumi/run.go#140"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#317"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/proto/go/language_grpc.pb.go#579"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1405"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1815"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1035"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../../opt/hostedtoolcache/go/1.24.12/x64/src/runtime/asm_amd64.s#1700"
+                    }
+                ]
+            },
+            "detailedDiff": null
+        },
+        {
+            "op": "update",
+            "urn": "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcSubnet:VpcSubnet::subnet",
+            "provider": "urn:pulumi:dev::yc-infra-drift::pulumi:providers:yandex::default::c33061fb-6986-44e7-8e31-c90598cd1462",
+            "oldState": {
+                "urn": "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcSubnet:VpcSubnet::subnet",
+                "custom": true,
+                "id": "e9buh4enm3qumb6gg8t5",
+                "type": "yandex:index/vpcSubnet:VpcSubnet",
+                "inputs": {
+                    "__defaults": [],
+                    "name": "les25-subnet-drift",
+                    "networkId": "enp1qi4pta336e54o9l5",
+                    "v4CidrBlocks": [
+                        "192.168.25.0/25"
+                    ]
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":180000000000,\"delete\":180000000000,\"update\":180000000000}}",
+                    "createdAt": "2026-02-18T04:55:28Z",
+                    "description": "",
+                    "dhcpOptions": null,
+                    "folderId": "b1glf35jjq6imk8i8k4m",
+                    "id": "e9buh4enm3qumb6gg8t5",
+                    "labels": {},
+                    "name": "les25-subnet-drift",
+                    "networkId": "enp1qi4pta336e54o9l5",
+                    "routeTableId": "",
+                    "v4CidrBlocks": [
+                        "192.168.25.0/25"
+                    ],
+                    "v6CidrBlocks": [],
+                    "zone": "ru-central1-a"
+                },
+                "parent": "urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev",
+                "dependencies": [
+                    "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcNetwork:VpcNetwork::network"
+                ],
+                "provider": "urn:pulumi:dev::yc-infra-drift::pulumi:providers:yandex::default::c33061fb-6986-44e7-8e31-c90598cd1462",
+                "propertyDependencies": {
+                    "name": [],
+                    "networkId": [
+                        "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcNetwork:VpcNetwork::network"
+                    ],
+                    "v4CidrBlocks": []
+                },
+                "created": "0001-01-01T00:00:00Z",
+                "modified": "0001-01-01T00:00:00Z",
+                "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439",
+                "stackTrace": [
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#995"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1219"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1074"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#504"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#319"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/go/pulumi/run.go#140"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#317"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/proto/go/language_grpc.pb.go#579"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1405"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1815"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1035"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../../opt/hostedtoolcache/go/1.24.12/x64/src/runtime/asm_amd64.s#1700"
+                    }
+                ]
+            },
+            "newState": {
+                "urn": "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcSubnet:VpcSubnet::subnet",
+                "custom": true,
+                "id": "e9buh4enm3qumb6gg8t5",
+                "type": "yandex:index/vpcSubnet:VpcSubnet",
+                "inputs": {
+                    "name": "les25-subnet-drifted",
+                    "networkId": "enp1qi4pta336e54o9l5",
+                    "v4CidrBlocks": [
+                        "192.168.25.0/25"
+                    ]
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":180000000000,\"delete\":180000000000,\"update\":180000000000}}",
+                    "createdAt": "2026-02-18T04:55:28Z",
+                    "description": "",
+                    "dhcpOptions": null,
+                    "folderId": "b1glf35jjq6imk8i8k4m",
+                    "id": "e9buh4enm3qumb6gg8t5",
+                    "labels": {},
+                    "name": "les25-subnet-drifted",
+                    "networkId": "enp1qi4pta336e54o9l5",
+                    "routeTableId": "",
+                    "v4CidrBlocks": [
+                        "192.168.25.0/25"
+                    ],
+                    "v6CidrBlocks": [],
+                    "zone": "ru-central1-a"
+                },
+                "parent": "urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev",
+                "dependencies": [
+                    "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcNetwork:VpcNetwork::network"
+                ],
+                "provider": "urn:pulumi:dev::yc-infra-drift::pulumi:providers:yandex::default::c33061fb-6986-44e7-8e31-c90598cd1462",
+                "propertyDependencies": {
+                    "name": [],
+                    "networkId": [
+                        "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcNetwork:VpcNetwork::network"
+                    ],
+                    "v4CidrBlocks": []
+                },
+                "created": "0001-01-01T00:00:00Z",
+                "modified": "0001-01-01T00:00:00Z",
+                "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439",
+                "stackTrace": [
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#995"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1219"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1074"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#504"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#319"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/go/pulumi/run.go#140"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#317"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/proto/go/language_grpc.pb.go#579"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1405"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1815"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1035"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../../opt/hostedtoolcache/go/1.24.12/x64/src/runtime/asm_amd64.s#1700"
+                    }
+                ]
+            },
+            "diffReasons": [
+                "name"
+            ],
+            "detailedDiff": {
+                "name": {
+                    "kind": "update",
+                    "inputDiff": false
+                }
+            }
+        },
+        {
+            "op": "refresh",
+            "urn": "urn:pulumi:dev::yc-infra-drift::yandex:index/computeInstance:ComputeInstance::instance",
+            "provider": "urn:pulumi:dev::yc-infra-drift::pulumi:providers:yandex::default::c33061fb-6986-44e7-8e31-c90598cd1462",
+            "oldState": {
+                "urn": "urn:pulumi:dev::yc-infra-drift::yandex:index/computeInstance:ComputeInstance::instance",
+                "custom": true,
+                "id": "fhmebv4f8i1uk9kf3d7k",
+                "type": "yandex:index/computeInstance:ComputeInstance",
+                "inputs": {
+                    "__defaults": [
+                        "networkAccelerationType",
+                        "platformId"
+                    ],
+                    "bootDisk": {
+                        "__defaults": [
+                            "autoDelete"
+                        ],
+                        "autoDelete": true,
+                        "initializeParams": {
+                            "__defaults": [
+                                "type"
+                            ],
+                            "imageId": "fd85r147n5huljgijb47",
+                            "size": 50,
+                            "type": "network-hdd"
+                        }
+                    },
+                    "metadata": {
+                        "__defaults": [],
+                        "ssh-keys": "[secret]"
+                    },
+                    "name": "les25-instance-drift",
+                    "networkAccelerationType": "standard",
+                    "networkInterfaces": [
+                        {
+                            "__defaults": [
+                                "ipv4"
+                            ],
+                            "ipv4": true,
+                            "nat": true,
+                            "subnetId": "e9buh4enm3qumb6gg8t5"
+                        }
+                    ],
+                    "platformId": "standard-v1",
+                    "resources": {
+                        "__defaults": [
+                            "coreFraction"
+                        ],
+                        "coreFraction": 100,
+                        "cores": 2,
+                        "memory": 4
+                    }
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":300000000000,\"delete\":300000000000,\"update\":300000000000},\"schema_version\":\"1\"}",
+                    "bootDisk": {
+                        "autoDelete": true,
+                        "deviceName": "fhmts0f440dg34sbdbsf",
+                        "diskId": "fhmts0f440dg34sbdbsf",
+                        "initializeParams": {
+                            "blockSize": 4096,
+                            "description": "",
+                            "imageId": "fd85r147n5huljgijb47",
+                            "name": "",
+                            "size": 50,
+                            "snapshotId": "",
+                            "type": "network-hdd"
+                        },
+                        "mode": "READ_WRITE"
+                    },
+                    "createdAt": "2026-02-18T04:55:30Z",
+                    "description": "",
+                    "folderId": "b1glf35jjq6imk8i8k4m",
+                    "fqdn": "fhmebv4f8i1uk9kf3d7k.auto.internal",
+                    "hostname": "fhmebv4f8i1uk9kf3d7k",
+                    "id": "fhmebv4f8i1uk9kf3d7k",
+                    "labels": {},
+                    "metadata": {
+                        "ssh-keys": "[secret]"
+                    },
+                    "name": "les25-instance-drift",
+                    "networkAccelerationType": "standard",
+                    "networkInterfaces": [
+                        {
+                            "dnsRecords": [],
+                            "index": 0,
+                            "ipAddress": "192.168.25.22",
+                            "ipv4": true,
+                            "ipv6": false,
+                            "ipv6Address": "",
+                            "ipv6DnsRecords": [],
+                            "macAddress": "d0:0d:e5:fc:8f:44",
+                            "nat": true,
+                            "natDnsRecords": [],
+                            "natIpAddress": "93.77.181.149",
+                            "natIpVersion": "IPV4",
+                            "securityGroupIds": [],
+                            "subnetId": "e9buh4enm3qumb6gg8t5"
+                        }
+                    ],
+                    "placementPolicy": {
+                        "placementGroupId": ""
+                    },
+                    "platformId": "standard-v1",
+                    "resources": {
+                        "coreFraction": 100,
+                        "cores": 2,
+                        "gpus": 0,
+                        "memory": 4
+                    },
+                    "schedulingPolicy": {
+                        "preemptible": false
+                    },
+                    "secondaryDisks": [],
+                    "serviceAccountId": "",
+                    "status": "running",
+                    "zone": "ru-central1-a"
+                },
+                "parent": "urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev",
+                "dependencies": [
+                    "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcSubnet:VpcSubnet::subnet"
+                ],
+                "provider": "urn:pulumi:dev::yc-infra-drift::pulumi:providers:yandex::default::c33061fb-6986-44e7-8e31-c90598cd1462",
+                "propertyDependencies": {
+                    "bootDisk": [],
+                    "metadata": [],
+                    "name": [],
+                    "networkInterfaces": [
+                        "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcSubnet:VpcSubnet::subnet"
+                    ],
+                    "resources": []
+                },
+                "created": "0001-01-01T00:00:00Z",
+                "modified": "0001-01-01T00:00:00Z",
+                "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439",
+                "stackTrace": [
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#995"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1219"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1074"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#504"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#319"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/go/pulumi/run.go#140"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#317"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/proto/go/language_grpc.pb.go#579"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1405"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1815"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1035"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../../opt/hostedtoolcache/go/1.24.12/x64/src/runtime/asm_amd64.s#1700"
+                    }
+                ]
+            },
+            "newState": {
+                "urn": "urn:pulumi:dev::yc-infra-drift::yandex:index/computeInstance:ComputeInstance::instance",
+                "custom": true,
+                "id": "fhmebv4f8i1uk9kf3d7k",
+                "type": "yandex:index/computeInstance:ComputeInstance",
+                "inputs": {
+                    "__defaults": [
+                        "networkAccelerationType",
+                        "platformId"
+                    ],
+                    "bootDisk": {
+                        "__defaults": [
+                            "autoDelete"
+                        ],
+                        "autoDelete": true,
+                        "initializeParams": {
+                            "__defaults": [
+                                "type"
+                            ],
+                            "imageId": "fd85r147n5huljgijb47",
+                            "size": 50,
+                            "type": "network-hdd"
+                        }
+                    },
+                    "metadata": {
+                        "__defaults": [],
+                        "ssh-keys": "[secret]"
+                    },
+                    "name": "les25-instance-drift",
+                    "networkAccelerationType": "standard",
+                    "networkInterfaces": [
+                        {
+                            "__defaults": [
+                                "ipv4"
+                            ],
+                            "ipv4": true,
+                            "nat": true,
+                            "subnetId": "e9buh4enm3qumb6gg8t5"
+                        }
+                    ],
+                    "platformId": "standard-v1",
+                    "resources": {
+                        "__defaults": [
+                            "coreFraction"
+                        ],
+                        "coreFraction": 100,
+                        "cores": 2,
+                        "memory": 4
+                    }
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":300000000000,\"delete\":300000000000,\"update\":300000000000},\"schema_version\":\"1\"}",
+                    "bootDisk": {
+                        "autoDelete": true,
+                        "deviceName": "fhmts0f440dg34sbdbsf",
+                        "diskId": "fhmts0f440dg34sbdbsf",
+                        "initializeParams": {
+                            "blockSize": 4096,
+                            "description": "",
+                            "imageId": "fd85r147n5huljgijb47",
+                            "name": "",
+                            "size": 50,
+                            "snapshotId": "",
+                            "type": "network-hdd"
+                        },
+                        "mode": "READ_WRITE"
+                    },
+                    "createdAt": "2026-02-18T04:55:30Z",
+                    "description": "",
+                    "folderId": "b1glf35jjq6imk8i8k4m",
+                    "fqdn": "fhmebv4f8i1uk9kf3d7k.auto.internal",
+                    "hostname": "fhmebv4f8i1uk9kf3d7k",
+                    "id": "fhmebv4f8i1uk9kf3d7k",
+                    "labels": {},
+                    "metadata": {
+                        "ssh-keys": "[secret]"
+                    },
+                    "name": "les25-instance-drift",
+                    "networkAccelerationType": "standard",
+                    "networkInterfaces": [
+                        {
+                            "dnsRecords": [],
+                            "index": 0,
+                            "ipAddress": "192.168.25.22",
+                            "ipv4": true,
+                            "ipv6": false,
+                            "ipv6Address": "",
+                            "ipv6DnsRecords": [],
+                            "macAddress": "d0:0d:e5:fc:8f:44",
+                            "nat": true,
+                            "natDnsRecords": [],
+                            "natIpAddress": "93.77.181.149",
+                            "natIpVersion": "IPV4",
+                            "securityGroupIds": [],
+                            "subnetId": "e9buh4enm3qumb6gg8t5"
+                        }
+                    ],
+                    "placementPolicy": {
+                        "placementGroupId": ""
+                    },
+                    "platformId": "standard-v1",
+                    "resources": {
+                        "coreFraction": 100,
+                        "cores": 2,
+                        "gpus": 0,
+                        "memory": 4
+                    },
+                    "schedulingPolicy": {
+                        "preemptible": false
+                    },
+                    "secondaryDisks": [],
+                    "serviceAccountId": "",
+                    "status": "running",
+                    "zone": "ru-central1-a"
+                },
+                "parent": "urn:pulumi:dev::yc-infra-drift::pulumi:pulumi:Stack::yc-infra-drift-dev",
+                "dependencies": [
+                    "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcSubnet:VpcSubnet::subnet"
+                ],
+                "provider": "urn:pulumi:dev::yc-infra-drift::pulumi:providers:yandex::default::c33061fb-6986-44e7-8e31-c90598cd1462",
+                "propertyDependencies": {
+                    "bootDisk": [],
+                    "metadata": [],
+                    "name": [],
+                    "networkInterfaces": [
+                        "urn:pulumi:dev::yc-infra-drift::yandex:index/vpcSubnet:VpcSubnet::subnet"
+                    ],
+                    "resources": []
+                },
+                "created": "0001-01-01T00:00:00Z",
+                "modified": "0001-01-01T00:00:00Z",
+                "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439",
+                "stackTrace": [
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1439"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#995"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1219"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#1074"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/pulumiyaml/run.go#504"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#319"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/go/pulumi/run.go#140"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/work/pulumi-yaml/pulumi-yaml/pkg/server/server.go#317"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/github.com/pulumi/pulumi/sdk/v3@v3.218.0/proto/go/language_grpc.pb.go#579"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1405"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1815"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../runner/go/pkg/mod/google.golang.org/grpc@v1.72.1/server.go#1035"
+                    },
+                    {
+                        "sourcePosition": "project:///../../../../../../../../opt/hostedtoolcache/go/1.24.12/x64/src/runtime/asm_amd64.s#1700"
+                    }
+                ]
+            },
+            "detailedDiff": null
+        }
+    ],
+    "duration": 1381058566,
+    "changeSummary": {
+        "same": 3,
+        "update": 1
+    }
+}
