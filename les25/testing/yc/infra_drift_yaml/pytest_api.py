@@ -53,17 +53,19 @@ def _checked_output_value(outputs, name):
     return value
     
 
+outputs_key = ("instance_id", "instance_name", "instance_nat_ip", "network_id", "network_name", "subnet_id", "subnet_name")
+
+
 def test_outputs_values(stack):
     outputs = stack.outputs()
-    assert all(k in outputs for k in ("instance_id", "instance_name", "instance_nat_ip",
-                                      "network_id", "network_name", "subnet_id", "subnet_name"))
-    instance_id     = _checked_output_value(outputs, "instance_id")
-    instance_name   = _checked_output_value(outputs, "instance_name")
-    instance_nat_ip = _checked_output_value(outputs, "instance_nat_ip")
-    network_id      = _checked_output_value(outputs, "network_id")
-    network_name    = _checked_output_value(outputs, "network_name")
-    subnet_id       = _checked_output_value(outputs, "subnet_id")
-    subnet_name     = _checked_output_value(outputs, "subnet_name")
+    assert all(k in outputs and  _checked_output_value(outputs, k) != None for k in outputs_key)
+#    instance_id     = _checked_output_value(outputs, "instance_id")
+#    instance_name   = _checked_output_value(outputs, "instance_name")
+#    instance_nat_ip = _checked_output_value(outputs, "instance_nat_ip")
+#    network_id      = _checked_output_value(outputs, "network_id")
+#    network_name    = _checked_output_value(outputs, "network_name")
+#    subnet_id       = _checked_output_value(outputs, "subnet_id")
+#    subnet_name     = _checked_output_value(outputs, "subnet_name")
 
 
 def test_lemp_server_responds(stack):
