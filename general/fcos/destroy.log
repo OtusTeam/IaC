@@ -1,0 +1,105 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/general/fcos$ terraform destroy
+yandex_compute_instance.vm: Refreshing state... [id=epdu8q3dq1dpohanekgg]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.vm will be destroyed
+  - resource "yandex_compute_instance" "vm" {
+      - created_at                = "2026-03-13T13:48:53Z" -> null
+      - folder_id                 = "b1ggm2k4duhi62vkadtq" -> null
+      - fqdn                      = "epdu8q3dq1dpohanekgg.auto.internal" -> null
+      - hardware_generation       = [
+          - {
+              - generation2_features = []
+              - legacy_features      = [
+                  - {
+                      - pci_topology = "PCI_TOPOLOGY_V1"
+                    },
+                ]
+            },
+        ] -> null
+      - id                        = "epdu8q3dq1dpohanekgg" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = (sensitive value)
+        } -> null
+      - name                      = "fcos-vm" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-b" -> null
+        # (5 unchanged attributes hidden)
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "epd8bi8tlk2gkn43ioe1" -> null
+          - disk_id     = "epd8bi8tlk2gkn43ioe1" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size  = 4096 -> null
+              - image_id    = "fd865udut6b1gvgh5igh" -> null
+                name        = null
+              - size        = 10 -> null
+              - type        = "network-hdd" -> null
+                # (3 unchanged attributes hidden)
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "10.129.0.33" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:1e:46:86:dd" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "178.154.194.209" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e2l0ngd4doggtiuk1cbu" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - resources {
+          - core_fraction = 5 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = false -> null
+        }
+    }
+
+Plan: 0 to add, 0 to change, 1 to destroy.
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+yandex_compute_instance.vm: Destroying... [id=epdu8q3dq1dpohanekgg]
+yandex_compute_instance.vm: Still destroying... [id=epdu8q3dq1dpohanekgg, 00m10s elapsed]
+yandex_compute_instance.vm: Still destroying... [id=epdu8q3dq1dpohanekgg, 00m20s elapsed]
+yandex_compute_instance.vm: Still destroying... [id=epdu8q3dq1dpohanekgg, 00m30s elapsed]
+yandex_compute_instance.vm: Destruction complete after 34s
+
+Destroy complete! Resources: 1 destroyed.

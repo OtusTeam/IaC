@@ -1,0 +1,267 @@
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/general/fcos$ ping 178.154.194.209
+PING 178.154.194.209 (178.154.194.209) 56(84) bytes of data.
+64 bytes from 178.154.194.209: icmp_seq=1 ttl=58 time=70.5 ms
+64 bytes from 178.154.194.209: icmp_seq=2 ttl=58 time=69.6 ms
+^C
+--- 178.154.194.209 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1002ms
+rtt min/avg/max/mdev = 69.637/70.084/70.532/0.447 ms
+za@za-Vivobook-ASUSLaptop-M3504YA-M3504YA:~/Documents/IaC/2git/general/fcos$ ssh.sh core@178.154.194.209
++ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null core@178.154.194.209
+Warning: Permanently added '178.154.194.209' (ED25519) to the list of known hosts.
+Fedora CoreOS 43.20260217.3.1
+Tracker: https://github.com/coreos/fedora-coreos-tracker
+Discuss: https://discussion.fedoraproject.org/tag/coreos
+
+core@epdu8q3dq1dpohanekgg:~$ podman --version
+podman version 5.7.1
+core@epdu8q3dq1dpohanekgg:~$ systemctl --version
+systemd 258 (258.4-1.fc43)
++PAM +AUDIT +SELINUX -APPARMOR +IMA +IPE +SMACK +SECCOMP -GCRYPT +GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 -IDN -IPTC +KMOD +LIBCRYPTSETUP +LIBCRYPTSETUP_PLUGINS +LIBFDISK +PCRE2 +PWQUALITY +P11KIT +QRENCODE +TPM2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD +BPF_FRAMEWORK +BTF +XKBCOMMON +UTMP +SYSVINIT +LIBARCHIVE
+core@epdu8q3dq1dpohanekgg:~$ sudo useradd -m -s /bin/bash app
+core@epdu8q3dq1dpohanekgg:~$ sudo passwd app
+New password: 
+Retype new password: 
+Sorry, passwords do not match.
+passwd: Authentication token manipulation error
+passwd: password unchanged
+core@epdu8q3dq1dpohanekgg:~$ sudo passwd app
+New password: 
+Retype new password: 
+passwd: password updated successfully
+core@epdu8q3dq1dpohanekgg:~$ grep ^app: /etc/subuid /etc/subgid || echo "subuid/subgid для app не найдены"
+/etc/subuid:app:524288:65536
+/etc/subgid:app:524288:65536
+core@epdu8q3dq1dpohanekgg:~$ sudo loginctl enable-linger app
+core@epdu8q3dq1dpohanekgg:~$ sudo -iu app
+app@epdu8q3dq1dpohanekgg:~$ podman run --rm quay.io/podman/hello
+Trying to pull quay.io/podman/hello:latest...
+Getting image source signatures
+Copying blob 81df7ff16254 done   | 
+Copying config 5dd467fce5 done   | 
+Writing manifest to image destination
+!... Hello Podman World ...!
+
+         .--"--.           
+       / -     - \         
+      / (O)   (O) \        
+   ~~~| -=(,Y,)=- |         
+    .---. /`  \   |~~      
+ ~/  o  o \~~~~.----. ~~   
+  | =(X)= |~  / (O (O) \   
+   ~~~~~~~  ~| =(Y_)=-  |   
+  ~~~~    ~~~|   U      |~~ 
+
+Project:   https://github.com/containers/podman
+Website:   https://podman.io
+Desktop:   https://podman-desktop.io
+Documents: https://docs.podman.io
+YouTube:   https://youtube.com/@Podman
+X/Twitter: @Podman_io
+Mastodon:  @Podman_io@fosstodon.org
+app@epdu8q3dq1dpohanekgg:~$ mkdir -p ~/.config/containers/systemd
+app@epdu8q3dq1dpohanekgg:~$ mkdir -p ~/apps/whoami
+app@epdu8q3dq1dpohanekgg:~$ cat > ~/apps/whoami/whoami.env << 'EOF'
+TZ=UTC
+WHOAMI_GREETING=Hello from Quadlet
+EOF
+app@epdu8q3dq1dpohanekgg:~$ nano ~/.config/containers/systemd/whoami.container
+app@epdu8q3dq1dpohanekgg:~$ cat ~/.config/containers/systemd/whoami.container
+[Unit]
+Description=Whoami demo (Podman Quadlet rootless)
+Wants=network-online.target
+After=network-online.target
+
+[Container]
+# Образ
+Image=docker.io/traefik/whoami:v1.10
+ContainerName=whoami
+
+# Сетевой стек rootless (по умолчанию slirp4netns)
+Network=slirp4netns
+
+# Проброс портов: внешний 8080 -> контейнерный 80
+# Можно использовать 80:80, если поддерживается rootlessport для низких портов
+PublishPort=0.0.0.0:8080:80
+
+# Логи в journald для удобства systemd --user
+LogDriver=journald
+
+# Healthcheck через curl внутри контейнера
+HealthCmd=curl -fsS http://127.0.0.1:80/ || exit 1
+HealthInterval=30s
+HealthTimeout=3s
+HealthRetries=3
+
+# Переменные окружения
+EnvironmentFile=%h/apps/whoami/whoami.env
+Environment=WHOAMI_COLOR=green
+
+# Том с данными (пример бинд‑монта)
+# Обратите внимание на суффикс :U для корректного маппинга uid/gid при rootless
+Volume=/home/app/apps/whoami:/data:U,Z
+
+# Автообновление образа (см. раздел ниже про таймер)
+AutoUpdate=registry
+
+[Service]
+# Рестарт‑политика на уровне systemd
+Restart=always
+RestartSec=2s
+
+# Лимиты ресурсов через cgroups v2
+MemoryMax=256M
+CPUQuota=80%
+
+# Более аккуратное завершение
+TimeoutStopSec=30s
+
+[Install]
+WantedBy=default.target
+app@epdu8q3dq1dpohanekgg:~$ export XDG_RUNTIME_DIR=/run/user/$(id -u)
+app@epdu8q3dq1dpohanekgg:~$ systemctl --user daemon-reload
+app@epdu8q3dq1dpohanekgg:~$ systemctl --user enable --now whoami.service
+Failed to enable unit: Unit /run/user/1001/systemd/generator/whoami.service is transient or generated
+app@epdu8q3dq1dpohanekgg:~$ systemctl --user status whoami.service -l --no-pager && systemctl --user cat whoami.service
+○ whoami.service - Whoami demo (Podman Quadlet rootless)
+     Loaded: loaded (/var/home/app/.config/containers/systemd/whoami.container; generated)
+    Drop-In: /usr/lib/systemd/user/service.d
+             └─10-timeout-abort.conf
+     Active: inactive (dead)
+app@epdu8q3dq1dpohanekgg:~$ systemctl --user cat whoami.service
+# /run/user/1001/systemd/generator/whoami.service
+# Automatically generated by /usr/lib/systemd/user-generators/podman-user-generator
+# 
+[Unit]
+Wants=podman-user-wait-network-online.service
+After=podman-user-wait-network-online.service
+Description=Whoami demo (Podman Quadlet rootless)
+Wants=network-online.target
+After=network-online.target
+SourcePath=/var/home/app/.config/containers/systemd/whoami.container
+RequiresMountsFor=%t/containers
+RequiresMountsFor=/home/app/apps/whoami
+
+[X-Container]
+# Образ
+Image=docker.io/traefik/whoami:v1.10
+ContainerName=whoami
+
+# Сетевой стек rootless (по умолчанию slirp4netns)
+Network=slirp4netns
+
+# Проброс портов: внешний 8080 -> контейнерный 80
+# Можно использовать 80:80, если поддерживается rootlessport для низких портов
+PublishPort=0.0.0.0:8080:80
+
+# Логи в journald для удобства systemd --user
+LogDriver=journald
+
+# Healthcheck через curl внутри контейнера
+HealthCmd=curl -fsS http://127.0.0.1:80/ || exit 1
+HealthInterval=30s
+HealthTimeout=3s
+HealthRetries=3
+
+# Переменные окружения
+EnvironmentFile=%h/apps/whoami/whoami.env
+Environment=WHOAMI_COLOR=green
+
+# Том с данными (пример бинд‑монта)
+# Обратите внимание на суффикс :U для корректного маппинга uid/gid при rootless
+Volume=/home/app/apps/whoami:/data:U,Z
+
+# Автообновление образа (см. раздел ниже про таймер)
+AutoUpdate=registry
+
+[Service]
+# Рестарт‑политика на уровне systemd
+Restart=always
+RestartSec=2s
+
+# Лимиты ресурсов через cgroups v2
+MemoryMax=256M
+CPUQuota=80%
+
+# Более аккуратное завершение
+TimeoutStopSec=30s
+Environment=PODMAN_SYSTEMD_UNIT=%n
+app@epdu8q3dq1dpohanekgg:~$ systemctl --user enable --now whoami.service
+Failed to enable unit: Unit /run/user/1001/systemd/generator/whoami.service is transient or generated
+app@epdu8q3dq1dpohanekgg:~$ exit
+logout
+core@epdu8q3dq1dpohanekgg:~$ sudo -i -u app bash -c 'export XDG_RUNTIME_DIR=/run/user/$(id -u) && systemctl --user daemon-reload && systemctl --user restart whoami.service'
+core@epdu8q3dq1dpohanekgg:~$ sudo -i -u app bash -c 'export XDG_RUNTIME_DIR=/run/user/$(id -u) && systemctl --user status whoami.service -l --no-pager'
+● whoami.service - Whoami demo (Podman Quadlet rootless)
+     Loaded: loaded (/var/home/app/.config/containers/systemd/whoami.container; generated)
+    Drop-In: /usr/lib/systemd/user/service.d
+             └─10-timeout-abort.conf
+     Active: active (running) since Fri 2026-03-13 16:35:08 UTC; 47s ago
+ Invocation: a9952cf7f5c849c3bb988d9af46b28a4
+   Main PID: 2282 (conmon)
+      Tasks: 18 (limit: 2195)
+     Memory: 16.5M (max: 256M, available: 239.4M, peak: 42.6M)
+        CPU: 973ms
+     CGroup: /user.slice/user-1001.slice/user@1001.service/app.slice/whoami.service
+             ├─libpod-payload-5af8ae17443ad30218241d8e9c75d3e5e744a9b9a92748dcccfb9567168a6b84
+             │ └─2284 /whoami
+             └─runtime
+               ├─2266 /usr/bin/slirp4netns --disable-host-loopback --mtu=65520 --enable-sandbox --enable-seccomp --enable-ipv6 -c -r 3 -e 4 --netns-type=path /run/user/1001/netns/netns-f79d6a91-71d2-6584-b3a7-34f2ec6026b9 tap0
+               ├─2268 rootlessport
+               ├─2274 rootlessport-child
+               └─2282 /usr/bin/conmon --api-version 1 -c 5af8ae17443ad30218241d8e9c75d3e5e744a9b9a92748dcccfb9567168a6b84 -u 5af8ae17443ad30218241d8e9c75d3e5e744a9b9a92748dcccfb9567168a6b84 -r /usr/bin/crun -b /var/home/app/.local/share/containers/storage/overlay-containers/5af8ae17443ad30218241d8e9c75d3e5e744a9b9a92748dcccfb9567168a6b84/userdata -p /run/user/1001/containers/overlay-containers/5af8ae17443ad30218241d8e9c75d3e5e744a9b9a92748dcccfb9567168a6b84/userdata/pidfile -n whoami --exit-dir /run/user/1001/libpod/tmp/exits --persist-dir /run/user/1001/libpod/tmp/persist/5af8ae17443ad30218241d8e9c75d3e5e744a9b9a92748dcccfb9567168a6b84 --full-attach -l journald --log-level warning --syslog --runtime-arg --log-format=json --runtime-arg --log --runtime-arg=/run/user/1001/containers/overlay-containers/5af8ae17443ad30218241d8e9c75d3e5e744a9b9a92748dcccfb9567168a6b84/userdata/oci-log --conmon-pidfile /run/user/1001/containers/overlay-containers/5af8ae17443ad30218241d8e9c75d3e5e744a9b9a92748dcccfb9567168a6b84/userdata/conmon.pid --exit-command /usr/bin/podman --exit-command-arg --root --exit-command-arg /var/home/app/.local/share/containers/storage --exit-command-arg --runroot --exit-command-arg /run/user/1001/containers --exit-command-arg --log-level --exit-command-arg warning --exit-command-arg --cgroup-manager --exit-command-arg systemd --exit-command-arg --tmpdir --exit-command-arg /run/user/1001/libpod/tmp --exit-command-arg --network-config-dir --exit-command-arg "" --exit-command-arg --network-backend --exit-command-arg netavark --exit-command-arg --volumepath --exit-command-arg /var/home/app/.local/share/containers/storage/volumes --exit-command-arg --db-backend --exit-command-arg sqlite --exit-command-arg --transient-store=false --exit-command-arg --hooks-dir --exit-command-arg /usr/share/containers/oci/hooks.d --exit-command-arg --runtime --exit-command-arg crun --exit-command-arg --storage-driver --exit-command-arg overlay --exit-command-arg --events-backend --exit-command-arg journald --exit-command-arg container --exit-command-arg cleanup --exit-command-arg --stopped-only --exit-command-arg --rm --exit-command-arg 5af8ae17443ad30218241d8e9c75d3e5e744a9b9a92748dcccfb9567168a6b84
+
+Mar 13 16:35:07 epdu8q3dq1dpohanekgg.auto.internal whoami[2211]: Copying blob sha256:8f64377bf2e7741491134f39a0cccb0beaeff88f2738c2169bbde6df1906f111
+Mar 13 16:35:08 epdu8q3dq1dpohanekgg.auto.internal whoami[2211]: Copying config sha256:9943fa5dfa160113993257e13b514a9d55065aa86a8fcabbf66359d8cf9e1ba5
+Mar 13 16:35:08 epdu8q3dq1dpohanekgg.auto.internal whoami[2211]: Writing manifest to image destination
+Mar 13 16:35:08 epdu8q3dq1dpohanekgg.auto.internal podman[2211]: 2026-03-13 16:35:08.688313718 +0000 UTC m=+2.782420482 container create 5af8ae17443ad30218241d8e9c75d3e5e744a9b9a92748dcccfb9567168a6b84 (image=docker.io/traefik/whoami:v1.10, name=whoami, org.opencontainers.image.version=1.10.4, io.containers.autoupdate=registry, org.opencontainers.image.description=Tiny Go webserver that prints OS information and HTTP request to output, org.opencontainers.image.documentation=https://github.com/traefik/whoami, org.opencontainers.image.source=https://github.com/traefik/whoami, org.opencontainers.image.title=whoami, org.opencontainers.image.created=2025-01-21T09:16:17Z, org.opencontainers.image.revision=b49779da6892cf6838b3452d436136a63539958d, PODMAN_SYSTEMD_UNIT=whoami.service, org.opencontainers.image.url=https://github.com/traefik/whoami)
+Mar 13 16:35:08 epdu8q3dq1dpohanekgg.auto.internal podman[2211]: 2026-03-13 16:35:08.658616751 +0000 UTC m=+2.752723551 image pull 9943fa5dfa160113993257e13b514a9d55065aa86a8fcabbf66359d8cf9e1ba5 docker.io/traefik/whoami:v1.10
+Mar 13 16:35:08 epdu8q3dq1dpohanekgg.auto.internal podman[2211]: 2026-03-13 16:35:08.889037926 +0000 UTC m=+2.983144683 container init 5af8ae17443ad30218241d8e9c75d3e5e744a9b9a92748dcccfb9567168a6b84 (image=docker.io/traefik/whoami:v1.10, name=whoami, org.opencontainers.image.url=https://github.com/traefik/whoami, org.opencontainers.image.description=Tiny Go webserver that prints OS information and HTTP request to output, org.opencontainers.image.documentation=https://github.com/traefik/whoami, org.opencontainers.image.source=https://github.com/traefik/whoami, org.opencontainers.image.title=whoami, org.opencontainers.image.version=1.10.4, org.opencontainers.image.created=2025-01-21T09:16:17Z, org.opencontainers.image.revision=b49779da6892cf6838b3452d436136a63539958d, io.containers.autoupdate=registry, PODMAN_SYSTEMD_UNIT=whoami.service)
+Mar 13 16:35:08 epdu8q3dq1dpohanekgg.auto.internal systemd[1868]: Started whoami.service - Whoami demo (Podman Quadlet rootless).
+Mar 13 16:35:08 epdu8q3dq1dpohanekgg.auto.internal whoami[2282]: 2026/03/13 16:35:08 Starting up on port 80
+Mar 13 16:35:08 epdu8q3dq1dpohanekgg.auto.internal podman[2211]: 2026-03-13 16:35:08.925158345 +0000 UTC m=+3.019265072 container start 5af8ae17443ad30218241d8e9c75d3e5e744a9b9a92748dcccfb9567168a6b84 (image=docker.io/traefik/whoami:v1.10, name=whoami, org.opencontainers.image.description=Tiny Go webserver that prints OS information and HTTP request to output, PODMAN_SYSTEMD_UNIT=whoami.service, org.opencontainers.image.url=https://github.com/traefik/whoami, org.opencontainers.image.source=https://github.com/traefik/whoami, org.opencontainers.image.title=whoami, org.opencontainers.image.revision=b49779da6892cf6838b3452d436136a63539958d, io.containers.autoupdate=registry, org.opencontainers.image.documentation=https://github.com/traefik/whoami, org.opencontainers.image.version=1.10.4, org.opencontainers.image.created=2025-01-21T09:16:17Z)
+Mar 13 16:35:08 epdu8q3dq1dpohanekgg.auto.internal whoami[2211]: 5af8ae17443ad30218241d8e9c75d3e5e744a9b9a92748dcccfb9567168a6b84
+core@epdu8q3dq1dpohanekgg:~$ ss -tulpan | grep 8080
+tcp   LISTEN 0      4096                  *:8080              *:*           
+core@epdu8q3dq1dpohanekgg:~$ curl http://localhost:8080
+Hostname: 5af8ae17443a
+IP: 127.0.0.1
+IP: ::1
+IP: 10.0.2.100
+IP: fd00::700e:c5ff:fe4d:8a43
+IP: fe80::700e:c5ff:fe4d:8a43
+RemoteAddr: 10.0.2.100:44014
+GET / HTTP/1.1
+Host: localhost:8080
+User-Agent: curl/8.15.0
+Accept: */*
+
+core@epdu8q3dq1dpohanekgg:~$ sudo -i -u app bash -c 'export XDG_RUNTIME_DIR=/run/user/$(id -u) && systemctl --user stop whoami.service'
+core@epdu8q3dq1dpohanekgg:~$ sudo -i -u app bash -c 'export XDG_RUNTIME_DIR=/run/user/$(id -u) && systemctl --user status whoami.service -l --no-pager'
+× whoami.service - Whoami demo (Podman Quadlet rootless)
+     Loaded: loaded (/var/home/app/.config/containers/systemd/whoami.container; generated)
+    Drop-In: /usr/lib/systemd/user/service.d
+             └─10-timeout-abort.conf
+     Active: failed (Result: exit-code) since Fri 2026-03-13 16:38:18 UTC; 5s ago
+   Duration: 3min 9.193s
+ Invocation: a9952cf7f5c849c3bb988d9af46b28a4
+    Process: 2282 ExecStart=/usr/bin/podman run --name whoami --replace --rm --log-driver journald --cgroups=split --network slirp4netns --sdnotify=conmon -d -v /home/app/apps/whoami:/data:U,Z --label io.containers.autoupdate=registry --publish 0.0.0.0:8080:80 --env WHOAMI_COLOR=green --env-file /var/home/app/apps/whoami/whoami.env --health-cmd curl -fsS http://127.0.0.1:80/ || exit 1 --health-interval 30s --health-retries 3 --health-timeout 3s docker.io/traefik/whoami:v1.10 (code=exited, status=2)
+    Process: 2514 ExecStop=/usr/bin/podman rm -v -f -i whoami (code=exited, status=0/SUCCESS)
+    Process: 2535 ExecStopPost=/usr/bin/podman rm -v -f -i whoami (code=exited, status=0/SUCCESS)
+   Main PID: 2282 (code=exited, status=2)
+   Mem peak: 42.6M
+        CPU: 1.203s
+
+Mar 13 16:35:08 epdu8q3dq1dpohanekgg.auto.internal podman[2211]: 2026-03-13 16:35:08.925158345 +0000 UTC m=+3.019265072 container start 5af8ae17443ad30218241d8e9c75d3e5e744a9b9a92748dcccfb9567168a6b84 (image=docker.io/traefik/whoami:v1.10, name=whoami, org.opencontainers.image.description=Tiny Go webserver that prints OS information and HTTP request to output, PODMAN_SYSTEMD_UNIT=whoami.service, org.opencontainers.image.url=https://github.com/traefik/whoami, org.opencontainers.image.source=https://github.com/traefik/whoami, org.opencontainers.image.title=whoami, org.opencontainers.image.revision=b49779da6892cf6838b3452d436136a63539958d, io.containers.autoupdate=registry, org.opencontainers.image.documentation=https://github.com/traefik/whoami, org.opencontainers.image.version=1.10.4, org.opencontainers.image.created=2025-01-21T09:16:17Z)
+Mar 13 16:35:08 epdu8q3dq1dpohanekgg.auto.internal whoami[2211]: 5af8ae17443ad30218241d8e9c75d3e5e744a9b9a92748dcccfb9567168a6b84
+Mar 13 16:38:18 epdu8q3dq1dpohanekgg.auto.internal systemd[1868]: Stopping whoami.service - Whoami demo (Podman Quadlet rootless)...
+Mar 13 16:38:18 epdu8q3dq1dpohanekgg.auto.internal podman[2514]: 2026-03-13 16:38:18.183923923 +0000 UTC m=+0.059520104 container died 5af8ae17443ad30218241d8e9c75d3e5e744a9b9a92748dcccfb9567168a6b84 (image=docker.io/traefik/whoami:v1.10, name=whoami, org.opencontainers.image.url=https://github.com/traefik/whoami, PODMAN_SYSTEMD_UNIT=whoami.service, io.containers.autoupdate=registry, org.opencontainers.image.created=2025-01-21T09:16:17Z, org.opencontainers.image.description=Tiny Go webserver that prints OS information and HTTP request to output, org.opencontainers.image.documentation=https://github.com/traefik/whoami, org.opencontainers.image.revision=b49779da6892cf6838b3452d436136a63539958d, org.opencontainers.image.title=whoami, org.opencontainers.image.version=1.10.4, org.opencontainers.image.source=https://github.com/traefik/whoami)
+Mar 13 16:38:18 epdu8q3dq1dpohanekgg.auto.internal podman[2514]: 2026-03-13 16:38:18.28595264 +0000 UTC m=+0.161548799 container remove 5af8ae17443ad30218241d8e9c75d3e5e744a9b9a92748dcccfb9567168a6b84 (image=docker.io/traefik/whoami:v1.10, name=whoami, org.opencontainers.image.description=Tiny Go webserver that prints OS information and HTTP request to output, org.opencontainers.image.documentation=https://github.com/traefik/whoami, org.opencontainers.image.revision=b49779da6892cf6838b3452d436136a63539958d, org.opencontainers.image.url=https://github.com/traefik/whoami, io.containers.autoupdate=registry, org.opencontainers.image.created=2025-01-21T09:16:17Z, org.opencontainers.image.title=whoami, org.opencontainers.image.source=https://github.com/traefik/whoami, org.opencontainers.image.version=1.10.4, PODMAN_SYSTEMD_UNIT=whoami.service)
+Mar 13 16:38:18 epdu8q3dq1dpohanekgg.auto.internal whoami[2514]: whoami
+Mar 13 16:38:18 epdu8q3dq1dpohanekgg.auto.internal systemd[1868]: whoami.service: Main process exited, code=exited, status=2/INVALIDARGUMENT
+Mar 13 16:38:18 epdu8q3dq1dpohanekgg.auto.internal systemd[1868]: whoami.service: Failed with result 'exit-code'.
+Mar 13 16:38:18 epdu8q3dq1dpohanekgg.auto.internal systemd[1868]: Stopped whoami.service - Whoami demo (Podman Quadlet rootless).
+Mar 13 16:38:18 epdu8q3dq1dpohanekgg.auto.internal systemd[1868]: whoami.service: Consumed 1.203s CPU time, 42.6M memory peak.
+core@epdu8q3dq1dpohanekgg:~$ exit
+logout
+Connection to 178.154.194.209 closed.
